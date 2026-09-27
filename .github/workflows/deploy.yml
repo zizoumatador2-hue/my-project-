@@ -32,10 +32,22 @@ jobs:
           echo "secret CLOUDFLARE_API_TOKEN=$H1 CLOUDFLARE_ACCOUNT_ID=$H2 CF_API_TOKEN=$H3 CLOUDFLARE_TOKEN=$H4 CF_ACCOUNT_ID=$H5 API_TOKEN=$H6 ACCOUNT_ID=$H7 BOOTSTRAP_ADMIN_EMAIL=$H10"
           echo "var CLOUDFLARE_API_TOKEN=$H8 var CLOUDFLARE_ACCOUNT_ID=$H9 any-vars=$VAR_NAMES"
           echo "repo=${{ github.repository }} ref=${{ github.ref }} event=${{ github.event_name }} actor=${{ github.actor }}"
-      - name: Require Cloudflare credentials
+      - name: Normalize credentials (trim whitespace; derive account id from the token if not given)
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::error::Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets (see docs/DEPLOY.md)"; exit 1; fi
+          TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          if [ -z "$TOKEN" ]; then echo "::error::CLOUDFLARE_API_TOKEN repository secret is missing (see docs/DEPLOY.md)"; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          ACC="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          V=$(curl -sS -H "Authorization: Bearer $TOKEN" https://api.cloudflare.com/client/v4/user/tokens/verify | jq -r '.result.status // .errors[0].message // "unknown"')
+          echo "token status: $V"
+          if [ -z "$ACC" ]; then
+            ACC=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty')
+            N=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result | length')
+            echo "derived account id from token (accounts visible: $N)"
+          fi
+          if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id — add CLOUDFLARE_ACCOUNT_ID secret"; exit 1; fi
+          echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run typecheck
       - run: npx vitest run tests/unit
