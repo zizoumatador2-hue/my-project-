@@ -1,0 +1,60 @@
+name = "trusttransfer"
+main = "worker/src/index.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*", "/__scheduled"]
+
+[observability]
+enabled = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "trusttransfer-db"
+database_id = "c82773a8-0135-4e60-bfbc-04a933e5be90"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "CONFIG"
+id = "89b98aa3b4be453cb0b3c48d99e0639e"
+
+[[r2_buckets]]
+binding = "EVIDENCE"
+bucket_name = "trusttransfer-evidence"
+
+[[queues.producers]]
+binding = "VERIFY_QUEUE"
+queue = "tt-verification"
+
+[[queues.producers]]
+binding = "TRANSFER_QUEUE"
+queue = "tt-transfer"
+
+[[queues.consumers]]
+queue = "tt-verification"
+max_batch_size = 10
+max_batch_timeout = 1
+max_retries = 5
+dead_letter_queue = "tt-dlq"
+
+[[queues.consumers]]
+queue = "tt-transfer"
+max_batch_size = 10
+max_batch_timeout = 2
+max_retries = 5
+dead_letter_queue = "tt-dlq"
+
+[triggers]
+crons = ["*/10 * * * *"]
+
+[vars]
+ENVIRONMENT = "production"
+PAYMENT_PROVIDER = "stripe"
+APP_URL = "https://trusttransfer.workers.dev"
+# Secrets (set with `wrangler secret put`, never committed):
+# SESSION_SECRET, DATA_ENCRYPTION_KEY, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,
+# TURNSTILE_SECRET_KEY, TURNSTILE_SITE_KEY, BOOTSTRAP_ADMIN_EMAIL
