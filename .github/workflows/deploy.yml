@@ -29,8 +29,15 @@ jobs:
           for q in tt-verification tt-transfer tt-dlq; do npx wrangler queues create "$q" 2>&1 | grep -qiE "created|already" || true; done
       - name: Apply D1 migrations
         run: npx wrangler d1 migrations apply trusttransfer-db --remote
-      - run: npx wrangler deploy
-      - name: Sync worker secrets (only those provided; creates a new version)
+      - name: Resolve workers.dev URL
+        id: url
+        run: |
+          SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
+          if [ -z "$SUB" ] || [ "$SUB" = "null" ]; then echo "::error::No workers.dev subdomain on this account (enable it in Workers & Pages)"; exit 1; fi
+          echo "host=trusttransfer.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Deploy worker
+        run: npx wrangler deploy --var APP_URL:https://${{ steps.url.outputs.host }}
+      - name: Provision secrets (generate missing ones once; never printed)
         env:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           DATA_ENCRYPTION_KEY: ${{ secrets.DATA_ENCRYPTION_KEY }}
@@ -39,11 +46,29 @@ jobs:
           TURNSTILE_SITE_KEY: ${{ secrets.TURNSTILE_SITE_KEY }}
           TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
           BOOTSTRAP_ADMIN_EMAIL: ${{ secrets.BOOTSTRAP_ADMIN_EMAIL }}
+          HOST: ${{ steps.url.outputs.host }}
         run: |
-          node -e '
-            const keys=["SESSION_SECRET","DATA_ENCRYPTION_KEY","STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","TURNSTILE_SITE_KEY","TURNSTILE_SECRET_KEY","BOOTSTRAP_ADMIN_EMAIL"];
-            const o={}; for (const k of keys) if (process.env[k]) o[k]=process.env[k];
-            require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(o));
-            console.log("syncing", Object.keys(o).length, "secrets");'
-          if [ "$(cat /tmp/secrets.json)" != "{}" ]; then npx wrangler secret bulk /tmp/secrets.json; fi
-          rm -f /tmp/secrets.json
+          EXISTING=$(npx wrangler secret list --format json 2>/dev/null | jq -r '.[].name' || true)
+          has() { echo "$EXISTING" | grep -qx "$1"; }
+          node -e 'const k=["SESSION_SECRET","DATA_ENCRYPTION_KEY","STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","TURNSTILE_SITE_KEY","TURNSTILE_SECRET_KEY","BOOTSTRAP_ADMIN_EMAIL"];const o={};for(const x of k)if(process.env[x])o[x]=process.env[x];require("fs").writeFileSync("/tmp/s.json",JSON.stringify(o))'
+          add() { jq --arg k "$1" --arg v "$2" '. + {($k): $v}' /tmp/s.json > /tmp/s2.json && mv /tmp/s2.json /tmp/s.json; }
+          # Keys generated only if the worker doesn't already have them (DATA_ENCRYPTION_KEY must never change once data exists).
+          if ! has SESSION_SECRET && [ -z "$SESSION_SECRET" ]; then add SESSION_SECRET "$(openssl rand -base64 48)"; echo "generated SESSION_SECRET"; fi
+          if ! has DATA_ENCRYPTION_KEY && [ -z "$DATA_ENCRYPTION_KEY" ]; then add DATA_ENCRYPTION_KEY "$(openssl rand -base64 32)"; echo "generated DATA_ENCRYPTION_KEY"; fi
+          # Turnstile widget for the workers.dev host (requires the token to have Turnstile:Edit).
+          if ! has TURNSTILE_SECRET_KEY && [ -z "$TURNSTILE_SECRET_KEY" ]; then
+            R=$(curl -fsS -X POST -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
+              "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/challenges/widgets" \
+              -d "{\"name\":\"TrustTransfer\",\"domains\":[\"$HOST\"],\"mode\":\"managed\"}" || echo '{}')
+            SK=$(echo "$R" | jq -r '.result.sitekey // empty'); SS=$(echo "$R" | jq -r '.result.secret // empty')
+            if [ -n "$SK" ] && [ -n "$SS" ]; then add TURNSTILE_SITE_KEY "$SK"; add TURNSTILE_SECRET_KEY "$SS"; echo "created Turnstile widget"; \
+            else echo "::warning::Could not create a Turnstile widget (token lacks Turnstile:Edit?) — signup stays closed until TURNSTILE_* secrets are set"; fi
+          fi
+          echo "syncing $(jq 'length' /tmp/s.json) secrets"
+          if [ "$(jq 'length' /tmp/s.json)" != "0" ]; then npx wrangler secret bulk /tmp/s.json; fi
+          rm -f /tmp/s.json
+      - name: Smoke test
+        run: |
+          sleep 5
+          curl -fsS "https://${{ steps.url.outputs.host }}/api/health"
+          echo "Live at https://${{ steps.url.outputs.host }}" >> "$GITHUB_STEP_SUMMARY"

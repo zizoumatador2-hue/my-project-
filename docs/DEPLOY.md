@@ -15,10 +15,10 @@ GitHub → Settings → Secrets and variables → Actions:
 
 | Secret | Purpose |
 |---|---|
-| `CLOUDFLARE_API_TOKEN` | Workers Scripts:Edit, D1:Edit, Queues:Edit, Workers KV:Edit, R2:Edit |
+| `CLOUDFLARE_API_TOKEN` | Workers Scripts:Edit, D1:Edit, Queues:Edit, Workers KV:Edit, R2:Edit, Turnstile:Edit |
 | `CLOUDFLARE_ACCOUNT_ID` | account id |
 
-Worker secrets (set once; the deploy workflow pushes them if present as GitHub secrets with the same names):
+Worker secrets. The deploy workflow **generates `SESSION_SECRET` and `DATA_ENCRYPTION_KEY` once** (only if the worker doesn't have them yet), **creates a Turnstile widget** for the workers.dev host, and sets `APP_URL` automatically. Any value you add as a GitHub secret with the same name overrides that:
 
 | Worker secret | How to get it |
 |---|---|
