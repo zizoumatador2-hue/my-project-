@@ -41,9 +41,11 @@ jobs:
       - run: npx vitest run tests/unit
       - run: npm run build
       - name: Ensure queues exist
+        continue-on-error: true
         run: |
           for q in tt-verification tt-transfer tt-dlq; do npx wrangler queues create "$q" 2>&1 | grep -qiE "created|already" || true; done
-      - name: Apply D1 migrations
+      - name: Apply D1 migrations (schema already applied; tolerate tokens without D1 permission)
+        continue-on-error: true
         run: npx wrangler d1 migrations apply trusttransfer-db --remote
       - name: Resolve workers.dev URL
         id: url
