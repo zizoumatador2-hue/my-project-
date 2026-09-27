@@ -15,6 +15,23 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
+      - name: Diagnose credentials (booleans and variable names only — never values)
+        env:
+          VAR_NAMES: ${{ join(fromJSON(toJSON(vars)).*, '') != '' }}
+          H1: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+          H2: ${{ secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+          H3: ${{ secrets.CF_API_TOKEN != '' }}
+          H4: ${{ secrets.CLOUDFLARE_TOKEN != '' }}
+          H5: ${{ secrets.CF_ACCOUNT_ID != '' }}
+          H6: ${{ secrets.API_TOKEN != '' }}
+          H7: ${{ secrets.ACCOUNT_ID != '' }}
+          H8: ${{ vars.CLOUDFLARE_API_TOKEN != '' }}
+          H9: ${{ vars.CLOUDFLARE_ACCOUNT_ID != '' }}
+          H10: ${{ secrets.BOOTSTRAP_ADMIN_EMAIL != '' }}
+        run: |
+          echo "secret CLOUDFLARE_API_TOKEN=$H1 CLOUDFLARE_ACCOUNT_ID=$H2 CF_API_TOKEN=$H3 CLOUDFLARE_TOKEN=$H4 CF_ACCOUNT_ID=$H5 API_TOKEN=$H6 ACCOUNT_ID=$H7 BOOTSTRAP_ADMIN_EMAIL=$H10"
+          echo "var CLOUDFLARE_API_TOKEN=$H8 var CLOUDFLARE_ACCOUNT_ID=$H9 any-vars=$VAR_NAMES"
+          echo "repo=${{ github.repository }} ref=${{ github.ref }} event=${{ github.event_name }} actor=${{ github.actor }}"
       - name: Require Cloudflare credentials
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
