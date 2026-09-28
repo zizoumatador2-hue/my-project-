@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import VehicleGrid from '../../components/VehicleGrid.astro';
+import Pagination from '../../components/Pagination.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import Icon from '../../components/Icon.astro';
+import Flash from '../../components/Flash.astro';
+import { getDealerFullBySlug, parseHours, DAYS } from '../../lib/dealers';
+import { runSearch, type SearchFilters } from '../../lib/search';
+import { all, first } from '../../lib/db';
+import { breadcrumbLd, absolute } from '../../lib/seo';
+import { formatDate, truncate } from '../../lib/format';
+
+const env = Astro.locals.runtime.env;
+const user = Astro.locals.user;
+const d = await getDealerFullBySlug(env.DB, String(Astro.params.slug));
+const isOwner = !!d && (user?.role === 'admin' || Astro.locals.dealer?.id === d.id);
+if (!d || (d.status !== 'active' && !isOwner)) return Astro.rewrite('/404');
+
+const page = Math.max(1, Math.min(200, Number(Astro.url.searchParams.get('page')) || 1));
+const filters: SearchFilters = { dealerId: d.id, sort: 'recommended', page };
+const { items, total, pages } = await runSearch(env.DB, filters);
+const reviews = await all<{ id: number; rating: number; title: string; body: string; created_at: string; name: string }>(
+  env.DB,
+  "SELECT r.id, r.rating, r.title, r.body, r.created_at, u.name FROM reviews r JOIN users u ON u.id = r.user_id WHERE r.dealer_id = ? AND r.status = 'approved' ORDER BY r.created_at DESC LIMIT 20",
+  [d.id],
+);
+const agg = await first<{ avg: number | null; n: number }>(env.DB, "SELECT ROUND(AVG(rating),1) AS avg, COUNT(*) AS n FROM reviews WHERE dealer_id = ? AND status = 'approved'", [d.id]);
+const hours = parseHours(d.hours_json);
+const site = env.SITE_URL;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Dealerships', href: '/dealers' }, { name: d.name, href: `/dealers/${d.slug}` }];
+const fullAddress = `${d.address}, ${d.city_name}, AL ${d.zip}`;
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${d.name}, ${fullAddress}`)}`;
+const tel = d.phone.replace(/[^\d+]/g, '');
+const dayMap: Record<string, string> = { mon: 'Mo', tue: 'Tu', wed: 'We', thu: 'Th', fri: 'Fr', sat: 'Sa', sun: 'Su' };
+const openingHours = Object.entries(hours).filter(([, v]) => v && !/closed/i.test(v)).map(([k, v]) => {
+  const m = v.match(/(\d{1,2}):?(\d{2})?\s*(AM|PM)\s*[–-]\s*(\d{1,2}):?(\d{2})?\s*(AM|PM)/i);
+  if (!m) return null;
+  const to24 = (h: string, mm: string | undefined, ap: string) => `${String((Number(h) % 12) + (ap.toUpperCase() === 'PM' ? 12 : 0)).padStart(2, '0')}:${mm ?? '00'}`;
+  return `${dayMap[k]} ${to24(m[1], m[2], m[3])}-${to24(m[4], m[5], m[6])}`;
+}).filter(Boolean);
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoDealer',
+  '@id': `${absolute(site, `/dealers/${d.slug}`)}#dealer`,
+  name: d.name,
+  url: absolute(site, `/dealers/${d.slug}`),
+  telephone: d.phone,
+  email: d.email,
+  ...(d.logo_key ? { logo: absolute(site, `/media/${d.logo_key}`), image: absolute(site, `/media/${d.logo_key}`) } : {}),
+  ...(d.description ? { description: truncate(d.description, 300) } : {}),
+  address: { '@type': 'PostalAddress', streetAddress: d.address, addressLocality: d.city_name, addressRegion: 'AL', postalCode: d.zip, addressCountry: 'US' },
+  ...(d.lat && d.lng ? { geo: { '@type': 'GeoCoordinates', latitude: d.lat, longitude: d.lng } } : {}),
+  ...(openingHours.length ? { openingHours } : {}),
+  ...(d.website ? { sameAs: [d.website, ...(d.facebook_url ? [d.facebook_url] : [])] } : {}),
+  areaServed: { '@type': 'State', name: 'Alabama' },
+  ...(agg && agg.n > 0 ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: agg.avg, reviewCount: agg.n, bestRating: 5, worstRating: 1 } } : {}),
+};
+const descParas = (d.description ?? '').split(/\n{2,}/).filter(Boolean);
+const reviewErr = Astro.url.searchParams.get('review_err');
+---
+<BaseLayout title={`${d.name} – Used Car Dealer in ${d.city_name}, AL`}
+  description={truncate(`${d.name} is a car dealership in ${d.city_name}, Alabama with ${total} vehicles for sale on BamaMotors. See inventory, hours, reviews and contact the dealer.`, 160)}
+  keywords={`${d.name}, used car dealer ${d.city_name} AL, car dealership ${d.city_name}, used cars ${d.city_name}`}
+  canonical={page > 1 ? `/dealers/${d.slug}?page=${page}` : `/dealers/${d.slug}`} noindex={d.status !== 'active'}
+  ogImage={d.logo_key ? `/media/${d.logo_key}` : undefined} jsonLd={[breadcrumbLd(site, crumbs), ld]}>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    {d.status !== 'active' && <div class="alert alert-warn" style="margin-top:12px">Preview: this dealer profile is <strong>{d.status}</strong> and not visible to shoppers yet.</div>}
+    <Flash />
+    <header class="card card-pad" style="margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+      {d.logo_key ? <img src={`/media/${d.logo_key}`} alt={`${d.name} logo`} width="96" height="96" style="border-radius:16px;object-fit:contain;border:1px solid var(--line);background:#fff" />
+        : <span class="avatar" style="width:96px;height:96px;font-size:2rem" aria-hidden="true">{d.name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase()}</span>}
+      <div style="flex:1;min-width:240px">
+        <h1 style="margin-bottom:4px">{d.name}</h1>
+        <p class="muted" style="margin:0"><Icon name="pin" size={16} /> {fullAddress}</p>
+        <div class="row" style="margin-top:8px">
+          {agg && agg.n > 0 && <span class="stars">★ {agg.avg} <span class="muted">({agg.n} reviews)</span></span>}
+          <span class="badge">{total} vehicles for sale</span>
+          {d.license_number && <span class="badge">AL Dealer License #{d.license_number}</span>}
+        </div>
+      </div>
+      <div class="row">
+        <a class="btn btn-primary" href={`tel:${tel}`}><Icon name="phone" size={18} /> {d.phone}</a>
+        <a class="btn btn-outline" href="#lead-form">Message dealer</a>
+        {d.website && <a class="btn btn-ghost" href={d.website} rel="noopener nofollow" target="_blank"><Icon name="globe" size={18} /> Website</a>}
+      </div>
+    </header>
+
+    <div class="vd-layout">
+      <div>
+        {d.description && (
+          <section class="section-tight" aria-labelledby="about-title">
+            <h2 id="about-title">About {d.name}</h2>
+            <div class="prose">{descParas.map((p) => <p>{p}</p>)}</div>
+          </section>
+        )}
+        <section class="section-tight" id="inventory" aria-labelledby="inv-title">
+          <h2 id="inv-title">Inventory from {d.name}</h2>
+          {items.length > 0 ? (
+            <>
+              <VehicleGrid items={items} eagerCount={0} />
+              <Pagination page={page} pages={pages} href={(p) => `/dealers/${d.slug}?page=${p}#inventory`} />
+            </>
+          ) : (
+            <EmptyState title="No vehicles listed right now"><p>Check back soon or contact the dealer about upcoming inventory.</p></EmptyState>
+          )}
+        </section>
+
+        <section class="section-tight" id="reviews" aria-labelledby="rev-title">
+          <h2 id="rev-title">Customer reviews</h2>
+          {reviewErr && <div class="alert alert-err" role="alert">{reviewErr.slice(0, 200)}</div>}
+          {reviews.length === 0 && <p class="muted">No reviews yet. Bought a car here? Be the first to share your experience.</p>}
+          <div class="stack">
+            {reviews.map((r) => (
+              <article class="panel">
+                <div class="spread"><strong>{r.title}</strong><span class="stars" aria-label={`${r.rating} out of 5 stars`}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</span></div>
+                <p style="margin:6px 0">{r.body}</p>
+                <p class="small muted" style="margin:0">{r.name.split(' ')[0]} · <time datetime={r.created_at}>{formatDate(r.created_at)}</time></p>
+              </article>
+            ))}
+          </div>
+          {user && user.id !== d.owner_user_id ? (
+            <form method="post" action="/api/reviews" class="panel" style="margin-top:16px">
+              <h3>Write a review</h3>
+              <input type="hidden" name="dealer_id" value={d.id} />
+              <div class="form-grid">
+                <div class="field"><label for="r-rating">Rating</label>
+                  <select class="select" id="r-rating" name="rating" required>{[5, 4, 3, 2, 1].map((n) => <option value={n}>{n} star{n > 1 ? 's' : ''}</option>)}</select></div>
+                <div class="field"><label for="r-title">Title</label><input class="input" id="r-title" name="title" required minlength="3" maxlength="120" /></div>
+                <div class="field full"><label for="r-body">Your experience</label><textarea class="textarea" id="r-body" name="body" required minlength="20" maxlength="3000"></textarea></div>
+              </div>
+              <p class="small muted">Reviews are moderated and must describe a real experience with this dealership.</p>
+              <button class="btn btn-dark" type="submit">Submit review</button>
+            </form>
+          ) : !user ? (
+            <p style="margin-top:12px"><a class="btn btn-outline" href={`/login?next=${encodeURIComponent(`/dealers/${d.slug}#reviews`)}`}>Sign in to write a review</a></p>
+          ) : null}
+        </section>
+      </div>
+
+      <aside class="vd-aside" aria-label="Dealer details">
+        <div class="card card-pad" style="margin-bottom:16px">
+          <h2 style="font-size:1.05rem">Location & hours</h2>
+          <address style="font-style:normal">{d.address}<br />{d.city_name}, AL {d.zip}</address>
+          <p style="margin:8px 0"><a href={mapsUrl} rel="noopener" target="_blank">Get directions →</a></p>
+          {d.lat && d.lng && (
+            <div data-map data-lat={d.lat} data-lng={d.lng} style="margin-bottom:12px">
+              <button class="btn btn-outline btn-sm btn-block" type="button" data-map-load><Icon name="pin" size={16} /> Show map</button>
+            </div>
+          )}
+          {Object.keys(hours).length > 0 ? (
+            <table><caption class="sr-only">Business hours</caption><tbody>
+              {DAYS.map(([k, label]) => <tr><th scope="row" style="text-transform:none;background:none">{label}</th><td>{hours[k] || 'Closed'}</td></tr>)}
+            </tbody></table>
+          ) : <p class="small muted">Call for business hours.</p>}
+        </div>
+        <LeadForm dealerId={d.id} types={['contact', 'financing']} heading={`Contact ${d.name}`} />
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+<script>
+  document.querySelector('[data-map-load]')?.addEventListener('click', (e) => {
+    const box = (e.currentTarget as HTMLElement).closest<HTMLElement>('[data-map]')!;
+    const lat = Number(box.dataset.lat), lng = Number(box.dataset.lng);
+    const bbox = [lng - 0.02, lat - 0.012, lng + 0.02, lat + 0.012].join(',');
+    box.innerHTML = `<iframe title="Dealer location map" width="100%" height="220" style="border:0;border-radius:10px" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lng}"></iframe>`;
+  });
+</script>

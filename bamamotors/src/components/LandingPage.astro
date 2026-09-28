@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Results from './Results.astro';
+import PriceTable from './PriceTable.astro';
+import Faq from './Faq.astro';
+import DealerCard from './DealerCard.astro';
+import type { Landing } from '../lib/landing';
+import { parseFilters, runSearch } from '../lib/search';
+import { priceStatsByBody, priceStatsByModel } from '../lib/vehicles';
+import { renderMarkdown } from '../lib/markdown';
+import { breadcrumbLd, faqLd, itemListLd } from '../lib/seo';
+import { all } from '../lib/db';
+import { BODY_TYPES, PRICE_BUCKETS } from '../lib/constants';
+import { formatPrice, formatNumber } from '../lib/format';
+import { DEALER_CARD_SQL, type DealerCard as DC } from '../lib/dealers';
+
+interface Props { landing: Landing; }
+const { landing: L } = Astro.props;
+const env = Astro.locals.runtime.env;
+const site = env.SITE_URL;
+
+const qs = parseFilters(Astro.url.searchParams);
+const filters = { ...qs, ...L.filters, sort: qs.sort, page: qs.page };
+const { total, items, origin, pages } = await runSearch(env.DB, filters);
+
+const byModel = L.kind === 'body' || L.kind === 'city-body' || L.kind === 'make' || L.kind === 'price';
+const stats = byModel ? await priceStatsByModel(env.DB, L.statsWhere.sql, L.statsWhere.params) : await priceStatsByBody(env.DB, L.statsWhere.sql, L.statsWhere.params);
+const overall = stats.reduce((acc, s) => ({ n: acc.n + s.count, min: Math.min(acc.min, s.min_cents), max: Math.max(acc.max, s.max_cents) }), { n: 0, min: Infinity, max: 0 });
+const body = L.content ? renderMarkdown(L.content) : null;
+
+const place = L.city ? `${L.city.name}, AL` : 'Alabama';
+const subject = L.h1.replace(/ for Sale.*$/, '').replace(/^Used /, 'used ').replace(' Cars, Trucks & SUVs', '');
+const snippet = overall.n > 0
+  ? `There ${overall.n === 1 ? 'is' : 'are'} ${formatNumber(overall.n)} ${subject.toLowerCase()} for sale in ${place} on BamaMotors right now, with dealer asking prices from ${formatPrice(overall.min)} to ${formatPrice(overall.max)}. Compare listings below, sort by price or mileage, and contact the dealer directly to request an out-the-door price or schedule a test drive.`
+  : null;
+
+const cities = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM cities WHERE is_featured = 1 ORDER BY sort_order');
+const popularMakes = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM makes WHERE is_popular = 1 ORDER BY name');
+const models = L.make && !L.model
+  ? await all<{ slug: string; name: string; n: number }>(env.DB, `SELECT md.slug, md.name, (SELECT COUNT(*) FROM vehicles v WHERE v.model_id = md.id AND v.status = 'active') AS n FROM models md WHERE md.make_id = (SELECT id FROM makes WHERE slug = ?) ORDER BY n DESC, md.name`, [L.make.slug])
+  : [];
+const dealers = L.kind === 'city' && L.city
+  ? await all<DC>(env.DB, `${DEALER_CARD_SQL} WHERE d.status = 'active' AND d.lat IS NOT NULL AND ((d.lat - ?) * (d.lat - ?) * 4761 + (d.lng - ?) * (d.lng - ?) * ?) <= 900 ORDER BY vehicle_count DESC LIMIT 6`,
+      [L.city.lat, L.city.lat, L.city.lng, L.city.lng, Math.pow(69 * Math.cos((L.city.lat * Math.PI) / 180), 2)])
+  : [];
+const guides = await all<{ slug: string; title: string }>(env.DB, "SELECT slug, title FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC LIMIT 4");
+
+const noindex = (total === 0 && !L.hasEditorial) || qs.sort !== 'recommended';
+const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
+const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
+---
+<BaseLayout
+  title={`${L.title}${pageSuffix}`}
+  description={L.description}
+  keywords={L.keywords}
+  canonical={canonical}
+  noindex={noindex}
+  prev={filters.page > 1 ? (filters.page === 2 ? L.path : `${L.path}?page=${filters.page - 1}`) : null}
+  next={filters.page < pages ? `${L.path}?page=${filters.page + 1}` : null}
+  jsonLd={[breadcrumbLd(site, L.crumbs), faqLd(L.faq), itemListLd(site, L.h1, items.map((v) => ({ slug: v.slug, title: `${v.year} ${v.make_name} ${v.model_name}` })))]}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={L.crumbs} />
+    <header style="margin-top:12px;max-width:860px">
+      <h1>{L.h1}</h1>
+      <p class="muted" style="font-size:1.05rem">{L.intro}</p>
+    </header>
+    {snippet && filters.page === 1 && <p class="snippet">{snippet}</p>}
+    <Results filters={filters} items={items} total={total} pages={pages} origin={origin} basePath={L.path} fixed={L.filters} />
+
+    {filters.page === 1 && (
+      <>
+        {stats.length > 0 && (
+          <section class="section-tight" aria-labelledby="prices-title">
+            <h2 id="prices-title">{L.h1.replace('for Sale', '').replace(/\s+/g, ' ').trim()}: price guide</h2>
+            <p class="muted">What {subject.toLowerCase()} cost in {place} right now, based on current listings.</p>
+            <PriceTable stats={stats} caption={`Price ranges for ${subject} in ${place}`} labelHeader={byModel ? 'Model' : 'Body type'} />
+          </section>
+        )}
+
+        {models.length > 0 && (
+          <section class="section-tight" aria-labelledby="models-title">
+            <h2 id="models-title">Popular used {L.make!.name} models</h2>
+            <ul class="chips">{models.map((m) => <li><a class="chip" href={`/used-cars/${L.make!.slug}/${m.slug}`}>{L.make!.name} {m.name} {m.n > 0 && <span class="count">({m.n})</span>}</a></li>)}</ul>
+          </section>
+        )}
+
+        {dealers.length > 0 && (
+          <section class="section-tight" aria-labelledby="dealers-title">
+            <h2 id="dealers-title">Car dealerships in {L.city!.name}</h2>
+            <div class="grid grid-3">{dealers.map((d) => <DealerCard d={d} />)}</div>
+          </section>
+        )}
+
+        {body && (
+          <section class="section-tight">
+            <article class="prose" set:html={body.html} />
+          </section>
+        )}
+
+        <section class="section-tight" aria-labelledby="related-title">
+          <h2 id="related-title">Related searches</h2>
+          {L.city && (
+            <>
+              <h3>{L.city.name} by body type</h3>
+              <ul class="chips">{BODY_TYPES.slice(0, 6).filter((b) => b.slug !== L.body?.slug).map((b) => <li><a class="chip" href={`/used-cars/${L.city!.slug}/${b.slug}`}>Used {b.plural} in {L.city!.name}</a></li>)}</ul>
+            </>
+          )}
+          <h3 style="margin-top:14px">Used cars in other Alabama cities</h3>
+          <ul class="chips">{cities.filter((c) => c.slug !== L.city?.slug).map((c) => <li><a class="chip" href={L.body ? `/used-cars/${c.slug}/${L.body.slug}` : `/used-cars/${c.slug}`}>{L.body ? `${L.body.plural} in ` : ''}{c.name}</a></li>)}</ul>
+          {!L.make && (
+            <>
+              <h3 style="margin-top:14px">Popular makes</h3>
+              <ul class="chips">{popularMakes.map((m) => <li><a class="chip" href={`/used-cars/${m.slug}`}>Used {m.name}</a></li>)}</ul>
+            </>
+          )}
+          <h3 style="margin-top:14px">Shop by budget</h3>
+          <ul class="chips">{PRICE_BUCKETS.map((p) => <li><a class="chip" href={`/used-cars/${p.slug}`}>Cars {p.label.toLowerCase()}</a></li>)}</ul>
+        </section>
+
+        <div class="section-tight"><Faq faq={L.faq} title={`${subject.charAt(0).toUpperCase()}${subject.slice(1)} in ${place}: FAQ`} /></div>
+
+        {guides.length > 0 && (
+          <section class="section-tight" aria-labelledby="guides-title">
+            <h2 id="guides-title">Helpful car buying guides</h2>
+            <div class="grid grid-4">{guides.map((g) => <a class="tile" href={`/blog/${g.slug}`}><strong>{g.title}</strong><span class="small muted">Read guide →</span></a>)}</div>
+          </section>
+        )}
+      </>
+    )}
+  </div>
+</BaseLayout>

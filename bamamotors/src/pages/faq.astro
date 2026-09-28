@@ -1,0 +1,35 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import Faq from '../components/Faq.astro';
+import { faqLd } from '../lib/seo';
+const groups = [
+  { title: 'Shopping for a car', faq: [
+    { q: 'Is BamaMotors free to use?', a: 'Yes. Searching, saving vehicles and contacting dealers is free for shoppers.' },
+    { q: 'Does BamaMotors sell cars?', a: 'No. We are a marketplace. You buy directly from the Alabama dealership that listed the vehicle.' },
+    { q: 'How do I search used cars near me?', a: 'Enter your ZIP code and a radius in the search form, or tap “Use my location.” You can sort results by distance.' },
+    { q: 'Are listing prices final?', a: 'Listing prices are the dealer’s asking price and exclude tax, title, registration and dealer fees. Request an itemized out-the-door price from the dealer.' },
+    { q: 'How do I save a car?', a: 'Create a free account and tap the heart icon on any vehicle. Saved vehicles appear in My Account.' },
+  ] },
+  { title: 'Contacting dealers', faq: [
+    { q: 'What happens after I send a request?', a: 'Your message goes directly to the dealer by email and to their dashboard. You also receive a confirmation email. The dealer replies by phone or email.' },
+    { q: 'Do you share my information with other companies?', a: 'We send your request only to the dealer you contacted. We do not sell your personal information. See our Privacy Policy.' },
+    { q: 'Can I schedule a test drive online?', a: 'Yes. Choose Schedule Test Drive on a listing and pick a preferred date. The dealer confirms the time with you.' },
+  ] },
+  { title: 'Buying in Alabama', faq: [
+    { q: 'How long do I have to register a car in Alabama?', a: 'Alabama generally requires newly purchased vehicles to be registered within 20 calendar days. Confirm with your county license office.' },
+    { q: 'Does Alabama require vehicle inspections?', a: 'Alabama has no statewide safety or emissions inspection for passenger vehicles, so an independent pre-purchase inspection is recommended.' },
+    { q: 'What is the car sales tax in Alabama?', a: 'The state automotive sales tax rate is 2%, plus county and city taxes that vary by location.' },
+  ] },
+  { title: 'For dealers', faq: [
+    { q: 'How do I list my dealership?', a: 'Create a dealer account on the For Dealers page. After our team approves your account, your vehicles are visible to shoppers.' },
+    { q: 'What does it cost?', a: 'There is a Free plan for up to 10 vehicles, plus Basic ($49/month) and Pro ($99/month) plans with more listings and featured slots.' },
+  ] },
+];
+const all = groups.flatMap((g) => g.faq);
+---
+<ContentLayout title="Frequently Asked Questions" h1="Frequently asked questions" path="/faq" description="Answers to common questions about buying used cars in Alabama on BamaMotors, contacting dealers, registration, and listing your dealership." jsonLd={[faqLd(all)]}>
+  <div style="max-width:860px">
+    {groups.map((g, i) => <div class="section-tight"><Faq faq={g.faq} title={g.title} id={`faq-${i}`} /></div>)}
+    <p>Still have questions? <a href="/contact">Contact us</a>.</p>
+  </div>
+</ContentLayout>

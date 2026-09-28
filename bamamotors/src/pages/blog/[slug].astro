@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Faq from '../../components/Faq.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPost, relatedPosts } from '../../lib/blog';
+import { renderMarkdown, readingMinutes, parseFaq } from '../../lib/markdown';
+import { breadcrumbLd, faqLd, absolute } from '../../lib/seo';
+import { formatDate } from '../../lib/format';
+
+const env = Astro.locals.runtime.env;
+const site = env.SITE_URL;
+const post = await getPost(env.DB, String(Astro.params.slug));
+const preview = Astro.locals.user?.role === 'admin';
+if (!post || (post.status !== 'published' && !preview)) return Astro.rewrite('/404');
+const { html, toc } = renderMarkdown(post.body, new URL(site).host);
+const faq = parseFaq(post.faq_json);
+let howto: { name: string; steps: { name: string; text: string }[] } | null;
+try { howto = post.howto_json ? JSON.parse(post.howto_json) : null; } catch { howto = null; }
+const related = await relatedPosts(env.DB, post);
+const url = absolute(site, `/blog/${post.slug}`);
+const crumbs = [
+  { name: 'Home', href: '/' }, { name: 'Car Buying Guides', href: '/blog' },
+  ...(post.category_slug ? [{ name: post.category_name!, href: `/blog/category/${post.category_slug}` }] : []),
+  { name: post.title, href: `/blog/${post.slug}` },
+];
+const published = post.published_at ?? post.created_at;
+const authorUrl = post.author_slug ? absolute(site, `/authors/${post.author_slug}`) : undefined;
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.meta_description ?? post.excerpt,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  url,
+  datePublished: published,
+  dateModified: post.updated_at,
+  inLanguage: 'en-US',
+  ...(post.cover_key ? { image: absolute(site, `/media/${post.cover_key}`) } : { image: absolute(site, '/og-default.png') }),
+  ...(post.keywords ? { keywords: post.keywords } : {}),
+  articleSection: post.category_name ?? undefined,
+  wordCount: post.body.split(/\s+/).length,
+  author: post.author_name ? { '@type': post.author_slug === 'bamamotors-editorial-team' ? 'Organization' : 'Person', name: post.author_name, url: authorUrl } : undefined,
+  publisher: { '@type': 'Organization', '@id': `${absolute(site, '/')}#organization`, name: 'BamaMotors', logo: { '@type': 'ImageObject', url: absolute(site, '/logo.png') } },
+  about: { '@type': 'Place', name: 'Alabama', sameAs: 'https://en.wikipedia.org/wiki/Alabama' },
+};
+const howtoLd = howto && howto.steps?.length ? {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: howto.name,
+  step: howto.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.name, text: s.text })),
+} : null;
+const initials = (post.author_name ?? 'BM').split(/\s+/).slice(0, 2).map((w) => w[0]).join('');
+---
+<BaseLayout title={post.meta_title || post.title} description={post.meta_description ?? post.excerpt} keywords={post.keywords ?? undefined}
+  canonical={`/blog/${post.slug}`} ogType="article" published={published} modified={post.updated_at} noindex={post.status !== 'published'}
+  ogImage={post.cover_key ? `/media/${post.cover_key}` : undefined} jsonLd={[breadcrumbLd(site, crumbs), articleLd, faqLd(faq), howtoLd]}>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    {post.status !== 'published' && <div class="alert alert-warn" style="margin-top:12px">Draft preview — not visible to the public.</div>}
+    <div class="article-layout">
+      <article>
+        <header>
+          {post.category_name && <a class="badge" href={`/blog/category/${post.category_slug}`}>{post.category_name}</a>}
+          <h1 style="margin-top:10px">{post.title}</h1>
+          <p class="muted" style="font-size:1.1rem;max-width:72ch">{post.excerpt}</p>
+          <div class="byline">
+            {post.author_name && <span>By {post.author_slug ? <a href={`/authors/${post.author_slug}`} rel="author">{post.author_name}</a> : post.author_name}</span>}
+            <span>Published <time datetime={published}>{formatDate(published)}</time></span>
+            <span>Updated <time datetime={post.updated_at}>{formatDate(post.updated_at)}</time></span>
+            <span>{readingMinutes(post.body)} min read</span>
+          </div>
+        </header>
+        <div class="prose" set:html={html} />
+        {faq.length > 0 && <div class="section-tight" style="max-width:72ch"><Faq faq={faq} /></div>}
+        {post.author_name && (
+          <section class="author-box" aria-label="About the author" style="max-width:72ch;margin:24px 0">
+            <span class="avatar" aria-hidden="true">{initials}</span>
+            <div>
+              <strong>{post.author_name}</strong>{post.author_title && <span class="muted"> · {post.author_title}</span>}
+              {post.author_bio && <p class="small" style="margin:6px 0 0">{post.author_bio}</p>}
+              {post.author_slug && <p class="small" style="margin:6px 0 0"><a href={`/authors/${post.author_slug}`}>More from {post.author_name} →</a></p>}
+            </div>
+          </section>
+        )}
+      </article>
+      <aside aria-label="Article tools">
+        {toc.length > 1 && (
+          <nav class="toc" aria-label="Table of contents" style="margin-bottom:16px">
+            <strong>In this guide</strong>
+            <ol>{toc.map((t) => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
+          </nav>
+        )}
+        <div class="card card-pad">
+          <strong>Ready to shop?</strong>
+          <p class="small muted">Search used cars for sale from Alabama dealers.</p>
+          <a class="btn btn-primary btn-block" href="/used-cars">Find Your Car</a>
+        </div>
+      </aside>
+    </div>
+    {related.length > 0 && (
+      <section class="section-tight" aria-labelledby="related-title" style="padding-bottom:56px">
+        <h2 id="related-title">Related guides</h2>
+        <div class="grid grid-3">{related.map((p) => <PostCard p={p} />)}</div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import VehicleForm from '../../../components/VehicleForm.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import { saveVehicle } from '../../../lib/vehicle-save';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+import { all } from '../../../lib/db';
+
+const env = Astro.locals.runtime.env;
+const dealers = await all<{ id: number; name: string }>(env.DB, "SELECT id, name FROM dealers WHERE status != 'suspended' ORDER BY name");
+let values: Record<string, string> = { condition: 'used', status: 'active', dealer_id: Astro.url.searchParams.get('dealer_id') ?? '', year: String(new Date().getFullYear() - 3) };
+let errors: FieldErrors = {};
+if (Astro.request.method === 'POST') {
+  values = formToObject(await Astro.request.formData());
+  const dealerId = Number(values.dealer_id);
+  if (!dealers.some((d) => d.id === dealerId)) errors = { _: 'Choose a dealer.' };
+  else {
+    const res = await saveVehicle(env.DB, values, { dealerId, actorId: Astro.locals.user!.id, enforceLimit: false, source: 'admin' });
+    if (res.ok) return Astro.redirect(`/admin/vehicles/${res.id}?ok=created#photos`, 303);
+    errors = res.errors;
+  }
+}
+---
+<DashboardLayout title="Add vehicle" area="admin">
+  <h1>Add a vehicle (admin)</h1>
+  {dealers.length === 0 ? <EmptyState title="Create a dealer first" icon="store"><p>Vehicles must belong to a dealer.</p></EmptyState> : <VehicleForm values={values} errors={errors} submitLabel="Save & add photos" dealers={dealers} />}
+</DashboardLayout>

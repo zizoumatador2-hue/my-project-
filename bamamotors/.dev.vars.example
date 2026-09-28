@@ -1,0 +1,15 @@
+# Local development only — copy to .dev.vars. Never use these values in production.
+SITE_URL=http://localhost:8788
+ENVIRONMENT=development
+PUBLIC_CACHE_TTL=0
+SESSION_SECRET=dev-only-change-me-0123456789abcdef0123456789abcdef
+BOOTSTRAP_ADMIN_EMAIL=admin@bamamotors.test
+# Optional integrations (leave blank to disable):
+RESEND_API_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+STRIPE_PRICE_BASIC=
+STRIPE_PRICE_PRO=
+STRIPE_PRICE_FEATURED=
+TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=

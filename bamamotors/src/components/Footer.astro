@@ -1,0 +1,59 @@
+---
+import Logo from './Logo.astro';
+const s = Astro.locals.settings ?? {};
+const year = new Date().getFullYear();
+const cities = [
+  ['birmingham-al', 'Birmingham'], ['huntsville-al', 'Huntsville'], ['mobile-al', 'Mobile'], ['montgomery-al', 'Montgomery'],
+  ['tuscaloosa-al', 'Tuscaloosa'], ['hoover-al', 'Hoover'], ['auburn-al', 'Auburn'], ['dothan-al', 'Dothan'],
+];
+const social = [
+  ['social_facebook', 'Facebook'], ['social_instagram', 'Instagram'], ['social_x', 'X'], ['social_youtube', 'YouTube'],
+].filter(([k]) => s[k]);
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <Logo />
+        <p style="margin-top:12px">BamaMotors is a local Alabama car marketplace. Search used cars for sale from Alabama dealerships and contact them directly — free for shoppers.</p>
+        {social.length > 0 && (
+          <ul class="row" style="display:flex">
+            {social.map(([k, label]) => <li><a href={s[k]} rel="noopener me" target="_blank">{label}</a></li>)}
+          </ul>
+        )}
+      </div>
+      <nav aria-label="Used cars by city">
+        <h2>Used Cars by City</h2>
+        <ul>{cities.map(([slug, name]) => <li><a href={`/used-cars/${slug}`}>Used cars in {name}</a></li>)}</ul>
+      </nav>
+      <nav aria-label="Shop">
+        <h2>Shop</h2>
+        <ul>
+          <li><a href="/used-cars">All used cars for sale</a></li>
+          <li><a href="/used-cars/trucks">Used trucks</a></li>
+          <li><a href="/used-cars/suvs">Used SUVs</a></li>
+          <li><a href="/used-cars/under-10000">Cars under $10,000</a></li>
+          <li><a href="/dealers">Car dealerships in Alabama</a></li>
+          <li><a href="/financing">Car financing</a></li>
+          <li><a href="/blog">Car buying guides</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Company">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about">About BamaMotors</a></li>
+          <li><a href="/how-it-works">How it works</a></li>
+          <li><a href="/for-dealers">For dealers</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact us</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} BamaMotors. All rights reserved.</p>
+      <p>Listings, prices and vehicle details are provided by the listing dealer. Always verify with the dealer before purchase.</p>
+    </div>
+  </div>
+</footer>

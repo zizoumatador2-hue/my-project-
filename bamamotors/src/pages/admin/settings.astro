@@ -1,0 +1,51 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { saveSettings, SETTING_DEFAULTS } from '../../lib/settings';
+import { audit } from '../../lib/db';
+
+const env = Astro.locals.runtime.env;
+let s = Astro.locals.settings;
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const values: Record<string, string> = {};
+  for (const k of Object.keys(SETTING_DEFAULTS)) values[k] = String(fd.get(k) ?? '').trim().slice(0, 500);
+  values.dealer_auto_approve = fd.get('dealer_auto_approve') === 'on' ? '1' : '0';
+  if (values.default_meta_description.length > 160) err = 'Default meta description must be 160 characters or fewer.';
+  else if (values.ga4_id && !/^G-[A-Z0-9]{4,12}$/.test(values.ga4_id)) err = 'GA4 measurement ID looks like G-XXXXXXXXXX.';
+  else if (!/^\d+$/.test(values.featured_price_cents) || !/^\d+$/.test(values.featured_days)) err = 'Featured price (cents) and days must be whole numbers.';
+  else {
+    await saveSettings(env.DB, values);
+    await audit(env.DB, Astro.locals.user!.id, 'settings.update', 'settings', null);
+    return Astro.redirect('/admin/settings?ok=saved', 303);
+  }
+  s = { ...s, ...values };
+}
+const groups: { title: string; fields: [string, string, string?][] }[] = [
+  { title: 'Site', fields: [['site_name', 'Site name'], ['tagline', 'Tagline'], ['contact_email', 'Contact email'], ['contact_phone', 'Contact phone'], ['announcement', 'Announcement bar (optional)']] },
+  { title: 'SEO defaults', fields: [['default_meta_description', 'Default meta description (≤ 160)', 'textarea'], ['default_meta_keywords', 'Default meta keywords']] },
+  { title: 'Search engines & analytics', fields: [['ga4_id', 'Google Analytics 4 measurement ID'], ['google_site_verification', 'Google Search Console verification code'], ['bing_site_verification', 'Bing Webmaster verification code']] },
+  { title: 'Brand profiles (Organization sameAs)', fields: [['social_facebook', 'Facebook URL'], ['social_instagram', 'Instagram URL'], ['social_x', 'X URL'], ['social_youtube', 'YouTube URL']] },
+  { title: 'Marketplace', fields: [['featured_price_cents', 'Featured listing price (cents)'], ['featured_days', 'Featured listing duration (days)']] },
+];
+---
+<DashboardLayout title="Settings" area="admin" err={err}>
+  <h1>SEO & site settings</h1>
+  <form method="post" class="panel">
+    {groups.map((g) => (
+      <fieldset><legend>{g.title}</legend><div class="form-grid">
+        {g.fields.map(([k, label, type]) => (
+          <div class={`field${type === 'textarea' ? ' full' : ''}`}><label for={`s-${k}`}>{label}</label>
+            {type === 'textarea' ? <textarea class="textarea" id={`s-${k}`} name={k} rows="3" style="min-height:80px">{s[k]}</textarea> : <input class="input" id={`s-${k}`} name={k} value={s[k]} />}</div>
+        ))}
+      </div></fieldset>
+    ))}
+    <label class="check" style="margin-bottom:16px"><input type="checkbox" name="dealer_auto_approve" checked={s.dealer_auto_approve === '1'} /> Auto-approve new dealer accounts (not recommended at launch)</label>
+    <button class="btn btn-primary" type="submit">Save settings</button>
+  </form>
+  <section class="panel" style="margin-top:20px">
+    <h2 style="font-size:1.1rem">Search engine submission</h2>
+    <p>Sitemap index: <a href="/sitemap.xml">{env.SITE_URL.replace(/\/$/, '')}/sitemap.xml</a> · <a href="/robots.txt">robots.txt</a></p>
+    <p class="small muted">Add the verification codes above, then submit the sitemap in Google Search Console and Bing Webmaster Tools.</p>
+  </section>
+</DashboardLayout>

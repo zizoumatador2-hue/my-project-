@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Results from '../../components/Results.astro';
+import { parseFilters, runSearch, countActiveFilters, filtersToQuery } from '../../lib/search';
+import { breadcrumbLd, itemListLd } from '../../lib/seo';
+import { all } from '../../lib/db';
+import { BODY_TYPES } from '../../lib/constants';
+
+const env = Astro.locals.runtime.env;
+const filters = parseFilters(Astro.url.searchParams);
+const { total, items, origin, pages } = await runSearch(env.DB, filters);
+if (filters.page > pages && filters.page > 1) return Astro.redirect(`/used-cars${filtersToQuery({ ...filters, page: pages })}`, 302);
+
+const filtered = countActiveFilters(filters) > 0 || filters.sort !== 'recommended';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Used Cars', href: '/used-cars' }];
+const cities = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM cities WHERE is_featured = 1 ORDER BY sort_order');
+const makes = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM makes WHERE is_popular = 1 ORDER BY name');
+const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
+const site = env.SITE_URL;
+---
+<BaseLayout
+  title={`Used Cars for Sale in Alabama${pageSuffix}`}
+  description="Search used cars for sale in Alabama from local dealers. Filter by make, model, price, mileage, body type, city or ZIP radius and contact dealers directly."
+  keywords="used cars for sale Alabama, used cars Alabama, cars for sale Alabama, used cars near me Alabama, affordable used cars Alabama"
+  canonical={filters.page > 1 && !filtered ? `/used-cars?page=${filters.page}` : '/used-cars'}
+  noindex={filtered}
+  prev={!filtered && filters.page > 1 ? (filters.page === 2 ? '/used-cars' : `/used-cars?page=${filters.page - 1}`) : null}
+  next={!filtered && filters.page < pages ? `/used-cars?page=${filters.page + 1}` : null}
+  jsonLd={[breadcrumbLd(site, crumbs), itemListLd(site, 'Used cars for sale in Alabama', items.map((v) => ({ slug: v.slug, title: `${v.year} ${v.make_name} ${v.model_name}` })))]}
+>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 style="margin-top:12px">{filters.q ? `Used cars matching “${filters.q}”` : 'Used Cars for Sale in Alabama'}</h1>
+    <p class="muted" style="max-width:760px">Compare used cars, trucks and SUVs from Alabama dealerships in one place. Narrow your search by price, mileage and body type, or enter your ZIP code to find used cars near you.</p>
+    <Results filters={filters} items={items} total={total} pages={pages} origin={origin} basePath="/used-cars" />
+    <section class="section-tight" aria-labelledby="browse-title">
+      <h2 id="browse-title">Browse used cars in Alabama</h2>
+      <h3>By city</h3>
+      <ul class="chips">{cities.map((c) => <li><a class="chip" href={`/used-cars/${c.slug}`}>{c.name}</a></li>)}</ul>
+      <h3 style="margin-top:16px">By body type</h3>
+      <ul class="chips">{BODY_TYPES.slice(0, 6).map((b) => <li><a class="chip" href={`/used-cars/${b.slug}`}>Used {b.plural}</a></li>)}</ul>
+      <h3 style="margin-top:16px">By make</h3>
+      <ul class="chips">{makes.map((m) => <li><a class="chip" href={`/used-cars/${m.slug}`}>Used {m.name}</a></li>)}</ul>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+import { all } from '../lib/db';
+import { LEAD_TYPES, LEAD_STATUSES, type LeadType } from '../lib/constants';
+import { formatDateTime } from '../lib/format';
+import type { LeadRow } from '../lib/lead-actions';
+interface Props { lead: LeadRow; canReply: boolean; }
+const { lead, canReply } = Astro.props;
+const msgs = await all<{ id: number; kind: string; body: string; emailed: number; created_at: string; author: string | null }>(
+  Astro.locals.runtime.env.DB,
+  'SELECT m.id, m.kind, m.body, m.emailed, m.created_at, u.name AS author FROM lead_messages m LEFT JOIN users u ON u.id = m.author_id WHERE m.lead_id = ? ORDER BY m.created_at',
+  [lead.id],
+);
+const tel = lead.phone?.replace(/[^\d+]/g, '');
+---
+<div class="grid grid-2" style="align-items:start">
+  <section class="panel">
+    <h1 style="font-size:1.4rem">{LEAD_TYPES[lead.type as LeadType]} from {lead.name}</h1>
+    <dl class="kv">
+      <dt>Email</dt><dd><a href={`mailto:${lead.email}`}>{lead.email}</a></dd>
+      {lead.phone && <><dt>Phone</dt><dd><a href={`tel:${tel}`}>{lead.phone}</a></dd></>}
+      <dt>Vehicle</dt><dd>{lead.vehicle_slug ? <a href={`/vehicles/${lead.vehicle_slug}`} target="_blank" rel="noopener">{lead.vehicle_label}</a> : lead.vehicle_label ?? '—'}</dd>
+      {lead.dealer_name && <><dt>Dealer</dt><dd>{lead.dealer_name}</dd></>}
+      {lead.preferred_date && <><dt>Preferred date</dt><dd>{lead.preferred_date}</dd></>}
+      <dt>Received</dt><dd>{formatDateTime(lead.created_at)}</dd>
+      <dt>Status</dt><dd><span class="badge">{lead.status}</span></dd>
+    </dl>
+    {lead.message && <><h2 style="font-size:1rem;margin-top:16px">Message</h2><p class="msg" style="white-space:pre-wrap">{lead.message}</p></>}
+    <form method="post" class="row" style="margin-top:16px">
+      <input type="hidden" name="action" value="status" />
+      <label for="lead-status" class="label">Update status</label>
+      <select class="select" id="lead-status" name="status" style="width:auto">{LEAD_STATUSES.map((s) => <option value={s} selected={s === lead.status}>{s}</option>)}</select>
+      <button class="btn btn-dark btn-sm" type="submit">Save</button>
+    </form>
+  </section>
+  <section class="panel">
+    <h2 style="font-size:1.1rem">Conversation & notes</h2>
+    {msgs.length === 0 && <p class="muted">No replies or notes yet.</p>}
+    <div class="stack">
+      {msgs.map((m) => (
+        <div class={`msg${m.kind === 'note' ? ' note' : ''}`}>
+          <div class="small muted">{m.kind === 'note' ? 'Internal note' : m.emailed ? 'Reply emailed' : 'Reply logged (email delivery not configured)'} · {m.author ?? 'Staff'} · {formatDateTime(m.created_at)}</div>
+          <p style="margin:6px 0 0;white-space:pre-wrap">{m.body}</p>
+        </div>
+      ))}
+    </div>
+    {canReply && (
+      <form method="post" style="margin-top:16px">
+        <div class="field"><label for="reply-body">Reply to {lead.name} or add a note</label><textarea class="textarea" id="reply-body" name="body" rows="5" required></textarea></div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn btn-primary" type="submit" name="action" value="reply">Send email reply</button>
+          <button class="btn btn-outline" type="submit" name="action" value="note">Save internal note</button>
+        </div>
+      </form>
+    )}
+  </section>
+</div>

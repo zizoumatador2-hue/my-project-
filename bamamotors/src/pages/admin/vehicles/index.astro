@@ -1,0 +1,94 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import Pagination from '../../../components/Pagination.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import { all, first, nowIso, audit } from '../../../lib/db';
+import { formatPrice, formatNumber, formatDate } from '../../../lib/format';
+import { featureVehicle, unfeatureVehicle } from '../../../lib/billing';
+import { deleteVehicle } from '../../../lib/vehicle-save';
+
+const env = Astro.locals.runtime.env;
+const db = env.DB;
+const admin = Astro.locals.user!;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const ids = fd.getAll('ids').map(Number).filter((n) => n > 0).slice(0, 200);
+  const action = String(fd.get('action'));
+  const rows = ids.length ? await all<{ id: number; dealer_id: number }>(db, `SELECT id, dealer_id FROM vehicles WHERE id IN (${ids.map(() => '?').join(',')})`, ids) : [];
+  if (action.startsWith('status_')) {
+    const status = action.slice(7);
+    if (['active', 'draft', 'sold', 'archived'].includes(status)) {
+      await db.batch(rows.map((r) => db.prepare('UPDATE vehicles SET status = ?, updated_at = ? WHERE id = ?').bind(status, nowIso(), r.id)));
+      await audit(db, admin.id, 'vehicle.bulk_status', 'vehicle', ids.join(','), { status });
+    }
+  } else if (action === 'feature') {
+    for (const r of rows) await featureVehicle(db, r.id, r.dealer_id, 30, 'admin');
+  } else if (action === 'unfeature') {
+    for (const r of rows) await unfeatureVehicle(db, r.id);
+  } else if (action === 'delete') {
+    for (const r of rows) await deleteVehicle(db, env.MEDIA, r.id, admin.id);
+  }
+  return Astro.redirect(`/admin/vehicles${Astro.url.search}${Astro.url.search ? '&' : '?'}ok=bulk`, 303);
+}
+const sp = Astro.url.searchParams;
+const status = ['active', 'draft', 'sold', 'archived'].includes(sp.get('status') ?? '') ? sp.get('status')! : '';
+const q = (sp.get('q') ?? '').trim().slice(0, 60);
+const dealerId = Number(sp.get('dealer_id')) || 0;
+const featuredOnly = sp.get('featured') === '1';
+const page = Math.max(1, Number(sp.get('page')) || 1);
+const PER = 40;
+const where = ['1=1'];
+const params: (string | number)[] = [];
+if (status) { where.push('v.status = ?'); params.push(status); }
+if (dealerId) { where.push('v.dealer_id = ?'); params.push(dealerId); }
+if (featuredOnly) { where.push('v.featured_until > ?'); params.push(nowIso()); }
+if (q) { where.push("(mk.name || ' ' || md.name || ' ' || COALESCE(v.trim,'') || ' ' || COALESCE(v.vin,'') || ' ' || v.year || ' ' || d.name) LIKE ?"); params.push(`%${q}%`); }
+const from = `FROM vehicles v JOIN makes mk ON mk.id = v.make_id JOIN models md ON md.id = v.model_id JOIN dealers d ON d.id = v.dealer_id WHERE ${where.join(' AND ')}`;
+const total = (await first<{ n: number }>(db, `SELECT COUNT(*) AS n ${from}`, params))?.n ?? 0;
+const rows = await all<{ id: number; slug: string; year: number; make: string; model: string; trim: string | null; price_cents: number; mileage: number; status: string; dealer: string; dealer_id: number; featured_until: string | null; created_at: string; views: number }>(db,
+  `SELECT v.id, v.slug, v.year, mk.name AS make, md.name AS model, v.trim, v.price_cents, v.mileage, v.status, d.name AS dealer, d.id AS dealer_id, v.featured_until, v.created_at, v.views ${from}
+   ORDER BY v.created_at DESC LIMIT ${PER} OFFSET ${(page - 1) * PER}`, params);
+const now = nowIso();
+---
+<DashboardLayout title="Vehicles" area="admin">
+  <div class="spread"><h1 style="margin:0">Vehicles</h1><a class="btn btn-primary" href="/admin/vehicles/new">+ Add vehicle</a></div>
+  <form method="get" class="toolbar" style="margin-top:12px">
+    <div class="field"><label for="q">Search</label><input class="input" id="q" name="q" value={q} placeholder="Make, model, VIN, dealer" /></div>
+    <div class="field"><label for="st">Status</label><select class="select" id="st" name="status"><option value="">All</option>{['active', 'draft', 'sold', 'archived'].map((s) => <option selected={s === status}>{s}</option>)}</select></div>
+    {dealerId > 0 && <input type="hidden" name="dealer_id" value={dealerId} />}
+    <label class="check" style="align-self:center"><input type="checkbox" name="featured" value="1" checked={featuredOnly} /> Featured only</label>
+    <button class="btn btn-outline" type="submit">Filter</button>
+  </form>
+  <p class="muted">{total} vehicles{dealerId ? ' for this dealer' : ''}</p>
+  {rows.length === 0 ? <EmptyState title="No vehicles found" /> : (
+    <form method="post">
+      <div class="toolbar">
+        <button class="btn btn-outline btn-sm" name="action" value="status_active">Activate</button>
+        <button class="btn btn-outline btn-sm" name="action" value="status_sold">Mark sold</button>
+        <button class="btn btn-outline btn-sm" name="action" value="status_archived">Archive</button>
+        <button class="btn btn-outline btn-sm" name="action" value="feature">Feature 30 days</button>
+        <button class="btn btn-outline btn-sm" name="action" value="unfeature">Unfeature</button>
+        <button class="btn btn-danger btn-sm" name="action" value="delete" data-confirm-click="Delete the selected vehicles permanently?">Delete</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th><input type="checkbox" aria-label="Select all" data-select-all /></th><th>Vehicle</th><th>Dealer</th><th>Price</th><th>Status</th><th>Views</th><th>Featured</th><th>Listed</th></tr></thead>
+        <tbody>{rows.map((r) => (
+          <tr><td><input type="checkbox" name="ids" value={r.id} aria-label={`Select vehicle ${r.id}`} /></td>
+            <td><a href={`/admin/vehicles/${r.id}`}><strong>{r.year} {r.make} {r.model}</strong></a> {r.trim}<br /><span class="small muted">{formatNumber(r.mileage)} mi · <a href={`/vehicles/${r.slug}`}>view</a></span></td>
+            <td><a href={`/admin/dealers/${r.dealer_id}`}>{r.dealer}</a></td><td>{formatPrice(r.price_cents)}</td>
+            <td><span class="badge">{r.status}</span></td><td>{r.views}</td>
+            <td>{r.featured_until && r.featured_until > now ? <span class="badge badge-featured">{r.featured_until.slice(0, 10)}</span> : '—'}</td>
+            <td class="small">{formatDate(r.created_at)}</td></tr>
+        ))}</tbody>
+      </table></div>
+    </form>
+  )}
+  <Pagination page={page} pages={Math.max(1, Math.ceil(total / PER))} href={(p) => `/admin/vehicles?${new URLSearchParams({ ...(q && { q }), ...(status && { status }), ...(dealerId && { dealer_id: String(dealerId) }), ...(featuredOnly && { featured: '1' }), page: String(p) })}`} />
+</DashboardLayout>
+<script>
+  document.querySelector<HTMLInputElement>('[data-select-all]')?.addEventListener('change', (e) => {
+    const on = (e.target as HTMLInputElement).checked;
+    document.querySelectorAll<HTMLInputElement>('input[name="ids"]').forEach((c) => (c.checked = on));
+  });
+  document.querySelectorAll<HTMLButtonElement>('[data-confirm-click]').forEach((b) => b.addEventListener('click', (e) => { if (!confirm(b.dataset.confirmClick!)) e.preventDefault(); }));
+</script>
