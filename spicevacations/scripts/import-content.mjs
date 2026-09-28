@@ -9,7 +9,7 @@
 // and `npm run report:content` flags missing SEO fields before you publish.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import yaml from 'js-yaml';
+import { load, dump } from 'js-yaml';
 import { parseCsv } from './lib/csv.mjs';
 
 const args = process.argv.slice(2);
@@ -83,7 +83,7 @@ for (const r of records) {
     skipped++;
     continue;
   }
-  const md = `---\n${yaml.dump(rec, { lineWidth: 200 })}---\n\n${body}\n`;
+  const md = `---\n${dump(rec, { lineWidth: 200 })}---\n\n${body}\n`;
   if (!dryRun) writeFileSync(path, md);
   written++;
   console.log(`${dryRun ? 'would write' : 'wrote'} ${collection}/${slug}.md`);

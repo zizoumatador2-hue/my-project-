@@ -2,7 +2,7 @@
 // Usage: npm run report:content   (exit code 1 if any error is found)
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import yaml from 'js-yaml';
+import { load, dump } from 'js-yaml';
 
 const ROOT = new URL('../src/content/', import.meta.url).pathname;
 const COLLECTIONS = {
@@ -28,7 +28,7 @@ for (const [col, cfg] of Object.entries(COLLECTIONS)) {
     const body = rest.join('---');
     let data = {};
     try {
-      data = yaml.load(fm) ?? {};
+      data = load(fm) ?? {};
     } catch (e) {
       entries.push({ col, id: f, error: `YAML: ${e.message.split('\n')[0]}` });
       continue;
