@@ -1,0 +1,22 @@
+---
+interface Props {
+  id: string;
+  variant?: 'footer' | 'band';
+}
+const { id, variant = 'band' } = Astro.props;
+---
+
+<form class="newsletter-form mt-2" action="/api/newsletter" method="post" data-ajax-form data-event="newsletter_signup" novalidate>
+  <label class="sr-only" for={`nl-email-${id}`}>Email address</label>
+  <input class="input" id={`nl-email-${id}`} name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+  <div class="hp" aria-hidden="true">
+    <label for={`nl-web-${id}`}>Website</label>
+    <input id={`nl-web-${id}`} name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+  <input type="hidden" name="source" value={variant} />
+  <button class="btn" type="submit">Get travel ideas</button>
+  <p class:list={['small', 'form-status']} data-status aria-live="polite" style="flex-basis:100%;margin:0"></p>
+  <p class="small" style="flex-basis:100%;margin:0;opacity:.85">
+    One inspiring email a month. No spam, unsubscribe anytime. See our <a href="/privacy-policy/">privacy policy</a>.
+  </p>
+</form>

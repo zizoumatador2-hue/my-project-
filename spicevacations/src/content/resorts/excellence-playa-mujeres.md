@@ -1,0 +1,39 @@
+---
+name: Excellence Playa Mujeres
+metaTitle: Excellence Playa Mujeres Review for Couples | SpiceVacations
+metaDescription: Excellence Playa Mujeres is an adults-only, all-inclusive resort north of Cancun. See who it suits, room tips, what to expect and how to check live availability.
+scene: pool
+palette: teal
+imageAlt: Illustrated adults-only resort pool with palm trees beside a turquoise sea
+destination: mexico
+location: Playa Mujeres, Cancun, Mexico
+resortTypes: [all-inclusive, adults-only, beachfront, luxury]
+vacationTypes: [adults-only-resorts, all-inclusive-resorts, honeymoon-vacations, romantic-getaways]
+idealFor: [couples, honeymooners]
+budgetStyle: splurge
+adultsOnly: true
+summary: A polished adults-only, all-inclusive resort in the quieter Playa Mujeres area north of Cancun, known for its many restaurants, swim-up suites and relaxed, grown-up atmosphere.
+features: [Adults-only, All-inclusive, Swim-up suites, Multiple à la carte restaurants, Full-service spa, Beachfront]
+goodToKnow:
+  - Playa Mujeres is north of Cancun's Hotel Zone; transfers from Cancun Airport typically take longer than to Hotel Zone resorts.
+  - The Excellence Club upgrade adds extra perks; confirm current inclusions when booking.
+featured: true
+updated: 2026-09-20
+---
+
+Excellence Playa Mujeres sits on a stretch of coast north of Cancun that feels calmer than the busy Hotel Zone. It is part of the Excellence Collection, known for adults-only, all-inclusive resorts built around couples.
+
+## Why couples love it
+
+The resort's layout is a big draw: a long beachfront, lagoon-style pools winding between buildings, and many rooms with swim-up access or rooftop terraces with plunge pools. With numerous restaurants and bars on site, it is easy to spend a week without repeating dinner.
+
+## Who it suits
+
+It suits couples and honeymooners who want an easy, high-comfort, all-inclusive week with lots of dining variety. It is less ideal if you want to explore downtown Cancun every night, as the area is more secluded.
+
+## Tips
+
+- Swim-up suites are popular; book early for peak dates.
+- Consider the Club level if a quieter pool and extra amenities matter to you.
+
+Compare with other picks in our [best adults-only resorts in Mexico](/guides/best-adults-only-resorts-in-mexico/) guide.

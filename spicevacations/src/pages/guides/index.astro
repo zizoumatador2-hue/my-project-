@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getGuides, getVacationTypes, url } from '../../lib/content';
+import { breadcrumbList, itemList, webPage } from '../../lib/schema';
+
+const guides = await getGuides();
+const types = await getVacationTypes();
+const path = '/guides/';
+const metaTitle = 'Travel Guides for Couples: Planning Tips | SpiceVacations';
+const description = 'In-depth travel guides for couples: romantic getaways, adults-only resorts, honeymoon destinations, beach vacations and deal timing, updated by our editors.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Guides', href: path }];
+const schema = [webPage({ path, title: metaTitle, description, type: 'CollectionPage' }), breadcrumbList(crumbs), itemList('Travel guides', guides.map((g) => ({ name: g.data.title, href: url.guide(g.id) })))];
+const groups = types.map((t) => ({ t, list: guides.filter((g) => g.data.category === t.id) })).filter((x) => x.list.length);
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <PageHero title="Travel Guides for Couples" lead={`${guides.length} in-depth guides to help you choose where to go, where to stay and when to book, plus our complete romantic getaways guide.`} crumbs={crumbs} media={{ scene: 'harbor', palette: 'gold', imageAlt: 'Illustrated harbor with a sailboat and lighthouse' }}>
+    <a class="btn mt-3" href="/">Read the complete romantic getaways guide</a>
+  </PageHero>
+  <div class="container section--tight">
+    <nav aria-label="Guide categories" class="cluster">
+      {groups.map(({ t }) => <a class="chip" href={`#${t.id}`}>{t.data.name}</a>)}
+    </nav>
+  </div>
+  {
+    groups.map(({ t, list }) => (
+      <section class="section--tight" aria-labelledby={t.id}>
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <div>
+              <h2 id={t.id}>{t.data.name}</h2>
+              <p>{t.data.tagline}</p>
+            </div>
+            <a class="link-arrow" href={url.vacationType(t.id)}>All {t.data.name.toLowerCase()}</a>
+          </div>
+          <div class="grid grid-3" data-stagger>
+            {list.map((g) => (
+              <GuideCard g={g} kicker={t.data.name} />
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+  <NewsletterBand />
+</Base>

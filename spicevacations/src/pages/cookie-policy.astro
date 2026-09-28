@@ -1,0 +1,22 @@
+---
+import Page from '../layouts/Page.astro';
+---
+
+<Page title="Cookie policy" metaTitle="Cookie Policy | SpiceVacations" description="Which cookies and browser storage SpiceVacations.com uses, why, and how to change your choice. Analytics load only after you give consent." updated="September 25, 2026">
+  <p>We use as little tracking as possible. Here's exactly what we use and how to control it.</p>
+  <h2>Essential storage (always on)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr></thead>
+    <tbody>
+      <tr><td>sv:consent</td><td>Local storage</td><td>Remembers your cookie choice</td><td>Until you clear it</td></tr>
+      <tr><td>sv:saved</td><td>Local storage</td><td>Keeps your saved trips on this device</td><td>Until you clear it</td></tr>
+    </tbody>
+  </table></div>
+  <h2>Analytics (only with your consent)</h2>
+  <p>If you choose "Accept analytics," we may load privacy-focused analytics (such as Plausible and/or Google Analytics 4) to measure page visits and events like searches, planner submissions, newsletter sign-ups and partner clicks. If you choose "Essential only," these scripts never load.</p>
+  <h2>Partner cookies</h2>
+  <p>When you click through to a booking partner, that partner may set cookies on its own site to attribute your booking. Those cookies are governed by the partner's policies.</p>
+  <h2>Change your choice</h2>
+  <p>You can change your choice at any time:</p>
+  <p><button class="btn btn--sm" type="button" data-cookie-settings>Open cookie settings</button></p>
+</Page>

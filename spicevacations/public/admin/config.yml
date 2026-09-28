@@ -1,0 +1,872 @@
+# Decap CMS configuration: a Git-based editor for the Markdown collections in src/content.
+# Editors log in with GitHub and every save becomes a commit (or a pull request with
+# the editorial workflow below), which triggers a rebuild and deploy on Cloudflare.
+backend:
+  name: github
+  repo: zizoumatador2-hue/my-project-
+  branch: main
+publish_mode: editorial_workflow
+media_folder: spicevacations/public/uploads
+public_folder: /uploads
+site_url: https://spicevacations.com
+display_url: https://spicevacations.com
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+collections:
+  - name: destinations
+    label: Destinations
+    folder: spicevacations/src/content/destinations
+    create: true
+    identifier_field: name
+    summary: '{{name}} — {{region}}'
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: SEO title (≤ 62 chars)
+        name: metaTitle
+        widget: string
+        pattern:
+          - ^.{20,62}$
+          - 20–62 characters
+      - label: Meta description (110–165 chars)
+        name: metaDescription
+        widget: text
+        pattern:
+          - ^[\s\S]{110,165}$
+          - 110–165 characters
+      - label: Canonical URL (optional)
+        name: canonical
+        widget: string
+        required: false
+      - label: Noindex
+        name: noindex
+        widget: boolean
+        default: false
+      - label: Illustration scene
+        name: scene
+        widget: select
+        options:
+          - beach
+          - sunset
+          - tropical
+          - overwater
+          - mountains
+          - city
+          - desert
+          - cliffs
+          - vineyard
+          - lake
+          - cruise
+          - pool
+          - volcano
+          - harbor
+        default: beach
+      - label: Illustration palette
+        name: palette
+        widget: select
+        options:
+          - coral
+          - gold
+          - teal
+          - dusk
+          - night
+        default: coral
+      - label: Photo (optional
+        overrides illustration): null
+        name: image
+        widget: image
+        required: false
+      - label: Image alt text
+        name: imageAlt
+        widget: string
+        pattern:
+          - ^.{10,}$
+          - Describe the image (10+ characters)
+      - label: Image credit
+        name: imageCredit
+        widget: string
+        required: false
+      - label: Region
+        name: region
+        widget: select
+        options:
+          - usa
+          - mexico
+          - caribbean
+      - label: Country
+        name: country
+        widget: string
+      - label: State (optional)
+        name: state
+        widget: string
+        required: false
+      - label: Tagline
+        name: tagline
+        widget: string
+      - label: Summary
+        name: summary
+        widget: text
+      - label: Best months (1–12)
+        name: bestMonths
+        widget: list
+        field:
+          label: Month
+          name: m
+          widget: number
+          value_type: int
+          min: 1
+          max: 12
+      - label: Best time note
+        name: bestTimeNote
+        widget: string
+      - label: Airports
+        name: airports
+        widget: list
+        required: false
+      - label: Ideal for
+        name: idealFor
+        widget: select
+        multiple: true
+        options:
+          - couples
+          - honeymooners
+          - families
+          - friends
+          - solo
+      - label: Budget styles
+        name: budgetStyles
+        widget: select
+        multiple: true
+        options:
+          - value
+          - mid-range
+          - splurge
+      - label: Vacation types (slugs)
+        name: vacationTypes
+        widget: relation
+        collection: vacation-types
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+        multiple: true
+      - label: Activities
+        name: activities
+        widget: list
+      - label: Highlights
+        name: highlights
+        widget: list
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Text
+            name: text
+            widget: text
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: Order
+        name: order
+        widget: number
+        default: 100
+      - label: FAQs
+        name: faqs
+        widget: list
+        required: false
+        fields:
+          - label: Question
+            name: q
+            widget: string
+          - label: Answer
+            name: a
+            widget: text
+      - label: Updated
+        name: updated
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: resorts
+    label: Resorts & hotels
+    folder: spicevacations/src/content/resorts
+    create: true
+    identifier_field: name
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: SEO title (≤ 62 chars)
+        name: metaTitle
+        widget: string
+        pattern:
+          - ^.{20,62}$
+          - 20–62 characters
+      - label: Meta description (110–165 chars)
+        name: metaDescription
+        widget: text
+        pattern:
+          - ^[\s\S]{110,165}$
+          - 110–165 characters
+      - label: Canonical URL (optional)
+        name: canonical
+        widget: string
+        required: false
+      - label: Noindex
+        name: noindex
+        widget: boolean
+        default: false
+      - label: Illustration scene
+        name: scene
+        widget: select
+        options:
+          - beach
+          - sunset
+          - tropical
+          - overwater
+          - mountains
+          - city
+          - desert
+          - cliffs
+          - vineyard
+          - lake
+          - cruise
+          - pool
+          - volcano
+          - harbor
+        default: beach
+      - label: Illustration palette
+        name: palette
+        widget: select
+        options:
+          - coral
+          - gold
+          - teal
+          - dusk
+          - night
+        default: coral
+      - label: Photo (optional
+        overrides illustration): null
+        name: image
+        widget: image
+        required: false
+      - label: Image alt text
+        name: imageAlt
+        widget: string
+        pattern:
+          - ^.{10,}$
+          - Describe the image (10+ characters)
+      - label: Image credit
+        name: imageCredit
+        widget: string
+        required: false
+      - label: Destination
+        name: destination
+        widget: relation
+        collection: destinations
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+      - label: Location
+        name: location
+        widget: string
+      - label: Resort types
+        name: resortTypes
+        widget: select
+        multiple: true
+        options:
+          - all-inclusive
+          - adults-only
+          - luxury
+          - beachfront
+          - boutique
+          - spa
+          - casino
+          - historic
+          - overwater
+      - label: Vacation types
+        name: vacationTypes
+        widget: relation
+        collection: vacation-types
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+        multiple: true
+      - label: Ideal for
+        name: idealFor
+        widget: select
+        multiple: true
+        options:
+          - couples
+          - honeymooners
+          - families
+          - friends
+          - solo
+      - label: Budget style
+        name: budgetStyle
+        widget: select
+        options:
+          - value
+          - mid-range
+          - splurge
+      - label: Adults-only
+        name: adultsOnly
+        widget: boolean
+        default: false
+      - label: Summary
+        name: summary
+        widget: text
+      - label: Features
+        name: features
+        widget: list
+      - label: Good to know
+        name: goodToKnow
+        widget: list
+        required: false
+      - label: Rating (ONLY a real, sourced rating)
+        name: rating
+        widget: object
+        required: false
+        fields:
+          - label: Value (0–5)
+            name: value
+            widget: number
+            value_type: float
+            min: 0
+            max: 5
+          - label: Review count
+            name: count
+            widget: number
+            value_type: int
+          - label: Source name
+            name: source
+            widget: string
+          - label: Source URL
+            name: url
+            widget: string
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: FAQs
+        name: faqs
+        widget: list
+        required: false
+        fields:
+          - label: Question
+            name: q
+            widget: string
+          - label: Answer
+            name: a
+            widget: text
+      - label: Updated
+        name: updated
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: guides
+    label: Guides & articles
+    folder: spicevacations/src/content/guides
+    create: true
+    identifier_field: title
+    fields:
+      - label: Title (H1)
+        name: title
+        widget: string
+      - label: SEO title (≤ 62 chars)
+        name: metaTitle
+        widget: string
+        pattern:
+          - ^.{20,62}$
+          - 20–62 characters
+      - label: Meta description (110–165 chars)
+        name: metaDescription
+        widget: text
+        pattern:
+          - ^[\s\S]{110,165}$
+          - 110–165 characters
+      - label: Canonical URL (optional)
+        name: canonical
+        widget: string
+        required: false
+      - label: Noindex
+        name: noindex
+        widget: boolean
+        default: false
+      - label: Illustration scene
+        name: scene
+        widget: select
+        options:
+          - beach
+          - sunset
+          - tropical
+          - overwater
+          - mountains
+          - city
+          - desert
+          - cliffs
+          - vineyard
+          - lake
+          - cruise
+          - pool
+          - volcano
+          - harbor
+        default: beach
+      - label: Illustration palette
+        name: palette
+        widget: select
+        options:
+          - coral
+          - gold
+          - teal
+          - dusk
+          - night
+        default: coral
+      - label: Photo (optional
+        overrides illustration): null
+        name: image
+        widget: image
+        required: false
+      - label: Image alt text
+        name: imageAlt
+        widget: string
+        pattern:
+          - ^.{10,}$
+          - Describe the image (10+ characters)
+      - label: Image credit
+        name: imageCredit
+        widget: string
+        required: false
+      - label: Primary keyword
+        name: primaryKeyword
+        widget: string
+      - label: Secondary keywords
+        name: secondaryKeywords
+        widget: list
+        required: false
+      - label: Category (vacation type)
+        name: category
+        widget: relation
+        collection: vacation-types
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+      - label: Destinations
+        name: destinations
+        widget: relation
+        collection: destinations
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+        multiple: true
+        required: false
+      - label: Resorts
+        name: resorts
+        widget: relation
+        collection: resorts
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+        multiple: true
+        required: false
+      - label: Related guides
+        name: related
+        widget: relation
+        collection: guides
+        value_field: '{{slug}}'
+        search_fields:
+          - title
+        multiple: true
+        required: false
+      - label: Quick answer (40–60 words
+        featured snippet): null
+        name: snippet
+        widget: text
+      - label: Published
+        name: published
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Updated
+        name: updated
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: Draft (hidden from site)
+        name: draft
+        widget: boolean
+        default: false
+      - label: FAQs
+        name: faqs
+        widget: list
+        required: false
+        fields:
+          - label: Question
+            name: q
+            widget: string
+          - label: Answer
+            name: a
+            widget: text
+      - label: Body
+        name: body
+        widget: markdown
+  - name: vacation-types
+    label: Vacation types
+    folder: spicevacations/src/content/vacation-types
+    create: true
+    identifier_field: name
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: SEO title (≤ 62 chars)
+        name: metaTitle
+        widget: string
+        pattern:
+          - ^.{20,62}$
+          - 20–62 characters
+      - label: Meta description (110–165 chars)
+        name: metaDescription
+        widget: text
+        pattern:
+          - ^[\s\S]{110,165}$
+          - 110–165 characters
+      - label: Canonical URL (optional)
+        name: canonical
+        widget: string
+        required: false
+      - label: Noindex
+        name: noindex
+        widget: boolean
+        default: false
+      - label: Illustration scene
+        name: scene
+        widget: select
+        options:
+          - beach
+          - sunset
+          - tropical
+          - overwater
+          - mountains
+          - city
+          - desert
+          - cliffs
+          - vineyard
+          - lake
+          - cruise
+          - pool
+          - volcano
+          - harbor
+        default: beach
+      - label: Illustration palette
+        name: palette
+        widget: select
+        options:
+          - coral
+          - gold
+          - teal
+          - dusk
+          - night
+        default: coral
+      - label: Photo (optional
+        overrides illustration): null
+        name: image
+        widget: image
+        required: false
+      - label: Image alt text
+        name: imageAlt
+        widget: string
+        pattern:
+          - ^.{10,}$
+          - Describe the image (10+ characters)
+      - label: Image credit
+        name: imageCredit
+        widget: string
+        required: false
+      - label: Tagline
+        name: tagline
+        widget: string
+      - label: Summary
+        name: summary
+        widget: text
+      - label: Icon
+        name: icon
+        widget: select
+        options:
+          - heart
+          - users
+          - gem
+          - wine
+          - palmtree
+          - crown
+          - sun
+          - calendar
+          - ship
+          - sparkles
+      - label: Order
+        name: order
+        widget: number
+        default: 100
+      - label: Pillar guide
+        name: pillarGuide
+        widget: relation
+        collection: guides
+        value_field: '{{slug}}'
+        search_fields:
+          - title
+        required: false
+      - label: FAQs
+        name: faqs
+        widget: list
+        required: false
+        fields:
+          - label: Question
+            name: q
+            widget: string
+          - label: Answer
+            name: a
+            widget: text
+      - label: Body
+        name: body
+        widget: markdown
+  - name: deals
+    label: Deal timing
+    folder: spicevacations/src/content/deals
+    create: true
+    identifier_field: title
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: SEO title (≤ 62 chars)
+        name: metaTitle
+        widget: string
+        pattern:
+          - ^.{20,62}$
+          - 20–62 characters
+      - label: Meta description (110–165 chars)
+        name: metaDescription
+        widget: text
+        pattern:
+          - ^[\s\S]{110,165}$
+          - 110–165 characters
+      - label: Canonical URL (optional)
+        name: canonical
+        widget: string
+        required: false
+      - label: Noindex
+        name: noindex
+        widget: boolean
+        default: false
+      - label: Illustration scene
+        name: scene
+        widget: select
+        options:
+          - beach
+          - sunset
+          - tropical
+          - overwater
+          - mountains
+          - city
+          - desert
+          - cliffs
+          - vineyard
+          - lake
+          - cruise
+          - pool
+          - volcano
+          - harbor
+        default: beach
+      - label: Illustration palette
+        name: palette
+        widget: select
+        options:
+          - coral
+          - gold
+          - teal
+          - dusk
+          - night
+        default: coral
+      - label: Photo (optional
+        overrides illustration): null
+        name: image
+        widget: image
+        required: false
+      - label: Image alt text
+        name: imageAlt
+        widget: string
+        pattern:
+          - ^.{10,}$
+          - Describe the image (10+ characters)
+      - label: Image credit
+        name: imageCredit
+        widget: string
+        required: false
+      - label: Destination
+        name: destination
+        widget: relation
+        collection: destinations
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+      - label: Vacation type
+        name: vacationType
+        widget: relation
+        collection: vacation-types
+        value_field: '{{slug}}'
+        search_fields:
+          - name
+      - label: Product type
+        name: productType
+        widget: select
+        options:
+          - hotel
+          - resort
+          - flight
+          - cruise
+          - car
+          - tour
+          - insurance
+      - label: Window
+        name: window
+        widget: string
+      - label: Months (1–12)
+        name: months
+        widget: list
+        field:
+          label: Month
+          name: m
+          widget: number
+          value_type: int
+          min: 1
+          max: 12
+      - label: Summary
+        name: summary
+        widget: text
+      - label: Tips
+        name: tips
+        widget: list
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: FAQs
+        name: faqs
+        widget: list
+        required: false
+        fields:
+          - label: Question
+            name: q
+            widget: string
+          - label: Answer
+            name: a
+            widget: text
+      - label: Updated
+        name: updated
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: settings
+    label: Settings
+    files:
+      - label: Affiliate link registry
+        name: affiliates
+        file: spicevacations/src/data/affiliates.json
+        fields:
+          - label: Partners
+            name: partners
+            widget: list
+            fields:
+              - label: ID
+                name: id
+                widget: string
+              - label: Name
+                name: name
+                widget: string
+              - label: Network
+                name: network
+                widget: string
+              - label: Product types
+                name: productTypes
+                widget: select
+                multiple: true
+                options:
+                  - hotel
+                  - resort
+                  - flight
+                  - cruise
+                  - car
+                  - tour
+                  - insurance
+              - label: URL template ({query} placeholder)
+                name: urlTemplate
+                widget: string
+                required: false
+              - label: Tracking parameter
+                name: trackingParam
+                widget: string
+                required: false
+              - label: Tracking ID
+                name: trackingId
+                widget: string
+                required: false
+              - label: UTM defaults
+                name: utm
+                widget: object
+                fields:
+                  - label: utm_source
+                    name: utm_source
+                    widget: string
+                    required: false
+                  - label: utm_medium
+                    name: utm_medium
+                    widget: string
+                    required: false
+              - label: Active
+                name: active
+                widget: boolean
+          - label: Defaults per product type
+            name: defaults
+            widget: object
+            fields:
+              - name: hotel
+                label: Hotel
+                widget: string
+              - name: resort
+                label: Resort
+                widget: string
+              - name: flight
+                label: Flight
+                widget: string
+              - name: car
+                label: Car
+                widget: string
+              - name: tour
+                label: Tour
+                widget: string
+              - name: cruise
+                label: Cruise
+                widget: string
+              - name: insurance
+                label: Insurance
+                widget: string

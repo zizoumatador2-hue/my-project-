@@ -1,0 +1,122 @@
+---
+import Page from '../layouts/Page.astro';
+import Logo from '../components/Logo.astro';
+
+const L = (h: string) => {
+  const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+const ratio = (a: string, b: string) => {
+  const x = L(a), y = L(b);
+  return ((Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05)).toFixed(2);
+};
+const colors = [
+  { name: 'Deep Ocean Navy', hex: '#0B1F3A', text: '#FFF8F0' },
+  { name: 'Chili Coral', hex: '#FF5A36', text: '#0B1F3A' },
+  { name: 'Sunset Gold', hex: '#FFB627', text: '#0B1F3A' },
+  { name: 'Lagoon Teal', hex: '#14B8A6', text: '#0B1F3A' },
+  { name: 'Warm Cream', hex: '#FFF8F0', text: '#111827' },
+  { name: 'Ink', hex: '#111827', text: '#FFF8F0' },
+];
+const pairs: [string, string, string][] = [
+  ['Ink text on Warm Cream', '#111827', '#FFF8F0'],
+  ['Body gray #4B5563 on Warm Cream', '#4B5563', '#FFF8F0'],
+  ['Coral text #B8321A on Warm Cream', '#B8321A', '#FFF8F0'],
+  ['Teal text #0F766E on White', '#0F766E', '#FFFFFF'],
+  ['Navy on Chili Coral (buttons)', '#0B1F3A', '#FF5A36'],
+  ['Navy on Sunset Gold (badges)', '#0B1F3A', '#FFB627'],
+  ['Cream on Deep Ocean Navy', '#FFF8F0', '#0B1F3A'],
+  ['Sunset Gold on Deep Ocean Navy', '#FFB627', '#0B1F3A'],
+];
+---
+
+<Page title="Brand guidelines" metaTitle="SpiceVacations Brand Guidelines: Logo & Colors" description="The SpiceVacations.com brand: logo versions, clear space, minimum size, color palette with WCAG contrast ratios, typography and logo misuse rules." noindex>
+  <h2>The mark</h2>
+  <p>Our icon is a chili pepper whose curved body arcs over a rising sun on the horizon: <strong>spice + escape</strong>. The coral-to-gold gradient runs from Chili Coral to Sunset Gold.</p>
+  <div class="logo-grid">
+    <div class="tile"><Logo id="b1" size={44} /><span>Horizontal</span></div>
+    <div class="tile"><Logo id="b2" variant="stacked" size={52} /><span>Stacked</span></div>
+    <div class="tile"><Logo id="b3" variant="icon" size={72} /><span>Icon only</span></div>
+    <div class="tile dark on-dark"><Logo id="b4" size={44} class="on-dark" /><span>On dark</span></div>
+    <div class="tile dark"><Logo id="b5" tone="white" size={44} /><span>One-color white</span></div>
+    <div class="tile"><Logo id="b6" tone="navy" size={44} /><span>One-color navy</span></div>
+    <div class="tile"><Logo id="b7" variant="icon" size={16} /><span>16px favicon size</span></div>
+  </div>
+  <p>Files: <a href="/brand/logo-horizontal.svg">horizontal SVG</a>, <a href="/brand/logo-stacked.svg">stacked SVG</a>, <a href="/brand/logo-icon.svg">icon SVG</a>, <a href="/brand/logo-white.svg">white SVG</a>, <a href="/brand/logo-navy.svg">navy SVG</a>, <a href="/icons/icon-512.png">512px PNG</a>, <a href="/brand/og-template.svg">Open Graph template (1200×630)</a>.</p>
+
+  <h2>Clear space and minimum size</h2>
+  <ul>
+    <li><strong>Clear space:</strong> keep empty space around the logo equal to the height of the sun (about a quarter of the icon's height) on every side.</li>
+    <li><strong>Minimum size:</strong> icon 16px; horizontal logo 120px wide on screen, 30mm in print.</li>
+    <li>Use the one-color white version on photos or dark brand colors when the gradient lacks contrast.</li>
+  </ul>
+
+  <h2>Misuse</h2>
+  <ul>
+    <li>Don't stretch, skew, rotate or re-color the mark outside the approved versions.</li>
+    <li>Don't separate the sun from the chili arc or rearrange the wordmark.</li>
+    <li>Don't place the gradient logo on busy imagery or on coral or gold backgrounds.</li>
+    <li>Don't add effects such as drop shadows, outlines or glows.</li>
+  </ul>
+
+  <h2>Color</h2>
+  <div class="swatches">
+    {colors.map((c) => <div class="swatch" style={`background:${c.hex};color:${c.text}`}><strong>{c.name}</strong><span>{c.hex}</span></div>)}
+  </div>
+  <h3>Verified contrast (WCAG 2.2)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Pair</th><th>Ratio</th><th>AA normal text (4.5:1)</th></tr></thead>
+    <tbody>{pairs.map(([n, a, b]) => <tr><td><span style={`background:${b};color:${a};padding:2px 8px;border-radius:6px`}>Aa</span> {n}</td><td>{ratio(a, b)}:1</td><td>{Number(ratio(a, b)) >= 4.5 ? 'Pass' : 'Large text only'}</td></tr>)}</tbody>
+  </table></div>
+  <p>Chili Coral (#FF5A36) is never used for small text on light backgrounds (2.95:1). Use Coral Text (#B8321A) instead.</p>
+
+  <h2>Typography</h2>
+  <p><span style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--navy)">Fraunces</span> for headlines, and <strong>Inter</strong> for body text and UI. Both are self-hosted variable fonts.</p>
+  <h2>Voice</h2>
+  <p>Fun, romantic, adventurous, premium and trustworthy. We write in warm, confident American English and never over-promise.</p>
+</Page>
+
+<style>
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 1em;
+  }
+  .tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 150px;
+    padding: 20px 12px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    font-size: 0.85rem;
+    color: var(--gray-600);
+  }
+  .tile.dark {
+    background: var(--navy);
+    color: #cbd5e1;
+  }
+  .tile.dark :global(.logo) {
+    color: var(--cream);
+  }
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    min-height: 120px;
+    padding: 14px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+</style>

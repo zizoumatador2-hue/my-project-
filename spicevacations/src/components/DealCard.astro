@@ -1,0 +1,35 @@
+---
+import type { Deal } from '../lib/content';
+import { url, dealTarget } from '../lib/content';
+import { PRODUCT_LABEL } from '../lib/affiliate';
+import Img from './Img.astro';
+import SaveButton from './SaveButton.astro';
+import AffiliateButton from './AffiliateButton.astro';
+import Icon from './Icon.astro';
+interface Props {
+  deal: Deal;
+  destinationName: string;
+  headingLevel?: 2 | 3;
+}
+const { deal, destinationName, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}` as 'h3';
+const href = url.deal(deal.id);
+const img = deal.data.image || `/art/${deal.data.scene}-${deal.data.palette}.svg`;
+---
+
+<article class="card" data-reveal>
+  <div class="card__media">
+    <Img data={deal.data} />
+    <div class="card__badges"><span class="badge badge--gold"><Icon name="tag" size={14} /> {PRODUCT_LABEL[deal.data.productType]}</span></div>
+    <SaveButton id={`deal:${deal.id}`} title={deal.data.title} href={href} img={img} kind="Deal" />
+  </div>
+  <div class="card__body">
+    <p class="card__kicker">{destinationName} · {deal.data.window}</p>
+    <H class="card__title"><a href={href}>{deal.data.title}</a></H>
+    <p class="card__text">{deal.data.summary}</p>
+    <div class="card__footer">
+      <span class="price-note">Prices vary. Check availability.</span>
+      <AffiliateButton target={dealTarget(deal, destinationName)} placement="deal-card" size="sm" label="Check prices" fallbackLabel="See the deal" />
+    </div>
+  </div>
+</article>
