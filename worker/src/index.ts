@@ -33,7 +33,7 @@ app.use('*', async (c, next) => {
 
 // Webhooks are authenticated by signature, not by session/CSRF — mount before those middlewares apply.
 app.use('*', async (c, next) => {
-  if (c.req.path === '/api/webhooks/stripe') return next();
+  if (c.req.path.startsWith('/api/webhooks/')) return next(); // signature-authenticated, not session/CSRF
   await loadSession(c, async () => {
     await csrfGuard(c, next);
   });
@@ -104,7 +104,7 @@ async function scheduled(env: Env) {
   }
 
   // 2. Unpaid deals past their payment timeout (+5 min grace for in-flight webhooks) → cancel and relist.
-  const unpaid = await env.DB.prepare(`SELECT id FROM deals WHERE escrow_state = 'pending_payment' AND payment_expires_at < ? LIMIT 50`).bind(t - 5 * 60_000).all<{ id: string }>();
+  const unpaid = await env.DB.prepare(`SELECT id FROM deals d WHERE escrow_state = 'pending_payment' AND payment_expires_at < ? AND NOT EXISTS (SELECT 1 FROM payment_proofs p WHERE p.deal_id = d.id AND p.status = 'pending') LIMIT 50`).bind(t - 5 * 60_000).all<{ id: string }>();
   for (const { id } of unpaid.results) {
     try { await cancelUnpaid(env, await getDeal(env, id), 'payment_timeout'); } catch (e) { console.error('cancel_failed', id); }
   }

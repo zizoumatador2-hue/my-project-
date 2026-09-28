@@ -106,3 +106,66 @@ export async function verifyStripeSignature(secret: string, rawBody: string, hea
 export async function signStripePayload(secret: string, rawBody: string, t = Math.floor(Date.now() / 1000)): Promise<string> {
   return `t=${t},v1=${await hmacHex(secret, `${t}.${rawBody}`)}`;
 }
+
+// ======================= Chargily Pay (Algeria: EDAHABIA / CIB) =======================
+// REST API v2. Amounts are whole Algerian dinars. Webhook `signature` header = hex HMAC-SHA256 of the raw body
+// keyed with the API secret key. Chargily has no refund API: refunds are executed manually (manual_refunds queue).
+
+const CHARGILY_LIVE = 'https://pay.chargily.net/api/v2';
+const CHARGILY_TEST = 'https://pay.chargily.net/test/api/v2';
+
+export function chargilyMode(env: Env): 'sandbox' | 'test' | 'live' | null {
+  if (env.PAYMENT_PROVIDER === 'sandbox' && env.ENVIRONMENT !== 'production') return 'sandbox';
+  if (!env.CHARGILY_SECRET_KEY) return null;
+  return env.CHARGILY_SECRET_KEY.startsWith('test_') ? 'test' : 'live';
+}
+
+export function assertChargilyConfigured(env: Env) {
+  const m = chargilyMode(env);
+  if (!m) throw new HttpError(503, 'chargily_unconfigured', 'الدفع بالبطاقة الذهبية / CIB غير مفعّل بعد.');
+  if (m === 'sandbox' && !env.STRIPE_WEBHOOK_SECRET) throw new HttpError(503, 'payments_unconfigured', 'الدفع غير مهيأ.');
+}
+
+export async function createChargilyCheckout(env: Env, p: {
+  dealId: string; amountDzd: number; method: 'edahabia' | 'cib'; description: string;
+}): Promise<{ sessionId: string; url: string }> {
+  assertChargilyConfigured(env);
+  if (p.amountDzd < 75) throw new HttpError(400, 'amount_too_low', 'المبلغ أقل من الحد الأدنى للدفع الإلكتروني.');
+  if (chargilyMode(env) === 'sandbox') {
+    const sessionId = `ch_sandbox_${randomToken(12)}`;
+    return { sessionId, url: `/checkout/sandbox/${p.dealId}?session=${sessionId}&provider=chargily` };
+  }
+  const base = chargilyMode(env) === 'test' ? CHARGILY_TEST : CHARGILY_LIVE;
+  const r = await fetch(`${base}/checkouts`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${env.CHARGILY_SECRET_KEY}`, 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      amount: p.amountDzd,
+      currency: 'dzd',
+      payment_method: p.method,
+      success_url: `${env.APP_URL}/deals/${p.dealId}?paid=1`,
+      failure_url: `${env.APP_URL}/deals/${p.dealId}?cancelled=1`,
+      webhook_endpoint: `${env.APP_URL}/api/webhooks/chargily`,
+      description: p.description.slice(0, 200),
+      locale: 'ar',
+      pass_fees_to_customer: false,
+      metadata: { deal_id: p.dealId },
+    }),
+  });
+  const data = (await r.json().catch(() => ({}))) as { id?: string; checkout_url?: string; message?: string };
+  if (!r.ok || !data.id || !data.checkout_url) {
+    console.error('chargily_error', r.status, data.message);
+    throw new HttpError(502, 'payment_provider_error', 'تعذّر الاتصال ببوابة الدفع الجزائرية. لم يتم خصم أي مبلغ.');
+  }
+  return { sessionId: data.id, url: data.checkout_url };
+}
+
+export async function verifyChargilySignature(secret: string, rawBody: string, signature: string | null | undefined): Promise<boolean> {
+  if (!signature || !/^[0-9a-f]{64}$/i.test(signature)) return false;
+  return timingSafeEqual(signature.toLowerCase(), await hmacHex(secret, rawBody));
+}
+
+/** Secret used to sign/verify Chargily webhooks (sandbox reuses the local webhook secret). */
+export function chargilyWebhookSecret(env: Env): string | undefined {
+  return chargilyMode(env) === 'sandbox' ? env.STRIPE_WEBHOOK_SECRET : env.CHARGILY_SECRET_KEY;
+}

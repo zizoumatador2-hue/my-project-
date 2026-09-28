@@ -213,6 +213,74 @@ describe('TrustTransfer API lifecycle', () => {
     expect((await buyer2.ok('GET', `/listings/${id2}`)).listing.status).toBe('approved');
   });
 
+  it('Algeria: Edahabia via Chargily (DZD at admin rate) and BaridiMob/CCP with finance verification + manual refund', async () => {
+    const ops = await admin();
+    const { settings } = await ops.ok('GET', '/admin/settings');
+    settings.payments = { ...settings.payments, usd_to_dzd: 250, platform_rip: '00799999001234567890', platform_account_holder: 'TrustTransfer SARL', baridimob_enabled: true, chargily_enabled: true };
+    await ops.ok('PUT', '/admin/settings', settings);
+    const cfg = await ops.ok('GET', '/config');
+    expect(cfg.payments.methods).toEqual(expect.arrayContaining(['card', 'edahabia', 'cib', 'baridimob']));
+
+    // --- Chargily (Edahabia) ---
+    const seller = await signup('dzseller');
+    const buyer = await signup('dzbuyer');
+    const { id } = await publishedListing(seller, ops, { priceCents: 40000 });
+    const r1 = await buyer.ok('POST', `/listings/${id}/buy`, { acceptDisclaimer: true, method: 'edahabia' });
+    expect(r1.checkoutUrl).toContain('provider=chargily');
+    let v = await buyer.ok('GET', `/deals/${r1.dealId}`);
+    expect(v.deal.pay_currency).toBe('DZD');
+    expect(v.deal.pay_amount).toBe(100000); // $400 × 250
+    // Forged Chargily webhook is rejected.
+    const forged = await fetch(BASE + '/api/webhooks/chargily', { method: 'POST', headers: { signature: 'a'.repeat(64) }, body: JSON.stringify({ id: 'x', type: 'checkout.paid', data: { metadata: { deal_id: r1.dealId } } }) });
+    expect(forged.status).toBe(400);
+    const session = new URL(BASE + r1.checkoutUrl).searchParams.get('session');
+    await buyer.ok('POST', `/payments/sandbox/${r1.dealId}`, { sessionId: session, outcome: 'success' });
+    v = await buyer.ok('GET', `/deals/${r1.dealId}`);
+    expect(v.deal.escrow_state).toBe('held');
+
+    // --- BaridiMob / CCP ---
+    const buyer2 = await signup('dzbuyer2');
+    const { id: id2 } = await publishedListing(seller, ops, { priceCents: 30000 });
+    const r2 = await buyer2.ok('POST', `/listings/${id2}/buy`, { acceptDisclaimer: true, method: 'baridimob' });
+    v = await buyer2.ok('GET', `/deals/${r2.dealId}`);
+    expect(v.manualPayment.rip).toBe('00799999001234567890');
+    expect(v.deal.pay_amount).toBe(75000);
+    const proof = (ref: string) => { const fd = new FormData(); fd.append('file', fakePng(), 'r.png'); fd.append('transferRef', ref); fd.append('refundRip', '0079 9999 0011 2233 4455'); return fd; };
+    // First proof rejected, second confirmed.
+    expect((await buyer2.req('POST', `/deals/${r2.dealId}/payment-proof`, proof('BM-1'))).status).toBe(201);
+    expect((await buyer2.req('POST', `/deals/${r2.dealId}/payment-proof`, proof('BM-dup'))).status).toBe(409);
+    let q = await ops.ok('GET', '/admin/payments');
+    let item = q.items.find((x: any) => x.deal_id === r2.dealId);
+    expect((await ops.req('GET', item.receipt_url.replace('/api', ''))).status).toBe(200);
+    expect((await buyer.req('GET', item.receipt_url.replace('/api', ''))).status).toBe(403);
+    await ops.ok('POST', `/admin/payments/${item.id}/decision`, { action: 'reject', note: 'المبلغ غير مطابق' });
+    expect((await buyer2.ok('GET', `/deals/${r2.dealId}`)).deal.escrow_state).toBe('pending_payment');
+    await buyer2.ok('POST', `/deals/${r2.dealId}/payment-proof`, proof('BM-2'));
+    q = await ops.ok('GET', '/admin/payments');
+    item = q.items.find((x: any) => x.deal_id === r2.dealId);
+    await ops.ok('POST', `/admin/payments/${item.id}/decision`, { action: 'confirm', note: 'التحويل وصل إلى الحساب' });
+    expect((await buyer2.ok('GET', `/deals/${r2.dealId}`)).deal.escrow_state).toBe('held');
+
+    // Seller backs out → refund goes to the manual refunds queue with the buyer's RIP.
+    await seller.ok('POST', `/deals/${r2.dealId}/cancel`, { reason: 'لم أعد أرغب في البيع' });
+    expect((await buyer2.ok('GET', `/deals/${r2.dealId}`)).deal.escrow_state).toBe('refunded');
+    const refunds = await ops.ok('GET', '/admin/refunds');
+    const rf = refunds.items.find((x: any) => x.deal_id === r2.dealId);
+    expect(rf).toMatchObject({ currency: 'DZD', amount: 75000, status: 'pending' });
+    expect((await ops.ok('POST', `/admin/refunds/${rf.id}/destination`)).rip).toBe('00799999001122334455');
+    await ops.ok('POST', `/admin/refunds/${rf.id}/done`, { reference: 'CCP-REF-7788' });
+    expect((await ops.req('POST', `/admin/refunds/${rf.id}/done`, { reference: 'again' })).status).toBe(409);
+  });
+
+  it('CCP withdrawal requires a valid 20-digit RIP', async () => {
+    const u = await signup('ccpuser');
+    const bad = await u.post('/wallet/withdrawals', { amountCents: 5000, payoutMethod: 'ccp', accountHolder: 'Test', rip: '123', password: 'Str0ngPassw0rd!' });
+    expect(bad.status).toBe(400);
+    expect(bad.data.details.fields.rip).toBeTruthy();
+    const ok = await u.post('/wallet/withdrawals', { amountCents: 5000, payoutMethod: 'ccp', accountHolder: 'Test', rip: '00799999001234567890', password: 'Str0ngPassw0rd!' });
+    expect(ok.status).toBe(409); // valid destination, but no balance
+  });
+
   it('webhook rejects forged signatures', async () => {
     const r = await fetch(BASE + '/api/webhooks/stripe', { method: 'POST', headers: { 'stripe-signature': 't=1,v1=deadbeef', 'content-type': 'application/json' }, body: '{"id":"evt_x","type":"checkout.session.completed","data":{"object":{}}}' });
     expect(r.status).toBe(400);

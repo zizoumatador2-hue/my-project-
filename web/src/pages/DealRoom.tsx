@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { DISPUTE_REASONS, ESCROW_LABELS, TRANSFER_STEPS, type EscrowState, type Platform, type StepDef } from '../../../shared/domain';
+import { DISPUTE_REASONS, ESCROW_LABELS, PAYMENT_METHOD_LABELS, TRANSFER_STEPS, type EscrowState, type PaymentMethod, type Platform, type StepDef } from '../../../shared/domain';
 import { ApiError, post } from '../lib/api';
-import { countdown, dateTime, money } from '../lib/format';
+import { countdown, dateTime, dzd, money } from '../lib/format';
 import { useSession } from '../lib/session';
 import { ChatThread } from '../ui/ChatThread';
 import { Icon, PlatformBadge } from '../ui/icons';
@@ -156,6 +156,60 @@ function StepCard({ def, step, deal, role, secrets, reload, canVerify }: { def: 
   );
 }
 
+function ManualPaymentPanel({ deal, mp, reload }: { deal: any; mp: any; reload: () => void }) {
+  const toast = useToast();
+  const [file, setFile] = useState<File | null>(null);
+  const [ref, setRef] = useState('');
+  const [rip, setRip] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<Record<string, string>>({});
+  const pending = mp.proofs.find((p: any) => p.status === 'pending');
+  const lastRejected = !pending && mp.proofs.find((p: any) => p.status === 'rejected');
+  async function submit() {
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('file', file); fd.append('transferRef', ref); fd.append('refundRip', rip);
+    setBusy(true); setErr({});
+    try { await post(`/deals/${deal.id}/payment-proof`, fd); toast('success', 'أُرسل وصل التحويل للمراجعة'); setFile(null); reload(); }
+    catch (e) { if (e instanceof ApiError) { setErr(e.fields); toast('error', e.message); } }
+    finally { setBusy(false); }
+  }
+  const copy = (v: string) => navigator.clipboard?.writeText(v).then(() => toast('success', 'نُسخ'), () => {});
+  return (
+    <div className="card stack">
+      <h2 style={{ fontSize: '1.1rem', margin: 0 }}>الدفع بتحويل BaridiMob / CCP</h2>
+      {pending ? (
+        <Alert kind="info" title="وصل التحويل قيد التحقق">يراجع الفريق المالي تحويلك (المرجع: <span className="ltr">{pending.transfer_ref}</span>). ستصلك إشعارات فور التأكيد، والإعلان محجوز لك خلال ذلك.</Alert>
+      ) : (
+        <>
+          {lastRejected && <Alert kind="warn" title="لم يُقبل الوصل السابق">{lastRejected.review_note}</Alert>}
+          <ol className="small stack-sm" style={{ margin: 0, paddingInlineStart: 20 }}>
+            <li>حوّل <strong className="num">{dzd(deal.pay_amount)}</strong> بالضبط عبر تطبيق BaridiMob أو من مكتب البريد إلى الحساب التالي.</li>
+            <li>اكتب رمز المرجع في خانة سبب/ملاحظة التحويل.</li>
+            <li>ارفع صورة وصل التحويل وأدخل رقم العملية.</li>
+          </ol>
+          <div className="panel stack-sm">
+            <div className="row between"><span className="small muted">RIP</span><span className="row" style={{ gap: 6 }}><strong className="ltr num">{mp.rip}</strong><button className="btn btn-ghost btn-sm" onClick={() => copy(mp.rip)}>نسخ</button></span></div>
+            <div className="row between"><span className="small muted">صاحب الحساب</span><strong>{mp.holder || '—'}</strong></div>
+            <div className="row between"><span className="small muted">رمز المرجع</span><span className="row" style={{ gap: 6 }}><strong className="ltr num">{mp.reference}</strong><button className="btn btn-ghost btn-sm" onClick={() => copy(mp.reference)}>نسخ</button></span></div>
+            <div className="row between"><span className="small muted">المبلغ</span><strong className="num">{dzd(deal.pay_amount)}</strong></div>
+          </div>
+          <label className="upload-zone">
+            <input type="file" accept="image/png,image/jpeg,image/webp,application/pdf" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
+            <span className="row small" style={{ justifyContent: 'center' }}><Icon.Upload size={18} /> {file ? file.name : 'صورة أو PDF لوصل التحويل'}</span>
+          </label>
+          <Field label="رقم العملية / المرجع في الوصل" htmlFor="tref" error={err.transferRef}><input id="tref" className="input ltr-input" value={ref} onChange={(e) => setRef(e.target.value)} /></Field>
+          <Field label="رقم RIP الخاص بك (لاسترداد المبلغ عند الحاجة)" htmlFor="rrip" error={err.refundRip} hint="20 رقمًا. يُشفَّر ولا يُستعمل إلا لرد المبلغ إليك."><input id="rrip" className="input ltr-input" inputMode="numeric" value={rip} onChange={(e) => setRip(e.target.value)} /></Field>
+          <Button loading={busy} disabled={!file || ref.trim().length < 4 || rip.replace(/\D/g, '').length !== 20} onClick={submit}>إرسال الوصل للتحقق</Button>
+        </>
+      )}
+      {mp.proofs.length > 0 && (
+        <ul className="timeline">{mp.proofs.map((p: any) => <li key={p.id}><div className="small">وصل <span className="ltr">{p.transfer_ref}</span> — <span className={`badge ${p.status === 'confirmed' ? 'vault' : p.status === 'rejected' ? 'danger' : 'info'}`}>{p.status === 'confirmed' ? 'مؤكَّد' : p.status === 'rejected' ? 'مرفوض' : 'قيد التحقق'}</span> <span className="xs muted">{dateTime(p.created_at)}</span></div></li>)}</ul>
+      )}
+    </div>
+  );
+}
+
 export default function DealRoom() {
   const { id } = useParams();
   const [params] = useSearchParams();
@@ -228,13 +282,17 @@ export default function DealRoom() {
                   <div className="lock"><Icon.Lock size={24} /></div>
                   <div className="grow">
                     <div className="state">{ESCROW_LABELS[s]}</div>
-                    <div className="amount num">{money(deal.price_cents, true)}</div>
+                    <div className="amount num">{deal.pay_currency === 'DZD' ? dzd(deal.pay_amount) : money(deal.price_cents, true)}</div>
+                    <div className="xs" style={{ opacity: 0.8 }}>{PAYMENT_METHOD_LABELS[deal.payment_method as PaymentMethod] ?? ''}{deal.pay_currency === 'DZD' && <> · يعادل <span className="num">{money(deal.price_cents, true)}</span></>}</div>
                     {role === 'seller' && <div className="xs" style={{ opacity: 0.8 }}>صافيك بعد العمولة: <span className="num">{money(deal.seller_net_cents, true)}</span></div>}
                   </div>
                 </div>
                 <div className="card"><EscrowVault state={s} prev={deal.prev_state} /></div>
 
-                {s === 'pending_payment' && (role === 'buyer' ? (
+                {s === 'pending_payment' && role === 'buyer' && deal.payment_method === 'baridimob' && v.manualPayment && (
+                  <ManualPaymentPanel deal={deal} mp={v.manualPayment} reload={state.reload} />
+                )}
+                {s === 'pending_payment' && !(role === 'buyer' && deal.payment_method === 'baridimob') && (role === 'buyer' ? (
                   <div className="card stack">
                     {paidReturn ? <Alert kind="info" title="جارٍ تأكيد الدفع">نتلقى التأكيد من بوابة الدفع. قد يستغرق ذلك بضع ثوانٍ؛ تتحدث الصفحة تلقائيًا.</Alert>
                       : params.get('cancelled') ? <Alert kind="warn">لم يكتمل الدفع. يمكنك المحاولة مجددًا قبل انتهاء مهلة الحجز.</Alert> : null}

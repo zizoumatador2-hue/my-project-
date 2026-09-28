@@ -84,11 +84,12 @@ jobs:
           TURNSTILE_SITE_KEY: ${{ secrets.TURNSTILE_SITE_KEY || vars.TURNSTILE_SITE_KEY }}
           TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY || vars.TURNSTILE_SECRET_KEY }}
           BOOTSTRAP_ADMIN_EMAIL: ${{ secrets.BOOTSTRAP_ADMIN_EMAIL || vars.BOOTSTRAP_ADMIN_EMAIL }}
+          CHARGILY_SECRET_KEY: ${{ secrets.CHARGILY_SECRET_KEY || vars.CHARGILY_SECRET_KEY }}
           HOST: ${{ steps.url.outputs.host }}
         run: |
           EXISTING=$(npx wrangler secret list --format json 2>/dev/null | jq -r '.[].name' || true)
           has() { echo "$EXISTING" | grep -qx "$1"; }
-          node -e 'const k=["SESSION_SECRET","DATA_ENCRYPTION_KEY","STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","TURNSTILE_SITE_KEY","TURNSTILE_SECRET_KEY","BOOTSTRAP_ADMIN_EMAIL"];const o={};for(const x of k)if(process.env[x])o[x]=process.env[x];require("fs").writeFileSync("/tmp/s.json",JSON.stringify(o))'
+          node -e 'const k=["SESSION_SECRET","DATA_ENCRYPTION_KEY","STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","TURNSTILE_SITE_KEY","TURNSTILE_SECRET_KEY","BOOTSTRAP_ADMIN_EMAIL","CHARGILY_SECRET_KEY"];const o={};for(const x of k)if(process.env[x])o[x]=process.env[x];require("fs").writeFileSync("/tmp/s.json",JSON.stringify(o))'
           add() { jq --arg k "$1" --arg v "$2" '. + {($k): $v}' /tmp/s.json > /tmp/s2.json && mv /tmp/s2.json /tmp/s.json; }
           # Keys generated only if the worker doesn't already have them (DATA_ENCRYPTION_KEY must never change once data exists).
           if ! has SESSION_SECRET && [ -z "$SESSION_SECRET" ]; then add SESSION_SECRET "$(openssl rand -base64 48)"; echo "generated SESSION_SECRET"; fi

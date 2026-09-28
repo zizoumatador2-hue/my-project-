@@ -6,6 +6,7 @@ export interface Me { id: string; email: string; display_name: string; role: Rol
 export interface PublicConfig {
   turnstileSiteKey: string | null; paymentProvider: 'stripe' | 'sandbox'; environment: string;
   flags: Settings['flags']; escrow: Settings['escrow']; commission: Settings['commission']; withdrawal: { min_cents: number };
+  payments: { usd_to_dzd: number; manual_payment_hours: number; methods: Array<'card' | 'edahabia' | 'cib' | 'baridimob'> };
 }
 
 interface Ctx {

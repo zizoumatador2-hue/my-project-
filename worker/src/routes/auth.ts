@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
-import { ROLE_PERMISSIONS } from '../../../shared/domain';
+import { normalizeRip, ROLE_PERMISSIONS } from '../../../shared/domain';
+import { chargilyMode } from '../lib/payments';
 import type { AppEnv } from '../env';
 import { audit } from '../lib/audit';
 import { createSession, destroySession, requireUser } from '../lib/auth';
@@ -27,6 +28,16 @@ r.get('/config', async (c) => {
     escrow: s.escrow,
     commission: s.commission,
     withdrawal: { min_cents: s.withdrawal.min_cents },
+    payments: {
+      usd_to_dzd: s.payments.usd_to_dzd,
+      manual_payment_hours: s.payments.manual_payment_hours,
+      methods: [
+        s.payments.card_enabled && (c.env.PAYMENT_PROVIDER === 'sandbox' ? c.env.ENVIRONMENT !== 'production' : !!c.env.STRIPE_SECRET_KEY) ? 'card' : null,
+        s.payments.chargily_enabled && chargilyMode(c.env) ? 'edahabia' : null,
+        s.payments.chargily_enabled && chargilyMode(c.env) ? 'cib' : null,
+        s.payments.baridimob_enabled && normalizeRip(s.payments.platform_rip) ? 'baridimob' : null,
+      ].filter(Boolean),
+    },
   });
 });
 

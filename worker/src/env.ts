@@ -16,6 +16,7 @@ export interface Env {
   DATA_ENCRYPTION_KEY?: string;
   STRIPE_SECRET_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
+  CHARGILY_SECRET_KEY?: string;
   TURNSTILE_SECRET_KEY?: string;
   TURNSTILE_SITE_KEY?: string;
   BOOTSTRAP_ADMIN_EMAIL?: string;

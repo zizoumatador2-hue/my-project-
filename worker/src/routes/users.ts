@@ -62,6 +62,10 @@ r.get('/files/:token', async (c) => {
     const d = await c.env.DB.prepare('SELECT d.buyer_id, d.seller_id FROM disputes ds JOIN deals d ON d.id = ds.deal_id WHERE ds.id = ?').bind(id).first<{ buyer_id: string; seller_id: string }>();
     ok = !!d && g.k.startsWith(`disputes/${id}/`) && (d.buyer_id === u.id || d.seller_id === u.id || can(u.role, 'disputes.manage'));
   }
+  else if (kind === 'proof') {
+    const p = await c.env.DB.prepare('SELECT p.receipt_key, d.buyer_id FROM payment_proofs p JOIN deals d ON d.id = p.deal_id WHERE p.id = ?').bind(id).first<{ receipt_key: string; buyer_id: string }>();
+    ok = !!p && p.receipt_key === g.k && (can(u.role, 'withdrawals.manage') || p.buyer_id === u.id);
+  }
   if (!ok) throw new HttpError(403, 'forbidden', 'لا تملك صلاحية عرض هذا الملف.');
   const f = await getDecrypted(c.env, g.k);
   if (!f) throw new HttpError(404, 'not_found', 'الملف غير موجود.');

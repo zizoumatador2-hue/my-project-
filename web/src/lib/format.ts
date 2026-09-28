@@ -17,6 +17,8 @@ export const money = (cents: number | null | undefined, exact = false) => {
   return `\u2066${v < 0 ? '-' : ''}$${(exact ? moneyFmt2 : moneyFmt).format(Math.abs(v))}\u2069`;
 };
 export const int = (n: number | null | undefined) => intFmt.format(n ?? 0);
+/** Whole Algerian dinars, e.g. "100,000 دج". */
+export const dzd = (n: number | null | undefined) => `\u2066${new Intl.NumberFormat('en-US').format(n ?? 0)}\u2069 دج`;
 export const compact = (n: number | null | undefined) => compactFmt.format(n ?? 0);
 export const pct = (n: number | null | undefined) => `${intFmt.format(Math.round((n ?? 0) * 10) / 10)}٪`;
 export const date = (ms: number | null | undefined) => (ms ? dateFmt.format(new Date(ms)) : '—');

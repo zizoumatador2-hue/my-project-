@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { ADMIN, approveListing, buy, createListing, opsLogin, pay, person, shot, signup, submitListing, uid } from './helpers';
+import { ADMIN, approveListing, buy, createListing, opsLogin, pay, person, pngFile, shot, signup, submitListing, uid } from './helpers';
 
 test.describe.configure({ mode: 'serial' });
 
@@ -85,6 +85,9 @@ test('4. ops edits settings with no deploy (reclaim hold → 0 for this run)', a
   await ops.goto('/admin/settings');
   await ops.getByLabel('فترة حماية الاسترداد').fill('0');
   await ops.getByLabel('سقف الاعتماد التلقائي اليومي (للمنصة)').fill('100000');
+  // Local Algerian payments: the platform's CCP RIP must be set before BaridiMob is offered.
+  await ops.getByLabel('RIP حساب المنصة').fill('00799999000123456789');
+  await ops.getByLabel('اسم صاحب الحساب', { exact: true }).fill('TrustTransfer SARL');
   await ops.getByRole('button', { name: 'حفظ الإعدادات' }).click();
   await expect(ops.getByText('حُفظت الإعدادات')).toBeVisible();
   await shot(ops, `${P}-admin-settings`, true);
@@ -207,7 +210,8 @@ test('7. wallet: auto-approved small withdrawal, manual approval + payout for la
   const req = async (amount: string) => {
     await seller.getByRole('button', { name: 'طلب سحب' }).click();
     await seller.getByLabel('المبلغ ($)').fill(amount);
-    await seller.getByLabel('اسم صاحب الحساب البنكي').fill('سارة أحمد');
+    await seller.getByRole('button', { name: 'حساب بنكي IBAN' }).click();
+    await seller.getByLabel('اسم صاحب الحساب').fill('سارة أحمد');
     await seller.getByLabel('رقم الآيبان (IBAN)').fill('SA03 8000 0000 6080 1016 7519');
     await seller.getByLabel('اسم البنك').fill('بنك الاختبار');
     await seller.getByLabel('كلمة مرور حسابك (للتأكيد)').fill('Str0ngPassw0rd!');
@@ -311,4 +315,56 @@ test('9. admin: users/roles, reports, audit trail', async () => {
   await buyer.goto('/deals');
   await shot(buyer, `${P}-deals-list`);
   void ADMIN;
+});
+
+test('10. Algeria: Edahabia via Chargily, BaridiMob transfer with receipt + finance verification', async ({ browser }, info) => {
+  // Fresh seller: the first one lost a dispute in step 8, which (by design) opens a fraud case on new listings.
+  const seller2 = await person(browser, info.project);
+  await signup(seller2, `ياسين ${run}`, `seller2-${run}@example.test`);
+  await expect(seller2).toHaveURL(/\/$/);
+  const l3 = await createListing(seller2, { handle: `dz_food_${run}`, title: 'حساب طبخ جزائري بجمهور محلي', followers: '9100', price: '300' });
+  await submitListing(seller2);
+  await approveListing(ops, l3, '9100');
+  // Edahabia: amount shown in DZD at the admin rate, paid through the signed Chargily sandbox.
+  await buyer.goto(`/listings/${l3}`);
+  await buyer.getByRole('button', { name: 'اشترِ عبر الضمان' }).click();
+  const dlg = buyer.getByRole('dialog');
+  await dlg.getByRole('radio', { name: /البطاقة الذهبية/ }).check();
+  await expect(dlg.getByText(/دج/).first()).toBeVisible();
+  await dlg.getByRole('checkbox').check();
+  await shot(buyer, `${P}-buy-methods`);
+  await buyer.getByRole('button', { name: 'المتابعة للدفع' }).click();
+  await expect(buyer).toHaveURL(/checkout\/sandbox\/.*provider=chargily/);
+  await expect(buyer.getByText(/Chargily Pay/)).toBeVisible();
+  await shot(buyer, `${P}-chargily-sandbox`);
+  await pay(buyer);
+
+  const l4 = await createListing(seller2, { handle: `dz_sport_${run}`, title: 'حساب رياضة جزائري', followers: '7200', price: '200' });
+  await submitListing(seller2);
+  await approveListing(ops, l4, '7200');
+  await buyer.goto(`/listings/${l4}`);
+  await buyer.getByRole('button', { name: 'اشترِ عبر الضمان' }).click();
+  await buyer.getByRole('dialog').getByRole('radio', { name: /BaridiMob/ }).check();
+  await buyer.getByRole('dialog').getByRole('checkbox').check();
+  await buyer.getByRole('button', { name: 'المتابعة للدفع' }).click();
+  await expect(buyer).toHaveURL(/\/deals\//);
+  await expect(buyer.getByRole('heading', { name: /الدفع بتحويل BaridiMob/ })).toBeVisible();
+  await expect(buyer.getByText('00799999000123456789').first()).toBeVisible();
+  await shot(buyer, `${P}-baridimob-instructions`, true);
+  await buyer.locator('.upload-zone input[type=file]').setInputFiles(pngFile(`receipt-${run}`));
+  await buyer.getByLabel('رقم العملية / المرجع في الوصل').fill(`BM-${run}`);
+  await buyer.getByLabel(/رقم RIP الخاص بك/).fill('00799999 0001 1122 2333');
+  await buyer.getByRole('button', { name: 'إرسال الوصل للتحقق' }).click();
+  await expect(buyer.getByText('وصل التحويل قيد التحقق')).toBeVisible();
+
+  await ops.goto('/admin/local-payments');
+  const card = ops.locator('.card', { hasText: `BM-${run}` });
+  await expect(card).toBeVisible();
+  await shot(ops, `${P}-admin-local-payments`, true);
+  await card.getByRole('button', { name: 'تأكيد الاستلام' }).click();
+  await ops.getByLabel(/ملاحظة/).fill('ظهر المبلغ في كشف حساب CCP');
+  await ops.getByRole('dialog').getByRole('button', { name: 'تأكيد' }).click();
+  await expect(ops.getByText('تم تسجيل القرار')).toBeVisible();
+  await buyer.reload();
+  await expect(buyer.getByText('المبلغ محتجز لدى الضمان').first()).toBeVisible();
 });

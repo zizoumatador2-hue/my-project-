@@ -8,6 +8,7 @@ export interface DealRow {
   state_version: number; payment_provider: string; payment_session_id: string | null; payment_intent_id: string | null;
   payment_expires_at: number | null; confirm_deadline: number | null; held_at: number | null; released_at: number | null;
   closed_at: number | null; cancel_reason: string | null; cancelled_by: string | null; created_at: number; updated_at: number;
+  payment_method: string; pay_currency: string | null; pay_amount: number | null; fx_rate: number | null;
 }
 
 export async function getDeal(env: Env, id: string): Promise<DealRow> {
@@ -103,4 +104,27 @@ export function partyOf(deal: DealRow, userId: string): 'buyer' | 'seller' | nul
   if (deal.buyer_id === userId) return 'buyer';
   if (deal.seller_id === userId) return 'seller';
   return null;
+}
+
+/**
+ * Refunds `amountCents` (USD) of a deal through the right rail. Card payments go through the provider API now;
+ * local Algerian methods (no refund API) become a guarded `manual_refunds` row that finance executes and closes.
+ */
+export async function refundDeal(env: Env, deal: DealRow, amountCents: number, reason: string): Promise<{ ref: string; effects: (g: Guard) => D1PreparedStatement[] }> {
+  if (deal.payment_method === 'card' || !deal.payment_method) {
+    const { refund } = await import('./payments');
+    const ref = await refund(env, { dealId: deal.id, paymentIntentId: deal.payment_intent_id, amountCents, reason });
+    return { ref, effects: () => [] };
+  }
+  const id = newId('mrf');
+  const local = deal.pay_currency === 'DZD' && deal.pay_amount
+    ? Math.round((amountCents / deal.price_cents) * deal.pay_amount)
+    : amountCents;
+  return {
+    ref: `manual:${id}`,
+    effects: (g) => [g.insert('manual_refunds', {
+      id, deal_id: deal.id, method: deal.payment_method, currency: deal.pay_currency ?? 'USD', amount: local, reason,
+      status: 'pending', executed_by: null, executed_at: null, reference: null, created_at: now(),
+    })],
+  };
 }

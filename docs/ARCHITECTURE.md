@@ -55,6 +55,16 @@ pending_payment ──paid (webhook)──► held ──seller starts step 1─
   During that window the buyer may open a "reclaimed" dispute, which freezes the entry; a refund decision writes a
   reversal plus a commission reversal.
 
+## Payment methods
+
+| Method | Provider | Moves to `held` when | Refund |
+|---|---|---|---|
+| `card` | Stripe Checkout | signed `checkout.session.completed` | Stripe refund API |
+| `edahabia`, `cib` | Chargily Pay V2 | signed `checkout.paid` (amount + currency + session checked) | queued in `manual_refunds` |
+| `baridimob` | manual (CCP/BaridiMob transfer) | finance confirms an uploaded receipt (`payment_proofs`) | queued in `manual_refunds` to the buyer's encrypted RIP |
+
+The DZD amount (`pay_amount`) and rate (`fx_rate`) are fixed at deal creation; the ledger stays in USD cents. Late Chargily payments on an already-cancelled deal produce a manual refund, never a silent capture.
+
 ## Ownership transfer (6 steps)
 
 | # | Step | Performer | Confirmer | Secret |

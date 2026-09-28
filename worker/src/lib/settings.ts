@@ -26,6 +26,13 @@ export const settingsSchema = z.object({
     new_seller_high_price_cents: cents,
   }),
   transfer: z.object({ secret_ttl_hours: z.number().int().min(1).max(168) }),
+  payments: z.object({
+    card_enabled: z.boolean(), chargily_enabled: z.boolean(), baridimob_enabled: z.boolean(),
+    usd_to_dzd: z.number().min(1).max(100000),
+    platform_rip: z.string().trim().max(40).refine((v) => v === '' || /^\d{20}$/.test(v.replace(/[\s-]/g, '')), 'RIP يجب أن يتكون من 20 رقمًا'),
+    platform_account_holder: z.string().trim().max(100),
+    manual_payment_hours: z.number().int().min(1).max(24 * 7),
+  }),
   flags: z.object({
     signups_enabled: z.boolean(), new_listings_enabled: z.boolean(), purchases_enabled: z.boolean(),
     withdrawals_enabled: z.boolean(), chat_enabled: z.boolean(),

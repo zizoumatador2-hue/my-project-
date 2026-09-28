@@ -13,7 +13,7 @@ export default function Wallet() {
   const state = useFetch<any>('/wallet');
   const toast = useToast();
   const [open, setOpen] = useState(false);
-  const [f, setF] = useState({ amount: '', accountHolder: '', iban: '', bankName: '', password: '' });
+  const [f, setF] = useState({ amount: '', accountHolder: '', iban: '', bankName: '', rip: '', password: '', payoutMethod: 'ccp' as 'ccp' | 'iban' });
   const [err, setErr] = useState<string | null>(null);
   const [fields, setFields] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
@@ -25,9 +25,9 @@ export default function Wallet() {
     if (!cents) { setFields({ amountCents: 'أدخل مبلغًا صحيحًا' }); return; }
     setBusy(true);
     try {
-      const r = await post<{ status: string }>('/wallet/withdrawals', { amountCents: cents, accountHolder: f.accountHolder, iban: f.iban, bankName: f.bankName, password: f.password });
+      const r = await post<{ status: string }>('/wallet/withdrawals', { amountCents: cents, payoutMethod: f.payoutMethod, accountHolder: f.accountHolder, iban: f.iban || undefined, bankName: f.bankName || undefined, rip: f.rip || undefined, password: f.password });
       toast('success', r.status === 'approved' ? 'تمت الموافقة تلقائيًا — التحويل قيد التنفيذ' : 'أُرسل الطلب للمراجعة المالية');
-      setOpen(false); setF({ amount: '', accountHolder: '', iban: '', bankName: '', password: '' }); state.reload();
+      setOpen(false); setF((x) => ({ ...x, amount: '', password: '' })); state.reload();
     } catch (e) { if (e instanceof ApiError) { setErr(e.message); setFields(e.fields); } }
     finally { setBusy(false); }
   }
@@ -87,9 +87,20 @@ export default function Wallet() {
               <Field label="المبلغ ($)" htmlFor="wa" error={fields.amountCents} hint={`الحد الأدنى ${money(w.rules.min_cents)}`}>
                 <input id="wa" className="input" inputMode="decimal" value={f.amount} onChange={(e) => set('amount', e.target.value)} />
               </Field>
-              <Field label="اسم صاحب الحساب البنكي" htmlFor="wh" error={fields.accountHolder}><input id="wh" className="input" value={f.accountHolder} onChange={(e) => set('accountHolder', e.target.value)} /></Field>
-              <Field label="رقم الآيبان (IBAN)" htmlFor="wi" error={fields.iban}><input id="wi" className="input ltr-input" autoCapitalize="characters" value={f.iban} onChange={(e) => set('iban', e.target.value)} /></Field>
-              <Field label="اسم البنك" htmlFor="wb" error={fields.bankName}><input id="wb" className="input" value={f.bankName} onChange={(e) => set('bankName', e.target.value)} /></Field>
+              <div className="seg" role="group" aria-label="وجهة السحب">
+                <button type="button" aria-pressed={f.payoutMethod === 'ccp'} onClick={() => set('payoutMethod', 'ccp')}>حساب بريدي CCP (الجزائر)</button>
+                <button type="button" aria-pressed={f.payoutMethod === 'iban'} onClick={() => set('payoutMethod', 'iban')}>حساب بنكي IBAN</button>
+              </div>
+              {f.payoutMethod === 'ccp' && w.rules.usd_to_dzd && <p className="xs muted" style={{ margin: 0 }}>يُحوَّل المبلغ بالدينار بسعر الصرف المعتمد لدى المنصة يوم التنفيذ (حاليًا {w.rules.usd_to_dzd} دج للدولار).</p>}
+              <Field label="اسم صاحب الحساب" htmlFor="wh" error={fields.accountHolder}><input id="wh" className="input" value={f.accountHolder} onChange={(e) => set('accountHolder', e.target.value)} /></Field>
+              {f.payoutMethod === 'ccp' ? (
+                <Field label="رقم RIP (20 رقمًا)" htmlFor="wr" error={fields.rip}><input id="wr" className="input ltr-input" inputMode="numeric" value={f.rip} onChange={(e) => set('rip', e.target.value)} /></Field>
+              ) : (
+                <>
+                  <Field label="رقم الآيبان (IBAN)" htmlFor="wi" error={fields.iban}><input id="wi" className="input ltr-input" autoCapitalize="characters" value={f.iban} onChange={(e) => set('iban', e.target.value)} /></Field>
+                  <Field label="اسم البنك" htmlFor="wb" error={fields.bankName}><input id="wb" className="input" value={f.bankName} onChange={(e) => set('bankName', e.target.value)} /></Field>
+                </>
+              )}
               <Field label="كلمة مرور حسابك (للتأكيد)" htmlFor="wp" error={fields.password}><input id="wp" className="input ltr-input" type="password" autoComplete="current-password" value={f.password} onChange={(e) => set('password', e.target.value)} /></Field>
               <p className="xs muted" style={{ margin: 0 }}>تُشفَّر بيانات التحويل ولا يطلع عليها إلا الفريق المالي عند التنفيذ. الطلبات الصغيرة قد تُعتمد تلقائيًا وفق سياسة المنصة.</p>
             </Modal>

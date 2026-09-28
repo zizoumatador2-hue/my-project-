@@ -61,6 +61,22 @@ function Editor({ initial, history, onSaved }: { initial: Settings; history: any
         <div className="panel small">معاينة: {[20000, 150000, 800000].map((p) => { const c = computeCommission(p, s.commission); return <span key={p} style={{ marginInlineEnd: 16 }}>{money(p)} ← <span className="num">{money(c.cents, true)}</span></span>; })}</div>
       </div>
       <div className="card pad-lg stack">
+        <h2 style={{ fontSize: '1.1rem', margin: 0 }}>وسائل الدفع</h2>
+        <label className="check"><input type="checkbox" checked={s.payments.card_enabled} onChange={(e) => setS((x) => ({ ...x, payments: { ...x.payments, card_enabled: e.target.checked } }))} /><span>البطاقات الدولية (Stripe)</span></label>
+        <label className="check"><input type="checkbox" checked={s.payments.chargily_enabled} onChange={(e) => setS((x) => ({ ...x, payments: { ...x.payments, chargily_enabled: e.target.checked } }))} /><span>البطاقة الذهبية و CIB (Chargily Pay)</span></label>
+        <label className="check"><input type="checkbox" checked={s.payments.baridimob_enabled} onChange={(e) => setS((x) => ({ ...x, payments: { ...x.payments, baridimob_enabled: e.target.checked } }))} /><span>تحويل BaridiMob / CCP (تحقق يدوي)</span></label>
+        <div className="form-grid two">
+          {numField(['payments', 'usd_to_dzd'], 'سعر الصرف (دج مقابل 1 دولار)', 'يُطبَّق على الدفع بالدينار ويُثبَّت على كل صفقة عند إنشائها.', 1, 'دج')}
+          {numField(['payments', 'manual_payment_hours'], 'مهلة التحويل اليدوي', 'مدة حجز الإعلان بانتظار وصل BaridiMob / CCP.', 1, 'ساعة')}
+          <Field label="RIP حساب المنصة" htmlFor="prip" hint="20 رقمًا — يظهر للمشترين لإجراء التحويل.">
+            <input id="prip" className="input ltr-input" inputMode="numeric" value={s.payments.platform_rip} onChange={(e) => setS((x) => ({ ...x, payments: { ...x.payments, platform_rip: e.target.value } }))} />
+          </Field>
+          <Field label="اسم صاحب الحساب" htmlFor="phold">
+            <input id="phold" className="input" value={s.payments.platform_account_holder} onChange={(e) => setS((x) => ({ ...x, payments: { ...x.payments, platform_account_holder: e.target.value } }))} />
+          </Field>
+        </div>
+      </div>
+      <div className="card pad-lg stack">
         <h2 style={{ fontSize: '1.1rem', margin: 0 }}>السحب</h2>
         <div className="form-grid two">
           {numField(['withdrawal', 'min_cents'], 'الحد الأدنى للسحب', '', 100, '$')}

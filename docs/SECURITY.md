@@ -23,7 +23,12 @@ This system is built defensively, but **it is not "100 % secure"** and no claim 
 | Audit | append-only `audit_log` for every sensitive action (who, what, when, IP), no secrets in details |
 | Headers | HSTS, X-Frame-Options DENY / frame-ancestors none, Referrer-Policy, Permissions-Policy, `Cache-Control: no-store` on API |
 
+- Local payments: Chargily webhooks are HMAC-verified, idempotent per event id, and checked against the deal's session, amount and currency. BaridiMob receipts are AES-GCM encrypted in R2 and served only through short-lived signed URLs to finance staff or the buyer; buyer refund RIPs are encrypted and revealing one is audited. A finance reviewer cannot confirm a payment on a deal they are party to.
+
 ## Residual risk (known, accepted or needing future work)
+
+- BaridiMob/CCP confirmation relies on a human checking the platform's account statement; forged receipts are caught only if staff check the real balance, not the image.
+- Chargily refunds and CCP payouts are manual, so they depend on finance staff executing and recording them.
 
 1. **Platform account recovery is outside our control.** A determined seller can sometimes reclaim an account via
    the social platform's own support channels long after the reclaim-protection window. Mitigated (hold period,
@@ -44,6 +49,8 @@ This system is built defensively, but **it is not "100 % secure"** and no claim 
 9. **KYC/identity verification of users is not implemented** (see legal section).
 
 ## Legal / compliance points that require qualified legal review before launch
+
+- Holding third-party funds in Algerian dinars (escrow via a CCP account) and converting from USD may require authorization under Bank of Algeria / foreign-exchange rules.
 
 * **Platform Terms of Service exposure.** Most social platforms prohibit selling or transferring accounts.
   Operating this marketplace may expose the company to account terminations, cease-and-desist letters or claims.

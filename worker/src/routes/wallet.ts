@@ -8,6 +8,7 @@ import { requireKeys } from '../lib/files';
 import { rateLimit } from '../lib/ratelimit';
 import { getSettings } from '../lib/settings';
 import { body, cleanText } from '../lib/validate';
+import { normalizeRip } from '../../../shared/domain';
 import { clientIp, DAY, HttpError, newId, now } from '../lib/util';
 
 const r = new Hono<AppEnv>();
@@ -38,7 +39,7 @@ r.get('/wallet', async (c) => {
     c.env.DB.prepare('SELECT id, amount_cents, status, payout_hint, auto_approved, payout_ref, note, created_at, reviewed_at FROM withdrawals WHERE user_id = ? ORDER BY created_at DESC LIMIT 100').bind(u.id).all(),
     getSettings(c.env),
   ]);
-  return c.json({ balances: b, ledger: ledger.results, withdrawals: withdrawals.results, rules: { min_cents: s.withdrawal.min_cents, reclaim_hold_days: s.escrow.reclaim_hold_days }, currency: 'USD' });
+  return c.json({ balances: b, ledger: ledger.results, withdrawals: withdrawals.results, rules: { min_cents: s.withdrawal.min_cents, reclaim_hold_days: s.escrow.reclaim_hold_days, usd_to_dzd: s.payments.usd_to_dzd }, currency: 'USD' });
 });
 
 function maskAccount(acc: string): string {
@@ -54,10 +55,17 @@ r.post('/wallet/withdrawals', async (c) => {
   if (!s.flags.withdrawals_enabled) throw new HttpError(503, 'withdrawals_disabled', 'السحب متوقف مؤقتًا.');
   const b = await body(c.req, z.object({
     amountCents: z.number().int().positive(),
+    payoutMethod: z.enum(['iban', 'ccp']).default('iban'),
     accountHolder: cleanText(3, 100),
-    iban: z.string().trim().toUpperCase().transform((v) => v.replace(/\s+/g, '')).pipe(z.string().regex(/^[A-Z]{2}[0-9]{2}[A-Z0-9]{10,30}$/, 'رقم IBAN غير صالح')),
-    bankName: cleanText(2, 100),
+    iban: z.string().trim().toUpperCase().transform((v) => v.replace(/\s+/g, '')).optional(),
+    rip: z.string().trim().optional(),
+    bankName: z.string().trim().max(100).optional(),
     password: z.string().min(1).max(200),
+  }).superRefine((v, ctx) => {
+    if (v.payoutMethod === 'iban') {
+      if (!v.iban || !/^[A-Z]{2}[0-9]{2}[A-Z0-9]{10,30}$/.test(v.iban)) ctx.addIssue({ code: 'custom', path: ['iban'], message: 'رقم IBAN غير صالح' });
+      if (!v.bankName || v.bankName.length < 2) ctx.addIssue({ code: 'custom', path: ['bankName'], message: 'اسم البنك مطلوب' });
+    } else if (!normalizeRip(v.rip ?? '')) ctx.addIssue({ code: 'custom', path: ['rip'], message: 'رقم RIP يجب أن يتكون من 20 رقمًا' });
   }));
   // Step-up: re-enter password for money movement.
   const row = await c.env.DB.prepare('SELECT password_hash, password_salt, trust_seller FROM users WHERE id = ?').bind(u.id).first<{ password_hash: string; password_salt: string; trust_seller: number }>();
@@ -74,13 +82,17 @@ r.post('/wallet/withdrawals', async (c) => {
 
   const { dek } = requireKeys(c.env);
   const id = newId('wdr');
-  const enc = await encryptText(dek, `payout:${id}`, JSON.stringify({ holder: b.accountHolder, iban: b.iban, bank: b.bankName }));
+  const dest = b.payoutMethod === 'ccp'
+    ? { method: 'ccp', holder: b.accountHolder, rip: normalizeRip(b.rip!), bank: 'بريد الجزائر (CCP)' }
+    : { method: 'iban', holder: b.accountHolder, iban: b.iban, bank: b.bankName };
+  const enc = await encryptText(dek, `payout:${id}`, JSON.stringify(dest));
+  const hint = b.payoutMethod === 'ccp' ? `CCP — ${maskAccount(dest.rip!)}` : `${b.bankName} — ${maskAccount(b.iban!)}`;
   // Atomic: the withdrawal row is only created if the available balance covers it; the debit follows only if it was.
   const res = await c.env.DB.batch([
     c.env.DB.prepare(
-      `INSERT INTO withdrawals (id, user_id, amount_cents, status, payout_ciphertext, payout_iv, payout_hint, auto_approved, reviewed_at, created_at)
-       SELECT ?3, ?1, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?2 WHERE (${AVAILABLE_SQL}) >= ?4`,
-    ).bind(u.id, t, id, b.amountCents, auto ? 'approved' : 'pending_review', enc.ciphertext, enc.iv, `${b.bankName} — ${maskAccount(b.iban)}`, auto ? 1 : 0, auto ? t : null),
+      `INSERT INTO withdrawals (id, user_id, amount_cents, status, payout_ciphertext, payout_iv, payout_hint, auto_approved, reviewed_at, created_at, payout_method)
+       SELECT ?3, ?1, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?2, ?11 WHERE (${AVAILABLE_SQL}) >= ?4`,
+    ).bind(u.id, t, id, b.amountCents, auto ? 'approved' : 'pending_review', enc.ciphertext, enc.iv, hint, auto ? 1 : 0, auto ? t : null, b.payoutMethod),
     c.env.DB.prepare(
       `INSERT INTO ledger_entries (id, user_id, withdrawal_id, kind, amount_cents, available_at, memo, created_at)
        SELECT ?, ?, ?, 'withdrawal', ?, ?, ?, ? WHERE changes() = 1`,

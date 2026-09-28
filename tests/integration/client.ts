@@ -58,8 +58,12 @@ export async function signup(name: string, email = `${name}-${uniq()}@example.te
 
 export const ADMIN_EMAIL = 'admin@trusttransfer.test';
 
+let adminClient: Client | null = null;
+/** One ops session per test run — logging in per test would trip the per-account login rate limit (by design). */
 export async function admin() {
+  if (adminClient) return adminClient;
   const c = new Client('admin');
+  adminClient = c;
   const r = await c.req('POST', '/auth/login', { email: ADMIN_EMAIL, password: 'Adm1nPassw0rd!!' });
   if (r.status === 200) return c;
   await c.ok('POST', '/auth/signup', { email: ADMIN_EMAIL, password: 'Adm1nPassw0rd!!', displayName: 'فريق العمليات', acceptTerms: true, confirmAdult: true });

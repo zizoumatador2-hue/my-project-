@@ -5,13 +5,12 @@ import type { AppEnv } from '../env';
 import { audit, auditStmt, notifyStmt } from '../lib/audit';
 import { can, requirePerm } from '../lib/auth';
 import { decryptText } from '../lib/crypto';
-import { getDeal, releaseEffects, transition, type DealRow } from '../lib/escrow';
+import { getDeal, refundDeal, releaseEffects, transition, type DealRow } from '../lib/escrow';
 import { requireKeys, signFileUrl } from '../lib/files';
-import { refund } from '../lib/payments';
 import { getSettings, saveSettings, settingsSchema } from '../lib/settings';
 import { body, cleanText, pageParams } from '../lib/validate';
 import { clientIp, HttpError, newId, now, parseJson } from '../lib/util';
-import { loadDealView } from './deals';
+import { loadDealView, markHeld } from './deals';
 import { disputeEvents, loadDispute } from './disputes';
 
 const r = new Hono<AppEnv>();
@@ -38,7 +37,11 @@ r.get('/admin/overview', async (c) => {
     one(`SELECT COALESCE(SUM(price_cents),0) n FROM deals WHERE escrow_state IN ('released','split') AND released_at > ?`, now() - 30 * 86400000),
     one(`SELECT COALESCE(SUM(amount_cents),0) n FROM platform_ledger WHERE kind IN ('commission','commission_reversal') AND created_at > ?`, now() - 30 * 86400000),
   ]);
-  return c.json({ pendingReviews, needsEvidence, openFraud, openDisputes, pendingWithdrawals, approvedWithdrawals, awaitingVerify, byState: byState.results, gmv30, commission30 });
+  const [pendingProofs, pendingRefunds] = await Promise.all([
+    one(`SELECT COUNT(*) n FROM payment_proofs WHERE status = 'pending'`),
+    one(`SELECT COUNT(*) n FROM manual_refunds WHERE status = 'pending'`),
+  ]);
+  return c.json({ pendingProofs, pendingRefunds, pendingReviews, needsEvidence, openFraud, openDisputes, pendingWithdrawals, approvedWithdrawals, awaitingVerify, byState: byState.results, gmv30, commission30 });
 });
 
 // ================= Listing review =================
@@ -351,11 +354,13 @@ r.post('/admin/disputes/:id/resolve', async (c) => {
   ];
 
   if (b.action === 'refund') {
-    const ref = await refund(c.env, { dealId: deal.id, paymentIntentId: deal.payment_intent_id, amountCents: deal.price_cents, reason: `dispute:${d.id}` });
+    const rf = await refundDeal(c.env, deal, deal.price_cents, `dispute:${d.id}`);
+    const ref = rf.ref;
     await transition(c.env, deal, 'refunded', {
       actorId: me.id, reason: `قرار تحكيم: رد كامل المبلغ للمشتري`, set: { closed_at: t }, ip,
       effects: (g) => [
         ...closeDispute(g, deal.price_cents),
+        ...rf.effects(g),
         g.insert('platform_ledger', { id: newId('pl'), deal_id: deal.id, kind: 'refund', amount_cents: -deal.price_cents, provider_ref: ref, created_at: t }),
         g.update(`UPDATE listings SET status = 'withdrawn', updated_at = ? WHERE id = ?`, t, deal.listing_id),
         g.update(`UPDATE transfer_secrets SET ciphertext = NULL, iv = NULL, destroyed_at = ? WHERE deal_id = ? AND ciphertext IS NOT NULL`, t, deal.id),
@@ -382,11 +387,13 @@ r.post('/admin/disputes/:id/resolve', async (c) => {
     if (!b.buyerRefundCents || b.buyerRefundCents >= deal.price_cents) throw new HttpError(400, 'bad_split', 'حدد مبلغًا للمشتري أقل من سعر الصفقة.');
     const sellerGross = deal.price_cents - b.buyerRefundCents;
     const commission = Math.round((sellerGross * deal.commission_bp) / 10000);
-    const ref = await refund(c.env, { dealId: deal.id, paymentIntentId: deal.payment_intent_id, amountCents: b.buyerRefundCents, reason: `dispute_split:${d.id}` });
+    const rf = await refundDeal(c.env, deal, b.buyerRefundCents, `dispute_split:${d.id}`);
+    const ref = rf.ref;
     await transition(c.env, deal, 'split', {
       actorId: me.id, reason: `قرار تحكيم: تقسيم (${(b.buyerRefundCents / 100).toFixed(2)} للمشتري)`, set: { released_at: t, closed_at: t }, ip,
       effects: (g) => [
         ...closeDispute(g, b.buyerRefundCents!),
+        ...rf.effects(g),
         g.insert('platform_ledger', { id: newId('pl'), deal_id: deal.id, kind: 'refund', amount_cents: -b.buyerRefundCents!, provider_ref: ref, created_at: t }),
         ...releaseEffects(g, deal, s.escrow.reclaim_hold_days, sellerGross, commission, 'dispute_split'),
       ],
@@ -461,6 +468,93 @@ r.post('/admin/withdrawals/:id/decision', async (c) => {
   const res = await c.env.DB.batch(stmts);
   if ((res[0].meta.changes ?? 0) !== 1) throw new HttpError(409, 'conflict', 'تغيّرت حالة الطلب. حدّث الصفحة.');
   return c.json({ ok: true, status });
+});
+
+// ================= Local payments: transfer verification & manual refunds =================
+r.get('/admin/payments', async (c) => {
+  const me = requirePerm(c, 'withdrawals.manage');
+  const status = c.req.query('status') || 'pending';
+  const rows = await c.env.DB.prepare(
+    `SELECT p.id, p.deal_id, p.transfer_ref, p.status, p.review_note, p.created_at, p.reviewed_at, p.receipt_key,
+       d.pay_amount, d.pay_currency, d.price_cents, d.fx_rate, d.escrow_state, d.payment_expires_at, l.title, l.handle,
+       b.display_name AS buyer_name, r.display_name AS reviewer_name
+     FROM payment_proofs p JOIN deals d ON d.id = p.deal_id JOIN listings l ON l.id = d.listing_id JOIN users b ON b.id = d.buyer_id
+     LEFT JOIN users r ON r.id = p.reviewed_by WHERE ${status === 'all' ? '1=1' : 'p.status = ?'} ORDER BY p.created_at ASC LIMIT 200`,
+  ).bind(...(status === 'all' ? [] : [status])).all<Record<string, any>>();
+  const items = [];
+  for (const x of rows.results) {
+    const { receipt_key, ...rest } = x;
+    items.push({ ...rest, reference: String(x.deal_id).slice(-8).toUpperCase(), receipt_url: await signFileUrl(c.env, { k: receipt_key, u: me.id, c: `proof:${x.id}` }) });
+  }
+  const st = await getSettings(c.env);
+  return c.json({ items, platformRip: st.payments.platform_rip });
+});
+
+r.post('/admin/payments/:id/decision', async (c) => {
+  const me = requirePerm(c, 'withdrawals.manage');
+  const b = await body(c.req, z.object({ action: z.enum(['confirm', 'reject']), note: cleanText(3, 1000, 'اكتب ملاحظة (3 أحرف على الأقل)') }));
+  const p = await c.env.DB.prepare('SELECT * FROM payment_proofs WHERE id = ?').bind(c.req.param('id')).first<Record<string, any>>();
+  if (!p) throw new HttpError(404, 'not_found', 'غير موجود.');
+  if (p.status !== 'pending') throw new HttpError(409, 'reviewed', 'تمت مراجعة هذا الإثبات مسبقًا.');
+  const deal = await getDeal(c.env, p.deal_id);
+  if (deal.buyer_id === me.id || deal.seller_id === me.id) throw new HttpError(403, 'conflict_of_interest', 'لا يمكنك مراجعة دفعة في صفقة أنت طرف فيها.');
+  const t = now();
+  if (b.action === 'confirm') {
+    if (deal.escrow_state !== 'pending_payment') throw new HttpError(409, 'not_pending', 'الصفقة لم تعد بانتظار الدفع.');
+    await markHeld(c.env, deal, `baridimob:${p.transfer_ref}`, me.id, (g) => [
+      g.update(`UPDATE payment_proofs SET status = 'confirmed', reviewed_by = ?, reviewed_at = ?, review_note = ? WHERE id = ? AND status = 'pending'`, me.id, t, b.note, p.id),
+      g.audit(me.id, 'payment.proof_confirmed', { proof: p.id, ref: p.transfer_ref }, clientIp(c.req.raw)),
+    ]);
+  } else {
+    await c.env.DB.batch([
+      c.env.DB.prepare(`UPDATE payment_proofs SET status = 'rejected', reviewed_by = ?, reviewed_at = ?, review_note = ? WHERE id = ? AND status = 'pending'`).bind(me.id, t, b.note, p.id),
+      notifyStmt(c.env, deal.buyer_id, 'لم يُقبل إثبات التحويل', b.note, `/deals/${deal.id}`),
+      auditStmt(c.env, { actorId: me.id, action: 'payment.proof_rejected', subjectType: 'deal', subjectId: deal.id, details: { proof: p.id } }),
+    ]);
+  }
+  return c.json({ ok: true });
+});
+
+r.get('/admin/refunds', async (c) => {
+  requirePerm(c, 'withdrawals.manage');
+  const status = c.req.query('status') || 'pending';
+  const rows = await c.env.DB.prepare(
+    `SELECT m.*, l.title, b.display_name AS buyer_name, b.email AS buyer_email, e.display_name AS executed_by_name,
+       (SELECT p.id FROM payment_proofs p WHERE p.deal_id = m.deal_id AND p.status = 'confirmed' LIMIT 1) AS proof_id
+     FROM manual_refunds m JOIN deals d ON d.id = m.deal_id JOIN listings l ON l.id = d.listing_id JOIN users b ON b.id = d.buyer_id
+     LEFT JOIN users e ON e.id = m.executed_by WHERE ${status === 'all' ? '1=1' : 'm.status = ?'} ORDER BY m.created_at ASC LIMIT 200`,
+  ).bind(...(status === 'all' ? [] : [status])).all();
+  return c.json({ items: rows.results });
+});
+
+r.post('/admin/refunds/:id/destination', async (c) => {
+  const me = requirePerm(c, 'withdrawals.manage');
+  const m = await c.env.DB.prepare('SELECT deal_id FROM manual_refunds WHERE id = ?').bind(c.req.param('id')).first<{ deal_id: string }>();
+  if (!m) throw new HttpError(404, 'not_found', 'غير موجود.');
+  const p = await c.env.DB.prepare(`SELECT id, refund_ciphertext, refund_iv FROM payment_proofs WHERE deal_id = ? AND refund_ciphertext IS NOT NULL ORDER BY created_at DESC LIMIT 1`).bind(m.deal_id).first<Record<string, string>>();
+  if (!p) return c.json({ rip: null, note: 'الدفع تم بالبطاقة عبر Chargily: نفّذ الاسترداد من لوحة Chargily ثم سجّل المرجع.' });
+  const { dek } = requireKeys(c.env);
+  const rip = await decryptText(dek, `refund-rip:${p.id}`, p.refund_ciphertext, p.refund_iv);
+  await audit(c.env, { actorId: me.id, action: 'refund.destination_viewed', subjectType: 'deal', subjectId: m.deal_id });
+  c.header('Cache-Control', 'no-store');
+  return c.json({ rip });
+});
+
+r.post('/admin/refunds/:id/done', async (c) => {
+  const me = requirePerm(c, 'withdrawals.manage');
+  const b = await body(c.req, z.object({ reference: cleanText(3, 120, 'أدخل مرجع عملية الاسترداد') }));
+  const m = await c.env.DB.prepare('SELECT * FROM manual_refunds WHERE id = ?').bind(c.req.param('id')).first<Record<string, any>>();
+  if (!m) throw new HttpError(404, 'not_found', 'غير موجود.');
+  const deal = await getDeal(c.env, m.deal_id);
+  const t = now();
+  const res = await c.env.DB.batch([
+    c.env.DB.prepare(`UPDATE manual_refunds SET status = 'done', executed_by = ?, executed_at = ?, reference = ? WHERE id = ? AND status = 'pending'`).bind(me.id, t, b.reference, m.id),
+    c.env.DB.prepare(`UPDATE platform_ledger SET provider_ref = ? WHERE deal_id = ? AND provider_ref = ?`).bind(`manual-done:${b.reference}`, m.deal_id, `manual:${m.id}`),
+    notifyStmt(c.env, deal.buyer_id, 'تم تنفيذ الاسترداد', `أُعيد لك مبلغ ${m.amount} ${m.currency === 'DZD' ? 'دج' : m.currency}. مرجع العملية: ${b.reference}`, `/deals/${deal.id}`),
+    auditStmt(c.env, { actorId: me.id, action: 'refund.manual_executed', subjectType: 'deal', subjectId: deal.id, details: { refund: m.id, ref: b.reference } }),
+  ]);
+  if ((res[0].meta.changes ?? 0) !== 1) throw new HttpError(409, 'done', 'تم تنفيذ هذا الاسترداد مسبقًا.');
+  return c.json({ ok: true });
 });
 
 // ================= Users & roles =================

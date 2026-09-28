@@ -1,13 +1,13 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
-import { computeCommission, DISPUTE_REASONS, TRANSFER_STEPS } from '../../../shared/domain';
+import { computeCommission, DISPUTE_REASONS, normalizeRip, PAYMENT_METHODS, TRANSFER_STEPS, usdCentsToDzd } from '../../../shared/domain';
 import type { AppEnv, Env } from '../env';
 import { audit, auditStmt, notifyStmt } from '../lib/audit';
 import { can, requirePerm, requireUser } from '../lib/auth';
-import { decryptText, encryptText } from '../lib/crypto';
-import { createStepsEffects, getDeal, partyOf, releaseEffects, transition, type DealRow } from '../lib/escrow';
-import { requireKeys } from '../lib/files';
-import { assertPaymentsConfigured, createCheckout, refund, signStripePayload, verifyStripeSignature } from '../lib/payments';
+import { decryptText, encryptText, hmacHex } from '../lib/crypto';
+import { createStepsEffects, getDeal, partyOf, refundDeal, releaseEffects, transition, type DealRow } from '../lib/escrow';
+import { putEncrypted, readUpload, requireKeys } from '../lib/files';
+import { assertChargilyConfigured, assertPaymentsConfigured, chargilyMode, chargilyWebhookSecret, createChargilyCheckout, createCheckout, refund, signStripePayload, verifyChargilySignature, verifyStripeSignature } from '../lib/payments';
 import { rateLimit } from '../lib/ratelimit';
 import { getSettings } from '../lib/settings';
 import { verifyTurnstile } from '../lib/turnstile';
@@ -21,11 +21,24 @@ r.post('/listings/:id/buy', async (c) => {
   const u = requireUser(c);
   const ip = clientIp(c.req.raw);
   await rateLimit(c.env, 'buy', u.id, 10, 3600_000);
-  const b = await body(c.req, z.object({ turnstileToken: z.string().max(4096).optional(), acceptDisclaimer: z.literal(true, { message: 'يجب الإقرار بإخلاء المسؤولية' }) }));
+  const b = await body(c.req, z.object({
+    turnstileToken: z.string().max(4096).optional(),
+    acceptDisclaimer: z.literal(true, { message: 'يجب الإقرار بإخلاء المسؤولية' }),
+    method: z.enum(PAYMENT_METHODS).default('card'),
+  }));
   await verifyTurnstile(c.env, b.turnstileToken, ip, 'buy');
   const s = await getSettings(c.env);
   if (!s.flags.purchases_enabled) throw new HttpError(503, 'purchases_disabled', 'الشراء متوقف مؤقتًا.');
-  assertPaymentsConfigured(c.env);
+  // Each rail must be both enabled by ops and configured on the server.
+  if (b.method === 'card') {
+    if (!s.payments.card_enabled) throw new HttpError(409, 'method_disabled', 'الدفع بالبطاقة الدولية غير متاح حاليًا.');
+    assertPaymentsConfigured(c.env);
+  } else if (b.method === 'edahabia' || b.method === 'cib') {
+    if (!s.payments.chargily_enabled) throw new HttpError(409, 'method_disabled', 'الدفع بالبطاقة الذهبية / CIB غير متاح حاليًا.');
+    assertChargilyConfigured(c.env);
+  } else {
+    if (!s.payments.baridimob_enabled || !normalizeRip(s.payments.platform_rip)) throw new HttpError(409, 'method_disabled', 'التحويل عبر BaridiMob / CCP غير متاح حاليًا.');
+  }
   const l = await c.env.DB.prepare('SELECT * FROM listings WHERE id = ?').bind(c.req.param('id')).first<Record<string, any>>();
   if (!l || l.status !== 'approved') throw new HttpError(409, 'not_available', 'هذا الإعلان غير متاح للشراء حاليًا.');
   if (l.seller_id === u.id) throw new HttpError(403, 'own_listing', 'لا يمكنك شراء إعلانك.');
@@ -33,21 +46,30 @@ r.post('/listings/:id/buy', async (c) => {
   const { bp, cents } = computeCommission(l.price_cents, s.commission);
   const id = newId('del');
   const t = now();
-  const expiresAt = t + s.escrow.payment_timeout_minutes * 60_000;
+  const local = b.method !== 'card';
+  const fx = local ? s.payments.usd_to_dzd : null;
+  const payAmount = local ? usdCentsToDzd(l.price_cents, fx!) : l.price_cents;
+  const provider = b.method === 'card' ? c.env.PAYMENT_PROVIDER : b.method === 'baridimob' ? 'manual' : 'chargily';
+  const expiresAt = t + (b.method === 'baridimob' ? s.payments.manual_payment_hours * 3600_000 : s.escrow.payment_timeout_minutes * 60_000);
   // Reserve atomically: the listing flips to "reserved" only if still approved (prevents double purchase).
   const res = await c.env.DB.batch([
     c.env.DB.prepare(`UPDATE listings SET status = 'reserved', updated_at = ? WHERE id = ? AND status = 'approved'`).bind(t, l.id),
     c.env.DB.prepare(
       `INSERT INTO deals (id, listing_id, buyer_id, seller_id, price_cents, commission_bp, commission_cents, seller_net_cents, currency, escrow_state,
-        payment_provider, payment_expires_at, created_at, updated_at)
-       SELECT ?,?,?,?,?,?,?,?,?,'pending_payment',?,?,?,? WHERE changes() = 1`,
-    ).bind(id, l.id, u.id, l.seller_id, l.price_cents, bp, cents, l.price_cents - cents, l.currency, c.env.PAYMENT_PROVIDER, expiresAt, t, t),
+        payment_provider, payment_expires_at, created_at, updated_at, payment_method, pay_currency, pay_amount, fx_rate)
+       SELECT ?,?,?,?,?,?,?,?,?,'pending_payment',?,?,?,?,?,?,?,? WHERE changes() = 1`,
+    ).bind(id, l.id, u.id, l.seller_id, l.price_cents, bp, cents, l.price_cents - cents, l.currency, provider, expiresAt, t, t,
+      b.method, local ? 'DZD' : l.currency, payAmount, fx),
   ]);
   if ((res[0].meta.changes ?? 0) !== 1 || (res[1].meta.changes ?? 0) !== 1) throw new HttpError(409, 'not_available', 'سبقك مشترٍ آخر إلى هذا الإعلان.');
 
   let checkout: { sessionId: string; url: string };
   try {
-    checkout = await createCheckout(c.env, { dealId: id, amountCents: l.price_cents, currency: l.currency, title: `${l.title} (@${l.handle})`, buyerEmail: u.email, expiresAt });
+    checkout = b.method === 'card'
+      ? await createCheckout(c.env, { dealId: id, amountCents: l.price_cents, currency: l.currency, title: `${l.title} (@${l.handle})`, buyerEmail: u.email, expiresAt })
+      : b.method === 'baridimob'
+        ? { sessionId: `bm_${id}`, url: `/deals/${id}` }
+        : await createChargilyCheckout(c.env, { dealId: id, amountDzd: payAmount, method: b.method, description: `TrustTransfer — @${l.handle}` });
   } catch (e) {
     // Roll back the reservation so the listing is not stuck.
     await c.env.DB.batch([
@@ -64,7 +86,7 @@ r.post('/listings/:id/buy', async (c) => {
     conv
       ? c.env.DB.prepare('UPDATE conversations SET deal_id = ? WHERE id = ?').bind(id, conv.id)
       : c.env.DB.prepare('INSERT INTO conversations (id, listing_id, buyer_id, seller_id, deal_id, created_at) VALUES (?,?,?,?,?,?)').bind(newId('cnv'), l.id, u.id, l.seller_id, id, t),
-    auditStmt(c.env, { actorId: u.id, action: 'deal.create', subjectType: 'deal', subjectId: id, details: { listing: l.id, price: l.price_cents, commission_bp: bp }, ip }),
+    auditStmt(c.env, { actorId: u.id, action: 'deal.create', subjectType: 'deal', subjectId: id, details: { listing: l.id, price: l.price_cents, commission_bp: bp, method: b.method, pay_amount: payAmount, fx }, ip }),
   ]);
   return c.json({ dealId: id, checkoutUrl: checkout.url }, 201);
 });
@@ -98,15 +120,7 @@ export async function handlePaymentWebhook(env: Env, raw: string, signature: str
       return { status: 200, body: { ignored: 'amount_mismatch' } };
     }
     if (deal.escrow_state === 'pending_payment') {
-      await transition(env, deal, 'held', {
-        actorId: null, reason: 'تم استلام الدفع وحجزه لدى الضمان',
-        set: { payment_intent_id: obj.payment_intent ?? null, held_at: now() },
-        effects: (g) => [
-          ...createStepsEffects(g, deal.id),
-          g.notify(deal.seller_id, 'تم الدفع — ابدأ نقل الملكية', 'المبلغ محتجز لدى الضمان. ابدأ الخطوة الأولى من خطوات النقل.'),
-          g.notify(deal.buyer_id, 'تم استلام دفعتك', 'المبلغ محتجز بأمان ولن يُحرَّر للبائع قبل اكتمال النقل وتأكيدك.'),
-        ],
-      });
+      await markHeld(env, deal, obj.payment_intent ?? null, null);
     } else if (deal.escrow_state === 'cancelled') {
       // Paid after local timeout: refund immediately rather than silently keeping money.
       const ref = await refund(env, { dealId: deal.id, paymentIntentId: obj.payment_intent ?? null, amountCents: deal.price_cents, reason: 'paid_after_cancel' });
@@ -127,6 +141,63 @@ export async function handlePaymentWebhook(env: Env, raw: string, signature: str
   return { status: 200, body: { ok: true } };
 }
 
+/** Payment confirmed (card webhook, Chargily webhook, or finance-verified transfer) → funds held in escrow. */
+export async function markHeld(env: Env, deal: DealRow, paymentRef: string | null, actorId: string | null, extra: (g: import('../lib/escrow').Guard) => D1PreparedStatement[] = () => []) {
+  return transition(env, deal, 'held', {
+    actorId, reason: actorId ? 'أكّد الفريق المالي استلام التحويل وحجزه لدى الضمان' : 'تم استلام الدفع وحجزه لدى الضمان',
+    set: { payment_intent_id: paymentRef, held_at: now() },
+    effects: (g) => [
+      ...createStepsEffects(g, deal.id),
+      g.notify(deal.seller_id, 'تم الدفع — ابدأ نقل الملكية', 'المبلغ محتجز لدى الضمان. ابدأ الخطوة الأولى من خطوات النقل.'),
+      g.notify(deal.buyer_id, 'تم استلام دفعتك', 'المبلغ محتجز بأمان ولن يُحرَّر للبائع قبل اكتمال النقل وتأكيدك.'),
+      ...extra(g),
+    ],
+  });
+}
+
+// ---------- Chargily Pay webhook (EDAHABIA / CIB) ----------
+export async function handleChargilyWebhook(env: Env, raw: string, signature: string | null | undefined): Promise<{ status: number; body: unknown }> {
+  const secret = chargilyWebhookSecret(env);
+  if (!secret) return { status: 503, body: { error: 'webhook_unconfigured' } };
+  if (!(await verifyChargilySignature(secret, raw, signature))) {
+    await audit(env, { actorId: null, action: 'webhook.signature_rejected', subjectType: 'webhook', details: { provider: 'chargily' } });
+    return { status: 400, body: { error: 'invalid_signature' } };
+  }
+  let event: { id: string; type: string; data: Record<string, any> };
+  try { event = JSON.parse(raw); } catch { return { status: 400, body: { error: 'bad_json' } }; }
+  if (!event?.id || !event.type) return { status: 400, body: { error: 'bad_event' } };
+  const ins = await env.DB.prepare('INSERT OR IGNORE INTO webhook_events (id, provider, type, received_at) VALUES (?,?,?,?)')
+    .bind(`chargily:${event.id}`, 'chargily', event.type, now()).run();
+  if ((ins.meta.changes ?? 0) === 0) return { status: 200, body: { duplicate: true } };
+  const co = event.data ?? {};
+  const dealId: string | undefined = co.metadata?.deal_id;
+  if (!dealId) return { status: 200, body: { ignored: true } };
+  const deal = await env.DB.prepare('SELECT * FROM deals WHERE id = ?').bind(dealId).first<DealRow>();
+  if (!deal || deal.payment_provider !== 'chargily') return { status: 200, body: { ignored: 'unknown_deal' } };
+  if (co.id !== deal.payment_session_id) return { status: 200, body: { ignored: 'session_mismatch' } };
+
+  if (event.type === 'checkout.paid' && co.status === 'paid') {
+    if (Number(co.amount) !== deal.pay_amount || String(co.currency).toLowerCase() !== 'dzd') {
+      await audit(env, { actorId: null, action: 'webhook.amount_mismatch', subjectType: 'deal', subjectId: deal.id, details: { amount: co.amount, currency: co.currency } });
+      return { status: 200, body: { ignored: 'amount_mismatch' } };
+    }
+    if (deal.escrow_state === 'pending_payment') await markHeld(env, deal, `chargily:${co.id}`, null);
+    else if (deal.escrow_state === 'cancelled') {
+      // Paid after local timeout: queue a manual refund (Chargily has no refund API) instead of keeping money.
+      const mid = newId('mrf');
+      await env.DB.batch([
+        env.DB.prepare('INSERT INTO manual_refunds (id, deal_id, method, currency, amount, reason, created_at) VALUES (?,?,?,?,?,?,?)')
+          .bind(mid, deal.id, deal.payment_method, 'DZD', deal.pay_amount, 'paid_after_cancel', now()),
+        env.DB.prepare('INSERT INTO platform_ledger (id, deal_id, kind, amount_cents, provider_ref, created_at) VALUES (?,?,?,?,?,?)')
+          .bind(newId('pl'), deal.id, 'refund', -deal.price_cents, `manual:${mid}`, now()),
+      ]);
+    }
+  } else if ((event.type === 'checkout.failed' || event.type === 'checkout.canceled' || event.type === 'checkout.expired') && deal.escrow_state === 'pending_payment') {
+    await cancelUnpaid(env, deal, 'payment_expired');
+  }
+  return { status: 200, body: { ok: true } };
+}
+
 export async function cancelUnpaid(env: Env, deal: DealRow, reason: string, actorId: string | null = null) {
   await transition(env, deal, 'cancelled', {
     actorId, reason: reason === 'payment_expired' ? 'انتهت مهلة الدفع' : 'ألغى المشتري قبل الدفع',
@@ -138,6 +209,12 @@ export async function cancelUnpaid(env: Env, deal: DealRow, reason: string, acto
 r.post('/webhooks/stripe', async (c) => {
   const raw = await c.req.text();
   const out = await handlePaymentWebhook(c.env, raw, c.req.header('stripe-signature'));
+  return c.json(out.body as object, out.status as 200);
+});
+
+r.post('/webhooks/chargily', async (c) => {
+  const raw = await c.req.text();
+  const out = await handleChargilyWebhook(c.env, raw, c.req.header('signature'));
   return c.json(out.body as object, out.status as 200);
 });
 
@@ -153,6 +230,15 @@ r.post('/payments/sandbox/:dealId', async (c) => {
     await audit(c.env, { actorId: u.id, action: 'payment.declined', subjectType: 'deal', subjectId: deal.id });
     throw new HttpError(402, 'card_declined', 'رُفضت البطاقة من البنك المُصدِر. لم يتم خصم أي مبلغ.');
   }
+  if (deal.payment_provider === 'chargily') {
+    const ev = { id: `ev_sandbox_${newId()}`, entity: 'event', livemode: false,
+      type: b.outcome === 'success' ? 'checkout.paid' : 'checkout.expired',
+      data: { id: b.sessionId, entity: 'checkout', amount: deal.pay_amount, currency: 'dzd', status: b.outcome === 'success' ? 'paid' : 'expired',
+        payment_method: deal.payment_method, metadata: { deal_id: deal.id } } };
+    const raw = JSON.stringify(ev);
+    const out = await handleChargilyWebhook(c.env, raw, await hmacHex(c.env.STRIPE_WEBHOOK_SECRET!, raw));
+    return c.json(out.body as object, out.status as 200);
+  }
   const event = {
     id: `evt_sandbox_${newId()}`,
     type: b.outcome === 'success' ? 'checkout.session.completed' : 'checkout.session.expired',
@@ -163,6 +249,40 @@ r.post('/payments/sandbox/:dealId', async (c) => {
   const sig = await signStripePayload(c.env.STRIPE_WEBHOOK_SECRET!, raw);
   const out = await handlePaymentWebhook(c.env, raw, sig);
   return c.json(out.body as object, out.status as 200);
+});
+
+// ---------- BaridiMob / CCP manual transfer ----------
+r.post('/deals/:id/payment-proof', async (c) => {
+  const u = requireUser(c);
+  await rateLimit(c.env, 'payment-proof', u.id, 10, 3600_000);
+  const { deal, party } = await partyDeal(c, c.req.param('id'), u.id);
+  if (party !== 'buyer' || deal.payment_method !== 'baridimob') throw new HttpError(403, 'forbidden', 'غير مصرح.');
+  if (deal.escrow_state !== 'pending_payment') throw new HttpError(409, 'not_pending', 'هذه الصفقة لم تعد بانتظار الدفع.');
+  const pending = await c.env.DB.prepare(`SELECT 1 FROM payment_proofs WHERE deal_id = ? AND status = 'pending'`).bind(deal.id).first();
+  if (pending) throw new HttpError(409, 'proof_pending', 'إثبات التحويل قيد المراجعة بالفعل.');
+  const form = await c.req.formData().catch(() => { throw new HttpError(400, 'bad_form', 'نموذج غير صالح.'); });
+  const transferRef = String(form.get('transferRef') ?? '').trim().slice(0, 80);
+  if (transferRef.length < 4) throw new HttpError(400, 'validation', 'أدخل رقم/مرجع عملية التحويل.', { fields: { transferRef: 'مطلوب' } });
+  const refundRip = normalizeRip(String(form.get('refundRip') ?? ''));
+  if (!refundRip) throw new HttpError(400, 'validation', 'أدخل رقم RIP الخاص بك (20 رقمًا) لاستعماله عند أي استرداد.', { fields: { refundRip: 'RIP غير صالح' } });
+  const f = await readUpload(form.get('file') as File | null, true);
+  const id = newId('prf');
+  const key = `proofs/${deal.id}/${id}`;
+  await putEncrypted(c.env, key, f.bytes, f.mime);
+  const { dek } = requireKeys(c.env);
+  const enc = await encryptText(dek, `refund-rip:${id}`, refundRip);
+  const s2 = await getSettings(c.env);
+  const t = now();
+  await c.env.DB.batch([
+    c.env.DB.prepare('INSERT INTO payment_proofs (id, deal_id, submitted_by, transfer_ref, receipt_key, receipt_mime, refund_ciphertext, refund_iv, created_at) VALUES (?,?,?,?,?,?,?,?,?)')
+      .bind(id, deal.id, u.id, transferRef, key, f.mime, enc.ciphertext, enc.iv, t),
+    // Keep the reservation alive while finance verifies the transfer.
+    c.env.DB.prepare('UPDATE deals SET payment_expires_at = MAX(COALESCE(payment_expires_at, 0), ?), updated_at = ? WHERE id = ?').bind(t + s2.payments.manual_payment_hours * 3600_000, t, deal.id),
+    c.env.DB.prepare('INSERT INTO escrow_events (id, deal_id, from_state, to_state, actor_id, reason, created_at) VALUES (?,?,?,?,?,?,?)')
+      .bind(newId('esc'), deal.id, 'pending_payment', 'pending_payment', u.id, 'أرسل المشتري إثبات تحويل BaridiMob / CCP للمراجعة', t),
+    auditStmt(c.env, { actorId: u.id, action: 'payment.proof_submitted', subjectType: 'deal', subjectId: deal.id, details: { proof: id, size: f.size } }),
+  ]);
+  return c.json({ id }, 201);
 });
 
 // ---------- Deal room ----------
@@ -193,12 +313,18 @@ export async function loadDealView(env: Env, deal: DealRow, viewerId: string) {
   const reclaimOpenUntil = deal.escrow_state === 'released'
     ? (await env.DB.prepare('SELECT MAX(available_at) n FROM ledger_entries WHERE deal_id = ? AND amount_cents > 0').bind(deal.id).first<{ n: number | null }>())?.n ?? null
     : null;
+  let manualPayment: unknown = null;
+  if (deal.payment_method === 'baridimob') {
+    const st = await getSettings(env);
+    const proofs = await env.DB.prepare('SELECT id, transfer_ref, status, review_note, created_at, reviewed_at FROM payment_proofs WHERE deal_id = ? ORDER BY created_at DESC').bind(deal.id).all();
+    manualPayment = { rip: st.payments.platform_rip, holder: st.payments.platform_account_holder, reference: deal.id.slice(-8).toUpperCase(), proofs: proofs.results };
+  }
   const { payment_session_id: _p, payment_intent_id: _pi, state_version: _v, ...safeDeal } = deal;
   return {
     deal: safeDeal, listing, steps: steps.results, events: events.results, stepLog: stepLog.results,
     secrets: secrets.results, dispute, conversationId: conv?.id ?? null, buyer, seller,
     role: deal.buyer_id === viewerId ? 'buyer' : deal.seller_id === viewerId ? 'seller' : 'admin',
-    reclaimOpenUntil,
+    reclaimOpenUntil, manualPayment,
   };
 }
 
@@ -221,6 +347,14 @@ r.post('/deals/:id/checkout', async (c) => {
   const u = requireUser(c);
   const { deal, party } = await partyDeal(c, c.req.param('id'), u.id);
   if (party !== 'buyer' || deal.escrow_state !== 'pending_payment') throw new HttpError(409, 'not_pending', 'لا يوجد دفع معلّق.');
+  if (deal.payment_method === 'baridimob') return c.json({ checkoutUrl: `/deals/${deal.id}` });
+  if (deal.payment_provider === 'chargily') {
+    if (chargilyMode(c.env) === 'sandbox') return c.json({ checkoutUrl: `/checkout/sandbox/${deal.id}?session=${deal.payment_session_id}&provider=chargily` });
+    const lc = await c.env.DB.prepare('SELECT handle FROM listings WHERE id = ?').bind(deal.listing_id).first<{ handle: string }>();
+    const co = await createChargilyCheckout(c.env, { dealId: deal.id, amountDzd: deal.pay_amount!, method: deal.payment_method as 'edahabia' | 'cib', description: `TrustTransfer — @${lc!.handle}` });
+    await c.env.DB.prepare('UPDATE deals SET payment_session_id = ? WHERE id = ?').bind(co.sessionId, deal.id).run();
+    return c.json({ checkoutUrl: co.url });
+  }
   if (c.env.PAYMENT_PROVIDER === 'sandbox') return c.json({ checkoutUrl: `/checkout/sandbox/${deal.id}?session=${deal.payment_session_id}` });
   const l = await c.env.DB.prepare('SELECT title, handle FROM listings WHERE id = ?').bind(deal.listing_id).first<{ title: string; handle: string }>();
   const s = await createCheckout(c.env, { dealId: deal.id, amountCents: deal.price_cents, currency: deal.currency, title: `${l!.title} (@${l!.handle})`, buyerEmail: u.email, expiresAt: deal.payment_expires_at ?? now() + HOUR });
@@ -238,11 +372,13 @@ r.post('/deals/:id/cancel', async (c) => {
   }
   if (party === 'seller' && ['held', 'transfer_in_progress'].includes(deal.escrow_state)) {
     // Seller backs out after payment → full refund to buyer, counts against seller trust.
-    const ref = await refund(c.env, { dealId: deal.id, paymentIntentId: deal.payment_intent_id, amountCents: deal.price_cents, reason: 'seller_cancelled' });
+    const rf = await refundDeal(c.env, deal, deal.price_cents, 'seller_cancelled');
+    const ref = rf.ref;
     await transition(c.env, deal, 'refunded', {
       actorId: u.id, reason: `انسحب البائع: ${b.reason}`, set: { cancel_reason: 'seller_cancelled', cancelled_by: u.id, closed_at: now() }, ip: clientIp(c.req.raw),
       effects: (g) => [
         g.insert('platform_ledger', { id: newId('pl'), deal_id: deal.id, kind: 'refund', amount_cents: -deal.price_cents, provider_ref: ref, created_at: now() }),
+        ...rf.effects(g),
         g.update(`UPDATE listings SET status = 'withdrawn', updated_at = ? WHERE id = ?`, now(), deal.listing_id),
         g.update(`UPDATE transfer_secrets SET ciphertext = NULL, iv = NULL, destroyed_at = ? WHERE deal_id = ? AND ciphertext IS NOT NULL`, now(), deal.id),
         g.notify(deal.buyer_id, 'تم رد المبلغ', 'انسحب البائع من الصفقة وتم رد كامل المبلغ إلى وسيلة الدفع.'),

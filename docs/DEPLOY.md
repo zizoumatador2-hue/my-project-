@@ -28,11 +28,19 @@ Worker secrets. The deploy workflow **generates `SESSION_SECRET` and `DATA_ENCRY
 | `STRIPE_WEBHOOK_SECRET` | Stripe → Webhooks → endpoint `https://<your-domain>/api/webhooks/stripe`, events `checkout.session.completed`, `checkout.session.expired`, `charge.dispute.created` |
 | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` | Cloudflare dashboard → Turnstile → add widget for your domain |
 | `BOOTSTRAP_ADMIN_EMAIL` | the first account that signs up with this email becomes `superadmin` |
+| `CHARGILY_SECRET_KEY` | Chargily Pay dashboard → Developers → API keys (`test_sk_…` for test mode, `live_sk_…` for live). Enables Edahabia / CIB. In the dashboard set the webhook URL to `https://<your-domain>/api/webhooks/chargily` |
 
 Also set `APP_URL` in `wrangler.toml` `[vars]` to the production origin.
 
 In production the Worker **refuses** to run with the sandbox payment provider and **fails closed** on Turnstile
 if its secret is missing.
+
+## Algerian local payments
+
+- **Edahabia / CIB** go through Chargily Pay V2 (hosted checkout, amounts in whole DZD, webhook signed with HMAC-SHA256 of the raw body using the API secret). Chargily has no refund API: refunds for these deals are queued under *Admin → المدفوعات المحلية → الاستردادات اليدوية* and executed manually.
+- **BaridiMob / CCP**: set the platform's 20-digit RIP and account holder in *Admin → الإعدادات → وسائل الدفع*. The method is offered only once the RIP is set. Buyers upload a receipt (encrypted in R2) plus their own RIP for refunds (encrypted); finance staff confirm before funds count as held.
+- USD prices are converted at the admin-set `usd_to_dzd` rate, snapshotted on each deal.
+- Migration `0002_local_payments.sql` must be applied to D1.
 
 ## Deploy
 

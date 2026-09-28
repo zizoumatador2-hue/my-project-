@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { CATEGORY_LABELS, COUNTRIES, LANGUAGES, LISTING_STATUS_LABELS, PLATFORM_LABELS } from '../../../shared/domain';
+import { CATEGORY_LABELS, COUNTRIES, LANGUAGES, LISTING_STATUS_LABELS, PAYMENT_METHOD_LABELS, PLATFORM_LABELS, usdCentsToDzd, type PaymentMethod } from '../../../shared/domain';
 import { post } from '../lib/api';
-import { accountAge, date, int, money, pct } from '../lib/format';
+import { accountAge, date, dzd, int, money, pct } from '../lib/format';
 import { useSession } from '../lib/session';
 import { Icon, PlatformBadge } from '../ui/icons';
 import { Alert, Button, Loadable, Modal, TrustSeal, Turnstile, useAction, useFetch } from '../ui/kit';
@@ -15,10 +15,11 @@ export default function ListingDetail() {
   const [buyOpen, setBuyOpen] = useState(false);
   const [accept, setAccept] = useState(false);
   const [token, setToken] = useState<string>();
+  const [method, setMethod] = useState<PaymentMethod | null>(null);
   const [chatToken, setChatToken] = useState<string>();
 
   const [buy, buying] = useAction(async () => {
-    const r = await post<{ dealId: string; checkoutUrl: string }>(`/listings/${id}/buy`, { acceptDisclaimer: true, turnstileToken: token });
+    const r = await post<{ dealId: string; checkoutUrl: string }>(`/listings/${id}/buy`, { acceptDisclaimer: true, turnstileToken: token, method: method ?? methods[0] });
     if (/^https?:\/\//.test(r.checkoutUrl)) window.location.assign(r.checkoutUrl);
     else nav(r.checkoutUrl);
   });
@@ -27,6 +28,8 @@ export default function ListingDetail() {
     nav(`/messages/${r.id}`);
   });
 
+  const methods = config?.payments?.methods ?? [];
+  const chosen = method ?? methods[0] ?? null;
   return (
     <div className="container page">
       <Loadable state={state}>
@@ -117,13 +120,32 @@ export default function ListingDetail() {
               </aside>
 
               <Modal open={buyOpen} onClose={() => setBuyOpen(false)} title="تأكيد الشراء عبر الضمان"
-                footer={<><Button variant="ghost" onClick={() => setBuyOpen(false)}>إلغاء</Button><Button disabled={!accept} loading={buying} onClick={() => buy()}>المتابعة للدفع</Button></>}>
+                footer={<><Button variant="ghost" onClick={() => setBuyOpen(false)}>إلغاء</Button><Button disabled={!accept || !chosen} loading={buying} onClick={() => buy()}>المتابعة للدفع</Button></>}>
                 <div className="escrow-banner">
                   <div className="lock"><Icon.Lock size={24} /></div>
-                  <div><div className="state">المبلغ الذي سيُحتجز</div><div className="amount num">{money(l.price_cents, true)}</div></div>
+                  <div>
+                    <div className="state">المبلغ الذي سيُحتجز</div>
+                    <div className="amount num">{chosen && chosen !== 'card' ? dzd(usdCentsToDzd(l.price_cents, config!.payments.usd_to_dzd)) : money(l.price_cents, true)}</div>
+                    {chosen && chosen !== 'card' && <div className="xs" style={{ opacity: 0.8 }}>ما يعادل {money(l.price_cents, true)} بسعر {int(config!.payments.usd_to_dzd)} دج للدولار</div>}
+                  </div>
                 </div>
+                <fieldset className="stack-sm">
+                  <legend className="label" style={{ marginBlockEnd: 6 }}>طريقة الدفع</legend>
+                  {methods.length === 0 && <Alert kind="warn">لا توجد طريقة دفع مفعّلة حاليًا. حاول لاحقًا.</Alert>}
+                  {methods.map((m) => (
+                    <label key={m} className="check panel" style={{ alignItems: 'center', borderColor: chosen === m ? 'var(--vault)' : undefined }}>
+                      <input type="radio" name="pm" checked={chosen === m} onChange={() => setMethod(m)} />
+                      <span className="grow">
+                        <strong className="small">{PAYMENT_METHOD_LABELS[m]}</strong>
+                        <span className="xs muted" style={{ display: 'block' }}>
+                          {m === 'card' ? 'دفع فوري عبر بوابة دفع دولية آمنة.' : m === 'baridimob' ? `حوّل إلى حساب المنصة ثم ارفع وصل التحويل؛ يتحقق الفريق المالي خلال ${int(config!.payments.manual_payment_hours)} ساعة.` : 'دفع فوري بالدينار عبر Chargily Pay.'}
+                        </span>
+                      </span>
+                    </label>
+                  ))}
+                </fieldset>
                 <ol className="small stack-sm" style={{ margin: 0, paddingInlineStart: 20 }}>
-                  <li>تدفع عبر بوابة دفع آمنة، ويُحجز الإعلان باسمك لمدة {int(config?.escrow.payment_timeout_minutes ?? 60)} دقيقة.</li>
+                  <li>{chosen === 'baridimob' ? <>تحوّل المبلغ وترفع الوصل، ويُحجز الإعلان باسمك لمدة {int(config!.payments.manual_payment_hours)} ساعة حتى يتحقق الفريق المالي.</> : <>تدفع عبر بوابة دفع آمنة، ويُحجز الإعلان باسمك لمدة {int(config?.escrow.payment_timeout_minutes ?? 60)} دقيقة.</>}</li>
                   <li>يبدأ البائع خطوات النقل، وتؤكد أنت كل خطوة تخصك.</li>
                   <li>لا يُحرَّر المبلغ إلا بعد تأكيدك أو انقضاء المهلة دون نزاع.</li>
                 </ol>

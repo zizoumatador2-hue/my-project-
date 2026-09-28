@@ -105,3 +105,23 @@ describe('fraud heuristics', () => {
     expect(scoreFlags(f)).toBeGreaterThanOrEqual(100);
   });
 });
+
+describe('algerian payments', async () => {
+  const { verifyChargilySignature } = await import('../../worker/src/lib/payments');
+  const { hmacHex } = await import('../../worker/src/lib/crypto');
+  const { usdCentsToDzd, normalizeRip } = await import('../../shared/domain');
+  it('verifies Chargily hex HMAC-SHA256 signatures', async () => {
+    const body = '{"id":"ev_1","type":"checkout.paid"}';
+    const sig = await hmacHex('test_sk_abc', body);
+    expect(await verifyChargilySignature('test_sk_abc', body, sig)).toBe(true);
+    expect(await verifyChargilySignature('test_sk_abc', body + ' ', sig)).toBe(false);
+    expect(await verifyChargilySignature('other', body, sig)).toBe(false);
+    expect(await verifyChargilySignature('test_sk_abc', body, null)).toBe(false);
+  });
+  it('converts USD to whole dinars and validates RIP', () => {
+    expect(usdCentsToDzd(40000, 250)).toBe(100000);
+    expect(usdCentsToDzd(999, 134.5)).toBe(1344); // rounds up, never undercharges
+    expect(normalizeRip('0079 9999 0012-3456 7890')).toBe('00799999001234567890');
+    expect(normalizeRip('12345')).toBeNull();
+  });
+});

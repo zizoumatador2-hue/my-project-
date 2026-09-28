@@ -190,6 +190,10 @@ export interface Settings {
   chat: { violation_flag_threshold: number; allow_contact_after_complete: boolean };
   fraud: { min_account_age_months: number; max_engagement_rate: number; min_price_per_1k_followers_cents: number; new_seller_hours: number; new_seller_high_price_cents: number };
   transfer: { secret_ttl_hours: number };
+  payments: {
+    card_enabled: boolean; chargily_enabled: boolean; baridimob_enabled: boolean;
+    usd_to_dzd: number; platform_rip: string; platform_account_holder: string; manual_payment_hours: number;
+  };
   flags: { signups_enabled: boolean; new_listings_enabled: boolean; purchases_enabled: boolean; withdrawals_enabled: boolean; chat_enabled: boolean };
 }
 
@@ -207,6 +211,10 @@ export const DEFAULT_SETTINGS: Settings = {
   chat: { violation_flag_threshold: 3, allow_contact_after_complete: false },
   fraud: { min_account_age_months: 6, max_engagement_rate: 25, min_price_per_1k_followers_cents: 50, new_seller_hours: 48, new_seller_high_price_cents: 200000 },
   transfer: { secret_ttl_hours: 24 },
+  payments: {
+    card_enabled: true, chargily_enabled: true, baridimob_enabled: true,
+    usd_to_dzd: 135, platform_rip: '', platform_account_holder: '', manual_payment_hours: 48,
+  },
   flags: { signups_enabled: true, new_listings_enabled: true, purchases_enabled: true, withdrawals_enabled: true, chat_enabled: true },
 };
 
@@ -217,4 +225,25 @@ export function computeCommission(priceCents: number, c: Settings['commission'])
   for (const t of tiers) if (priceCents >= t.min_cents) bp = t.bp;
   const cents = Math.min(priceCents, Math.max(c.min_fee_cents, Math.round((priceCents * bp) / 10000)));
   return { bp, cents };
+}
+
+export const PAYMENT_METHODS = ['card', 'edahabia', 'cib', 'baridimob'] as const;
+export type PaymentMethod = (typeof PAYMENT_METHODS)[number];
+
+export const PAYMENT_METHOD_LABELS: Record<PaymentMethod, string> = {
+  card: 'بطاقة دولية (Visa / Mastercard)',
+  edahabia: 'البطاقة الذهبية (Edahabia)',
+  cib: 'البطاقة البنكية CIB',
+  baridimob: 'تحويل BaridiMob / CCP',
+};
+
+/** DZD amount (whole dinars) for a USD price in cents at a given rate. */
+export function usdCentsToDzd(cents: number, rate: number): number {
+  return Math.ceil((cents / 100) * rate);
+}
+
+/** Algerian RIP (Relevé d'Identité Postale/Bancaire): 20 digits, spaces allowed. */
+export function normalizeRip(v: string): string | null {
+  const d = v.replace(/[\s-]/g, '');
+  return /^\d{20}$/.test(d) ? d : null;
 }
