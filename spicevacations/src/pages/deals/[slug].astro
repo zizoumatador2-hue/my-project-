@@ -1,0 +1,96 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResortCard from '../../components/ResortCard.astro';
+import DealCard from '../../components/DealCard.astro';
+import FaqList from '../../components/FaqList.astro';
+import AffiliateButton from '../../components/AffiliateButton.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import Icon from '../../components/Icon.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getDeals, lookup, url, dealTarget } from '../../lib/content';
+import { MONTHS } from '../../data/site';
+import { breadcrumbList, faqPage, webPage } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  return (await getDeals()).map((d) => ({ params: { slug: d.id }, props: { deal: d } }));
+}
+const { deal } = Astro.props as { deal: Awaited<ReturnType<typeof getDeals>>[number] };
+const { Content } = await render(deal);
+const L = await lookup();
+const x = deal.data;
+const path = url.deal(deal.id);
+const dest = L.destinations.get(x.destination);
+const type = L.vacationTypes.get(x.vacationType);
+const resorts = [...L.resorts.values()].filter((r) => r.data.destination === x.destination).slice(0, 3);
+const others = [...L.deals.values()].filter((d) => d.id !== deal.id).slice(0, 3);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Deals', href: '/deals/' },
+  { name: x.title, href: path },
+];
+const schema = [webPage({ path, title: x.metaTitle, description: x.metaDescription }), breadcrumbList(crumbs), faqPage(x.faqs, path)];
+---
+
+<Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
+  <PageHero title={x.title} lead={x.summary} crumbs={crumbs} media={x} eyebrow={`Deal timing · ${x.window}`}>
+    <div class="cluster mt-3">
+      <AffiliateButton target={dealTarget(deal, dest?.data.name ?? x.destination, '/plan-my-vacation/')} placement="deal-hero" label="Check live prices" fallbackLabel="Plan this trip" />
+    </div>
+  </PageHero>
+
+  <div class="container section--tight">
+    <div class="article-layout">
+      <div>
+        <Disclosure />
+        <div class="prose mt-4"><Content /></div>
+        <section class="mt-4" aria-labelledby="tips-h">
+          <h2 id="tips-h">How to get the best value</h2>
+          <ol class="feature-list mt-2">
+            {x.tips.map((t) => <li><Icon name="check" />{t}</li>)}
+          </ol>
+        </section>
+        <FaqList faqs={x.faqs} />
+      </div>
+      <aside class="article-aside">
+        <div class="info-card">
+          <h2>When</h2>
+          <p class="mb-0">{x.window}</p>
+          <div class="month-strip mt-2" role="img" aria-label={`Months: ${x.months.map((m) => MONTHS[m - 1]).join(', ')}`}>
+            {MONTHS.map((m, i) => <span class:list={{ on: x.months.includes(i + 1) }}>{m[0]}</span>)}
+          </div>
+          <p class="small muted mt-2 mb-0">We never publish invented prices. Rates change constantly and are set by providers.</p>
+          <div class="mt-2">
+            {dest && <p class="small mb-0">Destination: <a href={url.destination(dest.id)}>{dest.data.name}</a></p>}
+            {type && <p class="small mb-0">Trip style: <a href={url.vacationType(type.id)}>{type.data.name}</a></p>}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {
+    resorts.length > 0 && (
+      <section class="section section--white">
+        <div class="container">
+          <h2 data-reveal>Resorts to compare</h2>
+          <div class="grid grid-3 mt-3" data-stagger>
+            {resorts.map((r) => (
+              <ResortCard r={r} destinationName={dest?.data.name ?? ''} placement={`deal-${deal.id}`} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+  <section class="section">
+    <div class="container">
+      <h2 data-reveal>More deal timing</h2>
+      <div class="grid grid-3 mt-3" data-stagger>
+        {others.map((o) => <DealCard deal={o} destinationName={L.destinations.get(o.data.destination)?.data.name ?? ''} />)}
+      </div>
+    </div>
+  </section>
+  <NewsletterBand />
+</Base>

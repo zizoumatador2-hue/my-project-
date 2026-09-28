@@ -1,0 +1,295 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { getDestinations, getVacationTypes } from '../lib/content';
+import { MONTHS_LONG } from '../data/site';
+import { breadcrumbList, webPage } from '../lib/schema';
+
+const destinations = await getDestinations();
+const types = await getVacationTypes();
+const path = '/plan-my-vacation/';
+const title = 'Plan My Vacation: Free Couples Trip Planner';
+const description = 'Tell us your budget, dates and travel style and get a free, personalized shortlist of real destinations and resorts for your next romantic getaway in seconds.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Plan my vacation', href: path }];
+const schema = [webPage({ path, title, description }), breadcrumbList(crumbs)];
+const interests = ['Beach', 'Snorkel', 'Spa', 'Food', 'Wine', 'Nightlife', 'Shows', 'Hiking', 'Culture', 'History', 'Sunset', 'Adventure', 'Golf', 'Whale watching'];
+const cities = ['New York', 'Boston', 'Philadelphia', 'Washington DC', 'Atlanta', 'Miami', 'Orlando', 'Chicago', 'Dallas', 'Houston', 'Denver', 'Phoenix', 'Los Angeles', 'San Francisco', 'Seattle', 'Las Vegas'];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <PageHero title="Plan My Vacation" lead="Answer a few quick questions, or just describe your dream trip, and we'll match you with real destinations and resorts from our guides." crumbs={crumbs} media={{ scene: 'overwater', palette: 'dusk', imageAlt: 'Illustrated overwater bungalows at dusk' }} />
+
+  <section class="section--tight">
+    <div class="container narrow">
+      <form class="planner info-card" action="/search/" method="get" data-planner novalidate aria-describedby="planner-note">
+        <div class="progress" aria-hidden="true"><span data-progress></span></div>
+        <p class="small muted" data-step-label aria-live="polite">Step 1 of 5</p>
+
+        <fieldset class="step" data-step="1">
+          <legend><h2>Your budget and trip length</h2></legend>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="p-budget">Total budget for the trip (USD)</label>
+              <div class="money"><span aria-hidden="true">$</span><input class="input" id="p-budget" name="budget" type="number" inputmode="numeric" min="0" max="1000000" step="100" placeholder="2500" /></div>
+              <span class="field-hint">Rough is fine. Include hotel, food and activities.</span>
+            </div>
+            <div class="field">
+              <label for="p-days">How many days?</label>
+              <select class="select" id="p-days" name="days">
+                <option value="">Not sure yet</option>
+                {[2, 3, 4, 5, 6, 7, 8, 10, 12, 14].map((d) => <option value={d}>{d} days</option>)}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2">
+          <legend><h2>Who's going and from where?</h2></legend>
+          <div class="field">
+            <label for="p-from">Departure city</label>
+            <input class="input" id="p-from" name="departureCity" list="cities" autocomplete="address-level2" placeholder="e.g. New York" maxlength="80" />
+            <datalist id="cities">{cities.map((c) => <option value={c} />)}</datalist>
+          </div>
+          <div class="field mt-2" role="radiogroup" aria-labelledby="who-label">
+            <span class="label" id="who-label">Travelers</span>
+            <div class="choice-row">
+              {[['couple', 'Couple', 'heart'], ['family', 'Family', 'users'], ['friends', 'Friends', 'sparkles'], ['solo', 'Solo', 'compass']].map(([v, l, i], idx) => (
+                <label class="choice"><input type="radio" name="travelers" value={v} checked={idx === 0} /><span><Icon name={i} size={20} />{l}</span></label>
+              ))}
+            </div>
+          </div>
+          <div class="grid grid-2 mt-2">
+            <div class="field">
+              <label for="p-adults">Adults</label>
+              <input class="input" id="p-adults" name="adults" type="number" min="1" max="12" value="2" />
+            </div>
+            <div class="field">
+              <label for="p-children">Children</label>
+              <input class="input" id="p-children" name="children" type="number" min="0" max="10" value="0" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="3">
+          <legend><h2>Where and when?</h2></legend>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="p-dest">Destination preference</label>
+              <select class="select" id="p-dest" name="destination">
+                <option value="">Surprise us</option>
+                {destinations.map((d) => <option value={d.id}>{d.data.name}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="p-region">Or a region</label>
+              <select class="select" id="p-region" name="region">
+                <option value="">Anywhere</option>
+                <option value="usa">United States (no passport)</option>
+                <option value="mexico">Mexico</option>
+                <option value="caribbean">Caribbean</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="p-month">Travel month</label>
+              <select class="select" id="p-month" name="month">
+                <option value="">Flexible</option>
+                {MONTHS_LONG.map((m, i) => <option value={i + 1}>{m}</option>)}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="4">
+          <legend><h2>What kind of trip?</h2></legend>
+          <div class="choice-grid" role="radiogroup" aria-label="Vacation type">
+            <label class="choice"><input type="radio" name="vacationType" value="" checked /><span>Open to anything</span></label>
+            {types.map((t) => <label class="choice"><input type="radio" name="vacationType" value={t.id} /><span><Icon name={t.data.icon} size={20} />{t.data.name}</span></label>)}
+          </div>
+          <fieldset class="mt-3">
+            <legend class="label">Interests (pick any)</legend>
+            <div class="choice-row mt-2">
+              {interests.map((i) => <label class="choice choice--chip"><input type="checkbox" name="interests" value={i.toLowerCase()} /><span>{i}</span></label>)}
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <fieldset class="step" data-step="5">
+          <legend><h2>Anything else?</h2></legend>
+          <div class="field">
+            <label for="p-text">Describe your dream trip in your own words (optional)</label>
+            <textarea class="textarea" id="p-text" name="text" maxlength="1200" placeholder="I have $2,500 for 5 days. We are a couple departing from New York and want a romantic beach vacation."></textarea>
+            <span class="field-hint">We read budgets, trip length, departure city, trip style and interests from your text.</span>
+          </div>
+        </fieldset>
+
+        <p class="field-error" data-planner-error role="alert"></p>
+        <div class="planner-nav">
+          <button class="btn btn--ghost" type="button" data-prev>Back</button>
+          <button class="btn" type="button" data-next>Next <Icon name="arrow-right" /></button>
+          <button class="btn" type="submit" data-submit><Icon name="sparkles" /> Show my matches</button>
+        </div>
+        <p class="small muted mt-2 mb-0" id="planner-note">We never store your answers. Recommendations come only from destinations and resorts our editors have reviewed.</p>
+      </form>
+
+      <div class="info-card mt-3 quick">
+        <h2 style="font-size:var(--step-1)">In a hurry? Just tell us</h2>
+        <form data-quick-planner>
+          <label class="sr-only" for="q-text">Describe your trip</label>
+          <textarea class="textarea" id="q-text" name="text" maxlength="1200" required placeholder="I have $2,500 for 5 days. We are a couple departing from New York and want a romantic beach vacation."></textarea>
+          <button class="btn mt-2" type="submit">Get recommendations</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight" aria-live="polite" aria-busy="false" data-results-wrap>
+    <div class="container">
+      <div data-results hidden>
+        <h2 tabindex="-1" data-results-title>Your matches</h2>
+        <p class="lead" data-results-summary></p>
+        <Disclosure compact />
+        <div class="grid grid-3 mt-3" data-results-grid></div>
+        <div data-results-guides class="mt-4"></div>
+        <div class="cluster mt-3">
+          <button class="btn btn--ghost" type="button" data-restart>Start over</button>
+          <a class="btn btn--navy" href="/search/">Browse all vacations</a>
+        </div>
+      </div>
+      <div class="grid grid-3" data-skeletons hidden aria-hidden="true">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .planner fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .planner legend {
+    padding: 0;
+    width: 100%;
+  }
+  .planner legend h2 {
+    font-size: var(--step-2);
+  }
+  .step + .step {
+    margin-top: var(--s-4);
+  }
+  :global(.js) .planner .step {
+    display: none;
+    margin-top: 0;
+  }
+  :global(.js) .planner .step.is-active {
+    display: block;
+    animation: step-in 0.4s var(--ease);
+  }
+  @keyframes step-in {
+    from {
+      opacity: 0;
+      transform: translateX(12px);
+    }
+  }
+  .progress {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--gray-100);
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .progress span {
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: var(--grad-spice);
+    transition: width 0.4s var(--ease);
+  }
+  .money {
+    position: relative;
+  }
+  .money span {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: var(--gray-600);
+  }
+  .money .input {
+    padding-left: 30px;
+  }
+  .choice-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+  }
+  .choice {
+    position: relative;
+    cursor: pointer;
+  }
+  .choice input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+  }
+  .choice span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border: 1.5px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    font-weight: 600;
+    color: var(--navy);
+    transition: all 0.2s;
+  }
+  .choice--chip span {
+    border-radius: var(--radius-pill);
+    min-height: 40px;
+    padding: 8px 14px;
+    font-weight: 500;
+  }
+  .choice input:checked + span {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+  .choice input:focus-visible + span {
+    outline: 3px solid var(--teal);
+    outline-offset: 2px;
+  }
+  .planner-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: var(--s-3);
+    flex-wrap: wrap;
+  }
+  :global(html:not(.js)) [data-prev],
+  :global(html:not(.js)) [data-next] {
+    display: none;
+  }
+  .reasons {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.95rem;
+    color: var(--gray-700);
+  }
+</style>
+
+<script>
+  import { initPlanner } from '../scripts/planner-ui';
+  initPlanner();
+</script>

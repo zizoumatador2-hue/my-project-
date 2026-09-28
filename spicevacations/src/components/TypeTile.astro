@@ -1,0 +1,17 @@
+---
+import type { VacationType } from '../lib/content';
+import { url } from '../lib/content';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+interface Props {
+  t: VacationType;
+}
+const { t } = Astro.props;
+---
+
+<a class="type-tile" href={url.vacationType(t.id)} data-reveal>
+  <Img data={t.data} />
+  <span class="type-tile__icon"><Icon name={t.data.icon} /></span>
+  <h3>{t.data.name}</h3>
+  <p>{t.data.tagline}</p>
+</a>

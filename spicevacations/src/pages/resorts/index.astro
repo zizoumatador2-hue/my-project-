@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResortCard from '../../components/ResortCard.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getResorts, lookup, url, RESORT_TYPE_LABEL } from '../../lib/content';
+import { breadcrumbList, itemList, webPage } from '../../lib/schema';
+
+const all = await getResorts();
+const L = await lookup();
+const path = '/resorts/';
+const metaTitle = 'Best Resorts for Couples | SpiceVacations';
+const description = 'Compare hand-picked resorts for couples: adults-only, all-inclusive, luxury and beachfront stays in Mexico, the Caribbean, Hawaii, Florida and California.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Resorts', href: path }];
+const filters = ['adults-only', 'all-inclusive', 'luxury', 'beachfront', 'boutique', 'spa'];
+const schema = [webPage({ path, title: metaTitle, description, type: 'CollectionPage' }), breadcrumbList(crumbs), itemList('Resorts', all.map((r) => ({ name: r.data.name, href: url.resort(r.id) })))];
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <PageHero title="Resorts for Couples" lead="Adults-only hideaways, all-inclusive beach resorts and once-in-a-lifetime splurges, chosen for romance, privacy and service." crumbs={crumbs} media={{ scene: 'pool', palette: 'teal', imageAlt: 'Illustrated resort infinity pool with palm trees and ocean' }} />
+  <div class="container section--tight">
+    <nav aria-label="Filter resorts" class="cluster">
+      <span class="label">Filter:</span>
+      {filters.map((f) => <a class="chip" href={`/search/?kind=resort&resortType=${f}`}>{RESORT_TYPE_LABEL[f]}</a>)}
+      <a class="chip" href="/search/?kind=resort">All filters</a>
+    </nav>
+    <div class="mt-3"><Disclosure /></div>
+    <h2 class="sr-only">All resorts</h2>
+    <div class="grid grid-3 mt-4" data-stagger>
+      {all.map((r) => <ResortCard r={r} destinationName={L.destinations.get(r.data.destination)?.data.name ?? ''} placement="resorts-index" />)}
+    </div>
+  </div>
+  <NewsletterBand />
+</Base>

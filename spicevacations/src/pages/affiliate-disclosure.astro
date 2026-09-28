@@ -1,0 +1,36 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+import { listPartners, PRODUCT_LABEL } from '../lib/affiliate';
+const partners = listPartners().filter((p) => p.active);
+---
+
+<Page title="Affiliate disclosure" metaTitle="Affiliate Disclosure: How We Make Money | SpiceVacations" description="How SpiceVacations.com earns money through affiliate links, which partners we work with, and why commissions never influence our travel recommendations." updated="September 25, 2026">
+  <p>
+    SpiceVacations.com is a free, independent travel publication. To keep it free, some of the links on our site are <strong>affiliate links</strong>. If
+    you click one and make a booking or purchase, we may earn a commission from the partner. <strong>This costs you nothing extra.</strong>
+  </p>
+  <h2>How affiliate links work here</h2>
+  <ul>
+    <li>Affiliate links are marked as sponsored in our code (<code>rel="sponsored"</code>) and open in a new tab.</li>
+    <li>Buttons like "Check Availability" route through a short <code>/go/</code> link so we can count clicks without collecting personal data.</li>
+    <li>If a partner isn't available for an item, the button takes you to our own page instead. We never send you to a dead link.</li>
+  </ul>
+  <h2>Partners we currently link to</h2>
+  <ul>
+    {partners.map((p) => <li>{p.name}: {p.productTypes.map((t) => PRODUCT_LABEL[t as keyof typeof PRODUCT_LABEL]).join(', ')}</li>)}
+  </ul>
+  <p>This list changes as partnerships begin or end. Partnerships can include networks that pay us per booking.</p>
+  <h2>Our promise</h2>
+  <ol>
+    <li>Commissions never decide which destinations or resorts we recommend, or their order.</li>
+    <li>We never invent prices, ratings, reviews, availability or urgency.</li>
+    <li>Sponsored content, if we ever publish it, will be clearly labeled "Sponsored."</li>
+  </ol>
+  <h2>We are not the travel provider</h2>
+  <p>
+    SpiceVacations.com is not a hotel, airline, cruise line, tour operator or travel agency. Final prices, availability, taxes, fees and booking terms
+    are set by the provider or booking site you use. Questions about a booking should go to that provider.
+  </p>
+  <p>Questions about this disclosure? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</Page>

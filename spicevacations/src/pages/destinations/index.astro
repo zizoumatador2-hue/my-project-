@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import DestinationCard from '../../components/DestinationCard.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getDestinations, url, REGION_LABEL } from '../../lib/content';
+import { breadcrumbList, itemList, webPage } from '../../lib/schema';
+import { REGIONS } from '../../content.config';
+
+const all = await getDestinations();
+const path = '/destinations/';
+const title = 'Vacation Destinations for Couples: USA, Mexico & Caribbean';
+const metaTitle = 'Couples Vacation Destinations | SpiceVacations';
+const description = 'Explore romantic vacation destinations for couples in the USA, Mexico and the Caribbean. Compare seasons, budgets and trip styles, then pick your escape.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Destinations', href: path }];
+const schema = [webPage({ path, title: metaTitle, description, type: 'CollectionPage' }), breadcrumbList(crumbs), itemList('Destinations', all.map((d) => ({ name: d.data.name, href: url.destination(d.id) })))];
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <PageHero title={title} lead="From Florida's Keys to St. Lucia's Pitons, here is where couples go to reconnect. Every guide is written by our editors, with honest timing tips and no invented prices." crumbs={crumbs} media={{ scene: 'tropical', palette: 'coral', imageAlt: 'Illustrated tropical cove with palm trees at sunset' }} />
+  {
+    REGIONS.map((region) => {
+      const list = all.filter((d) => d.data.region === region);
+      return (
+        list.length > 0 && (
+          <section class="section" aria-labelledby={`r-${region}`}>
+            <div class="container">
+              <div class="section-header" data-reveal>
+                <div>
+                  <h2 id={`r-${region}`}>{REGION_LABEL[region]}</h2>
+                  <p>{list.length} destinations</p>
+                </div>
+              </div>
+              <div class="grid grid-3" data-stagger>
+                {list.map((d) => (
+                  <DestinationCard d={d} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )
+      );
+    })
+  }
+  <NewsletterBand />
+</Base>

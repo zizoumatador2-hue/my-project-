@@ -1,0 +1,52 @@
+---
+import type { Resort } from '../lib/content';
+import { url, resortTarget } from '../lib/content';
+import Img from './Img.astro';
+import SaveButton from './SaveButton.astro';
+import AffiliateButton from './AffiliateButton.astro';
+import Icon from './Icon.astro';
+interface Props {
+  r: Resort;
+  /** Kept for API symmetry with other cards; the location line already names the destination. */
+  destinationName?: string;
+  headingLevel?: 2 | 3;
+  placement?: string;
+}
+const { r, headingLevel = 3, placement = 'resort-card' } = Astro.props;
+const H = `h${headingLevel}` as 'h3';
+const href = url.resort(r.id);
+const img = r.data.image || `/art/${r.data.scene}-${r.data.palette}.svg`;
+const rating = r.data.rating;
+---
+
+<article class="card" data-reveal>
+  <div class="card__media">
+    <Img data={r.data} />
+    <div class="card__badges">
+      {r.data.adultsOnly && <span class="badge badge--gold">Adults-only</span>}
+      {r.data.resortTypes.includes('all-inclusive') && <span class="badge badge--glass">All-inclusive</span>}
+      {rating && <span class="badge badge--glass rating-badge"><Icon name="star" size={14} />{rating.value.toFixed(1)} · {rating.source}</span>}
+    </div>
+    <SaveButton id={`resort:${r.id}`} title={r.data.name} href={href} img={img} kind="Resort" />
+  </div>
+  <div class="card__body">
+    <p class="card__kicker"><Icon name="map-pin" size={14} class="inline-icon" /> {r.data.location}</p>
+    <H class="card__title"><a href={href}>{r.data.name}</a></H>
+    <p class="card__text">{r.data.summary}</p>
+    <div class="card__chips">{r.data.features.slice(0, 3).map((f) => <span class="chip">{f}</span>)}</div>
+    <div class="card__footer">
+      <span class="price-note">Prices vary. Check availability.</span>
+      <AffiliateButton target={resortTarget(r)} placement={placement} size="sm" fallbackLabel="View resort" />
+    </div>
+  </div>
+</article>
+<style>
+  .card__kicker :global(.inline-icon) {
+    display: inline;
+    vertical-align: -2px;
+  }
+  .rating-badge :global(svg) {
+    fill: var(--gold);
+    stroke: var(--gold);
+  }
+</style>

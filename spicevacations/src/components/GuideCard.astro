@@ -1,0 +1,33 @@
+---
+import type { Guide } from '../lib/content';
+import { url, readingTime } from '../lib/content';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+interface Props {
+  g: Guide;
+  headingLevel?: 2 | 3;
+  kicker?: string;
+}
+const { g, headingLevel = 3, kicker } = Astro.props;
+const H = `h${headingLevel}` as 'h3';
+const { minutes } = readingTime(g.body);
+---
+
+<article class="card" data-reveal>
+  <div class="card__media"><Img data={g.data} /></div>
+  <div class="card__body">
+    <p class="card__kicker">{kicker ?? 'Travel guide'}</p>
+    <H class="card__title"><a href={url.guide(g.id)}>{g.data.title}</a></H>
+    <p class="card__text">{g.data.metaDescription}</p>
+    <div class="card__footer">
+      <span class="price-note"><Icon name="clock" size={14} class="inline-icon" /> {minutes} min read</span>
+      <span class="link-arrow" aria-hidden="true">Read guide</span>
+    </div>
+  </div>
+</article>
+<style>
+  .price-note :global(.inline-icon) {
+    display: inline;
+    vertical-align: -2px;
+  }
+</style>

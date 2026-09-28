@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "spicevacations",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    // Only dynamic routes hit the Worker; everything else is served straight from the edge cache.
+    "run_worker_first": ["/api/*", "/go/*"]
+  },
+  "kv_namespaces": [{ "binding": "DATA", "id": "87fe2e9e4d3d44999b27f79e1f97793a" }],
+  "ratelimits": [
+    { "name": "FORM_LIMITER", "namespace_id": "4101", "simple": { "limit": 5, "period": 60 } },
+    { "name": "PLAN_LIMITER", "namespace_id": "4102", "simple": { "limit": 20, "period": 60 } }
+  ],
+  "observability": { "enabled": true },
+  "vars": {
+    "SITE_URL": "https://spicevacations.com",
+    "PLANNER_PROVIDER": "rules",
+    "PLANNER_LLM_MODEL": "claude-opus-5"
+  }
+  // Secrets (wrangler secret put): ANTHROPIC_API_KEY, RESEND_API_KEY, CONTACT_TO, TURNSTILE_SECRET_KEY
+}

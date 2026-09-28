@@ -1,0 +1,112 @@
+---
+/**
+ * SpiceVacations logo. The mark is a chili pepper whose curved body arcs over a
+ * rising sun on the horizon: spice + escape. Variants: horizontal (default),
+ * stacked, icon. Tone: "color" (for light or dark backgrounds via currentColor
+ * horizon), "white" or "navy" one-color versions.
+ */
+interface Props {
+  id: string;
+  variant?: 'horizontal' | 'stacked' | 'icon';
+  tone?: 'color' | 'white' | 'navy';
+  animated?: boolean;
+  size?: number;
+  class?: string;
+}
+const { id, variant = 'horizontal', tone = 'color', animated = false, size = 40, class: cls } = Astro.props;
+const g = `lg-${id}`;
+const clip = `lc-${id}`;
+const sunClip = `ls-${id}`;
+const one = tone === 'white' ? '#FFFFFF' : tone === 'navy' ? '#0B1F3A' : null;
+const chili = one ?? `url(#${g})`;
+const sunFill = one ?? '#FFB627';
+const stem = one ?? '#14B8A6';
+---
+
+<span class:list={['logo', `logo--${variant}`, { 'logo--animated': animated }, cls]} style={`--logo-size:${size}px`}>
+  <svg class="logo__mark" viewBox="0 0 64 64" width={size} height={size} aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id={g} x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#FF5A36"></stop>
+        <stop offset="1" stop-color="#FFB627"></stop>
+      </linearGradient>
+      <clipPath id={clip}><path d="M8 44A24 24 0 0 1 56 44A19.5 19.5 0 0 0 17 44Z"></path></clipPath>
+      <clipPath id={sunClip}><rect x="0" y="0" width="64" height="44.5"></rect></clipPath>
+    </defs>
+    <g clip-path={`url(#${sunClip})`}>
+      <circle class="logo__sun" cx="35" cy="44" r="11" fill={sunFill}></circle>
+    </g>
+    <path d="M8 44A24 24 0 0 1 56 44A19.5 19.5 0 0 0 17 44Z" fill={chili}></path>
+    <g clip-path={`url(#${clip})`}><rect class="logo__shine" x="-30" y="0" width="14" height="64" fill="#fff" opacity=".55" transform="skewX(-20)"></rect></g>
+    <path d="M12.5 44.5c0 4.8-2.4 7.8-7 9" fill="none" stroke={stem} stroke-width="3.6" stroke-linecap="round"></path>
+    <path d="M20 50.5h32M27 57h18" fill="none" stroke={one ?? 'currentColor'} stroke-width="3.6" stroke-linecap="round"></path>
+  </svg>
+  {
+    variant !== 'icon' && (
+      <span class="logo__word" style={one ? `color:${one}` : undefined}>
+        Spice<span class="logo__word2">Vacations</span>
+        <span class="logo__tld">.com</span>
+      </span>
+    )
+  }
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--logo-size) * 0.22);
+    color: var(--navy);
+    line-height: 1;
+  }
+  .logo--stacked {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .logo__mark {
+    flex: none;
+    overflow: visible;
+  }
+  .logo__word {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: calc(var(--logo-size) * 0.62);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .logo__word2 {
+    color: var(--coral-text);
+  }
+  :global(.site-footer) .logo__word2,
+  :global(.on-dark) .logo__word2 {
+    color: var(--gold);
+  }
+  .logo__tld {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.55em;
+    opacity: 0.75;
+    margin-left: 1px;
+  }
+  .logo__shine {
+    transition: transform 0s;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .logo--animated .logo__sun {
+      animation: sunrise 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+    }
+    :global(a:hover) > .logo--animated .logo__shine,
+    .logo--animated:hover .logo__shine {
+      transform: translateX(110px) skewX(-20deg);
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+  @keyframes sunrise {
+    from {
+      transform: translateY(14px);
+    }
+    to {
+      transform: none;
+    }
+  }
+</style>

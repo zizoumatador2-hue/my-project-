@@ -1,0 +1,25 @@
+---
+/** Content image: a licensed photo when the entry has one, otherwise the brand scene illustration. */
+interface Props {
+  data: { image?: string; imageAlt: string; scene: string; palette: string };
+  eager?: boolean;
+  class?: string;
+  sizes?: string;
+  parallax?: boolean;
+}
+const { data, eager = false, class: cls, parallax = false } = Astro.props;
+const src = data.image || `/art/${data.scene}-${data.palette}.svg`;
+---
+
+<img
+  src={src}
+  alt={data.imageAlt}
+  width="1600"
+  height="1000"
+  loading={eager ? 'eager' : 'lazy'}
+  decoding={eager ? 'sync' : 'async'}
+  fetchpriority={eager ? 'high' : undefined}
+  class={cls}
+  data-parallax={parallax ? '' : undefined}
+  draggable="false"
+/>

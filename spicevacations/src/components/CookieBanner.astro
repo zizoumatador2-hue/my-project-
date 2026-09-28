@@ -1,0 +1,15 @@
+---
+/* Consent banner. Nothing non-essential (analytics) loads until the visitor opts in. */
+---
+
+<div class="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc" data-cookie-banner hidden>
+  <h2 id="cookie-title">Cookies, your call</h2>
+  <p id="cookie-desc">
+    We use essential storage to run the site (like your saved trips). With your permission we'd also use privacy-friendly analytics to see which
+    guides help most. Read our <a href="/cookie-policy/">cookie policy</a>.
+  </p>
+  <div class="cluster">
+    <button class="btn btn--sm" type="button" data-consent="accept">Accept analytics</button>
+    <button class="btn btn--sm btn--ghost" type="button" data-consent="reject">Essential only</button>
+  </div>
+</div>

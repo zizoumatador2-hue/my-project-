@@ -1,0 +1,30 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Img from './Img.astro';
+import type { Crumb } from '../lib/schema';
+interface Props {
+  title: string;
+  lead?: string;
+  eyebrow?: string;
+  crumbs?: Crumb[];
+  media?: { image?: string; imageAlt: string; scene: string; palette: string };
+}
+const { title, lead, eyebrow, crumbs, media } = Astro.props;
+---
+
+<section class:list={['page-hero', { 'page-hero--plain': !media }]}>
+  {
+    media && (
+      <div class="page-hero__media">
+        <Img data={media} eager />
+      </div>
+    )
+  }
+  <div class="container">
+    {crumbs && <Breadcrumbs crumbs={crumbs} />}
+    {eyebrow && <p class="eyebrow" style="color:var(--gold)">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>

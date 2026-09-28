@@ -1,0 +1,186 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResortCard from '../../components/ResortCard.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import DealCard from '../../components/DealCard.astro';
+import DestinationCard from '../../components/DestinationCard.astro';
+import FaqList from '../../components/FaqList.astro';
+import AffiliateButton from '../../components/AffiliateButton.astro';
+import PartnerSlot from '../../components/PartnerSlot.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import SaveButton from '../../components/SaveButton.astro';
+import Icon from '../../components/Icon.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getDestinations, lookup, url, destinationTarget, TRAVELER_LABEL, BUDGET_LABEL, REGION_LABEL } from '../../lib/content';
+import { MONTHS } from '../../data/site';
+import { breadcrumbList, faqPage, touristDestination, webPage } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  return (await getDestinations()).map((d) => ({ params: { slug: d.id }, props: { d } }));
+}
+const { d } = Astro.props as { d: Awaited<ReturnType<typeof getDestinations>>[number] };
+const { Content } = await render(d);
+const L = await lookup();
+const x = d.data;
+const path = url.destination(d.id);
+const resorts = [...L.resorts.values()].filter((r) => r.data.destination === d.id);
+const guides = [...L.guides.values()].filter((g) => g.data.destinations.includes(d.id)).slice(0, 6);
+const deals = [...L.deals.values()].filter((de) => de.data.destination === d.id);
+const types = x.vacationTypes.map((id) => L.vacationTypes.get(id)).filter((t): t is NonNullable<typeof t> => Boolean(t));
+const nearby = [...L.destinations.values()].filter((o) => o.id !== d.id && o.data.region === x.region).slice(0, 3);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Destinations', href: '/destinations/' },
+  { name: x.name, href: path },
+];
+const img = x.image || `/art/${x.scene}-${x.palette}.svg`;
+const schema = [
+  webPage({ path, title: x.metaTitle, description: x.metaDescription }),
+  breadcrumbList(crumbs),
+  touristDestination({ path, name: x.name, description: x.summary, image: img, country: x.country, region: x.state, activities: x.activities }),
+  faqPage(x.faqs, path),
+];
+---
+
+<Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
+  <PageHero title={`${x.name} Vacations for Couples`} lead={x.summary} crumbs={crumbs} media={x} eyebrow={REGION_LABEL[x.region]}>
+    <div class="cluster mt-3">
+      <AffiliateButton target={destinationTarget(d, 'hotel', '#where-to-stay')} placement="destination-hero" label={`Find stays in ${x.name}`} fallbackLabel="Where to stay" />
+      <a class="btn btn--light" href={`/plan-my-vacation/?destination=${d.id}`}>Plan a {x.name} trip</a>
+    </div>
+  </PageHero>
+
+  <div class="container section--tight">
+    <div class="article-layout">
+      <div>
+        <section aria-labelledby="highlights">
+          <h2 id="highlights" data-reveal>Why couples love {x.name}</h2>
+          <div class="grid grid-2 mt-2" data-stagger>
+            {
+              x.highlights.map((h) => (
+                <div class="info-card" data-reveal>
+                  <h3>{h.title}</h3>
+                  <p class="mb-0 muted">{h.text}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <div class="prose mt-4">
+          <Content />
+        </div>
+
+        {
+          resorts.length > 0 && (
+            <section class="mt-4" aria-labelledby="where-to-stay-h" id="where-to-stay">
+              <h2 id="where-to-stay-h">Where to stay in {x.name}</h2>
+              <Disclosure compact />
+              <div class="grid grid-2 mt-3" data-stagger>
+                {resorts.map((r) => (
+                  <ResortCard r={r} destinationName={x.name} placement={`destination-${d.id}`} />
+                ))}
+              </div>
+            </section>
+          )
+        }
+        <FaqList faqs={x.faqs} title={`${x.name} travel FAQ`} />
+      </div>
+
+      <aside class="article-aside" aria-label={`${x.name} at a glance`}>
+        <div class="info-card" style="position:relative">
+          <SaveButton id={`destination:${d.id}`} title={x.name} href={path} img={img} kind="Destination" />
+          <h2>{x.name} at a glance</h2>
+          <dl class="kv mt-2">
+            <dt>Region</dt><dd>{x.state ? `${x.state}, ` : ''}{x.country}</dd>
+            <dt>Ideal for</dt><dd>{x.idealFor.map((t) => TRAVELER_LABEL[t]).join(', ')}</dd>
+            <dt>Budget</dt><dd>{x.budgetStyles.map((b) => BUDGET_LABEL[b]).join(' · ')}</dd>
+            {x.airports.length > 0 && <><dt>Fly into</dt><dd>{x.airports.slice(0, 3).join(', ')}</dd></>}
+          </dl>
+          <h3 class="mt-3" style="font-size:1rem">Best months to visit</h3>
+          <div class="month-strip" role="img" aria-label={`Best months: ${x.bestMonths.map((m) => MONTHS[m - 1]).join(', ')}`}>
+            {MONTHS.map((m, i) => <span class:list={{ on: x.bestMonths.includes(i + 1) }}>{m[0]}</span>)}
+          </div>
+          <p class="small muted mt-2 mb-0">{x.bestTimeNote}</p>
+        </div>
+
+        <div class="info-card mt-3">
+          <h2>Things to do</h2>
+          <ul class="feature-list mt-2">
+            {x.activities.map((a) => <li><Icon name="check" />{a}</li>)}
+          </ul>
+        </div>
+
+        <div class="mt-3 stack">
+          <PartnerSlot target={destinationTarget(d, 'tour', '/plan-my-vacation/')} heading={`Tours & experiences in ${x.name}`} text="Sunset sails, food tours and day trips from trusted operators." placement={`destination-tours-${d.id}`} />
+          <PartnerSlot target={destinationTarget(d, 'flight', '/plan-my-vacation/')} heading={`Flights to ${x.name}`} text="Compare routes and airports before you pick your dates." placement={`destination-flights-${d.id}`} />
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {
+    types.length > 0 && (
+      <section class="section--tight container" aria-labelledby="types-h">
+        <h2 id="types-h" style="font-size:var(--step-2)">{x.name} is great for</h2>
+        <ul class="pill-list mt-2">
+          {types.map((t) => (
+            <li>
+              <a class="chip" href={url.vacationType(t.id)}>
+                {t.data.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    deals.length > 0 && (
+      <section class="section section--sand">
+        <div class="container">
+          <h2 data-reveal>{x.name} deal timing</h2>
+          <div class="grid grid-3 mt-3" data-stagger>
+            {deals.map((de) => (
+              <DealCard deal={de} destinationName={x.name} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    guides.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <h2 data-reveal>{x.name} guides</h2>
+          <div class="grid grid-3 mt-3" data-stagger>
+            {guides.map((g) => (
+              <GuideCard g={g} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    nearby.length > 0 && (
+      <section class="section section--white">
+        <div class="container">
+          <h2 data-reveal>More in {REGION_LABEL[x.region]}</h2>
+          <div class="grid grid-3 mt-3" data-stagger>
+            {nearby.map((n) => (
+              <DestinationCard d={n} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+  <NewsletterBand />
+</Base>

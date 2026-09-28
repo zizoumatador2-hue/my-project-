@@ -1,0 +1,39 @@
+---
+import Page from '../layouts/Page.astro';
+import FaqList from '../components/FaqList.astro';
+
+const groups = [
+  {
+    title: 'About SpiceVacations',
+    faqs: [
+      { q: 'Is SpiceVacations.com a travel agency?', a: 'No. SpiceVacations.com is an independent travel publisher. We do not sell travel or take bookings. When you check availability, you are sent to a partner or provider that sets the final price, availability and terms.' },
+      { q: 'How does SpiceVacations make money?', a: 'Some links are affiliate links. If you book through them, we may earn a commission at no extra cost to you. Commissions never influence which destinations or resorts we recommend.' },
+      { q: 'Why don\'t you show prices?', a: 'Travel prices change constantly and depend on dates, room types and availability. Rather than publish numbers that may be wrong, we say "Prices vary. Check availability." and link you to live rates.' },
+      { q: 'Do you show ratings and reviews?', a: 'Only when a real, sourced rating exists, and we always name the source. We never write or display fake reviews.' },
+    ],
+  },
+  {
+    title: 'Planning a romantic getaway',
+    faqs: [
+      { q: 'What is the best romantic getaway for a long weekend?', a: 'Choose a destination within about three hours of home so you spend your time together, not in transit. Popular options include the Florida Keys, Napa Valley, the Hudson Valley and Las Vegas.' },
+      { q: 'Are adults-only resorts worth it for couples?', a: 'For most couples, yes. Adults-only resorts offer quieter pools, grown-up dining and a more relaxed atmosphere. Check the minimum age, which is often 16 or 18.' },
+      { q: 'When is hurricane season in the Caribbean and Florida?', a: 'The Atlantic hurricane season runs from June 1 to November 30. Many people travel then without problems, but book flexible rates and consider travel insurance.' },
+      { q: 'Do I need a passport for Hawaii, Puerto Rico or the U.S. Virgin Islands?', a: 'U.S. citizens do not need a passport for Hawaii, Puerto Rico or the U.S. Virgin Islands, but you need an accepted government-issued ID. Mexico, the Bahamas and most Caribbean islands require a passport.' },
+      { q: 'How does Plan My Vacation work?', a: 'You share your budget, trip length, departure city, style and interests, or describe your trip in your own words. The planner matches your answers against destinations and resorts our editors have reviewed and explains why each one fits.' },
+    ],
+  },
+  {
+    title: 'Your data',
+    faqs: [
+      { q: 'Where are my saved trips stored?', a: 'Saved trips are stored only in your browser on this device. We do not receive or store them.' },
+      { q: 'Do you use cookies?', a: 'We use essential browser storage to run features like saved trips and your cookie choice. Analytics load only if you accept them. See our cookie policy for details.' },
+    ],
+  },
+];
+const all = groups.flatMap((g) => g.faqs);
+---
+
+<Page title="Frequently asked questions" metaTitle="FAQ: How SpiceVacations Works & Trip Tips | SpiceVacations" description="Answers to common questions about SpiceVacations.com, planning romantic getaways, adults-only resorts, passports, hurricane season, prices and your privacy." faqs={all} type="FAQPage">
+  {groups.map((g, i) => <FaqList faqs={g.faqs} title={g.title} id={`faq-${i}`} />)}
+  <p class="mt-4">Still have a question? <a href="/contact/">Contact us</a>.</p>
+</Page>
