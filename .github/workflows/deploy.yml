@@ -41,6 +41,8 @@ jobs:
           ACC="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
           V=$(curl -sS -H "Authorization: Bearer $TOKEN" https://api.cloudflare.com/client/v4/user/tokens/verify | jq -r '.result.status // .errors[0].message // "unknown"')
           echo "token status: $V"
+          # Shape only (never the value): helps tell an API Token (~40 chars, letters/digits/_-) from a Global API Key (37 hex) or a pasted command.
+          echo "token shape: length=${#TOKEN} hex_only=$([[ "$TOKEN" =~ ^[0-9a-f]+$ ]] && echo yes || echo no) has_non_token_chars=$([[ "$TOKEN" =~ [^A-Za-z0-9_-] ]] && echo yes || echo no)"
           if [ -z "$ACC" ]; then
             ACC=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty')
             N=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result | length')
