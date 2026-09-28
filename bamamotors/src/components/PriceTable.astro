@@ -1,0 +1,21 @@
+---
+import type { PriceStat } from '../lib/vehicles';
+import { formatPrice, formatNumber } from '../lib/format';
+interface Props { stats: PriceStat[]; caption: string; labelHeader?: string; }
+const { stats, caption, labelHeader = 'Body type' } = Astro.props;
+const updated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Chicago' });
+---
+{stats.length > 0 && (
+  <div class="table-wrap">
+    <table>
+      <caption class="sr-only">{caption}</caption>
+      <thead><tr><th scope="col">{labelHeader}</th><th scope="col">Listings</th><th scope="col">Lowest</th><th scope="col">Average</th><th scope="col">Highest</th><th scope="col">Avg. miles</th></tr></thead>
+      <tbody>
+        {stats.map((s) => (
+          <tr><td><strong>{s.label}</strong></td><td>{s.count}</td><td>{formatPrice(s.min_cents)}</td><td>{formatPrice(s.avg_cents)}</td><td>{formatPrice(s.max_cents)}</td><td>{formatNumber(s.avg_mileage)}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">Live data from active BamaMotors listings as of <time datetime={new Date().toISOString().slice(0, 10)}>{updated}</time>. Prices are dealer asking prices and exclude tax, title and fees.</p>
+)}

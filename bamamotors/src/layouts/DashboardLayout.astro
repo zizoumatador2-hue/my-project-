@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import Flash from '../components/Flash.astro';
+import { first } from '../lib/db';
+
+interface Props { title: string; area: 'dealer' | 'admin' | 'account'; ok?: string | null; err?: string | null; }
+const { title, area, ok, err } = Astro.props;
+const db = Astro.locals.runtime.env.DB;
+const path = Astro.url.pathname;
+let items: { href: string; label: string; icon: string; count?: number }[];
+if (area === 'dealer') {
+  const dealer = Astro.locals.dealer!;
+  const n = await first<{ leads: number; notes: number }>(db,
+    "SELECT (SELECT COUNT(*) FROM leads WHERE dealer_id = ? AND status = 'new') AS leads, (SELECT COUNT(*) FROM notifications WHERE user_id = ? AND read_at IS NULL) AS notes",
+    [dealer.id, Astro.locals.user!.id]);
+  items = [
+    { href: '/dashboard', label: 'Overview', icon: 'home', count: n?.notes },
+    { href: '/dashboard/vehicles', label: 'Inventory', icon: 'car' },
+    { href: '/dashboard/vehicles/new', label: 'Add vehicle', icon: 'tag' },
+    { href: '/dashboard/leads', label: 'Leads', icon: 'inbox', count: n?.leads },
+    { href: '/dashboard/profile', label: 'Dealer profile', icon: 'store' },
+    { href: '/dashboard/billing', label: 'Plan & billing', icon: 'dollar' },
+  ];
+} else if (area === 'admin') {
+  const n = await first<{ dealers: number; reviews: number; subs: number; msgs: number }>(db,
+    "SELECT (SELECT COUNT(*) FROM dealers WHERE status = 'pending') AS dealers, (SELECT COUNT(*) FROM reviews WHERE status = 'pending') AS reviews, (SELECT COUNT(*) FROM subscriptions WHERE status = 'requested') AS subs, (SELECT COUNT(*) FROM contact_messages WHERE status = 'new') AS msgs");
+  items = [
+    { href: '/admin', label: 'Overview', icon: 'home' },
+    { href: '/admin/dealers', label: 'Dealers', icon: 'store', count: n?.dealers },
+    { href: '/admin/vehicles', label: 'Vehicles', icon: 'car' },
+    { href: '/admin/leads', label: 'Leads', icon: 'inbox' },
+    { href: '/admin/users', label: 'Users', icon: 'users' },
+    { href: '/admin/featured', label: 'Featured listings', icon: 'star' },
+    { href: '/admin/subscriptions', label: 'Subscriptions', icon: 'dollar', count: n?.subs },
+    { href: '/admin/reviews', label: 'Reviews', icon: 'check', count: n?.reviews },
+    { href: '/admin/posts', label: 'Blog posts', icon: 'file' },
+    { href: '/admin/categories', label: 'Categories', icon: 'tag' },
+    { href: '/admin/cities', label: 'Cities', icon: 'pin' },
+    { href: '/admin/makes', label: 'Makes & models', icon: 'car' },
+    { href: '/admin/messages', label: 'Messages & email', icon: 'mail', count: n?.msgs },
+    { href: '/admin/reports', label: 'Reports', icon: 'chart' },
+    { href: '/admin/settings', label: 'SEO & site settings', icon: 'settings' },
+  ];
+} else {
+  items = [
+    { href: '/account', label: 'Saved & inquiries', icon: 'heart' },
+    { href: '/account/settings', label: 'Account settings', icon: 'settings' },
+  ];
+}
+const current = (href: string) => {
+  const root = area === 'dealer' ? '/dashboard' : area === 'admin' ? '/admin' : '/account';
+  if (href === root) return path === root;
+  if (href === '/dashboard/vehicles') return path.startsWith('/dashboard/vehicles') && path !== '/dashboard/vehicles/new';
+  return path === href || path.startsWith(`${href}/`);
+};
+---
+<BaseLayout title={`${title} – ${area === 'admin' ? 'Admin' : area === 'dealer' ? 'Dealer Dashboard' : 'My Account'}`} noindex bare>
+  <div class="dash">
+    <nav class="dash-nav" aria-label={area === 'admin' ? 'Admin' : 'Dashboard'}>
+      <ul>
+        {items.map((i) => (
+          <li><a href={i.href} aria-current={current(i.href) ? 'page' : undefined}><Icon name={i.icon} size={18} /> {i.label}{i.count ? <span class="count">{i.count}</span> : null}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <main id="main" class="dash-main">
+      <Flash ok={ok} err={err} />
+      <slot />
+    </main>
+  </div>
+</BaseLayout>

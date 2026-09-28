@@ -1,0 +1,47 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+const s = Astro.locals.settings;
+const updated = '2026-09-28';
+---
+<ContentLayout title="Privacy Policy" h1="Privacy Policy" path="/privacy" updated={updated} description="How BamaMotors collects, uses, shares and protects your information, and the choices and rights you have over your data.">
+  <div class="prose">
+    <p>This Privacy Policy explains how BamaMotors (“we,” “us”) handles information when you use BamaMotors.com. We keep it plain and specific.</p>
+    <h2>Information we collect</h2>
+    <ul>
+      <li><strong>Account information:</strong> name, email, phone (optional) and a securely hashed password. We never store your password in readable form.</li>
+      <li><strong>Inquiries you send:</strong> the details you enter in contact, price, test-drive or financing forms, and the vehicle or dealer you contacted.</li>
+      <li><strong>Dealer information:</strong> business name, address, phone, email, hours, license number and listings provided by dealerships.</li>
+      <li><strong>Usage information:</strong> pages viewed and basic device/browser data. We store a one-way hash of IP addresses for fraud and spam prevention rather than the raw address.</li>
+      <li><strong>Location (optional):</strong> if you tap “Use my location,” your browser shares approximate coordinates, which we use once to find the nearest Alabama ZIP code. We don't store them.</li>
+    </ul>
+    <h2>How we use information</h2>
+    <ul>
+      <li>To deliver your inquiry to the dealer you choose and send you a confirmation.</li>
+      <li>To run your account, saved vehicles and dashboards.</li>
+      <li>To keep the marketplace safe — rate limiting, spam and fraud prevention.</li>
+      <li>To improve the site and measure performance.</li>
+      <li>To send service emails such as password resets. We do not send marketing email without your permission.</li>
+    </ul>
+    <h2>How we share information</h2>
+    <ul>
+      <li><strong>With the dealer you contact.</strong> When you submit a form, that dealership receives your inquiry details.</li>
+      <li><strong>With service providers</strong> that host the site, deliver email and process payments for dealers, only as needed to provide those services.</li>
+      <li><strong>For legal reasons</strong> when required by law or to protect users and the marketplace.</li>
+    </ul>
+    <p><strong>We do not sell your personal information.</strong></p>
+    <h2>Cookies and analytics</h2>
+    <p>We use one essential cookie to keep you signed in. If analytics is enabled, we use Google Analytics 4 with IP anonymization to understand aggregate site usage. You can block analytics cookies in your browser settings without affecting core features.</p>
+    <h2>Data retention</h2>
+    <p>We keep account data while your account is active. Inquiries are retained so dealers and shoppers can reference them and for record-keeping, and are deleted or anonymized when no longer needed. You may ask us to delete your data at any time.</p>
+    <h2>Your choices and rights</h2>
+    <p>You can access and update your account details from <a href="/account/settings">account settings</a>. To request a copy or deletion of your data, <a href="/contact">contact us</a> and choose “Privacy request.” We honor these requests for all users.</p>
+    <h2>Security</h2>
+    <p>We use HTTPS, hashed passwords, secure HttpOnly session cookies, rate limiting and role-based access controls. No system is perfectly secure, so please use a unique password.</p>
+    <h2>Children</h2>
+    <p>BamaMotors is not directed to children under 13, and we do not knowingly collect their information.</p>
+    <h2>Changes</h2>
+    <p>If we make material changes, we will update the date at the top of this page.</p>
+    <h2>Contact</h2>
+    <p>Questions? <a href="/contact">Contact us</a>{s.contact_email && <> or email <a href={`mailto:${s.contact_email}`}>{s.contact_email}</a></>}.</p>
+  </div>
+</ContentLayout>

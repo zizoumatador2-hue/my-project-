@@ -1,0 +1,71 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Faq from '../components/Faq.astro';
+import { faqLd } from '../lib/seo';
+const faq = [
+  { q: 'Is BamaMotors a lender?', a: 'No. BamaMotors connects you with dealers and their lending partners. We do not make credit decisions or lend money.' },
+  { q: 'Will submitting a financing inquiry affect my credit score?', a: 'Sending an inquiry on BamaMotors does not run a credit check. A lender may run one later if you choose to apply — ask them whether it is a soft or hard inquiry.' },
+  { q: 'Can I get a car loan with bad credit in Alabama?', a: 'Many dealers work with buyers who have limited or damaged credit. Expect higher rates; a larger down payment or co-signer can help.' },
+  { q: 'What do I need to apply for an auto loan?', a: 'Typically a driver’s license, proof of income, proof of residence, and insurance information. Your lender will confirm exact requirements.' },
+];
+---
+<ContentLayout title="Car Financing in Alabama – Payment Calculator & Auto Loan Help" h1="Car financing in Alabama" path="/financing"
+  description="Estimate your car payment, learn how used car loans work in Alabama, and send a financing inquiry to local dealers. No credit check to ask questions."
+  keywords="car financing Alabama, used car loans Alabama, auto loan calculator, bad credit car loans Alabama" jsonLd={[faqLd(faq)]}>
+  <p class="snippet" style="max-width:72ch">Financing a used car in Alabama starts with knowing your budget. Use the calculator to estimate a monthly payment, compare loan terms, then send a financing inquiry. A local dealer or the BamaMotors team will follow up — sending an inquiry does not run a credit check.</p>
+  <div class="vd-layout">
+    <div>
+      <section class="panel" data-calc aria-labelledby="calc-title">
+        <h2 id="calc-title">Car payment calculator</h2>
+        <div class="form-grid">
+          <div class="field"><label for="c-price">Vehicle price ($)</label><input class="input" id="c-price" inputmode="numeric" value="22000" data-c-price /></div>
+          <div class="field"><label for="c-down">Down payment ($)</label><input class="input" id="c-down" inputmode="numeric" value="2500" data-c-down /></div>
+          <div class="field"><label for="c-trade">Trade-in value ($)</label><input class="input" id="c-trade" inputmode="numeric" value="0" data-c-trade /></div>
+          <div class="field"><label for="c-apr">APR (%)</label><input class="input" id="c-apr" inputmode="decimal" value="8.5" data-c-apr /></div>
+          <div class="field"><label for="c-term">Loan term</label><select class="select" id="c-term" data-c-term>{[36, 48, 60, 72, 84].map((t) => <option value={t} selected={t === 60}>{t} months</option>)}</select></div>
+          <div class="field"><label for="c-tax">Sales tax (%)</label><input class="input" id="c-tax" inputmode="decimal" value="0" data-c-tax aria-describedby="tax-hint" /><span class="hint" id="tax-hint">Alabama's state automotive rate is 2% plus local taxes. Enter your combined rate.</span></div>
+        </div>
+        <div class="grid grid-3" style="margin-top:16px">
+          <div class="stat"><div class="n" data-c-monthly>$0</div><div class="l">Est. monthly payment</div></div>
+          <div class="stat"><div class="n" data-c-financed>$0</div><div class="l">Amount financed</div></div>
+          <div class="stat"><div class="n" data-c-interest>$0</div><div class="l">Total interest</div></div>
+        </div>
+        <p class="small muted" style="margin-top:12px">Estimates only; excludes title, registration and dealer fees. Not an offer of credit.</p>
+      </section>
+      <section class="section-tight prose">
+        <h2>How auto financing works</h2>
+        <ol>
+          <li><strong>Check your credit</strong> for free at <a href="https://www.annualcreditreport.com/" rel="noopener" target="_blank">AnnualCreditReport.com</a>.</li>
+          <li><strong>Get pre-approved</strong> by a bank or credit union to set a benchmark rate.</li>
+          <li><strong>Compare offers</strong> by APR and total cost, not only by monthly payment.</li>
+          <li><strong>Read the contract</strong> and decline add-ons you don't want.</li>
+        </ol>
+        <p>Read the full guide: <a href="/blog/how-to-finance-a-used-car-in-alabama">How to finance a used car in Alabama</a>. The <a href="https://www.consumerfinance.gov/consumer-tools/auto-loans/" rel="noopener" target="_blank">CFPB's auto loan tools</a> are another excellent resource.</p>
+      </section>
+      <Faq faq={faq} title="Car financing FAQ" />
+    </div>
+    <aside class="vd-aside" aria-label="Financing inquiry">
+      <LeadForm types={['financing']} heading="Send a financing inquiry" />
+    </aside>
+  </div>
+</ContentLayout>
+<script>
+  const q = <T extends Element>(s: string) => document.querySelector<T>(s)!;
+  const num = (el: HTMLInputElement) => Number(el.value.replace(/[^\d.]/g, '')) || 0;
+  const money = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
+  const els = ['[data-c-price]', '[data-c-down]', '[data-c-trade]', '[data-c-apr]', '[data-c-tax]'].map((s) => q<HTMLInputElement>(s));
+  const term = q<HTMLSelectElement>('[data-c-term]');
+  const calc = () => {
+    const [price, down, trade, apr, tax] = els.map(num);
+    const financed = Math.max(0, price * (1 + tax / 100) - down - trade);
+    const n = Number(term.value);
+    const r = apr / 1200;
+    const m = r === 0 ? financed / n : (financed * r) / (1 - Math.pow(1 + r, -n));
+    q('[data-c-monthly]').textContent = money(m);
+    q('[data-c-financed]').textContent = money(financed);
+    q('[data-c-interest]').textContent = money(Math.max(0, m * n - financed));
+  };
+  [...els, term].forEach((el) => el.addEventListener('input', calc));
+  calc();
+</script>

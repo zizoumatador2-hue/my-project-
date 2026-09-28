@@ -1,0 +1,73 @@
+---
+import { LEAD_TYPES, type LeadType } from '../lib/constants';
+
+interface Props {
+  vehicleId?: number;
+  dealerId?: number;
+  types?: LeadType[];
+  defaultType?: LeadType;
+  heading?: string;
+  subject?: string; // e.g. vehicle title, used in default message
+  id?: string;
+}
+const { vehicleId, dealerId, types = ['contact'], defaultType = types[0], heading = 'Contact the dealer', subject, id = 'lead-form' } = Astro.props;
+const user = Astro.locals.user;
+const env = Astro.locals.runtime.env;
+const sent = Astro.url.searchParams.get('lead') === 'sent';
+const leadErr = Astro.url.searchParams.get('lead_err');
+const defaults: Record<LeadType, string> = {
+  contact: subject ? `Hi, I'm interested in the ${subject}. Is it still available?` : 'Hi, I have a question about your inventory.',
+  info: subject ? `Could you send me more information about the ${subject}, including its history and any reconditioning done?` : '',
+  price: subject ? `What is your best out-the-door price on the ${subject}, including tax, title and fees?` : '',
+  test_drive: subject ? `I'd like to schedule a test drive of the ${subject}.` : '',
+  financing: subject ? `I'm interested in financing the ${subject}. Please contact me about payment options.` : "I'd like to learn about my car financing options.",
+};
+const minDate = new Date().toISOString().slice(0, 10);
+---
+<section class="card card-pad" id={id} aria-labelledby={`${id}-title`}>
+  <h2 id={`${id}-title`} style="font-size:1.25rem">{heading}</h2>
+  {sent && <div class="alert alert-ok" role="status">Thanks! Your request was sent. Expect a reply by email or phone.</div>}
+  {leadErr && <div class="alert alert-err" role="alert">{leadErr.slice(0, 200)}</div>}
+  <form method="post" action="/api/leads" data-lead-form novalidate>
+    {types.length > 1 && (
+      <div class="tabs" role="tablist" aria-label="Request type">
+        {types.map((t) => (
+          <button type="button" role="tab" aria-selected={t === defaultType ? 'true' : 'false'} data-lead-type={t} data-default-msg={defaults[t]}>
+            {LEAD_TYPES[t].replace('Request ', '').replace(' Inquiry', '').replace('Schedule ', '')}
+          </button>
+        ))}
+      </div>
+    )}
+    <input type="hidden" name="type" value={defaultType} />
+    {vehicleId && <input type="hidden" name="vehicle_id" value={vehicleId} />}
+    {dealerId && <input type="hidden" name="dealer_id" value={dealerId} />}
+    <input type="hidden" name="return_to" value={Astro.url.pathname} />
+    <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="form-grid">
+      <div class="field full"><label for={`${id}-name`}>Full name</label>
+        <input class="input" id={`${id}-name`} name="name" required autocomplete="name" value={user?.name ?? ''} maxlength="120" /></div>
+      <div class="field"><label for={`${id}-email`}>Email</label>
+        <input class="input" id={`${id}-email`} name="email" type="email" required autocomplete="email" value={user?.email ?? ''} maxlength="160" /></div>
+      <div class="field"><label for={`${id}-phone`}>Phone <span class="muted">(optional)</span></label>
+        <input class="input" id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" value={user?.phone ?? ''} maxlength="30" /></div>
+      <div class="field full" data-date-field hidden={defaultType !== 'test_drive'}>
+        <label for={`${id}-date`}>Preferred date</label>
+        <input class="input" id={`${id}-date`} name="preferred_date" type="date" min={minDate} /></div>
+      <div class="field full"><label for={`${id}-message`}>Message</label>
+        <textarea class="textarea" id={`${id}-message`} name="message" maxlength="3000" rows="4">{defaults[defaultType]}</textarea></div>
+      <label class="check full"><input type="checkbox" name="consent" required />
+        <span>I agree to be contacted about this request by {dealerId || vehicleId ? 'the dealer and ' : ''}BamaMotors. See our <a href="/privacy">Privacy Policy</a>.</span></label>
+      {env.TURNSTILE_SITE_KEY && <div class="cf-turnstile full" data-sitekey={env.TURNSTILE_SITE_KEY}></div>}
+    </div>
+    <p class="field-error" data-lead-error role="alert" hidden></p>
+    <button class="btn btn-primary btn-block btn-lg" type="submit" style="margin-top:14px" data-lead-submit>Send request</button>
+  </form>
+  <div data-lead-success hidden class="alert alert-ok" role="status" tabindex="-1">
+    <strong>Request sent!</strong> The {dealerId || vehicleId ? 'dealership' : 'BamaMotors team'} will contact you soon. A copy was emailed to you.
+  </div>
+</section>
+{env.TURNSTILE_SITE_KEY && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+<script>
+  import { initLeadForms } from '../scripts/lead-form';
+  initLeadForms();
+</script>

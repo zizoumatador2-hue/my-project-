@@ -1,0 +1,70 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import Pagination from '../../../components/Pagination.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import { all, first, audit } from '../../../lib/db';
+import { formatDate } from '../../../lib/format';
+import { sendEmail } from '../../../lib/email';
+
+const env = Astro.locals.runtime.env;
+const db = env.DB;
+const admin = Astro.locals.user!;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const ids = fd.getAll('ids').map(Number).filter((n) => n > 0).slice(0, 200);
+  const status = String(fd.get('status'));
+  if (ids.length && ['active', 'suspended', 'pending'].includes(status)) {
+    const targets = await all<{ id: number; name: string; email: string; status: string }>(db, `SELECT id, name, email, status FROM dealers WHERE id IN (${ids.map(() => '?').join(',')})`, ids);
+    await db.prepare(`UPDATE dealers SET status = ?, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id IN (${ids.map(() => '?').join(',')})`).bind(status, ...ids).run();
+    for (const t of targets) {
+      await audit(db, admin.id, 'dealer.status', 'dealer', t.id, { status });
+      if (status === 'active' && t.status === 'pending') await sendEmail(env, t.email, 'Your BamaMotors dealership is approved', `Good news — ${t.name} is now live on BamaMotors. Your active vehicles are visible to shoppers.\n\n${env.SITE_URL}/dashboard`);
+    }
+    return Astro.redirect(`/admin/dealers${Astro.url.search}${Astro.url.search ? '&' : '?'}ok=bulk`, 303);
+  }
+}
+const sp = Astro.url.searchParams;
+const status = ['pending', 'active', 'suspended'].includes(sp.get('status') ?? '') ? sp.get('status')! : '';
+const plan = ['free', 'basic', 'pro'].includes(sp.get('plan') ?? '') ? sp.get('plan')! : '';
+const q = (sp.get('q') ?? '').trim().slice(0, 60);
+const page = Math.max(1, Number(sp.get('page')) || 1);
+const PER = 30;
+const where = ['1=1'];
+const params: (string | number)[] = [];
+if (status) { where.push('d.status = ?'); params.push(status); }
+if (plan) { where.push('d.plan = ?'); params.push(plan); }
+if (q) { where.push('(d.name LIKE ? OR d.email LIKE ? OR d.city_name LIKE ?)'); params.push(`%${q}%`, `%${q}%`, `%${q}%`); }
+const total = (await first<{ n: number }>(db, `SELECT COUNT(*) AS n FROM dealers d WHERE ${where.join(' AND ')}`, params))?.n ?? 0;
+const rows = await all<{ id: number; slug: string; name: string; email: string; city_name: string; status: string; plan: string; created_at: string; vehicles: number; leads: number }>(db,
+  `SELECT d.id, d.slug, d.name, d.email, d.city_name, d.status, d.plan, d.created_at,
+     (SELECT COUNT(*) FROM vehicles v WHERE v.dealer_id = d.id AND v.status = 'active') AS vehicles,
+     (SELECT COUNT(*) FROM leads l WHERE l.dealer_id = d.id) AS leads
+   FROM dealers d WHERE ${where.join(' AND ')} ORDER BY (d.status = 'pending') DESC, d.created_at DESC LIMIT ${PER} OFFSET ${(page - 1) * PER}`, params);
+---
+<DashboardLayout title="Dealers" area="admin">
+  <h1>Dealers</h1>
+  <form method="get" class="toolbar">
+    <div class="field"><label for="q">Search</label><input class="input" id="q" name="q" value={q} placeholder="Name, email or city" /></div>
+    <div class="field"><label for="st">Status</label><select class="select" id="st" name="status"><option value="">All</option>{['pending', 'active', 'suspended'].map((s) => <option selected={s === status}>{s}</option>)}</select></div>
+    <div class="field"><label for="pl">Plan</label><select class="select" id="pl" name="plan"><option value="">All</option>{['free', 'basic', 'pro'].map((s) => <option selected={s === plan}>{s}</option>)}</select></div>
+    <button class="btn btn-outline" type="submit">Filter</button>
+  </form>
+  {rows.length === 0 ? <EmptyState title="No dealers found" icon="store" /> : (
+    <form method="post">
+      <div class="toolbar">
+        <div class="field" style="max-width:200px"><label for="bs">Set status</label><select class="select" id="bs" name="status"><option value="active">Approve / activate</option><option value="suspended">Suspend</option><option value="pending">Pending</option></select></div>
+        <button class="btn btn-dark" type="submit">Apply to selected</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th><span class="sr-only">Select</span></th><th>Dealer</th><th>City</th><th>Status</th><th>Plan</th><th>Vehicles</th><th>Leads</th><th>Joined</th></tr></thead>
+        <tbody>{rows.map((d) => (
+          <tr><td><input type="checkbox" name="ids" value={d.id} aria-label={`Select ${d.name}`} /></td>
+            <td><a href={`/admin/dealers/${d.id}`}><strong>{d.name}</strong></a><br /><span class="small muted">{d.email}</span></td>
+            <td>{d.city_name}</td><td><span class={`badge ${d.status === 'pending' ? 'badge-warn' : d.status === 'active' ? 'badge-ok' : 'badge-err'}`}>{d.status}</span></td>
+            <td>{d.plan}</td><td>{d.vehicles}</td><td>{d.leads}</td><td class="small">{formatDate(d.created_at)}</td></tr>
+        ))}</tbody>
+      </table></div>
+    </form>
+  )}
+  <Pagination page={page} pages={Math.max(1, Math.ceil(total / PER))} href={(p) => `/admin/dealers?${new URLSearchParams({ ...(q && { q }), ...(status && { status }), ...(plan && { plan }), page: String(p) })}`} />
+</DashboardLayout>

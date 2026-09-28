@@ -1,0 +1,23 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { breadcrumbLd } from '../lib/seo';
+import { formatDate } from '../lib/format';
+
+interface Props { title: string; h1: string; description: string; path: string; updated?: string; jsonLd?: unknown[]; keywords?: string; }
+const { title, h1, description, path, updated, jsonLd = [], keywords } = Astro.props;
+const crumbs = [{ name: 'Home', href: '/' }, { name: h1, href: path }];
+const site = Astro.locals.runtime.env.SITE_URL;
+---
+<BaseLayout title={title} description={description} canonical={path} keywords={keywords} jsonLd={[breadcrumbLd(site, crumbs), ...jsonLd]}>
+  <div class="wrap" style="padding-bottom:56px">
+    <Breadcrumbs crumbs={crumbs} />
+    <article style="margin-top:14px">
+      <header style="max-width:72ch">
+        <h1>{h1}</h1>
+        {updated && <p class="small muted">Last updated <time datetime={updated}>{formatDate(updated)}</time></p>}
+      </header>
+      <slot />
+    </article>
+  </div>
+</BaseLayout>

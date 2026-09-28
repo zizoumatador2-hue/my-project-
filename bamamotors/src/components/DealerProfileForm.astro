@@ -1,0 +1,43 @@
+---
+import type { DealerFull } from '../lib/dealers';
+import { parseHours, DAYS } from '../lib/dealers';
+import type { FieldErrors } from '../lib/validation';
+interface Props { d: DealerFull; values?: Record<string, string>; errors?: FieldErrors; }
+const { d, values, errors = {} } = Astro.props;
+const hours = parseHours(d.hours_json);
+const v = (k: string, fallback: string | null | undefined) => values?.[k] ?? fallback ?? '';
+const field = (name: string, label: string, fallback: string | null | undefined, type = 'text') => ({ name, label, value: v(name, fallback), type });
+const fields = [
+  field('name', 'Dealership name', d.name), field('phone', 'Phone', d.phone, 'tel'), field('email', 'Lead email', d.email, 'email'),
+  field('address', 'Street address', d.address), field('city_name', 'City', d.city_name), field('zip', 'ZIP code', d.zip),
+  field('website', 'Website', d.website, 'url'), field('facebook_url', 'Facebook page', d.facebook_url, 'url'), field('license_number', 'Alabama dealer license #', d.license_number),
+];
+const logoErr = Astro.url.searchParams.get('logo_err');
+---
+<section class="panel" style="margin-bottom:20px" aria-labelledby="logo-title">
+  <h2 id="logo-title" style="font-size:1.1rem">Logo</h2>
+  {logoErr && <div class="alert alert-err">{logoErr.slice(0, 200)}</div>}
+  <div class="row">
+    {d.logo_key ? <img src={`/media/${d.logo_key}`} alt="Current logo" width="80" height="80" style="border-radius:12px;object-fit:contain;border:1px solid var(--line)" /> : <span class="muted small">No logo uploaded.</span>}
+    <form method="post" action="/api/dealer/logo" enctype="multipart/form-data" class="row">
+      <input type="hidden" name="dealer_id" value={d.id} />
+      <input type="file" name="logo" accept="image/png,image/jpeg,image/webp" required aria-label="Logo file" />
+      <button class="btn btn-outline btn-sm" type="submit">Upload logo</button>
+    </form>
+  </div>
+</section>
+<form method="post" class="panel" novalidate>
+  <input type="hidden" name="action" value="profile" />
+  <div class="form-grid">
+    {fields.map((f) => (
+      <div class="field"><label for={`dp-${f.name}`}>{f.label}</label>
+        <input class="input" id={`dp-${f.name}`} name={f.name} type={f.type as 'text'} value={f.value} aria-invalid={errors[f.name] ? 'true' : undefined} />
+        {errors[f.name] && <span class="field-error">{errors[f.name]}</span>}</div>
+    ))}
+    <div class="field full"><label for="dp-desc">About the dealership</label><textarea class="textarea" id="dp-desc" name="description" rows="5">{v('description', d.description)}</textarea><span class="hint">Tell shoppers what makes your dealership different — in your own words.</span></div>
+  </div>
+  <fieldset style="margin-top:16px"><legend>Business hours</legend>
+    <div class="form-grid">{DAYS.map(([k, label]) => <div class="field"><label for={`h-${k}`}>{label}</label><input class="input" id={`h-${k}`} name={`hours_${k}`} value={v(`hours_${k}`, hours[k])} placeholder="9:00 AM – 7:00 PM or Closed" /></div>)}</div>
+  </fieldset>
+  <button class="btn btn-primary" type="submit">Save profile</button>
+</form>

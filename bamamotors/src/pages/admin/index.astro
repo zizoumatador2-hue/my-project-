@@ -1,0 +1,37 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, first } from '../../lib/db';
+import { formatDateTime, formatPrice } from '../../lib/format';
+import { LEAD_TYPES, type LeadType } from '../../lib/constants';
+
+const db = Astro.locals.runtime.env.DB;
+const since = new Date(Date.now() - 30 * 86400000).toISOString();
+const c = await first<Record<string, number>>(db, `SELECT
+  (SELECT COUNT(*) FROM users) AS users, (SELECT COUNT(*) FROM dealers WHERE status = 'active') AS dealers,
+  (SELECT COUNT(*) FROM dealers WHERE status = 'pending') AS pending, (SELECT COUNT(*) FROM vehicles WHERE status = 'active') AS vehicles,
+  (SELECT COUNT(*) FROM leads WHERE created_at >= ?1) AS leads30, (SELECT COUNT(*) FROM leads WHERE dealer_id IS NULL AND status = 'new') AS siteLeads,
+  (SELECT COUNT(*) FROM subscriptions WHERE status = 'active' AND plan != 'free') AS paying,
+  (SELECT COALESCE(SUM(amount_cents),0) FROM payments WHERE status = 'succeeded' AND created_at >= ?1) AS revenue30,
+  (SELECT COUNT(*) FROM reviews WHERE status = 'pending') AS reviews, (SELECT COUNT(*) FROM blog_posts WHERE status = 'published') AS posts`, [since]);
+const pending = await all<{ id: number; name: string; city_name: string; created_at: string }>(db, "SELECT id, name, city_name, created_at FROM dealers WHERE status = 'pending' ORDER BY created_at LIMIT 10");
+const leads = await all<{ id: number; type: LeadType; name: string; dealer: string | null; created_at: string; status: string }>(db, 'SELECT l.id, l.type, l.name, d.name AS dealer, l.created_at, l.status FROM leads l LEFT JOIN dealers d ON d.id = l.dealer_id ORDER BY l.created_at DESC LIMIT 8');
+const stats: [string, string | number, string][] = [
+  ['Active dealers', c?.dealers ?? 0, '/admin/dealers?status=active'], ['Pending dealers', c?.pending ?? 0, '/admin/dealers?status=pending'],
+  ['Active vehicles', c?.vehicles ?? 0, '/admin/vehicles'], ['Leads (30d)', c?.leads30 ?? 0, '/admin/leads'],
+  ['New site leads', c?.siteLeads ?? 0, '/admin/leads?site=1'], ['Paying dealers', c?.paying ?? 0, '/admin/subscriptions'],
+  ['Revenue (30d)', formatPrice(c?.revenue30 ?? 0), '/admin/reports'], ['Users', c?.users ?? 0, '/admin/users'],
+  ['Reviews to moderate', c?.reviews ?? 0, '/admin/reviews'], ['Published posts', c?.posts ?? 0, '/admin/posts'],
+];
+---
+<DashboardLayout title="Admin overview" area="admin">
+  <h1>Admin overview</h1>
+  <div class="grid grid-4">{stats.map(([l, n, href]) => <a class="stat" href={href} style="text-decoration:none"><div class="n">{n}</div><div class="l">{l}</div></a>)}</div>
+  <div class="grid grid-2" style="margin-top:20px;align-items:start">
+    <section class="panel"><h2 style="font-size:1.1rem">Dealers awaiting approval</h2>
+      {pending.length ? <ul style="padding-left:1.1em">{pending.map((d) => <li><a href={`/admin/dealers/${d.id}`}>{d.name}</a> <span class="small muted">· {d.city_name} · {formatDateTime(d.created_at)}</span></li>)}</ul> : <p class="muted">No dealers waiting.</p>}
+    </section>
+    <section class="panel"><h2 style="font-size:1.1rem">Latest leads</h2>
+      {leads.length ? <ul style="padding-left:1.1em">{leads.map((l) => <li><a href={`/admin/leads/${l.id}`}>{l.name}</a> · {LEAD_TYPES[l.type]} → {l.dealer ?? 'BamaMotors'} <span class="small muted">· {l.status} · {formatDateTime(l.created_at)}</span></li>)}</ul> : <p class="muted">No leads yet.</p>}
+    </section>
+  </div>
+</DashboardLayout>

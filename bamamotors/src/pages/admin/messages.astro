@@ -1,0 +1,29 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, run } from '../../lib/db';
+import { formatDateTime } from '../../lib/format';
+
+const env = Astro.locals.runtime.env;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  await run(env.DB, "UPDATE contact_messages SET status = 'handled' WHERE id = ?", [Number(fd.get('id'))]);
+  return Astro.redirect('/admin/messages?ok=updated', 303);
+}
+const msgs = await all<{ id: number; name: string; email: string; subject: string; message: string; status: string; created_at: string }>(env.DB, 'SELECT * FROM contact_messages ORDER BY (status = \'new\') DESC, created_at DESC LIMIT 100');
+const outbox = await all<{ id: number; to_email: string; subject: string; body: string; status: string; error: string | null; created_at: string }>(env.DB, 'SELECT * FROM email_outbox ORDER BY created_at DESC LIMIT 50');
+---
+<DashboardLayout title="Messages & email" area="admin">
+  <h1>Contact messages</h1>
+  {msgs.length === 0 && <p class="muted">No messages yet.</p>}
+  <div class="stack">{msgs.map((m) => (
+    <article class={`panel${m.status === 'new' ? '' : ''}`} style={m.status === 'handled' ? 'opacity:.65' : ''}>
+      <div class="spread"><strong>{m.subject} — {m.name} &lt;<a href={`mailto:${m.email}`}>{m.email}</a>&gt;</strong><span class="small muted">{formatDateTime(m.created_at)}</span></div>
+      <p style="white-space:pre-wrap;margin:8px 0">{m.message}</p>
+      {m.status === 'new' && <form method="post"><input type="hidden" name="id" value={m.id} /><button class="btn btn-outline btn-sm">Mark handled</button></form>}
+    </article>
+  ))}</div>
+  <h2 style="margin-top:32px">Email outbox</h2>
+  <p class="muted">Email delivery: <strong>{env.RESEND_API_KEY ? 'Resend connected' : 'not configured — emails are logged here instead of sent'}</strong>.</p>
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>To</th><th>Subject</th><th>Status</th></tr></thead>
+    <tbody>{outbox.map((e) => <tr><td class="small">{formatDateTime(e.created_at)}</td><td>{e.to_email}</td><td><details><summary>{e.subject}</summary><pre style="white-space:pre-wrap;font-size:.85rem">{e.body}</pre></details></td><td><span class={`badge ${e.status === 'sent' ? 'badge-ok' : e.status === 'failed' ? 'badge-err' : ''}`}>{e.status}</span>{e.error && <div class="small field-error">{e.error}</div>}</td></tr>)}</tbody></table></div>
+</DashboardLayout>

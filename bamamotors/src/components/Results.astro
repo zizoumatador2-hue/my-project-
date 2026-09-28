@@ -1,0 +1,67 @@
+---
+import SearchForm from './SearchForm.astro';
+import VehicleGrid from './VehicleGrid.astro';
+import Pagination from './Pagination.astro';
+import EmptyState from './EmptyState.astro';
+import Icon from './Icon.astro';
+import { SORTS } from '../lib/constants';
+import { filtersToQuery, type SearchFilters, type VehicleCard, type Origin } from '../lib/search';
+import { formatNumber } from '../lib/format';
+
+interface Props {
+  filters: SearchFilters;
+  items: VehicleCard[];
+  total: number;
+  pages: number;
+  origin: Origin | null;
+  basePath: string; // where sort/pagination links point
+  fixed?: Partial<SearchFilters>; // filters implied by the landing URL (not repeated in links)
+}
+const { filters, items, total, pages, origin, basePath, fixed = {} } = Astro.props;
+const linkFilters: Partial<SearchFilters> = { ...filters };
+for (const k of Object.keys(fixed) as (keyof SearchFilters)[]) delete linkFilters[k];
+const pageHref = (p: number) => `${basePath}${filtersToQuery({ ...linkFilters, page: p })}`;
+const sorts = SORTS.filter((s) => s.value !== 'distance' || origin);
+---
+<div class="results-layout">
+  <div>
+    <button class="btn btn-outline btn-block filters-toggle" type="button" aria-controls="filters" aria-expanded="false" data-filters-toggle>
+      <Icon name="settings" size={18} /> Filters & location
+    </button>
+    <SearchForm variant="sidebar" filters={filters} />
+  </div>
+  <section aria-label="Search results">
+    <div class="spread" style="margin-bottom:14px">
+      <p style="margin:0" aria-live="polite"><strong>{formatNumber(total)}</strong> {total === 1 ? 'vehicle' : 'vehicles'}{origin ? ` near ${origin.label}` : ' in Alabama'}</p>
+      <form method="get" action={basePath} class="row" data-sort-form>
+        {Object.entries(Object.fromEntries(new URLSearchParams(filtersToQuery({ ...linkFilters, sort: undefined, page: undefined }).slice(1)))).map(([k, v]) => <input type="hidden" name={k} value={v} />)}
+        <label for="sort" class="label">Sort by</label>
+        <select class="select" id="sort" name="sort" style="width:auto;min-height:40px" data-autosubmit>
+          {sorts.map((s) => <option value={s.value} selected={filters.sort === s.value}>{s.label}</option>)}
+        </select>
+        <noscript><button class="btn btn-outline btn-sm" type="submit">Apply</button></noscript>
+      </form>
+    </div>
+    {items.length > 0 ? (
+      <>
+        <VehicleGrid items={items} eagerCount={2} headingLevel="h2" />
+        <Pagination page={filters.page} pages={pages} href={pageHref} />
+      </>
+    ) : (
+      <EmptyState title="No vehicles match these filters yet" icon="search">
+        <p>Try widening your price range, removing a filter or increasing the search radius. New inventory is added by Alabama dealers every day.</p>
+        <p><a class="btn btn-outline" href="/used-cars">See all used cars in Alabama</a></p>
+      </EmptyState>
+    )}
+  </section>
+</div>
+<script>
+  document.querySelectorAll<HTMLSelectElement>('[data-autosubmit]').forEach((s) => s.addEventListener('change', () => s.form?.submit()));
+  const t = document.querySelector<HTMLButtonElement>('[data-filters-toggle]');
+  const f = document.getElementById('filters');
+  t?.addEventListener('click', () => {
+    const open = f?.getAttribute('data-collapsed') === 'true';
+    f?.setAttribute('data-collapsed', open ? 'false' : 'true');
+    t.setAttribute('aria-expanded', String(open));
+  });
+</script>

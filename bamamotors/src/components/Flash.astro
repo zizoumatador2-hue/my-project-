@@ -1,0 +1,15 @@
+---
+// Renders ?ok= / ?err= messages after POST-redirect-GET, plus explicit messages.
+interface Props { ok?: string | null; err?: string | null; }
+const MESSAGES: Record<string, string> = {
+  saved: 'Changes saved.', created: 'Created successfully.', deleted: 'Deleted.', sent: 'Message sent.',
+  updated: 'Updated successfully.', uploaded: 'Photos uploaded.', welcome: 'Welcome to BamaMotors! Your account is ready.',
+  password: 'Password updated.', requested: 'Request received — our team will follow up shortly.', featured: 'Featured listing updated.',
+  reset: 'Password reset. You can sign in now.', review: 'Thanks! Your review was submitted and will appear after moderation.',
+  bulk: 'Bulk action applied.', billing: 'Billing updated.', limit: 'You have reached your plan limit.', canceled: 'Checkout canceled.',
+};
+const ok = Astro.props.ok ?? (Astro.url.searchParams.get('ok') ? MESSAGES[Astro.url.searchParams.get('ok')!] ?? null : null);
+const err = Astro.props.err ?? (Astro.url.searchParams.get('err') ? MESSAGES[Astro.url.searchParams.get('err')!] ?? 'Something went wrong. Please try again.' : null);
+---
+{ok && <div class="alert alert-ok" role="status">{ok}</div>}
+{err && <div class="alert alert-err" role="alert">{err}</div>}

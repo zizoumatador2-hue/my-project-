@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import type { DealerCard } from '../lib/dealers';
+interface Props { d: DealerCard; }
+const { d } = Astro.props;
+const initials = d.name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+const miles = d.dist2 != null ? Math.round(Math.sqrt(d.dist2)) : null;
+---
+<a class="tile" href={`/dealers/${d.slug}`}>
+  <div class="row" style="flex-wrap:nowrap">
+    {d.logo_key ? <img src={`/media/${d.logo_key}`} alt={`${d.name} logo`} width="56" height="56" loading="lazy" style="border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line)" />
+      : <span class="avatar" aria-hidden="true">{initials}</span>}
+    <div style="min-width:0">
+      <strong>{d.name}</strong>
+      <div class="small muted"><Icon name="pin" size={14} /> {d.city_name}, AL{miles !== null ? ` · ${miles} mi` : ''}</div>
+    </div>
+  </div>
+  <div class="row small" style="margin-top:8px">
+    <span class="badge">{d.vehicle_count} vehicles</span>
+    {d.review_count > 0 && <span class="stars" aria-label={`Rated ${d.rating} out of 5`}>★ {d.rating} <span class="muted">({d.review_count})</span></span>}
+  </div>
+</a>
