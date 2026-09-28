@@ -1,0 +1,54 @@
+name: Live check
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Production URL
+        default: https://trusttransfer.zizoumatador2.workers.dev
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: API probes
+        env: { U: "${{ inputs.url }}" }
+        run: |
+          set -x
+          curl -fsS "$U/api/health"; echo
+          curl -fsS "$U/api/config"; echo
+          curl -fsS "$U/api/listings?limit=1" | head -c 200; echo
+          curl -sS -o /dev/null -w "spa-route %{http_code}\n" "$U/listings"
+          curl -sSI "$U/" | grep -iE "content-security-policy|strict-transport|x-frame" || true
+          curl -sS -X POST "$U/api/auth/login" -H 'content-type: application/json' -H 'origin: https://evil.example' -d '{}' -w " cross-origin=%{http_code}\n"
+          curl -sS -X POST "$U/api/webhooks/stripe" -H 'stripe-signature: t=1,v1=00' -d '{}' -w " forged-webhook=%{http_code}\n"
+      - name: Browser screenshots (mobile + desktop)
+        env: { U: "${{ inputs.url }}" }
+        run: |
+          mkdir -p shots
+          cat > shots.mjs <<'JS'
+          import { chromium } from '@playwright/test';
+          const U = process.env.U;
+          const b = await chromium.launch();
+          for (const [name, vp] of [['mobile', { width: 390, height: 844 }], ['desktop', { width: 1366, height: 900 }]]) {
+            const p = await b.newPage({ viewport: vp, locale: 'ar', isMobile: name === 'mobile' });
+            const errs = [];
+            p.on('pageerror', (e) => errs.push(e.message));
+            p.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
+            for (const path of ['/', '/listings', '/signup', '/policies/disclaimer']) {
+              await p.goto(U + path, { waitUntil: 'networkidle' });
+              const [sw, cw] = await p.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+              console.log(name, path, 'title=', await p.title(), 'dir=', await p.getAttribute('html', 'dir'), 'overflow=', sw > cw + 1);
+              await p.screenshot({ path: `shots/${name}${path.replace(/\//g, '_') || '_home'}.png`, fullPage: true });
+            }
+            console.log(name, 'errors:', JSON.stringify(errs).slice(0, 800));
+          }
+          await b.close();
+          JS
+          node shots.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: live-shots, path: shots }
