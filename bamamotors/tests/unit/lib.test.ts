@@ -144,3 +144,11 @@ describe('formatting & plans', () => {
     expect(planOf('nope').id).toBe('free');
   });
 });
+
+describe('seed bootstrap', () => {
+  it('splits SQL on statement boundaries, respecting quotes and comments', async () => {
+    const { splitStatements } = await import('../../src/lib/bootstrap');
+    const sql = "-- header\nINSERT INTO a VALUES ('x; y', 'it''s');\nINSERT INTO b VALUES (1);\n";
+    expect(splitStatements(sql)).toEqual(["INSERT INTO a VALUES ('x; y', 'it''s');", 'INSERT INTO b VALUES (1);']);
+  });
+});

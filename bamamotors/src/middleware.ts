@@ -2,6 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { SESSION_COOKIE, loadSessionUser } from './lib/auth';
 import { getDealerForUser } from './lib/dealers';
 import { loadSettings } from './lib/settings';
+import { ensureSeeded } from './lib/bootstrap';
 
 const PRIVATE_PREFIXES = ['/dashboard', '/admin', '/account', '/api', '/login', '/signup', '/logout', '/forgot-password', '/reset-password'];
 const isPrivate = (path: string) => PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(`${p}/`));
@@ -48,6 +49,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     if (hit) return withHeaders(hit, { 'X-Cache': 'HIT' });
   }
 
+  await ensureSeeded(env.DB);
   locals.settings = await loadSettings(env.DB);
   locals.user = await loadSessionUser(env.DB, token);
   locals.dealer = locals.user?.role === 'dealer' ? await getDealerForUser(env.DB, locals.user.id) : null;
