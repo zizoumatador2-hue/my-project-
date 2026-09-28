@@ -10,14 +10,14 @@ binding = "ASSETS"
 [observability]
 enabled = true
 
-# Create with: npx wrangler d1 create bamamotors-db  → paste the id below.
+# Created with: npx wrangler d1 create bamamotors-db
 [[d1_databases]]
 binding = "DB"
 database_name = "bamamotors-db"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "289868be-3c91-49c6-ad4e-04657c2de5b7"
 migrations_dir = "migrations"
 
-# Create with: npx wrangler r2 bucket create bamamotors-media
+# Created with: npx wrangler r2 bucket create bamamotors-media
 [[r2_buckets]]
 binding = "MEDIA"
 bucket_name = "bamamotors-media"
