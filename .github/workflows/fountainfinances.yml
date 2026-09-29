@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: fountainfinances-production
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
       PUBLIC_GA_ID: ${{ vars.PUBLIC_GA_ID }}
       PUBLIC_GSC_VERIFICATION: ${{ vars.PUBLIC_GSC_VERIFICATION }}
       PUBLIC_BING_VERIFICATION: ${{ vars.PUBLIC_BING_VERIFICATION }}
@@ -50,13 +50,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
-      - name: Require Cloudflare credentials
+      - name: Resolve Cloudflare credentials (derive the account id from the token when not set)
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::error::Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets (see fountainfinances/README.md)"; exit 1
+          TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          if [ -z "$TOKEN" ]; then echo "::error::Set the CLOUDFLARE_API_TOKEN repository secret (see fountainfinances/README.md)"; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          ACC="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          if [ -z "$ACC" ]; then
+            ACC=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty')
           fi
+          if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id — add a CLOUDFLARE_ACCOUNT_ID secret"; exit 1; fi
+          echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
       - run: npm ci
       - name: Provision D1 database (idempotent) and write its id into wrangler.toml
+        id: d1
+        continue-on-error: true
         run: |
           ID=$(npx wrangler d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const db=JSON.parse(s).find(d=>d.name==='fountainfinances-db');process.stdout.write(db?db.uuid:'')})")
           if [ -z "$ID" ]; then
@@ -64,8 +73,36 @@ jobs:
             ID=$(npx wrangler d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{process.stdout.write(JSON.parse(s).find(d=>d.name==='fountainfinances-db').uuid)})")
           fi
           sed -i "s/^database_id = .*/database_id = \"$ID\"/" wrangler.toml
-      - run: npx wrangler d1 migrations apply fountainfinances-db --remote
+          npx wrangler d1 migrations apply fountainfinances-db --remote
+      - name: Without D1 access, deploy the static site and leave forms disabled
+        if: steps.d1.outcome != 'success'
+        run: |
+          echo "::warning::The Cloudflare token cannot manage D1. The site will deploy, but the newsletter and contact endpoints need a D1 binding — grant the token 'D1: Edit' and re-run."
+          python3 - <<'PY'
+          import re
+          s = open('wrangler.toml').read()
+          s = re.sub(r'\n\[\[d1_databases\]\][\s\S]*$', '\n', s)
+          open('wrangler.toml', 'w').write(s)
+          PY
       - run: npm run build
-      - name: Create the Pages project on first deploy
-        run: npx wrangler pages project list | grep -q ' fountainfinances ' || npx wrangler pages project create fountainfinances --production-branch main
-      - run: npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true
+      - name: Deploy to Cloudflare Pages
+        id: pages
+        continue-on-error: true
+        run: |
+          npx wrangler pages project list | grep -q 'fountainfinances' || npx wrangler pages project create fountainfinances --production-branch main
+          npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true | tee deploy.log
+          URL=$(grep -Eo 'https://[a-z0-9.-]+\.pages\.dev' deploy.log | tail -1)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Fallback — serve the site from Workers static assets (token without Pages permission)
+        id: worker
+        if: steps.pages.outcome != 'success'
+        run: |
+          echo "::warning::Pages deploy failed (the token likely lacks 'Cloudflare Pages: Edit'). Deploying the static site as a Worker instead; /api forms stay offline until Pages works."
+          npx wrangler deploy --config wrangler.assets.toml
+          SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
+          echo "url=https://fountainfinances.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Report live URL
+        run: |
+          URL="${{ steps.pages.outputs.url || steps.worker.outputs.url }}"
+          echo "Live URL: $URL"
+          echo "### Live URL: $URL" >> "$GITHUB_STEP_SUMMARY"
