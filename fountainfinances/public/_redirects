@@ -1,0 +1,12 @@
+# Friendly aliases for common URLs
+/credit-cards/best/            /best/credit-cards-for-beginners/     301
+/savings-accounts/best/        /best/high-yield-savings-accounts/    301
+/personal-loans/best/          /best/personal-loans/                 301
+/calculators/mortgage-affordability/ /calculators/home-affordability/ 301
+/calculators/personal-loan/    /calculators/loan/                    301
+/calculators/credit-card/      /calculators/credit-card-payoff/      301
+/terms-and-conditions/         /terms/                               301
+/privacy-policy/               /privacy/                             301
+/about-us/                     /about/                               301
+/contact-us/                   /contact/                             301
+/blog/                         /guides/                              301

@@ -1,0 +1,98 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'Is sales tax included in a car loan?',
+    a: 'Often, yes. Many buyers roll sales tax, title, registration and dealer fees into the loan. This calculator includes them in the amount financed so the payment reflects what you would actually borrow. In most states, a trade-in reduces the taxable price — check your state’s rules.',
+  },
+  {
+    q: 'What is a good auto loan term?',
+    a: 'Shorter terms cost less in interest and reduce the risk of owing more than the car is worth. Terms of 72 or 84 months lower the payment but can leave you "upside down" for years. Many buyers aim for 60 months or less.',
+  },
+  {
+    q: 'Should I get preapproved before visiting a dealer?',
+    a: 'Preapproval from a bank or credit union gives you a rate to compare against dealer financing and helps you negotiate the price of the car separately from the financing.',
+  },
+  {
+    q: 'How much should I put down on a car?',
+    a: 'A larger down payment lowers both the payment and total interest and helps you avoid negative equity. Many guides suggest about 20% for a new car and 10% for a used car, but any amount helps.',
+  },
+];
+---
+<CalculatorLayout slug="auto-loan" faqs={faqs}>
+  <form slot="form" class="calc-form" id="auto-form" novalidate>
+    <fieldset>
+      <legend>Vehicle and trade-in</legend>
+      <Field id="price" label="Vehicle price" value={32000} prefix="$" min={1} />
+      <div class="row2">
+        <Field id="down" label="Cash down payment" value={4000} prefix="$" />
+        <Field id="trade" label="Trade-in value" value={0} prefix="$" hint="Net of any loan still owed on it." />
+      </div>
+      <div class="row2">
+        <Field id="tax" label="Sales tax rate" value={6.5} suffix="%" max={15} />
+        <Field id="fees" label="Title, registration & fees" value={900} prefix="$" />
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Financing</legend>
+      <div class="row2">
+        <Field id="apr" label="APR" value={7.5} suffix="%" max={40} />
+        <Field id="term" label="Term" value={60} suffix="months" min={6} max={96} />
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="payment">—</p>
+    <p class="big-sub">estimated monthly car payment</p>
+    <ul class="stat-list">
+      <li><span>Amount financed</span><span data-out="financed">—</span></li>
+      <li><span>Sales tax</span><span data-out="salestax">—</span></li>
+      <li><span>Total interest</span><span data-out="interest">—</span></li>
+      <li><span>Total cost of the car</span><span data-out="total">—</span></li>
+    </ul>
+    <h3 style="font-size:1rem;margin:0 0 10px">Same car, different terms</h3>
+    <div class="table-scroll" style="background:#fff">
+      <table class="data-table">
+        <caption class="sr-only">Payment and interest by loan term</caption>
+        <thead><tr><th scope="col">Term</th><th scope="col">Payment</th><th scope="col">Interest</th></tr></thead>
+        <tbody data-out="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>How the auto loan calculator works</h2>
+  <p>Enter the car’s price, your down payment and trade-in, your state’s sales tax rate and any fees. The calculator determines the <strong>amount financed</strong> — price plus tax and fees, minus cash down and trade-in — and applies the APR and term to estimate the monthly payment and total interest.</p>
+  <p>The comparison table shows how the same purchase looks at different loan lengths, which makes the trade-off between a lower payment and a higher total cost easy to see.</p>
+
+  <h2>Tips for a lower total cost</h2>
+  <ul>
+    <li><strong>Negotiate the price first</strong>, then discuss financing. Dealers can make a payment look affordable by stretching the term.</li>
+    <li><strong>Compare APRs</strong> from a bank, credit union and the dealer’s lender. Even one percentage point matters on a five-year loan.</li>
+    <li><strong>Watch add-ons</strong> such as extended warranties and GAP coverage rolled into the loan — you pay interest on them too.</li>
+    <li><strong>Keep the term short</strong> enough that you owe less than the car is worth as it depreciates.</li>
+  </ul>
+  <p>Read <a href="/guides/how-auto-loans-work/">how auto loans work</a> for a deeper walk-through of rates, terms and dealer financing, and visit our <a href="/auto-loans/">auto loans</a> hub for more.</p>
+</CalculatorLayout>
+
+<script>
+  import { autoLoan } from '@/lib/finance';
+  import { bindCalculator, usd, table } from '@/lib/calc-ui';
+  const form = document.getElementById('auto-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'auto-loan', (v) => {
+    const base = { price: v.price, downPayment: v.down, tradeIn: v.trade, salesTaxPct: v.tax, fees: v.fees, aprPct: v.apr };
+    const r = autoLoan({ ...base, months: Math.round(v.term) });
+    out('payment').textContent = usd(r.payment, true);
+    out('financed').textContent = usd(r.financed);
+    out('salestax').textContent = usd(r.tax);
+    out('interest').textContent = usd(r.totalInterest);
+    out('total').textContent = usd(r.totalCost);
+    table(out('rows'), [36, 48, 60, 72, 84].map((m) => {
+      const x = autoLoan({ ...base, months: m });
+      return [`${m} mo`, usd(x.payment), usd(x.totalInterest)];
+    }));
+  });
+</script>

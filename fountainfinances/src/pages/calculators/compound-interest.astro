@@ -1,0 +1,105 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'What is the compound interest formula?',
+    a: 'For a single deposit, A = P × (1 + r/n)^(n×t), where P is the principal, r the annual rate as a decimal, n the number of compounding periods per year and t the number of years. Regular contributions add a second term for the future value of a series of deposits.',
+  },
+  {
+    q: 'How often is interest compounded on a savings account?',
+    a: 'Many banks compound interest daily and credit it monthly. Because the advertised APY already reflects compounding, you can enter the APY here and choose annual compounding for a close estimate.',
+  },
+  {
+    q: 'What rate should I use?',
+    a: 'For a savings account or CD, use its current APY. For long-term investing, use a conservative assumption and remember that investment returns are not guaranteed and vary from year to year.',
+  },
+  {
+    q: 'What is the Rule of 72?',
+    a: 'Divide 72 by the annual interest rate to estimate how many years it takes money to double. At 6%, money doubles in about 12 years; at 4%, about 18 years.',
+  },
+];
+---
+<CalculatorLayout slug="compound-interest" faqs={faqs}>
+  <form slot="form" class="calc-form" id="ci-form" novalidate>
+    <fieldset>
+      <legend>Your savings plan</legend>
+      <Field id="initial" label="Initial deposit" value={5000} prefix="$" />
+      <Field id="monthly" label="Monthly contribution" value={300} prefix="$" />
+      <div class="row2">
+        <Field id="rate" label="Annual interest rate" value={4} suffix="%" max={50} />
+        <Field id="years" label="Years" value={15} suffix="years" min={1} max={80} />
+      </div>
+      <div class="field">
+        <span class="label" id="comp-label">Compounding</span>
+        <div class="seg" role="radiogroup" aria-labelledby="comp-label">
+          <label><input type="radio" name="comp" value="365" /><span>Daily</span></label>
+          <label><input type="radio" name="comp" value="12" checked /><span>Monthly</span></label>
+          <label><input type="radio" name="comp" value="1" /><span>Annually</span></label>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="fv">—</p>
+    <p class="big-sub">estimated future value</p>
+    <ul class="stat-list">
+      <li><span>Total contributions</span><span data-out="contrib">—</span></li>
+      <li><span>Interest earned</span><span data-out="interest">—</span></li>
+      <li><span>Effective annual yield</span><span data-out="apy">—</span></li>
+    </ul>
+    <div class="stack" aria-hidden="true"><span data-out="s-c" style="background:var(--brand)"></span><span data-out="s-i" style="background:var(--gold)"></span></div>
+    <ul class="legend"><li><i style="background:var(--brand)"></i>Your contributions</li><li><i style="background:var(--gold)"></i>Interest earned</li></ul>
+    <div class="table-scroll" style="background:#fff;max-height:320px;overflow-y:auto">
+      <table class="data-table">
+        <caption class="sr-only">Year-by-year growth</caption>
+        <thead><tr><th scope="col">Year</th><th scope="col">Contributions</th><th scope="col">Interest</th><th scope="col">Balance</th></tr></thead>
+        <tbody data-out="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>How compound interest works</h2>
+  <p><strong>Compound interest</strong> is interest earned on both your original deposit and the interest that has already been added to it. Each period, the balance grows a little, and the next period’s interest is calculated on that larger balance. Over short periods the effect is small; over decades it becomes the largest part of your balance.</p>
+  <p>This calculator adds your monthly contributions at the end of each month and compounds interest at the frequency you choose. The year-by-year table shows how the interest share of your balance accelerates over time.</p>
+
+  <h2>The compound interest formula</h2>
+  <p>For a single deposit: <strong>A = P × (1 + r/n)<sup>n×t</sup></strong></p>
+  <ul>
+    <li><strong>A</strong> — ending balance</li>
+    <li><strong>P</strong> — starting principal</li>
+    <li><strong>r</strong> — annual interest rate (decimal)</li>
+    <li><strong>n</strong> — compounding periods per year</li>
+    <li><strong>t</strong> — years</li>
+  </ul>
+  <p>Example: $5,000 at 4% compounded monthly for 15 years grows to about $9,100 with no additional deposits. Add $300 a month and the balance reaches roughly $83,000, of which about $24,000 is interest.</p>
+
+  <h2>Three ways to make compounding work harder</h2>
+  <ol>
+    <li><strong>Start early.</strong> Time is the most powerful input; the last years of growth are the largest.</li>
+    <li><strong>Contribute automatically.</strong> A recurring transfer on payday removes the temptation to skip a month.</li>
+    <li><strong>Earn a competitive rate.</strong> Moving idle cash to a <a href="/high-yield-savings/">high-yield savings account</a> or a <a href="/cds/">CD</a> can multiply what it earns compared with a traditional savings account.</li>
+  </ol>
+  <p>Read our full guide on <a href="/guides/how-compound-interest-works/">how compound interest works</a>, or use the <a href="/calculators/investment/">investment growth calculator</a> to model long-term investing with inflation.</p>
+</CalculatorLayout>
+
+<script>
+  import { compoundGrowth, type Compounding } from '@/lib/finance';
+  import { bindCalculator, usd, pct, table } from '@/lib/calc-ui';
+  const form = document.getElementById('ci-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  const map: Record<number, Compounding> = { 365: 'daily', 12: 'monthly', 4: 'quarterly', 1: 'annually' };
+  bindCalculator(form, 'compound-interest', (v) => {
+    const g = compoundGrowth(v.initial, v.monthly, v.rate, v.years, map[v.comp] ?? 'monthly');
+    out('fv').textContent = usd(g.futureValue);
+    out('contrib').textContent = usd(g.totalContributions);
+    out('interest').textContent = usd(g.totalInterest);
+    out('apy').textContent = pct(g.effectiveAnnualRate * 100, 2);
+    const t = g.futureValue || 1;
+    out('s-c').style.width = `${(g.totalContributions / t) * 100}%`;
+    out('s-i').style.width = `${(Math.max(0, g.totalInterest) / t) * 100}%`;
+    table(out('rows'), g.rows.map((r) => [r.year, usd(r.contributions), usd(r.interest), usd(r.balance)]));
+  });
+</script>

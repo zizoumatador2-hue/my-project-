@@ -1,0 +1,112 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'How many months of expenses should an emergency fund cover?',
+    a: 'Three to six months of essential expenses is the most common guideline. Aim toward six months or more if you are self-employed, have an irregular income, are the only earner in your household or work in an industry with frequent layoffs.',
+  },
+  {
+    q: 'Which expenses count as essential?',
+    a: 'Count what you must pay even in a crisis: housing, utilities, groceries, insurance, transportation, minimum debt payments and childcare. Leave out dining out, vacations and other spending you would cut in an emergency.',
+  },
+  {
+    q: 'Where should I keep an emergency fund?',
+    a: 'In a separate, federally insured savings account that is easy to reach but not linked to your everyday debit card — a high-yield savings account is a common choice because it pays more interest while keeping the money available.',
+  },
+  {
+    q: 'Should I save for emergencies or pay off debt first?',
+    a: 'Many people build a small starter fund (for example, one month of expenses) first, then focus on high-interest debt, then finish the full emergency fund. Without any cushion, a surprise bill often ends up back on a credit card.',
+  },
+];
+---
+<CalculatorLayout slug="emergency-fund" faqs={faqs}>
+  <form slot="form" class="calc-form" id="ef-form" novalidate>
+    <fieldset>
+      <legend>Essential monthly expenses</legend>
+      <div class="row2">
+        <Field id="housing" label="Housing" value={1500} prefix="$" />
+        <Field id="utilities" label="Utilities & phone" value={280} prefix="$" />
+      </div>
+      <div class="row2">
+        <Field id="food" label="Groceries" value={550} prefix="$" />
+        <Field id="transport" label="Transportation" value={350} prefix="$" />
+      </div>
+      <div class="row2">
+        <Field id="insurance" label="Insurance & medical" value={300} prefix="$" />
+        <Field id="debt" label="Minimum debt payments" value={200} prefix="$" />
+      </div>
+      <Field id="other" label="Other essentials" value={150} prefix="$" hint="Childcare, pet care, required subscriptions." />
+    </fieldset>
+    <fieldset>
+      <legend>Your plan</legend>
+      <div class="row2">
+        <Field id="monthsTarget" label="Months of coverage" value={6} suffix="months" min={1} max={24} />
+        <Field id="apy" label="Savings APY" value={3.5} suffix="%" max={20} />
+      </div>
+      <div class="row2">
+        <Field id="saved" label="Already saved" value={2500} prefix="$" />
+        <Field id="monthly" label="Monthly deposit" value={400} prefix="$" />
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="target">—</p>
+    <p class="big-sub">emergency fund target</p>
+    <ul class="stat-list">
+      <li><span>Essential expenses per month</span><span data-out="essentials">—</span></li>
+      <li><span>Still to save</span><span data-out="gap">—</span></li>
+      <li><span>Time to reach your goal</span><span data-out="time">—</span></li>
+      <li><span>Current coverage</span><span data-out="coverage">—</span></li>
+    </ul>
+    <div class="bars" data-out="bars"></div>
+  </div>
+
+  <h2>How much emergency savings do you need?</h2>
+  <p>An emergency fund is cash set aside for unplanned expenses and income interruptions — a job loss, a medical bill, a car repair. This calculator adds up your <strong>essential</strong> monthly costs, multiplies them by the number of months you want covered and compares the target with what you have already saved.</p>
+  <p>It also estimates how long it will take to reach the goal with regular monthly deposits, including the interest your savings account pays along the way.</p>
+
+  <h2>Choosing your number of months</h2>
+  <div class="table-scroll">
+    <table>
+      <caption class="sr-only">Suggested emergency fund size by situation</caption>
+      <thead><tr><th scope="col">Situation</th><th scope="col">Suggested coverage</th></tr></thead>
+      <tbody>
+        <tr><td>Two stable incomes, no dependents</td><td>3 months</td></tr>
+        <tr><td>One stable income or dependents</td><td>4–6 months</td></tr>
+        <tr><td>Self-employed, commission or seasonal income</td><td>6–12 months</td></tr>
+        <tr><td>Homeowner with older home or vehicle</td><td>Add a separate repair fund</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How to build it faster</h2>
+  <ol>
+    <li>Automate a transfer to savings on every payday.</li>
+    <li>Send windfalls — tax refunds, bonuses, gifts — straight to the fund.</li>
+    <li>Keep the money in a <a href="/high-yield-savings/">high-yield savings account</a> so it earns a competitive rate.</li>
+    <li>Pause extra spending categories until you hit your first milestone.</li>
+  </ol>
+  <p>For the full strategy, read our <a href="/guides/emergency-fund-guide/">emergency fund guide</a>. If you do not yet know your essential costs, start with the <a href="/calculators/budget/">budget calculator</a>.</p>
+</CalculatorLayout>
+
+<script>
+  import { monthsToGoalWithInterest } from '@/lib/finance';
+  import { bindCalculator, usd, months, bars } from '@/lib/calc-ui';
+  const form = document.getElementById('ef-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'emergency-fund', (v) => {
+    const essentials = v.housing + v.utilities + v.food + v.transport + v.insurance + v.debt + v.other;
+    const target = essentials * v.monthsTarget;
+    const gap = Math.max(0, target - v.saved);
+    const m = monthsToGoalWithInterest(target, v.saved, v.monthly, v.apy);
+    out('target').textContent = usd(target);
+    out('essentials').textContent = usd(essentials);
+    out('gap').textContent = gap > 0 ? usd(gap) : 'Goal reached';
+    out('time').textContent = m === 0 ? 'Already there' : Number.isFinite(m) ? months(m) : 'Add a monthly deposit';
+    out('coverage').textContent = essentials > 0 ? `${(v.saved / essentials).toFixed(1)} months` : '—';
+    bars(out('bars'), [{ label: 'Progress toward goal', value: Math.min(v.saved, target), max: target, display: target > 0 ? `${Math.min(100, (v.saved / target) * 100).toFixed(0)}%` : '—' }]);
+  });
+</script>

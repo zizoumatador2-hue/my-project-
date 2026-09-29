@@ -1,0 +1,11 @@
+---
+interface Props { heading: string; text: string; href: string; label: string }
+const { heading, text, href, label } = Astro.props;
+---
+<aside class="cta-band" aria-label={heading}>
+  <div>
+    <h2>{heading}</h2>
+    <p>{text}</p>
+  </div>
+  <a class="btn btn-primary" href={href} data-track="cta_click" data-placement="cta-band">{label}</a>
+</aside>

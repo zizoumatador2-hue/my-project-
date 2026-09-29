@@ -1,0 +1,77 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+---
+<PageLayout
+  title="Editorial Standards & Methodology"
+  description="How Fountain Finances researches, writes, fact-checks, updates and corrects content, how we compare financial products and how affiliate relationships work."
+  lede="The rules we follow so you can trust what you read here."
+>
+  <p>Money decisions have real consequences, so we hold our content to a high standard. This page explains exactly how we research and write guides, how we compare financial products, how we handle affiliate relationships, and how we keep content accurate over time.</p>
+
+  <h2 id="research">How content is researched</h2>
+  <p>Every guide begins with <strong>primary sources</strong> rather than other websites. Depending on the topic, those include:</p>
+  <ul>
+    <li><strong>Federal regulators and agencies:</strong> the Consumer Financial Protection Bureau (CFPB), Federal Reserve, Federal Deposit Insurance Corporation (FDIC), National Credit Union Administration (NCUA), Securities and Exchange Commission (SEC), Federal Trade Commission (FTC), Internal Revenue Service (IRS) and U.S. Department of Education.</li>
+    <li><strong>Laws and regulations</strong> such as the Truth in Lending Act, Fair Credit Reporting Act, Credit CARD Act, Equal Credit Opportunity Act and Homeowners Protection Act, as summarized by the agencies that enforce them.</li>
+    <li><strong>Official product documentation:</strong> account agreements, pricing and terms, fee schedules and disclosures published by banks, credit unions, card issuers, lenders and insurers.</li>
+    <li><strong>Official data</strong> from sources such as the Bureau of Labor Statistics and the Federal Reserve.</li>
+  </ul>
+  <p>Each guide ends with a list of the sources we relied on, linked so you can check them yourself.</p>
+
+  <h2 id="writing">How we write</h2>
+  <ul>
+    <li><strong>Education, not advice.</strong> We explain how things work and what to consider. We do not tell you what to buy or recommend products for your individual situation.</li>
+    <li><strong>Plain English.</strong> We define every financial term and use worked examples with realistic numbers.</li>
+    <li><strong>Balanced.</strong> We describe the downsides and risks of every product and strategy, not just the benefits.</li>
+    <li><strong>No unsupported claims.</strong> Statistics and rules are tied to a source. Example calculations use the same formulas as our calculators so you can reproduce them.</li>
+    <li><strong>Original.</strong> We write our own content and never copy text from other publishers.</li>
+  </ul>
+
+  <h2 id="review">Fact-checking and review</h2>
+  <p>Before a guide is published, an editor checks its figures, rules and definitions against the listed sources, recalculates every worked example and confirms that internal links point to the right pages. Guides that involve a regulated topic — such as federal student loans, tax treatment or mortgage insurance — are checked against the responsible agency’s current guidance. When a qualified subject-matter reviewer has reviewed a guide, their name appears at the top of the article.</p>
+
+  <h2 id="comparisons">How products are compared</h2>
+  <p>Our comparison pages follow a consistent methodology:</p>
+  <ol>
+    <li><strong>Eligibility.</strong> To be included, a product must be available to consumers nationwide (or in most states), publish its terms online and, for deposit accounts, be federally insured by the FDIC or NCUA.</li>
+    <li><strong>Published criteria.</strong> Each comparison lists the factors we evaluated — for example APY, fees, minimums, access and insurance for savings accounts; or APR range, fees, loan amounts and terms for personal loans.</li>
+    <li><strong>No hidden ranking.</strong> Products are listed alphabetically. We describe who each option may suit instead of declaring a single “winner,” because the best product depends on your circumstances.</li>
+    <li><strong>Verified figures only.</strong> We display a specific rate, fee or minimum only after an editor has confirmed it on the provider’s own website. Each figure is shown with the date it was verified. If a figure has not been verified, we link to the provider’s current terms instead of guessing.</li>
+    <li><strong>Pros and cons for every product.</strong> Every listing includes drawbacks and important considerations, whether or not we have a business relationship with the provider.</li>
+  </ol>
+
+  <h2 id="affiliates">How affiliate relationships work</h2>
+  <p>Fountain Finances may earn a commission when you click certain links and open an account or apply for a product. We keep that business separate from editorial decisions:</p>
+  <ul>
+    <li>Affiliate links are <strong>labeled</strong> (“Affiliate link”) and marked as sponsored for search engines.</li>
+    <li>Whether a provider pays us has <strong>no effect</strong> on inclusion, order, or how we describe it. Products without an affiliate relationship appear on equal terms.</li>
+    <li>Writers and editors do not negotiate or manage commercial agreements.</li>
+    <li>We do not accept payment for positive coverage.</li>
+  </ul>
+  <p>See our full <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
+
+  <h2 id="updates">How information is updated</h2>
+  <p>Financial information goes out of date. We maintain a review schedule:</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">Content type</th><th scope="col">Review frequency</th></tr></thead>
+      <tbody>
+        <tr><td>Product comparisons and any displayed rates or fees</td><td>At least monthly, and whenever a provider announces a change</td></tr>
+        <tr><td>Guides that cite limits, thresholds or regulations</td><td>At least annually, and when the rule changes</td></tr>
+        <tr><td>Evergreen educational guides</td><td>Every 6–12 months</td></tr>
+        <tr><td>Calculators and formulas</td><td>Tested with every site release</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The “Updated” date on a page changes only when we make a substantive change — new information, corrected facts or revised recommendations — not for cosmetic edits.</p>
+
+  <h2 id="corrections">How corrections are handled</h2>
+  <p>If we publish an error, we correct it promptly. Material corrections are noted at the end of the affected article with the date and a description of what changed. Anyone can report an error through our <a href="/contact/">contact page</a> or by emailing <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Read our full <a href="/corrections/">corrections policy</a>.</p>
+
+  <h2 id="decisions">How editorial decisions are made</h2>
+  <p>Topics are chosen based on the questions readers ask and the financial decisions with the greatest impact on household finances — not on which topics earn the most revenue. Advertisers, affiliate partners and sponsors have no ability to review, edit or approve content before it is published. Sponsored content, if we ever publish it, will be clearly labeled as such and kept separate from our editorial guides.</p>
+
+  <h2 id="calculators">How our calculators work</h2>
+  <p>Our calculators use standard financial formulas — loan amortization, compound growth and debt-to-income ratios — and every calculator page explains its formula and assumptions. The math runs entirely in your browser; the numbers you enter are not sent to us. Results are estimates and are not an offer of credit or a rate quote.</p>
+</PageLayout>

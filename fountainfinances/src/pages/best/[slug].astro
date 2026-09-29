@@ -1,0 +1,131 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Disclosure from '@/components/Disclosure.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import Faq from '@/components/Faq.astro';
+import Sources from '@/components/Sources.astro';
+import AuthorBox from '@/components/AuthorBox.astro';
+import GuideCard from '@/components/GuideCard.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import { hubBySlug } from '@/data/taxonomy';
+import { calcBySlug } from '@/data/calculators';
+import { article, faqPage, itemList } from '@/lib/schema';
+import { fmtDate, isoDay } from '@/lib/text';
+
+export async function getStaticPaths() {
+  const items = await getCollection('comparisons');
+  return items.map((c) => ({ params: { slug: c.id }, props: { cmp: c } }));
+}
+
+const { cmp } = Astro.props;
+const d = cmp.data;
+const { Content } = await render(cmp);
+const author = (await getEntry(d.author))!.data;
+const hub = hubBySlug(d.hub)!;
+const products = (await getCollection('products', (p) => p.data.category === d.category && p.data.active))
+  .map((p) => p.data)
+  .sort((a, b) => a.provider.localeCompare(b.provider) || a.product.localeCompare(b.product));
+if (products.length < 3) throw new Error(`Comparison "${cmp.id}" needs at least 3 active products in category "${d.category}"`);
+const rateLabel = ['savings', 'cd', 'checking'].includes(d.category) ? 'APY' : 'APR';
+const path = `/best/${cmp.id}/`;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Comparisons', href: '/best/' },
+  { name: d.title, href: path },
+];
+const guides = await getCollection('guides', (g) => d.related.includes(g.id));
+const calcs = d.calculators.map(calcBySlug).filter(Boolean);
+const schema = [
+  article({ url: path, title: d.title, description: d.description, published: d.published, updated: d.updated, author, keywords: d.keywords, section: hub.title }),
+  itemList(d.title, products.map((p) => ({ name: `${p.provider} ${p.product}`, url: `${path}#${p.id}` }))),
+  ...(d.faqs.length ? [faqPage(d.faqs)] : []),
+];
+---
+<BaseLayout title={d.seoTitle} description={d.description} keywords={d.keywords} path={path} crumbs={crumbs} schema={schema} ogType="article" published={d.published} modified={d.updated} section={hub.title}>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>{d.title}</h1>
+      <p class="lede">{d.intro}</p>
+      <div class="meta-line">
+        <span>By <a href={`/authors/${author.id}/`}><strong>{author.name}</strong></a></span>
+        <span>Updated <time datetime={isoDay(d.updated)}><strong>{fmtDate(d.updated)}</strong></time></span>
+        <span>{products.length} options compared</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:28px">
+    <Disclosure kind="comparison" />
+    <p class="notice">Rates and fees on deposit accounts, cards and loans change frequently. We show a number only after our editors have confirmed it on the provider’s own disclosure page, together with the date it was checked. Where no figure is shown, follow the link for the provider’s current terms.</p>
+
+    <section aria-labelledby="glance-h">
+      <h2 id="glance-h">At a glance</h2>
+      <div class="table-scroll">
+        <table class="data-table compare-table" style="font-variant-numeric:normal">
+          <caption class="sr-only">Summary of {d.title.toLowerCase()}</caption>
+          <thead><tr><th scope="col">Provider</th><th scope="col" style="text-align:left">Product</th><th scope="col" style="text-align:left">Type</th><th scope="col" style="text-align:left">Worth a look for</th><th scope="col" style="text-align:left">Insurance</th></tr></thead>
+          <tbody>
+            {products.map((p) => (
+              <tr>
+                <td style="text-align:left"><a href={`#${p.id}`}>{p.provider}</a></td>
+                <td style="text-align:left">{p.product}</td>
+                <td style="text-align:left">{p.type}</td>
+                <td style="text-align:left">{p.bestFor}</td>
+                <td style="text-align:left">{p.insured === 'n/a' || p.insured === 'none' ? '—' : p.insured}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="list-h" style="margin-top:32px">
+      <h2 id="list-h">The options in detail</h2>
+      <div class="product-list">
+        {products.map((p, i) => <ProductCard product={p} rateLabel={rateLabel} index={i + 1} />)}
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap article-grid">
+    <article class="prose">
+      <section aria-labelledby="method-h">
+        <h2 id="method-h">How we chose and compared these options</h2>
+        <p>We list providers in alphabetical order rather than ranking them, because the right choice depends on your situation. To be included, each product must be widely available to U.S. consumers and publish its terms online. We compared them on the following criteria:</p>
+        <ul>{d.criteria.map((c) => <li><strong>{c.name}.</strong> {c.detail}</li>)}</ul>
+        <p>Compensation from providers never affects which products appear or how we describe them. Read our full <a href="/editorial-standards/">editorial methodology</a> and <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
+      </section>
+      <Content />
+      <Faq faqs={d.faqs} />
+      <Sources sources={d.sources} />
+      <AuthorBox author={author} />
+    </article>
+    <aside aria-label="Related tools">
+      <div class="aside-sticky">
+        {calcs.length > 0 && (
+          <nav class="toc" aria-label="Calculators">
+            <h2>Run the numbers</h2>
+            <ol>{calcs.map((c) => <li><a href={`/calculators/${c!.slug}/`}>{c!.name}</a></li>)}</ol>
+          </nav>
+        )}
+        <nav class="toc" aria-label="More comparisons">
+          <h2>More</h2>
+          <ol><li><a href="/best/">All product comparisons</a></li><li><a href={`/${hub.slug}/`}>{hub.title} hub</a></li></ol>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  {guides.length > 0 && (
+    <section class="section section-soft" aria-labelledby="rel-h">
+      <div class="wrap">
+        <div class="section-head"><h2 id="rel-h">Read before you choose</h2></div>
+        <div class="grid grid-3">{guides.map((g) => <GuideCard slug={g.id} title={g.data.title} description={g.data.description} />)}</div>
+      </div>
+    </section>
+  )}
+  <div class="wrap" style="padding:48px 16px 56px"><NewsletterForm placement={`best-${cmp.id}`} /></div>
+</BaseLayout>

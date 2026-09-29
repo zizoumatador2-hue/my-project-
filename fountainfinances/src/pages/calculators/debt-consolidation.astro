@@ -1,0 +1,120 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const debts = [
+  { b: 6200, a: 23.9, p: 210 },
+  { b: 3400, a: 27.2, p: 120 },
+  { b: 2100, a: 19.5, p: 80 },
+  { b: 0, a: 0, p: 0 },
+];
+
+const faqs = [
+  {
+    q: 'Does debt consolidation save money?',
+    a: 'It saves money when the new loan’s APR — including any origination fee — is meaningfully lower than the rates on your current debts, and you do not run the old balances back up. A longer term can lower your payment while still increasing total interest, so compare both numbers.',
+  },
+  {
+    q: 'How do origination fees affect a consolidation loan?',
+    a: 'Many lenders deduct an origination fee from the loan proceeds. To pay off $10,000 of debt with a 5% fee, you would need to borrow about $10,526. This calculator grosses up the loan so the fee is counted in your cost.',
+  },
+  {
+    q: 'Will consolidating hurt my credit score?',
+    a: 'Applying causes a hard inquiry, which may lower your score slightly for a short time. Paying off credit cards can lower your credit utilization, which often helps. Keeping the paid-off cards open (and unused) usually supports your score.',
+  },
+  {
+    q: 'What are alternatives to a consolidation loan?',
+    a: 'A 0% intro APR balance transfer card, a nonprofit credit counseling debt management plan, or a focused avalanche or snowball payoff plan. Read [what is debt consolidation](/guides/what-is-debt-consolidation/) for a comparison.',
+  },
+];
+---
+<CalculatorLayout slug="debt-consolidation" faqs={faqs}>
+  <form slot="form" class="calc-form" id="dc-form" novalidate>
+    <fieldset>
+      <legend>Your current debts</legend>
+      <p class="hint" style="margin:0">Leave a row at $0 if you have fewer debts.</p>
+      {debts.map((d, i) => (
+        <div class="debt-row" role="group" aria-label={`Debt ${i + 1}`}>
+          <Field id={`b${i}`} label={`Debt ${i + 1} balance`} value={d.b} prefix="$" />
+          <Field id={`a${i}`} label="APR" value={d.a} suffix="%" max={80} />
+          <Field id={`p${i}`} label="Monthly payment" value={d.p} prefix="$" />
+        </div>
+      ))}
+    </fieldset>
+    <fieldset>
+      <legend>Consolidation loan offer</legend>
+      <div class="row2">
+        <Field id="newApr" label="Loan APR" value={13.5} suffix="%" max={40} />
+        <Field id="term" label="Term" value={48} suffix="months" min={6} max={120} />
+      </div>
+      <Field id="fee" label="Origination fee" value={4} suffix="%" max={15} hint="Enter 0 if the lender charges no fee." />
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="savings">—</p>
+    <p class="big-sub" data-out="savings-label">estimated interest saved</p>
+    <div class="table-scroll" style="background:#fff">
+      <table class="data-table">
+        <caption class="sr-only">Current debts compared with a consolidation loan</caption>
+        <thead><tr><th scope="col"></th><th scope="col">Current</th><th scope="col">Consolidated</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly payment</td><td data-out="c-pay">—</td><td data-out="n-pay">—</td></tr>
+          <tr><td>Time to debt-free</td><td data-out="c-time">—</td><td data-out="n-time">—</td></tr>
+          <tr><td>Total interest</td><td data-out="c-int">—</td><td data-out="n-int">—</td></tr>
+          <tr><td>Fees</td><td>$0</td><td data-out="n-fee">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="calc-note" data-out="note"></p>
+  </div>
+
+  <h2>How the debt consolidation calculator works</h2>
+  <p>List each debt you are thinking of consolidating with its balance, APR and the monthly payment you are making now. The calculator projects how long each debt would take to pay off at that payment and adds up the interest. It then prices a single <strong>consolidation loan</strong> — grossed up to cover the origination fee — at the APR and term you enter, and compares the two paths side by side.</p>
+
+  <h2>When consolidation makes sense</h2>
+  <ul>
+    <li>The new APR is clearly lower than the weighted average rate on your current debts.</li>
+    <li>The total cost (interest plus fees) is lower — not just the monthly payment.</li>
+    <li>You have a plan to avoid running credit card balances back up after they are paid off.</li>
+    <li>The fixed payment fits your budget, so you can pay on time every month.</li>
+  </ul>
+
+  <h2>When it may not help</h2>
+  <p>If the best rate you qualify for is close to what you pay now, the origination fee can erase the savings. Stretching repayment over many more years can also increase the total interest even at a lower rate. In those cases a structured payoff plan may work better — see <a href="/guides/debt-payoff-strategies/">debt payoff strategies: avalanche vs. snowball</a>.</p>
+  <p>To learn how lenders price these loans, read <a href="/guides/what-is-debt-consolidation/">what is debt consolidation?</a> and visit our <a href="/debt-consolidation/">debt consolidation</a> hub. The Consumer Financial Protection Bureau also has guidance on <a href="https://www.consumerfinance.gov/consumer-tools/credit-cards/" target="_blank" rel="noopener">managing credit card debt</a>.</p>
+</CalculatorLayout>
+
+<script>
+  import { consolidationCompare } from '@/lib/finance';
+  import { bindCalculator, usd, months } from '@/lib/calc-ui';
+  const form = document.getElementById('dc-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'debt-consolidation', (v) => {
+    const debts = [0, 1, 2, 3].map((i) => ({ balance: v[`b${i}`], aprPct: v[`a${i}`], payment: v[`p${i}`] })).filter((d) => d.balance > 0);
+    if (!debts.length) {
+      out('savings').textContent = '—';
+      out('note').textContent = 'Enter at least one debt balance to compare.';
+      return;
+    }
+    const r = consolidationCompare(debts, v.newApr, Math.round(v.term), v.fee);
+    out('c-pay').textContent = usd(r.current.payment);
+    out('n-pay').textContent = usd(r.consolidated.payment);
+    out('c-time').textContent = r.current.feasible ? months(r.current.months) : 'Never';
+    out('n-time').textContent = months(r.consolidated.months);
+    out('c-int').textContent = r.current.feasible ? usd(r.current.interest) : 'Unlimited';
+    out('n-int').textContent = usd(r.consolidated.interest);
+    out('n-fee').textContent = usd(r.consolidated.fee);
+    if (!r.current.feasible) {
+      out('savings').textContent = usd(r.consolidated.payment);
+      out('savings-label').textContent = 'consolidated monthly payment';
+      out('note').textContent = 'At least one current payment does not cover its monthly interest, so that debt would never be paid off as-is.';
+      return;
+    }
+    const saved = r.savings;
+    out('savings').textContent = usd(Math.abs(saved));
+    out('savings-label').textContent = saved >= 0 ? 'estimated interest and fees saved' : 'more in interest and fees with the loan';
+    out('savings').style.color = saved >= 0 ? '' : 'var(--red)';
+    out('note').textContent = `The loan would be ${usd(r.consolidated.loanAmount)} to net ${usd(r.totalBalance)} after a ${usd(r.consolidated.fee)} fee.`;
+  });
+</script>

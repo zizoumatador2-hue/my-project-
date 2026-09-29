@@ -1,0 +1,11 @@
+---
+interface Props { slug: string; title: string; description: string; kicker?: string; updated?: Date; headingLevel?: 'h2' | 'h3' }
+const { slug, title, description, kicker, updated, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<article class="card">
+  {kicker && <div class="kicker">{kicker}</div>}
+  <H><a href={`/guides/${slug}/`}>{title}</a></H>
+  <p>{description}</p>
+  {updated && <div class="foot">Updated <time datetime={updated.toISOString().slice(0, 10)}>{updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time></div>}
+</article>

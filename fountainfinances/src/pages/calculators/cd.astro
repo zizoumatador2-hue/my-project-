@@ -1,0 +1,83 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'How is CD interest calculated?',
+    a: 'Banks quote CDs by APY, which already includes the effect of compounding over a year. The value at maturity is approximately deposit × (1 + APY)^(months ÷ 12). Interest is typically compounded daily or monthly and credited to the CD or paid out on a schedule you choose.',
+  },
+  {
+    q: 'What happens if I withdraw from a CD early?',
+    a: 'Most CDs charge an early withdrawal penalty, commonly a set number of months of interest. The penalty can exceed the interest earned if you withdraw very early. No-penalty CDs exist but usually pay a lower rate.',
+  },
+  {
+    q: 'Is CD interest taxable?',
+    a: 'Yes. CD interest is generally taxed as ordinary income in the year it is credited to your account, even if the CD has not matured. Your bank reports it on Form 1099-INT.',
+  },
+  {
+    q: 'Are CDs FDIC insured?',
+    a: 'CDs at FDIC-member banks are insured up to $250,000 per depositor, per insured bank, for each ownership category. Credit union share certificates have equivalent NCUA coverage.',
+  },
+];
+---
+<CalculatorLayout slug="cd" faqs={faqs}>
+  <form slot="form" class="calc-form" id="cd-form" novalidate>
+    <fieldset>
+      <legend>Certificate of deposit</legend>
+      <Field id="deposit" label="Deposit amount" value={10000} prefix="$" min={1} />
+      <div class="row2">
+        <Field id="apy" label="APY" value={4} suffix="%" max={20} hint="Use the APY the bank advertises." />
+        <Field id="term" label="Term" value={12} suffix="months" min={1} max={120} />
+      </div>
+      <Field id="taxrate" label="Your marginal tax rate (optional)" value={22} suffix="%" max={60} hint="Estimate interest after federal income tax." />
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="value">—</p>
+    <p class="big-sub">estimated value at maturity</p>
+    <ul class="stat-list">
+      <li><span>Interest earned</span><span data-out="interest">—</span></li>
+      <li><span>Interest after tax (estimate)</span><span data-out="after">—</span></li>
+      <li><span>Average interest per month</span><span data-out="permonth">—</span></li>
+    </ul>
+    <h3 style="font-size:1rem;margin:0 0 10px">Same APY at common terms</h3>
+    <div class="table-scroll" style="background:#fff">
+      <table class="data-table">
+        <caption class="sr-only">Interest earned by CD term</caption>
+        <thead><tr><th scope="col">Term</th><th scope="col">Interest</th><th scope="col">Value</th></tr></thead>
+        <tbody data-out="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>How to use the CD calculator</h2>
+  <p>Enter the amount you plan to deposit, the <strong>annual percentage yield (APY)</strong> the bank or credit union is offering and the term in months. The calculator shows what the certificate will be worth at maturity and how much interest it will earn. Add your marginal tax rate to see a rough after-tax figure.</p>
+
+  <h2>Is a CD right for your money?</h2>
+  <p>A <strong>certificate of deposit</strong> pays a fixed rate for a fixed term in exchange for leaving the money untouched. That makes CDs useful for savings with a known date — a down payment next year, a tuition bill, a planned purchase — and for locking in a rate if you expect rates to fall.</p>
+  <ul>
+    <li><strong>Pros:</strong> predictable return, federal deposit insurance, no market risk.</li>
+    <li><strong>Cons:</strong> early withdrawal penalties, and your rate will not rise if market rates go up.</li>
+  </ul>
+  <p>Many savers build a <strong>CD ladder</strong> — splitting money across several terms so a portion matures regularly. Learn more in <a href="/guides/how-cds-work/">how CDs work</a>, compare options on our <a href="/best/cd-accounts/">CD accounts comparison</a>, or weigh CDs against a <a href="/high-yield-savings/">high-yield savings account</a>.</p>
+</CalculatorLayout>
+
+<script>
+  import { cdMaturity } from '@/lib/finance';
+  import { bindCalculator, usd, table } from '@/lib/calc-ui';
+  const form = document.getElementById('cd-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'cd', (v) => {
+    const r = cdMaturity(v.deposit, v.apy, v.term);
+    out('value').textContent = usd(r.value, true);
+    out('interest').textContent = usd(r.interest, true);
+    out('after').textContent = usd(r.interest * (1 - v.taxrate / 100), true);
+    out('permonth').textContent = usd(r.interest / v.term, true);
+    table(out('rows'), [3, 6, 12, 24, 36, 60].map((m) => {
+      const x = cdMaturity(v.deposit, v.apy, m);
+      return [m < 12 ? `${m} months` : `${m / 12} year${m === 12 ? '' : 's'}`, usd(x.interest), usd(x.value)];
+    }));
+  });
+</script>

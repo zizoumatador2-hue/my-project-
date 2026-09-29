@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Disclosure from '@/components/Disclosure.astro';
+import { hubBySlug } from '@/data/taxonomy';
+import { collectionPage, itemList } from '@/lib/schema';
+
+const items = await getCollection('comparisons');
+const path = '/best/';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Comparisons', href: path }];
+const title = 'Compare Financial Products: Savings, Cards, Loans & CDs';
+const description = 'Side-by-side comparisons of savings, checking, CDs, credit cards and personal loans, with a transparent methodology and clearly labeled affiliate links.';
+---
+<BaseLayout title={title} description={description} keywords={['credit card comparison', 'savings account comparison', 'personal loan comparison', 'checking account comparison']} crumbs={crumbs} schema={[collectionPage({ url: path, name: title, description }), itemList('Product comparisons', items.map((c) => ({ name: c.data.title, url: `/best/${c.id}/` })))]}>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Compare Financial Products</h1>
+      <p class="lede">Transparent, side-by-side comparisons of widely available U.S. financial products — with the criteria we use and the trade-offs of each option spelled out.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:28px;padding-bottom:56px">
+    <Disclosure kind="comparison" />
+    <div class="grid grid-3">
+      {items.map((c) => (
+        <article class="card">
+          <div class="kicker">{hubBySlug(c.data.hub)?.shortTitle}</div>
+          <h2><a href={`/best/${c.id}/`}>{c.data.title}</a></h2>
+          <p>{c.data.description}</p>
+        </article>
+      ))}
+    </div>
+    <div class="prose" style="margin-top:40px">
+      <h2>How our comparisons work</h2>
+      <p>Each comparison explains the criteria that matter for that product type, then lists qualifying options alphabetically with their features, pros, cons and requirements. We do not publish a rate, fee or bonus unless an editor has confirmed it on the provider’s own website and recorded the date — financial terms change too often for anything else to be reliable.</p>
+      <p>Learn more in our <a href="/editorial-standards/">editorial standards and methodology</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

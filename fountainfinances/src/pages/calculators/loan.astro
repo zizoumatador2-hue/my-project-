@@ -1,0 +1,105 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'How is a personal loan payment calculated?',
+    a: 'Most personal loans are fully amortizing installment loans. The payment is M = P × r ÷ (1 − (1 + r)^−n), where P is the amount borrowed, r is the APR divided by 12 and n is the number of monthly payments. Each payment covers that month’s interest first; the rest reduces the balance.',
+  },
+  {
+    q: 'Does APR include the origination fee?',
+    a: 'Yes. Under the Truth in Lending Act, a loan’s APR reflects the interest rate plus certain finance charges such as origination fees, expressed as a yearly rate. That is why APR is the best number for comparing offers — two loans with the same interest rate can have different APRs.',
+  },
+  {
+    q: 'Is a longer loan term better?',
+    a: 'A longer term lowers the monthly payment but increases the total interest you pay, and lenders often charge higher rates on longer terms. Choose the shortest term whose payment fits comfortably in your budget.',
+  },
+  {
+    q: 'Can I pay off a personal loan early?',
+    a: 'Many lenders allow early payoff without a penalty, which cuts your total interest. Check the loan agreement for a prepayment penalty before you sign.',
+  },
+];
+---
+<CalculatorLayout slug="loan" faqs={faqs}>
+  <form slot="form" class="calc-form" id="loan-form" novalidate>
+    <fieldset>
+      <legend>Loan details</legend>
+      <Field id="amount" label="Loan amount" value={15000} prefix="$" min={100} max={10000000} />
+      <div class="row2">
+        <Field id="apr" label="APR" value={11.5} suffix="%" min={0} max={100} hint="Use the APR from your offer, not the interest rate." />
+        <Field id="term" label="Term" value={48} suffix="months" min={1} max={480} />
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="payment">—</p>
+    <p class="big-sub">estimated monthly payment</p>
+    <ul class="stat-list">
+      <li><span>Total interest</span><span data-out="interest">—</span></li>
+      <li><span>Total repayment</span><span data-out="total">—</span></li>
+      <li><span>Interest as % of amount borrowed</span><span data-out="ratio">—</span></li>
+    </ul>
+    <div class="stack" aria-hidden="true"><span data-out="stack-p" style="background:var(--brand)"></span><span data-out="stack-i" style="background:var(--gold)"></span></div>
+    <ul class="legend"><li><i style="background:var(--brand)"></i>Principal</li><li><i style="background:var(--gold)"></i>Interest</li></ul>
+    <div class="table-scroll" style="background:#fff">
+      <table class="data-table">
+        <caption class="sr-only">Balance at the end of each year</caption>
+        <thead><tr><th scope="col">Year</th><th scope="col">Interest paid</th><th scope="col">Principal paid</th><th scope="col">Balance</th></tr></thead>
+        <tbody data-out="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>How to use the loan payment calculator</h2>
+  <p>Enter the amount you plan to borrow, the <strong>APR</strong> from your loan offer and the repayment term in months. The calculator returns your estimated monthly payment, the total interest over the life of the loan and the total amount you will repay, plus a year-by-year view of how the balance falls.</p>
+  <p>If you are still shopping, run the numbers at two or three different APRs. Personal loan pricing depends heavily on your credit score, income and existing debt, and the difference between a 9% and a 19% APR on a $15,000, four-year loan is more than $3,000 in interest.</p>
+
+  <h2>The loan payment formula</h2>
+  <p>Installment loans use a standard amortization formula:</p>
+  <p><strong>M = P × r ÷ (1 − (1 + r)<sup>−n</sup>)</strong></p>
+  <ul>
+    <li><strong>M</strong> — monthly payment</li>
+    <li><strong>P</strong> — amount borrowed</li>
+    <li><strong>r</strong> — monthly rate (APR ÷ 12 ÷ 100)</li>
+    <li><strong>n</strong> — number of monthly payments</li>
+  </ul>
+  <p>Early payments are mostly interest because interest is charged on a larger balance. As the balance falls, more of each payment goes to principal — which is why extra payments made early in a loan save the most.</p>
+
+  <h2>Example: $15,000 over different terms</h2>
+  <div class="table-scroll">
+    <table>
+      <caption class="sr-only">Payments on a $15,000 loan at 11.5% APR</caption>
+      <thead><tr><th scope="col">Term</th><th scope="col">Monthly payment</th><th scope="col">Total interest</th></tr></thead>
+      <tbody>
+        <tr><td>36 months</td><td>$495</td><td>$2,807</td></tr>
+        <tr><td>48 months</td><td>$391</td><td>$3,784</td></tr>
+        <tr><td>60 months</td><td>$330</td><td>$4,793</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Figures assume an 11.5% APR and are rounded to the nearest dollar.</p>
+
+  <h2>Before you borrow</h2>
+  <p>Compare the total cost, not just the payment. Our guide to <a href="/personal-loans/">personal loans</a> explains fees, prequalification and what lenders look at, and <a href="/guides/personal-loan-vs-credit-card/">personal loan vs. credit card</a> covers when an installment loan is the cheaper option. If you want to combine several balances into one payment, try the <a href="/calculators/debt-consolidation/">debt consolidation calculator</a>.</p>
+</CalculatorLayout>
+
+<script>
+  import { amortizationByYear } from '@/lib/finance';
+  import { bindCalculator, usd, pct, table } from '@/lib/calc-ui';
+  const form = document.getElementById('loan-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'loan', (v) => {
+    const n = Math.round(v.term);
+    const r = amortizationByYear(v.amount, v.apr, n);
+    const total = v.amount + r.totalInterest;
+    out('payment').textContent = usd(r.payment, true);
+    out('interest').textContent = usd(r.totalInterest);
+    out('total').textContent = usd(total);
+    out('ratio').textContent = pct((r.totalInterest / v.amount) * 100);
+    out('stack-p').style.width = `${(v.amount / total) * 100}%`;
+    out('stack-i').style.width = `${(r.totalInterest / total) * 100}%`;
+    table(out('rows'), r.rows.map((y) => [y.year, usd(y.interestPaid), usd(y.principalPaid), usd(y.balance)]));
+  });
+</script>
