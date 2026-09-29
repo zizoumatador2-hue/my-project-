@@ -1,0 +1,25 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+---
+<PageLayout
+  title="Fountain Finances Newsletter: Practical Money Tips"
+  heading="The Fountain Finances Newsletter"
+  description="Get practical personal finance tips, new guides and calculator walk-throughs every two weeks. Free, confirmed opt-in, and one-click unsubscribe any time."
+  lede="Practical money guidance in your inbox every two weeks — no hype, no spam."
+  showUpdated={false}
+>
+  <h2>What you’ll get</h2>
+  <ul>
+    <li><strong>One focused lesson</strong> each issue — budgeting, credit, saving, borrowing or insurance — explained with real numbers.</li>
+    <li><strong>New and updated guides</strong>, including changes to rules and limits that affect your money.</li>
+    <li><strong>Calculator walk-throughs</strong> that show how to model a real decision.</li>
+  </ul>
+  <h2>Our promises</h2>
+  <ul>
+    <li>We email you once to confirm. Nothing else arrives until you click the confirmation link.</li>
+    <li>Every email has a one-click unsubscribe link. You can also <a href="/newsletter/unsubscribe/">unsubscribe here</a>.</li>
+    <li>We never sell or rent your email address. See our <a href="/privacy/">Privacy Policy</a>.</li>
+  </ul>
+  <div style="margin-top:28px"><NewsletterForm placement="newsletter-page" /></div>
+</PageLayout>

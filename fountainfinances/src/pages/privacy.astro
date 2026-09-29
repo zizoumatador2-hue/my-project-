@@ -1,0 +1,91 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+---
+<PageLayout
+  title="Privacy Policy"
+  description="How Fountain Finances collects, uses, stores and protects personal information, how cookies and analytics work, and how to exercise your privacy rights."
+  lede="We collect as little personal information as possible, never sell it, and explain exactly what we do with it."
+>
+  <p>This Privacy Policy explains how Fountain Finances (“we,” “us”) handles personal information when you visit <strong>{SITE.domain}</strong> (the “Site”). By using the Site you agree to this policy. If you do not agree, please do not use the Site.</p>
+
+  <h2 id="summary">The short version</h2>
+  <ul>
+    <li>You can read every guide and use every calculator without giving us any personal information.</li>
+    <li>Calculator inputs are processed in your browser and are not sent to us.</li>
+    <li>We collect your email address only if you subscribe to the newsletter or contact us.</li>
+    <li>Optional analytics cookies are off unless you allow them.</li>
+    <li>We do not sell or rent personal information, and we do not share it for cross-context behavioral advertising.</li>
+  </ul>
+
+  <h2 id="collect">Information we collect</h2>
+  <h3>Information you give us</h3>
+  <ul>
+    <li><strong>Newsletter:</strong> your email address, the date and time you subscribed and confirmed, and the page where you signed up.</li>
+    <li><strong>Contact form:</strong> your name, email address, the topic and the message you send.</li>
+  </ul>
+  <p>Please do not send sensitive financial information such as account numbers, Social Security numbers or passwords. We never ask for them.</p>
+
+  <h3>Information collected automatically</h3>
+  <ul>
+    <li><strong>Server and security logs:</strong> our hosting provider processes technical data such as IP address, browser type and requested pages to deliver the Site and protect it from abuse.</li>
+    <li><strong>Abuse prevention:</strong> when you submit a form, we store a one-way hashed version of your IP address for a short period to limit repeated submissions. The hash cannot be used to identify you directly.</li>
+    <li><strong>Analytics (only with consent):</strong> if you allow analytics cookies, Google Analytics collects information about how you use the Site, such as pages viewed, approximate location, device type and interactions with calculators and links. IP addresses are truncated.</li>
+  </ul>
+
+  <h2 id="use">How we use information</h2>
+  <ul>
+    <li>To send the newsletter you requested and confirm your subscription.</li>
+    <li>To respond to your messages and correction requests.</li>
+    <li>To understand which content is useful and improve the Site (with consent).</li>
+    <li>To keep the Site secure, prevent spam and abuse, and comply with legal obligations.</li>
+  </ul>
+
+  <h2 id="cookies">Cookies and analytics</h2>
+  <p>The Site works without cookies. We use <strong>optional</strong> analytics cookies set by Google Analytics only after you click “Allow analytics” in the cookie banner. Until then, analytics runs in a privacy-preserving “consent denied” mode that does not set analytics cookies. Your choice is stored in your browser’s local storage. You can change it at any time using the “Cookie settings” link in the footer, or by clearing your browser’s site data.</p>
+  <p>We honor browser-level opt-out signals such as Global Privacy Control where required by law by treating them as a refusal of optional cookies.</p>
+  <p>When you click a link to a financial provider, that provider may set its own cookies and collect information under its own privacy policy. Please review it before applying for any product.</p>
+
+  <h2 id="share">How we share information</h2>
+  <p>We share personal information only with service providers who help us operate the Site, under contracts that limit their use of it:</p>
+  <ul>
+    <li><strong>Hosting and security</strong> (Cloudflare) — to serve the Site, store newsletter and contact records and block abuse.</li>
+    <li><strong>Email delivery</strong> (our transactional email provider) — to send confirmation messages and newsletters.</li>
+    <li><strong>Analytics</strong> (Google) — only if you consent.</li>
+  </ul>
+  <p>We may also disclose information if required by law, to protect our rights or the safety of others, or as part of a business transfer, in which case this policy will continue to apply.</p>
+
+  <h2 id="retention">How long we keep information</h2>
+  <ul>
+    <li>Newsletter records are kept while you are subscribed. After you unsubscribe we keep only your email address and unsubscribe date on a suppression list so we never email you again.</li>
+    <li>Unconfirmed newsletter sign-ups are deleted after 30 days.</li>
+    <li>Contact messages are kept for up to 24 months unless needed longer to resolve an issue.</li>
+    <li>Hashed IP addresses used for rate limiting are deleted within 24 hours.</li>
+  </ul>
+
+  <h2 id="security">Security</h2>
+  <p>The Site is served exclusively over HTTPS. Form submissions are validated on the server, protected against cross-site request forgery and rate limited. Access to stored records is restricted to authorized administrators. No method of transmission or storage is completely secure, but we work to protect your information.</p>
+
+  <h2 id="rights">Your privacy rights</h2>
+  <p>Depending on where you live — including California, Colorado, Connecticut, Virginia and other states with consumer privacy laws — you may have the right to:</p>
+  <ul>
+    <li>Know what personal information we hold about you and request a copy.</li>
+    <li>Correct inaccurate information.</li>
+    <li>Delete your personal information.</li>
+    <li>Opt out of the sale or sharing of personal information (we do not sell or share it).</li>
+    <li>Not be discriminated against for exercising these rights.</li>
+  </ul>
+  <p>To make a request, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use our <a href="/contact/">contact form</a> and select “Privacy request.” We will verify your request using the email address associated with your information and respond within the time required by law. You may use an authorized agent where permitted.</p>
+
+  <h2 id="email">Email communications</h2>
+  <p>We use confirmed opt-in: after you subscribe, we send one email asking you to confirm, and we do not send the newsletter until you do. Every newsletter includes a one-click unsubscribe link and our contact information, consistent with the CAN-SPAM Act. You can also <a href="/newsletter/unsubscribe/">unsubscribe here</a>.</p>
+
+  <h2 id="children">Children’s privacy</h2>
+  <p>The Site is intended for adults and is not directed to children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us information, contact us and we will delete it.</p>
+
+  <h2 id="changes">Changes to this policy</h2>
+  <p>We may update this policy from time to time. The “Last updated” date at the top shows when it last changed. Material changes will be highlighted on this page.</p>
+
+  <h2 id="contact">Contact</h2>
+  <p>Questions about this policy: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</PageLayout>

@@ -1,0 +1,37 @@
+{
+  "name": "fountainfinances",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/postbuild.mjs",
+    "preview": "wrangler pages dev dist --port 8788",
+    "check": "astro check && tsc -p functions/tsconfig.json",
+    "test": "node --test tests/unit/*.test.ts",
+    "qa": "node scripts/qa.mjs",
+    "test:e2e": "playwright test",
+    "db:migrate:local": "wrangler d1 migrations apply fountainfinances-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply fountainfinances-db --remote",
+    "sweep": "node scripts/browser-sweep.mjs",
+    "qa:external": "node scripts/qa.mjs --external",
+    "images": "node scripts/generate-brand-images.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^5.18.2",
+    "marked": "^16.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260928.1",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/source-serif-4": "^5.3.0",
+    "@playwright/test": "^1.63.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.143.0"
+  }
+}

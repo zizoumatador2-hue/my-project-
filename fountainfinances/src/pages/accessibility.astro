@@ -1,0 +1,29 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+---
+<PageLayout
+  title="Accessibility Statement"
+  description="Fountain Finances aims to meet WCAG 2.1 Level AA. Learn about the accessibility features of our site and calculators and how to report a barrier."
+  lede="Everyone deserves clear financial information. We design the Site to be usable by as many people as possible."
+>
+  <h2>Our goal</h2>
+  <p>We aim to conform to the <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">Web Content Accessibility Guidelines (WCAG) 2.1, Level AA</a>. Accessibility is part of how we design, build and test every page and calculator.</p>
+
+  <h2>What we do</h2>
+  <ul>
+    <li><strong>Semantic structure:</strong> one main heading per page, headings in logical order, landmark regions and labeled navigation.</li>
+    <li><strong>Keyboard access:</strong> every link, form and calculator can be used without a mouse, with a visible focus indicator and a “Skip to main content” link.</li>
+    <li><strong>Readable text:</strong> body text of at least 16px, strong color contrast and layouts that reflow without horizontal scrolling on small screens.</li>
+    <li><strong>Forms and calculators:</strong> every input has a visible label, errors are announced, and results are placed in a live region so screen readers hear updates.</li>
+    <li><strong>Touch targets:</strong> buttons and links sized for comfortable tapping on phones.</li>
+    <li><strong>Reduced motion:</strong> we use minimal animation and respect the “reduce motion” setting.</li>
+    <li><strong>Tables:</strong> data tables include headers and captions and scroll horizontally on small screens.</li>
+  </ul>
+
+  <h2>Known limitations</h2>
+  <p>Calculators require JavaScript to compute results. Each calculator page explains its formula in text so the method is available without JavaScript. Some external sites we link to may not meet the same standards.</p>
+
+  <h2>Feedback</h2>
+  <p>If you encounter a barrier on our Site, please tell us — email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the page address and a description of the problem. We aim to respond within two business days and will work to provide the information in an accessible format.</p>
+</PageLayout>

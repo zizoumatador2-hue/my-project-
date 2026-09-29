@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProviderLink from './ProviderLink.astro';
+import { fmtDate } from '@/lib/text';
+interface Props { product: CollectionEntry<'products'>['data']; rateLabel?: string; index: number }
+const { product: p, rateLabel = 'Rate', index } = Astro.props;
+const verified = (v?: { value: string; asOf: Date; sourceUrl: string }) =>
+  v ? { text: v.value, note: `as of ${fmtDate(v.asOf)}`, url: v.sourceUrl } : null;
+const rate = verified(p.rate);
+const fees = verified(p.fees);
+const minimum = verified(p.minimum);
+---
+<article class="product" id={p.id} aria-labelledby={`${p.id}-h`}>
+  <div class="product-head">
+    <div>
+      <h3 id={`${p.id}-h`}>{p.product}</h3>
+      <p class="prov">{p.provider} · {p.type}</p>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      {p.insured === 'FDIC' && <span class="badge">FDIC insured</span>}
+      {p.insured === 'NCUA' && <span class="badge">NCUA insured</span>}
+      {p.affiliateUrl && <span class="badge badge-ad">Affiliate</span>}
+    </div>
+  </div>
+  <div class="product-body">
+    <div>
+      <p style="margin:0 0 12px"><strong>Worth a look for:</strong> {p.bestFor}</p>
+      <dl class="kv">
+        <dt>{rateLabel}</dt>
+        <dd>{rate ? <>{rate.text} <small class="muted">({rate.note})</small></> : <span>Variable — <a href={p.officialUrl} target="_blank" rel="noopener">check today’s rate</a></span>}</dd>
+        <dt>Fees</dt>
+        <dd>{fees ? <>{fees.text} <small class="muted">({fees.note})</small></> : <span>See provider’s fee schedule</span>}</dd>
+        <dt>Minimums</dt>
+        <dd>{minimum ? <>{minimum.text} <small class="muted">({minimum.note})</small></> : <span>{p.requirements}</span>}</dd>
+      </dl>
+      <h4 style="font-size:.92rem;margin:16px 0 6px">Key features</h4>
+      <ul style="margin:0;padding-left:1.1em;font-size:.94rem">{p.features.map((f) => <li>{f}</li>)}</ul>
+    </div>
+    <div class="pc">
+      <div class="pros"><h4>Pros</h4><ul>{p.pros.map((x) => <li>{x}</li>)}</ul></div>
+      <div class="cons"><h4>Cons</h4><ul>{p.cons.map((x) => <li>{x}</li>)}</ul></div>
+      <div style="grid-column:1/-1"><h4>Things to consider</h4><p style="margin:0;font-size:.93rem">{p.considerations}</p></div>
+    </div>
+  </div>
+  <div class="product-foot">
+    <p>Listed #{index} alphabetically, not ranked. Confirm current rates, fees and eligibility on the provider’s site before applying.</p>
+    <ProviderLink productId={p.id} provider={p.provider} officialUrl={p.officialUrl} affiliateUrl={p.affiliateUrl} />
+  </div>
+</article>

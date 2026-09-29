@@ -1,0 +1,803 @@
+[
+  {
+    "id": "ally-online-savings",
+    "category": "savings",
+    "provider": "Ally Bank",
+    "product": "Online Savings Account",
+    "officialUrl": "https://www.ally.com/bank/online-savings-account/",
+    "insured": "FDIC",
+    "type": "Online high-yield savings",
+    "bestFor": "Savers who want to organize several goals inside one account",
+    "features": [
+      "Online-only bank with 24/7 customer support by phone and chat",
+      "Savings “buckets” to divide one account into separate goals",
+      "Surprise-savings and round-up tools when paired with an Ally checking account"
+    ],
+    "pros": [
+      "No branch network overhead; rates are typically competitive with other online banks",
+      "Goal-tracking tools built into the account",
+      "Easy transfers when paired with an Ally checking account"
+    ],
+    "cons": [
+      "No physical branches",
+      "Does not accept cash deposits"
+    ],
+    "considerations": "Rates are variable. If you regularly deposit cash, you will need a separate account elsewhere to move cash into Ally.",
+    "requirements": "Check Ally’s current account terms for any opening deposit"
+  },
+  {
+    "id": "amex-hysa",
+    "category": "savings",
+    "provider": "American Express National Bank",
+    "product": "High Yield Savings Account",
+    "officialUrl": "https://www.americanexpress.com/en-us/banking/online-savings/",
+    "insured": "FDIC",
+    "type": "Online high-yield savings",
+    "bestFor": "Savers who want a straightforward online savings account from a large, well-known institution",
+    "features": [
+      "Online account managed through the American Express website and app",
+      "Link external bank accounts for transfers",
+      "Phone customer support"
+    ],
+    "pros": [
+      "Simple, no-frills savings account",
+      "Backed by a large national bank"
+    ],
+    "cons": [
+      "No ATM card for the savings account",
+      "Limited budgeting and goal tools compared with some competitors"
+    ],
+    "considerations": "Withdrawals are made by transfer to a linked account, so allow one to three business days to access funds.",
+    "requirements": "See American Express’s current terms for minimums"
+  },
+  {
+    "id": "capital-one-360-performance",
+    "category": "savings",
+    "provider": "Capital One",
+    "product": "360 Performance Savings",
+    "officialUrl": "https://www.capitalone.com/bank/savings-accounts/",
+    "insured": "FDIC",
+    "type": "High-yield savings (online with branch access)",
+    "bestFor": "Savers who want online-bank convenience plus access to branches and cafés in some areas",
+    "features": [
+      "Manage online and in the Capital One app",
+      "Physical branches and Capital One Cafés in select markets",
+      "Automatic savings plans and multiple savings accounts for goals"
+    ],
+    "pros": [
+      "Pairs easily with Capital One 360 Checking for instant internal transfers",
+      "In-person help available in some regions"
+    ],
+    "cons": [
+      "Branch access is limited to certain markets",
+      "Rate can differ from the bank’s other savings products — confirm which account you open"
+    ],
+    "considerations": "Capital One offers more than one savings product. Make sure you are opening the one with the rate you expect.",
+    "requirements": "See Capital One’s current account disclosures"
+  },
+  {
+    "id": "marcus-online-savings",
+    "category": "savings",
+    "provider": "Marcus by Goldman Sachs",
+    "product": "High-Yield Online Savings",
+    "officialUrl": "https://www.marcus.com/us/en/savings",
+    "insured": "FDIC",
+    "type": "Online high-yield savings",
+    "bestFor": "Savers who want a simple savings-only relationship with an online bank",
+    "features": [
+      "Offered by Goldman Sachs Bank USA",
+      "Same-day transfers between Marcus accounts",
+      "Phone and online support"
+    ],
+    "pros": [
+      "Straightforward account focused on savings",
+      "Deposits held at Goldman Sachs Bank USA, an FDIC member"
+    ],
+    "cons": [
+      "No Marcus checking account to pair with",
+      "No ATM access"
+    ],
+    "considerations": "Because Marcus does not offer checking, plan to link an external checking account for deposits and withdrawals.",
+    "requirements": "See Marcus’s current terms for minimums"
+  },
+  {
+    "id": "sofi-checking-savings",
+    "category": "savings",
+    "provider": "SoFi Bank",
+    "product": "Checking and Savings",
+    "officialUrl": "https://www.sofi.com/banking/",
+    "insured": "FDIC",
+    "type": "Combined checking and savings",
+    "bestFor": "People who want checking and savings in one app and can set up direct deposit",
+    "features": [
+      "Checking and savings managed together in one account and app",
+      "Savings “vaults” for separate goals",
+      "Debit card for the checking portion"
+    ],
+    "pros": [
+      "One login for everyday spending and savings",
+      "Early paycheck access with direct deposit, per SoFi’s terms"
+    ],
+    "cons": [
+      "The highest advertised savings rate typically requires direct deposit or other qualifying activity",
+      "Primarily app-based service"
+    ],
+    "considerations": "Read SoFi’s current rate conditions carefully — the APY you earn can depend on whether you meet its qualifying-deposit rules.",
+    "requirements": "Qualifying activity may be required for the top rate"
+  },
+  {
+    "id": "synchrony-hysa",
+    "category": "savings",
+    "provider": "Synchrony Bank",
+    "product": "High Yield Savings",
+    "officialUrl": "https://www.synchronybank.com/banking/high-yield-savings/",
+    "insured": "FDIC",
+    "type": "Online high-yield savings",
+    "bestFor": "Savers who want an online savings account with optional ATM access",
+    "features": [
+      "Optional ATM card for the savings account",
+      "Online and mobile account management",
+      "Also offers CDs and money market accounts"
+    ],
+    "pros": [
+      "ATM access is uncommon among online savings accounts",
+      "Broad lineup of other deposit products"
+    ],
+    "cons": [
+      "No checking account",
+      "Online-only service"
+    ],
+    "considerations": "ATM withdrawals and transfers may have limits; review Synchrony’s current account agreement.",
+    "requirements": "See Synchrony’s current terms"
+  },
+  {
+    "id": "ally-spending",
+    "category": "checking",
+    "provider": "Ally Bank",
+    "product": "Spending Account",
+    "officialUrl": "https://www.ally.com/bank/interest-checking-account/",
+    "insured": "FDIC",
+    "type": "Online checking",
+    "bestFor": "People comfortable banking online who want fee-light everyday checking",
+    "features": [
+      "Large in-network ATM access through a national ATM network",
+      "Early direct deposit, per Ally’s terms",
+      "Spending buckets and overdraft tools"
+    ],
+    "pros": [
+      "Strong digital tools",
+      "Pairs with Ally savings for easy transfers"
+    ],
+    "cons": [
+      "No branches",
+      "Cash deposits are not accepted"
+    ],
+    "considerations": "If you handle cash regularly, confirm how you will deposit it before switching.",
+    "requirements": "See Ally’s current account terms"
+  },
+  {
+    "id": "alliant-checking",
+    "category": "checking",
+    "provider": "Alliant Credit Union",
+    "product": "High-Rate Checking",
+    "officialUrl": "https://www.alliantcreditunion.org/bank/high-rate-checking",
+    "insured": "NCUA",
+    "type": "Credit union checking",
+    "bestFor": "People who want a digital-first credit union checking account",
+    "features": [
+      "Member-owned credit union with nationwide membership options",
+      "Access to a large surcharge-free ATM network",
+      "Interest may be earned when account requirements are met"
+    ],
+    "pros": [
+      "Credit union ownership structure",
+      "Digital banking with nationwide access"
+    ],
+    "cons": [
+      "Membership eligibility requirements apply",
+      "Earning interest depends on meeting monthly requirements"
+    ],
+    "considerations": "Read the monthly requirements for earning interest and confirm how you qualify for membership.",
+    "requirements": "Credit union membership required"
+  },
+  {
+    "id": "capital-one-360-checking",
+    "category": "checking",
+    "provider": "Capital One",
+    "product": "360 Checking",
+    "officialUrl": "https://www.capitalone.com/bank/checking-accounts/",
+    "insured": "FDIC",
+    "type": "Online checking with branch access",
+    "bestFor": "People who want an online-first checking account with some in-person options",
+    "features": [
+      "Access to a large fee-free ATM network",
+      "Branches and Capital One Cafés in select markets",
+      "Overdraft options you can choose in your settings"
+    ],
+    "pros": [
+      "Strong mobile app",
+      "Pairs with Capital One savings for instant transfers"
+    ],
+    "cons": [
+      "Branch access limited to certain regions",
+      "Cash deposit options vary by location"
+    ],
+    "considerations": "Review the overdraft options and choose the one that fits you when you open the account.",
+    "requirements": "See Capital One’s current disclosures"
+  },
+  {
+    "id": "chase-total-checking",
+    "category": "checking",
+    "provider": "Chase",
+    "product": "Total Checking",
+    "officialUrl": "https://www.chase.com/personal/checking",
+    "insured": "FDIC",
+    "type": "Traditional bank checking",
+    "bestFor": "People who want an extensive branch and ATM network nationwide",
+    "features": [
+      "Large national branch and ATM network",
+      "Monthly service fee that can be waived by meeting requirements, per Chase’s terms",
+      "Zelle and full online and mobile banking"
+    ],
+    "pros": [
+      "In-person service in many parts of the country",
+      "Full range of other banking and lending products"
+    ],
+    "cons": [
+      "Monthly service fee applies unless you meet waiver requirements",
+      "Typically pays no interest"
+    ],
+    "considerations": "Check which waiver requirement you can meet each month — such as direct deposit or a minimum balance — so the monthly fee doesn’t apply.",
+    "requirements": "Monthly fee waiver requirements apply"
+  },
+  {
+    "id": "schwab-investor-checking",
+    "category": "checking",
+    "provider": "Charles Schwab Bank",
+    "product": "Investor Checking",
+    "officialUrl": "https://www.schwab.com/checking",
+    "insured": "FDIC",
+    "type": "Online checking linked to brokerage",
+    "bestFor": "Frequent travelers and people who use ATMs outside a single network",
+    "features": [
+      "ATM fee rebates, per Schwab’s terms",
+      "Opened together with a linked Schwab One brokerage account",
+      "Online and mobile banking"
+    ],
+    "pros": [
+      "ATM flexibility at home and abroad",
+      "Convenient for existing Schwab investors"
+    ],
+    "cons": [
+      "Requires opening a linked brokerage account",
+      "No branches designed for everyday banking"
+    ],
+    "considerations": "You don’t have to fund the linked brokerage account, but you do have to open it.",
+    "requirements": "Linked Schwab One brokerage account required"
+  },
+  {
+    "id": "sofi-checking",
+    "category": "checking",
+    "provider": "SoFi Bank",
+    "product": "Checking and Savings",
+    "officialUrl": "https://www.sofi.com/banking/",
+    "insured": "FDIC",
+    "type": "Online checking and savings",
+    "bestFor": "People who want checking and savings together in one app",
+    "features": [
+      "Combined checking and savings account",
+      "Early paycheck access with direct deposit, per SoFi’s terms",
+      "Savings vaults and budgeting tools"
+    ],
+    "pros": [
+      "Everything in one app",
+      "Strong digital experience"
+    ],
+    "cons": [
+      "Some features and rates require direct deposit",
+      "Cash deposits may involve third-party retail locations and fees"
+    ],
+    "considerations": "If you deposit cash, check SoFi’s current cash deposit options and any fees.",
+    "requirements": "See SoFi’s current terms"
+  },
+  {
+    "id": "ally-cds",
+    "category": "cd",
+    "provider": "Ally Bank",
+    "product": "High Yield CD and No Penalty CD",
+    "officialUrl": "https://www.ally.com/bank/cd-rates/",
+    "insured": "FDIC",
+    "type": "Online CDs",
+    "bestFor": "Savers who want both standard and no-penalty CD options from one online bank",
+    "features": [
+      "Range of standard CD terms",
+      "No-penalty CD option",
+      "Manage alongside Ally savings and checking"
+    ],
+    "pros": [
+      "No-penalty option adds flexibility",
+      "Easy to build a CD ladder in one place"
+    ],
+    "cons": [
+      "No branches",
+      "No-penalty CDs typically pay less than standard CDs of similar length"
+    ],
+    "considerations": "Review the early withdrawal penalty for standard CDs and the grace period at maturity.",
+    "requirements": "See Ally’s current CD terms"
+  },
+  {
+    "id": "amex-cds",
+    "category": "cd",
+    "provider": "American Express National Bank",
+    "product": "Certificates of Deposit",
+    "officialUrl": "https://www.americanexpress.com/en-us/banking/online-savings/cd/",
+    "insured": "FDIC",
+    "type": "Online CDs",
+    "bestFor": "Savers who want standard CDs from a large national bank",
+    "features": [
+      "Several term lengths",
+      "Online account management",
+      "Pairs with the American Express savings account"
+    ],
+    "pros": [
+      "Simple product lineup",
+      "Large, established institution"
+    ],
+    "cons": [
+      "Fewer specialty CD types",
+      "Early withdrawal penalties apply"
+    ],
+    "considerations": "Confirm the penalty schedule before choosing longer terms.",
+    "requirements": "See American Express’s current terms"
+  },
+  {
+    "id": "barclays-cds",
+    "category": "cd",
+    "provider": "Barclays Bank Delaware",
+    "product": "Online CDs",
+    "officialUrl": "https://banking.barclaysus.com/online-cds.html",
+    "insured": "FDIC",
+    "type": "Online CDs",
+    "bestFor": "Savers who want online CDs with a range of terms",
+    "features": [
+      "Multiple CD terms",
+      "Online-only account management",
+      "Also offers online savings"
+    ],
+    "pros": [
+      "Range of term lengths for laddering",
+      "Online convenience"
+    ],
+    "cons": [
+      "No checking account",
+      "No branches"
+    ],
+    "considerations": "Link an external checking account for funding and maturity transfers.",
+    "requirements": "See Barclays’ current terms"
+  },
+  {
+    "id": "capital-one-360-cds",
+    "category": "cd",
+    "provider": "Capital One",
+    "product": "360 CDs",
+    "officialUrl": "https://www.capitalone.com/bank/cds/",
+    "insured": "FDIC",
+    "type": "Online CDs with branch access",
+    "bestFor": "Savers who want CDs alongside checking and savings at the same bank",
+    "features": [
+      "Range of CD terms",
+      "Choose to have interest paid out or compounded in the CD",
+      "Manage alongside Capital One checking and savings"
+    ],
+    "pros": [
+      "Convenient if you already bank with Capital One",
+      "Branch and café access in some areas"
+    ],
+    "cons": [
+      "Early withdrawal penalties apply",
+      "Branch access limited to certain markets"
+    ],
+    "considerations": "Choose at opening whether interest is paid out or added to the CD.",
+    "requirements": "See Capital One’s current terms"
+  },
+  {
+    "id": "marcus-cds",
+    "category": "cd",
+    "provider": "Marcus by Goldman Sachs",
+    "product": "High-Yield CDs and No-Penalty CDs",
+    "officialUrl": "https://www.marcus.com/us/en/cds",
+    "insured": "FDIC",
+    "type": "Online CDs",
+    "bestFor": "Savers who want both standard and no-penalty CD choices",
+    "features": [
+      "Standard high-yield CD terms",
+      "No-penalty CD option",
+      "Rate guarantee period after opening, per Marcus’s terms"
+    ],
+    "pros": [
+      "Flexible no-penalty option",
+      "Offered by Goldman Sachs Bank USA"
+    ],
+    "cons": [
+      "No checking account",
+      "Early withdrawal penalties on standard CDs"
+    ],
+    "considerations": "Read how the funding window and rate guarantee work when you open a CD.",
+    "requirements": "See Marcus’s current terms"
+  },
+  {
+    "id": "synchrony-cds",
+    "category": "cd",
+    "provider": "Synchrony Bank",
+    "product": "Certificates of Deposit",
+    "officialUrl": "https://www.synchronybank.com/banking/cd/",
+    "insured": "FDIC",
+    "type": "Online CDs",
+    "bestFor": "Savers who want a wide selection of CD terms",
+    "features": [
+      "Wide range of terms",
+      "Online and mobile management",
+      "Also offers savings and money market accounts"
+    ],
+    "pros": [
+      "Many term choices for laddering",
+      "Established online bank"
+    ],
+    "cons": [
+      "No checking account",
+      "Early withdrawal penalties apply"
+    ],
+    "considerations": "Note the grace period at maturity; CDs may renew automatically if you take no action.",
+    "requirements": "See Synchrony’s current terms"
+  },
+  {
+    "id": "boa-secured",
+    "category": "starter-cards",
+    "provider": "Bank of America",
+    "product": "Customized Cash Rewards Secured Credit Card",
+    "officialUrl": "https://www.bankofamerica.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Secured credit card with rewards",
+    "bestFor": "People building or rebuilding credit who want to earn cash back",
+    "features": [
+      "Requires a refundable security deposit",
+      "Earns cash back rewards",
+      "Account may be reviewed periodically for return of the deposit, per Bank of America’s terms"
+    ],
+    "pros": [
+      "Rewards on a secured card",
+      "Large issuer with branch network"
+    ],
+    "cons": [
+      "Deposit ties up cash",
+      "Rewards categories and caps require attention"
+    ],
+    "considerations": "Confirm the minimum and maximum deposit and how and when the issuer reviews accounts for graduation.",
+    "requirements": "Refundable security deposit required"
+  },
+  {
+    "id": "capital-one-platinum-secured",
+    "category": "starter-cards",
+    "provider": "Capital One",
+    "product": "Platinum Secured Credit Card",
+    "officialUrl": "https://www.capitalone.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Secured credit card",
+    "bestFor": "People with limited or damaged credit who want a simple secured card",
+    "features": [
+      "Refundable security deposit; depending on credit, the deposit may be less than the credit line",
+      "Automatic reviews for a higher credit line, per Capital One’s terms",
+      "Reports to the major credit bureaus"
+    ],
+    "pros": [
+      "Straightforward card focused on building credit",
+      "Path to a higher line with responsible use"
+    ],
+    "cons": [
+      "No rewards",
+      "High ongoing APR if you carry a balance"
+    ],
+    "considerations": "Use it lightly and pay the statement balance in full each month to build credit without paying interest.",
+    "requirements": "Refundable security deposit required"
+  },
+  {
+    "id": "capital-one-quicksilver-secured",
+    "category": "starter-cards",
+    "provider": "Capital One",
+    "product": "Quicksilver Secured Cash Rewards Credit Card",
+    "officialUrl": "https://www.capitalone.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Secured credit card with rewards",
+    "bestFor": "Credit builders who want flat-rate cash back on a secured card",
+    "features": [
+      "Refundable security deposit",
+      "Flat-rate cash back on purchases",
+      "Automatic credit line reviews, per Capital One’s terms"
+    ],
+    "pros": [
+      "Rewards without tracking categories",
+      "Designed for building credit"
+    ],
+    "cons": [
+      "Deposit required",
+      "High APR if you carry a balance"
+    ],
+    "considerations": "Check the card’s current fees and deposit requirements in the issuer’s pricing information before applying.",
+    "requirements": "Refundable security deposit required"
+  },
+  {
+    "id": "chase-freedom-rise",
+    "category": "starter-cards",
+    "provider": "Chase",
+    "product": "Freedom Rise",
+    "officialUrl": "https://creditcards.chase.com/",
+    "insured": "n/a",
+    "type": "Starter credit card (unsecured)",
+    "bestFor": "People new to credit, especially existing Chase banking customers",
+    "features": [
+      "Unsecured card designed for limited credit history",
+      "Earns cash back rewards",
+      "Chase notes that having a Chase checking account may improve approval odds"
+    ],
+    "pros": [
+      "No security deposit",
+      "Rewards from the start"
+    ],
+    "cons": [
+      "Approval not guaranteed for applicants with no history",
+      "Low starting credit limits are common"
+    ],
+    "considerations": "If you are not approved, a secured card may be the better first step.",
+    "requirements": "No deposit; approval based on application"
+  },
+  {
+    "id": "bofa-bankamericard",
+    "category": "balance-transfer",
+    "provider": "Bank of America",
+    "product": "BankAmericard Credit Card",
+    "officialUrl": "https://www.bankofamerica.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Low-rate / intro APR card",
+    "bestFor": "People who want a no-frills card focused on an introductory APR",
+    "features": [
+      "Introductory APR offer on purchases and qualifying balance transfers, per current terms",
+      "No rewards program — the focus is on a lower-cost balance",
+      "Online and mobile account management"
+    ],
+    "pros": [
+      "Simple card aimed at paying down balances",
+      "Large issuer with branch network"
+    ],
+    "cons": [
+      "No rewards",
+      "Balance transfer fee applies"
+    ],
+    "considerations": "Check the current intro period length, the transfer window and the transfer fee in the pricing table.",
+    "requirements": "Good credit typically required"
+  },
+  {
+    "id": "citi-diamond-preferred",
+    "category": "balance-transfer",
+    "provider": "Citi",
+    "product": "Diamond Preferred Card",
+    "officialUrl": "https://www.citi.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Balance transfer card",
+    "bestFor": "Borrowers focused on the length of the intro balance transfer period",
+    "features": [
+      "Introductory APR on balance transfers and purchases, per current terms",
+      "Balance transfers must typically be completed within a set window after opening",
+      "No rewards program"
+    ],
+    "pros": [
+      "Built for paying down transferred balances",
+      "Also offers an intro rate on purchases"
+    ],
+    "cons": [
+      "No rewards",
+      "Balance transfer fee applies"
+    ],
+    "considerations": "Transfers from other Citi cards are generally not allowed. Confirm the current transfer window.",
+    "requirements": "Good to excellent credit typically required"
+  },
+  {
+    "id": "citi-simplicity",
+    "category": "balance-transfer",
+    "provider": "Citi",
+    "product": "Simplicity Card",
+    "officialUrl": "https://www.citi.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Balance transfer card",
+    "bestFor": "People who want a balance transfer card with simple, forgiving terms",
+    "features": [
+      "Introductory APR on balance transfers and purchases, per current terms",
+      "Citi markets the card as having no late fees and no penalty rate",
+      "No rewards program"
+    ],
+    "pros": [
+      "Forgiving terms if a payment is late",
+      "Straightforward structure"
+    ],
+    "cons": [
+      "No rewards",
+      "Balance transfer fee applies"
+    ],
+    "considerations": "Paying late still hurts your credit even if no fee is charged. Keep autopay on.",
+    "requirements": "Good to excellent credit typically required"
+  },
+  {
+    "id": "wells-fargo-reflect",
+    "category": "balance-transfer",
+    "provider": "Wells Fargo",
+    "product": "Reflect Card",
+    "officialUrl": "https://www.wellsfargo.com/credit-cards/",
+    "insured": "n/a",
+    "type": "Balance transfer card",
+    "bestFor": "Borrowers who want a long intro period on both purchases and transfers",
+    "features": [
+      "Introductory APR on purchases and qualifying balance transfers, per current terms",
+      "Cell phone protection benefit when you pay your bill with the card, per Wells Fargo’s terms",
+      "No rewards program"
+    ],
+    "pros": [
+      "Useful for paying down debt and financing a planned purchase",
+      "Added protection benefit"
+    ],
+    "cons": [
+      "No rewards",
+      "Balance transfer fee applies"
+    ],
+    "considerations": "Balance transfers must usually be made within a set period after opening to get the intro rate.",
+    "requirements": "Good to excellent credit typically required"
+  },
+  {
+    "id": "best-egg",
+    "category": "personal-loans",
+    "provider": "Best Egg",
+    "product": "Personal Loans",
+    "officialUrl": "https://www.bestegg.com/",
+    "insured": "n/a",
+    "type": "Online personal loan",
+    "bestFor": "Borrowers consolidating debt who want the option of direct payment to creditors",
+    "features": [
+      "Check your rate with a soft credit inquiry",
+      "Offers unsecured loans and, in some cases, secured options",
+      "Direct payment to creditors available for debt consolidation"
+    ],
+    "pros": [
+      "Prequalification without affecting your credit score",
+      "Multiple loan structures"
+    ],
+    "cons": [
+      "May charge an origination fee, which is included in the APR",
+      "Rates depend heavily on credit profile"
+    ],
+    "considerations": "Compare the APR — not only the interest rate — since fees are included in the APR.",
+    "requirements": "Credit and income review; loans issued by partner banks"
+  },
+  {
+    "id": "lendingclub",
+    "category": "personal-loans",
+    "provider": "LendingClub",
+    "product": "Personal Loans",
+    "officialUrl": "https://www.lendingclub.com/",
+    "insured": "n/a",
+    "type": "Online personal loan",
+    "bestFor": "Borrowers who want direct payment to credit card issuers when consolidating",
+    "features": [
+      "Check your rate with a soft credit inquiry",
+      "Balance transfer loans can pay creditors directly",
+      "Joint applications available"
+    ],
+    "pros": [
+      "Direct pay simplifies consolidation",
+      "Co-borrower option may help approval"
+    ],
+    "cons": [
+      "May charge an origination fee",
+      "Rates vary widely by credit"
+    ],
+    "considerations": "An origination fee is deducted from proceeds; borrow enough to cover what you need.",
+    "requirements": "Credit and income review"
+  },
+  {
+    "id": "lightstream",
+    "category": "personal-loans",
+    "provider": "LightStream",
+    "product": "Personal Loans",
+    "officialUrl": "https://www.lightstream.com/",
+    "insured": "n/a",
+    "type": "Online personal loan",
+    "bestFor": "Borrowers with strong credit seeking larger loans for many purposes",
+    "features": [
+      "Online lending division of Truist Bank",
+      "Loans for a wide range of purposes, including home improvement and auto purchases",
+      "Fixed-rate loans"
+    ],
+    "pros": [
+      "Backed by a large bank",
+      "Broad range of permitted uses"
+    ],
+    "cons": [
+      "Generally requires good to excellent credit",
+      "Application typically results in a hard credit inquiry"
+    ],
+    "considerations": "Because the application usually involves a hard inquiry, apply after you have compared prequalified offers elsewhere.",
+    "requirements": "Strong credit history typically required"
+  },
+  {
+    "id": "sofi-personal-loans",
+    "category": "personal-loans",
+    "provider": "SoFi",
+    "product": "Personal Loans",
+    "officialUrl": "https://www.sofi.com/personal-loans/",
+    "insured": "n/a",
+    "type": "Online personal loan",
+    "bestFor": "Borrowers with good credit who want member benefits and flexible terms",
+    "features": [
+      "Check your rate with a soft credit inquiry",
+      "Fixed-rate loans",
+      "Member benefits such as career resources, per SoFi’s terms"
+    ],
+    "pros": [
+      "Prequalification without affecting your score",
+      "Autopay discount available, per SoFi’s terms"
+    ],
+    "cons": [
+      "Best rates require strong credit",
+      "Review your offer for any fees and how they affect the APR"
+    ],
+    "considerations": "Review the offer details carefully, including any fee and how it affects the APR.",
+    "requirements": "Credit and income review"
+  },
+  {
+    "id": "upgrade",
+    "category": "personal-loans",
+    "provider": "Upgrade",
+    "product": "Personal Loans",
+    "officialUrl": "https://www.upgrade.com/",
+    "insured": "n/a",
+    "type": "Online personal loan",
+    "bestFor": "Borrowers with fair to good credit consolidating debt",
+    "features": [
+      "Check your rate with a soft credit inquiry",
+      "Direct payment to creditors for debt consolidation",
+      "Secured and joint loan options may be available"
+    ],
+    "pros": [
+      "Works with a broader range of credit profiles",
+      "Direct pay simplifies consolidation"
+    ],
+    "cons": [
+      "May charge an origination fee",
+      "Higher APRs for lower credit scores"
+    ],
+    "considerations": "Compare the APR and total cost against a balance transfer card if you have mostly credit card debt.",
+    "requirements": "Credit and income review; loans issued by partner banks"
+  },
+  {
+    "id": "upstart",
+    "category": "personal-loans",
+    "provider": "Upstart",
+    "product": "Personal Loans",
+    "officialUrl": "https://www.upstart.com/",
+    "insured": "n/a",
+    "type": "Online personal loan",
+    "bestFor": "Borrowers with limited credit history",
+    "features": [
+      "Check your rate with a soft credit inquiry",
+      "Underwriting considers factors beyond the credit score, such as education and employment",
+      "Fast online application"
+    ],
+    "pros": [
+      "May help applicants with thin credit files",
+      "Quick decisions"
+    ],
+    "cons": [
+      "May charge an origination fee",
+      "Fewer term options than some lenders"
+    ],
+    "considerations": "If your credit is strong, compare with lenders that charge no origination fee.",
+    "requirements": "Credit and income review; loans issued by partner banks"
+  }
+]

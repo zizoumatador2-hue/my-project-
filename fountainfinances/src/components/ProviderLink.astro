@@ -1,0 +1,22 @@
+---
+/**
+ * Outbound CTA to a provider. Affiliate links are always labeled and carry rel="sponsored".
+ * Tracked with the `provider_click` / `affiliate_click` events (consent-gated).
+ */
+interface Props { productId: string; provider: string; officialUrl: string; affiliateUrl?: string; label?: string; placement?: string }
+const { productId, provider, officialUrl, affiliateUrl, label = 'See provider', placement = 'product-card' } = Astro.props;
+const isAffiliate = Boolean(affiliateUrl);
+---
+<span style="display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px">
+  <a
+    class="btn btn-primary"
+    href={affiliateUrl ?? officialUrl}
+    target="_blank"
+    rel={isAffiliate ? 'sponsored noopener' : 'noopener'}
+    data-track={isAffiliate ? 'affiliate_click' : 'provider_click'}
+    data-provider={provider}
+    data-product={productId}
+    data-placement={placement}
+  >{label}<span class="sr-only"> at {provider} (opens in a new tab)</span> ↗</a>
+  <small class="muted" style="font-size:.78rem">{isAffiliate ? 'Affiliate link — we may earn a commission' : `On ${new URL(officialUrl).hostname.replace(/^www\./, '')}`}</small>
+</span>

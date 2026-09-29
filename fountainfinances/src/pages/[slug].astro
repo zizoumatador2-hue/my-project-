@@ -1,0 +1,181 @@
+---
+/**
+ * Renders the six pillar hubs (/credit/) and every topic page (/credit-cards/).
+ * Both live at the top level to keep URLs short.
+ */
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/Faq.astro';
+import GuideCard from '@/components/GuideCard.astro';
+import CalcCard from '@/components/CalcCard.astro';
+import Icon from '@/components/Icon.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import Disclosure from '@/components/Disclosure.astro';
+import { HUBS, hubBySlug, type Hub } from '@/data/taxonomy';
+import { CALCULATORS, calcBySlug } from '@/data/calculators';
+import { collectionPage, faqPage, itemList } from '@/lib/schema';
+import { fmtDate, isoDay } from '@/lib/text';
+
+type Props =
+  | { kind: 'hub'; hub: Hub; entry: CollectionEntry<'hubs'> }
+  | { kind: 'topic'; entry: CollectionEntry<'topics'> };
+
+export async function getStaticPaths() {
+  const hubs = await getCollection('hubs');
+  const topics = await getCollection('topics');
+  return [
+    ...HUBS.map((hub) => {
+      const entry = hubs.find((h) => h.id === hub.slug);
+      if (!entry) throw new Error(`Missing hub content: src/content/hubs/${hub.slug}.md`);
+      return { params: { slug: hub.slug }, props: { kind: 'hub' as const, hub, entry } };
+    }),
+    ...topics.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'topic' as const, entry } })),
+  ];
+}
+
+const props = Astro.props as Props;
+const guides = await getCollection('guides', (g) => !g.data.draft);
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const comparisons = await getCollection('comparisons');
+const { Content } = await render(props.entry);
+
+let hub: Hub;
+let title: string, seoTitle: string, description: string, lede: string, keywords: string[];
+let faqs: { q: string; a: string }[];
+let updated: Date;
+let pageGuides: typeof guides;
+let pageCalcs: (typeof CALCULATORS)[number][];
+let pageComparisons: typeof comparisons;
+let siblings: typeof topics = [];
+
+if (props.kind === 'hub') {
+  hub = props.hub;
+  title = hub.title;
+  seoTitle = hub.seoTitle;
+  description = hub.description;
+  lede = hub.lede;
+  keywords = hub.keywords;
+  faqs = props.entry.data.faqs;
+  updated = props.entry.data.updated;
+  const featured = props.entry.data.featuredGuides.map((s) => guides.find((g) => g.id === s)).filter(Boolean) as typeof guides;
+  pageGuides = [...featured, ...guides.filter((g) => g.data.hub === hub.slug && !featured.includes(g))];
+  pageCalcs = CALCULATORS.filter((c) => c.hub === hub.slug);
+  pageComparisons = comparisons.filter((c) => c.data.hub === hub.slug);
+  siblings = topics.filter((t) => t.data.hub === hub.slug);
+} else {
+  const d = props.entry.data;
+  hub = hubBySlug(d.hub)!;
+  title = d.title;
+  seoTitle = d.seoTitle;
+  description = d.description;
+  lede = d.summary;
+  keywords = d.keywords;
+  faqs = d.faqs;
+  updated = d.updated;
+  const explicit = d.guides.map((s) => guides.find((g) => g.id === s)).filter(Boolean) as typeof guides;
+  const tagged = guides.filter((g) => g.data.topics.includes(props.entry.id) && !explicit.includes(g));
+  pageGuides = [...explicit, ...tagged];
+  if (pageGuides.length < 3) pageGuides = [...pageGuides, ...guides.filter((g) => g.data.hub === d.hub && !pageGuides.includes(g))].slice(0, 3);
+  pageCalcs = d.calculators.map(calcBySlug).filter(Boolean) as typeof pageCalcs;
+  pageComparisons = comparisons.filter((c) => d.comparisons.includes(c.id));
+  siblings = topics.filter((t) => t.data.hub === d.hub && t.id !== props.entry.id);
+}
+
+const path = `/${props.kind === 'hub' ? hub.slug : props.entry.id}/`;
+const crumbs =
+  props.kind === 'hub'
+    ? [{ name: 'Home', href: '/' }, { name: hub.shortTitle, href: path }]
+    : [{ name: 'Home', href: '/' }, { name: hub.shortTitle, href: `/${hub.slug}/` }, { name: title, href: path }];
+
+const schema = [
+  collectionPage({ url: path, name: title, description }),
+  ...(pageGuides.length ? [itemList(`${title} guides`, pageGuides.map((g) => ({ name: g.data.title, url: `/guides/${g.id}/` })))] : []),
+  ...(faqs.length ? [faqPage(faqs)] : []),
+];
+---
+<BaseLayout title={seoTitle} description={description} keywords={keywords} path={path} crumbs={crumbs} schema={schema}>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>{props.kind === 'hub' ? hub.title : title}</h1>
+      <p class="lede">{lede}</p>
+      <div class="meta-line"><span>By <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a></span><span>Updated <time datetime={isoDay(updated)}>{fmtDate(updated)}</time></span></div>
+    </div>
+  </div>
+
+  {props.kind === 'hub' && siblings.length > 0 && (
+    <section class="section" style="padding-bottom:16px" aria-labelledby="topics-h">
+      <div class="wrap">
+        <div class="section-head"><h2 id="topics-h">Explore {hub.shortTitle.toLowerCase()} topics</h2></div>
+        <div class="grid grid-3">
+          {siblings.map((t) => (
+            <article class="card">
+              <h3><a href={`/${t.id}/`}>{t.data.title}</a></h3>
+              <p>{t.data.summary}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="wrap article-grid">
+    <div class="prose">
+      {pageComparisons.length > 0 && <Disclosure kind="comparison" />}
+      <Content />
+      <Faq faqs={faqs} />
+      <p class="muted" style="font-size:.93rem;margin-top:24px">
+        {props.kind === 'topic' ? <>Part of our <a href={`/${hub.slug}/`}>{hub.title} hub</a> and our complete <a href="/#personal-finance-guide">personal finance guide</a>.</> : <>This hub is part of our complete <a href="/#personal-finance-guide">personal finance guide</a>.</>}
+        {' '}Read our <a href="/editorial-standards/">editorial standards</a>.
+      </p>
+    </div>
+    <aside aria-label={`${title} resources`}>
+      <div class="aside-sticky">
+        {pageCalcs.length > 0 && (
+          <nav class="toc" aria-label="Calculators">
+            <h2>Calculators</h2>
+            <ol>{pageCalcs.map((c) => <li><a href={`/calculators/${c.slug}/`}>{c.name}</a></li>)}</ol>
+          </nav>
+        )}
+        {pageComparisons.length > 0 && (
+          <nav class="toc" aria-label="Comparisons">
+            <h2>Compare products</h2>
+            <ol>{pageComparisons.map((c) => <li><a href={`/best/${c.id}/`}>{c.data.title}</a></li>)}</ol>
+          </nav>
+        )}
+        {props.kind === 'topic' && siblings.length > 0 && (
+          <nav class="toc" aria-label={`More ${hub.shortTitle} topics`}>
+            <h2>More in {hub.shortTitle}</h2>
+            <ol>
+              {siblings.map((t) => <li><a href={`/${t.id}/`}>{t.data.title}</a></li>)}
+              <li><a href={`/${hub.slug}/`}>{hub.title} overview</a></li>
+            </ol>
+          </nav>
+        )}
+      </div>
+    </aside>
+  </div>
+
+  {pageGuides.length > 0 && (
+    <section class="section section-soft" aria-labelledby="guides-h">
+      <div class="wrap">
+        <div class="section-head"><h2 id="guides-h">{title} guides</h2><a class="more" href="/guides/">All guides →</a></div>
+        <div class="grid grid-3">
+          {pageGuides.slice(0, props.kind === 'hub' ? 9 : 6).map((g) => <GuideCard slug={g.id} title={g.data.title} description={g.data.description} updated={g.data.updated} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {props.kind === 'hub' && pageCalcs.length > 0 && (
+    <section class="section" aria-labelledby="calcs-h">
+      <div class="wrap">
+        <div class="section-head"><h2 id="calcs-h"><span style="display:inline-flex;vertical-align:middle;margin-right:8px"><Icon name="calc" /></span>{hub.shortTitle} calculators</h2><a class="more" href="/calculators/">All calculators →</a></div>
+        <div class="grid grid-3">{pageCalcs.map((c) => <CalcCard calc={c} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <div class="wrap" style="padding:48px 16px 56px"><NewsletterForm placement={`hub-${hub.slug}`} /></div>
+</BaseLayout>

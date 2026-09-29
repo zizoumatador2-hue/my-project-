@@ -1,0 +1,90 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'What rate of return should I assume?',
+    a: 'There is no guaranteed rate. Diversified stock portfolios have historically returned more than bonds or cash over long periods, but with large swings year to year. Many planners test several assumptions — for example 4%, 6% and 8% — to see a range of outcomes rather than relying on one number.',
+  },
+  {
+    q: 'Why adjust for inflation?',
+    a: 'Inflation reduces what a dollar buys. The inflation-adjusted figure shows your future balance in today’s purchasing power, which is more useful for judging whether a goal like retirement is on track.',
+  },
+  {
+    q: 'Does this calculator include taxes and fees?',
+    a: 'No. Investment fees, fund expense ratios and taxes reduce real-world returns. You can approximate their effect by lowering the return assumption — for example, subtract a fund’s expense ratio from the rate you enter.',
+  },
+  {
+    q: 'What does annual contribution increase mean?',
+    a: 'It raises your monthly contribution by a set percentage each year, which models increasing your savings as your income grows. Even a 2% or 3% annual increase makes a large difference over several decades.',
+  },
+];
+---
+<CalculatorLayout slug="investment" faqs={faqs}>
+  <form slot="form" class="calc-form" id="inv-form" novalidate>
+    <fieldset>
+      <legend>Contributions</legend>
+      <Field id="initial" label="Starting balance" value={10000} prefix="$" />
+      <Field id="monthly" label="Monthly contribution" value={500} prefix="$" />
+      <Field id="increase" label="Increase contributions each year by" value={2} suffix="%" max={50} />
+    </fieldset>
+    <fieldset>
+      <legend>Assumptions</legend>
+      <div class="row2">
+        <Field id="rate" label="Expected annual return" value={6} suffix="%" min={-20} max={30} />
+        <Field id="years" label="Years to invest" value={25} suffix="years" min={1} max={70} />
+      </div>
+      <Field id="inflation" label="Expected inflation" value={2.5} suffix="%" max={20} />
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="fv">—</p>
+    <p class="big-sub">projected balance (before taxes and fees)</p>
+    <ul class="stat-list">
+      <li><span>In today’s dollars</span><span data-out="real">—</span></li>
+      <li><span>Total contributions</span><span data-out="contrib">—</span></li>
+      <li><span>Investment growth</span><span data-out="growth">—</span></li>
+      <li><span>Final monthly contribution</span><span data-out="final">—</span></li>
+    </ul>
+    <div class="bars" data-out="bars"></div>
+  </div>
+
+  <h2>How this investment calculator works</h2>
+  <p>The calculator projects the value of an investment account from a starting balance, a monthly contribution that can grow each year, and an assumed average annual return compounded monthly. It then converts the result into <strong>today’s dollars</strong> using the inflation rate you enter, so you can see what the balance would actually buy.</p>
+  <p>Real investment returns are uneven. Some years are negative, and the order of returns matters — especially close to the point when you start withdrawing. Treat this as a planning estimate, not a forecast.</p>
+
+  <h2>Nominal vs. real returns</h2>
+  <p>A <strong>nominal</strong> return is the raw percentage change in your balance. A <strong>real</strong> return subtracts inflation. If investments earn 6% and inflation runs 2.5%, your purchasing power grows by roughly 3.4% a year. Over 25 years, that difference turns a large-looking nominal number into a more modest — and more honest — figure.</p>
+
+  <h2>Tips for long-term investors</h2>
+  <ul>
+    <li><strong>Capture any employer match first.</strong> A 401(k) match is an immediate return on your contribution.</li>
+    <li><strong>Mind the fees.</strong> A 1% annual fee can consume a large share of long-term growth. Low-cost index funds keep more of the return in your account.</li>
+    <li><strong>Build an emergency fund before investing aggressively</strong> so a surprise bill never forces you to sell investments at a bad time.</li>
+  </ul>
+  <p>New to growth math? Start with <a href="/guides/how-compound-interest-works/">how compound interest works</a>, and see <a href="/guides/financial-planning-for-beginners/">financial planning for beginners</a> for how investing fits alongside saving and debt payoff. The SEC’s investor education site, <a href="https://www.investor.gov/" target="_blank" rel="noopener">Investor.gov</a>, has additional free tools.</p>
+</CalculatorLayout>
+
+<script>
+  import { compoundGrowth, inflationAdjust } from '@/lib/finance';
+  import { bindCalculator, usd, bars } from '@/lib/calc-ui';
+  const form = document.getElementById('inv-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'investment', (v) => {
+    const g = compoundGrowth(v.initial, v.monthly, v.rate, v.years, 'monthly', v.increase);
+    const real = inflationAdjust(g.futureValue, v.inflation, v.years);
+    out('fv').textContent = usd(g.futureValue);
+    out('real').textContent = usd(real);
+    out('contrib').textContent = usd(g.totalContributions);
+    out('growth').textContent = usd(g.totalInterest);
+    out('final').textContent = usd(v.monthly * Math.pow(1 + v.increase / 100, Math.max(0, Math.ceil(v.years) - 1)));
+    const max = Math.max(g.futureValue, 1);
+    bars(out('bars'), [
+      { label: 'Contributions', value: g.totalContributions, max },
+      { label: 'Growth', value: Math.max(0, g.totalInterest), max, cls: 'alt' },
+      { label: 'Projected balance', value: g.futureValue, max },
+    ]);
+  });
+</script>

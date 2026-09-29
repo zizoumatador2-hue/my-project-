@@ -1,0 +1,102 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'How much can I borrow against my home?',
+    a: 'Lenders typically cap your combined loan-to-value ratio (CLTV) — all mortgages on the home divided by its appraised value — often around 80% to 85%, and sometimes higher. Your credit, income and debt-to-income ratio also affect the amount.',
+  },
+  {
+    q: 'What is the difference between a home equity loan and a HELOC?',
+    a: 'A home equity loan pays a lump sum with a fixed rate and fixed payments. A HELOC is a revolving line of credit, usually with a variable rate, that you draw on as needed during a draw period before a repayment period begins.',
+  },
+  {
+    q: 'Is home equity loan interest tax-deductible?',
+    a: 'Interest may be deductible if you itemize and use the funds to buy, build or substantially improve the home that secures the loan, subject to IRS limits. Interest on funds used for other purposes generally is not. Check IRS Publication 936 or a tax professional.',
+  },
+  {
+    q: 'What are the risks of borrowing against home equity?',
+    a: 'Your home is the collateral. If you cannot repay, you could lose it to foreclosure. Home values can also fall, leaving you owing more than the home is worth.',
+  },
+];
+---
+<CalculatorLayout slug="home-equity" faqs={faqs}>
+  <form slot="form" class="calc-form" id="he-form" novalidate>
+    <fieldset>
+      <legend>Your home</legend>
+      <div class="row2">
+        <Field id="value" label="Estimated home value" value={450000} prefix="$" min={1} />
+        <Field id="balance" label="Mortgage balance" value={260000} prefix="$" />
+      </div>
+      <Field id="cltv" label="Lender’s maximum CLTV" value={85} suffix="%" min={1} max={100} hint="Combined loan-to-value limit. 80–85% is common." />
+    </fieldset>
+    <fieldset>
+      <legend>Loan you’re considering</legend>
+      <Field id="amount" label="Amount to borrow" value={50000} prefix="$" />
+      <div class="row2">
+        <Field id="rate" label="Interest rate" value={8.25} suffix="%" max={30} />
+        <Field id="years" label="Term" value={15} suffix="years" min={1} max={30} />
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="borrowable">—</p>
+    <p class="big-sub">estimated maximum you could borrow</p>
+    <p class="calc-warn" data-out="warn" hidden></p>
+    <ul class="stat-list">
+      <li><span>Current equity</span><span data-out="equity">—</span></li>
+      <li><span>Equity share</span><span data-out="equitypct">—</span></li>
+      <li><span>Current loan-to-value</span><span data-out="ltv">—</span></li>
+    </ul>
+    <h3 style="font-size:1rem;margin:0 0 10px">Loan you’re considering</h3>
+    <ul class="stat-list">
+      <li><span>Monthly payment</span><span data-out="payment">—</span></li>
+      <li><span>Total interest</span><span data-out="interest">—</span></li>
+      <li><span>Combined LTV after the loan</span><span data-out="newcltv">—</span></li>
+    </ul>
+  </div>
+
+  <h2>How home equity is calculated</h2>
+  <p><strong>Home equity</strong> is the part of your home you own outright: its current market value minus what you still owe on it. If your home is worth $450,000 and you owe $260,000, you have $190,000 in equity, or about 42%.</p>
+  <p>Lenders will not let you borrow all of it. They set a maximum <strong>combined loan-to-value ratio (CLTV)</strong>. With an 85% limit on a $450,000 home, total mortgage debt can reach $382,500 — so after your $260,000 first mortgage, the most you could borrow is about $122,500.</p>
+
+  <h2>Home equity loan vs. HELOC</h2>
+  <div class="table-scroll">
+    <table>
+      <caption class="sr-only">Home equity loan compared with HELOC</caption>
+      <thead><tr><th scope="col">Feature</th><th scope="col">Home equity loan</th><th scope="col">HELOC</th></tr></thead>
+      <tbody>
+        <tr><td>How you get the money</td><td>Lump sum</td><td>Draw as needed</td></tr>
+        <tr><td>Rate</td><td>Usually fixed</td><td>Usually variable</td></tr>
+        <tr><td>Payment</td><td>Fixed</td><td>Varies; may be interest-only during draw period</td></tr>
+        <tr><td>Best for</td><td>One large, known cost</td><td>Ongoing or uncertain costs</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The payment estimate in this calculator assumes a fixed-rate, fully amortizing home equity loan. A HELOC’s payment will change with its rate and whether you are in the draw or repayment period.</p>
+  <p>For a full comparison read <a href="/guides/heloc-vs-home-equity-loan/">HELOC vs. home equity loan</a>, and visit the <a href="/home-equity/">home equity</a> hub.</p>
+</CalculatorLayout>
+
+<script>
+  import { homeEquity, loanSummary } from '@/lib/finance';
+  import { bindCalculator, usd, pct } from '@/lib/calc-ui';
+  const form = document.getElementById('he-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'home-equity', (v) => {
+    const e = homeEquity({ homeValue: v.value, mortgageBalance: v.balance, maxCltvPct: v.cltv });
+    const loan = loanSummary(v.amount, v.rate, Math.round(v.years * 12));
+    out('borrowable').textContent = usd(e.borrowable);
+    out('equity').textContent = usd(e.equity);
+    out('equitypct').textContent = pct(e.equityPct);
+    out('ltv').textContent = pct((v.balance / v.value) * 100);
+    out('payment').textContent = usd(loan.payment, true);
+    out('interest').textContent = usd(loan.totalInterest);
+    const newCltv = ((v.balance + v.amount) / v.value) * 100;
+    out('newcltv').textContent = pct(newCltv);
+    const warn = out('warn');
+    warn.hidden = v.amount <= e.borrowable;
+    warn.textContent = `The amount you entered exceeds the estimated limit at a ${v.cltv}% CLTV.`;
+  });
+</script>

@@ -1,0 +1,38 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { NAV } from '@/data/site';
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+<header class="site-header">
+  <div class="wrap hdr">
+    <a class="brand" href="/">
+      <Logo />
+      <span>Fountain Finances<small>Smarter money decisions</small></span>
+    </a>
+    <nav class="mainnav" aria-label="Main">
+      <ul>
+        {NAV.map((n) => (
+          <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a class="hdr-search" href="/search/" aria-label="Search the site"><Icon name="search" /></a>
+    <details class="mnav">
+      <summary aria-label="Open menu"><Icon name="menu" size={24} /></summary>
+      <nav class="mnav-panel" aria-label="Mobile">
+        <ul>
+          {NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        </ul>
+        <ul class="mnav-sub">
+          <li><a href="/guides/">All financial guides</a></li>
+          <li><a href="/best/">Product comparisons</a></li>
+          <li><a href="/editorial-standards/">Editorial standards</a></li>
+          <li><a href="/about/">About Fountain Finances</a></li>
+          <li><a href="/contact/">Contact us</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>

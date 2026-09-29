@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Search', href: '/search/' }];
+const filters = [
+  ['all', 'All'], ['guide', 'Guides'], ['calculator', 'Calculators'], ['comparison', 'Comparisons'], ['product', 'Products'], ['topic', 'Topics'],
+];
+---
+<BaseLayout title="Search Fountain Finances" description="Search Fountain Finances guides, financial calculators, product comparisons and topics to find clear answers to your money questions." crumbs={crumbs} noindex>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Search</h1>
+      <p class="lede">Find guides, calculators, product comparisons and topics.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:28px;padding-bottom:64px;max-width:860px">
+    <form class="search-box" action="/search/" method="get" role="search" id="search-form">
+      <label class="sr-only" for="q">Search the site</label>
+      <input class="input" id="q" name="q" type="search" placeholder="Try “emergency fund” or “mortgage”" autocomplete="off" />
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <div class="filters" role="group" aria-label="Filter results by type">
+      {filters.map(([k, label], i) => <button type="button" data-filter={k} aria-pressed={i === 0 ? 'true' : 'false'}>{label} <span data-count={k}></span></button>)}
+    </div>
+    <p class="muted" id="summary" role="status" aria-live="polite"></p>
+    <ol class="results" id="results"></ol>
+    <noscript><p>Search needs JavaScript. Browse our <a href="/guides/">guides</a>, <a href="/calculators/">calculators</a> and <a href="/best/">comparisons</a> instead.</p></noscript>
+  </div>
+</BaseLayout>
+<script>
+  interface Item { type: string; title: string; url: string; desc: string; kw: string }
+  const labels: Record<string, string> = { guide: 'Guide', calculator: 'Calculator', comparison: 'Comparison', product: 'Product', topic: 'Topic' };
+  const input = document.getElementById('q') as HTMLInputElement;
+  const form = document.getElementById('search-form') as HTMLFormElement;
+  const list = document.getElementById('results')!;
+  const summary = document.getElementById('summary')!;
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  let filter = new URLSearchParams(location.search).get('type') || 'all';
+  input.value = new URLSearchParams(location.search).get('q') || '';
+  let index: Item[] = [];
+
+  const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[^\w\s%-]/g, ' ');
+  const stem = (w: string) => w.replace(/(ies|es|s|ing|ed)$/, '');
+
+  function score(item: Item, terms: string[]) {
+    const title = norm(item.title), desc = norm(item.desc), kw = norm(item.kw);
+    let s = 0;
+    for (const t of terms) {
+      const st = stem(t);
+      let hit = false;
+      if (title.includes(t)) { s += 10; hit = true; } else if (title.includes(st)) { s += 7; hit = true; }
+      if (kw.includes(st)) { s += 4; hit = true; }
+      if (desc.includes(st)) { s += 2; hit = true; }
+      if (!hit) return 0;
+    }
+    if (title.startsWith(terms.join(' '))) s += 8;
+    if (item.type === 'calculator' && terms.some((t) => t.startsWith('calc'))) s += 6;
+    return s;
+  }
+
+  function render() {
+    const q = norm(input.value).trim();
+    const terms = q.split(/\s+/).filter((t) => t.length > 1);
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    if (!terms.length) { list.replaceChildren(); summary.textContent = 'Type a word or phrase to search.'; document.querySelectorAll('[data-count]').forEach((e) => (e.textContent = '')); return; }
+    const scored = index.map((it) => ({ it, s: score(it, terms) })).filter((x) => x.s > 0).sort((a, b) => b.s - a.s);
+    const counts: Record<string, number> = { all: scored.length };
+    scored.forEach((x) => (counts[x.it.type] = (counts[x.it.type] || 0) + 1));
+    document.querySelectorAll<HTMLElement>('[data-count]').forEach((e) => (e.textContent = `(${counts[e.dataset.count!] || 0})`));
+    const shown = scored.filter((x) => filter === 'all' || x.it.type === filter).slice(0, 40);
+    summary.textContent = shown.length ? `${shown.length} result${shown.length === 1 ? '' : 's'} for “${input.value.trim()}”` : `No results for “${input.value.trim()}”. Try a broader term such as “savings”, “credit” or “loan”.`;
+    list.replaceChildren(...shown.map(({ it }) => {
+      const li = document.createElement('li');
+      const type = document.createElement('span'); type.className = 'type'; type.textContent = labels[it.type] || it.type;
+      const h = document.createElement('h2'); const a = document.createElement('a'); a.href = it.url; a.textContent = it.title; h.append(a);
+      const p = document.createElement('p'); p.textContent = it.desc;
+      li.append(type, h, p);
+      return li;
+    }));
+  }
+
+  function sync() {
+    const qs = new URLSearchParams();
+    if (input.value.trim()) qs.set('q', input.value.trim());
+    if (filter !== 'all') qs.set('type', filter);
+    history.replaceState(null, '', `/search/${qs.toString() ? `?${qs}` : ''}`);
+  }
+
+  form.addEventListener('submit', (e) => { e.preventDefault(); sync(); render(); window.ffTrack?.('search', { search_term: input.value.trim() }); });
+  input.addEventListener('input', () => { render(); sync(); });
+  buttons.forEach((b) => b.addEventListener('click', () => { filter = b.dataset.filter!; render(); sync(); }));
+
+  fetch('/search-index.json').then((r) => r.json()).then((data: Item[]) => { index = data; render(); if (!input.value) input.focus(); })
+    .catch(() => { summary.textContent = 'Search is temporarily unavailable. Please try again.'; });
+</script>

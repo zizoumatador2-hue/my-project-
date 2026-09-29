@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { SITE } from '@/data/site';
+import { fmtDate } from '@/lib/text';
+
+interface Props {
+  title: string;
+  heading?: string;
+  description: string;
+  lede?: string;
+  updated?: string;
+  schema?: Record<string, unknown>[];
+  keywords?: string[];
+  noindex?: boolean;
+  showUpdated?: boolean;
+}
+const { title, heading = title, description, lede, updated = SITE.policiesUpdated, schema = [], keywords, noindex, showUpdated = true } = Astro.props;
+const path = Astro.url.pathname;
+const crumbs = [{ name: 'Home', href: '/' }, { name: heading, href: path }];
+---
+<BaseLayout title={title} description={description} keywords={keywords} crumbs={crumbs} schema={schema} noindex={noindex}>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>{heading}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      {showUpdated && <div class="meta-line"><span>Last updated <time datetime={updated}>{fmtDate(new Date(updated))}</time></span></div>}
+    </div>
+  </div>
+  <div class="wrap policy">
+    <div class="prose">
+      <slot />
+    </div>
+  </div>
+  <slot name="after" />
+</BaseLayout>

@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Disclosure from '@/components/Disclosure.astro';
+import Faq from '@/components/Faq.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import { calcBySlug, CALCULATORS } from '@/data/calculators';
+import { hubBySlug } from '@/data/taxonomy';
+import { faqPage, webApp } from '@/lib/schema';
+
+interface Props {
+  slug: string;
+  faqs: { q: string; a: string }[];
+  updated?: string;
+}
+const { slug, faqs, updated = '2026-09-28' } = Astro.props;
+const calc = calcBySlug(slug)!;
+const hub = hubBySlug(calc.hub)!;
+const path = `/calculators/${slug}/`;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Calculators', href: '/calculators/' },
+  { name: calc.name, href: path },
+];
+const guides = (await getCollection('guides', (g) => !g.data.draft && g.data.calculators.includes(slug))).slice(0, 4);
+const others = CALCULATORS.filter((c) => c.slug !== slug && (c.hub === calc.hub || c.featured)).slice(0, 5);
+const updatedDate = new Date(updated);
+---
+<BaseLayout
+  title={calc.seoTitle}
+  description={calc.description}
+  keywords={calc.keywords}
+  path={path}
+  crumbs={crumbs}
+  schema={[webApp({ url: path, name: calc.name, description: calc.description }), ...(faqs.length ? [faqPage(faqs)] : [])]}
+>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>{calc.name}</h1>
+      <p class="lede">{calc.short}</p>
+      <div class="meta-line">
+        <span>Free · No sign-up · Runs in your browser</span>
+        <span>Updated <time datetime={updated}>{updatedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="calc">
+      <div>
+        <slot name="form" />
+        <noscript><p class="notice">This calculator needs JavaScript to compute results. Every formula it uses is explained below so you can work through the numbers by hand.</p></noscript>
+      </div>
+      <section class="calc-out" aria-labelledby="results-h" aria-live="polite">
+        <h2 id="results-h">Your estimate</h2>
+        <p class="calc-warn" data-invalid-msg hidden>Please check the highlighted fields — one or more values are missing or out of range.</p>
+        <slot name="results" />
+        <p class="calc-note">Estimates only. Figures are rounded and assume the inputs stay the same for the whole period.</p>
+      </section>
+    </div>
+    <Disclosure kind="calculator" />
+  </div>
+  <a class="calc-mini" href="#results-h" hidden><span data-mini>—</span><span>See details ↓</span></a>
+  <div class="wrap article-grid">
+    <div class="prose">
+      <slot />
+      <Faq faqs={faqs} />
+      {guides.length > 0 && (
+        <section aria-labelledby="learn-h">
+          <h2 id="learn-h">Learn more</h2>
+          <ul>
+            {guides.map((g) => <li><a href={`/guides/${g.id}/`}>{g.data.title}</a> — {g.data.description}</li>)}
+          </ul>
+        </section>
+      )}
+    </div>
+    <aside aria-label="More calculators">
+      <div class="aside-sticky">
+        <nav class="toc" aria-label="Other calculators">
+          <h2>More calculators</h2>
+          <ol>
+            {others.map((c) => <li><a href={`/calculators/${c.slug}/`}>{c.name}</a></li>)}
+            <li><a href="/calculators/">See all calculators</a></li>
+          </ol>
+        </nav>
+        <nav class="toc" aria-label={`${hub.shortTitle} topics`}>
+          <h2>{hub.shortTitle} guides</h2>
+          <ol><li><a href={`/${hub.slug}/`}>{hub.title} hub</a></li></ol>
+        </nav>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap" style="padding-bottom:56px"><NewsletterForm placement={`calc-${slug}`} /></div>
+</BaseLayout>
+<script>
+  // Mobile: mirror the headline result into a bottom bar until the results panel is on screen.
+  const mini = document.querySelector<HTMLAnchorElement>('.calc-mini');
+  const big = document.querySelector<HTMLElement>('.calc-out .big-num');
+  const panel = document.querySelector<HTMLElement>('.calc-out');
+  const form = document.querySelector<HTMLElement>('.calc-form');
+  if (mini && big && panel && form && matchMedia('(max-width: 959px)').matches) {
+    const text = mini.querySelector<HTMLElement>('[data-mini]')!;
+    const sync = () => (text.textContent = big.textContent);
+    new MutationObserver(sync).observe(big, { childList: true, characterData: true, subtree: true });
+    sync();
+    let formVisible = false;
+    let panelVisible = false;
+    const update = () => (mini.hidden = !(formVisible && !panelVisible));
+    new IntersectionObserver((e) => { formVisible = e[0].isIntersecting; update(); }).observe(form);
+    new IntersectionObserver((e) => { panelVisible = e[0].isIntersecting; update(); }).observe(panel);
+  }
+</script>

@@ -1,0 +1,146 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Disclosure from '@/components/Disclosure.astro';
+import Toc from '@/components/Toc.astro';
+import Faq from '@/components/Faq.astro';
+import Sources from '@/components/Sources.astro';
+import AuthorBox from '@/components/AuthorBox.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import GuideCard from '@/components/GuideCard.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import { hubBySlug } from '@/data/taxonomy';
+import { calcBySlug } from '@/data/calculators';
+import { article, faqPage, howTo } from '@/lib/schema';
+import { durationText, fmtDate, isoDay, readingMinutes, wordCount } from '@/lib/text';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', (g) => !g.data.draft);
+  return guides.map((g) => ({ params: { slug: g.id }, props: { guide: g } }));
+}
+
+const { guide } = Astro.props;
+const d = guide.data;
+const { Content, headings } = await render(guide);
+const author = (await getEntry(d.author))!.data;
+const reviewer = d.reviewer ? (await getEntry(d.reviewer))?.data : undefined;
+const hub = hubBySlug(d.hub)!;
+const path = `/guides/${guide.id}/`;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: hub.shortTitle, href: `/${hub.slug}/` },
+  { name: d.title, href: path },
+];
+const words = wordCount(guide.body ?? '');
+
+const all = await getCollection('guides', (g) => !g.data.draft && g.id !== guide.id);
+const explicit = d.related.map((s) => all.find((g) => g.id === s)).filter(Boolean) as typeof all;
+const fill = all.filter((g) => g.data.hub === d.hub && !d.related.includes(g.id));
+const related = [...explicit, ...fill].slice(0, 3);
+const calcs = d.calculators.map(calcBySlug).filter(Boolean);
+const primaryCalc = calcs[0];
+
+const schema = [
+  article({ url: path, title: d.title, description: d.description, published: d.published, updated: d.updated, author, reviewer, keywords: d.keywords, section: hub.title, wordCount: words }),
+  faqPage(d.faqs),
+  ...(d.howTo ? [howTo(path, d.howTo)] : []),
+];
+---
+<BaseLayout
+  title={d.seoTitle}
+  description={d.description}
+  keywords={d.keywords}
+  path={path}
+  crumbs={crumbs}
+  schema={schema}
+  ogType="article"
+  published={d.published}
+  modified={d.updated}
+  section={hub.title}
+>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+      <div class="meta-line">
+        <span>By <a href={`/authors/${author.id}/`}><strong>{author.name}</strong></a></span>
+        {reviewer && <span>Reviewed by <a href={`/authors/${reviewer.id}/`}><strong>{reviewer.name}</strong></a></span>}
+        <span>Published <time datetime={isoDay(d.published)}>{fmtDate(d.published)}</time></span>
+        <span>Updated <time datetime={isoDay(d.updated)}><strong>{fmtDate(d.updated)}</strong></time></span>
+        <span>{readingMinutes(words)} min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap article-grid">
+    <article class="prose">
+      <Disclosure kind="editorial" />
+      <section class="quick-answer" aria-labelledby="qa-h">
+        <h2 id="qa-h">Quick answer</h2>
+        <p>{d.quickAnswer}</p>
+      </section>
+      <section class="takeaways" aria-labelledby="kt-h">
+        <h2 id="kt-h">Key takeaways</h2>
+        <ul>{d.takeaways.map((t) => <li>{t}</li>)}</ul>
+      </section>
+      <Toc headings={headings} extra={[{ slug: 'faq-h', text: 'Frequently asked questions' }, { slug: 'sources-h', text: 'Sources' }]} />
+
+      {d.howTo && (
+        <section aria-labelledby="steps-h">
+          <h2 id="steps-h">{d.howTo.name}: the steps at a glance</h2>
+          {d.howTo.totalTime && <p class="muted">Estimated time: {durationText(d.howTo.totalTime)}</p>}
+          <ol class="steps-list">
+            {d.howTo.steps.map((s, i) => <li id={`step-${i + 1}`}><strong>{s.name}.</strong> {s.text}</li>)}
+          </ol>
+        </section>
+      )}
+
+      <Content />
+
+      {primaryCalc && (
+        <CtaBand
+          heading={`Try the ${primaryCalc.name}`}
+          text={primaryCalc.short}
+          href={`/calculators/${primaryCalc.slug}/`}
+          label="Open the calculator"
+        />
+      )}
+
+      <Faq faqs={d.faqs} />
+      <Sources sources={d.sources} />
+      <p class="muted" style="font-size:.93rem;margin-top:20px">This guide is part of our <a href={`/${hub.slug}/`}>{hub.title} hub</a> and our complete <a href="/#personal-finance-guide">personal finance guide</a>. Spot an error? <a href="/corrections/">Request a correction</a>.</p>
+      <AuthorBox author={author} reviewer={reviewer} />
+    </article>
+
+    <aside aria-label="Guide navigation">
+      <div class="aside-sticky">
+        {headings.filter((h) => h.depth === 2).length > 2 && (
+          <nav class="toc aside-toc" aria-label="Table of contents">
+            <h2>In this guide</h2>
+            <ol>{headings.filter((h) => h.depth === 2).map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        )}
+        {calcs.length > 0 && (
+          <nav class="toc" aria-label="Related calculators">
+            <h2>Related calculators</h2>
+            <ol>{calcs.map((c) => <li><a href={`/calculators/${c!.slug}/`}>{c!.name}</a></li>)}</ol>
+          </nav>
+        )}
+      </div>
+    </aside>
+  </div>
+
+  {related.length > 0 && (
+    <section class="section section-soft" aria-labelledby="rel-h">
+      <div class="wrap">
+        <div class="section-head"><h2 id="rel-h">Related guides</h2><a class="more" href="/guides/">All guides →</a></div>
+        <div class="grid grid-3">
+          {related.map((g) => <GuideCard slug={g.id} title={g.data.title} description={g.data.description} kicker={hubBySlug(g.data.hub)?.shortTitle} />)}
+        </div>
+      </div>
+    </section>
+  )}
+  <div class="wrap" style="padding:48px 16px 56px"><NewsletterForm placement="guide" /></div>
+</BaseLayout>
