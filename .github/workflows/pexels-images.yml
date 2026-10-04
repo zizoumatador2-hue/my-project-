@@ -1,0 +1,53 @@
+name: Pexels images
+# One-off helper: downloads Pexels photos (free to use, no attribution required) by ID.
+#  mode=sheets -> builds labelled contact sheets and pushes them to the temporary branch tmp-pexels-sheets for review
+#  mode=final  -> downloads chaystore/data/pexels-final.json into chaystore/public/images (WebP 1600 + 800) and commits them
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'sheets or final'
+        type: choice
+        options: [sheets, final]
+        default: sheets
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp >/dev/null
+          convert -version | head -1
+      - name: Contact sheets
+        if: ${{ inputs.mode == 'sheets' }}
+        run: |
+          mkdir -p /tmp/p /tmp/sheets
+          for id in $(jq -r '.[]' chaystore/data/pexels-candidates.json); do
+            curl -fsSL --retry 2 -o /tmp/p/$id.jpg "https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=480" || echo "FAILED $id"
+          done
+          ls /tmp/p | wc -l
+          cd /tmp/p; ls *.jpg | split -l 12 - /tmp/grp_
+          n=0; for g in /tmp/grp_*; do n=$((n+1)); montage -label '%t' $(cat $g) -pointsize 18 -geometry 380x260+6+6 -tile 4x3 /tmp/sheets/sheet$n.jpg; done
+          ls -la /tmp/sheets
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions"; git config user.email "actions@users.noreply.github.com"
+          git checkout --orphan tmp-pexels-sheets; git rm -rfq . ; cp /tmp/sheets/*.jpg .
+          git add -A; git commit -qm "Pexels contact sheets (temporary)"; git push -f origin tmp-pexels-sheets
+      - name: Final images
+        if: ${{ inputs.mode == 'final' }}
+        run: |
+          mkdir -p chaystore/public/images /tmp/p
+          jq -c '.[]' chaystore/data/pexels-final.json | while read -r row; do
+            id=$(echo "$row" | jq -r .id); name=$(echo "$row" | jq -r .name)
+            curl -fsSL --retry 2 -o /tmp/p/$name.jpg "https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=1920" || { echo "FAILED $id"; continue; }
+            convert /tmp/p/$name.jpg -resize '1600x>' -strip -quality 78 chaystore/public/images/$name-1600.webp
+            convert /tmp/p/$name.jpg -resize '800x>' -strip -quality 76 chaystore/public/images/$name-800.webp
+          done
+          ls -la chaystore/public/images | head -80
+          git config user.name "github-actions"; git config user.email "actions@users.noreply.github.com"
+          git add chaystore/public/images
+          git commit -qm "Add Pexels photos (WebP)" || echo "nothing to commit"
+          git push origin HEAD:${{ github.ref_name }}
