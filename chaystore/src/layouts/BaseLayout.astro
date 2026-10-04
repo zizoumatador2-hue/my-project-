@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../lib/site';
+import { abs } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  type?: 'website' | 'article';
+  schema?: object[];
+  noindex?: boolean;
+  published?: string;
+  modified?: string;
+  progress?: boolean;
+  keywords?: string;
+}
+const { title, description, path, type = 'website', schema = [], noindex = false, published, modified, progress = false, keywords } = Astro.props;
+const canonical = abs(path);
+const withSite = `${title} | ${SITE.name}`;
+const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
+---
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  {keywords && <meta name="keywords" content={keywords} />}
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+  <meta name="theme-color" content="#0d1a12" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title={`${SITE.name} RSS`} href="/rss.xml" />
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="en_US" />
+  {published && <meta property="article:published_time" content={published} />}
+  {modified && <meta property="article:modified_time" content={modified} />}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {progress && <div class="progress" aria-hidden="true"></div>}
+  <Header path={path} />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer />
+  {SITE.gaId && (
+    <div id="consent" class="consent" data-ga={SITE.gaId} role="dialog" aria-label="Cookie consent">
+      <p>We use analytics cookies to understand how guides are used. Accept or decline; see our <a href="/privacy/">Privacy Policy</a>.</p>
+      <div class="row"><button class="yes" type="button">Accept</button><button class="no" type="button">Decline</button></div>
+    </div>
+    <script>import '../scripts/consent';</script>
+  )}
+  <script>import '../scripts/cinema';</script>
+</body>
+</html>

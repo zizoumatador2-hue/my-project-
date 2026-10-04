@@ -1,0 +1,23 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import { SITE } from '../lib/site';
+---
+<DocLayout title="Terms & Conditions" h1="Terms & Conditions" description="The terms for using ChayStore.com, including content use, health disclaimer, affiliate links and limits of liability." path="/terms/" updated="2026-10-04">
+  <p>By using ChayStore.com you agree to these terms. If you do not agree, please do not use the site.</p>
+  <h2>Information only</h2>
+  <p>ChayStore publishes general information about tea. It is not medical, dietary or professional advice. Always consult a qualified healthcare professional about your health, medications, pregnancy, allergies or caffeine sensitivity.</p>
+  <h2>Accuracy</h2>
+  <p>We work to keep content accurate and current, but we make no warranty that it is complete or error-free. Prices, product details and availability at third-party sites can change without notice.</p>
+  <h2>Affiliate links and third-party sites</h2>
+  <p>Some links may be affiliate links. We are not responsible for the content, products, policies or practices of third-party sites.</p>
+  <h2>Intellectual property</h2>
+  <p>Text, design and code on this site are owned by ChayStore unless stated otherwise. You may quote short excerpts with a clear link back to the source. Please do not copy full articles.</p>
+  <h2>Acceptable use</h2>
+  <p>Do not misuse the site, attempt to disrupt it, or scrape it in a way that harms performance.</p>
+  <h2>Limitation of liability</h2>
+  <p>To the fullest extent permitted by law, ChayStore is not liable for any loss or damage arising from your use of the site or reliance on its content.</p>
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of the United States and the state in which the site owner is established, without regard to conflict-of-law rules.</p>
+  <h2>Contact</h2>
+  <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</DocLayout>

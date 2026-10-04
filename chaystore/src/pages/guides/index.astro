@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { allArticles } from '../../lib/content';
+const articles = await allArticles();
+---
+<BaseLayout title="All Tea Guides" description="Browse every ChayStore guide: brewing, chai, green tea and matcha, herbal tea, tea gear and tea wellness." path="/guides/">
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'All Guides', path: '/guides/' }]} />
+  <section class="section" style="padding-top:1.5rem">
+    <div class="wrap">
+      <div class="section-head"><h1>All Tea Guides</h1><p>{articles.length} guides on brewing, buying and enjoying tea. Start with the <a href="/#tea-guide">complete guide to tea</a>.</p></div>
+      <ul class="grid">{articles.map((a) => <ArticleCard a={a} level={2} />)}</ul>
+    </div>
+  </section>
+</BaseLayout>

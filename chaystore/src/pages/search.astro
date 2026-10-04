@@ -1,0 +1,31 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+---
+<DocLayout title="Search" h1="Search the Guides" description="Search ChayStore guides on tea brewing, chai, matcha, green tea, herbal tea and tea gear." path="/search/">
+  <form role="search" id="sf" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem">
+    <label class="sr" for="q">Search guides</label>
+    <input id="q" type="search" placeholder="e.g. matcha, chai, water temperature" style="flex:1;min-width:220px;min-height:48px;padding:0 1rem;border:1px solid var(--sand-d);border-radius:12px;font:inherit" />
+    <button class="btn primary" type="submit">Search</button>
+  </form>
+  <ul id="res" aria-live="polite" style="list-style:none;padding:0"></ul>
+  <noscript><p>Search needs JavaScript. You can <a href="/guides/">browse all guides</a> instead.</p></noscript>
+  <script is:inline>
+    (async () => {
+      const q = document.getElementById('q'), res = document.getElementById('res'), f = document.getElementById('sf');
+      const data = await (await fetch('/search.json')).json();
+      const run = () => {
+        const t = q.value.trim().toLowerCase(); res.innerHTML = '';
+        if (!t) return;
+        const hits = data.filter(d => (d.title + ' ' + d.description + ' ' + d.keyword).toLowerCase().includes(t));
+        if (!hits.length) { res.innerHTML = '<li>No guides found. Try another word.</li>'; return; }
+        for (const h of hits) { const li = document.createElement('li'); li.style.margin = '0 0 1rem';
+          const a = document.createElement('a'); a.href = h.url; a.textContent = h.title; a.style.fontWeight = '600';
+          const p = document.createElement('p'); p.textContent = h.description; p.style.margin = '.2rem 0 0';
+          li.append(a, p); res.append(li); }
+      };
+      f.addEventListener('submit', e => { e.preventDefault(); run(); });
+      q.addEventListener('input', run);
+      const init = new URLSearchParams(location.search).get('q'); if (init) { q.value = init; run(); }
+    })();
+  </script>
+</DocLayout>

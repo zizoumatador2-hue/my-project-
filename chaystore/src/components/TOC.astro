@@ -1,0 +1,11 @@
+---
+interface Props { headings: { depth: number; slug: string; text: string }[]; title?: string }
+const { headings, title = 'In this guide' } = Astro.props;
+const items = headings.filter((h) => h.depth === 2);
+---
+{items.length > 1 && (
+  <nav class="box toc" aria-label={title}>
+    <p style="margin:0 0 .5rem;font-family:var(--serif);font-weight:600;color:var(--green-d)">{title}</p>
+    <ol>{items.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+  </nav>
+)}

@@ -1,0 +1,77 @@
+name: ChayStore (Cloudflare Pages)
+# Builds the Astro site in /chaystore and deploys it to Cloudflare Pages (project "chaystore").
+# - push to the default branch (changes under chaystore/) or manual run with production=true -> production deploy
+# - any other branch -> preview deploy (never touches production)
+on:
+  push:
+    paths: ['chaystore/**', '.github/workflows/chaystore-deploy.yml']
+  workflow_dispatch:
+    inputs:
+      production:
+        description: 'Deploy to production (the main/production branch of the Pages project)'
+        type: boolean
+        default: false
+      attach_domain:
+        description: 'Also attach chaystore.com and www.chaystore.com to the Pages project'
+        type: boolean
+        default: false
+concurrency: chaystore-deploy
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: chaystore } }
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+      WRANGLER_SEND_METRICS: 'false'
+      PROJECT: chaystore
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: chaystore/package-lock.json }
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check:links
+      - name: Decide target
+        id: target
+        run: |
+          DEFAULT="${{ github.event.repository.default_branch }}"
+          if [ "${{ inputs.production }}" = "true" ] || [ "${{ github.ref_name }}" = "$DEFAULT" ]; then
+            echo "branch=main" >> "$GITHUB_OUTPUT"; echo "kind=production" >> "$GITHUB_OUTPUT"
+          else
+            B=$(echo "${{ github.ref_name }}" | tr -c 'A-Za-z0-9\n' '-' | cut -c1-40)
+            echo "branch=$B" >> "$GITHUB_OUTPUT"; echo "kind=preview" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Credentials (trim; derive account id from the token if needed)
+        run: |
+          TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          if [ -z "$TOKEN" ]; then echo "::error::CLOUDFLARE_API_TOKEN secret is missing"; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          ACC="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          if [ -z "$ACC" ]; then
+            ACC=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty')
+          fi
+          if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id; add a CLOUDFLARE_ACCOUNT_ID secret"; exit 1; fi
+          echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
+      - name: Ensure Pages project exists
+        run: |
+          R=$(curl -sS -X POST -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects" \
+            -d "{\"name\":\"$PROJECT\",\"production_branch\":\"main\"}")
+          echo "$R" | jq -r 'if .success then "created project" else (.errors[0].message // "unknown") end'
+          # "already exists" is fine; anything else surfaces at the deploy step.
+      - name: Deploy to Cloudflare Pages
+        run: npx --yes wrangler@4 pages deploy dist --project-name "$PROJECT" --branch "${{ steps.target.outputs.branch }}" --commit-dirty=true
+      - name: Attach custom domains (optional)
+        if: ${{ inputs.attach_domain && steps.target.outputs.kind == 'production' }}
+        run: |
+          for D in chaystore.com www.chaystore.com; do
+            R=$(curl -sS -X POST -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
+              "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" -d "{\"name\":\"$D\"}")
+            echo "$D: $(echo "$R" | jq -r 'if .success then "attached (status: " + (.result.status // "pending") + ")" else (.errors[0].message // "failed") end')"
+          done
+      - name: Summary
+        run: |
+          echo "ChayStore ${{ steps.target.outputs.kind }} deploy finished (branch ${{ steps.target.outputs.branch }})." >> "$GITHUB_STEP_SUMMARY"
+          echo "Default URL: https://$PROJECT.pages.dev (previews: https://<branch>.$PROJECT.pages.dev)" >> "$GITHUB_STEP_SUMMARY"

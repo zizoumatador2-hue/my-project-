@@ -1,0 +1,20 @@
+---
+import { HUBS } from '../lib/site';
+const { path = '/' } = Astro.props;
+const links = [
+  { href: '/guides/', label: 'All Guides' },
+  ...Object.entries(HUBS).map(([id, h]) => ({ href: `/category/${id}/`, label: h.name })),
+];
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="ChayStore home">Chay<b>Store</b></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle sr" aria-label="Toggle menu" />
+    <label for="nav-toggle" class="nav-btn" aria-hidden="true">☰</label>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {links.map((l) => <li><a href={l.href} aria-current={path === l.href || (l.href !== '/guides/' && path.startsWith(l.href)) ? 'page' : undefined}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</header>

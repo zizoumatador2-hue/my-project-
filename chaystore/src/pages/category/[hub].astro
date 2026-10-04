@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { HUBS, HUB_IDS } from '../../lib/site';
+import { allArticles } from '../../lib/content';
+export function getStaticPaths() { return HUB_IDS.map((hub) => ({ params: { hub } })); }
+const { hub } = Astro.params as { hub: keyof typeof HUBS };
+const h = HUBS[hub];
+const items = (await allArticles()).filter((a) => a.data.hub === hub);
+const path = `/category/${hub}/`;
+---
+<BaseLayout title={`${h.name}: Guides & Tips`} description={`${h.blurb} Browse every ChayStore guide in ${h.name}.`.slice(0, 158)} path={path}>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: h.name, path }]} />
+  <section class="section" style="padding-top:1.5rem">
+    <div class="wrap">
+      <div class="section-head"><h1>{h.name}</h1><p>{h.blurb} Part of our <a href="/#tea-guide">complete guide to tea</a>.</p></div>
+      <ul class="grid">{items.map((a) => <ArticleCard a={a} level={2} />)}</ul>
+    </div>
+  </section>
+</BaseLayout>

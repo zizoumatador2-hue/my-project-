@@ -1,0 +1,12 @@
+# Pre-launch checklist
+- [ ] Replace the placeholder contact mailbox (`SITE.email` in `src/lib/site.ts`) with a real, monitored address
+- [ ] Add images + alt text to all articles (front matter `image`, `imageAlt`)
+- [ ] Human-review every article with `docs/editorial-checklist.md`; verify all external links and facts
+- [ ] Attach chaystore.com (and www) in Cloudflare Pages; confirm HTTPS and redirect www → apex (or reverse)
+- [ ] Add the property in Google Search Console and Bing Webmaster Tools; submit `https://chaystore.com/sitemap-index.xml`
+- [ ] Run PageSpeed Insights on home + 2 articles (mobile); target LCP < 2.5 s, CLS < 0.1, INP < 200 ms
+- [ ] Validate structured data (Rich Results Test) on home, one article, FAQ page
+- [ ] Review Privacy Policy + Terms with a qualified professional for your jurisdiction
+- [ ] If enabling GA4: set `PUBLIC_GA_ID` and update the Privacy Policy
+- [ ] Join Amazon Associates (then set `AMAZON_ASSOCIATE = true` and add links in `src/lib/affiliate.ts`)
+- [ ] Apply for ad networks only after ~20–30 strong articles and steady traffic; then set `ADS_ENABLED = true`

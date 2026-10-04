@@ -1,0 +1,40 @@
+---
+import { HUBS, SITE, AMAZON_ASSOCIATE } from '../lib/site';
+const year = new Date().getUTCFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-h">ChayStore</p>
+        <p>{SITE.tagline}. Independent, research-based tea guides for everyday drinkers.</p>
+      </div>
+      <nav aria-label="Topics">
+        <p class="foot-h">Topics</p>
+        <ul>{Object.entries(HUBS).map(([id, h]) => <li><a href={`/category/${id}/`}>{h.name}</a></li>)}</ul>
+      </nav>
+      <nav aria-label="Company">
+        <p class="foot-h">Company</p>
+        <ul>
+          <li><a href="/about/">About &amp; Editorial Policy</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/search/">Search</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <p class="foot-h">Legal</p>
+        <ul>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms &amp; Conditions</a></li>
+          <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="legal">
+      <p>© {year} ChayStore.com. All rights reserved.</p>
+      {AMAZON_ASSOCIATE && <p>As an Amazon Associate, ChayStore earns from qualifying purchases.</p>}
+      <p>Content is for general information only and is not medical advice. Statements about tea have not been evaluated by the U.S. Food and Drug Administration. Consult a healthcare professional about your health.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,8 @@
+---
+// Image slot. With no `src`, renders a CSS-only placeholder block (no image files needed).
+interface Props { src?: string; alt?: string; width?: number; height?: number; class?: string; eager?: boolean }
+const { src = '', alt = '', width = 1600, height = 900, class: cls = '', eager = false } = Astro.props;
+---
+<div class={`ph ${cls}`} style={`aspect-ratio:${width}/${height}`} role={src ? undefined : 'presentation'}>
+  {src && <img src={src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" />}
+</div>

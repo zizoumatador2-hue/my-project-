@@ -1,0 +1,22 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import { SITE } from '../lib/site';
+---
+<DocLayout title="About ChayStore & Editorial Policy" h1="About ChayStore" description="ChayStore is an independent tea guide. Learn who we are, how we research, how we handle affiliate links and how to contact us." path="/about/" updated="2026-10-04">
+  <p>ChayStore is an independent guide to tea. We publish clear, practical articles about brewing, choosing and enjoying chai, black tea, green tea, matcha and herbal infusions. We do not sell tea, and nothing on this site is a shop.</p>
+  <h2>What "Chay" means</h2>
+  <p>"Chay" is a word for tea in many languages, from Russian and Turkish to Persian and Hindi. The same plant, <a href="https://en.wikipedia.org/wiki/Camellia_sinensis" rel="noopener">Camellia sinensis</a>, has been cultivated for centuries, and the name travelled with the leaf. We chose it because tea is a shared ritual across cultures.</p>
+  <h2>Who writes ChayStore</h2>
+  <p>Articles are published by the {SITE.author}. We are not doctors, chemists or professional tea tasters, and we do not claim credentials we do not hold. Our job is to research carefully, explain clearly and point you to better sources when a topic needs them.</p>
+  <h2>Editorial policy</h2>
+  <ul>
+    <li><strong>Research first.</strong> We base guides on reputable public sources such as government health agencies, university and hospital resources, and established reference works, and we link to them.</li>
+    <li><strong>No invented facts.</strong> We do not fabricate statistics, studies, reviews, awards or testimonials. If we cannot support a claim, we leave it out.</li>
+    <li><strong>No personal-testing claims.</strong> Our gear and buying guides explain what to look for. They are not hands-on lab tests unless we say so explicitly.</li>
+    <li><strong>Health caution.</strong> Wellness articles use careful language, avoid treatment claims, and carry a medical disclaimer. Tea is not a substitute for medical care.</li>
+    <li><strong>Updates.</strong> Every article shows its published and last-updated dates. We revisit evergreen guides regularly and correct errors when we find them.</li>
+    <li><strong>Independence.</strong> Affiliate commissions never buy better coverage. See our <a href="/affiliate-disclosure/">affiliate disclosure</a>.</li>
+  </ul>
+  <h2>Corrections</h2>
+  <p>Found a mistake? Email us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the page and what should change. We will review it and update the article.</p>
+</DocLayout>

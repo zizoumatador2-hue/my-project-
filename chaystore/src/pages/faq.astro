@@ -1,0 +1,18 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import { faqPage } from '../lib/schema';
+const faq = [
+  { q: 'What is ChayStore?', a: 'ChayStore is an independent tea guide. We publish articles about brewing, choosing and enjoying tea. We do not sell tea or any other products.' },
+  { q: 'Who writes the articles?', a: 'Articles are published by the ChayStore Editorial Team. We research from reputable public sources and link to them. See our editorial policy on the About page.' },
+  { q: 'Are your guides medical advice?', a: 'No. Wellness articles are general information only. Talk with a healthcare professional about your own health, medications, pregnancy or caffeine sensitivity.' },
+  { q: 'Do you earn money from links?', a: 'Some links may be affiliate links, which can earn us a commission at no extra cost to you. We mark them clearly and explain our approach in the affiliate disclosure.' },
+  { q: 'How often is content updated?', a: 'Every article shows its published and last-updated dates. We revisit evergreen guides regularly and fix errors as soon as we find them.' },
+  { q: 'How do I report a mistake or suggest a topic?', a: 'Email us from the contact page with the page URL and your suggestion. We read every message.' },
+  { q: 'Can I republish your articles?', a: 'You may quote short excerpts with a clear link back to the original. Please do not copy complete articles.' },
+];
+---
+<DocLayout title="FAQ" h1="Frequently Asked Questions" description="Answers about ChayStore: who we are, how we write, our health disclaimer, affiliate links, updates and corrections." path="/faq/" updated="2026-10-04" schema={[faqPage(faq)]}>
+  <FAQ items={faq} heading="About ChayStore" />
+  <p>Looking for tea answers? Start with the <a href="/#tea-guide">complete guide to tea</a> or browse <a href="/guides/">all guides</a>.</p>
+</DocLayout>

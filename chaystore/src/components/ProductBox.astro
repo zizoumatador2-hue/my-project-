@@ -1,0 +1,13 @@
+---
+// Reusable affiliate "product box". Links come from src/lib/affiliate.ts so they can be changed in one file.
+import { AFFILIATE } from '../lib/affiliate';
+interface Props { id: string; name: string; pros?: string[]; cons?: string[] }
+const { id, name, pros = [], cons = [] } = Astro.props;
+const link = AFFILIATE[id];
+---
+<div class="box">
+  <h3>{name}</h3>
+  {pros.length > 0 && <><p><strong>Pros</strong></p><ul>{pros.map((p) => <li>{p}</li>)}</ul></>}
+  {cons.length > 0 && <><p><strong>Cons</strong></p><ul>{cons.map((p) => <li>{p}</li>)}</ul></>}
+  {link && <p><a class="btn primary" href={link} rel="sponsored nofollow noopener" target="_blank">Check current price</a></p>}
+</div>
