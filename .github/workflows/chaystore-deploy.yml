@@ -105,7 +105,12 @@ jobs:
             exit 0
           fi
           for N in chaystore.com www.chaystore.com; do
-            EX=$(curl -sS -H "$H" "$API/zones/$ZID/dns_records?name=$N" | jq -r '[.result[] | select(.type=="A" or .type=="AAAA" or .type=="CNAME")] | length')
+            L=$(curl -sS -H "$H" "$API/zones/$ZID/dns_records?name=$N")
+            if [ "$(echo "$L" | jq -r '.success')" != "true" ]; then
+              echo "::warning::$N: the token cannot read/edit DNS records ($(echo "$L" | jq -r '.errors[0].message // "unknown"')). Grant 'Zone > DNS > Edit' or add CNAME $N -> $PROJECT.pages.dev manually."
+              continue
+            fi
+            EX=$(echo "$L" | jq -r '[.result[] | select(.type=="A" or .type=="AAAA" or .type=="CNAME")] | length')
             if [ "$EX" != "0" ]; then echo "$N: a record already exists, left untouched"; continue; fi
             R=$(curl -sS -X POST -H "$H" -H "Content-Type: application/json" "$API/zones/$ZID/dns_records" \
               -d "{\"type\":\"CNAME\",\"name\":\"$N\",\"content\":\"$PROJECT.pages.dev\",\"proxied\":true,\"ttl\":1}")
