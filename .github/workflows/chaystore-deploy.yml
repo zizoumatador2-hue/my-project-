@@ -15,6 +15,10 @@ on:
         description: 'Also attach chaystore.com and www.chaystore.com to the Pages project'
         type: boolean
         default: false
+      create_dns:
+        description: 'Create proxied CNAME records for chaystore.com and www in the Cloudflare zone (only if missing; never overwrites)'
+        type: boolean
+        default: false
 concurrency: chaystore-deploy
 jobs:
   build-and-deploy:
@@ -89,6 +93,23 @@ jobs:
             R=$(curl -sS -X POST -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
               "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" -d "{\"name\":\"$D\"}")
             echo "$D: $(echo "$R" | jq -r 'if .success then "attached (status: " + (.result.status // "pending") + ")" else (.errors[0].message // "failed") end')"
+          done
+      - name: Create DNS records (optional; never overwrites existing records)
+        if: ${{ inputs.create_dns && steps.target.outputs.kind == 'production' }}
+        run: |
+          API="https://api.cloudflare.com/client/v4"; H="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          Z=$(curl -sS -H "$H" "$API/zones?name=chaystore.com&account.id=$CLOUDFLARE_ACCOUNT_ID")
+          ZID=$(echo "$Z" | jq -r '.result[0].id // empty')
+          if [ -z "$ZID" ]; then
+            echo "::warning::Zone chaystore.com not found or not readable with this token ($(echo "$Z" | jq -r '.errors[0].message // "no zone in this account"')). Add the domain to Cloudflare, or add CNAMEs chaystore.com and www -> $PROJECT.pages.dev at your DNS provider."
+            exit 0
+          fi
+          for N in chaystore.com www.chaystore.com; do
+            EX=$(curl -sS -H "$H" "$API/zones/$ZID/dns_records?name=$N" | jq -r '[.result[] | select(.type=="A" or .type=="AAAA" or .type=="CNAME")] | length')
+            if [ "$EX" != "0" ]; then echo "$N: a record already exists, left untouched"; continue; fi
+            R=$(curl -sS -X POST -H "$H" -H "Content-Type: application/json" "$API/zones/$ZID/dns_records" \
+              -d "{\"type\":\"CNAME\",\"name\":\"$N\",\"content\":\"$PROJECT.pages.dev\",\"proxied\":true,\"ttl\":1}")
+            echo "$N: $(echo "$R" | jq -r 'if .success then "CNAME created" else (.errors[0].message // "failed") end')"
           done
       - name: Summary
         run: |
