@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChayStore — Premium Loose-Leaf Tea, Shipped Across the USA</title>
+<meta name="description" content="ChayStore.com: small-batch loose-leaf teas, chai blends and tea gear. Free shipping on US orders over $35. Ships from the USA in 1–2 business days.">
+<meta property="og:title" content="ChayStore — Premium Loose-Leaf Tea">
+<meta property="og:description" content="Small-batch teas, chai blends and tea gear. Free US shipping over $35.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chaystore.com/">
+<link rel="canonical" href="https://chaystore.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍵%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Store","name":"ChayStore","url":"https://chaystore.com","description":"Premium loose-leaf tea and tea accessories shipped across the United States.","priceRange":"$$","areaServed":"US","currenciesAccepted":"USD"}
+</script>
+</head>
+<body>
+<div class="announce">Free US shipping on orders over $35 · Ships in 1–2 business days 🇺🇸</div>
+
+<header class="site-header">
+  <a class="logo" href="#top" aria-label="ChayStore home"><span>🍵</span> Chay<b>Store</b></a>
+  <nav aria-label="Main">
+    <a href="#shop">Shop</a>
+    <a href="#story">Our Story</a>
+    <a href="#shipping">Shipping</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="cart-btn" id="cartBtn" aria-label="Open cart">🛒 Cart <span id="cartCount">0</span></button>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Small-batch · Ethically sourced · Fresh-packed in the USA</p>
+      <h1>Real tea, steeped in tradition. Delivered to your door.</h1>
+      <p class="lead">From robust Assam chai to delicate Darjeeling and ceremonial matcha — hand-picked loose-leaf teas for every cup, every mood.</p>
+      <div class="cta">
+        <a href="#shop" class="btn primary">Shop Teas</a>
+        <a href="#story" class="btn ghost">Our Story</a>
+      </div>
+      <ul class="trust">
+        <li>✔ Free shipping $35+</li>
+        <li>✔ 30-day happiness guarantee</li>
+        <li>✔ Secure checkout</li>
+      </ul>
+    </div>
+    <div class="hero-art" aria-hidden="true">🍵</div>
+  </section>
+
+  <section id="shop" class="section">
+    <h2>Shop Our Teas</h2>
+    <div class="filters" id="filters" role="tablist" aria-label="Categories"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="section alt perks">
+    <div><h3>🌿 Loose-leaf only</h3><p>Whole leaves, no dust, no artificial flavors.</p></div>
+    <div><h3>📦 Packed in the USA</h3><p>Sealed fresh in resealable, light-proof pouches.</p></div>
+    <div><h3>🤝 Fair sourcing</h3><p>Direct relationships with family-run gardens.</p></div>
+    <div><h3>💬 Real support</h3><p>US-based help within one business day.</p></div>
+  </section>
+
+  <section id="story" class="section narrow">
+    <h2>Our Story</h2>
+    <p>“Chay” is the word for tea in dozens of languages across the world — a drink that has brought people together for thousands of years. ChayStore was founded to bring that shared ritual to American cups: honest, flavorful tea at fair prices, without the grocery-aisle compromises.</p>
+    <p>We taste every batch ourselves, buy directly from growers, and pack to order so your tea arrives fresh.</p>
+  </section>
+
+  <section id="shipping" class="section alt narrow">
+    <h2>Shipping &amp; Returns</h2>
+    <ul class="list">
+      <li><b>Free</b> standard shipping on US orders over $35; otherwise a flat $5.95.</li>
+      <li>Orders ship within 1–2 business days via USPS. Delivery typically takes 2–5 business days.</li>
+      <li>Shipping to all 50 states, APO/FPO and US territories.</li>
+      <li>Not happy? Contact us within 30 days for a replacement or refund.</li>
+    </ul>
+  </section>
+
+  <section id="faq" class="section narrow">
+    <h2>FAQ</h2>
+    <details><summary>How should I store my tea?</summary><p>Keep it in the resealable pouch or an airtight tin, away from light, heat and strong odors.</p></details>
+    <details><summary>How do I brew loose-leaf tea?</summary><p>Use about 1 teaspoon per 8 oz cup. Black: 212°F for 3–5 min. Green: 175°F for 2–3 min. Herbal: 212°F for 5–7 min.</p></details>
+    <details><summary>Is your tea caffeine-free?</summary><p>Black, green, oolong and matcha contain caffeine. Our herbal blends are naturally caffeine-free and labeled as such.</p></details>
+    <details><summary>Which payment methods do you accept?</summary><p>All major credit cards, Apple Pay, Google Pay and PayPal.</p></details>
+  </section>
+
+  <section class="section alt news">
+    <h2>Get 10% off your first order</h2>
+    <form id="newsForm" class="inline-form">
+      <input type="email" id="newsEmail" placeholder="you@example.com" required aria-label="Email address">
+      <button class="btn primary" type="submit">Subscribe</button>
+    </form>
+    <p id="newsMsg" class="muted" role="status"></p>
+  </section>
+
+  <section id="contact" class="section narrow">
+    <h2>Contact</h2>
+    <form id="contactForm" class="stack">
+      <input name="name" placeholder="Your name" required aria-label="Name">
+      <input name="email" type="email" placeholder="Email" required aria-label="Email">
+      <textarea name="message" rows="4" placeholder="How can we help?" required aria-label="Message"></textarea>
+      <button class="btn primary" type="submit">Send message</button>
+    </form>
+    <p id="contactMsg" class="muted" role="status"></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div>
+    <strong>ChayStore</strong>
+    <p>Premium loose-leaf tea, shipped across the USA.</p>
+  </div>
+  <div>
+    <a href="#shop">Shop</a> · <a href="#shipping">Shipping</a> · <a href="#faq">FAQ</a> · <a href="#contact">Contact</a>
+  </div>
+  <p class="small">© <span id="year"></span> ChayStore.com. All rights reserved. · Prices in USD. · These statements have not been evaluated by the FDA. Teas are not intended to diagnose, treat, cure or prevent any disease.</p>
+</footer>
+
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head"><h3>Your Cart</h3><button id="closeCart" aria-label="Close cart">✕</button></div>
+  <div id="cartItems"></div>
+  <div class="drawer-foot">
+    <div class="row"><span>Subtotal</span><b id="subtotal">$0.00</b></div>
+    <div class="row"><span>Shipping</span><b id="shipping-cost">—</b></div>
+    <div class="row total"><span>Total</span><b id="total">$0.00</b></div>
+    <p class="muted" id="freeShipNote"></p>
+    <button class="btn primary block" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+<div class="overlay" id="overlay"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
