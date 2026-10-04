@@ -3,6 +3,8 @@ name: Pexels images
 #  mode=sheets -> builds labelled contact sheets and pushes them to the temporary branch tmp-pexels-sheets for review
 #  mode=final  -> downloads chaystore/data/pexels-final.json into chaystore/public/images (WebP 1600 + 800) and commits them
 on:
+  push:
+    paths: ['.github/workflows/pexels-images.yml']
   workflow_dispatch:
     inputs:
       mode:
@@ -22,7 +24,7 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp >/dev/null
           convert -version | head -1
       - name: Contact sheets
-        if: ${{ inputs.mode == 'sheets' }}
+        if: ${{ github.event_name == 'push' || inputs.mode == 'sheets' }}
         run: |
           mkdir -p /tmp/p /tmp/sheets
           for id in $(jq -r '.[]' chaystore/data/pexels-candidates.json); do
