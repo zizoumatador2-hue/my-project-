@@ -14,6 +14,8 @@ const articles = defineCollection({
     image: z.string().default(''),
     imageAlt: z.string().default(''),
     imageAltSuggestion: z.string().default(''),
+    imagePos: z.string().default(''),
+    imageId: z.number().optional(),
     keyTakeaways: z.array(z.string()).min(3),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).min(4),
     related: z.array(z.string()).default([]),

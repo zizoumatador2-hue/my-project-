@@ -33,7 +33,7 @@ const schema = [
   ...(d.howto ? [howTo({ name: d.title, totalTime: d.howto.totalTime, steps: d.howto.steps })] : []),
 ];
 ---
-<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} published={iso(d.publishDate)} modified={iso(d.modifiedDate)} progress keywords={d.keyword}>
+<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} published={iso(d.publishDate)} modified={iso(d.modifiedDate)} progress keywords={d.keyword} image={d.image || undefined}>
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: hub.name, path: hubUrl(d.hub) }, { name: d.title, path }]} />
   <div class="wrap">
     <header class="article-head">
@@ -46,7 +46,10 @@ const schema = [
         <span>{mins} min read</span>
       </p>
     </header>
-    <ImageSlot src={d.image} alt={d.imageAlt} width={d.image ? 1600 : 2100} height={d.image ? 900 : 420} eager class="reveal" />
+    <figure class="article-hero reveal" style="margin:0">
+      <ImageSlot src={d.image} alt={d.imageAlt} width={d.image ? 1600 : 2100} height={d.image ? 900 : 420} eager pos={d.imagePos} />
+      {d.imageId && <figcaption class="credit">Photo via <a href={`https://www.pexels.com/photo/${d.imageId}/`} rel="noopener">Pexels</a> · <a href="/credits/">credits</a></figcaption>}
+    </figure>
     <div class="article-layout" style="margin-top:2rem">
       <article class="prose">
         {d.wellness && <WellnessNotice />}

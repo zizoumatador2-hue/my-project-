@@ -5,8 +5,10 @@ hub: tea-gear
 keyword: "best tea infusers"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/best-tea-infusers-1600.webp"
+imageAlt: "Hand holding a ceramic cup with a mesh tea infuser and green tea inside"
+imageId: 18946746
 gear: true
-imageAltSuggestion: "Several types of tea infusers: a basket infuser, a ball infuser and a glass teapot with a filter"
 keyTakeaways:
   - "Basket infusers and teapots with built-in filters give leaves room to expand, which usually makes better tea than small tea balls."
   - "Fine-mesh stainless steel is durable, easy to clean and does not hold flavors."

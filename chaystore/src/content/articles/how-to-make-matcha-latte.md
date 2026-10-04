@@ -5,7 +5,9 @@ hub: green-tea-matcha
 keyword: "how to make matcha latte"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A glass of iced matcha latte with swirling green and white layers"
+image: "/images/how-to-make-matcha-latte-1600.webp"
+imageAlt: "Close-up of a frothy matcha latte in a teal ceramic cup"
+imageId: 8634757
 keyTakeaways:
   - "Use about 1 teaspoon (2 g) of matcha, a small amount of hot (not boiling) water, and 6 to 8 oz of milk."
   - "Sift the powder and whisk it into a paste first to avoid clumps."

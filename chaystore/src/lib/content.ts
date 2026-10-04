@@ -14,3 +14,10 @@ export const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric',
 export const iso = (d: Date) => d.toISOString().slice(0, 10);
 export const words = (s: string) => s.trim().split(/\s+/).length;
 export const readMins = (body: string) => Math.max(1, Math.round(words(body) / 220));
+
+export async function allWords(): Promise<number> {
+  const a = await allArticles();
+  const { getCollection } = await import('astro:content');
+  const p = await getCollection('pillar');
+  return a.reduce((n, x) => n + words(x.body ?? ''), 0) + p.reduce((n, x) => n + words(x.body ?? ''), 0);
+}

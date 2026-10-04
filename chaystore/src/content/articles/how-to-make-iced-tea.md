@@ -5,7 +5,10 @@ hub: brewing
 keyword: "how to make iced tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A tall glass of iced tea with ice cubes and a lemon slice on a table"
+image: "/images/how-to-make-iced-tea-1600.webp"
+imageAlt: "Tall glass of iced tea with a straw and a small bowl on a dark table"
+imageId: 1484678
+imagePos: "50% 40%"
 keyTakeaways:
   - "Hot-brew iced tea by making it stronger than usual, then chilling it over ice."
   - "Cold brew tea in the refrigerator for 6 to 12 hours for a smoother, less bitter result."

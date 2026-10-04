@@ -5,7 +5,9 @@ hub: chai-black-tea
 keyword: "how to make chai at home"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A saucepan of milky spiced chai simmering with cinnamon sticks and cardamom pods"
+image: "/images/how-to-make-chai-at-home-1600.webp"
+imageAlt: "Spiced black tea in a glass cup with a cinnamon stick, star anise and lemon slices on a dark surface"
+imageId: 33789289
 keyTakeaways:
   - "Real masala chai is simmered: water, strong black tea, milk and whole spices cooked together."
   - "Use crushed whole spices (cardamom, cinnamon, ginger, cloves, black pepper) for the best aroma."

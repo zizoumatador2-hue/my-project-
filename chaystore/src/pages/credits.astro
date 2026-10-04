@@ -1,0 +1,24 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import { allArticles, url } from '../lib/content';
+import imageMap from '../../data/image-map.json';
+const articles = await allArticles();
+const names: Record<number, string> = { 7138780: 'Julia Filirovska', 33118330: 'Thanh Truc Ho', 4390014: 'ric perin', 1362537: 'Teejay', 19300588: 'Feyza Yıldırım', 8474082: 'Cup of Couple' };
+const used = new Map<number, string[]>();
+const add = (id: number, label: string) => used.set(id, [...(used.get(id) ?? []), label]);
+for (const a of articles) if (a.data.imageId) add(a.data.imageId, a.data.title);
+for (const [k, id] of Object.entries(imageMap.extra as Record<string, number>)) add(id, k.startsWith('hub-') ? 'Topic hub image' : k === 'hero-steam' ? 'Home page hero' : 'Home page banner');
+for (const g of imageMap.gallery) add(g.id, 'Home page gallery');
+const list = [...used.entries()];
+---
+<DocLayout title="Photo Credits" description="Photo credits for ChayStore: free-to-use photographs from Pexels, with links to each photo page and photographer." path="/credits/" updated="2026-10-04">
+  <p>The photographs on ChayStore come from <a href="https://www.pexels.com" rel="noopener">Pexels</a>, whose license allows free use. Attribution is not required, but we credit the photographers where we can. Each link opens the photo's Pexels page, which names the photographer.</p>
+  <p>Interface effects (aurora background, text and card animations, gallery) use components from <a href="https://reactbits.dev" rel="noopener">React Bits</a> by David Haz, used under its MIT + Commons Clause license.</p>
+  <ul>
+    {list.map(([id, labels]) => (
+      <li>
+        <a href={`https://www.pexels.com/photo/${id}/`} rel="noopener">Pexels photo #{id}</a>{names[id] ? ` by ${names[id]}` : ''} — used for: {[...new Set(labels)].join('; ')}
+      </li>
+    ))}
+  </ul>
+</DocLayout>

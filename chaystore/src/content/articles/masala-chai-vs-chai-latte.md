@@ -5,7 +5,9 @@ hub: chai-black-tea
 keyword: "masala chai vs chai latte"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A cup of masala chai next to a frothy chai latte in a café mug"
+image: "/images/masala-chai-vs-chai-latte-1600.webp"
+imageAlt: "Cup of spiced tea with an orange slice next to a bowl of cinnamon sticks on a wooden board"
+imageId: 1717767
 keyTakeaways:
   - "Masala chai is simmered tea with milk and whole spices; a chai latte is a café-style drink, often made from a concentrate or syrup and steamed milk."
   - "'Chai' means tea, so 'chai tea' is redundant, although the term is common in the U.S."

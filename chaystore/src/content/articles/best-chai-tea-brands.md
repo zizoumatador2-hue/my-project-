@@ -5,8 +5,10 @@ hub: chai-black-tea
 keyword: "best chai tea brands"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/best-chai-tea-brands-1600.webp"
+imageAlt: "Open hands holding star anise and a cinnamon stick"
+imageId: 6560260
 gear: true
-imageAltSuggestion: "Several chai tea formats: tea bags, loose leaf chai with whole spices, and a bottle of chai concentrate"
 keyTakeaways:
   - "Rather than chasing a single best brand, choose the format first: tea bags, loose leaf blends, concentrate or powder."
   - "Read the ingredients: real black tea and whole spices point to a better chai than a long list of flavorings and sweeteners."

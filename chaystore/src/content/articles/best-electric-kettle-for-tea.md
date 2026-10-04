@@ -5,8 +5,11 @@ hub: tea-gear
 keyword: "best electric kettle for tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/best-electric-kettle-for-tea-1600.webp"
+imageAlt: "Steam rising from a kettle beside a glowing pot in a dark kitchen"
+imageId: 16696855
+imagePos: "50% 35%"
 gear: true
-imageAltSuggestion: "A stainless steel gooseneck electric kettle on a kitchen counter beside tea cups"
 keyTakeaways:
   - "Variable-temperature settings are the most useful feature for tea, especially for green and white tea."
   - "A gooseneck spout gives control for pour-over style brewing but is not needed for basic steeping."

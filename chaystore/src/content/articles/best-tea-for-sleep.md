@@ -5,8 +5,11 @@ hub: herbal-tea
 keyword: "best tea for sleep"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/best-tea-for-sleep-1600.webp"
+imageAlt: "Cup of chamomile tea with daisies resting on an open book"
+imageId: 17125143
+imagePos: "50% 35%"
 wellness: true
-imageAltSuggestion: "A steaming cup of chamomile tea on a bedside table with a lamp and book"
 keyTakeaways:
   - "Caffeine-free herbal teas such as chamomile, lemon balm and lavender are popular evening drinks."
   - "A calming routine matters as much as the herb: a warm drink, low light and a regular bedtime."

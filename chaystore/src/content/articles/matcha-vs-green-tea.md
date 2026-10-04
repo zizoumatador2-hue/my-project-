@@ -5,7 +5,10 @@ hub: green-tea-matcha
 keyword: "matcha vs green tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A bowl of bright green matcha beside a clear cup of steeped green tea"
+image: "/images/matcha-vs-green-tea-1600.webp"
+imageAlt: "Bamboo whisk, a spoon of matcha powder and a glass of iced matcha on a pale surface"
+imageId: 8004563
+imagePos: "50% 55%"
 keyTakeaways:
   - "Matcha is shade-grown green tea ground into a fine powder and consumed whole; regular green tea is steeped and the leaves are removed."
   - "Because you drink the whole leaf, matcha delivers more caffeine and plant compounds per serving than a typical cup of steeped green tea."

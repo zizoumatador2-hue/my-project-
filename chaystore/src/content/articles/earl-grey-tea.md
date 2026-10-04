@@ -5,7 +5,9 @@ hub: chai-black-tea
 keyword: "Earl Grey tea benefits and taste"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A cup of Earl Grey tea with a slice of lemon and dried bergamot peel nearby"
+image: "/images/earl-grey-tea-1600.webp"
+imageAlt: "Top view of a dark ceramic mug of hot tea with a lemon slice"
+imageId: 3873198
 keyTakeaways:
   - "Earl Grey is black tea flavored with oil from the bergamot orange, which gives it a citrusy, floral aroma."
   - "It contains caffeine because it is made with black tea, usually less than the same amount of coffee."

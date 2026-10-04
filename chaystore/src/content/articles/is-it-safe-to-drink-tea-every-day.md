@@ -5,8 +5,11 @@ hub: tea-wellness
 keyword: "is it safe to drink tea every day"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/is-it-safe-to-drink-tea-every-day-1600.webp"
+imageAlt: "Person in a knitted sweater holding a cup of tea in both hands"
+imageId: 6874185
+imagePos: "50% 60%"
 wellness: true
-imageAltSuggestion: "A person holding a warm mug of tea beside a window in the morning"
 keyTakeaways:
   - "For most healthy adults, drinking a few cups of tea a day is considered fine, as part of a balanced diet."
   - "Watch total caffeine, which comes from all sources, and your own sensitivity."

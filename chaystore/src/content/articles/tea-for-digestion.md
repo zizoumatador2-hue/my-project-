@@ -5,8 +5,10 @@ hub: herbal-tea
 keyword: "tea for digestion"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/tea-for-digestion-1600.webp"
+imageAlt: "Glass cup of tea with fresh green mint leaves on a burlap mat"
+imageId: 1417945
 wellness: true
-imageAltSuggestion: "A glass cup of ginger tea with fresh ginger slices and mint leaves"
 keyTakeaways:
   - "Peppermint, ginger, fennel and chamomile are the teas most commonly drunk after meals."
   - "They are traditionally used for comfort, but scientific evidence varies and tea is not a treatment for digestive conditions."

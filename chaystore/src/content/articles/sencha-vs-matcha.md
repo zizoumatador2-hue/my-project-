@@ -5,7 +5,10 @@ hub: green-tea-matcha
 keyword: "sencha vs matcha"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A cup of clear green sencha beside a bowl of frothy matcha with a bamboo whisk"
+image: "/images/sencha-vs-matcha-1600.webp"
+imageAlt: "Hands whisking matcha in a bowl beside a small teapot and tea cups"
+imageId: 5946632
+imagePos: "50% 35%"
 keyTakeaways:
   - "Sencha is a sun-grown Japanese green tea whose steamed leaves are steeped and removed; matcha is shade-grown leaf ground to a powder and consumed whole."
   - "Sencha tastes fresh, grassy and slightly sweet; matcha is richer, creamier and more savory (umami)."

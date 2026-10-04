@@ -5,7 +5,9 @@ hub: brewing
 keyword: "how much tea per cup"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A measuring spoon of loose tea leaves beside an empty white cup"
+image: "/images/how-much-tea-per-cup-1600.webp"
+imageAlt: "Cup of black tea beside small bowls of loose tea leaves and a wooden spoon on a white background"
+imageId: 4390014
 keyTakeaways:
   - "A reliable starting point is 1 teaspoon (2–3 g) of loose tea per 8 oz (240 ml) cup."
   - "Weight is more accurate than volume because tea leaves vary in size and density."

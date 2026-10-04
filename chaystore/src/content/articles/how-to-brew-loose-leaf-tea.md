@@ -5,7 +5,9 @@ hub: brewing
 keyword: "how to brew loose leaf tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "Loose tea leaves unfurling in a clear glass teapot of hot water"
+image: "/images/how-to-brew-loose-leaf-tea-1600.webp"
+imageAlt: "Glass teapot with a steel infuser, two double-walled cups and loose tea leaves on a white table"
+imageId: 1362537
 keyTakeaways:
   - "Use about 1 teaspoon of loose tea per 8 oz (240 ml) cup, then adjust to taste."
   - "Match water temperature to the tea: hotter for black and herbal, cooler for green and white."

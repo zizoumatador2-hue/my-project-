@@ -5,8 +5,11 @@ hub: tea-wellness
 keyword: "tea for stress and anxiety"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/tea-for-stress-and-anxiety-1600.webp"
+imageAlt: "Woman in a cozy sweater sitting by a window holding a cup of tea"
+imageId: 11012771
+imagePos: "50% 45%"
 wellness: true
-imageAltSuggestion: "A person holding a warm cup of herbal tea near a window in soft light"
 keyTakeaways:
   - "A warm cup of tea can be a calming ritual, but tea is not a treatment for anxiety or any medical condition."
   - "Caffeine can worsen jitters in some people, so caffeine-free herbal teas are common choices for stressful moments."

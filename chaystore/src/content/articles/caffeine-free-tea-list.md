@@ -5,8 +5,10 @@ hub: herbal-tea
 keyword: "caffeine-free tea list"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/caffeine-free-tea-list-1600.webp"
+imageAlt: "Wooden spoons holding dried chamomile flowers and lavender on white marble"
+imageId: 6694167
 wellness: true
-imageAltSuggestion: "Assorted dried herbs and flowers for tea: chamomile, peppermint, hibiscus and rooibos"
 keyTakeaways:
   - "True tea (black, green, white, oolong) always contains some caffeine; herbal infusions made from other plants usually do not."
   - "Popular naturally caffeine-free choices include rooibos, chamomile, peppermint, hibiscus, ginger and lemon balm."

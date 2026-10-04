@@ -5,8 +5,10 @@ hub: tea-wellness
 keyword: "how much caffeine in tea vs coffee"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/how-much-caffeine-in-tea-vs-coffee-1600.webp"
+imageAlt: "Glass cup of black tea steeping on a sunlit windowsill"
+imageId: 370018
 wellness: true
-imageAltSuggestion: "A cup of coffee and a cup of tea side by side on a wooden table"
 keyTakeaways:
   - "An 8 oz cup of brewed coffee typically has roughly twice the caffeine of the same size cup of black tea, and more than green tea."
   - "These are averages: leaf amount, water temperature and steeping time can change tea caffeine a lot."

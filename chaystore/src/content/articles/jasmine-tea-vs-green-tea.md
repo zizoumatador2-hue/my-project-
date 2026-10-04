@@ -5,7 +5,9 @@ hub: green-tea-matcha
 keyword: "jasmine tea vs green tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "Jasmine pearls unfurling in a glass cup with jasmine blossoms nearby"
+image: "/images/jasmine-tea-vs-green-tea-1600.webp"
+imageAlt: "Glass cup of golden jasmine tea with white jasmine blossoms on a wooden table"
+imageId: 7138780
 keyTakeaways:
   - "Jasmine tea is usually green tea scented with jasmine blossoms; plain green tea has no added scent."
   - "Both contain caffeine, since jasmine tea is typically made with a green tea base."

@@ -5,7 +5,10 @@ hub: green-tea-matcha
 keyword: "best matcha for beginners"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A small tin of matcha powder with a bamboo scoop and whisk"
+image: "/images/best-matcha-for-beginners-1600.webp"
+imageAlt: "Small bowl of matcha powder beside a bamboo whisk in bright sunlight"
+imageId: 8474082
+imagePos: "50% 40%"
 keyTakeaways:
   - "For lattes, a culinary or 'daily' grade is perfectly fine and more affordable."
   - "For drinking matcha plain, choose a ceremonial or premium grade with vivid green color."

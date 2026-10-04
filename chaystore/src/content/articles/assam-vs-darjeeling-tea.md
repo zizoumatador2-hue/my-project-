@@ -5,7 +5,9 @@ hub: chai-black-tea
 keyword: "Assam vs Darjeeling tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "Two cups of tea: a dark amber Assam and a light golden Darjeeling"
+image: "/images/assam-vs-darjeeling-tea-1600.webp"
+imageAlt: "Rolling green hills covered with tea plantations in morning mist"
+imageId: 33437258
 keyTakeaways:
   - "Assam is bold, malty and full-bodied; Darjeeling is lighter, floral and often described as muscatel."
   - "Assam suits milk and sugar, breakfast blends and chai; Darjeeling is usually enjoyed plain."

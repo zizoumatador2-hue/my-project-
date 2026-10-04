@@ -5,7 +5,9 @@ hub: brewing
 keyword: "loose leaf tea vs tea bags"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A tea bag and a pile of loose tea leaves side by side on a wooden board"
+image: "/images/loose-leaf-tea-vs-tea-bags-1600.webp"
+imageAlt: "Loose black tea leaves spilling from a white cup beside sugar cubes"
+imageId: 6448535
 keyTakeaways:
   - "Loose leaf tea usually contains larger pieces of leaf, which often gives a fuller flavor."
   - "Tea bags are convenient, consistent and fast; some modern bags use whole leaf."

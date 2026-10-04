@@ -9,6 +9,14 @@ import AdSlot from '../components/AdSlot.astro';
 import { HUBS, SITE } from '../lib/site';
 import { allArticles, hubUrl, iso } from '../lib/content';
 import { organization, website, faqPage } from '../lib/schema';
+import AuroraBg from '../components/react/AuroraBg';
+import ShinyEyebrow from '../components/react/ShinyEyebrow';
+import HeroLead from '../components/react/HeroLead';
+import Stats from '../components/react/Stats';
+import HubGrid from '../components/react/HubGrid';
+import TeaGallery from '../components/react/TeaGallery';
+import ImageSlot from '../components/ImageSlot.astro';
+import { allWords } from '../lib/content';
 
 const articles = await allArticles();
 const parts = (await getCollection('pillar')).sort((a, b) => a.data.order - b.data.order);
@@ -25,6 +33,14 @@ const faq = [
   { q: 'Is ChayStore a shop?', a: 'No. ChayStore is an independent guide to tea. We do not sell tea. Some pages may contain affiliate links, which we disclose clearly.' },
 ];
 const schema = [organization(), website(), faqPage(faq)];
+const hubData = Object.entries(HUBS).map(([id, h]) => ({ id, name: h.name, blurb: h.blurb, count: count(id), image: `/images/hub-${id}-800.webp` }));
+const totalWords = Math.round((await allWords()) / 1000) * 1000;
+const stats = [
+  { value: articles.length, label: 'in-depth guides' },
+  { value: Object.keys(HUBS).length, label: 'topic hubs' },
+  { value: totalWords, label: 'words of guidance', suffix: '+' },
+];
+const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Winter pour"}, {"id": 1362537, "text": "Glass teapot"}, {"id": 32695045, "text": "Iced matcha"}, {"id": 7138780, "text": "Jasmine"}, {"id": 19880782, "text": "Tea for two"}, {"id": 33789289, "text": "Spiced tea"}, {"id": 8634757, "text": "Matcha latte"}, {"id": 17125143, "text": "Chamomile"}, {"id": 6871921, "text": "Tea terraces"}].map((g, i) => ({ image: `/images/gallery-${i + 1}-800.webp`, text: g.text }));
 ---
 <BaseLayout
   title="Tea Guide: Types of Tea, Brewing & Buying | ChayStore"
@@ -35,23 +51,26 @@ const schema = [organization(), website(), faqPage(faq)];
   keywords="tea guide, types of tea, how to brew tea, loose leaf tea, chai, matcha, green tea, black tea, herbal tea"
 >
   <section class="hero" aria-labelledby="hero-title">
-    <canvas class="hero-steam" aria-hidden="true"></canvas>
+    <AuroraBg client:idle />
     <div class="hero-grain" aria-hidden="true"></div>
     <div class="letterbox top" aria-hidden="true"></div>
     <div class="letterbox bot" aria-hidden="true"></div>
     <div class="wrap">
       <div class="hero-inner" data-parallax="0.18">
-        <p class="eyebrow">Independent tea guides · Updated {iso(new Date('2026-10-04'))}</p>
+        <p class="eyebrow"><ShinyEyebrow client:load text={`Independent tea guides · Updated ${iso(new Date('2026-10-04'))}`} /></p>
         <h1 id="hero-title">Every great cup of tea starts with <em>knowing the leaf.</em></h1>
-        <p class="lead">Clear, research-based guides to chai, green tea, matcha, black tea and herbal infusions. How to brew them, how to choose them, and how to enjoy them at home.</p>
+        <div class="lead"><HeroLead client:load text="Clear, research-based guides to chai, green tea, matcha, black tea and herbal infusions. How to brew them, how to choose them, and how to enjoy them at home." /></div>
         <div class="cta-row">
           <a class="btn primary" href="#tea-guide">Read the complete tea guide</a>
           <a class="btn ghost" href="/guides/">Browse all guides</a>
         </div>
       </div>
     </div>
+    <div class="hero-photo" data-parallax="-0.06" aria-hidden="true"><img src="/images/hero-steam-800.webp" alt="" width="800" height="1000" decoding="async" loading="eager" /></div>
     <div class="scroll-cue" aria-hidden="true"></div>
   </section>
+
+  <section class="stats-band" aria-label="Site at a glance"><div class="wrap"><Stats client:visible stats={stats} /></div></section>
 
   <section class="section dark" aria-labelledby="hubs-h">
     <div class="wrap">
@@ -59,15 +78,7 @@ const schema = [organization(), website(), faqPage(faq)];
         <h2 id="hubs-h">Explore tea by topic</h2>
         <p>Six hubs, each one a deep dive. Pick the part of tea you want to master first.</p>
       </div>
-      <ul class="grid">
-        {Object.entries(HUBS).map(([id, h], i) => (
-          <li class="card hub-card reveal" data-d={String(i % 3)}>
-            <h3><a href={hubUrl(id as keyof typeof HUBS)}>{h.name}</a></h3>
-            <p>{h.blurb}</p>
-            <span class="count">{count(id)} guides</span>
-          </li>
-        ))}
-      </ul>
+      <HubGrid client:visible hubs={hubData} />
     </div>
   </section>
 
@@ -82,6 +93,11 @@ const schema = [organization(), website(), faqPage(faq)];
     </div>
   </section>
 
+  <section class="dark-gallery" aria-label="Tea in pictures">
+    <TeaGallery client:visible items={gallery} />
+    <p class="gallery-note">Drag or scroll to explore. Photos from <a href="https://www.pexels.com" rel="noopener">Pexels</a> · <a href="/credits/">credits</a></p>
+  </section>
+
   <section class="section sand" id="tea-guide" aria-labelledby="pillar-title">
     <div class="wrap">
       <div class="section-head">
@@ -89,6 +105,7 @@ const schema = [organization(), website(), faqPage(faq)];
         <h2 id="pillar-title">The Complete Guide to Tea</h2>
         <p>Everything in one place: what tea is, the six types, how to brew each one, the gear worth owning, how to buy and store tea, and what to read next.</p>
       </div>
+      <ImageSlot src="/images/pillar-terraces-1600.webp" alt="Terraced green tea fields on a hillside with a winding path" width={1600} height={640} class="pillar-banner" pos="50% 60%" />
       <div class="pillar-wrap">
         <article class="prose pillar" aria-label="The Complete Guide to Tea">
           {rendered.map((r) => <r.Content />)}

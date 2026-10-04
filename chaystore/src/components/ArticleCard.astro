@@ -5,7 +5,7 @@ const { a, level = 3 } = Astro.props as { a: Article; level?: 2 | 3 };
 const H = (`h${level}`) as 'h2' | 'h3';
 ---
 <li class="card reveal">
-  <ImageSlot src={a.data.image} alt={a.data.imageAlt} width={800} height={450} />
+  <ImageSlot src={a.data.image} alt={a.data.imageAlt} width={800} height={450} pos={a.data.imagePos} sizes="(min-width: 1120px) 270px, (min-width: 600px) 33vw, 100vw" />
   <div class="card-body">
     <span class="tag">{hubOf(a).name}</span>
     <H><a href={url(a)}>{a.data.title}</a></H>

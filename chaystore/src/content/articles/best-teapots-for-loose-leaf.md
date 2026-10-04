@@ -5,8 +5,11 @@ hub: tea-gear
 keyword: "best teapots for loose leaf"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
+image: "/images/best-teapots-for-loose-leaf-1600.webp"
+imageAlt: "Flat lay of a dark teapot, small bowls of loose tea and white tea cups"
+imageId: 33118330
+imagePos: "50% 40%"
 gear: true
-imageAltSuggestion: "A ceramic teapot with a removable stainless filter basket, with loose tea leaves and a cup beside it"
 keyTakeaways:
   - "Choose a teapot with a roomy filter or strainer so loose leaves can expand."
   - "Ceramic and porcelain are neutral and versatile; glass shows the leaves; cast iron holds heat; unglazed clay is best kept for one kind of tea."

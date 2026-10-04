@@ -5,7 +5,10 @@ hub: green-tea-matcha
 keyword: "what is kahwa tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A small glass of golden kahwa tea with almonds, saffron threads and a cinnamon stick"
+image: "/images/what-is-kahwa-tea-1600.webp"
+imageAlt: "Cup of red tea with a silver teapot, a candle and orange flowers on a wooden tray"
+imageId: 19040147
+imagePos: "50% 55%"
 keyTakeaways:
   - "Kahwa is a traditional Kashmiri tea made with green tea, saffron and spices such as cardamom and cinnamon, often served with almonds."
   - "It is typically made without milk, which makes it lighter and more aromatic than masala chai."

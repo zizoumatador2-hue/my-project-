@@ -5,7 +5,9 @@ hub: brewing
 keyword: "how to store loose leaf tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "Several airtight tea tins on a shelf in a dark cupboard"
+image: "/images/how-to-store-loose-leaf-tea-1600.webp"
+imageAlt: "Glass storage jars filled with loose tea and dried herbs on a wooden shelf"
+imageId: 4044070
 keyTakeaways:
   - "Tea's four enemies are air, light, heat and moisture, plus strong odors."
   - "Store loose leaf tea in an airtight, opaque container in a cool, dry cupboard."

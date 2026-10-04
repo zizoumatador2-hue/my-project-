@@ -5,7 +5,10 @@ hub: brewing
 keyword: "water temperature for green tea"
 publishDate: 2026-10-04
 modifiedDate: 2026-10-04
-imageAltSuggestion: "A kettle pouring water into a glass cup of pale green tea"
+image: "/images/water-temperature-for-green-tea-1600.webp"
+imageAlt: "Hand pouring hot water from a cast-iron kettle into a small cup"
+imageId: 19300588
+imagePos: "50% 55%"
 keyTakeaways:
   - "Most green teas taste best with water around 160–185°F (70–85°C), not boiling."
   - "Japanese steamed teas like sencha and gyokuro favor the cooler end; roasted or pan-fired teas tolerate hotter water."
