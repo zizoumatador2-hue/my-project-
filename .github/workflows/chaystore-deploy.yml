@@ -55,14 +55,33 @@ jobs:
           if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id; add a CLOUDFLARE_ACCOUNT_ID secret"; exit 1; fi
           echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
       - name: Ensure Pages project exists
+        continue-on-error: true
         run: |
           R=$(curl -sS -X POST -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
             "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects" \
             -d "{\"name\":\"$PROJECT\",\"production_branch\":\"main\"}")
-          echo "$R" | jq -r 'if .success then "created project" else (.errors[0].message // "unknown") end'
-          # "already exists" is fine; anything else surfaces at the deploy step.
+          echo "$R" | jq -r 'if .success then "created project" else (.errors[0].message // "unknown") end' || true
+          # "already exists" or missing permission is fine here; the deploy step reports real failures.
       - name: Deploy to Cloudflare Pages
-        run: npx --yes wrangler@4 pages deploy dist --project-name "$PROJECT" --branch "${{ steps.target.outputs.branch }}" --commit-dirty=true
+        id: pages
+        continue-on-error: true
+        run: |
+          npx --yes wrangler@4 pages deploy dist --project-name "$PROJECT" --branch "${{ steps.target.outputs.branch }}" --commit-dirty=true | tee deploy.log
+          URL=$(grep -Eo 'https://[a-z0-9.-]+\.pages\.dev' deploy.log | tail -1)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Fallback, serve from Workers static assets (token without Pages permission; production only)
+        id: worker
+        if: ${{ steps.pages.outcome != 'success' && steps.target.outputs.kind == 'production' }}
+        run: |
+          echo "::warning::Pages deploy failed (the token likely lacks 'Cloudflare Pages: Edit'). Deploying the static site as a Worker instead."
+          npx --yes wrangler@4 deploy --config wrangler.assets.toml
+          SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
+          echo "url=https://chaystore.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Fail if nothing was deployed
+        if: ${{ steps.pages.outcome != 'success' && steps.worker.outcome != 'success' }}
+        run: |
+          echo "::error::Deploy failed on Pages and on the fallback. Check token permissions (Cloudflare Pages Edit, Workers Scripts Edit)."
+          exit 1
       - name: Attach custom domains (optional)
         if: ${{ inputs.attach_domain && steps.target.outputs.kind == 'production' }}
         run: |
@@ -74,4 +93,4 @@ jobs:
       - name: Summary
         run: |
           echo "ChayStore ${{ steps.target.outputs.kind }} deploy finished (branch ${{ steps.target.outputs.branch }})." >> "$GITHUB_STEP_SUMMARY"
-          echo "Default URL: https://$PROJECT.pages.dev (previews: https://<branch>.$PROJECT.pages.dev)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Live URL: ${{ steps.pages.outputs.url || steps.worker.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"
