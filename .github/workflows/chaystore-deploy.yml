@@ -94,6 +94,11 @@ jobs:
               "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" -d "{\"name\":\"$D\"}")
             echo "$D: $(echo "$R" | jq -r 'if .success then "attached (status: " + (.result.status // "pending") + ")" else (.errors[0].message // "failed") end')"
           done
+      - name: Report custom-domain status
+        if: ${{ inputs.attach_domain && steps.target.outputs.kind == 'production' }}
+        run: |
+          curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" \
+            | jq -r '.result[]? | "\(.name): status=\(.status) validation=\(.validation_data.status // "-") verification=\(.verification_data.status // "-") error=\(.validation_data.error_message // .verification_data.error_message // "-")"'
       - name: Create DNS records (optional; never overwrites existing records)
         if: ${{ inputs.create_dns && steps.target.outputs.kind == 'production' }}
         run: |
