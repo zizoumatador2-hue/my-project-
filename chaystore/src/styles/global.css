@@ -190,3 +190,32 @@ h4{font-size:1.15rem;margin:1.6rem 0 .5rem}
   .card,.btn{transition:none}
 }
 @media print{.site-header,.site-footer,.progress,.hero-steam,.aside,.adslot{display:none}}
+
+/* ---------- React Bits integration ---------- */
+.hero-aurora{position:absolute;inset:0;z-index:-2;opacity:.8;mix-blend-mode:screen;pointer-events:none}
+.hero .lead{margin:0 0 2rem}
+.lead-blur{display:flex;flex-wrap:wrap;margin:0;font-size:inherit;color:inherit}
+.stats{list-style:none;margin:0;padding:1.4rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;text-align:center}
+.stats strong{display:block;font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);color:var(--gold);line-height:1.1}
+.stats span{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#cfc8b6}
+.stats-band{background:linear-gradient(180deg,var(--night),var(--night-2));border-top:1px solid rgba(230,184,122,.15);border-bottom:1px solid rgba(230,184,122,.15)}
+.hub-grid li{display:block}
+.card-spotlight.hub-spot{height:100%;padding:0;border:1px solid rgba(230,184,122,.28);background:linear-gradient(160deg,var(--night-2),var(--night));border-radius:var(--r);overflow:hidden;position:relative;color:#e8e1d1}
+.hub-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;opacity:.9;transition:transform .6s,opacity .3s}
+.card-spotlight.hub-spot:hover .hub-img{transform:scale(1.05);opacity:1}
+.hub-body{padding:1.1rem 1.3rem 1.3rem}
+.hub-body h3{margin:0 0 .3rem;font-size:1.25rem}
+.hub-body h3 a{color:var(--cream);text-decoration:none}
+.hub-body h3 a::after{content:"";position:absolute;inset:0}
+.hub-body p{margin:0 0 .5rem;color:#cfc8b6;font-size:.95rem}
+.hub-body .count{color:var(--gold);font-size:.85rem;font-weight:600}
+.gallery-wrap{position:relative;height:min(70vh,520px);background:var(--night)}
+.gallery-wrap canvas{display:block;width:100%;height:100%}
+.gallery-note{text-align:center;color:#a9a493;font-size:.85rem;padding:.6rem 1rem 1.4rem;background:var(--night)}
+.gallery-note a{color:#cfc8b6}
+.ph img{transition:transform .8s ease}
+.card:hover .ph img{transform:scale(1.04)}
+.article-hero{position:relative;overflow:hidden;border-radius:var(--r)}
+.article-hero .ph{border-radius:var(--r)}
+.credit{font-size:.75rem;color:var(--muted);margin:.4rem 0 0;text-align:right}
+@media (prefers-reduced-motion:reduce){.ph img,.hub-img{transition:none}}
