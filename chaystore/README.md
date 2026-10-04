@@ -19,7 +19,10 @@ npm run check:links    # integrity checks on dist/: links, anchors, one H1, head
 - `public/_headers`: cache rules (immutable assets, no-cache HTML) and security headers for Cloudflare Pages.
 
 ## Images
-No images are bundled. Every article has `image: ""` and `imageAlt: ""` in its front matter; add a file under `public/images/` and fill both fields. Until then a CSS-only placeholder is shown. `imageAltSuggestion` holds suggested alt text.
+Photos are free-to-use Pexels photos (WebP, 1600 + 800 px) in `public/images/`; the chosen photo IDs, alt text and focal points are in `data/image-map.json` and each article's front matter (`image`, `imageAlt`, `imageId`, `imagePos`). `.github/workflows/pexels-images.yml` re-downloads them from `data/pexels-final.json`. Credits are generated at `/credits/`. Articles without `image` fall back to a CSS-only placeholder.
+
+## Effects (React Bits)
+Cinematic UI comes from [React Bits](https://reactbits.dev) components copied to `src/react-bits/` (Aurora, BlurText, ShinyText, SpotlightCard, CountUp, CircularGallery), used as small Astro/React islands in `src/components/react/`. Aurora (WebGL) starts only after the first user interaction to protect Core Web Vitals; reduced-motion users get the static gradient. License: MIT + Commons Clause (see `THIRD-PARTY-NOTICES.md`).
 
 ## Analytics
 Leave `PUBLIC_GA_ID` empty to ship with no cookies. If set, GA4 loads only after the visitor accepts the consent banner.

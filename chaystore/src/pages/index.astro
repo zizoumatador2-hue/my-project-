@@ -57,16 +57,16 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
     <div class="letterbox bot" aria-hidden="true"></div>
     <div class="wrap">
       <div class="hero-inner" data-parallax="0.18">
-        <p class="eyebrow"><ShinyEyebrow client:load text={`Independent tea guides · Updated ${iso(new Date('2026-10-04'))}`} /></p>
+        <p class="eyebrow"><ShinyEyebrow client:idle text={`Independent tea guides · Updated ${iso(new Date('2026-10-04'))}`} /></p>
         <h1 id="hero-title">Every great cup of tea starts with <em>knowing the leaf.</em></h1>
-        <div class="lead"><HeroLead client:load text="Clear, research-based guides to chai, green tea, matcha, black tea and herbal infusions. How to brew them, how to choose them, and how to enjoy them at home." /></div>
+        <div class="lead"><HeroLead client:idle text="Clear, research-based guides to chai, green tea, matcha, black tea and herbal infusions. How to brew them, how to choose them, and how to enjoy them at home." /></div>
         <div class="cta-row">
           <a class="btn primary" href="#tea-guide">Read the complete tea guide</a>
           <a class="btn ghost" href="/guides/">Browse all guides</a>
         </div>
       </div>
     </div>
-    <div class="hero-photo" data-parallax="-0.06" aria-hidden="true"><img src="/images/hero-steam-800.webp" alt="" width="800" height="1000" decoding="async" loading="eager" /></div>
+    <div class="hero-photo" data-parallax="-0.06" aria-hidden="true"><img src="/images/hero-steam-800.webp" alt="" width="800" height="1000" decoding="async" fetchpriority="low" /></div>
     <div class="scroll-cue" aria-hidden="true"></div>
   </section>
 
