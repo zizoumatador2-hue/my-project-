@@ -163,11 +163,13 @@ Here is a suggested reading path, depending on what you want to do:
 - [Masala chai vs chai latte](/guides/masala-chai-vs-chai-latte/)
 - [Earl Grey tea](/guides/earl-grey-tea/)
 - [Assam vs Darjeeling tea](/guides/assam-vs-darjeeling-tea/)
+- [Best chai tea brands: how to choose](/guides/best-chai-tea-brands/)
 
 **Explore green tea and matcha**
 - [Matcha vs green tea](/guides/matcha-vs-green-tea/)
 - [How to make a matcha latte](/guides/how-to-make-matcha-latte/)
 - [Best matcha for beginners](/guides/best-matcha-for-beginners/)
+- [Sencha vs matcha](/guides/sencha-vs-matcha/)
 - [Jasmine tea vs green tea](/guides/jasmine-tea-vs-green-tea/)
 - [What is kahwa tea](/guides/what-is-kahwa-tea/)
 
@@ -175,12 +177,14 @@ Here is a suggested reading path, depending on what you want to do:
 - [Caffeine-free tea list](/guides/caffeine-free-tea-list/)
 - [Best tea for sleep](/guides/best-tea-for-sleep/)
 - [Tea for digestion](/guides/tea-for-digestion/)
+- [Tea for stress and anxiety](/guides/tea-for-stress-and-anxiety/)
 - [Caffeine in tea vs coffee](/guides/how-much-caffeine-in-tea-vs-coffee/)
 - [Is it safe to drink tea every day](/guides/is-it-safe-to-drink-tea-every-day/)
 
 **Gear and storage**
 - [Best electric kettle for tea](/guides/best-electric-kettle-for-tea/)
 - [Best tea infusers](/guides/best-tea-infusers/)
+- [Best teapots for loose leaf tea](/guides/best-teapots-for-loose-leaf/)
 - [How to store loose leaf tea](/guides/how-to-store-loose-leaf-tea/)
 - [Loose leaf tea vs tea bags](/guides/loose-leaf-tea-vs-tea-bags/)
 
