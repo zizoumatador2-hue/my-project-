@@ -4,8 +4,9 @@ export const SITE = {
   tagline: 'Your Everyday Guide to Great Tea',
   description:
     'Independent tea guides: how to brew, how to choose, and how to enjoy chai, green tea, matcha, black tea and herbal tea at home.',
-  // Placeholder mailbox: create it (or change it here) before launch.
-  email: 'contact@chaystore.com',
+  // Contact point (a contact site, not a mailbox).
+  contactUrl: 'https://info.christopherkunz.com',
+  contactLabel: 'info.christopherkunz.com',
   author: 'ChayStore Editorial Team',
   gaId: import.meta.env.PUBLIC_GA_ID ?? '',
 };

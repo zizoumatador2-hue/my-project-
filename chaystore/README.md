@@ -13,7 +13,7 @@ npm run check:links    # integrity checks on dist/: links, anchors, one H1, head
 - `src/content/pillar/*.md`: the ~8,000-word homepage pillar guide (rendered in order).
 - `src/content/articles/*.md`: 22 cluster guides (frontmatter schema in `src/content.config.ts`).
 - `src/pages`: home, `/guides/`, `/category/<hub>/`, About (editorial policy), Contact, FAQ, Privacy, Terms, Affiliate Disclosure, Search, RSS, 404.
-- `src/lib/site.ts`: site constants, hubs, `ADS_ENABLED`, `AMAZON_ASSOCIATE`, contact email (placeholder).
+- `src/lib/site.ts`: site constants, hubs, `ADS_ENABLED`, `AMAZON_ASSOCIATE`, contact URL (`info.christopherkunz.com`).
 - `src/lib/affiliate.ts`: single place for affiliate links (`<ProductBox id="..." />`).
 - `src/scripts/cinema.ts`: cinematic effects (steam canvas, parallax, scroll reveal, progress bar), all disabled for `prefers-reduced-motion`.
 - `public/_headers`: cache rules (immutable assets, no-cache HTML) and security headers for Cloudflare Pages.

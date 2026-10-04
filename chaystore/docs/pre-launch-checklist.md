@@ -1,5 +1,5 @@
 # Pre-launch checklist
-- [ ] Replace the placeholder contact mailbox (`SITE.email` in `src/lib/site.ts`) with a real, monitored address
+- [ ] Contact point is `https://info.christopherkunz.com` (`SITE.contactUrl` in `src/lib/site.ts`); confirm it works and is monitored
 - [ ] Add images + alt text to all articles (front matter `image`, `imageAlt`)
 - [ ] Human-review every article with `docs/editorial-checklist.md`; verify all external links and facts
 - [ ] Attach chaystore.com (and www) in Cloudflare Pages; confirm HTTPS and redirect www → apex (or reverse)
