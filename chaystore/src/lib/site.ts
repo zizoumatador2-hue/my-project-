@@ -5,6 +5,7 @@ export const SITE = {
   description:
     'Independent tea guides: how to brew, how to choose, and how to enjoy chai, green tea, matcha, black tea and herbal tea at home.',
   // Contact point (a contact site, not a mailbox).
+  email: 'info@christopherkunz.com',
   contactUrl: 'https://info.christopherkunz.com',
   contactLabel: 'info.christopherkunz.com',
   author: 'ChayStore Editorial Team',

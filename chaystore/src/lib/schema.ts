@@ -9,7 +9,8 @@ export const organization = () => ({
   name: SITE.name,
   url: SITE.url,
   description: SITE.description,
-  contactPoint: { '@type': 'ContactPoint', contactType: 'editorial', url: SITE.contactUrl },
+  email: SITE.email,
+  contactPoint: { '@type': 'ContactPoint', contactType: 'editorial', email: SITE.email, url: SITE.contactUrl },
 });
 
 export const website = () => ({
