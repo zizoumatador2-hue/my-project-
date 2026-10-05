@@ -15,7 +15,7 @@ const p = photoFor(Astro.props.pkey);
       </a>{' '}
       on{' '}
       <a href={p.url} rel="noopener nofollow" target="_blank">
-        Pexels
+        {p.source ?? 'Pexels'}
       </a>
     </p>
   )

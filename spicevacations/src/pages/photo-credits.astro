@@ -10,12 +10,13 @@ const pageHref = (key: string) => (key.startsWith('home/') ? '/' : `/${key}/`);
 <Page
   title="Photo credits"
   metaTitle="Photo Credits | SpiceVacations"
-  description="Credits for the photographs used on SpiceVacations.com. Photos are provided by talented photographers on Pexels under the Pexels license."
+  description="Credits for the photographs used on SpiceVacations.com. Photos are provided by talented photographers on Pexels and Pixabay under their free licenses."
   updated="October 5, 2026"
 >
   <p>
-    The photographs on SpiceVacations.com come from photographers who share their work on <a href="https://www.pexels.com/" rel="noopener">Pexels</a>,
-    used under the <a href="https://www.pexels.com/license/" rel="noopener">Pexels license</a>. Photos marked "representative" show the
+    The photographs on SpiceVacations.com come from photographers who share their work on <a href="https://www.pexels.com/" rel="noopener">Pexels</a> and
+    <a href="https://pixabay.com/" rel="noopener">Pixabay</a>, used under the <a href="https://www.pexels.com/license/" rel="noopener">Pexels license</a>
+    and the <a href="https://pixabay.com/service/license-summary/" rel="noopener">Pixabay content license</a>. Photos marked "representative" show the
     destination or the type of setting, not the exact resort. Where no photo is listed, the page uses an original SpiceVacations illustration.
   </p>
   {
@@ -40,7 +41,7 @@ const pageHref = (key: string) => (key.startsWith('home/') ? '/' : `/${key}/`);
                   <a href={p.photographerUrl} rel="noopener nofollow">{p.photographer}</a>
                 </td>
                 <td>
-                  <a href={p.url} rel="noopener nofollow">View on Pexels</a>
+                  <a href={p.url} rel="noopener nofollow">View on {p.source ?? 'Pexels'}</a>
                 </td>
               </tr>
             ))}

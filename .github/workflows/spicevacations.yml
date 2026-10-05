@@ -30,9 +30,10 @@ jobs:
             spicevacations/src/data/photos.json
           key: pexels-${{ hashFiles('spicevacations/src/content/**', 'spicevacations/scripts/fetch-photos.mjs') }}
           restore-keys: pexels-
-      - name: Fetch photos from Pexels (skipped when PEXELS_API_KEY is not set)
+      - name: Fetch stock photos (Pexels or Pixabay; skipped when no key is set)
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY || vars.PIXABAY_API_KEY }}
         run: node scripts/fetch-photos.mjs
       - run: npm run report:content
       - run: npm run check
@@ -79,9 +80,10 @@ jobs:
             spicevacations/src/data/photos.json
           key: pexels-${{ hashFiles('spicevacations/src/content/**', 'spicevacations/scripts/fetch-photos.mjs') }}
           restore-keys: pexels-
-      - name: Fetch photos from Pexels (skipped when PEXELS_API_KEY is not set)
+      - name: Fetch stock photos (Pexels or Pixabay; skipped when no key is set)
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY || vars.PIXABAY_API_KEY }}
         run: node scripts/fetch-photos.mjs
       - run: npm run build
       - name: Deploy Worker + static assets

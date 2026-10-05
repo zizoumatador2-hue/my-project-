@@ -54,7 +54,7 @@ const schema = [
 ];
 const heroWords = ['Find', 'Your', 'Next'];
 const heroPhoto = photoFor('home/hero');
-const heroSrc = heroPhoto ? srcOf(heroPhoto, 1600) : '/art/sunset-coral.svg';
+const heroSrc = heroPhoto ? srcOf(heroPhoto) : '/art/sunset-coral.svg';
 const bandPhoto = photoFor('home/band');
 const stats = [
   { n: destinations.length, label: 'destinations for couples' },
@@ -284,7 +284,7 @@ const stats = [
     <div class="cine-band__media">
       {
         bandPhoto ? (
-          <img src={srcOf(bandPhoto, 1600)} srcset={srcsetOf(bandPhoto)} sizes="100vw" alt={bandPhoto.alt} width="1600" height="1000" loading="lazy" data-parallax />
+          <img src={srcOf(bandPhoto)} srcset={srcsetOf(bandPhoto)} sizes="100vw" alt={bandPhoto.alt} width="1600" height="1000" loading="lazy" data-parallax />
         ) : (
           <img src="/art/overwater-teal.svg" alt="Illustrated overwater bungalows on a calm turquoise lagoon" width="1600" height="1000" loading="lazy" data-parallax />
         )

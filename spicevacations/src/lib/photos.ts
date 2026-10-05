@@ -1,9 +1,9 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-/** Licensed Pexels photos fetched at build time (scripts/fetch-photos.mjs). Empty → illustrations. */
+/** Licensed stock photos (Pexels or Pixabay) fetched at build time (scripts/fetch-photos.mjs). Empty → illustrations. */
 export interface Photo {
-  id: number;
+  id: number | string;
   base: string;
   widths: number[];
   alt: string;
@@ -12,6 +12,8 @@ export interface Photo {
   photographerUrl: string;
   url: string;
   representative?: boolean;
+  /** Library the photo came from ("Pexels" or "Pixabay"); older manifests omit it. */
+  source?: string;
 }
 
 let cache: Record<string, Photo> | undefined;
@@ -28,5 +30,9 @@ export function photos(): Record<string, Photo> {
 }
 
 export const photoFor = (key?: string): Photo | undefined => (key ? photos()[key] : undefined);
-export const srcOf = (p: Photo, w = 1600) => `${p.base}-${w}.webp`;
+/** URL of the closest generated width that does not exceed `w` (falls back to the smallest). */
+export const srcOf = (p: Photo, w = Infinity) => {
+  const fit = [...p.widths].sort((a, b) => a - b).filter((x) => x <= w);
+  return `${p.base}-${fit.at(-1) ?? Math.min(...p.widths)}.webp`;
+};
 export const srcsetOf = (p: Photo) => p.widths.map((w) => `${p.base}-${w}.webp ${w}w`).join(', ');
