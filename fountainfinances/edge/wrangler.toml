@@ -1,0 +1,6 @@
+# Edge Worker that serves the Pages site on the custom domain (see worker.js).
+# Custom domains are attached by scripts/connect-domain.sh through the API.
+name = "fountainfinances-edge"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = false

@@ -78,7 +78,10 @@ export const now = () => Math.floor(Date.now() / 1000);
 
 /** Fixed-window rate limit stored in D1. Returns true when the request is allowed. */
 export async function rateLimit(env: Env, req: Request, scope: string, limit: number, windowSec: number): Promise<boolean> {
-  const ip = req.headers.get('cf-connecting-ip') || 'unknown';
+  // Behind the edge Worker (custom domain) the visitor's IP arrives in x-ff-client-ip;
+  // cf-worker is set by Cloudflare on Worker subrequests and cannot come from a browser.
+  const viaEdge = req.headers.get('cf-worker') === 'fountainfinances.com';
+  const ip = (viaEdge && req.headers.get('x-ff-client-ip')) || req.headers.get('cf-connecting-ip') || 'unknown';
   const bucket = `${scope}:${await sha256(`${env.IP_HASH_SALT}:${ip}`)}`;
   const windowStart = Math.floor(now() / windowSec) * windowSec;
   const row = await env.DB.prepare(

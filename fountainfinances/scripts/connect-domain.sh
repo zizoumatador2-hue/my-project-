@@ -68,6 +68,25 @@ if [ -n "$ZONE_ID" ]; then
   [ "$(echo "$R" | jq -r .success)" = true ] && summary "- Redirect $DOMAIN → www.$DOMAIN (301) active." || summary "- Redirect rule: $(echo "$R" | errors)"
 fi
 
+# 4b) If the domain still doesn't serve this site (no DNS permission), put the edge Worker on it.
+#     Worker Custom Domains create their own DNS records (needs Zone › Workers Routes › Edit).
+PAGES_STATUS=$(cf "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" | jq -r --arg h "www.$DOMAIN" '.result[]? | select(.name==$h) | .status')
+if [ -n "$ZONE_ID" ] && [ "$PAGES_STATUS" != active ]; then
+  if (cd edge && npx wrangler deploy --config wrangler.toml >/tmp/edge.log 2>&1); then
+    summary "- Edge Worker fountainfinances-edge deployed."
+    for host in "www.$DOMAIN" "$DOMAIN"; do
+      R=$(cf -X PUT "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" --data "{\"hostname\":\"$host\",\"service\":\"fountainfinances-edge\",\"zone_id\":\"$ZONE_ID\",\"environment\":\"production\",\"override_existing_dns_record\":true}")
+      if [ "$(echo "$R" | jq -r .success)" = true ]; then
+        summary "- Worker custom domain $host attached (Cloudflare created the DNS record and certificate)."
+      else
+        summary "- Worker custom domain $host: $(echo "$R" | errors)"
+      fi
+    done
+  else
+    summary "- Edge Worker deploy failed: $(tail -5 /tmp/edge.log | tr '\n' ' ')"
+  fi
+fi
+
 # 5) Current Pages domain status
 cf "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" \
   | jq -r '.result[]? | "- \(.name): \(.status)\(if .verification_data.error_message then " — " + .verification_data.error_message else "" end)"' \
