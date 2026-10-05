@@ -18,7 +18,7 @@ interface Props {
   keywords?: string;
   image?: string;
 }
-const { title, description, path, type = 'website', schema = [], noindex = false, published, modified, progress = false, keywords, image } = Astro.props;
+const { title, description, path, type = 'website', schema = [], noindex = false, published, modified, progress = false, keywords, image = '/images/hero-steam-1600.webp' } = Astro.props;
 const canonical = abs(path);
 const withSite = `${title} | ${SITE.name}`;
 const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
@@ -30,6 +30,7 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  <meta name="author" content={SITE.author} />
   {keywords && <meta name="keywords" content={keywords} />}
   <link rel="canonical" href={canonical} />
   <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
@@ -44,11 +45,12 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content="en_US" />
-  {image && <meta property="og:image" content={abs(image)} />}
+  <meta property="og:image" content={abs(image)} />
+  <meta property="og:image:alt" content="A carefully brewed cup of tea featured by ChayStore" />
   {published && <meta property="article:published_time" content={published} />}
   {modified && <meta property="article:modified_time" content={modified} />}
-  <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
-  {image && <meta name="twitter:image" content={abs(image)} />}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={abs(image)} />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
@@ -71,3 +73,4 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <script>import '../scripts/cinema';</script>
 </body>
 </html>
+
