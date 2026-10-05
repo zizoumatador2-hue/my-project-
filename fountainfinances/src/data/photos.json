@@ -35,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -810,17 +810,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/7580855/",
     "color": "#c8d8e8",
-    "width": 1600,
-    "height": 900
-  },
-  "editorial": {
-    "id": 3944385,
-    "query": "newspaper desk",
-    "alt": "Newspaper on Desk",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/3944385/",
-    "color": "#f8f8f8",
     "width": 1600,
     "height": 900
   },

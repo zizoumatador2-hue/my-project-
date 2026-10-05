@@ -79,7 +79,7 @@ async function searchPage(query) {
 const INDEX = '.cache/pexels-index.jsonl';
 let index = null;
 // Off-topic or branded subjects that don't belong on a personal finance site.
-const EXCLUDE = /\b(bitcoin|crypto\w*|ethereum|blockchain|nft|beer|wine|alcohol|cigar\w*|casino|gambl\w*|nat ?west|visa|mastercard|paypal|apple|iphone|samsung|logo)\b/i;
+const EXCLUDE = /\b(bitcoin|crypto\w*|ethereum|blockchain|nft|beer|wine|alcohol|cigar\w*|casino|gambl\w*|nat ?west|new york times|nytimes|wall street journal|visa|mastercard|paypal|apple|iphone|samsung|logo)\b/i;
 const STOP = new Set(['and', 'with', 'on', 'of', 'the', 'a', 'in', 'at', 'for', 'from', 'to']);
 const words = (t) => t.toLowerCase().match(/[a-z]+/g) || [];
 const stem = (w) => w.replace(/(ies|es|s|ing|ed)$/, '');
