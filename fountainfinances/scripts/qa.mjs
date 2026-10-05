@@ -102,7 +102,7 @@ for (const [path, { html }] of pages) {
   }
 
   // images
-  for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\salt="/.test(m[0])) err(path, 'img without alt');
+  for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\salt(="|[\s/>])/.test(m[0])) err(path, 'img without alt');
 
   // navs must be labeled
   for (const m of html.matchAll(/<nav\b[^>]*>/g)) if (!/aria-label=/.test(m[0])) err(path, 'nav without aria-label');

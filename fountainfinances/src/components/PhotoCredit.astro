@@ -1,12 +1,13 @@
 ---
 import photos from '@/data/photos.json';
 
-interface Props { slot: string; class?: string }
-const { slot, class: cls = '' } = Astro.props;
-const p = (photos as Record<string, { photographer: string; photographerUrl: string; pageUrl: string }>)[slot];
+interface Props { name: string; class?: string }
+const { name, class: cls = '' } = Astro.props;
+const p = (photos as Record<string, { photographer: string; photographerUrl: string; pageUrl: string }>)[name];
+const byline = p && p.photographer !== 'Pexels' ? p.photographer : null;
 ---
 {p && (
-  <p class={`photo-credit ${cls}`}>
-    Photo: <a href={p.pageUrl} rel="noopener" target="_blank">{p.photographer}</a> / Pexels
+  <p class={`photo-credit ${cls}`.trim()}>
+    {byline ? <>Photo: <a href={p.pageUrl} rel="noopener" target="_blank">{byline}</a> / Pexels</> : <>Photo: <a href={p.pageUrl} rel="noopener" target="_blank">Pexels</a></>}
   </p>
 )}

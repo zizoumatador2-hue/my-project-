@@ -35,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -51,17 +51,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4977446/",
     "color": "#d8d8d8",
-    "width": 1600,
-    "height": 900
-  },
-  "hub-personal-finance": {
-    "id": 4246240,
-    "query": "woman budget notebook calculator",
-    "alt": "Calm woman with notebook looking at boyfriend",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/4246240/",
-    "color": "#081818",
     "width": 1600,
     "height": 900
   },
@@ -161,17 +150,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/12920750/",
     "color": "#a888d8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-checking-accounts": {
-    "id": 12605419,
-    "query": "banking app smartphone",
-    "alt": "A Close-Up Shot of a Smartphone with an Open App",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/12605419/",
-    "color": "#080818",
     "width": 1600,
     "height": 900
   },

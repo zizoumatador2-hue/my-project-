@@ -68,7 +68,7 @@ const schema = [
 <BaseLayout title={pageTitle} description={description} keywords={['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money', 'free financial calculators']} path="/" schema={schema}>
   <section class="hero hero-cine" aria-labelledby="hero-h">
     <div class="hero-media" aria-hidden="true">
-      <Photo slot="home" class="kenburns" eager decorative />
+      <Photo name="home" class="kenburns" eager decorative />
       <div class="hero-aurora"><Aurora client:idle colorStops={['#0a6a6b', '#e2b65a', '#1f8f8f']} amplitude={1.1} blend={0.6} speed={0.6} /></div>
       <div class="hero-shade"></div>
       <div class="grain"></div>
@@ -99,7 +99,7 @@ const schema = [
         </ul>
       </nav>
     </div>
-    <PhotoCredit slot="home" class="hero-credit" />
+    <PhotoCredit name="home" class="hero-credit" />
   </section>
 
   <section class="stats-band" aria-label="Fountain Finances at a glance">
