@@ -14,6 +14,8 @@ import NewsletterForm from '../components/NewsletterForm.astro';
 import { lookup, url } from '../lib/content';
 import { faqPage, howTo, itemList, webPage, article } from '../lib/schema';
 import { MONTHS_LONG } from '../data/site';
+import { photoFor, srcOf, srcsetOf } from '../lib/photos';
+import PhotoCredit from '../components/PhotoCredit.astro';
 
 const L = await lookup();
 const destinations = [...L.destinations.values()];
@@ -51,23 +53,47 @@ const schema = [
   itemList('Featured destinations for couples', featuredDest.map((d) => ({ name: d.data.name, href: url.destination(d.id) }))),
 ];
 const heroWords = ['Find', 'Your', 'Next'];
+const heroPhoto = photoFor('home/hero');
+const heroSrc = heroPhoto ? srcOf(heroPhoto, 1600) : '/art/sunset-coral.svg';
+const bandPhoto = photoFor('home/band');
+const stats = [
+  { n: destinations.length, label: 'destinations for couples' },
+  { n: resorts.length, label: 'hand-picked resorts' },
+  { n: guides.length, label: 'in-depth travel guides' },
+  { n: 0, label: 'invented prices or fake reviews' },
+];
 ---
 
-<Base title={title} description={metaDescription} schema={schema} preloadImage="/art/sunset-coral.svg">
+<Base title={title} description={metaDescription} schema={schema} preloadImage={heroSrc}>
   <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__media"><img src="/art/sunset-coral.svg" alt="" width="1600" height="1000" fetchpriority="high" decoding="sync" /></div>
+  <section class="hero cine cine--letterbox" aria-labelledby="hero-title" data-cine-hero>
+    <div class="hero__media" data-hero-media>
+      <img
+        src={heroSrc}
+        srcset={heroPhoto ? srcsetOf(heroPhoto) : undefined}
+        sizes={heroPhoto ? '100vw' : undefined}
+        alt={heroPhoto?.alt || 'Illustrated beach at sunset with palm trees, the setting for a romantic getaway for couples'}
+        width="1600"
+        height="1000"
+        fetchpriority="high"
+        decoding="sync"
+        style={heroPhoto ? `background:${heroPhoto.avg}` : undefined}
+      />
+    </div>
+    <div class="cine__leak" aria-hidden="true"></div>
+    <div class="cine__grain" aria-hidden="true"></div>
+    <div class="cine__bars" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div>
-        <p class="eyebrow" style="color:var(--gold)"><Icon name="sparkles" size={16} /> Romantic getaways, couples resorts &amp; beach escapes</p>
+        <p class="eyebrow shiny"><Icon name="sparkles" size={16} /> Couples resorts, beach escapes &amp; honest deals</p>
         <h1 id="hero-title">
-          {heroWords.map((w, i) => <span class="word" style={`--i:${i}`}>{w} </span>)}<span class="word" style="--i:3"><em>Escape</em></span>
-          <span class="sr-only">: romantic getaways for couples</span>
+          <span class="hero__kicker" data-blur-in>Romantic Getaways for Couples</span>
+          {heroWords.map((w, i) => <span class="word" style={`--i:${i + 1}`}>{w}</span>)}<span class="word" style="--i:4"><em class="gradient-text">Escape</em></span>
         </h1>
         <p class="lead">Discover romantic getaways, unforgettable resorts, beach escapes and vacation deals made for your next adventure.</p>
         <div class="hero__ctas">
-          <a class="btn" href="#explore">Explore Vacations <Icon name="arrow-right" /></a>
-          <a class="btn btn--light" href="/plan-my-vacation/">Find a Getaway</a>
+          <a class="btn" href="#explore" data-magnet>Explore Vacations <Icon name="arrow-right" /></a>
+          <a class="btn btn--light" href="/plan-my-vacation/" data-magnet>Find a Getaway</a>
         </div>
       </div>
 
@@ -107,6 +133,24 @@ const heroWords = ['Find', 'Your', 'Next'];
         </div>
         <button class="btn btn--block mt-2" type="submit"><Icon name="search" /> Search vacations</button>
       </form>
+    </div>
+    <a class="scroll-cue" href="#explore" aria-label="Scroll to explore"><span></span></a>
+    <PhotoCredit pkey="home/hero" />
+  </section>
+
+  <!-- STATS (CountUp on real numbers) -->
+  <section class="stats-band" aria-label="SpiceVacations at a glance">
+    <div class="container stats-grid">
+      {
+        stats.map((x) => (
+          <div class="stat" data-reveal>
+            <span class="stat__n" data-countup={x.n}>
+              {x.n}
+            </span>
+            <span class="stat__l">{x.label}</span>
+          </div>
+        ))
+      }
     </div>
   </section>
 
@@ -226,6 +270,34 @@ const heroWords = ['Find', 'Your', 'Next'];
         </aside>
       </div>
     </div>
+  </section>
+
+  <!-- SCROLL-VELOCITY MARQUEE -->
+  <div class="marquee" aria-hidden="true" data-marquee>
+    <div class="marquee__track">
+      {[0, 1].map(() => destinations.map((d) => <a href={url.destination(d.id)} tabindex="-1">{d.data.name}<span>✦</span></a>))}
+    </div>
+  </div>
+
+  <!-- CINEMATIC PARALLAX BAND -->
+  <section class="cine-band cine" aria-labelledby="band-title">
+    <div class="cine-band__media">
+      {
+        bandPhoto ? (
+          <img src={srcOf(bandPhoto, 1600)} srcset={srcsetOf(bandPhoto)} sizes="100vw" alt={bandPhoto.alt} width="1600" height="1000" loading="lazy" data-parallax />
+        ) : (
+          <img src="/art/overwater-teal.svg" alt="Illustrated overwater bungalows on a calm turquoise lagoon" width="1600" height="1000" loading="lazy" data-parallax />
+        )
+      }
+    </div>
+    <div class="cine__grain" aria-hidden="true"></div>
+    <div class="container cine-band__inner">
+      <p class="eyebrow shiny">Slow down together</p>
+      <h2 id="band-title" data-split>The best trips are measured in sunsets, not sights.</h2>
+      <p class="lead">Fewer plans, better rooms and one unforgettable experience: that's our formula for every getaway we recommend.</p>
+      <a class="btn" href="/plan-my-vacation/" data-magnet>Plan your escape</a>
+    </div>
+    <PhotoCredit pkey="home/band" />
   </section>
 
   <!-- ADULTS-ONLY -->

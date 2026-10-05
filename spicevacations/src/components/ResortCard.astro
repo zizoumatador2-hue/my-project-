@@ -21,7 +21,7 @@ const rating = r.data.rating;
 
 <article class="card" data-reveal>
   <div class="card__media">
-    <Img data={r.data} />
+    <Img data={r.data} pkey={`resorts/${r.id}`} />
     <div class="card__badges">
       {r.data.adultsOnly && <span class="badge badge--gold">Adults-only</span>}
       {r.data.resortTypes.includes('all-inclusive') && <span class="badge badge--glass">All-inclusive</span>}

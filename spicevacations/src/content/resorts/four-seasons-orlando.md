@@ -29,4 +29,21 @@ Rooftop dinners with fireworks views are unforgettable, and service is top-tier.
 
 Couples who want theme parks and luxury in one trip.
 
+
+## Our take
+
+Four Seasons Orlando is the best way we know to make a Disney-area trip feel romantic. The adults-only pool, spa and rooftop dining with fireworks views give couples a refined base, while park transportation keeps the logistics easy. It is an especially good pick for couples who love the parks but want quiet evenings away from the crowds.
+
+## Skip it if…
+
+- You are not planning to visit the theme parks at all.
+- You want a beach on site.
+- You are looking for a budget hotel near Disney.
+
+## Planning tips
+
+- Book the rooftop dinner around the fireworks schedule for the best view.
+- Summer afternoons bring frequent thunderstorms; plan pool time for the morning.
+- Check which park perks currently apply to resort guests before booking.
+
 See [Orlando](/destinations/orlando/).

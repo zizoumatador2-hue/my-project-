@@ -31,3 +31,19 @@ Beyond the pools and spa, guests can join workshops in areas like painting, danc
 Culture-curious couples and honeymooners who want an all-inclusive with personality.
 
 Read [best adults-only resorts in Mexico](/guides/best-adults-only-resorts-in-mexico/) to compare.
+
+## Our take
+
+Hotel Xcaret Arte is the adults-only, all-inclusive pick for couples who want more than a beach and a buffet. The focus on Mexican art and culture, plus workshops and park access options, gives each day a little more texture. It is a great fit for curious couples who like to mix relaxation with experiences.
+
+## Skip it if…
+
+- You want a long, classic white-sand beach right outside your room.
+- You want a quiet, low-activity stay.
+- You are not interested in the Xcaret parks.
+
+## Planning tips
+
+- Check what park access is included in your rate before booking extras.
+- Book art workshops early in your stay.
+- Allow about an hour for the transfer from Cancun airport (CUN).

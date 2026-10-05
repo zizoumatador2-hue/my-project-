@@ -30,4 +30,21 @@ It is intimate, adults-only and designed around privacy, while dining and drinks
 
 Honeymooners and couples who want boutique luxury without watching the bill.
 
+
+## Our take
+
+Hammock Cove is a small, adults-only all-inclusive where every villa comes with its own plunge pool. That privacy, plus premium food and drinks included, makes it an excellent honeymoon base for couples who want seclusion without giving up good dining. Antigua’s many beaches also make it easy to add a few memorable day trips.
+
+## Skip it if…
+
+- You want lots of on-site entertainment and activities.
+- You are looking for a large resort with many pools and restaurants.
+- You need a budget-friendly all-inclusive.
+
+## Planning tips
+
+- Many U.S. gateways offer flights to Antigua (ANU); check nonstop options from your city.
+- Visit Nelson’s Dockyard and Shirley Heights for sunset views.
+- Hurricane season runs June through November; consider travel insurance.
+
 See [best all-inclusive resorts for couples](/guides/best-all-inclusive-resorts-for-couples/).

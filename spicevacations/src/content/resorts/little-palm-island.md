@@ -32,3 +32,19 @@ The sense of arrival, the privacy and the barefoot luxury make it one of Florida
 Honeymooners and couples celebrating a milestone who want total seclusion without a passport.
 
 Read [best romantic getaways in Florida](/guides/best-romantic-getaways-in-florida/).
+
+## Our take
+
+Little Palm Island is a true private-island escape in the Florida Keys, reached only by boat or seaplane. Thatched bungalows, waterfront dining and an adults-only atmosphere create the feeling of being far away without a passport. It is perfect for couples who want total seclusion and are happy to unplug.
+
+## Skip it if…
+
+- You want nightlife or lots of activities.
+- You want a sprawling resort with many restaurants.
+- You are on a tight budget.
+
+## Planning tips
+
+- Plan your arrival time around the boat transfer schedule.
+- Key West is about 30 miles away if you want a day trip.
+- Spring is usually a pleasant time to visit; hurricane season runs June to November.

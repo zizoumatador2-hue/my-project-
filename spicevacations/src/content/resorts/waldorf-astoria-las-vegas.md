@@ -30,3 +30,19 @@ It is calm, polished and private, yet within walking distance of shows, restaura
 Couples who want Vegas nights and peaceful mornings.
 
 Read [Las Vegas couples vacation](/guides/las-vegas-couples-vacation/).
+
+## Our take
+
+Waldorf Astoria Las Vegas is the calm luxury choice on the Strip: no casino, a sky lobby with views and a spa. It suits couples who want to enjoy Las Vegas shows and dining but return to somewhere quiet, with no slot machines between the elevator and the front door. The CityCenter location keeps the center Strip within walking distance, and the high-floor setting gives rooms wide views of the city lights. It is a great anniversary pick for couples who like Vegas in small doses.
+
+## Skip it if…
+
+- You want a casino in your hotel.
+- You want a large pool scene.
+- You are looking for a budget hotel.
+
+## Planning tips
+
+- Request a Strip-view room.
+- Walk to nearby shows and restaurants.
+- Midweek stays are usually cheaper.

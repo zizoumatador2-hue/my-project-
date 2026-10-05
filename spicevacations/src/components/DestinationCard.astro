@@ -15,7 +15,7 @@ const img = d.data.image || `/art/${d.data.scene}-${d.data.palette}.svg`;
 
 <article class="card" data-reveal>
   <div class="card__media">
-    <Img data={d.data} />
+    <Img data={d.data} pkey={`destinations/${d.id}`} />
     <div class="card__badges"><span class="badge badge--glass">{REGION_LABEL[d.data.region]}</span></div>
     <SaveButton id={`destination:${d.id}`} title={d.data.name} href={href} img={img} kind="Destination" />
   </div>

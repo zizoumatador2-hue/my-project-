@@ -30,3 +30,19 @@ It feels like stepping back in time, with fireside lounges, lake views and hikes
 Couples wanting a classic mountain weekend from New York.
 
 Read [best weekend getaways from New York](/guides/best-weekend-getaways-from-new-york/).
+
+## Our take
+
+Mohonk Mountain House is a classic Hudson Valley escape: a Victorian castle on a lake, surrounded by miles of trails and scenic gazebos. Many rates include meals, which keeps budgeting simple. It is ideal for couples who love the outdoors, fall foliage and a sense of history, and it works in every season.
+
+## Skip it if…
+
+- You want a beach or a warm-weather getaway.
+- You prefer modern design and a city atmosphere.
+- You want to be in a town with lots of shopping and nightlife.
+
+## Planning tips
+
+- Fall foliage season books up quickly; reserve months ahead.
+- Bring good walking shoes for the trails and rock scrambles.
+- New York City is roughly a two-hour drive, making it an easy weekend escape.

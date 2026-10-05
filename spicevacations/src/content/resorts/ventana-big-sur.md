@@ -31,3 +31,19 @@ Mist in the redwoods, ocean views at dinner and quiet pools make it deeply relax
 Nature-loving couples who want a Big Sur escape with style.
 
 Compare with [Post Ranch Inn](/resorts/post-ranch-inn/).
+
+## Our take
+
+Ventana Big Sur offers adults-only luxury in a redwood setting, with options from rooms to luxury glamping. Pools, a spa and ocean-view dining make it a romantic base for exploring one of America’s most dramatic coastlines. The glamping option is a fun twist for couples who want to sleep among the trees without giving up real comfort. It is ideal for couples who love nature, hiking and slow mornings, and who are happy to trade nightlife for starry skies.
+
+## Skip it if…
+
+- You want a beach on site.
+- You need nightlife or shopping.
+- You are traveling on a budget.
+
+## Planning tips
+
+- Check Highway 1 conditions before you go.
+- Bring layers; Big Sur can be cool and foggy.
+- Book glamping well ahead for summer weekends.

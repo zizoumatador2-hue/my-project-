@@ -19,7 +19,7 @@ const img = deal.data.image || `/art/${deal.data.scene}-${deal.data.palette}.svg
 
 <article class="card" data-reveal>
   <div class="card__media">
-    <Img data={deal.data} />
+    <Img data={deal.data} pkey={`deals/${deal.id}`} />
     <div class="card__badges"><span class="badge badge--gold"><Icon name="tag" size={14} /> {PRODUCT_LABEL[deal.data.productType]}</span></div>
     <SaveButton id={`deal:${deal.id}`} title={deal.data.title} href={href} img={img} kind="Deal" />
   </div>

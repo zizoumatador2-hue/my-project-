@@ -77,6 +77,8 @@ export const FOOTER_NAV = [
       { label: 'About us', href: '/about/' },
       { label: 'Contact', href: '/contact/' },
       { label: 'FAQ', href: '/faq/' },
+      { label: 'Editorial policy', href: '/editorial-policy/' },
+      { label: 'Photo credits', href: '/photo-credits/' },
       { label: 'Brand guidelines', href: '/brand/' },
     ],
   },

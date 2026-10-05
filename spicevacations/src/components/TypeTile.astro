@@ -10,7 +10,7 @@ const { t } = Astro.props;
 ---
 
 <a class="type-tile" href={url.vacationType(t.id)} data-reveal>
-  <Img data={t.data} />
+  <Img data={t.data} pkey={`vacation-types/${t.id}`} sizes="(min-width: 768px) 25vw, 80vw" />
   <span class="type-tile__icon"><Icon name={t.data.icon} /></span>
   <h3>{t.data.name}</h3>
   <p>{t.data.tagline}</p>

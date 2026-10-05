@@ -34,7 +34,7 @@ const schema = [webPage({ path, title: x.metaTitle, description: x.metaDescripti
 ---
 
 <Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
-  <PageHero title={x.title} lead={x.summary} crumbs={crumbs} media={x} eyebrow={`Deal timing · ${x.window}`}>
+  <PageHero title={x.title} lead={x.summary} crumbs={crumbs} pkey={`deals/${deal.id}`} media={x} eyebrow={`Deal timing · ${x.window}`}>
     <div class="cluster mt-3">
       <AffiliateButton target={dealTarget(deal, dest?.data.name ?? x.destination, '/plan-my-vacation/')} placement="deal-hero" label="Check live prices" fallbackLabel="Plan this trip" />
     </div>

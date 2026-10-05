@@ -31,3 +31,19 @@ Service is the headline: butlers help with reservations and small requests, and 
 Couples who value service and polish over sprawling grounds, and who like being close to Cancun's restaurants and nightlife.
 
 See also [luxury resorts for couples](/guides/luxury-resorts-for-couples/).
+
+## Our take
+
+Le Blanc Spa Resort Cancun is the most refined adults-only all-inclusive in the Hotel Zone, with butler service, a large spa and ocean-view rooms. It suits couples who want luxury and calm but also like easy access to Cancun’s restaurants and nightlife. Choose it for a pampering-focused honeymoon or a milestone anniversary.
+
+## Skip it if…
+
+- You want a lively party atmosphere at the resort itself.
+- You want a long, quiet, undeveloped beach.
+- You are looking for a value-priced all-inclusive.
+
+## Planning tips
+
+- Request an ocean-view room; most rooms face the sea.
+- Book spa treatments early in your stay so you can choose your preferred times.
+- Check sargassum reports for the season before you go.

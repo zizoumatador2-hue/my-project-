@@ -31,3 +31,19 @@ The short transfer, the long beach and the classic Sandals formula of couples-on
 Couples who want to maximize beach time on a four- or five-night trip.
 
 Compare in [best all-inclusive resorts for couples](/guides/best-all-inclusive-resorts-for-couples/).
+
+## Our take
+
+Sandals Montego Bay is the easy-access choice for couples who want to start relaxing as soon as they land. It is minutes from the airport, has a long beach and plenty of dining, and it is couples-only and all-inclusive. It is ideal for shorter trips where you do not want to lose half a day to transfers.
+
+## Skip it if…
+
+- You are bothered by occasional airplane noise.
+- You want a remote or secluded setting.
+- You prefer smaller, boutique resorts.
+
+## Planning tips
+
+- Take advantage of the short transfer by booking a morning flight.
+- Visit Dunn’s River Falls or Rick’s Café on a day trip.
+- Ask about room locations away from the airport side if noise concerns you.

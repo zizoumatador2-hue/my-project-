@@ -31,3 +31,19 @@ The beach is the star, but the resort backs it up with a range of restaurants, a
 Couples and honeymooners who want a classic all-inclusive with an exceptional beach, and who would like to explore the Riviera Maya on a few excursion days.
 
 See more in [best adults-only resorts in Mexico](/guides/best-adults-only-resorts-in-mexico/) and [all-inclusive vacations for couples](/guides/all-inclusive-vacations-for-couples/).
+
+## Our take
+
+Secrets Maroma Beach sits on one of the Riviera Maya’s most beautiful beaches, and it pairs that setting with an adults-only, all-inclusive format. Swim-up rooms, a spa and several restaurants make it easy to stay put. It is a great honeymoon choice for couples who want a beach-first vacation.
+
+## Skip it if…
+
+- You want to walk to towns, shops or nightlife.
+- You want a small, intimate resort.
+- You are looking for a budget all-inclusive.
+
+## Planning tips
+
+- Cancun airport (CUN) is about 35–45 minutes away.
+- Plan a day trip to Tulum or the cenotes.
+- Check sargassum reports in warmer months.

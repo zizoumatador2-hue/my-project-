@@ -48,7 +48,7 @@ const schema = [
 ---
 
 <Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
-  <PageHero title={x.name} lead={x.summary} crumbs={crumbs} media={x} eyebrow={x.location}>
+  <PageHero title={x.name} lead={x.summary} crumbs={crumbs} media={x} pkey={`resorts/${r.id}`} eyebrow={x.location}>
     <div class="cluster mt-3">
       {x.adultsOnly && <span class="badge badge--gold">Adults-only</span>}
       {x.resortTypes.filter((t) => t !== 'adults-only').map((t) => <span class="badge badge--glass">{RESORT_TYPE_LABEL[t]}</span>)}
@@ -90,6 +90,25 @@ const schema = [
                   </li>
                 ))}
               </ul>
+            </section>
+          )
+        }
+
+        {
+          dest && (
+            <section class="mt-4" aria-labelledby="when-h">
+              <h2 id="when-h">When to go and getting there</h2>
+              <p>
+                <strong>Best time to visit {dest.data.name}:</strong> {dest.data.bestTimeNote}
+              </p>
+              {dest.data.airports.length > 0 && (
+                <p>
+                  <strong>Nearest airports:</strong> {dest.data.airports.join('; ')}. Flight times and fares change often, so compare routes from your home airport before you commit to dates.
+                </p>
+              )}
+              <p class="mb-0">
+                Popular experiences nearby: {dest.data.activities.slice(0, 4).join(' · ')}. See our full <a href={url.destination(dest.id)}>{dest.data.name} couples guide</a> for more.
+              </p>
             </section>
           )
         }

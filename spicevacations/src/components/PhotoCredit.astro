@@ -1,0 +1,22 @@
+---
+import { photoFor } from '../lib/photos';
+interface Props {
+  pkey?: string;
+}
+const p = photoFor(Astro.props.pkey);
+---
+
+{
+  p && (
+    <p class="photo-credit">
+      {p.representative ? 'Representative photo of the area · ' : 'Photo: '}
+      <a href={p.photographerUrl} rel="noopener nofollow" target="_blank">
+        {p.photographer}
+      </a>{' '}
+      on{' '}
+      <a href={p.url} rel="noopener nofollow" target="_blank">
+        Pexels
+      </a>
+    </p>
+  )
+}

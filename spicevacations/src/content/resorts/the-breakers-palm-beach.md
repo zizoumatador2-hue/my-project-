@@ -29,4 +29,21 @@ Grand architecture, an oceanfront setting, a large spa and a beach club make it 
 
 Couples who love old-world glamour and full-service luxury.
 
+
+## Our take
+
+The Breakers is a landmark oceanfront resort with a beach club, pools, a spa and many restaurants. It suits couples who want a classic, grand Florida getaway with plenty to do on site, from long beach afternoons to dinners that feel like an event. The Italian Renaissance-style building and manicured grounds give it an old-world elegance that few U.S. beach resorts can match, and Worth Avenue is close for shopping and dining. Choose it for a polished winter escape or an anniversary with a dress-up dinner.
+
+## Skip it if…
+
+- You want an all-inclusive.
+- You prefer a small, boutique hotel.
+- You want a budget stay.
+
+## Planning tips
+
+- Winter is peak season in Palm Beach; book early.
+- Reserve restaurants and spa treatments in advance.
+- Explore Worth Avenue and the Palm Beach Lake Trail by bike.
+
 See [Florida weekend getaways](/guides/florida-weekend-getaways/).

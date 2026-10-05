@@ -29,4 +29,21 @@ It turns a Miami weekend into an occasion, with glamorous dining, a lavish spa a
 
 Couples who love design, nightlife and a sense of drama.
 
+
+## Our take
+
+Faena is a stay for couples who want Miami Beach with a sense of theater: bold design, a showpiece oceanfront pool, destination dining and evening entertainment under one roof. Mid-Beach is calmer than South Beach while still being close to it. Pick Faena for a design-lovers getaway or a milestone birthday where the setting is part of the gift.
+
+## Skip it if…
+
+- You want an all-inclusive or a budget-friendly stay.
+- Minimalist decor is more your style.
+- You want to walk to the heart of South Beach every evening.
+
+## Planning tips
+
+- Winter and spring are peak season in Miami; book early for those months.
+- Reserve the hotel restaurants and shows in advance on weekends.
+- Use rideshares rather than renting a car; parking in Miami Beach is costly.
+
 See [Miami romantic getaways](/guides/miami-romantic-getaways/).

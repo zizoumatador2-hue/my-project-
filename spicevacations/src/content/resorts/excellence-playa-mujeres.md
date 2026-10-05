@@ -37,3 +37,19 @@ It suits couples and honeymooners who want an easy, high-comfort, all-inclusive 
 - Consider the Club level if a quieter pool and extra amenities matter to you.
 
 Compare with other picks in our [best adults-only resorts in Mexico](/guides/best-adults-only-resorts-in-mexico/) guide.
+
+## Our take
+
+Excellence Playa Mujeres is one of the most complete adults-only all-inclusives near Cancun: a big choice of restaurants, swim-up suites and a full spa on a quieter stretch north of the Hotel Zone. It works best for couples who want to settle in for five nights or more and rarely leave. For a honeymoon with plenty of variety, it is hard to beat in this region.
+
+## Skip it if…
+
+- You want to walk out to Cancun nightlife; the area is self-contained.
+- You are looking for a small, intimate property.
+- You plan to tour every day and barely use the resort.
+
+## Planning tips
+
+- Seaweed (sargassum) can affect Caribbean Mexico beaches in warmer months; check recent reports before booking.
+- Book specialty dinners on your first day, when reservations are available.
+- The ferry to Isla Mujeres makes an easy day trip.

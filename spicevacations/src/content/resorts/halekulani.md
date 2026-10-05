@@ -29,4 +29,21 @@ Evenings at House Without a Key, with sunset, live Hawaiian music and hula under
 
 Couples who want Honolulu's dining and culture with a tranquil, classic base.
 
+
+## Our take
+
+Halekulani is calm luxury in the middle of Waikiki, a rare combination. The orchid-mosaic pool, Diamond Head views and sunset music give it a sense of place, and you can still walk to Honolulu dining and shopping. Choose it for couples who want city energy on their doorstep and a serene place to come back to.
+
+## Skip it if…
+
+- You want a secluded resort away from crowds.
+- You want a wide private beach; Waikiki sand is shared and busy.
+- You are traveling on a tight budget.
+
+## Planning tips
+
+- Fly into Honolulu (HNL); the drive to Waikiki is usually 20–30 minutes.
+- Hike Diamond Head early in the morning, and check whether a reservation is required.
+- Plan a day on the North Shore for a quieter side of Oahu.
+
 See [Hawaii couples vacation](/guides/hawaii-couples-vacation/).

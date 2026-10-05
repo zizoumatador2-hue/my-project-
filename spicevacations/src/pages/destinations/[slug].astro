@@ -45,7 +45,7 @@ const schema = [
 ---
 
 <Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
-  <PageHero title={`${x.name} Vacations for Couples`} lead={x.summary} crumbs={crumbs} media={x} eyebrow={REGION_LABEL[x.region]}>
+  <PageHero title={`${x.name} Vacations for Couples`} lead={x.summary} crumbs={crumbs} media={x} pkey={`destinations/${d.id}`} eyebrow={REGION_LABEL[x.region]}>
     <div class="cluster mt-3">
       <AffiliateButton target={destinationTarget(d, 'hotel', '#where-to-stay')} placement="destination-hero" label={`Find stays in ${x.name}`} fallbackLabel="Where to stay" />
       <a class="btn btn--light" href={`/plan-my-vacation/?destination=${d.id}`}>Plan a {x.name} trip</a>

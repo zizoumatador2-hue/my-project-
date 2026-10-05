@@ -31,3 +31,19 @@ The setting feels exclusive and calm, with coves and beaches to explore and a sh
 Couples who want an adults-only all-inclusive with a more upscale, peaceful setting.
 
 See more in [best all-inclusive resorts for couples](/guides/best-all-inclusive-resorts-for-couples/).
+
+## Our take
+
+Sanctuary Cap Cana gives couples an adults-only, all-inclusive stay in the polished Cap Cana area, with beaches, coves and a marina and golf close by. It feels more exclusive than the big Bávaro resorts. It is a strong choice for couples who want a luxury all-inclusive with a more private feel.
+
+## Skip it if…
+
+- You want to be near Punta Cana’s busiest resort strip.
+- You want a small boutique hotel.
+- You are looking for the lowest price.
+
+## Planning tips
+
+- Punta Cana airport (PUJ) is usually 20–30 minutes away.
+- Explore the Cap Cana marina for dinner or a boat trip.
+- Book a catamaran outing early in your stay so you can reschedule if the weather turns.

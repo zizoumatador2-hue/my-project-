@@ -17,7 +17,7 @@ const schema = [webPage({ path, title: metaTitle, description, type: 'Collection
 ---
 
 <Base title={metaTitle} description={description} schema={schema}>
-  <PageHero title={title} lead="From Florida's Keys to St. Lucia's Pitons, here is where couples go to reconnect. Every guide is written by our editors, with honest timing tips and no invented prices." crumbs={crumbs} media={{ scene: 'tropical', palette: 'coral', imageAlt: 'Illustrated tropical cove with palm trees at sunset' }} />
+  <PageHero title={title} lead="From Florida's Keys to St. Lucia's Pitons, here is where couples go to reconnect. Every guide is written by our editors, with honest timing tips and no invented prices." crumbs={crumbs} pkey="vacation-types/beach-vacations" media={{ scene: 'tropical', palette: 'coral', imageAlt: 'Illustrated tropical cove with palm trees at sunset' }} />
   {
     REGIONS.map((region) => {
       const list = all.filter((d) => d.data.region === region);

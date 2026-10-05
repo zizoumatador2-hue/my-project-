@@ -29,6 +29,8 @@ const media = {
   image: z.string().optional(),
   imageAlt: z.string().min(10),
   imageCredit: z.string().optional(),
+  /** Optional Pexels search query used by scripts/fetch-photos.mjs to pick a matching photo. */
+  photoQuery: z.string().optional(),
 };
 
 export const REGIONS = ['usa', 'mexico', 'caribbean'] as const;

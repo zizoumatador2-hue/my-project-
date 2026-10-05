@@ -31,3 +31,19 @@ The beach is long and sunset-facing, the grounds feel lush and spacious, and the
 Active couples who like a morning workout or tennis match before a lazy beach afternoon.
 
 See our [best all-inclusive resorts for couples](/guides/best-all-inclusive-resorts-for-couples/).
+
+## Our take
+
+Couples Swept Away is for active couples. Its gardens and sports facilities set it apart, and its position on Seven Mile Beach gives you a long walk at sunrise and sunset. The couples-only, all-inclusive format keeps the planning simple, so you can split days between tennis, the gym, the spa and doing absolutely nothing.
+
+## Skip it if…
+
+- You want a party atmosphere late into the night.
+- You want a remote, secluded setting; this is a busy beach strip.
+- You would rather have a small boutique property.
+
+## Planning tips
+
+- Walk the beach toward the cliffs side of Negril for some of the best sunset views.
+- Bring workout gear if you plan to use the sports facilities.
+- Allow about 1.5 hours for the transfer from Montego Bay airport.

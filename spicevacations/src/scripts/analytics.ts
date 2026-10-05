@@ -1,5 +1,7 @@
-/* Consent-gated analytics. Events are queued until consent, then forwarded to
-   Plausible and/or GA4 (whichever is configured). With no consent nothing leaves the browser. */
+/* Consent-gated analytics and ads. Events are queued until consent, then forwarded to
+   Plausible and/or GA4 (whichever is configured). Google Consent Mode v2 defaults every
+   storage type to "denied"; it is only upgraded after the visitor accepts. AdSense (when
+   configured) therefore serves non-personalized ads until consent is given. */
 
 const KEY = 'sv:consent';
 type Consent = 'accept' | 'reject' | null;
@@ -14,8 +16,19 @@ declare global {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
     svTrack?: typeof track;
+    adsbygoogle?: unknown[];
   }
 }
+
+window.dataLayer = window.dataLayer || [];
+window.gtag =
+  window.gtag ||
+  function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  };
+const GRANTED = { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' };
+window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
 
 function getConsent(): Consent {
   try {
@@ -25,10 +38,11 @@ function getConsent(): Consent {
   }
 }
 
-function loadScript(src: string, attrs: Record<string, string> = {}) {
+function loadScript(src: string, attrs: Record<string, string> = {}, async = false) {
   const s = document.createElement('script');
   s.src = src;
-  s.defer = true;
+  if (async) s.async = true;
+  else s.defer = true;
   Object.entries(attrs).forEach(([k, v]) => s.setAttribute(k, v));
   document.head.appendChild(s);
 }
@@ -43,13 +57,8 @@ function loadAnalytics() {
     loadScript('https://plausible.io/js/script.tagged-events.js', { 'data-domain': plausible });
   }
   if (ga4) {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag() {
-      // eslint-disable-next-line prefer-rest-params
-      window.dataLayer!.push(arguments);
-    };
-    window.gtag('js', new Date());
-    window.gtag('config', ga4, { anonymize_ip: true });
+    window.gtag!('js', new Date());
+    window.gtag!('config', ga4, { anonymize_ip: true });
     loadScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4)}`);
   }
   queue.splice(0).forEach(([e, p]) => send(e, p));
@@ -58,6 +67,14 @@ function loadAnalytics() {
 function send(event: string, props: Props) {
   window.plausible?.(event, { props });
   window.gtag?.('event', event, props);
+}
+
+/** AdSense: loads only when a publisher ID is configured, and fills each <ins class="adsbygoogle"> slot once. */
+function loadAds() {
+  const client = document.body.dataset.adsense;
+  if (!client) return;
+  loadScript(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`, { crossorigin: 'anonymous' }, true);
+  document.querySelectorAll('ins.adsbygoogle').forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}));
 }
 
 /** Analytics hook used across the site: clicks, searches, planner submissions, newsletter signups. */
@@ -71,7 +88,11 @@ window.svTrack = track;
 export function initConsent() {
   const banner = document.querySelector<HTMLElement>('[data-cookie-banner]');
   const current = getConsent();
-  if (current === 'accept') loadAnalytics();
+  if (current === 'accept') {
+    window.gtag!('consent', 'update', GRANTED);
+    loadAnalytics();
+  }
+  loadAds();
   if (!current && banner) banner.hidden = false;
   banner?.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((b) =>
     b.addEventListener('click', () => {
@@ -82,7 +103,12 @@ export function initConsent() {
         /* ignore */
       }
       banner.hidden = true;
-      if (v === 'accept') loadAnalytics();
+      if (v === 'accept') {
+        window.gtag!('consent', 'update', GRANTED);
+        loadAnalytics();
+      } else {
+        window.gtag!('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+      }
     }),
   );
   document.querySelectorAll('[data-cookie-settings]').forEach((b) =>

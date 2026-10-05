@@ -29,4 +29,21 @@ Historic glamour, a wide sandy beach and sunset views make it an easy, romantic 
 
 Couples looking for a classic beach weekend near Tampa and St. Petersburg.
 
+
+## Our take
+
+The Don CeSar is a pink historic landmark on the Gulf, with sunset views and a beachfront setting. It is a good mid-range choice for couples who want a sense of history without giving up beach time, and the Gulf sunsets here are some of the best in Florida. St. Pete Beach is relaxed and easy to navigate, and downtown St. Petersburg’s museums and waterfront restaurants are a short drive away. It works well for a long weekend or a first anniversary that does not require a passport.
+
+## Skip it if…
+
+- You want an all-inclusive.
+- You want a quiet, secluded beach.
+- You want ultra-luxury service.
+
+## Planning tips
+
+- Watch the sunset from the beach every evening.
+- Tampa (TPA) and St. Pete–Clearwater (PIE) are the nearest airports.
+- Visit the Dalí Museum in St. Petersburg.
+
 See [Florida weekend getaways](/guides/florida-weekend-getaways/).

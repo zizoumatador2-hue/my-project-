@@ -30,3 +30,19 @@ The scenery is extraordinary, the beach is excellent for swimming and snorkeling
 Couples who want a full-service luxury resort with a beach, rather than a hillside hideaway.
 
 Compare with [Jade Mountain](/resorts/jade-mountain/) in our [luxury resorts for couples](/guides/luxury-resorts-for-couples/) guide.
+
+## Our take
+
+Sugar Beach, A Viceroy Resort sits between the Pitons on a white-sand beach, one of the most scenic settings in the Caribbean. Villas with plunge pools, a rainforest spa and good snorkeling make it ideal for a luxury honeymoon. It is a great fit for couples who want both drama and beach time.
+
+## Skip it if…
+
+- You want an all-inclusive plan by default.
+- You have mobility issues; the setting is hilly.
+- You want lots of nightlife nearby.
+
+## Planning tips
+
+- Most flights land at Hewanorra (UVF); the drive takes about an hour.
+- Snorkel off the beach in the morning when the water is calmest.
+- Book a Pitons hike or boat tour for different views.

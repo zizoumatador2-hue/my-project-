@@ -1,5 +1,6 @@
 /* Site-wide progressive enhancements. Every feature works (or degrades gracefully) without JS. */
 import { track, initConsent } from './analytics';
+import './cinema';
 
 document.documentElement.classList.add('js');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

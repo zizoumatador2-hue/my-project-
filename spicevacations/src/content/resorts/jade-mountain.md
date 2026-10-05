@@ -31,3 +31,19 @@ Waking up to that open-air view is unforgettable, and the resort is built for pr
 Honeymooners and couples marking a milestone who value views and seclusion above all else.
 
 Read [luxury resorts for couples](/guides/luxury-resorts-for-couples/) and [honeymoon destinations](/guides/honeymoon-destinations/).
+
+## Our take
+
+Jade Mountain is one of the Caribbean’s most dramatic places to stay, with open-wall sanctuaries looking straight out at the Pitons. Many suites have private infinity pools, so the view becomes your daily focus. Book it for a once-in-a-lifetime honeymoon when seclusion and scenery matter more than nightlife or beach time.
+
+## Skip it if…
+
+- You have mobility issues; the hillside setting involves many steps.
+- You want TVs and a conventional hotel room.
+- You want to be close to a busy town.
+
+## Planning tips
+
+- Most international flights land at Hewanorra (UVF) in the south; the drive to Soufrière takes about an hour.
+- Plan a hike or boat trip to see the Pitons from different angles.
+- Pack light, breathable clothing and bug spray for evenings.

@@ -29,4 +29,21 @@ It combines beach-resort space with easy access to Key West's restaurants, bars 
 
 Couples who want a beach base in Key West rather than a guesthouse in town.
 
+
+## Our take
+
+Casa Marina pairs something Key West rarely offers, a proper private beach, with easy access to Old Town. It is a good fit for couples who want to spend afternoons on the sand and evenings exploring Duval Street, the harbor and the famous sunset celebration at Mallory Square. The 1920s architecture adds a sense of occasion without feeling stuffy.
+
+## Skip it if…
+
+- You want an all-inclusive where every meal is covered.
+- You need to walk to Old Town every day; it is a longer stroll or a short ride.
+- You are visiting on a tight budget during peak winter season.
+
+## Planning tips
+
+- Rent bicycles for getting around Key West; parking in Old Town is limited.
+- Hurricane season runs June through November, so consider travel insurance for those months.
+- Book a snorkel or sunset sail early during spring break and holiday weeks.
+
 See [best romantic getaways in Florida](/guides/best-romantic-getaways-in-florida/).

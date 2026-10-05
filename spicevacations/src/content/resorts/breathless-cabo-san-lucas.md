@@ -31,3 +31,19 @@ The atmosphere is lively, with music, pool parties and a rooftop pool looking to
 Social couples who want a fun, adults-only base. If you want total quiet, look at resorts in San José del Cabo or along the Tourist Corridor instead.
 
 More in [Mexico vacations for couples](/guides/mexico-vacations-for-couples/).
+
+## Our take
+
+Breathless Cabo San Lucas suits couples who want an all-inclusive with energy: music by the pool, a social rooftop and the marina within walking distance. It sits on Medano Beach, one of the few swimmable stretches in Cabo, which matters more than many first-timers realize. Choose it for a fun anniversary or a first trip together, not for a whisper-quiet retreat.
+
+## Skip it if…
+
+- You want a serene, low-key atmosphere all day.
+- You plan to spend most days on the beach and want a large private stretch of sand.
+- You prefer a smaller, boutique-sized hotel.
+
+## Planning tips
+
+- Ask for a room away from the main pool if you want quieter evenings.
+- Many beaches around Cabo have dangerous currents; swim only where flags and locals say it is safe.
+- Book a sunset boat to El Arco from the marina next door.

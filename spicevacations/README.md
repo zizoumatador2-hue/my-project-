@@ -107,7 +107,20 @@ npm run deploy
 - Contact and newsletter forms work without JavaScript (POST + 303 redirect) and are enhanced with fetch. Server-side Zod validation, honeypot field, time-trap, per-IP rate limiting (Workers Rate Limiting binding), same-origin CSRF check (`Origin`/`Sec-Fetch-Site`), optional Cloudflare Turnstile (`TURNSTILE_SECRET_KEY` + `PUBLIC_TURNSTILE_SITE_KEY`). No personal data in URLs.
 - Contact messages are stored in KV for 180 days; set `RESEND_API_KEY` + `CONTACT_TO` to also forward them by email. Newsletter sign-ups are stored in KV keyed by a hash of the email (export them to your email provider).
 - `public/_headers`: CSP (`script-src 'self'` — the build fails on inline scripts), HSTS, X-Content-Type-Options, Referrer-Policy, X-Frame-Options, Permissions-Policy, COOP. The Worker adds the same headers to API responses.
-- Cookie consent banner: analytics (Plausible via `PUBLIC_PLAUSIBLE_DOMAIN` and/or GA4 via `PUBLIC_GA4_ID`) load only after "Accept analytics". Events: `affiliate_click`, `search`, `planner_submit`, `newsletter_signup`, `contact_submit`, `save_item`.
+- Cookie consent banner: analytics (Plausible via `PUBLIC_PLAUSIBLE_DOMAIN` and/or GA4 via `PUBLIC_GA4_ID`) load only after "Accept all". Google Consent Mode v2 defaults all storage to `denied` until then. Events: `affiliate_click`, `search`, `planner_submit`, `newsletter_signup`, `contact_submit`, `save_item`.
+
+## Photos (Pexels) & cinematic effects
+
+- `scripts/fetch-photos.mjs` searches Pexels for every destination, resort, guide, vacation type and deal (query = `photoQuery` frontmatter, a curated map, or a derived query), and self-hosts WebP versions at 640/960/1600px in `public/photos/` with a manifest in `src/data/photos.json`. Both are git-ignored and cached in CI.
+- Set the repository secret `PEXELS_API_KEY` (free at pexels.com/api). Without it the build uses the original SVG illustrations.
+- Resort photos are labeled "representative photo of the area" and every photo is credited on the page and at `/photo-credits/`.
+- Effects (`src/scripts/cinema.ts` + "Cinematic layer" in `global.css`) are inspired by ReactBits: blur/split text, shiny and gradient text, film grain, light leak, letterbox intro, tilted cards with glare, spotlight cards, magnetic buttons, count-up stats, scroll-velocity marquee and scroll-driven hero. All are disabled under `prefers-reduced-motion`, and pointer effects run only on mouse devices.
+
+## Google AdSense
+
+- Set repository variable `PUBLIC_ADSENSE_CLIENT` (`ca-pub-…`) to add the `google-adsense-account` meta tag, load AdSense and generate `/ads.txt`. Optionally set `PUBLIC_ADSENSE_SLOT_ARTICLE` for the labeled in-article slot on guides (Auto ads work without it).
+- Until configured, no ad code, empty slots or placeholder publisher IDs are shipped.
+- For EEA/UK/Swiss visitors, enable Google's certified CMP (Privacy & messaging) in AdSense.
 
 ## SEO implementation
 

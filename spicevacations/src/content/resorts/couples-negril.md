@@ -31,3 +31,19 @@ The calm water is great for swimming and paddleboarding, and the resort's size k
 Couples looking for an unpretentious, all-inclusive beach week with a warm Jamaican welcome.
 
 Compare with [Couples Swept Away](/resorts/couples-swept-away/) and read [Caribbean vacations for couples](/guides/caribbean-vacations-for-couples/).
+
+## Our take
+
+Couples Negril is a relaxed, genuinely couples-only all-inclusive on calm Bloody Bay, which makes it a strong pick for travelers who want easy swimming and an unpretentious vibe. Water sports and drinks are part of the stay, so most couples never need to reach for a wallet. It is a smart choice if you care more about warmth and simplicity than designer interiors.
+
+## Skip it if…
+
+- You want to walk to the bars and restaurants on Seven Mile Beach every night.
+- You expect ultra-luxury finishes and butler service.
+- You dislike the long transfer from Montego Bay airport.
+
+## Planning tips
+
+- The drive from Montego Bay (MBJ) takes roughly 1.5 hours; plan your flight times around it.
+- Schedule a catamaran cruise or a visit to the West End cliffs for sunset.
+- Pack reef-safe sunscreen and water shoes for snorkeling.

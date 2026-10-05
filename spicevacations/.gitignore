@@ -6,3 +6,5 @@ dist/
 public/art/
 public/og/
 *.log
+public/photos/
+src/data/photos.json

@@ -27,6 +27,8 @@ const ogImage = new URL(Astro.props.ogImage ?? `/og/${ogSlug}.png`, SITE.url).to
 const jsonld = JSON.stringify(graph(...schema)).replace(/</g, '\\u003c');
 const plausible = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
 const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
+/** AdSense publisher client (ca-pub-…). Ads and the verification meta tag only appear once this is set. */
+const adsense = /^ca-pub-\d{10,20}$/.test(import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '') ? (import.meta.env.PUBLIC_ADSENSE_CLIENT as string) : '';
 ---
 
 <!doctype html>
@@ -40,6 +42,7 @@ const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
     <link rel="alternate" hreflang="en-US" href={canonical} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    {adsense && <meta name="google-adsense-account" content={adsense} />}
     <meta name="theme-color" content="#0B1F3A" />
     <meta name="color-scheme" content="light" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -68,7 +71,7 @@ const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
     <script type="application/ld+json" set:html={jsonld} />
     <slot name="head" />
   </head>
-  <body data-plausible={plausible || undefined} data-ga4={ga4 || undefined}>
+  <body data-plausible={plausible || undefined} data-ga4={ga4 || undefined} data-adsense={adsense || undefined}>
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header />
     <main id="main" tabindex="-1">

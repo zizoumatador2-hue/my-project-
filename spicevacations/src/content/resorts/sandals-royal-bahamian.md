@@ -31,3 +31,19 @@ The combination of an easy flight, a long beach and an island escape makes it a 
 Couples who want a Caribbean-feel honeymoon with minimal travel time from the East Coast.
 
 See the [Bahamas](/destinations/bahamas/) and [best honeymoon resorts](/guides/best-honeymoon-resorts/).
+
+## Our take
+
+Sandals Royal Bahamian is one of the most convenient luxury all-inclusives for U.S. travelers, with short flights to Nassau and a couples-only setting on Cable Beach. Its private offshore island adds a memorable beach day. Choose it for a quick-to-reach honeymoon or anniversary trip.
+
+## Skip it if…
+
+- You want a wild, untouched island setting.
+- You want to explore Nassau extensively and eat out every night.
+- You are looking for a budget option.
+
+## Planning tips
+
+- Nassau (NAS) is about 15 minutes away by car.
+- Check if your rate includes airport transfers.
+- Visit the offshore island early in the day for quieter beaches.

@@ -31,3 +31,19 @@ Swim-up suites, plentiful dining and a calm, grown-up atmosphere make it a stron
 Couples who prefer peace over nightlife and do not mind a longer airport transfer.
 
 Compare with [Sanctuary Cap Cana](/resorts/sanctuary-cap-cana/).
+
+## Our take
+
+Excellence Punta Cana is a solid value-luxury option in quiet Uvero Alto, where the beaches feel wilder and less developed than central Bávaro. Swim-up suites, an adults-only crowd and an all-inclusive setup make it a natural honeymoon choice. It is ideal for couples who want to switch off and are happy to stay mostly on site.
+
+## Skip it if…
+
+- You want to visit shops and restaurants outside the resort often.
+- You dislike transfers longer than about 45 minutes.
+- You want calm, lagoon-like water every day; this coast can be wavy.
+
+## Planning tips
+
+- Transfers from Punta Cana airport (PUJ) take roughly 40–60 minutes.
+- Ask about rooms closer to the beach if ocean sounds matter to you.
+- Book a day trip to Saona Island if you want a classic Caribbean beach outing.

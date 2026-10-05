@@ -31,3 +31,19 @@ The spa experiences are private and restorative, and the grounds are peaceful an
 Couples looking for wellness and quiet rather than a traditional beach resort.
 
 More ideas in [luxury vacations](/guides/luxury-vacations/).
+
+## Our take
+
+Sensei Lanai is a wellness-focused, adults-oriented retreat in Lanai’s cool upland forest. Guided programs and private spa hale make it ideal for couples who want to rest and recharge together. It is a different kind of Hawaii trip, less about beaches and more about calm and wellbeing.
+
+## Skip it if…
+
+- You want to be on the beach every day.
+- You want nightlife or lots of dining choices.
+- You prefer a self-guided, low-structure trip.
+
+## Planning tips
+
+- Check flight and transfer options to Lanai (LNY) when booking.
+- The beach at Hulopoe Bay is a short drive away.
+- Book wellness programs early to secure your preferred times.

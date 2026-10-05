@@ -10,6 +10,7 @@ import Disclosure from '../../components/Disclosure.astro';
 import PartnerSlot from '../../components/PartnerSlot.astro';
 import Icon from '../../components/Icon.astro';
 import NewsletterBand from '../../components/NewsletterBand.astro';
+import AdSlot from '../../components/AdSlot.astro';
 import { getGuides, lookup, url, readingTime, fmtDate, destinationTarget } from '../../lib/content';
 import { article, breadcrumbList, faqPage, howTo, webPage } from '../../lib/schema';
 
@@ -53,7 +54,7 @@ const primaryDest = dests[0];
 ---
 
 <Base title={d.metaTitle} description={d.metaDescription} ogType="article" noindex={d.noindex} canonical={d.canonical} schema={schema}>
-  <PageHero title={d.title} crumbs={crumbs} media={d} eyebrow={category?.data.name ?? 'Travel guide'}>
+  <PageHero title={d.title} crumbs={crumbs} media={d} pkey={`guides/${g.id}`} eyebrow={category?.data.name ?? 'Travel guide'}>
     <div class="meta-row">
       <span>By the SpiceVacations Editorial Team</span>
       <span>Updated <time datetime={d.updated.toISOString()}>{fmtDate(d.updated)}</time></span>
@@ -73,6 +74,8 @@ const primaryDest = dests[0];
         <div class="prose mt-4">
           <Content />
         </div>
+
+        <AdSlot />
 
         {
           d.howTo && (

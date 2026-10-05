@@ -38,7 +38,7 @@ const schema = [
 ---
 
 <Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
-  <PageHero title={x.name} lead={x.summary} crumbs={crumbs} media={x} eyebrow="Vacation type">
+  <PageHero title={x.name} lead={x.summary} crumbs={crumbs} media={x} pkey={`vacation-types/${t.id}`} eyebrow="Vacation type">
     <div class="cluster mt-3">
       <a class="btn" href={`/search/?type=${t.id}`}>Browse {x.name.toLowerCase()}</a>
       <a class="btn btn--light" href={`/plan-my-vacation/?type=${t.id}`}>Get a personal shortlist</a>
