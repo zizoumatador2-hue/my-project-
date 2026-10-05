@@ -37,7 +37,7 @@ jobs:
         run: node scripts/fetch-pexels.mjs
       - name: Commit new photos
         run: |
-          git add public/images/photos src/data/photos.json
+          git add -A public/images/photos src/data/photos.json
           if git diff --cached --quiet; then echo "No new photos"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

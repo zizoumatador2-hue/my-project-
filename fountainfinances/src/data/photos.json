@@ -1,15 +1,4 @@
 {
-  "home": {
-    "id": 19393195,
-    "query": "family planning finances at kitchen table",
-    "alt": "Kitchen table",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/19393195/",
-    "color": "#180808",
-    "width": 1600,
-    "height": 900
-  },
   "calculators": {
     "id": 8292896,
     "query": "calculator and financial documents on desk",
@@ -35,7 +24,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -51,17 +40,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4977446/",
     "color": "#d8d8d8",
-    "width": 1600,
-    "height": 900
-  },
-  "hub-personal-finance": {
-    "id": 8933777,
-    "query": "couple managing budget laptop",
-    "alt": "Couple Using Laptop",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/8933777/",
-    "color": "#181818",
     "width": 1600,
     "height": 900
   },
@@ -84,17 +62,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/11277463/",
     "color": "#281818",
-    "width": 1600,
-    "height": 900
-  },
-  "hub-loans": {
-    "id": 7083939,
-    "query": "signing loan agreement",
-    "alt": "Business partners talking while signing agreement at table with beer",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/7083939/",
-    "color": "#d8d8d8",
     "width": 1600,
     "height": 900
   },
@@ -131,17 +98,6 @@
     "width": 1600,
     "height": 900
   },
-  "topic-balance-transfers": {
-    "id": 6818066,
-    "query": "credit cards stack",
-    "alt": "Woman Holding a Credit Card",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/6818066/",
-    "color": "#080808",
-    "width": 1600,
-    "height": 900
-  },
   "topic-budgeting": {
     "id": 8702215,
     "query": "budget planner notebook",
@@ -150,28 +106,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/8702215/",
     "color": "#882818",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-cds": {
-    "id": 7788009,
-    "query": "savings growth coins",
-    "alt": "Gold bitcoin coin on background of growth chart",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/7788009/",
-    "color": "#080828",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-checking-accounts": {
-    "id": 5741881,
-    "query": "mobile banking app phone",
-    "alt": "Watch and Mobile Phone ",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/5741881/",
-    "color": "#182838",
     "width": 1600,
     "height": 900
   },
@@ -219,17 +153,6 @@
     "width": 1600,
     "height": 900
   },
-  "topic-credit-scores": {
-    "id": 7876503,
-    "query": "financial report chart",
-    "alt": "Person Holding A Bitcoin With Stock Chart Report On Wall",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/7876503/",
-    "color": "#e8e8e8",
-    "width": 1600,
-    "height": 900
-  },
   "topic-debt-consolidation": {
     "id": 6684775,
     "query": "paying bills",
@@ -271,17 +194,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4246034/",
     "color": "#683808",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-high-yield-savings": {
-    "id": 19693211,
-    "query": "piggy bank",
-    "alt": "Nat West Piggy Banks",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/19693211/",
-    "color": "#f8f8f8",
     "width": 1600,
     "height": 900
   },
@@ -329,28 +241,6 @@
     "width": 1600,
     "height": 900
   },
-  "topic-online-banks": {
-    "id": 7013900,
-    "query": "online banking laptop",
-    "alt": "Online Class in a Laptop ",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/7013900/",
-    "color": "#080808",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-refinancing": {
-    "id": 16307278,
-    "query": "home office paperwork",
-    "alt": "Home office",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/16307278/",
-    "color": "#080808",
-    "width": 1600,
-    "height": 900
-  },
   "topic-renters-insurance": {
     "id": 10827192,
     "query": "apartment living room",
@@ -359,17 +249,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10827192/",
     "color": "#c8c8c8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-saving-money": {
-    "id": 19988417,
-    "query": "coins jar savings",
-    "alt": "A jar filled with hearts and coins",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/19988417/",
-    "color": "#b8a898",
     "width": 1600,
     "height": 900
   },
@@ -538,17 +417,6 @@
     "width": 1600,
     "height": 900
   },
-  "guide-how-to-read-a-credit-report": {
-    "id": 20182276,
-    "query": "reading paperwork glasses",
-    "alt": "A woman in glasses reading a book",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/20182276/",
-    "color": "#585858",
-    "width": 1600,
-    "height": 900
-  },
   "guide-how-to-save-money-every-month": {
     "id": 19956096,
     "query": "grocery shopping list",
@@ -582,17 +450,6 @@
     "width": 1600,
     "height": 900
   },
-  "guide-what-is-a-high-yield-savings-account": {
-    "id": 17200433,
-    "query": "saving money piggy bank coins",
-    "alt": "Golden bitcoin with a pink piggy bank, on a black background. Investments in cryptocurrency. How to safely save money.",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/17200433/",
-    "color": "#080808",
-    "width": 1600,
-    "height": 900
-  },
   "guide-what-is-apy": {
     "id": 7621351,
     "query": "dollar bills",
@@ -612,17 +469,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/8938733/",
     "color": "#d8d8e8",
-    "width": 1600,
-    "height": 900
-  },
-  "best-cd-accounts": {
-    "id": 10468099,
-    "query": "coins stack bank",
-    "alt": "Stacked Gold Coins",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/10468099/",
-    "color": "#f8f8f8",
     "width": 1600,
     "height": 900
   },

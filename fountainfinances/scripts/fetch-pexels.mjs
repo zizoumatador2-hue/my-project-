@@ -20,7 +20,9 @@ const SIZES = [1600, 800];
 
 const slots = JSON.parse(readFileSync('src/data/images.json', 'utf8'));
 const photos = existsSync(META) ? JSON.parse(readFileSync(META, 'utf8')) : {};
-const used = new Set(Object.values(photos).map((p) => p.id));
+// Photos reviewed and rejected as off-topic are never picked again.
+const REJECTED = 'src/data/photos-rejected.json';
+const used = new Set([...Object.values(photos).map((p) => p.id), ...(existsSync(REJECTED) ? JSON.parse(readFileSync(REJECTED, 'utf8')) : [])]);
 mkdirSync(OUT, { recursive: true });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -76,6 +78,8 @@ async function searchPage(query) {
 // Keyless fallback: a local index of Pexels photo descriptions built by scripts/pexels-index.py.
 const INDEX = '.cache/pexels-index.jsonl';
 let index = null;
+// Off-topic or branded subjects that don't belong on a personal finance site.
+const EXCLUDE = /\b(bitcoin|crypto\w*|ethereum|blockchain|nft|beer|wine|alcohol|cigar\w*|casino|gambl\w*|nat ?west|visa|mastercard|paypal|apple|iphone|samsung|logo)\b/i;
 const STOP = new Set(['and', 'with', 'on', 'of', 'the', 'a', 'in', 'at', 'for', 'from', 'to']);
 const words = (t) => t.toLowerCase().match(/[a-z]+/g) || [];
 const stem = (w) => w.replace(/(ies|es|s|ing|ed)$/, '');
@@ -88,10 +92,10 @@ function searchIndex(query) {
   const q = [...new Set(words(query).filter((w) => !STOP.has(w)).map(stem))];
   const need = Math.min(q.length, 2);
   return index
-    .filter((r) => !r.w || !r.h || r.w > r.h * 1.2)
+    .filter((r) => (!r.w || !r.h || r.w > r.h * 1.2) && !EXCLUDE.test(r.alt))
     .map((r) => ({ r, score: q.filter((w) => r.stems.has(w)).length }))
     .filter((x) => x.score >= need)
-    .sort((a, b) => b.score - a.score || a.r.alt.length - b.r.alt.length)
+    .sort((a, b) => b.score - a.score || Math.abs(a.r.alt.length - 45) - Math.abs(b.r.alt.length - 45))
     .slice(0, 12)
     .map(({ r }) => ({
       id: r.id,
@@ -125,7 +129,7 @@ let failed = 0;
 for (const [slot, query] of Object.entries(slots)) {
   if (!FORCE && photos[slot] && existsSync(`${OUT}/${slot}-800.webp`)) continue;
   try {
-    const results = (await search(query)).filter((p) => p.landscape && !used.has(p.id));
+    const results = (await search(query)).filter((p) => p.landscape && !used.has(p.id) && !EXCLUDE.test(p.alt));
     let pick = null;
     let buf = null;
     for (const cand of results.slice(0, 8)) {
