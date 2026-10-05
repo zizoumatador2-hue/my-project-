@@ -47,6 +47,9 @@ const comparisonCount = (await getCollection('comparisons')).length;
   <h2>How we make money</h2>
   <p>Fountain Finances is free to use. We may earn revenue from clearly labeled affiliate links, display advertising and sponsorships. Those relationships do not affect our editorial content or comparison criteria. Our <a href="/affiliate-disclosure/">affiliate disclosure</a> explains the details.</p>
 
+  <h2>Who runs Fountain Finances</h2>
+  <p>Fountain Finances was founded in {SITE.foundingYear} by <strong>{SITE.founder}</strong>, who owns and publishes the site and is responsible for its content, policies and partnerships. You can reach him directly at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
   <h2>Our editorial team</h2>
   <p>Guides are researched and written by the <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a> and reviewed against their sources before publication. Our full research, fact-checking and update process is described in our <a href="/editorial-standards/">editorial standards and methodology</a>.</p>
 
@@ -66,6 +69,7 @@ const comparisonCount = (await getCollection('comparisons')).length;
     <dt>Contact form</dt><dd><a href="/contact/">fountainfinances.com/contact</a></dd>
     <dt>Website</dt><dd><a href="/">{SITE.domain}</a></dd>
     <dt>Audience</dt><dd>Consumers in the United States</dd>
+    <dt>Founder &amp; publisher</dt><dd>{SITE.founder}</dd>
     <dt>Founded</dt><dd>{SITE.foundingYear}</dd>
   </dl>
   <p>We read every message and aim to reply within two business days — for questions, feedback, corrections, privacy requests or partnership inquiries.</p>

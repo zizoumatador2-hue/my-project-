@@ -16,6 +16,7 @@ export function organization(): Json {
     description: SITE.description,
     email: SITE.email,
     foundingDate: String(SITE.foundingYear),
+    founder: { '@type': 'Person', name: SITE.founder },
     areaServed: { '@type': 'Country', name: 'United States' },
     knowsAbout: ['Personal finance', 'Budgeting', 'Credit scores', 'Credit cards', 'Savings accounts', 'Personal loans', 'Mortgages', 'Insurance'],
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: SITE.email, availableLanguage: 'English', url: abs('/contact/') },
