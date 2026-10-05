@@ -790,5 +790,49 @@
     "color": "#c8c8c8",
     "width": 1600,
     "height": 900
+  },
+  "contact": {
+    "id": 8867414,
+    "query": "customer support headset",
+    "alt": "Three Women in Black Blazers With Headsets Working As Customer Support Agents",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/8867414/",
+    "color": "#e8e8e8",
+    "width": 1600,
+    "height": 900
+  },
+  "legal": {
+    "id": 7580855,
+    "query": "signing documents pen",
+    "alt": "Woman Asking the Man to Sign the Documents",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7580855/",
+    "color": "#c8d8e8",
+    "width": 1600,
+    "height": 900
+  },
+  "editorial": {
+    "id": 3944385,
+    "query": "newspaper desk",
+    "alt": "Newspaper on Desk",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/3944385/",
+    "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
+  },
+  "faq": {
+    "id": 10981240,
+    "query": "question mark",
+    "alt": "Wooden Hand Holding a Question Mark ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/10981240/",
+    "color": "#181838",
+    "width": 1600,
+    "height": 900
   }
 }
