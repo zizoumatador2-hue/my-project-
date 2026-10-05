@@ -1,6 +1,7 @@
-import { type Env, redirect, sha256, now } from '../_lib/http';
+import { type Env, redirect, sha256, now, dbReady } from '../_lib/http';
 
 export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
+  if (!dbReady(env)) return redirect('/newsletter/error/');
   const token = new URL(request.url).searchParams.get('token') || '';
   if (!/^[a-f0-9]{64}$/.test(token)) return redirect('/newsletter/error/');
   const hash = await sha256(token);

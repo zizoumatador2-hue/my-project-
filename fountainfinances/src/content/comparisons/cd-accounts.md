@@ -1,6 +1,6 @@
 ---
 title: "Best CD Accounts: Compare CD Rates, Terms and Penalties"
-seoTitle: "Best CD Accounts: Compare CD Rates, Terms & Penalties"
+seoTitle: "Best CD Accounts of 2026: Compare CD Rates, Terms & Penalties"
 description: "Compare CD options from FDIC-insured banks: term lengths, no-penalty CDs, early withdrawal penalties and maturity rules — and how to judge a CD rate."
 keywords: ["best CD rates", "CD account rates", "certificate of deposit rates", "CD rates", "CD calculator"]
 hub: banking

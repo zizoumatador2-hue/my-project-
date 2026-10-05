@@ -1,4 +1,4 @@
-import { type Env, json, redirect, wantsJson, originAllowed, readBody, normalizeEmail, isEmail, safePath, sha256, randomToken, now, rateLimit, housekeeping, verifyTurnstile } from '../_lib/http';
+import { type Env, json, redirect, wantsJson, originAllowed, readBody, normalizeEmail, isEmail, safePath, sha256, randomToken, now, rateLimit, housekeeping, verifyTurnstile, dbReady } from '../_lib/http';
 import { emailConfigured, sendEmail, confirmationEmail } from '../_lib/email';
 
 const CONSENT_TEXT = 'I agree to receive the Fountain Finances newsletter and accept the Privacy Policy.';
@@ -7,6 +7,7 @@ const GENERIC_OK = 'Almost done — check your inbox and click the link to confi
 export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUntil }) => {
   const asJson = wantsJson(request);
   const fail = (status: number, error: string) => (asJson ? json(status, { error }) : redirect(`/newsletter/error/`));
+  if (!dbReady(env)) return fail(503, 'Newsletter sign-up is temporarily unavailable. Please try again later.');
   if (!originAllowed(request, env)) return fail(403, 'This request could not be verified. Please reload the page and try again.');
 
   const body = await readBody(request);

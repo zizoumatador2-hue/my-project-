@@ -1,6 +1,6 @@
 ---
 title: "Best High-Yield Savings Accounts: How to Compare Top Online Options"
-seoTitle: "Best High-Yield Savings Accounts: Compare Top Options"
+seoTitle: "Best High-Yield Savings Accounts of 2026: Compare Options"
 description: "Compare high-yield savings accounts from FDIC-insured online banks by features, access, fees and requirements — plus how to judge an account’s rate."
 keywords: ["best high yield savings accounts", "high yield savings account rates", "high interest savings account", "online high yield savings", "savings account comparison"]
 hub: banking

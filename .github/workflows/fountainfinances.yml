@@ -112,23 +112,22 @@ jobs:
           fi
           sed -i "s/^database_id = .*/database_id = \"$ID\"/" wrangler.toml
           npx wrangler d1 migrations apply fountainfinances-db --remote
-      - name: Without D1 access, deploy the static site and leave forms disabled
+      - name: D1 status
         if: steps.d1.outcome != 'success'
-        run: |
-          echo "::warning::The Cloudflare token cannot manage D1. The site will deploy, but the newsletter and contact endpoints need a D1 binding — grant the token 'D1: Edit' and re-run."
-          python3 - <<'PY'
-          import re
-          s = open('wrangler.toml').read()
-          s = re.sub(r'\n\[\[d1_databases\]\][\s\S]*$', '\n', s)
-          open('wrangler.toml', 'w').write(s)
-          PY
+        run: echo "::notice::The token cannot manage D1; deploying with the database id committed in wrangler.toml."
       - run: npm run build
       - name: Deploy to Cloudflare Pages
         id: pages
         continue-on-error: true
         run: |
+          set -o pipefail
           npx wrangler pages project list | grep -q 'fountainfinances' || npx wrangler pages project create fountainfinances --production-branch main
-          npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true | tee deploy.log
+          if ! npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true 2>&1 | tee deploy.log; then
+            echo "::warning::Deploy with the D1 binding failed; retrying without it (forms will show a 'temporarily unavailable' message)."
+            python3 -c "import re;p='wrangler.toml';s=open(p).read();open(p,'w').write(re.sub(r'\n\[\[d1_databases\]\][\s\S]*$','\n',s))"
+            npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true 2>&1 | tee deploy.log
+          fi
+          grep -q 'Deployment complete' deploy.log
           URL=$(grep -Eo 'https://[a-z0-9.-]+\.pages\.dev' deploy.log | tail -1)
           echo "url=$URL" >> "$GITHUB_OUTPUT"
       - name: Fallback — serve the site from Workers static assets (token without Pages permission)
@@ -139,6 +138,13 @@ jobs:
           npx wrangler deploy --config wrangler.assets.toml
           SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
           echo "url=https://fountainfinances.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Pages secrets (rate-limit salt, generated once)
+        if: steps.pages.outcome == 'success'
+        continue-on-error: true
+        run: |
+          if ! npx wrangler pages secret list --project-name fountainfinances 2>/dev/null | grep -q IP_HASH_SALT; then
+            openssl rand -hex 32 | npx wrangler pages secret put IP_HASH_SALT --project-name fountainfinances
+          fi
       - name: Connect FountainFinances.com (Pages custom domains, DNS, apex → www redirect)
         if: steps.pages.outcome == 'success'
         continue-on-error: true
@@ -153,8 +159,34 @@ jobs:
               echo "$html" | grep -q -- "$marker" && echo "ok   $u has $marker" || echo "::warning::$u is missing $marker"
             done
           done
+      - name: Notify search engines (IndexNow) once the domain serves this site
+        if: steps.pages.outcome == 'success'
+        continue-on-error: true
+        run: bash scripts/indexnow.sh
       - name: Report live URL
         run: |
           URL="${{ steps.pages.outputs.url || steps.worker.outputs.url }}"
           echo "Live URL: $URL"
           echo "### Live URL: $URL" >> "$GITHUB_STEP_SUMMARY"
+
+  diagnose:
+    # Manual runs end with a report on the live site: DNS, indexing signals, forms and Lighthouse scores.
+    needs: deploy
+    if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
+      - name: Live diagnostics
+        run: bash scripts/diagnose-live.sh
+      - name: Lighthouse (mobile)
+        run: |
+          echo "### Lighthouse (mobile)" >> "$GITHUB_STEP_SUMMARY"
+          for path in / /guides/how-to-build-a-budget/ /calculators/mortgage/; do
+            npx -y lighthouse@12 "https://fountainfinances.pages.dev$path" --quiet --output=json --output-path=lh.json \
+              --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" || continue
+            line=$(jq -r '"\(.categories.performance.score*100|round) perf · \(.categories.accessibility.score*100|round) a11y · \(.categories["best-practices"].score*100|round) best · \(.categories.seo.score*100|round) SEO · LCP \(.audits["largest-contentful-paint"].displayValue) · CLS \(.audits["cumulative-layout-shift"].displayValue) · TBT \(.audits["total-blocking-time"].displayValue)"' lh.json)
+            echo "- \`$path\`: $line" | tee -a "$GITHUB_STEP_SUMMARY"
+            jq -r '[.audits[] | select(.score != null and .score < 0.9 and (.details.type // "") != "debugdata") | "  - \(.id): \(.title)"] | .[:8][]' lh.json | tee -a "$GITHUB_STEP_SUMMARY"
+          done

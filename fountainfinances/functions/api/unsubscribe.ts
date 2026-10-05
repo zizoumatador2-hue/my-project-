@@ -1,8 +1,9 @@
-import { type Env, json, redirect, wantsJson, originAllowed, readBody, normalizeEmail, isEmail, sha256, now, rateLimit } from '../_lib/http';
+import { type Env, json, redirect, wantsJson, originAllowed, readBody, normalizeEmail, isEmail, sha256, now, rateLimit, dbReady } from '../_lib/http';
 
 const DONE = 'Done. If that address was subscribed, it will not receive any more newsletters.';
 
 async function byToken(env: Env, token: string) {
+  if (!dbReady(env)) return false;
   if (!/^[a-f0-9]{64}$/.test(token)) return false;
   const res = await env.DB.prepare(
     `UPDATE subscribers SET status = 'unsubscribed', unsubscribed_at = ?2, confirm_hash = NULL WHERE unsub_hash = ?1 AND status != 'unsubscribed'`,
@@ -26,6 +27,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return new Response(null, { status: 200 });
   }
   const asJson = wantsJson(request);
+  if (!dbReady(env)) return asJson ? json(200, { message: DONE }) : redirect('/newsletter/unsubscribed/');
   if (!originAllowed(request, env)) return asJson ? json(403, { error: 'This request could not be verified. Please reload the page.' }) : redirect('/newsletter/error/');
   const body = await readBody(request);
   if (!body) return json(400, { error: 'Please submit the form again.' });

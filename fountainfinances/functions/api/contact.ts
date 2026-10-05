@@ -1,4 +1,4 @@
-import { type Env, json, redirect, wantsJson, originAllowed, readBody, normalizeEmail, isEmail, clean, safePath, now, rateLimit, housekeeping, verifyTurnstile } from '../_lib/http';
+import { type Env, json, redirect, wantsJson, originAllowed, readBody, normalizeEmail, isEmail, clean, safePath, now, rateLimit, housekeeping, verifyTurnstile, dbReady } from '../_lib/http';
 import { emailConfigured, sendEmail, escapeHtml } from '../_lib/email';
 
 const TOPICS = new Set(['General question', 'Report an error or correction', 'Feedback on a calculator', 'Partnership or advertising', 'Privacy request']);
@@ -6,6 +6,7 @@ const TOPICS = new Set(['General question', 'Report an error or correction', 'Fe
 export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUntil }) => {
   const asJson = wantsJson(request);
   const fail = (status: number, error: string) => (asJson ? json(status, { error }) : redirect('/contact/?error=1'));
+  if (!dbReady(env)) return fail(503, 'Our contact form is temporarily unavailable. Please email us at info.christopherkunz@gmail.com.');
   if (!originAllowed(request, env)) return fail(403, 'This request could not be verified. Please reload the page and try again.');
   const body = await readBody(request);
   if (!body) return fail(400, 'Please submit the form again.');

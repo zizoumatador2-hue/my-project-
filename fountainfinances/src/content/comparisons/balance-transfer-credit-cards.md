@@ -1,6 +1,6 @@
 ---
 title: "Best Balance Transfer Credit Cards: 0% Intro APR Cards Compared"
-seoTitle: "Best Balance Transfer Credit Cards: 0% Intro APR Compared"
+seoTitle: "Best Balance Transfer Credit Cards of 2026: 0% APR Compared"
 description: "Compare balance transfer credit cards with 0% intro APR offers by transfer window, fees and fine print — and learn how to check if a transfer saves money."
 keywords: ["best balance transfer cards", "balance transfer credit cards", "0 percent balance transfer cards", "balance transfer offers"]
 hub: credit

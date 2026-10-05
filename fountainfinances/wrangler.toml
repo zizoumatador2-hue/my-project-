@@ -9,6 +9,6 @@ SITE_URL = "https://www.fountainfinances.com"
 [[d1_databases]]
 binding = "DB"
 database_name = "fountainfinances-db"
-# Replace with the id printed by `wrangler d1 create fountainfinances-db` (the deploy workflow does this automatically).
-database_id = "00000000-0000-0000-0000-000000000000"
+# Created 2026-10-05 (ENAM). The deploy workflow keeps this id in sync if the token can manage D1.
+database_id = "5e159827-1921-4f53-b186-3a1d818df1c9"
 migrations_dir = "migrations"

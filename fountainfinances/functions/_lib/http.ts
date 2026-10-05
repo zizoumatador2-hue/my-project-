@@ -1,4 +1,5 @@
 export interface Env {
+  /** Can be missing at runtime when the Pages project has no D1 binding; check with `dbReady`. */
   DB: D1Database;
   SITE_URL: string;
   /** Extra comma-separated origins allowed to POST (e.g. a preview domain). */
@@ -113,3 +114,6 @@ export async function verifyTurnstile(env: Env, req: Request, token: string | un
   const data = (await res.json().catch(() => ({}))) as { success?: boolean };
   return data.success === true;
 }
+
+/** True when the D1 binding exists, so form handlers can fail with a clear 503 instead of crashing. */
+export const dbReady = (env: Env): boolean => Boolean((env as { DB?: D1Database }).DB);
