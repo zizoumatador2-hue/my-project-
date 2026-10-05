@@ -11,7 +11,7 @@ category: couples-vacations
 destinations: [florida, las-vegas, mexico, dominican-republic, miami]
 resorts: [excellence-punta-cana, couples-negril, the-don-cesar, breathless-cabo-san-lucas]
 related: [affordable-romantic-getaways, cheap-vacation-destinations, how-to-find-vacation-deals]
-snippet: "With $2,000 for two, the best couples vacations are drive-to beach towns, Florida's Gulf Coast, midweek Las Vegas, Charleston or Savannah, and, with flexible dates and a good flight from your city, shoulder-season all-inclusives in Punta Cana or Cancun. Split the budget into transport, lodging, food and one splurge, and compare live prices before booking."
+snippet: "The best couples vacations under $2,000 for two are drive-to beach towns, Florida's Gulf Coast, midweek Las Vegas, Charleston or Savannah, and, with flexible dates and a good flight from your city, shoulder-season all-inclusives in Punta Cana or Cancun. Split the budget into transport, lodging, food and one splurge, and compare live prices before booking."
 published: 2026-09-04
 updated: 2026-09-22
 featured: true

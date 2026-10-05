@@ -18,3 +18,14 @@ faqs:
 A great weekend getaway feels longer than it is. The trick is minimizing transit and decisions: pick one base, book dinner in advance, and leave space for doing nothing.
 
 Start with [weekend getaways for couples](/guides/weekend-getaways-for-couples/), [best weekend getaways from New York](/guides/best-weekend-getaways-from-new-york/) and [Florida weekend getaways](/guides/florida-weekend-getaways/).
+
+## How to plan a weekend getaway for two
+
+- **Keep travel under three hours each way.** A drive or a single nonstop flight leaves you two full days instead of two half days. From New York, think the Hudson Valley, the Catskills or the Connecticut shoreline; from Florida cities, the Keys, St. Pete Beach or Palm Beach; from the West Coast, Napa Valley, Big Sur or Las Vegas.
+- **Leave Thursday night or Friday morning.** Even a few extra hours on the first day changes the whole trip. Many hotels also charge less on Sunday nights, so a Friday-to-Monday stay can cost about the same as a standard weekend.
+- **Book one memorable thing.** A sunset sail, a spa appointment, a tasting or a table at a restaurant you have wanted to try. Plan around it and keep the rest of the weekend loose.
+- **Choose a walkable base.** If you can stroll to coffee, dinner and the water, you will spend less time in the car and more time together.
+
+## When weekend getaways are better value
+
+Shoulder seasons are the sweet spot: spring and fall for the Northeast and wine country, late spring and early fall for Florida beaches, and midweek dates almost everywhere. Holiday weekends and local events push prices up quickly, so check the calendar before you commit. When you compare hotels, look at the total price after taxes and resort fees.

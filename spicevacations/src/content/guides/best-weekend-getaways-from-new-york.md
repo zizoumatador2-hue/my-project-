@@ -1,6 +1,6 @@
 ---
 title: "Best Weekend Getaways from New York: 14 Romantic Escapes for Couples"
-metaTitle: "Best Weekend Getaways from New York for Couples"
+metaTitle: "Romantic Weekend Getaways from New York | SpiceVacations"
 metaDescription: "The best romantic weekend getaways from New York: the Hudson Valley, Catskills, Hamptons, Newport, Mystic, Cape May, the Berkshires and more, with travel times."
 scene: lake
 palette: dusk
