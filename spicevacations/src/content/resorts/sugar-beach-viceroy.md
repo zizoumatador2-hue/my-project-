@@ -16,7 +16,7 @@ features: [Between the Pitons, White-sand beach, Villas with plunge pools, Rainf
 goodToKnow:
   - The resort welcomes families as well as couples.
   - The hillside setting means golf-cart rides between villas and the beach.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Sugar Beach, A Viceroy Resort occupies one of the most dramatic settings in the Caribbean: the valley between St. Lucia's two Pitons, which rise straight from the sea on either side.

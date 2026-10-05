@@ -16,7 +16,7 @@ features: [Waikiki beachfront, Iconic orchid-mosaic pool, Sunset music and hula,
 goodToKnow:
   - Waikiki is lively; the hotel is an oasis of calm within it.
   - Book oceanfront rooms for Diamond Head views.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Halekulani has long been one of Waikiki's most refined hotels. Its name is often translated as "house befitting heaven," and the atmosphere is serene despite the busy beach outside.

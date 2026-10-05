@@ -17,7 +17,7 @@ features: [Adults-only, Clifftop ocean views, Architecture blending into nature,
 goodToKnow:
   - Check Highway 1 conditions before you travel; closures happen.
   - There is limited cell service in Big Sur; embrace it.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Post Ranch Inn is one of America's most romantic hotels. Set on the ridge above the Pacific in Big Sur, its rooms, some shaped like treehouses and others built into the hillside, are designed to disappear into the landscape.

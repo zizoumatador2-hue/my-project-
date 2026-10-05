@@ -17,7 +17,7 @@ features: [Adults-only, Redwood setting, Luxury glamping, Pools, Spa, Ocean-view
 goodToKnow:
   - Glamping tents are a unique alternative to rooms.
   - Check current meal-plan options; some rates have included meals.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Ventana Big Sur sits on a hillside of redwoods and meadows above the Pacific. It is adults-only and pairs rustic nature with high-end comfort, including luxury glamping tents.

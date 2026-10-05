@@ -13,7 +13,7 @@ resorts: [mohonk-mountain-house]
 related: [weekend-getaways-for-couples, romantic-getaways-in-the-usa, best-couples-vacations]
 snippet: "The best romantic weekend getaways from New York include the Hudson Valley and Catskills for inns and hiking, the Hamptons and Montauk for beaches, Newport for mansions and sailing, Mystic for a seaside village, Cape May for Victorian charm, the Berkshires for culture, Lake Placid for mountains and Philadelphia for a food-focused city break."
 published: 2026-09-15
-updated: 2026-09-22
+updated: 2026-10-05
 featured: true
 faqs:
   - q: What is the most romantic weekend getaway from New York City?

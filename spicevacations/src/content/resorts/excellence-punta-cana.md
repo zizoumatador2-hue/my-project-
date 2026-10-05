@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Quiet Uvero Alto beach, Swim-up suites, S
 goodToKnow:
   - Uvero Alto is farther from Punta Cana Airport than Bávaro resorts; expect a longer transfer.
   - The Atlantic-facing coast can have waves; ask about calmer swimming areas.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Excellence Punta Cana brings the Excellence Collection's adults-only formula to the Dominican Republic. Its Uvero Alto location is quieter than the Bávaro strip, with a long beach and a relaxed pace.

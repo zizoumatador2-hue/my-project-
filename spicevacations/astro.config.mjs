@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
 /** rehype: wrap tables for horizontal scroll on mobile, and harden external links in Markdown. */
 function rehypeSpice() {
@@ -22,6 +23,20 @@ function rehypeSpice() {
 
 const SITE = process.env.SITE_URL || 'https://spicevacations.com';
 
+/** Sitemap <lastmod> straight from each entry's `updated` frontmatter, so crawlers see real edit dates. */
+const LASTMOD = (() => {
+  const map = new Map();
+  for (const dir of ['destinations', 'resorts', 'guides', 'deals']) {
+    const base = `./src/content/${dir}`;
+    if (!existsSync(base)) continue;
+    for (const f of readdirSync(base).filter((x) => x.endsWith('.md'))) {
+      const m = /^updated:\s*["']?(\d{4}-\d{2}-\d{2})/m.exec(readFileSync(`${base}/${f}`, 'utf8'));
+      if (m) map.set(`/${dir}/${f.replace(/\.md$/, '')}/`, new Date(m[1]).toISOString());
+    }
+  }
+  return map;
+})();
+
 // Utility pages that must never appear in the sitemap (they are also noindex).
 const EXCLUDE = ['/brand/', '/search/', '/contact/thanks/', '/newsletter/thanks/', '/500/', '/404/', '/saved/'];
 
@@ -39,7 +54,8 @@ export default defineConfig({
       filter: (page) => !EXCLUDE.some((p) => page.endsWith(p)),
       i18n: undefined,
       serialize(item) {
-        item.links = [{ lang: 'en-US', url: item.url }];
+        const lastmod = LASTMOD.get(new URL(item.url).pathname);
+        if (lastmod) item.lastmod = lastmod;
         return item;
       },
     }),

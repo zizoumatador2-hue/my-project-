@@ -18,7 +18,7 @@ goodToKnow:
   - Playa Mujeres is north of Cancun's Hotel Zone; transfers from Cancun Airport typically take longer than to Hotel Zone resorts.
   - The Excellence Club upgrade adds extra perks; confirm current inclusions when booking.
 featured: true
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Excellence Playa Mujeres sits on a stretch of coast north of Cancun that feels calmer than the busy Hotel Zone. It is part of the Excellence Collection, known for adults-only, all-inclusive resorts built around couples.

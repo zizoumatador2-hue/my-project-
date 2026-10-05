@@ -16,7 +16,7 @@ features: [Vineyard views, Hillside olive groves, Terrace dining, Spa, Private t
 goodToKnow:
   - Sunset on the restaurant terrace is a Napa tradition; reserve ahead.
   - Plan a designated driver or car service for tastings.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Auberge du Soleil has been a Napa Valley favorite for decades. From its hillside in Rutherford, the whole valley spreads out below, a patchwork of vineyards glowing in late-afternoon light.

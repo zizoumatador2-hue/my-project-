@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Cap Cana setting, Beach and coves, Spa, C
 goodToKnow:
   - Cap Cana is a short drive from Punta Cana International Airport.
   - The area has golf courses and a marina for day trips.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Sanctuary Cap Cana is set within Cap Cana, an upscale, gated development known for its marina, golf and quieter atmosphere compared with the Bávaro strip.

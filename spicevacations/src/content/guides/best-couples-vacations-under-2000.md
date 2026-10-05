@@ -13,7 +13,7 @@ resorts: [excellence-punta-cana, couples-negril, the-don-cesar, breathless-cabo-
 related: [affordable-romantic-getaways, cheap-vacation-destinations, how-to-find-vacation-deals]
 snippet: "The best couples vacations under $2,000 for two are drive-to beach towns, Florida's Gulf Coast, midweek Las Vegas, Charleston or Savannah, and, with flexible dates and a good flight from your city, shoulder-season all-inclusives in Punta Cana or Cancun. Split the budget into transport, lodging, food and one splurge, and compare live prices before booking."
 published: 2026-09-04
-updated: 2026-09-22
+updated: 2026-10-05
 featured: true
 howTo:
   name: How to plan a couples vacation under $2,000

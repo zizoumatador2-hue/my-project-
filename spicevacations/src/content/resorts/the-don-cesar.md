@@ -16,7 +16,7 @@ features: [Historic 1928 landmark, Gulf beachfront, Sunset views, Pool, Spa, Nea
 goodToKnow:
   - Tampa International Airport (TPA) is about 30 to 45 minutes away depending on traffic.
   - Check recent renovation and reopening notes after hurricane seasons.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 The Don CeSar has been a Gulf Coast landmark since 1928. Its pink facade is instantly recognizable, and sunsets over the Gulf from its beach are spectacular.

@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Maroma Beach location, Swim-up rooms, Spa
 goodToKnow:
   - Maroma Beach is roughly halfway between Cancun Airport and Playa del Carmen.
   - Beach conditions can change seasonally with sargassum; ask about recent conditions.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Secrets Maroma Beach Riviera Cancun is one of the best-known adults-only resorts on the Riviera Maya, thanks largely to its location on Maroma Beach, a wide sweep of soft white sand backed by palms.

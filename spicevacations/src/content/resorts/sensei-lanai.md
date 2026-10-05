@@ -17,7 +17,7 @@ features: [Adults-focused, Wellness programs, Private spa hale, Upland forest se
 goodToKnow:
   - The resort is inland; the beach at Four Seasons Resort Lanai is a drive away.
   - Check the current minimum age and program inclusions before booking.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Sensei Lanai is a different kind of Hawaii escape. Instead of the beach, it sits in Lanai's cooler, pine-covered uplands and focuses on rest, movement and nourishment.

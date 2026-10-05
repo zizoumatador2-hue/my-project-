@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Mexican art and culture focus, Art worksh
 goodToKnow:
   - The resort's "All-Fun Inclusive" concept has included entry to Xcaret parks and tours; confirm current inclusions before booking.
   - Check the current minimum guest age.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Hotel Xcaret Arte is a different kind of adults-only resort. Rather than generic luxury, it celebrates Mexico: its architecture, food, music and craft traditions are woven into the design, the restaurants and the activities.

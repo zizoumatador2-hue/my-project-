@@ -16,7 +16,7 @@ features: [Beachfront on Wailea Beach, Adults-only Serenity Pool, Spa, Fine dini
 goodToKnow:
   - The resort welcomes families; the Serenity Pool is the couples' refuge.
   - Wailea Beach is often calm in the morning, ideal for swimming and snorkeling.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Four Seasons Resort Maui at Wailea is one of Hawaii's most admired resorts, set on Wailea Beach on Maui's sunny south shore.

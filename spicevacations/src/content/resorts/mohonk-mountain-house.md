@@ -16,7 +16,7 @@ features: [Victorian castle on a lake, Miles of hiking trails, Spa, Meals includ
 goodToKnow:
   - Rates have traditionally included meals and many activities; confirm your package.
   - Fall foliage weekends book far in advance.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Mohonk Mountain House has welcomed guests since the 1800s. The rambling Victorian castle sits on a glacial lake high in the Shawangunk Ridge, surrounded by trails, gardens and rustic gazebos.

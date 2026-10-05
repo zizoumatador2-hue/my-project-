@@ -16,7 +16,7 @@ features: [Historic 1920s resort, Private beach, Pools, Oceanfront dining, Near 
 goodToKnow:
   - Old Town and Duval Street are a short drive or bike ride away.
   - Beaches in Key West are generally calm and shallow.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Casa Marina was built in the 1920s at the end of Henry Flagler's Overseas Railroad, and it remains one of Key West's grandest resorts, with a generous private beach rare on the island.

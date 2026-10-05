@@ -16,7 +16,7 @@ features: [Design-driven interiors, Oceanfront pool and beach, Spa, Cabaret-styl
 goodToKnow:
   - Mid-Beach is quieter than central South Beach but a short ride away.
   - Evening entertainment books up; reserve early.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Faena Hotel Miami Beach is pure theater. The interiors, created with film director Baz Luhrmann and costume designer Catherine Martin, are a riot of red, gold and art.

@@ -17,7 +17,7 @@ features: [Adults-only, All suites, Ocean-view hillside setting, Intimate size, 
 goodToKnow:
   - The hotel is on the hillside rather than the beach; check current beach shuttle arrangements.
   - Its small size means peak dates sell out early.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Hotel Wailea is one of Hawaii's few adults-only hotels, and it leans fully into romance. The all-suite property sits on the hills above Wailea, looking out across the ocean toward neighboring islands.

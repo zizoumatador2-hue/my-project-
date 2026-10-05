@@ -16,7 +16,7 @@ features: [Adults-only pool, Spa, Rooftop dining with fireworks views, Lazy rive
 goodToKnow:
   - The resort welcomes families; couples can retreat to the adults-only pool.
   - Park tickets are separate from room rates.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 The Four Seasons Resort Orlando sits within the Walt Disney World Resort area and offers a grown-up way to do Orlando. Spend the day at the parks, then retreat to the adults-only pool or the spa.

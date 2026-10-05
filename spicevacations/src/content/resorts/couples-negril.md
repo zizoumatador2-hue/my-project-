@@ -17,7 +17,7 @@ features: [Couples-only, All-inclusive, Calm bay for swimming, Water sports, Rel
 goodToKnow:
   - Bloody Bay is north of Negril's main Seven Mile Beach strip, so it is quieter.
   - Couples Resorts has included some excursions in stays; confirm current inclusions.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Couples Negril sits on Bloody Bay, a sheltered crescent just north of Negril's famous Seven Mile Beach. As the name suggests, it is designed exclusively for couples, and the atmosphere is laid-back and friendly.

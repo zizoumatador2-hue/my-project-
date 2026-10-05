@@ -16,7 +16,7 @@ features: [Fountains of Bellagio, Conservatory & Botanical Gardens, Fountain-vie
 goodToKnow:
   - Fountain-view rooms are the romantic upgrade.
   - Resort fees apply at most Strip hotels; check the total price before booking.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Bellagio is the Las Vegas resort people picture when they imagine romance on the Strip. Its lake and fountains, set to music, are one of the city's iconic free shows.

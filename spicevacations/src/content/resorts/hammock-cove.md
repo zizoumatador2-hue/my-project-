@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Private plunge pool in every villa, Water
 goodToKnow:
   - Ask about beach and swimming options when booking, since the resort is focused on villa pools and the waterfront.
   - Its boutique size means it can book up early for peak weeks.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Hammock Cove combines two things couples often have to choose between: the ease of all-inclusive and the privacy of a luxury villa. Every villa faces the water and has a private plunge pool.

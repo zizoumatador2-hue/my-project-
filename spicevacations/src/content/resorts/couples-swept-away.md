@@ -17,7 +17,7 @@ features: [Couples-only, All-inclusive, Seven Mile Beach, Sports and fitness fac
 goodToKnow:
   - Great for active couples who want tennis, fitness classes and water sports.
   - Rooms are spread through gardens; beachfront suites book early.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Couples Swept Away sits on Negril's Seven Mile Beach, surrounded by tropical gardens. It is known for its active side, with sports facilities and fitness options, balanced by a spa and plenty of quiet sand.

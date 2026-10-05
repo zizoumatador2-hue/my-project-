@@ -17,7 +17,7 @@ features: [Couples-only, All-inclusive, Private offshore island, Cable Beach, Ea
 goodToKnow:
   - The offshore island is reached by a short boat ride.
   - Nassau is about an hour's flight from South Florida.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Sandals Royal Bahamian sits on Cable Beach, west of downtown Nassau, and adds something few all-inclusives can: a private offshore island for guests, reached by a short boat ride.

@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Lively atmosphere, Rooftop pool, Walk to 
 goodToKnow:
   - The vibe is social and upbeat; couples seeking silence may prefer a San José del Cabo resort.
   - Medano Beach is one of the more swimmable beaches in Cabo San Lucas.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Breathless Cabo San Lucas is built for couples and friends who want energy with their ocean views. It sits on Medano Beach, one of Cabo San Lucas's most swimmable beaches, a short walk from the marina's boats, bars and restaurants.

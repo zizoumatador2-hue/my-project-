@@ -17,7 +17,7 @@ features: [Adults-only, All-inclusive, Butler service, Large spa, Ocean-view roo
 goodToKnow:
   - The Hotel Zone location is convenient for Cancun nightlife and dining.
   - Some Hotel Zone beaches can have stronger surf; ask about swimming conditions.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Le Blanc Spa Resort Cancun is one of the city's most refined adults-only resorts. Its all-white design, attentive butler service and emphasis on spa and wellness give it a calm, upscale feel in the heart of the Hotel Zone.

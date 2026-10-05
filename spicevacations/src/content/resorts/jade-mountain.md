@@ -17,7 +17,7 @@ goodToKnow:
   - The resort sits on a hillside; expect stairs and steep paths.
   - Transfers from Hewanorra International Airport (UVF) take roughly an hour or more.
 featured: true
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Jade Mountain is one of the Caribbean's most distinctive resorts. Each "sanctuary" is designed without a fourth wall, so your room opens straight onto the view of the Pitons and the sea, and many include a private infinity pool.

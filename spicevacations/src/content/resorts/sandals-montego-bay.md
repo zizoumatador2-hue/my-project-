@@ -17,7 +17,7 @@ features: [Couples-only, All-inclusive, Minutes from MBJ airport, Long beach, Ov
 goodToKnow:
   - The resort is near the airport; some guests notice aircraft noise at times.
   - Sandals has offered exchange privileges with nearby sister resorts; check current rules.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Sandals Montego Bay is one of the brand's longest-running resorts and is close to Sangster International Airport, so you can be on the beach soon after landing.

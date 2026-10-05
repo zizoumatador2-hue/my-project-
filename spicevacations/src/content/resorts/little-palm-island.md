@@ -18,7 +18,7 @@ goodToKnow:
   - Check the current minimum guest age before booking.
   - Key West is about 30 miles away by road from the mainland dock.
 featured: true
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 Little Palm Island feels like a far-flung South Pacific hideaway, yet it sits in the Lower Florida Keys. Guests arrive by boat or seaplane, and the island's bungalows are tucked among palms along the water.

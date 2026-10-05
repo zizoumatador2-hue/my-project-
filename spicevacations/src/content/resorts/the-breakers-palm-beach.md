@@ -16,7 +16,7 @@ features: [Historic landmark, Oceanfront, Beach club with pools, Spa, Many resta
 goodToKnow:
   - The resort welcomes families, but its scale offers quiet corners for couples.
   - Palm Beach International Airport (PBI) is a short drive away.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 The Breakers is one of Florida's most famous resorts. The original hotel was founded by railroad magnate Henry Flagler in the 1890s, and the current Italian Renaissance-style building dates to the 1920s.

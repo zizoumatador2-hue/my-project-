@@ -16,7 +16,7 @@ features: [No casino, 23rd-floor sky lobby, Spa, Strip views, Quiet atmosphere, 
 goodToKnow:
   - It is steps from major casino resorts if you want to play.
   - Check the current resort fee and parking policy.
-updated: 2026-09-20
+updated: 2026-10-05
 ---
 
 The Waldorf Astoria Las Vegas is the Strip without the noise. There is no casino, and the arrival lobby is on the 23rd floor, with views over the city.
