@@ -163,5 +163,6 @@ for (const [slot, query] of Object.entries(slots)) {
 }
 
 const sorted = Object.fromEntries(Object.keys(slots).filter((k) => photos[k]).map((k) => [k, photos[k]]));
-writeFileSync(META, JSON.stringify(sorted, null, 2) + '\n');
+// Only rewrite the metadata when photos changed, so no-op runs don't create commits.
+if (fetched) writeFileSync(META, JSON.stringify(sorted, null, 2) + '\n');
 console.log(`Done: ${fetched} new, ${failed} failed, ${Object.keys(sorted).length}/${Object.keys(slots).length} slots have photos`);
