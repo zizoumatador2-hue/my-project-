@@ -35,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -230,6 +230,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-credit-scores": {
+    "id": 7621381,
+    "query": "credit",
+    "alt": "Credit Cards and a Smartphone on a White Wall",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7621381/",
+    "color": "#a8a8a8",
+    "width": 1600,
+    "height": 900
+  },
   "topic-debt-consolidation": {
     "id": 6684775,
     "query": "paying bills",
@@ -329,6 +340,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-money-management": {
+    "id": 12591339,
+    "query": "wallet with money",
+    "alt": "Getting Paid Money and Red Wallet",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/12591339/",
+    "color": "#c8c8c8",
+    "width": 1600,
+    "height": 900
+  },
   "topic-mortgage-basics": {
     "id": 7937363,
     "query": "real estate house model",
@@ -348,6 +370,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/6615188/",
     "color": "#e8e8e8",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-online-banks": {
+    "id": 6768014,
+    "query": "woman using laptop at home",
+    "alt": "Woman in White Sweater Using a Laptop at Home",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/6768014/",
+    "color": "#d8d8d8",
     "width": 1600,
     "height": 900
   },
@@ -392,6 +425,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/7009596/",
     "color": "#e8a8b8",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-savings-accounts": {
+    "id": 5080099,
+    "query": "piggy",
+    "alt": "Adorable piggy standing in sunny countryside",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/5080099/",
+    "color": "#d8c8b8",
     "width": 1600,
     "height": 900
   },
@@ -579,6 +623,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/6994192/",
     "color": "#c8b8a8",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-how-to-improve-credit-score": {
+    "id": 7947837,
+    "query": "chart",
+    "alt": "Overhead Shot of a Pen and Notebook on Charts",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7947837/",
+    "color": "#e8e8e8",
     "width": 1600,
     "height": 900
   },
