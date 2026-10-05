@@ -1,4 +1,5 @@
 ---
+import PageHead from '@/components/PageHead.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CalcCard from '@/components/CalcCard.astro';
@@ -20,13 +21,11 @@ const groups = HUBS.map((h) => ({ hub: h, calcs: CALCULATORS.filter((c) => c.hub
   crumbs={crumbs}
   schema={[collectionPage({ url: path, name: title, description }), itemList('Financial calculators', CALCULATORS.map((c) => ({ name: c.name, url: `/calculators/${c.slug}/` })))]}
 >
-  <div class="page-head">
-    <div class="wrap">
+  <PageHead photo="calculators">
       <Breadcrumbs items={crumbs} />
       <h1>Free Financial Calculators</h1>
       <p class="lede">Run the numbers before you decide. Every calculator is free, works on your phone and runs entirely in your browser — nothing you type is sent to us.</p>
-    </div>
-  </div>
+  </PageHead>
   <div class="wrap" style="padding:36px 16px 8px">
     {groups.map((g) => (
       <section class="section" style="padding:0 0 40px" aria-labelledby={`g-${g.hub.slug}`}>

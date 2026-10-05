@@ -1,4 +1,5 @@
 ---
+import PageHead from '@/components/PageHead.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -14,13 +15,11 @@ const title = 'Personal Finance Guides: Budgeting, Credit, Loans & More';
 const description = 'In-depth, sourced personal finance guides in plain English: budgeting, saving, credit scores, credit cards, bank accounts, loans, mortgages and insurance.';
 ---
 <BaseLayout title={title} description={description} keywords={['personal finance guide', 'personal finance for beginners', 'financial advice for beginners', 'money management advice']} crumbs={crumbs} schema={[collectionPage({ url: path, name: title, description }), itemList('Guides', guides.map((g) => ({ name: g.data.title, url: `/guides/${g.id}/` })))]}>
-  <div class="page-head">
-    <div class="wrap">
+  <PageHead photo="guides">
       <Breadcrumbs items={crumbs} />
       <h1>Personal Finance Guides</h1>
       <p class="lede">Clear, carefully sourced explanations of the money decisions most Americans face — from building a first budget to buying a home.</p>
-    </div>
-  </div>
+  </PageHead>
   <div class="wrap" style="padding-top:12px">
     <nav aria-label="Jump to a topic" style="padding:20px 0 4px">
       <ul class="pill-list">{HUBS.map((h) => <li><a href={`#${h.slug}`}>{h.shortTitle}</a></li>)}</ul>

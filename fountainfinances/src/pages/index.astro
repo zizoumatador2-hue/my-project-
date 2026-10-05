@@ -2,6 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
+import Photo from '@/components/Photo.astro';
+import PhotoCredit from '@/components/PhotoCredit.astro';
+import Aurora from '@/components/reactbits/Aurora';
+import BlurText from '@/components/reactbits/BlurText';
+import ShinyText from '@/components/reactbits/ShinyText';
+import CountUp from '@/components/reactbits/CountUp';
+import Magnet from '@/components/reactbits/Magnet';
 import CalcCard from '@/components/CalcCard.astro';
 import GuideCard from '@/components/GuideCard.astro';
 import Faq from '@/components/Faq.astro';
@@ -59,23 +66,29 @@ const schema = [
 ];
 ---
 <BaseLayout title={pageTitle} description={description} keywords={['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money', 'free financial calculators']} path="/" schema={schema}>
-  <section class="hero" aria-labelledby="hero-h">
+  <section class="hero hero-cine" aria-labelledby="hero-h">
+    <div class="hero-media" aria-hidden="true">
+      <Photo slot="home" class="kenburns" eager decorative />
+      <div class="hero-aurora"><Aurora client:idle colorStops={['#0a6a6b', '#e2b65a', '#1f8f8f']} amplitude={1.1} blend={0.6} speed={0.6} /></div>
+      <div class="hero-shade"></div>
+      <div class="grain"></div>
+    </div>
     <div class="wrap hero-grid">
-      <div>
-      <span class="eyebrow">Independent personal finance for Americans</span>
-      <h1 id="hero-h">Make Smarter Money Decisions</h1>
-      <p class="hero-lede">Compare financial products, understand your options, and use practical tools to take control of your finances.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="/calculators/" data-track="cta_click" data-placement="hero">Explore Financial Tools</a>
-        <a class="btn btn-ghost" href="/best/" data-track="cta_click" data-placement="hero">Compare Financial Products</a>
+      <div class="hero-copy">
+        <span class="eyebrow eyebrow-light"><ShinyText client:idle text="Independent personal finance for Americans" color="#9fd9d6" shineColor="#ffffff" speed={3} delay={1.5} /></span>
+        <BlurText client:load as="h1" id="hero-h" className="hero-title" text="Make Smarter Money Decisions" delay={120} animateBy="words" direction="bottom" />
+        <p class="hero-lede" data-reveal>Compare financial products, understand your options, and use practical tools to take control of your finances.</p>
+        <div class="hero-cta" data-reveal>
+          <Magnet client:idle padding={60} magnetStrength={4}><a class="btn btn-primary btn-glow" href="/calculators/" data-track="cta_click" data-placement="hero">Explore Financial Tools</a></Magnet>
+          <Magnet client:idle padding={60} magnetStrength={4}><a class="btn btn-glass" href="/best/" data-track="cta_click" data-placement="hero">Compare Financial Products</a></Magnet>
+        </div>
+        <ul class="hero-points" data-reveal>
+          <li><Icon name="check" size={18} />Free calculators — no sign-up</li>
+          <li><Icon name="check" size={18} />Sourced from CFPB, FDIC, Federal Reserve &amp; IRS</li>
+          <li><Icon name="check" size={18} />Affiliate links always labeled</li>
+        </ul>
       </div>
-      <ul class="hero-points">
-        <li><Icon name="check" size={18} />Free calculators — no sign-up</li>
-        <li><Icon name="check" size={18} />Sourced from CFPB, FDIC, Federal Reserve &amp; IRS</li>
-        <li><Icon name="check" size={18} />Affiliate links always labeled</li>
-      </ul>
-      </div>
-      <nav class="quickstart" aria-label="Quick start">
+      <nav class="quickstart glass" aria-label="Quick start" data-reveal>
         <p class="qs-title">Quick start: pick a goal</p>
         <ul>
           <li><a href="/calculators/budget/"><Icon name="wallet" size={20} /><span><strong>Build a monthly budget</strong><small>See where your money goes in 2 minutes</small></span></a></li>
@@ -85,6 +98,16 @@ const schema = [
           <li><a href="/calculators/home-affordability/"><Icon name="home" size={20} /><span><strong>See how much house you can afford</strong><small>Turn income into a price range</small></span></a></li>
         </ul>
       </nav>
+    </div>
+    <PhotoCredit slot="home" class="hero-credit" />
+  </section>
+
+  <section class="stats-band" aria-label="Fountain Finances at a glance">
+    <div class="wrap stats">
+      <div class="stat"><strong><CountUp client:visible to={CALCULATORS.length} duration={1.6} /></strong><span>free calculators</span></div>
+      <div class="stat"><strong><CountUp client:visible to={guides.length} duration={1.8} /></strong><span>in-depth guides</span></div>
+      <div class="stat"><strong><CountUp client:visible to={comparisons.length} duration={1.4} /></strong><span>product comparisons</span></div>
+      <div class="stat"><strong>$0</strong><span>cost to you, no sign-up</span></div>
     </div>
   </section>
 

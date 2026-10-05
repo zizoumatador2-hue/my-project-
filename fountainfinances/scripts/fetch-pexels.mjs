@@ -2,7 +2,8 @@
 // optimized WebP files to public/images/photos/ plus metadata to src/data/photos.json.
 //
 //   PEXELS_API_KEY=… node scripts/fetch-pexels.mjs           → official Pexels API
-//   node scripts/fetch-pexels.mjs                             → public search pages (fallback)
+//   node scripts/fetch-pexels.mjs                             → keyless fallback: public search pages, then a
+//                                                               public index of Pexels photos (Hugging Face datasets)
 //   node scripts/fetch-pexels.mjs --force                     → refetch every slot
 //
 // Slots that already have a photo are kept, so the selection stays stable between runs.
@@ -72,20 +73,101 @@ async function searchPage(query) {
   return found;
 }
 
-const search = KEY ? searchApi : searchPage;
-console.log(`Fetching Pexels photos via ${KEY ? 'the API' : 'public search pages'} for ${Object.keys(slots).length} slots`);
+// Keyless fallback: full-text search over a public dataset that indexes Pexels photos with their descriptions.
+const HF = 'https://datasets-server.huggingface.co';
+let dataset = null;
+const PEXELS_ID = /pexels\.com\/photos?\/(?:[a-z0-9-]*?-)?(\d{3,})/i;
+function rowToPhoto(row, query) {
+  let id = null;
+  const texts = [];
+  let photographer = null;
+  for (const [k, v] of Object.entries(row)) {
+    if (typeof v !== 'string') continue;
+    const m = v.match(PEXELS_ID);
+    if (m && !id) id = Number(m[1]);
+    else if (/photographer|author|user/i.test(k) && v.length < 80) photographer = v;
+    else if (!/^https?:/.test(v)) texts.push([k, v]);
+  }
+  if (!id && typeof row.id === 'number' && /pexels/i.test(JSON.stringify(row))) id = row.id;
+  if (!id) return null;
+  const named = texts.find(([k]) => /^(alt|title|caption|description|text|prompt)$/i.test(k));
+  const alt = (named?.[1] || texts.sort((a, b) => b[1].length - a[1].length)[0]?.[1] || query).trim();
+  return {
+    id,
+    alt: alt.charAt(0).toUpperCase() + alt.slice(1),
+    photographer: photographer || 'Pexels',
+    photographerUrl: 'https://www.pexels.com/',
+    pageUrl: `https://www.pexels.com/photo/${id}/`,
+    color: null,
+    src: `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1920`,
+    landscape: true,
+  };
+}
+async function hfSearch(ds, query) {
+  const url = `${HF}/search?dataset=${encodeURIComponent(ds.name)}&config=${encodeURIComponent(ds.config)}&split=${encodeURIComponent(ds.split)}&query=${encodeURIComponent(query)}&offset=0&length=40`;
+  const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
+  if (!res.ok) throw new Error(`dataset search ${res.status}`);
+  const data = await res.json();
+  return (data.rows || []).map((r) => rowToPhoto(r.row, query)).filter(Boolean);
+}
+async function findDataset() {
+  const list = await (await fetch('https://huggingface.co/api/datasets?search=pexels&sort=downloads&direction=-1&limit=40')).json();
+  for (const d of list) {
+    try {
+      const splits = await (await fetch(`${HF}/splits?dataset=${encodeURIComponent(d.id)}`, { signal: AbortSignal.timeout(30000) })).json();
+      const sp = splits.splits?.[0];
+      if (!sp) continue;
+      const ds = { name: d.id, config: sp.config, split: sp.split };
+      const rows = await hfSearch(ds, 'money');
+      console.log(`  dataset ${d.id}: ${rows.length} Pexels matches for "money"`);
+      if (rows.length >= 3) return ds;
+    } catch (e) {
+      console.log(`  dataset ${d.id}: ${e.message}`);
+    }
+  }
+  throw new Error('no searchable Pexels dataset found');
+}
+async function searchDataset(query) {
+  dataset ??= await findDataset();
+  let rows = await hfSearch(dataset, query);
+  if (rows.length < 3) rows = rows.concat(await hfSearch(dataset, query.split(' ').slice(-2).join(' ')));
+  return rows;
+}
+let pageBlocked = false;
+async function searchKeyless(query) {
+  if (!pageBlocked) {
+    try {
+      return await searchPage(query);
+    } catch (e) {
+      pageBlocked = true;
+      console.log(`  search pages unavailable (${e.message}); using the public dataset index`);
+    }
+  }
+  return searchDataset(query);
+}
+
+const search = KEY ? searchApi : searchKeyless;
+console.log(`Fetching Pexels photos via ${KEY ? 'the API' : 'keyless sources'} for ${Object.keys(slots).length} slots`);
 
 let fetched = 0;
 let failed = 0;
 for (const [slot, query] of Object.entries(slots)) {
   if (!FORCE && photos[slot] && existsSync(`${OUT}/${slot}-800.webp`)) continue;
   try {
-    const results = (await search(query)).filter((p) => p.landscape);
-    const pick = results.find((p) => !used.has(p.id));
-    if (!pick) throw new Error('no unused landscape result');
-    const res = await fetch(pick.src, { headers: { 'user-agent': UA } });
-    if (!res.ok) throw new Error(`image ${res.status}`);
-    const buf = Buffer.from(await res.arrayBuffer());
+    const results = (await search(query)).filter((p) => p.landscape && !used.has(p.id));
+    let pick = null;
+    let buf = null;
+    for (const cand of results.slice(0, 8)) {
+      const res = await fetch(cand.src, { headers: { 'user-agent': UA } });
+      if (!res.ok) continue;
+      const b = Buffer.from(await res.arrayBuffer());
+      const meta = await sharp(b).metadata();
+      if (!meta.width || meta.width < 1200 || meta.width <= meta.height * 1.15) continue; // landscape, large enough
+      pick = cand;
+      buf = b;
+      break;
+    }
+    if (!pick) throw new Error(`no usable landscape photo among ${results.length} results`);
     let width = 0;
     let height = 0;
     for (const w of SIZES) {
@@ -102,7 +184,7 @@ for (const [slot, query] of Object.entries(slots)) {
     failed++;
     console.log(`  ✗ ${slot}: ${e.message}`);
   }
-  await sleep(KEY ? 250 : 1200);
+  await sleep(KEY ? 250 : 400);
 }
 
 const sorted = Object.fromEntries(Object.keys(slots).filter((k) => photos[k]).map((k) => [k, photos[k]]));

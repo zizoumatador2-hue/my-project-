@@ -1,0 +1,12 @@
+---
+import photos from '@/data/photos.json';
+
+interface Props { slot: string; class?: string }
+const { slot, class: cls = '' } = Astro.props;
+const p = (photos as Record<string, { photographer: string; photographerUrl: string; pageUrl: string }>)[slot];
+---
+{p && (
+  <p class={`photo-credit ${cls}`}>
+    Photo: <a href={p.pageUrl} rel="noopener" target="_blank">{p.photographer}</a> / Pexels
+  </p>
+)}

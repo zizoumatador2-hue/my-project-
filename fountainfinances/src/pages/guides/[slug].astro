@@ -1,4 +1,5 @@
 ---
+import PageHead from '@/components/PageHead.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -59,8 +60,7 @@ const schema = [
   modified={d.updated}
   section={hub.title}
 >
-  <div class="page-head">
-    <div class="wrap">
+  <PageHead photo={`guide-${guide.id}`}>
       <Breadcrumbs items={crumbs} />
       <h1>{d.title}</h1>
       <p class="lede">{d.description}</p>
@@ -71,8 +71,7 @@ const schema = [
         <span>Updated <time datetime={isoDay(d.updated)}><strong>{fmtDate(d.updated)}</strong></time></span>
         <span>{readingMinutes(words)} min read</span>
       </div>
-    </div>
-  </div>
+  </PageHead>
 
   <div class="wrap article-grid">
     <article class="prose">

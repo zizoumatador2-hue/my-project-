@@ -3,6 +3,7 @@
  * Renders the six pillar hubs (/credit/) and every topic page (/credit-cards/).
  * Both live at the top level to keep URLs short.
  */
+import PageHead from '@/components/PageHead.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -95,14 +96,12 @@ const schema = [
 ];
 ---
 <BaseLayout title={seoTitle} description={description} keywords={keywords} path={path} crumbs={crumbs} schema={schema}>
-  <div class="page-head">
-    <div class="wrap">
+  <PageHead photo={props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`}>
       <Breadcrumbs items={crumbs} />
       <h1>{props.kind === 'hub' ? hub.title : title}</h1>
       <p class="lede">{lede}</p>
       <div class="meta-line"><span>By <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a></span><span>Updated <time datetime={isoDay(updated)}>{fmtDate(updated)}</time></span></div>
-    </div>
-  </div>
+  </PageHead>
 
   {props.kind === 'hub' && siblings.length > 0 && (
     <section class="section" style="padding-bottom:16px" aria-labelledby="topics-h">

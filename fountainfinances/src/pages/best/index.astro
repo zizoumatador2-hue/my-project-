@@ -1,4 +1,5 @@
 ---
+import PageHead from '@/components/PageHead.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -13,13 +14,11 @@ const title = 'Compare Financial Products: Savings, Cards, Loans & CDs';
 const description = 'Side-by-side comparisons of savings, checking, CDs, credit cards and personal loans, with a transparent methodology and clearly labeled affiliate links.';
 ---
 <BaseLayout title={title} description={description} keywords={['credit card comparison', 'savings account comparison', 'personal loan comparison', 'checking account comparison']} crumbs={crumbs} schema={[collectionPage({ url: path, name: title, description }), itemList('Product comparisons', items.map((c) => ({ name: c.data.title, url: `/best/${c.id}/` })))]}>
-  <div class="page-head">
-    <div class="wrap">
+  <PageHead photo="best">
       <Breadcrumbs items={crumbs} />
       <h1>Compare Financial Products</h1>
       <p class="lede">Transparent, side-by-side comparisons of widely available U.S. financial products — with the criteria we use and the trade-offs of each option spelled out.</p>
-    </div>
-  </div>
+  </PageHead>
   <div class="wrap" style="padding-top:28px;padding-bottom:56px">
     <Disclosure kind="comparison" />
     <div class="grid grid-3">

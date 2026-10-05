@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type Transition } from 'motion/react';
+import { motion, useReducedMotion, type Transition } from 'motion/react';
 import { useEffect, useRef, useState, useMemo } from 'react';
 
 type BlurTextProps = {
@@ -17,6 +17,7 @@ type BlurTextProps = {
   onAnimationComplete?: () => void;
   stepDuration?: number;
   as?: 'p' | 'h1' | 'h2' | 'span';
+  id?: string;
 };
 
 const buildKeyframes = (
@@ -45,8 +46,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   easing = (t: number) => t,
   onAnimationComplete,
   stepDuration = 0.35,
-  as = 'p'
+  as = 'p',
+  id
 }) => {
+  const reduce = useReducedMotion();
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -92,8 +95,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
+  if (reduce) return <Tag id={id} className={`rb-blur ${className}`}>{text}</Tag>;
+
   return (
-    <Tag ref={ref} className={`rb-blur ${className}`} style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <Tag ref={ref} id={id} aria-label={text} className={`rb-blur ${className}`} style={{ display: 'flex', flexWrap: 'wrap' }}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -107,6 +112,7 @@ const BlurText: React.FC<BlurTextProps> = ({
         return (
           <motion.span
             key={index}
+            aria-hidden="true"
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}

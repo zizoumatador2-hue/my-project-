@@ -1,0 +1,17 @@
+---
+// Page header; with a Pexels photo for `photo` it becomes a dark cinematic header with parallax.
+import Photo from '@/components/Photo.astro';
+import PhotoCredit from '@/components/PhotoCredit.astro';
+import photos from '@/data/photos.json';
+
+interface Props { photo?: string }
+const { photo } = Astro.props;
+const has = !!photo && photo in photos;
+---
+<div class:list={['page-head', has && 'ph']}>
+  {has && <div class="ph-media" data-parallax aria-hidden="true"><Photo slot={photo!} eager decorative /></div>}
+  <div class="wrap">
+    <slot />
+  </div>
+  {has && <PhotoCredit slot={photo!} />}
+</div>

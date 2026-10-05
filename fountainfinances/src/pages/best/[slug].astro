@@ -1,4 +1,5 @@
 ---
+import PageHead from '@/components/PageHead.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -44,8 +45,7 @@ const schema = [
 ];
 ---
 <BaseLayout title={d.seoTitle} description={d.description} keywords={d.keywords} path={path} crumbs={crumbs} schema={schema} ogType="article" published={d.published} modified={d.updated} section={hub.title}>
-  <div class="page-head">
-    <div class="wrap">
+  <PageHead photo={`best-${cmp.id}`}>
       <Breadcrumbs items={crumbs} />
       <h1>{d.title}</h1>
       <p class="lede">{d.intro}</p>
@@ -54,8 +54,7 @@ const schema = [
         <span>Updated <time datetime={isoDay(d.updated)}><strong>{fmtDate(d.updated)}</strong></time></span>
         <span>{products.length} options compared</span>
       </div>
-    </div>
-  </div>
+  </PageHead>
 
   <div class="wrap" style="padding-top:28px">
     <Disclosure kind="comparison" />
