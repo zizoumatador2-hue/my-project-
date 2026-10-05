@@ -27,18 +27,12 @@ faqs:
   - q: "Is life insurance through work enough?"
     a: "Group life insurance is a useful benefit, but coverage is often one or two times salary and usually ends if you leave the job. Many people with dependents add an individual term policy they control."
 sources:
-  - title: "Life Insurance Buyer's Guide"
-    publisher: "National Association of Insurance Commissioners"
-    url: "https://content.naic.org/sites/default/files/publication-lif-lp-life-insurance-buyers-guide.pdf"
   - title: "Life insurance"
     publisher: "National Association of Insurance Commissioners — Consumer Insight"
     url: "https://content.naic.org/consumer/life-insurance.htm"
   - title: "Insurance basics: life insurance"
     publisher: "Insurance Information Institute"
     url: "https://www.iii.org/insurance-basics/life-insurance"
-  - title: "Investor Bulletin: Variable Life Insurance"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
-    url: "https://www.investor.gov/introduction-investing/investing-basics/investment-products/insurance-products/variable-life-insurance"
 related: ["types-of-insurance", "financial-planning-for-beginners", "emergency-fund-guide", "50-30-20-rule"]
 calculators: ["investment", "budget"]
 comparisons: []

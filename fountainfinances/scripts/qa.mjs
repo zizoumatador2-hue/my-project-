@@ -181,14 +181,16 @@ if (/Disallow: \/(\s|$)/.test(robots)) err('robots.txt', 'blocks the whole site'
 
 // Optional: external link check
 if (process.argv.includes('--external')) {
-  const list = [...externals];
+  // Pexels photo pages block automated requests; they are credits, not sources.
+  const list = [...externals].filter((u) => !u.startsWith('https://www.pexels.com/'));
   console.log(`Checking ${list.length} external links…`);
   await Promise.all(
     list.map(async (u) => {
       try {
         let res = await fetch(u, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(20000), headers: { 'user-agent': 'Mozilla/5.0 (FountainFinances link check)' } });
         if (res.status >= 400) res = await fetch(u, { redirect: 'follow', signal: AbortSignal.timeout(20000), headers: { 'user-agent': 'Mozilla/5.0 (FountainFinances link check)' } });
-        if (res.status >= 400) err('external', `${res.status} ${u}`);
+        if (res.status === 403 || res.status === 429) warn('external', `${res.status} (blocks automated checks) ${u}`);
+        else if (res.status >= 400) err('external', `${res.status} ${u}`);
       } catch (e) {
         err('external', `${e.name} ${u}`);
       }

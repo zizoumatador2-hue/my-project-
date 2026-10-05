@@ -36,9 +36,9 @@ sources:
   - title: "Homeowners Protection Act (PMI Cancellation Act)"
     publisher: "Federal Deposit Insurance Corporation — Consumer Compliance Examination Manual"
     url: "https://www.fdic.gov/resources/supervision-and-examinations/consumer-compliance-examination-manual/documents/5/v-8-1.pdf"
-  - title: "Mortgagee Letter 2013-04: Revision of Federal Housing Administration (FHA) policies concerning cancellation of the annual Mortgage Insurance Premium"
+  - title: "FHA Mortgagee Letters (see Mortgagee Letter 2013-04 on annual MIP duration)"
     publisher: "U.S. Department of Housing and Urban Development"
-    url: "https://www.hud.gov/sites/documents/13-04ML.PDF"
+    url: "https://www.hud.gov/program_offices/administration/hudclips/letters/mortgagee"
 howTo:
   name: "How to request PMI cancellation"
   totalTime: "P30D"
