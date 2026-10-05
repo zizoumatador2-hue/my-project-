@@ -1,4 +1,4 @@
-# Fountain Finances — https://www.fountainfinances.com
+# Fountain Finances — https://fountainfinances.com
 User-agent: Googlebot
 Allow: /
 Disallow: /api/
@@ -11,4 +11,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.fountainfinances.com/sitemap-index.xml
+Sitemap: https://fountainfinances.com/sitemap-index.xml

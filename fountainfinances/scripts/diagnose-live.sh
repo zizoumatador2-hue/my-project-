@@ -3,7 +3,7 @@
 # Writes a Markdown report to the job summary. Never fails the job.
 set -uo pipefail
 PAGES=https://fountainfinances.pages.dev
-HOSTS=("https://www.fountainfinances.com" "https://fountainfinances.com" "$PAGES")
+HOSTS=("https://fountainfinances.com" "https://www.fountainfinances.com" "$PAGES")
 out() { echo "$1"; [ -n "${GITHUB_STEP_SUMMARY:-}" ] && echo "$1" >> "$GITHUB_STEP_SUMMARY"; }
 
 out "## Live diagnostics"

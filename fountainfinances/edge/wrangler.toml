@@ -1,6 +1,10 @@
 # Edge Worker that serves the Pages site on the custom domain (see worker.js).
-# Custom domains are attached by scripts/connect-domain.sh through the API.
+# Routes only fire for proxied (orange-cloud) DNS records; the apex already is.
 name = "fountainfinances-edge"
 main = "worker.js"
 compatibility_date = "2026-09-01"
 workers_dev = false
+routes = [
+  { pattern = "fountainfinances.com/*", zone_name = "fountainfinances.com" },
+  { pattern = "www.fountainfinances.com/*", zone_name = "fountainfinances.com" },
+]

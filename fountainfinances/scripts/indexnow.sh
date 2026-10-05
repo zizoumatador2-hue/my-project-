@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Submits every sitemap URL to IndexNow (Bing, Yahoo, DuckDuckGo, Yandex, Seznam…) so new and
-# updated pages are crawled within hours. Runs only when www.fountainfinances.com serves this build.
+# updated pages are crawled within hours. Runs only when fountainfinances.com serves this build.
 set -uo pipefail
 KEY=2d37b51220901b323a44e71fca9ace63
-HOST=www.fountainfinances.com
+HOST=fountainfinances.com
 if ! curl -fsS -m 20 "https://$HOST/$KEY.txt" | grep -q "$KEY"; then
   echo "::notice::$HOST does not serve this site yet (DNS not connected) — skipping IndexNow."
   exit 0

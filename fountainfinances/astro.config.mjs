@@ -7,7 +7,7 @@ import { join } from 'node:path';
 
 import react from '@astrojs/react';
 
-const SITE = 'https://www.fountainfinances.com';
+const SITE = 'https://fountainfinances.com';
 
 /** Read `updated:` dates from content front matter so the sitemap carries real lastmod values. */
 function contentDates() {

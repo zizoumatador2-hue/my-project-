@@ -152,8 +152,8 @@ jobs:
       - name: Verify the deployed site serves this build
         if: steps.pages.outcome == 'success'
         run: |
-          sleep 10
-          for u in "${{ steps.pages.outputs.url }}" "https://fountainfinances.pages.dev" "https://www.fountainfinances.com"; do
+          sleep 20
+          for u in "${{ steps.pages.outputs.url }}" "https://fountainfinances.pages.dev" "https://fountainfinances.com"; do
             html=$(curl -fsSL "$u/") || { echo "::warning::$u not reachable"; continue; }
             for marker in hero-cine marquee-track "/js/fx.js?v=" astro-island; do
               echo "$html" | grep -q -- "$marker" && echo "ok   $u has $marker" || echo "::warning::$u is missing $marker"

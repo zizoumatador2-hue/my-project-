@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Connects fountainfinances.com (apex) and www.fountainfinances.com to the Cloudflare Pages project.
 #   CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID must be set. Safe to run repeatedly.
-# Steps: Pages custom domains → DNS records (if the zone is in this account) → apex→www redirect rule.
+# Canonical host: fountainfinances.com. Steps: Pages custom domains → DNS records (needs DNS Edit)
+# → www→apex redirect rule → edge Worker routes (needs Workers Routes Edit; works without DNS Edit).
 set -uo pipefail
 DOMAIN=fountainfinances.com
 PROJECT=fountainfinances
@@ -62,28 +63,18 @@ if [ -n "$ZONE_ID" ]; then
     fi
   done
 
-  # 4) Redirect apex → www (single redirect rule, keeps path and query)
-  RULE='{"rules":[{"description":"fountainfinances.com to www","expression":"(http.host eq \"'$DOMAIN'\")","action":"redirect","action_parameters":{"from_value":{"status_code":301,"target_url":{"expression":"concat(\"https://www.'$DOMAIN'\", http.request.uri.path)"},"preserve_query_string":true}}}]}'
+  # 4) Redirect www → apex (single redirect rule, keeps path and query)
+  RULE='{"rules":[{"description":"www to fountainfinances.com","expression":"(http.host eq \"www.'$DOMAIN'\")","action":"redirect","action_parameters":{"from_value":{"status_code":301,"target_url":{"expression":"concat(\"https://'$DOMAIN'\", http.request.uri.path)"},"preserve_query_string":true}}}]}'
   R=$(cf -X PUT "$API/zones/$ZONE_ID/rulesets/phases/http_request_dynamic_redirect/entrypoint" --data "$RULE")
-  [ "$(echo "$R" | jq -r .success)" = true ] && summary "- Redirect $DOMAIN → www.$DOMAIN (301) active." || summary "- Redirect rule: $(echo "$R" | errors)"
+  [ "$(echo "$R" | jq -r .success)" = true ] && summary "- Redirect www.$DOMAIN → $DOMAIN (301) active." || summary "- Redirect rule: $(echo "$R" | errors)"
 fi
 
-# 4b) If the domain still doesn't serve this site (no DNS permission), put the edge Worker on it.
-#     Worker Custom Domains create their own DNS records (needs Zone › Workers Routes › Edit).
-PAGES_STATUS=$(cf "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" | jq -r --arg h "www.$DOMAIN" '.result[]? | select(.name==$h) | .status')
-if [ -n "$ZONE_ID" ] && [ "$PAGES_STATUS" != active ]; then
+# 4b) Edge Worker on Worker Routes: serves the site on the proxied apex record without touching DNS.
+if [ -n "$ZONE_ID" ]; then
   if (cd edge && npx wrangler deploy --config wrangler.toml >/tmp/edge.log 2>&1); then
-    summary "- Edge Worker fountainfinances-edge deployed."
-    for host in "www.$DOMAIN" "$DOMAIN"; do
-      R=$(cf -X PUT "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" --data "{\"hostname\":\"$host\",\"service\":\"fountainfinances-edge\",\"zone_id\":\"$ZONE_ID\",\"environment\":\"production\",\"override_existing_dns_record\":true}")
-      if [ "$(echo "$R" | jq -r .success)" = true ]; then
-        summary "- Worker custom domain $host attached (Cloudflare created the DNS record and certificate)."
-      else
-        summary "- Worker custom domain $host: $(echo "$R" | errors)"
-      fi
-    done
+    summary "- Edge Worker deployed with routes fountainfinances.com/* and www.fountainfinances.com/*."
   else
-    summary "- Edge Worker deploy failed: $(tail -5 /tmp/edge.log | tr '\n' ' ')"
+    summary "- Edge Worker deploy failed: $(tail -6 /tmp/edge.log | tr '\n' ' ')"
   fi
 fi
 

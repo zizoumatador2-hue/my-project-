@@ -2,7 +2,7 @@ export const SITE = {
   name: 'Fountain Finances',
   legalName: 'Fountain Finances',
   domain: 'FountainFinances.com',
-  url: 'https://www.fountainfinances.com',
+  url: 'https://fountainfinances.com',
   tagline: 'Smarter Money Decisions, Made Simple.',
   supportingLine: 'Compare. Learn. Plan. Make Better Financial Decisions.',
   description:

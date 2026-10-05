@@ -153,7 +153,7 @@ One-time setup:
    - `CONTACT_TO_EMAIL` = `info.christopherkunz@gmail.com` — contact form notifications
    - `TURNSTILE_SECRET_KEY` (secret, optional; pair with `PUBLIC_TURNSTILE_SITE_KEY`)
    - `SITE_URL` is set in `wrangler.toml`.
-4. **Custom domain:** Pages project → Custom domains → add `www.fountainfinances.com` and `fountainfinances.com`; add a redirect rule (Rules → Redirect Rules) from the apex to `https://www.fountainfinances.com` preserving path and query.
+4. **Custom domain:** the canonical address is `https://fountainfinances.com`. The deploy job runs `scripts/connect-domain.sh`, which puts the edge Worker (`edge/worker.js`) on the domain through a Worker Route: the Worker serves the Pages site on `fountainfinances.com` and 301-redirects `www` to it. For `www` to redirect too, its DNS record must be proxied (orange cloud) — a CNAME `www` → `fountainfinances.pages.dev` is enough.
 5. **Email:** in Resend, verify the `fountainfinances.com` sending domain (SPF/DKIM DNS records) before enabling the newsletter.
 
 Manual deploy alternative: `npm run build && npx wrangler pages deploy dist --project-name fountainfinances`.
@@ -186,8 +186,8 @@ Strict CSP, HSTS (preload-ready), `X-Frame-Options: DENY`, `nosniff`, restrictiv
 
 ## 14. SEO launch checklist
 
-- [ ] Connect `www.fountainfinances.com` and apex redirect; confirm HTTPS
-- [ ] Verify the site in **Google Search Console** (set `PUBLIC_GSC_VERIFICATION` or DNS TXT) and submit `https://www.fountainfinances.com/sitemap-index.xml`
+- [ ] Confirm `https://fountainfinances.com` serves the site and `www` redirects to it
+- [ ] Verify the site in **Google Search Console** (set `PUBLIC_GSC_VERIFICATION` or DNS TXT) and submit `https://fountainfinances.com/sitemap-index.xml`
 - [ ] Verify in **Bing Webmaster Tools** (set `PUBLIC_BING_VERIFICATION` or import from GSC) and submit the sitemap
 - [ ] Create the GA4 property, set `PUBLIC_GA_ID`, mark key events, link GA4 ↔ Search Console
 - [ ] Run `npm run qa:external` from a machine with normal internet access and fix any external link that has moved

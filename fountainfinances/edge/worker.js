@@ -1,12 +1,12 @@
-// Edge entry for www.fountainfinances.com and fountainfinances.com.
-// Serves the Cloudflare Pages deployment under the custom domain and sends the bare domain to www.
+// Edge entry for fountainfinances.com (canonical) and www.fountainfinances.com.
+// Serves the Cloudflare Pages deployment on the custom domain and sends www to the bare domain.
 const ORIGIN = 'https://fountainfinances.pages.dev';
-const CANONICAL = 'www.fountainfinances.com';
+const CANONICAL = 'fountainfinances.com';
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    if (url.hostname !== CANONICAL) {
+    if (url.hostname !== CANONICAL || url.protocol !== 'https:') {
       url.hostname = CANONICAL;
       url.protocol = 'https:';
       return Response.redirect(url.toString(), 301);

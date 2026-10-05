@@ -5,7 +5,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const DIST = 'dist';
-const SITE = 'https://www.fountainfinances.com';
+const SITE = 'https://fountainfinances.com';
 const errors = [];
 const warnings = [];
 const err = (page, msg) => errors.push(`${page}: ${msg}`);
@@ -176,7 +176,7 @@ for (const [p, { html }] of pages) {
 }
 if (!/<lastmod>/.test(sm)) err('sitemap', 'no lastmod values');
 const robots = readFileSync(join(DIST, 'robots.txt'), 'utf8');
-if (!robots.includes('Sitemap: https://www.fountainfinances.com/sitemap-index.xml')) err('robots.txt', 'missing sitemap');
+if (!robots.includes('Sitemap: https://fountainfinances.com/sitemap-index.xml')) err('robots.txt', 'missing sitemap');
 if (/Disallow: \/(\s|$)/.test(robots)) err('robots.txt', 'blocks the whole site');
 
 // Optional: external link check
