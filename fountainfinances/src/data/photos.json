@@ -35,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -150,17 +150,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/6994265/",
     "color": "#b88858",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-banking-fees": {
-    "id": 19961529,
-    "query": "atm",
-    "alt": "A woman sitting on a bench in front of an atm",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/19961529/",
-    "color": "#080808",
     "width": 1600,
     "height": 900
   },
@@ -340,17 +329,6 @@
     "width": 1600,
     "height": 900
   },
-  "topic-money-management": {
-    "id": 16026069,
-    "query": "wallet",
-    "alt": "Tablet, Smart Phone and Vulkit Wallet on a Desk",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/16026069/",
-    "color": "#181828",
-    "width": 1600,
-    "height": 900
-  },
   "topic-mortgage-basics": {
     "id": 7937363,
     "query": "real estate house model",
@@ -370,17 +348,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/6615188/",
     "color": "#e8e8e8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-online-banks": {
-    "id": 14354118,
-    "query": "banking",
-    "alt": "Free stock photo of aim, attention, bank note",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/14354118/",
-    "color": "#080808",
     "width": 1600,
     "height": 900
   },
@@ -722,17 +689,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/7621351/",
     "color": "#888888",
-    "width": 1600,
-    "height": 900
-  },
-  "guide-what-is-debt-consolidation": {
-    "id": 5980581,
-    "query": "bills",
-    "alt": "Stack of Gold Bitcoins on a Five Dollar Bill ",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/5980581/",
-    "color": "#c89828",
     "width": 1600,
     "height": 900
   },
