@@ -99,28 +99,39 @@ jobs:
         run: |
           curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" \
             | jq -r '.result[]? | "\(.name): status=\(.status) validation=\(.validation_data.status // "-") verification=\(.verification_data.status // "-") error=\(.validation_data.error_message // .verification_data.error_message // "-")"'
-      - name: Create DNS records (optional; never overwrites existing records)
+      - name: Point chaystore.com and www at the Pages project (replaces conflicting A/AAAA/CNAME records)
         if: ${{ inputs.create_dns && steps.target.outputs.kind == 'production' }}
+        env:
+          DNS_TOKEN: ${{ secrets.CLOUDFLARE_DNS_TOKEN }}
         run: |
-          API="https://api.cloudflare.com/client/v4"; H="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
-          Z=$(curl -sS -H "$H" "$API/zones?name=chaystore.com&account.id=$CLOUDFLARE_ACCOUNT_ID")
+          # Uses CLOUDFLARE_DNS_TOKEN (Zone > DNS > Edit on chaystore.com) when set, else the deploy token.
+          T="$(printf '%s' "${DNS_TOKEN:-$CLOUDFLARE_API_TOKEN}" | tr -d '[:space:]')"
+          echo "::add-mask::$T"
+          API="https://api.cloudflare.com/client/v4"; H="Authorization: Bearer $T"
+          Z=$(curl -sS -H "$H" "$API/zones?name=chaystore.com")
           ZID=$(echo "$Z" | jq -r '.result[0].id // empty')
           if [ -z "$ZID" ]; then
-            echo "::warning::Zone chaystore.com not found or not readable with this token ($(echo "$Z" | jq -r '.errors[0].message // "no zone in this account"')). Add the domain to Cloudflare, or add CNAMEs chaystore.com and www -> $PROJECT.pages.dev at your DNS provider."
-            exit 0
+            echo "::error::Zone chaystore.com not visible to this token ($(echo "$Z" | jq -r '.errors[0].message // "no zone"')). Add the secret CLOUDFLARE_DNS_TOKEN (Zone > DNS > Edit, Zone > Zone > Read for chaystore.com)."; exit 1
           fi
+          echo "zone status: $(echo "$Z" | jq -r '.result[0].status') ns: $(echo "$Z" | jq -r '.result[0].name_servers | join(",")')"
+          fail=0
           for N in chaystore.com www.chaystore.com; do
-            L=$(curl -sS -H "$H" "$API/zones/$ZID/dns_records?name=$N")
+            L=$(curl -sS -H "$H" "$API/zones/$ZID/dns_records?name=$N&per_page=100")
             if [ "$(echo "$L" | jq -r '.success')" != "true" ]; then
-              echo "::warning::$N: the token cannot read/edit DNS records ($(echo "$L" | jq -r '.errors[0].message // "unknown"')). Grant 'Zone > DNS > Edit' or add CNAME $N -> $PROJECT.pages.dev manually."
-              continue
+              echo "::error::$N: cannot read DNS records ($(echo "$L" | jq -r '.errors[0].message // "unknown"')). The token needs Zone > DNS > Edit."; fail=1; continue
             fi
-            EX=$(echo "$L" | jq -r '[.result[] | select(.type=="A" or .type=="AAAA" or .type=="CNAME")] | length')
-            if [ "$EX" != "0" ]; then echo "$N: a record already exists, left untouched"; continue; fi
+            OK=$(echo "$L" | jq -r --arg t "$PROJECT.pages.dev" '[.result[] | select(.type=="CNAME" and .content==$t)] | length')
+            if [ "$OK" != "0" ]; then echo "$N: CNAME to $PROJECT.pages.dev already present"; continue; fi
+            for row in $(echo "$L" | jq -r '.result[] | select(.type=="A" or .type=="AAAA" or .type=="CNAME") | "\(.id):\(.type):\(.content)"'); do
+              id="${row%%:*}"; echo "$N: deleting ${row#*:}"
+              curl -sS -X DELETE -H "$H" "$API/zones/$ZID/dns_records/$id" | jq -r 'if .success then "  deleted" else "  delete failed: " + (.errors[0].message // "?") end'
+            done
             R=$(curl -sS -X POST -H "$H" -H "Content-Type: application/json" "$API/zones/$ZID/dns_records" \
               -d "{\"type\":\"CNAME\",\"name\":\"$N\",\"content\":\"$PROJECT.pages.dev\",\"proxied\":true,\"ttl\":1}")
-            echo "$N: $(echo "$R" | jq -r 'if .success then "CNAME created" else (.errors[0].message // "failed") end')"
+            echo "$N: $(echo "$R" | jq -r 'if .success then "CNAME created" else "FAILED: " + (.errors[0].message // "?") end')"
+            echo "$R" | jq -e '.success' >/dev/null || fail=1
           done
+          exit $fail
       - name: Summary
         run: |
           echo "ChayStore ${{ steps.target.outputs.kind }} deploy finished (branch ${{ steps.target.outputs.branch }})." >> "$GITHUB_STEP_SUMMARY"
