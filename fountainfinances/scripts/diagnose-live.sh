@@ -39,8 +39,11 @@ for q in "site:fountainfinances.com" "site:fountainfinances.pages.dev"; do
 done
 
 out "### Forms (validation-only requests, nothing is stored)"
-for ep in subscribe contact; do
-  R=$(curl -s -m 20 -o /tmp/f -w '%{http_code}' -X POST "$PAGES/api/$ep" -H "origin: $PAGES" -H 'accept: application/json' -H 'content-type: application/x-www-form-urlencoded' --data 'email=not-an-email&name=x&message=short')
-  out "- /api/$ep → HTTP $R $(cat /tmp/f | cut -c1-160)"
+for base in https://fountainfinances.com "$PAGES"; do
+  for ep in subscribe contact; do
+    R=$(curl -s -m 20 -o /tmp/f -w '%{http_code}' -X POST "$base/api/$ep" -H "origin: $base" -H 'accept: application/json' -H 'content-type: application/x-www-form-urlencoded' --data 'email=not-an-email&name=x&message=short')
+    out "- $base/api/$ep → HTTP $R $(cut -c1-160 /tmp/f)"
+  done
 done
+out "- www redirect: $(curl -s -m 15 -o /dev/null -w '%{http_code} → %{redirect_url}' https://www.fountainfinances.com/guides/)"
 exit 0

@@ -66,8 +66,8 @@ const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.a
     <link rel="preload" href="/fonts/source-serif-4-var.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline set:html={FX_BOOT}></script>
     <style is:inline set:html={critical}></style>
-    <link rel="preload" as="style" href={`/global.css?v=${CSS_VERSION}`} onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href={`/global.css?v=${CSS_VERSION}`} /></noscript>
+    <!-- Render-blocking on purpose: deferring it caused layout shifts (CLS) on calculators and lists. -->
+    <link rel="stylesheet" href={`/global.css?v=${CSS_VERSION}`} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
