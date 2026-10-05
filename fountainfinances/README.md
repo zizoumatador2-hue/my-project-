@@ -220,7 +220,15 @@ Strict CSP, HSTS (preload-ready), `X-Frame-Options: DENY`, `nosniff`, restrictiv
 
 **Motion.** Effects use components adapted from [React Bits](https://reactbits.dev/) (`src/components/reactbits/`, MIT + Commons Clause, see its LICENSE.md): Aurora (WebGL background), BlurText (headline), ShinyText (eyebrow), CountUp (stats) and Magnet (hero buttons), loaded as small React islands only on the homepage. Site-wide effects live in `public/js/fx.js` (scroll reveal, card spotlight, header parallax), with view transitions and Ken Burns/grain in CSS. Everything is disabled for visitors who prefer reduced motion, and content stays visible without JavaScript.
 
-## 17. Optional improvements
+## 17. Google AdSense
+
+The site is prepared for AdSense review: About and Contact pages with contact details, a Privacy Policy with the required advertising/cookie disclosures and opt-out links, an advertiser disclosure, an HTML site map (`/site-map/`) and original long-form content.
+
+1. Apply at adsense.google.com with `fountainfinances.com`.
+2. Add the publisher id as the repository variable `PUBLIC_ADSENSE_CLIENT` (format `ca-pub-1234567890123456`) and run the workflow. The build then adds the AdSense script and `google-adsense-account` meta tag to every indexable page and writes `/ads.txt`. The CSP in `public/_headers` already allows Google's ad domains.
+3. In AdSense, enable **Privacy & messaging** (European consent message and U.S. state regulations message) before ads are shown.
+
+## 18. Optional improvements
 
 - Named expert reviewers (CFP®, CPA) for YMYL guides; author profile pages per person
 - Verified APY/APR data for comparison tables, refreshed on a monthly schedule (or via provider data feeds/APIs once partnerships exist)
