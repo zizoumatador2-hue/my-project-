@@ -48,7 +48,7 @@ const GSC = import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined;
 const BING = import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined;
 /** Google AdSense publisher id (ca-pub-…). When set, Auto ads load and dist/ads.txt is written. */
 const ADSENSE = (import.meta.env.PUBLIC_ADSENSE_CLIENT as string | undefined)?.trim();
-const CSS_VERSION = '3';
+const CSS_VERSION = '4';
 // Arms the scroll-reveal styles before first paint; falls back to static content if fx.js never runs.
 const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.add('fx');setTimeout(function(){if(!d.classList.contains('fx-ready'))d.classList.remove('fx')},2500)}})(document.documentElement)";
 ---
