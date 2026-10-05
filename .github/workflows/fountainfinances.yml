@@ -139,11 +139,15 @@ jobs:
           npx wrangler deploy --config wrangler.assets.toml
           SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
           echo "url=https://fountainfinances.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Connect FountainFinances.com (Pages custom domains, DNS, apex → www redirect)
+        if: steps.pages.outcome == 'success'
+        continue-on-error: true
+        run: bash scripts/connect-domain.sh
       - name: Verify the deployed site serves this build
         if: steps.pages.outcome == 'success'
         run: |
           sleep 10
-          for u in "${{ steps.pages.outputs.url }}" "https://fountainfinances.pages.dev"; do
+          for u in "${{ steps.pages.outputs.url }}" "https://fountainfinances.pages.dev" "https://www.fountainfinances.com"; do
             html=$(curl -fsSL "$u/") || { echo "::warning::$u not reachable"; continue; }
             for marker in hero-cine marquee-track "/js/fx.js?v=" astro-island; do
               echo "$html" | grep -q -- "$marker" && echo "ok   $u has $marker" || echo "::warning::$u is missing $marker"
