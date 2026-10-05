@@ -189,7 +189,11 @@ jobs:
       - uses: actions/checkout@v4
         with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
       - name: Live diagnostics
-        run: bash scripts/diagnose-live.sh
+        run: |
+          bash scripts/diagnose-live.sh
+          echo "--- robots.txt as served on fountainfinances.com"; curl -s https://fountainfinances.com/robots.txt | head -40
+          echo "--- scripts injected into the served HTML"; curl -s https://fountainfinances.com/ | grep -o '<script[^>]*src="[^"]*"' | sort -u
+          echo "--- response headers"; curl -sI https://fountainfinances.com/ | tr -d '\r' | grep -iE 'server|cf-|alt-svc|content-security|x-robots|link' 
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
       - name: Check every outbound source link
@@ -208,4 +212,7 @@ jobs:
             line=$(jq -r '"\(.categories.performance.score*100|round) perf · \(.categories.accessibility.score*100|round) a11y · \(.categories["best-practices"].score*100|round) best · \(.categories.seo.score*100|round) SEO · LCP \(.audits["largest-contentful-paint"].displayValue) · CLS \(.audits["cumulative-layout-shift"].displayValue) · TBT \(.audits["total-blocking-time"].displayValue)"' lh.json)
             echo "- \`$path\`: $line" | tee -a "$GITHUB_STEP_SUMMARY"
             jq -r '[.audits[] | select(.score != null and .score < 0.9 and (.details.type // "") != "debugdata") | "  - \(.id): \(.title)"] | .[:8][]' lh.json | tee -a "$GITHUB_STEP_SUMMARY"
+            jq -r '.audits["errors-in-console"].details.items[]? | "    console: \(.source // "") \(.description // "" | .[0:200]) \(.sourceLocation.url // "")"' lh.json
+            jq -r '.audits["robots-txt"].details.items[]? | "    robots.txt line \(.index // ""): \(.line // "") — \(.message // "")"' lh.json
+            jq -r '.audits["inspector-issues"].details.items[]? | "    issue: \(.issueType // "") \(.subItems.items[]?.url // "")"' lh.json | head -5
           done
