@@ -35,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -51,6 +51,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4977446/",
     "color": "#d8d8d8",
+    "width": 1600,
+    "height": 900
+  },
+  "hub-personal-finance": {
+    "id": 16978371,
+    "query": "calculator notebook",
+    "alt": "Desk with notebook and calculator with colorful notes. Colorful stickers and markers. Office work and school studies. Elements on an isolated white background.",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/16978371/",
+    "color": "#f8f8f8",
     "width": 1600,
     "height": 900
   },
@@ -98,6 +109,17 @@
     "width": 1600,
     "height": 900
   },
+  "hub-insurance": {
+    "id": 7292696,
+    "query": "umbrella",
+    "alt": "Two Persons Sitting while Holding an Umbrella",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7292696/",
+    "color": "#e8e8e8",
+    "width": 1600,
+    "height": 900
+  },
   "topic-auto-insurance": {
     "id": 221284,
     "query": "car on road",
@@ -131,6 +153,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-banking-fees": {
+    "id": 19961529,
+    "query": "atm",
+    "alt": "A woman sitting on a bench in front of an atm",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/19961529/",
+    "color": "#080808",
+    "width": 1600,
+    "height": 900
+  },
   "topic-budgeting": {
     "id": 8702215,
     "query": "budget planner notebook",
@@ -150,6 +183,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/12920750/",
     "color": "#a888d8",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-checking-accounts": {
+    "id": 6928880,
+    "query": "debit card",
+    "alt": "A Debit Card with Paper and Pen on a Wooden Table",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/6928880/",
+    "color": "#d8d8d8",
     "width": 1600,
     "height": 900
   },
@@ -263,6 +307,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-home-equity": {
+    "id": 19520994,
+    "query": "renovation",
+    "alt": "Kitchen and Dining Room During Renovation",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/19520994/",
+    "color": "#b8b8a8",
+    "width": 1600,
+    "height": 900
+  },
   "topic-home-insurance": {
     "id": 18905859,
     "query": "house exterior",
@@ -282,6 +337,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/8914041/",
     "color": "#383828",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-money-management": {
+    "id": 16026069,
+    "query": "wallet",
+    "alt": "Tablet, Smart Phone and Vulkit Wallet on a Desk",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/16026069/",
+    "color": "#181828",
     "width": 1600,
     "height": 900
   },
@@ -307,6 +373,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-online-banks": {
+    "id": 14354118,
+    "query": "banking",
+    "alt": "Free stock photo of aim, attention, bank note",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/14354118/",
+    "color": "#080808",
+    "width": 1600,
+    "height": 900
+  },
   "topic-personal-loans": {
     "id": 8428059,
     "query": "handshake deal",
@@ -315,6 +392,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/8428059/",
     "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-refinancing": {
+    "id": 8035298,
+    "query": "paperwork",
+    "alt": "Man in Glasses Sitting at Desk with Paperwork",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/8035298/",
+    "color": "#080808",
     "width": 1600,
     "height": 900
   },
@@ -392,6 +480,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4386370/",
     "color": "#080808",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-financial-planning-for-beginners": {
+    "id": 7516548,
+    "query": "planner",
+    "alt": "Woman writing in planner during business call",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7516548/",
+    "color": "#c8c8b8",
     "width": 1600,
     "height": 900
   },
@@ -491,6 +590,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/7937730/",
     "color": "#b8b8b8",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-how-to-build-a-budget": {
+    "id": 7054391,
+    "query": "budget",
+    "alt": "Free stock photo of budget, business, clips",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7054391/",
+    "color": "#d8d8e8",
     "width": 1600,
     "height": 900
   },
@@ -615,6 +725,17 @@
     "width": 1600,
     "height": 900
   },
+  "guide-what-is-debt-consolidation": {
+    "id": 5980581,
+    "query": "bills",
+    "alt": "Stack of Gold Bitcoins on a Five Dollar Bill ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/5980581/",
+    "color": "#c89828",
+    "width": 1600,
+    "height": 900
+  },
   "best-balance-transfer-credit-cards": {
     "id": 8938733,
     "query": "credit card wallet",
@@ -667,6 +788,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/12357588/",
     "color": "#088888",
+    "width": 1600,
+    "height": 900
+  },
+  "best-personal-loans": {
+    "id": 8292879,
+    "query": "loan",
+    "alt": "A Person Holding Loan Documents",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/8292879/",
+    "color": "#c8c8c8",
     "width": 1600,
     "height": 900
   }
