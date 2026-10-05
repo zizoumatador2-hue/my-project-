@@ -50,6 +50,26 @@ function onScroll() {
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
+// A restrained pointer-lit editorial scene. It adds depth without hijacking
+// scrolling, and is skipped for touch/reduced-motion users.
+const cinemaStage = document.querySelector<HTMLElement>('[data-cinema-stage]');
+const cinemaFrame = document.querySelector<HTMLElement>('[data-cinema-frame]');
+if (cinemaStage && cinemaFrame && !reduce && matchMedia('(pointer:fine)').matches) {
+  cinemaStage.addEventListener('pointermove', (event) => {
+    const box = cinemaStage.getBoundingClientRect();
+    const x = Math.max(0, Math.min(1, (event.clientX - box.left) / box.width));
+    const y = Math.max(0, Math.min(1, (event.clientY - box.top) / box.height));
+    cinemaStage.style.setProperty('--cinema-x', `${(x * 100).toFixed(1)}%`);
+    cinemaStage.style.setProperty('--cinema-y', `${(y * 100).toFixed(1)}%`);
+    cinemaFrame.style.setProperty('--cinema-ry', `${((x - 0.5) * 7).toFixed(2)}deg`);
+    cinemaFrame.style.setProperty('--cinema-rx', `${((0.5 - y) * 5).toFixed(2)}deg`);
+  }, { passive: true });
+  cinemaStage.addEventListener('pointerleave', () => {
+    cinemaFrame.style.setProperty('--cinema-ry', '-3deg');
+    cinemaFrame.style.setProperty('--cinema-rx', '1deg');
+  });
+}
+
 // Steam: soft rising puffs on a canvas, paused when off-screen.
 const canvas = document.querySelector<HTMLCanvasElement>('.hero-steam');
 if (canvas) {
@@ -111,3 +131,4 @@ if (canvas) {
     }
   }
 }
+
