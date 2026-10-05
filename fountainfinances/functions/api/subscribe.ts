@@ -3,6 +3,7 @@ import { emailConfigured, sendEmail, confirmationEmail } from '../_lib/email';
 
 const CONSENT_TEXT = 'I agree to receive the Fountain Finances newsletter and accept the Privacy Policy.';
 const GENERIC_OK = 'Almost done — check your inbox and click the link to confirm your subscription.';
+const QUEUED_OK = 'Thanks — you’re on the list. Before our first issue we’ll email you a link to confirm your subscription; nothing else is sent until you confirm.';
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUntil }) => {
   const asJson = wantsJson(request);
@@ -19,7 +20,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUnti
   if (body.consent !== 'yes' && body.consent !== 'on' && body.consent !== 'true') return fail(400, 'Please confirm you would like to receive the newsletter.');
   if (!(await verifyTurnstile(env, request, body['cf-turnstile-response']))) return fail(400, 'Please complete the verification challenge.');
   if (!(await rateLimit(env, request, 'subscribe', 5, 3600))) return fail(429, 'Too many attempts. Please try again later.');
-  if (!emailConfigured(env)) return fail(503, 'Newsletter sign-up is temporarily unavailable. Please try again later.');
+  // Without an email provider, sign-ups are stored as pending and confirmed by email before the first issue.
+  const canEmail = emailConfigured(env);
 
   const existing = await env.DB.prepare('SELECT status FROM subscribers WHERE email = ?1').bind(email).first<{ status: string }>();
   // Don't reveal whether an address is already subscribed.
@@ -35,8 +37,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env, waitUnti
      ON CONFLICT (email) DO UPDATE SET status = 'pending', confirm_hash = ?2, confirm_expires = ?3, unsub_hash = ?4,
        source_path = ?5, consent_text = ?6, created_at = ?7, unsubscribed_at = NULL`,
   )
-    .bind(email, await sha256(confirmToken), t + 7 * 86_400, await sha256(unsubToken), source, CONSENT_TEXT, t)
+    .bind(email, await sha256(confirmToken), t + (canEmail ? 7 : 365) * 86_400, await sha256(unsubToken), source, CONSENT_TEXT, t)
     .run();
+
+  if (!canEmail) {
+    waitUntil(housekeeping(env));
+    return asJson ? json(200, { message: QUEUED_OK }) : redirect('/newsletter/thanks/');
+  }
 
   const site = env.SITE_URL.replace(/\/$/, '');
   const confirmUrl = `${site}/api/confirm?token=${confirmToken}`;

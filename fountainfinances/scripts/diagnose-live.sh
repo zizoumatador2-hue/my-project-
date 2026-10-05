@@ -29,8 +29,11 @@ out "### Crawl signals on $PAGES"
 out "- robots.txt: $(curl -s -m 15 "$PAGES/robots.txt" | tr '\n' ' ' | cut -c1-200)"
 SM=$(curl -s -m 15 "$PAGES/sitemap-0.xml")
 out "- sitemap-0.xml: $(echo "$SM" | grep -c '<loc>' ) URLs; first: $(echo "$SM" | grep -o '<loc>[^<]*' | head -1 | sed 's/<loc>//')"
-G=$(curl -s -m 15 "$PAGES/guides/what-is-apr/" -D /tmp/gh -o /tmp/gb; grep -i '^x-robots-tag' /tmp/gh | tr -d '\r')
-out "- guide page x-robots-tag: ${G:-none} · meta robots: $(grep -o '<meta name="robots" content="[^"]*' /tmp/gb | sed 's/.*content="//')"
+for base in https://fountainfinances.com "$PAGES"; do
+  curl -s -m 15 "$base/guides/what-is-apr/" -D /tmp/gh -o /tmp/gb
+  G=$(grep -i '^x-robots-tag' /tmp/gh | tr -d '\r')
+  out "- $base guide page x-robots-tag: ${G:-none} · meta robots: $(grep -o '<meta name="robots" content="[^"]*' /tmp/gb | sed 's/.*content="//')"
+done
 
 out "### Search engine presence"
 for q in "site:fountainfinances.com" "site:fountainfinances.pages.dev"; do

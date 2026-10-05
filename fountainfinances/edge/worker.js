@@ -22,6 +22,7 @@ export default {
       redirect: 'manual',
     }));
     const out = new Headers(upstream.headers);
+    out.delete('x-robots-tag'); // only the pages.dev copy is noindexed (public/_headers)
     const loc = out.get('location');
     if (loc && loc.startsWith(ORIGIN)) out.set('location', 'https://' + CANONICAL + loc.slice(ORIGIN.length));
     return new Response(upstream.body, { status: upstream.status, statusText: upstream.statusText, headers: out });

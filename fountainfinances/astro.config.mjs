@@ -50,7 +50,7 @@ export default defineConfig({
   markdown: { rehypePlugins: [rehypeLinks], smartypants: true },
   integrations: [sitemap({
     filter: (page) =>
-      !/\/(search|newsletter\/(confirmed|unsubscribed|unsubscribe|error|check-email)|contact\/thanks|404)\/?$/.test(new URL(page).pathname),
+      !/\/(search|newsletter\/(confirmed|unsubscribed|unsubscribe|error|check-email|thanks)|contact\/thanks|404)\/?$/.test(new URL(page).pathname),
     serialize(item) {
       const path = new URL(item.url).pathname;
       item.priority = priorityFor(path);

@@ -100,7 +100,8 @@ export async function housekeeping(env: Env) {
   const t = now();
   await env.DB.batch([
     env.DB.prepare('DELETE FROM rate_limits WHERE window_start < ?1').bind(t - 86_400),
-    env.DB.prepare("DELETE FROM subscribers WHERE status = 'pending' AND created_at < ?1").bind(t - 30 * 86_400),
+    // Unconfirmed sign-ups are removed once their confirmation window has passed (plus a grace week).
+    env.DB.prepare("DELETE FROM subscribers WHERE status = 'pending' AND confirm_expires < ?1").bind(t - 7 * 86_400),
     env.DB.prepare('DELETE FROM contact_messages WHERE created_at < ?1').bind(t - 730 * 86_400),
   ]);
 }

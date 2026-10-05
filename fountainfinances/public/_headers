@@ -62,3 +62,11 @@
 /search-index.json
   ! Cache-Control
   Cache-Control: public, max-age=3600
+
+# The canonical site is https://fountainfinances.com (served through edge/worker.js, which strips this
+# header). Keep the pages.dev copies out of search results so they never compete with the real domain.
+https://fountainfinances.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.fountainfinances.pages.dev/*
+  X-Robots-Tag: noindex

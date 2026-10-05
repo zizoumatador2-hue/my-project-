@@ -160,6 +160,15 @@ jobs:
               echo "$html" | grep -q -- "$marker" && echo "ok   $u has $marker" || echo "::warning::$u is missing $marker"
             done
           done
+      - name: The real domain must stay indexable
+        if: steps.pages.outcome == 'success'
+        run: |
+          H=$(curl -sSI -m 20 https://fountainfinances.com/guides/what-is-apr/ | tr -d '\r')
+          if echo "$H" | grep -qi '^x-robots-tag:.*noindex'; then
+            echo "::error::fountainfinances.com is sending X-Robots-Tag: noindex — the edge Worker is not stripping it. Fix before search engines see it."
+            exit 1
+          fi
+          echo "fountainfinances.com is indexable"
       - name: Notify search engines (IndexNow) once the domain serves this site
         if: steps.pages.outcome == 'success'
         continue-on-error: true
@@ -194,7 +203,7 @@ jobs:
         run: |
           echo "### Lighthouse (mobile)" >> "$GITHUB_STEP_SUMMARY"
           for path in / /guides/how-to-build-a-budget/ /calculators/mortgage/; do
-            npx -y lighthouse@12 "https://fountainfinances.pages.dev$path" --quiet --output=json --output-path=lh.json \
+            npx -y lighthouse@12 "https://fountainfinances.com$path" --quiet --output=json --output-path=lh.json \
               --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" || continue
             line=$(jq -r '"\(.categories.performance.score*100|round) perf · \(.categories.accessibility.score*100|round) a11y · \(.categories["best-practices"].score*100|round) best · \(.categories.seo.score*100|round) SEO · LCP \(.audits["largest-contentful-paint"].displayValue) · CLS \(.audits["cumulative-layout-shift"].displayValue) · TBT \(.audits["total-blocking-time"].displayValue)"' lh.json)
             echo "- \`$path\`: $line" | tee -a "$GITHUB_STEP_SUMMARY"
