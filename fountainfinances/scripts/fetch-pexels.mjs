@@ -3,7 +3,7 @@
 //
 //   PEXELS_API_KEY=… node scripts/fetch-pexels.mjs           → official Pexels API
 //   node scripts/fetch-pexels.mjs                             → keyless fallback: public search pages, then a
-//                                                               public index of Pexels photos (Hugging Face datasets)
+//                                                               local index of Pexels photo metadata (scripts/pexels-index.py)
 //   node scripts/fetch-pexels.mjs --force                     → refetch every slot
 //
 // Slots that already have a photo are kept, so the selection stays stable between runs.
@@ -73,65 +73,36 @@ async function searchPage(query) {
   return found;
 }
 
-// Keyless fallback: full-text search over a public dataset that indexes Pexels photos with their descriptions.
-const HF = 'https://datasets-server.huggingface.co';
-let dataset = null;
-const PEXELS_ID = /pexels\.com\/photos?\/(?:[a-z0-9-]*?-)?(\d{3,})/i;
-function rowToPhoto(row, query) {
-  let id = null;
-  const texts = [];
-  let photographer = null;
-  for (const [k, v] of Object.entries(row)) {
-    if (typeof v !== 'string') continue;
-    const m = v.match(PEXELS_ID);
-    if (m && !id) id = Number(m[1]);
-    else if (/photographer|author|user/i.test(k) && v.length < 80) photographer = v;
-    else if (!/^https?:/.test(v)) texts.push([k, v]);
+// Keyless fallback: a local index of Pexels photo descriptions built by scripts/pexels-index.py.
+const INDEX = '.cache/pexels-index.jsonl';
+let index = null;
+const STOP = new Set(['and', 'with', 'on', 'of', 'the', 'a', 'in', 'at', 'for', 'from', 'to']);
+const words = (t) => t.toLowerCase().match(/[a-z]+/g) || [];
+const stem = (w) => w.replace(/(ies|es|s|ing|ed)$/, '');
+function searchIndex(query) {
+  if (!index) {
+    if (!existsSync(INDEX)) throw new Error('no photo index (run scripts/pexels-index.py)');
+    index = readFileSync(INDEX, 'utf8').trim().split('\n').map((l) => JSON.parse(l)).map((r) => ({ ...r, stems: new Set(words(r.alt).map(stem)) }));
+    console.log(`  using local index of ${index.length} Pexels photos`);
   }
-  if (!id && typeof row.id === 'number' && /pexels/i.test(JSON.stringify(row))) id = row.id;
-  if (!id) return null;
-  const named = texts.find(([k]) => /^(alt|title|caption|description|text|prompt)$/i.test(k));
-  const alt = (named?.[1] || texts.sort((a, b) => b[1].length - a[1].length)[0]?.[1] || query).trim();
-  return {
-    id,
-    alt: alt.charAt(0).toUpperCase() + alt.slice(1),
-    photographer: photographer || 'Pexels',
-    photographerUrl: 'https://www.pexels.com/',
-    pageUrl: `https://www.pexels.com/photo/${id}/`,
-    color: null,
-    src: `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1920`,
-    landscape: true,
-  };
-}
-async function hfSearch(ds, query) {
-  const url = `${HF}/search?dataset=${encodeURIComponent(ds.name)}&config=${encodeURIComponent(ds.config)}&split=${encodeURIComponent(ds.split)}&query=${encodeURIComponent(query)}&offset=0&length=40`;
-  const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
-  if (!res.ok) throw new Error(`dataset search ${res.status}`);
-  const data = await res.json();
-  return (data.rows || []).map((r) => rowToPhoto(r.row, query)).filter(Boolean);
-}
-async function findDataset() {
-  const list = await (await fetch('https://huggingface.co/api/datasets?search=pexels&sort=downloads&direction=-1&limit=40')).json();
-  for (const d of list) {
-    try {
-      const splits = await (await fetch(`${HF}/splits?dataset=${encodeURIComponent(d.id)}`, { signal: AbortSignal.timeout(30000) })).json();
-      const sp = splits.splits?.[0];
-      if (!sp) continue;
-      const ds = { name: d.id, config: sp.config, split: sp.split };
-      const rows = await hfSearch(ds, 'money');
-      console.log(`  dataset ${d.id}: ${rows.length} Pexels matches for "money"`);
-      if (rows.length >= 3) return ds;
-    } catch (e) {
-      console.log(`  dataset ${d.id}: ${e.message}`);
-    }
-  }
-  throw new Error('no searchable Pexels dataset found');
-}
-async function searchDataset(query) {
-  dataset ??= await findDataset();
-  let rows = await hfSearch(dataset, query);
-  if (rows.length < 3) rows = rows.concat(await hfSearch(dataset, query.split(' ').slice(-2).join(' ')));
-  return rows;
+  const q = [...new Set(words(query).filter((w) => !STOP.has(w)).map(stem))];
+  const need = Math.min(q.length, 2);
+  return index
+    .filter((r) => !r.w || !r.h || r.w > r.h * 1.2)
+    .map((r) => ({ r, score: q.filter((w) => r.stems.has(w)).length }))
+    .filter((x) => x.score >= need)
+    .sort((a, b) => b.score - a.score || a.r.alt.length - b.r.alt.length)
+    .slice(0, 12)
+    .map(({ r }) => ({
+      id: r.id,
+      alt: r.alt.charAt(0).toUpperCase() + r.alt.slice(1),
+      photographer: r.by || 'Pexels',
+      photographerUrl: 'https://www.pexels.com/',
+      pageUrl: `https://www.pexels.com/photo/${r.id}/`,
+      color: null,
+      src: `https://images.pexels.com/photos/${r.id}/pexels-photo-${r.id}.jpeg?auto=compress&cs=tinysrgb&w=1920`,
+      landscape: true,
+    }));
 }
 let pageBlocked = false;
 async function searchKeyless(query) {
@@ -143,7 +114,7 @@ async function searchKeyless(query) {
       console.log(`  search pages unavailable (${e.message}); using the public dataset index`);
     }
   }
-  return searchDataset(query);
+  return searchIndex(query);
 }
 
 const search = KEY ? searchApi : searchKeyless;

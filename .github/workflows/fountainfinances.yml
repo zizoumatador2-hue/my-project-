@@ -14,17 +14,26 @@ jobs:
     # Manual runs refresh the Pexels photo set and commit it, so builds never depend on Pexels.
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: write
+    env:
+      PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
       - run: npm ci
+      - name: Cache the Pexels photo index
+        uses: actions/cache@v4
+        with: { path: fountainfinances/.cache/pexels-index.jsonl, key: pexels-index-v1 }
+      - name: Build a keyless Pexels photo index (only used when no API key is set)
+        if: env.PEXELS_API_KEY == ''
+        run: |
+          [ -s .cache/pexels-index.jsonl ] && exit 0
+          pip install --quiet pyarrow
+          python3 scripts/pexels-index.py
       - name: Fetch photos from Pexels
-        env:
-          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
         run: node scripts/fetch-pexels.mjs
       - name: Commit new photos
         run: |
