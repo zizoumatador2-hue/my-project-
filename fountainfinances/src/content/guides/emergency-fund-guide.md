@@ -51,7 +51,7 @@ howTo:
       text: "Send tax refunds, bonuses and cash gifts straight to the fund until you reach your target."
     - name: "Refill after use"
       text: "After an emergency, restart deposits until the fund is back to its target."
-related: ["how-to-build-a-budget", "what-is-a-high-yield-savings-account", "how-to-save-money-every-month"]
+related: ["sinking-funds", "how-to-build-a-budget", "what-is-a-high-yield-savings-account", "how-to-save-money-every-month"]
 calculators: ["emergency-fund", "budget", "compound-interest"]
 ---
 

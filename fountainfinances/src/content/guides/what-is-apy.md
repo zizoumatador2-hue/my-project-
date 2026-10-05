@@ -33,7 +33,7 @@ sources:
   - title: "Compound Interest Calculator"
     publisher: "U.S. Securities and Exchange Commission — Investor.gov"
     url: "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"
-related: ["what-is-apr", "what-is-a-high-yield-savings-account", "how-compound-interest-works"]
+related: ["cd-ladder", "what-is-apr", "what-is-a-high-yield-savings-account", "how-compound-interest-works"]
 calculators: ["compound-interest", "cd"]
 comparisons: ["high-yield-savings-accounts", "cd-accounts"]
 ---

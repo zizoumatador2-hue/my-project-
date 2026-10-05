@@ -36,7 +36,7 @@ sources:
   - title: "Topic No. 403, Interest Received"
     publisher: "Internal Revenue Service"
     url: "https://www.irs.gov/taxtopics/tc403"
-related: ["what-is-a-high-yield-savings-account", "what-is-apy", "how-compound-interest-works"]
+related: ["cd-ladder", "what-is-a-high-yield-savings-account", "what-is-apy", "how-compound-interest-works"]
 calculators: ["cd", "compound-interest"]
 comparisons: ["cd-accounts"]
 ---

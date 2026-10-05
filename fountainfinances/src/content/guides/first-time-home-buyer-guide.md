@@ -62,7 +62,7 @@ howTo:
       text: "Inspect the home, let the lender appraise it and respond quickly to documentation requests."
     - name: "Review the Closing Disclosure and close"
       text: "Compare the Closing Disclosure with your Loan Estimate, do a final walk-through and sign."
-related: ["how-much-house-can-i-afford", "how-mortgage-payments-work", "how-to-improve-credit-score"]
+related: ["how-to-remove-pmi", "how-much-house-can-i-afford", "how-mortgage-payments-work", "how-to-improve-credit-score"]
 calculators: ["home-affordability", "mortgage"]
 ---
 

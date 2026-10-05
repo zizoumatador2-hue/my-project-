@@ -1,5 +1,6 @@
 ---
 import PageHead from '@/components/PageHead.astro';
+import { ogImage } from '@/lib/og';
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -39,12 +40,12 @@ const crumbs = [
 const guides = await getCollection('guides', (g) => d.related.includes(g.id));
 const calcs = d.calculators.map(calcBySlug).filter(Boolean);
 const schema = [
-  article({ url: path, title: d.title, description: d.description, published: d.published, updated: d.updated, author, keywords: d.keywords, section: hub.title }),
+  article({ url: path, title: d.title, description: d.description, published: d.published, updated: d.updated, author, keywords: d.keywords, section: hub.title, image: ogImage(`best-${cmp.id}`, `hub-${d.hub}`) }),
   itemList(d.title, products.map((p) => ({ name: `${p.provider} ${p.product}`, url: `${path}#${p.id}` }))),
   ...(d.faqs.length ? [faqPage(d.faqs)] : []),
 ];
 ---
-<BaseLayout title={d.seoTitle} description={d.description} keywords={d.keywords} path={path} crumbs={crumbs} schema={schema} ogType="article" published={d.published} modified={d.updated} section={hub.title}>
+<BaseLayout title={d.seoTitle} description={d.description} keywords={d.keywords} path={path} crumbs={crumbs} schema={schema} ogType="article" published={d.published} modified={d.updated} section={hub.title} image={ogImage(`best-${cmp.id}`, `hub-${d.hub}`)}>
   <PageHead photo={`best-${cmp.id}`} fallback={`hub-${d.hub}`}>
       <Breadcrumbs items={crumbs} />
       <h1>{d.title}</h1>

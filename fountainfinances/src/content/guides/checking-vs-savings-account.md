@@ -33,7 +33,7 @@ sources:
   - title: "National Rates and Rate Caps"
     publisher: "Federal Deposit Insurance Corporation"
     url: "https://www.fdic.gov/national-rates-and-rate-caps"
-related: ["what-is-a-high-yield-savings-account", "how-to-build-a-budget", "emergency-fund-guide"]
+related: ["how-to-avoid-overdraft-fees", "what-is-a-high-yield-savings-account", "how-to-build-a-budget", "emergency-fund-guide"]
 calculators: ["compound-interest", "budget"]
 comparisons: ["checking-accounts", "high-yield-savings-accounts"]
 ---

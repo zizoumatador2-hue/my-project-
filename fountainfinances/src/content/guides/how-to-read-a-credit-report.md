@@ -57,7 +57,7 @@ howTo:
       text: "Bureaus generally must investigate within 30 days and send you the results."
     - name: "Follow up if needed"
       text: "If the error remains, add documentation, add a statement to your file or submit a complaint to the CFPB."
-related: ["how-credit-scores-work", "how-to-improve-credit-score", "how-to-build-credit"]
+related: ["hard-vs-soft-credit-inquiry", "how-to-freeze-your-credit", "how-credit-scores-work", "how-to-improve-credit-score", "how-to-build-credit"]
 calculators: ["credit-card-payoff"]
 ---
 

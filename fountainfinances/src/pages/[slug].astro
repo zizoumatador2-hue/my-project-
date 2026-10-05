@@ -4,6 +4,7 @@
  * Both live at the top level to keep URLs short.
  */
 import PageHead from '@/components/PageHead.astro';
+import { ogImage } from '@/lib/og';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
@@ -95,7 +96,7 @@ const schema = [
   ...(faqs.length ? [faqPage(faqs)] : []),
 ];
 ---
-<BaseLayout title={seoTitle} description={description} keywords={keywords} path={path} crumbs={crumbs} schema={schema}>
+<BaseLayout title={seoTitle} description={description} keywords={keywords} path={path} crumbs={crumbs} schema={schema} image={ogImage(props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`, props.kind === 'topic' ? `hub-${props.entry.data.hub}` : undefined)}>
   <PageHead photo={props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`} fallback={props.kind === 'topic' ? `hub-${props.entry.data.hub}` : undefined}>
       <Breadcrumbs items={crumbs} />
       <h1>{props.kind === 'hub' ? hub.title : title}</h1>

@@ -2,7 +2,7 @@
 
 The site follows a **pillar → hub → topic → guide** model. The homepage hosts the pillar (*The Complete Guide to Personal Finance*, target keyword **personal finance**). Six hubs and 31 topic pages organize the clusters. Every guide links up to its hub and the pillar and across to related guides, calculators and comparisons.
 
-- ✅ = published (28 guides, each 1,500–2,600 words, sourced, with FAQ schema)
+- ✅ = published (36 guides, each 1,500–2,600 words, sourced, with FAQ schema)
 - 📝 = planned (brief ready; publish 1–2 per week, never as thin content)
 
 ## Personal finance (hub: `/personal-finance/`)
@@ -14,9 +14,9 @@ The site follows a **pillar → hub → topic → guide** model. The homepage ho
 | 3 | ✅ | How to Save Money Every Month: 30 Practical Ways | how to save money | budget calc, compound interest |
 | 4 | ✅ | Debt Payoff Strategies: Avalanche vs. Snowball | debt payoff strategies | card payoff calc, consolidation |
 | 5 | ✅ | Financial Planning for Beginners | financial planning for beginners | investment calc, retirement |
-| 29 | 📝 | The 50/30/20 Rule Explained (With Examples) | 50/30/20 rule | budget calc, budget guide |
+| 29 | ✅ | The 50/30/20 Rule Explained (With Examples) | 50/30/20 rule | budget calc, budget guide |
 | 30 | 📝 | Zero-Based Budgeting: A Step-by-Step Guide | zero based budgeting | budget guide |
-| 31 | 📝 | Sinking Funds: How to Save for Irregular Expenses | sinking funds | budget guide, HYSA |
+| 31 | ✅ | Sinking Funds: How to Save for Irregular Expenses | sinking funds | budget guide, HYSA |
 | 32 | 📝 | How to Calculate Your Net Worth (and Grow It) | how to calculate net worth | planning guide |
 | 33 | 📝 | How Much Should I Save for Retirement? | how much to save for retirement | investment calc |
 | 34 | 📝 | Roth IRA vs. Traditional IRA | roth vs traditional ira | planning guide |
@@ -36,8 +36,8 @@ The site follows a **pillar → hub → topic → guide** model. The homepage ho
 | 12 | ✅ | What Is a Balance Transfer? | balance transfer credit cards | BT comparison |
 | 13 | ✅ | Credit Card Rewards Explained | credit card rewards | beginner cards |
 | 37 | 📝 | Credit Utilization Explained | credit utilization | improve score |
-| 38 | 📝 | Hard vs. Soft Credit Inquiries | hard vs soft inquiry | credit scores |
-| 39 | 📝 | How to Freeze Your Credit (Free) | how to freeze credit | credit report guide |
+| 38 | ✅ | Hard vs. Soft Credit Inquiries | hard vs soft inquiry | credit scores |
+| 39 | ✅ | How to Freeze Your Credit (Free) | how to freeze credit | credit report guide |
 | 40 | 📝 | Secured vs. Unsecured Credit Cards | secured credit card | build credit |
 
 ## Banking (hub: `/banking/`)
@@ -51,8 +51,8 @@ The site follows a **pillar → hub → topic → guide** model. The homepage ho
 | 18 | ✅ | How Does a CD Work? | certificate of deposit rates | CD comparison |
 | 41 | 📝 | Money Market Account vs. High-Yield Savings | money market vs high yield savings | HYSA guide |
 | 42 | 📝 | How FDIC Insurance Works (and Coverage Limits) | fdic insurance limits | online banks |
-| 43 | 📝 | How to Avoid Overdraft Fees | how to avoid overdraft fees | banking fees |
-| 44 | 📝 | How to Build a CD Ladder | cd ladder | CD calc |
+| 43 | ✅ | How to Avoid Overdraft Fees | how to avoid overdraft fees | banking fees |
+| 44 | ✅ | How to Build a CD Ladder | cd ladder | CD calc |
 
 ## Loans (hub: `/loans/`)
 
@@ -76,7 +76,7 @@ The site follows a **pillar → hub → topic → guide** model. The homepage ho
 | 26 | ✅ | First-Time Home Buyer Guide | first time home buyer guide | affordability calc |
 | 27 | ✅ | HELOC vs. Home Equity Loan | heloc vs home equity loan | home equity calc |
 | 48 | 📝 | Fixed vs. Adjustable-Rate Mortgage | fixed vs adjustable rate mortgage | mortgage basics |
-| 49 | 📝 | How to Remove PMI | how to remove pmi | mortgage payments guide |
+| 49 | ✅ | How to Remove PMI | how to remove pmi | mortgage payments guide |
 | 50 | 📝 | When Does Refinancing Make Sense? | when to refinance | refinancing |
 
 ## Insurance (hub: `/insurance/`)
@@ -84,7 +84,7 @@ The site follows a **pillar → hub → topic → guide** model. The homepage ho
 | # | Status | Article | Primary keyword | Links to |
 |---|---|---|---|---|
 | 28 | ✅ | Types of Insurance | types of insurance | all insurance topics |
-| 51 | 📝 | Term vs. Whole Life Insurance | term vs whole life insurance | life insurance |
+| 51 | ✅ | Term vs. Whole Life Insurance | term vs whole life insurance | life insurance |
 | 52 | 📝 | How to Lower Your Car Insurance | how to lower car insurance | auto insurance |
 
 ## Publishing standard for every new article

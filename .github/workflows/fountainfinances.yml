@@ -181,6 +181,15 @@ jobs:
         with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
       - name: Live diagnostics
         run: bash scripts/diagnose-live.sh
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
+      - name: Check every outbound source link
+        continue-on-error: true
+        run: |
+          npm ci --silent
+          npm run build > /dev/null
+          node scripts/qa.mjs --external | tee qa-external.txt
+          { echo "### Outbound links"; grep -E "ERROR external|external links" qa-external.txt || echo "- all outbound links respond"; } >> "$GITHUB_STEP_SUMMARY"
       - name: Lighthouse (mobile)
         run: |
           echo "### Lighthouse (mobile)" >> "$GITHUB_STEP_SUMMARY"

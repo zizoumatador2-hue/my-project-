@@ -53,7 +53,7 @@ howTo:
       text: "Assign a specific monthly amount to your emergency fund, retirement and extra debt payments, and automate those transfers."
     - name: "Track and review monthly"
       text: "Compare actual spending with your plan at the end of each month and adjust categories that were unrealistic."
-related: ["how-to-save-money-every-month", "emergency-fund-guide", "financial-planning-for-beginners"]
+related: ["sinking-funds", "50-30-20-rule", "how-to-save-money-every-month", "emergency-fund-guide", "financial-planning-for-beginners"]
 calculators: ["budget", "emergency-fund"]
 ---
 

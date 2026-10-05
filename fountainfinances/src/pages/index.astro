@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
 import Photo from '@/components/Photo.astro';
+import { ogImage } from '@/lib/og';
 import PhotoCredit from '@/components/PhotoCredit.astro';
 import Aurora from '@/components/reactbits/Aurora';
 import BlurText from '@/components/reactbits/BlurText';
@@ -61,11 +62,12 @@ const schema = [
     author,
     keywords: ['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money'],
     section: 'Personal Finance',
+    image: ogImage('home'),
   }),
   faqPage(faqs),
 ];
 ---
-<BaseLayout title={pageTitle} description={description} keywords={['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money', 'free financial calculators']} path="/" schema={schema}>
+<BaseLayout title={pageTitle} description={description} keywords={['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money', 'free financial calculators']} path="/" schema={schema} image={ogImage('home')}>
   <section class="hero hero-cine" aria-labelledby="hero-h" data-glow>
     <div class="hero-media" aria-hidden="true">
       <Photo name="home" class="kenburns" eager decorative />

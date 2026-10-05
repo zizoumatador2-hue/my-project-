@@ -33,7 +33,7 @@ sources:
   - title: "Primary Mortgage Market Survey"
     publisher: "Freddie Mac"
     url: "https://www.freddiemac.com/pmms"
-related: ["how-mortgage-payments-work", "first-time-home-buyer-guide", "how-to-build-a-budget"]
+related: ["how-to-remove-pmi", "how-mortgage-payments-work", "first-time-home-buyer-guide", "how-to-build-a-budget"]
 calculators: ["home-affordability", "mortgage"]
 ---
 

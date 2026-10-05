@@ -38,7 +38,7 @@ sources:
   - title: "Annual Credit Report"
     publisher: "AnnualCreditReport.com (authorized by federal law)"
     url: "https://www.annualcreditreport.com/"
-related: ["how-to-improve-credit-score", "how-to-read-a-credit-report", "how-to-build-credit"]
+related: ["hard-vs-soft-credit-inquiry", "how-to-improve-credit-score", "how-to-read-a-credit-report", "how-to-build-credit"]
 calculators: ["credit-card-payoff"]
 ---
 

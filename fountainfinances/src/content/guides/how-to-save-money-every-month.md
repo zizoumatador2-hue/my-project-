@@ -33,7 +33,7 @@ sources:
   - title: "Economic Well-Being of U.S. Households (SHED)"
     publisher: "Board of Governors of the Federal Reserve System"
     url: "https://www.federalreserve.gov/consumerscommunities/shed.htm"
-related: ["how-to-build-a-budget", "emergency-fund-guide", "what-is-a-high-yield-savings-account"]
+related: ["50-30-20-rule", "how-to-build-a-budget", "emergency-fund-guide", "what-is-a-high-yield-savings-account"]
 calculators: ["budget", "compound-interest", "emergency-fund"]
 ---
 

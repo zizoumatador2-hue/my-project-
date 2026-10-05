@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import PageHead from '@/components/PageHead.astro';
+import { ogImage } from '@/lib/og';
 import { SITE } from '@/data/site';
 import { fmtDate } from '@/lib/text';
 
@@ -22,7 +23,7 @@ const { title, heading = title, description, lede, updated = SITE.policiesUpdate
 const path = Astro.url.pathname;
 const crumbs = [{ name: 'Home', href: '/' }, { name: heading, href: path }];
 ---
-<BaseLayout title={title} description={description} keywords={keywords} crumbs={crumbs} schema={schema} noindex={noindex}>
+<BaseLayout title={title} description={description} keywords={keywords} crumbs={crumbs} schema={schema} noindex={noindex} image={ogImage(photo)}>
   <PageHead photo={photo}>
     <Breadcrumbs items={crumbs} />
     <h1>{heading}</h1>

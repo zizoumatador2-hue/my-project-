@@ -33,7 +33,7 @@ sources:
   - title: "FloodSmart — National Flood Insurance Program"
     publisher: "Federal Emergency Management Agency"
     url: "https://www.floodsmart.gov/"
-related: ["financial-planning-for-beginners", "emergency-fund-guide", "how-mortgage-payments-work"]
+related: ["term-vs-whole-life-insurance", "financial-planning-for-beginners", "emergency-fund-guide", "how-mortgage-payments-work"]
 calculators: ["emergency-fund", "budget"]
 ---
 
