@@ -60,7 +60,7 @@ const schema = [
   modified={d.updated}
   section={hub.title}
 >
-  <PageHead photo={`guide-${guide.id}`}>
+  <PageHead photo={`guide-${guide.id}`} fallback={`hub-${d.hub}`}>
       <Breadcrumbs items={crumbs} />
       <h1>{d.title}</h1>
       <p class="lede">{d.description}</p>

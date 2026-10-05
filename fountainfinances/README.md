@@ -208,7 +208,19 @@ Strict CSP, HSTS (preload-ready), `X-Frame-Options: DENY`, `nosniff`, restrictiv
 - [x] Functions scoped to `/api/*` via `_routes.json`
 - [ ] After launch: monitor Core Web Vitals in Search Console and PageSpeed Insights
 
-## 16. Optional improvements
+## 16. Photos (Pexels) and motion effects
+
+**Photos.** Every hub, topic, guide and comparison has a photo slot in `src/data/images.json` (slot → search query). `scripts/fetch-pexels.mjs` picks one landscape photo per slot from [Pexels](https://www.pexels.com/), writes 1600px and 800px WebP files to `public/images/photos/` and records them in `src/data/photos.json`. Photos are committed, so builds never depend on Pexels.
+
+- Refresh: run the **FountainFinances.com** workflow manually (Actions → Run workflow). Its `photos` job fetches any missing slots and commits them. Existing photos are kept; delete an entry from `photos.json` to replace it.
+- With a free Pexels API key in the `PEXELS_API_KEY` repository secret, the official API is used and photographer names are credited. Without one, a local index of public Pexels metadata is used (`scripts/pexels-index.py`).
+- Reviewed-and-rejected photo ids live in `src/data/photos-rejected.json` and are never picked again. Always look at new photos before deploying.
+- Pages without their own photo fall back to their hub photo; with no photo at all the light header is used.
+- Pexels license: free to use; credit is shown under each header photo.
+
+**Motion.** Effects use components adapted from [React Bits](https://reactbits.dev/) (`src/components/reactbits/`, MIT + Commons Clause, see its LICENSE.md): Aurora (WebGL background), BlurText (headline), ShinyText (eyebrow), CountUp (stats) and Magnet (hero buttons), loaded as small React islands only on the homepage. Site-wide effects live in `public/js/fx.js` (scroll reveal, card spotlight, header parallax), with view transitions and Ken Burns/grain in CSS. Everything is disabled for visitors who prefer reduced motion, and content stays visible without JavaScript.
+
+## 17. Optional improvements
 
 - Named expert reviewers (CFP®, CPA) for YMYL guides; author profile pages per person
 - Verified APY/APR data for comparison tables, refreshed on a monthly schedule (or via provider data feeds/APIs once partnerships exist)

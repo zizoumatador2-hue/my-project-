@@ -45,7 +45,7 @@ const schema = [
 ];
 ---
 <BaseLayout title={d.seoTitle} description={d.description} keywords={d.keywords} path={path} crumbs={crumbs} schema={schema} ogType="article" published={d.published} modified={d.updated} section={hub.title}>
-  <PageHead photo={`best-${cmp.id}`}>
+  <PageHead photo={`best-${cmp.id}`} fallback={`hub-${d.hub}`}>
       <Breadcrumbs items={crumbs} />
       <h1>{d.title}</h1>
       <p class="lede">{d.intro}</p>

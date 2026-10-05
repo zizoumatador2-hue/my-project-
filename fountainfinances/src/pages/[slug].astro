@@ -96,7 +96,7 @@ const schema = [
 ];
 ---
 <BaseLayout title={seoTitle} description={description} keywords={keywords} path={path} crumbs={crumbs} schema={schema}>
-  <PageHead photo={props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`}>
+  <PageHead photo={props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`} fallback={props.kind === 'topic' ? `hub-${props.entry.data.hub}` : undefined}>
       <Breadcrumbs items={crumbs} />
       <h1>{props.kind === 'hub' ? hub.title : title}</h1>
       <p class="lede">{lede}</p>

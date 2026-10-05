@@ -35,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -230,17 +230,6 @@
     "width": 1600,
     "height": 900
   },
-  "topic-credit-scores": {
-    "id": 7621381,
-    "query": "credit",
-    "alt": "Credit Cards and a Smartphone on a White Wall",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/7621381/",
-    "color": "#a8a8a8",
-    "width": 1600,
-    "height": 900
-  },
   "topic-debt-consolidation": {
     "id": 6684775,
     "query": "paying bills",
@@ -425,17 +414,6 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/7009596/",
     "color": "#e8a8b8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-savings-accounts": {
-    "id": 5080099,
-    "query": "piggy",
-    "alt": "Adorable piggy standing in sunny countryside",
-    "photographer": "Pexels",
-    "photographerUrl": "https://www.pexels.com/",
-    "pageUrl": "https://www.pexels.com/photo/5080099/",
-    "color": "#d8c8b8",
     "width": 1600,
     "height": 900
   },

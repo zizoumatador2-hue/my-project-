@@ -4,9 +4,11 @@ import Photo from '@/components/Photo.astro';
 import PhotoCredit from '@/components/PhotoCredit.astro';
 import photos from '@/data/photos.json';
 
-interface Props { photo?: string }
-const { photo } = Astro.props;
-const has = !!photo && photo in photos;
+interface Props { photo?: string; fallback?: string }
+const { fallback } = Astro.props;
+// Use the page's own photo, else the fallback (e.g. its hub's photo).
+const photo = [Astro.props.photo, fallback].find((p) => !!p && p in photos);
+const has = !!photo;
 ---
 <div class:list={['page-head', has && 'ph']}>
   {has && <div class="ph-media" data-parallax aria-hidden="true"><Photo name={photo!} eager decorative /></div>}
