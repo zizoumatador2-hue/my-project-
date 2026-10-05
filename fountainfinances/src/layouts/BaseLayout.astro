@@ -46,9 +46,9 @@ const jsonLd = graph(nodes);
 const GA_ID = import.meta.env.PUBLIC_GA_ID as string | undefined;
 const GSC = import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined;
 const BING = import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined;
-const CSS_VERSION = '2';
+const CSS_VERSION = '3';
 // Arms the scroll-reveal styles before first paint; falls back to static content if fx.js never runs.
-const FX_BOOT = "(function(d){if('IntersectionObserver' in window&&matchMedia('(prefers-reduced-motion: no-preference)').matches){d.classList.add('fx');setTimeout(function(){if(!d.classList.contains('fx-ready'))d.classList.remove('fx')},2500)}})(document.documentElement)";
+const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.add('fx');setTimeout(function(){if(!d.classList.contains('fx-ready'))d.classList.remove('fx')},2500)}})(document.documentElement)";
 ---
 <!doctype html>
 <html lang="en-US" dir="ltr">
@@ -132,6 +132,6 @@ const FX_BOOT = "(function(d){if('IntersectionObserver' in window&&matchMedia('(
       </>
     )}
     <script src="/js/track.js" defer></script>
-    <script src="/js/fx.js" defer></script>
+    <script src={`/js/fx.js?v=${CSS_VERSION}`} defer></script>
   </body>
 </html>

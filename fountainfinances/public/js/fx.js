@@ -1,8 +1,25 @@
-/* Cinematic effects: scroll reveal, card spotlight and header parallax. Disabled for reduced motion. */
+/* Cinematic effects: scroll reveal, progress bar, card spotlight and tilt, hero glow and header parallax.
+   With reduced motion, reveals become plain fades (CSS) and movement effects are skipped. */
 (function () {
   var root = document.documentElement;
   if (!root.classList.contains('fx')) return;
   root.classList.add('fx-ready');
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Reading progress bar and header shadow
+  var bar = document.createElement('div');
+  bar.className = 'progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  var header = document.querySelector('.site-header');
+  var onScroll = function () {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);
+    if (header) header.classList.toggle('scrolled', scrollY > 8);
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   // Scroll reveal: hero items are tagged in markup; content below the fold is tagged here, so nothing visible flickers.
   var io = new IntersectionObserver(function (entries) {
@@ -24,19 +41,37 @@
     io.observe(el);
   });
 
-  // Spotlight that follows the pointer on cards
-  if (matchMedia('(hover: hover)').matches) {
+  // Spotlight that follows the pointer on cards, with a slight 3D tilt
+  if (hover) {
+    var tilted = null;
     document.addEventListener('pointermove', function (e) {
       var c = e.target.closest && e.target.closest('.card');
+      if (tilted && tilted !== c) { tilted.style.transform = ''; tilted.classList.remove('tilt'); tilted = null; }
       if (!c) return;
       var r = c.getBoundingClientRect();
-      c.style.setProperty('--mx', e.clientX - r.left + 'px');
-      c.style.setProperty('--my', e.clientY - r.top + 'px');
+      var x = e.clientX - r.left, y = e.clientY - r.top;
+      c.style.setProperty('--mx', x + 'px');
+      c.style.setProperty('--my', y + 'px');
+      if (!still) {
+        c.classList.add('tilt');
+        c.style.transform = 'perspective(800px) rotateX(' + ((0.5 - y / r.height) * 6).toFixed(2) + 'deg) rotateY(' + ((x / r.width - 0.5) * 6).toFixed(2) + 'deg) translateY(-4px)';
+        tilted = c;
+      }
+    }, { passive: true });
+  }
+
+  // Soft light that follows the pointer across the hero
+  var glow = document.querySelector('[data-glow]');
+  if (glow && hover) {
+    glow.addEventListener('pointermove', function (e) {
+      var r = glow.getBoundingClientRect();
+      glow.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+      glow.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
     }, { passive: true });
   }
 
   // Parallax on photo headers
-  var layers = [].slice.call(document.querySelectorAll('[data-parallax]'));
+  var layers = still ? [] : [].slice.call(document.querySelectorAll('[data-parallax]'));
   if (layers.length) {
     var ticking = false;
     var update = function () {

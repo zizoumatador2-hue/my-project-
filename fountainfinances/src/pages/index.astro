@@ -66,29 +66,33 @@ const schema = [
 ];
 ---
 <BaseLayout title={pageTitle} description={description} keywords={['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money', 'free financial calculators']} path="/" schema={schema}>
-  <section class="hero hero-cine" aria-labelledby="hero-h">
+  <section class="hero hero-cine" aria-labelledby="hero-h" data-glow>
     <div class="hero-media" aria-hidden="true">
       <Photo name="home" class="kenburns" eager decorative />
       <div class="hero-aurora"><Aurora client:idle colorStops={['#0a6a6b', '#e2b65a', '#1f8f8f']} amplitude={1.1} blend={0.6} speed={0.6} /></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
       <div class="hero-shade"></div>
+      <div class="hero-glow"></div>
       <div class="grain"></div>
     </div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="eyebrow eyebrow-light"><ShinyText client:idle text="Independent personal finance for Americans" color="#9fd9d6" shineColor="#ffffff" speed={3} delay={1.5} /></span>
         <BlurText client:load as="h1" id="hero-h" className="hero-title" text="Make Smarter Money Decisions" delay={120} animateBy="words" direction="bottom" />
-        <p class="hero-lede" data-reveal>Compare financial products, understand your options, and use practical tools to take control of your finances.</p>
-        <div class="hero-cta" data-reveal>
+        <p class="hero-lede anim" style="--a:.55s">Compare financial products, understand your options, and use practical tools to take control of your finances.</p>
+        <div class="hero-cta anim" style="--a:.75s">
           <Magnet client:idle padding={60} magnetStrength={4}><a class="btn btn-primary btn-glow" href="/calculators/" data-track="cta_click" data-placement="hero">Explore Financial Tools</a></Magnet>
           <Magnet client:idle padding={60} magnetStrength={4}><a class="btn btn-glass" href="/best/" data-track="cta_click" data-placement="hero">Compare Financial Products</a></Magnet>
         </div>
-        <ul class="hero-points" data-reveal>
+        <ul class="hero-points anim" style="--a:.95s">
           <li><Icon name="check" size={18} />Free calculators — no sign-up</li>
           <li><Icon name="check" size={18} />Sourced from CFPB, FDIC, Federal Reserve &amp; IRS</li>
           <li><Icon name="check" size={18} />Affiliate links always labeled</li>
         </ul>
       </div>
-      <nav class="quickstart glass" aria-label="Quick start" data-reveal>
+      <nav class="quickstart glass anim anim-right" aria-label="Quick start" style="--a:.6s">
         <p class="qs-title">Quick start: pick a goal</p>
         <ul>
           <li><a href="/calculators/budget/"><Icon name="wallet" size={20} /><span><strong>Build a monthly budget</strong><small>See where your money goes in 2 minutes</small></span></a></li>
@@ -110,6 +114,10 @@ const schema = [
       <div class="stat"><strong>$0</strong><span>cost to you, no sign-up</span></div>
     </div>
   </section>
+
+  <div class="marquee" aria-hidden="true">
+    <ul class="marquee-track"><li>{CALCULATORS.length} free calculators</li><li>Sources: CFPB, FDIC, Federal Reserve, IRS</li><li>No sign-up required</li><li>Affiliate links always labeled</li><li>Plain-English guides</li><li>Budgeting</li><li>Credit scores</li><li>High-yield savings</li><li>Mortgages</li><li>Personal loans</li><li>Insurance</li><li>{CALCULATORS.length} free calculators</li><li>Sources: CFPB, FDIC, Federal Reserve, IRS</li><li>No sign-up required</li><li>Affiliate links always labeled</li><li>Plain-English guides</li><li>Budgeting</li><li>Credit scores</li><li>High-yield savings</li><li>Mortgages</li><li>Personal loans</li><li>Insurance</li></ul>
+  </div>
 
   <section class="section" aria-labelledby="what-h">
     <div class="wrap">
