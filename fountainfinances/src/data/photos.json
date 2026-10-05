@@ -834,5 +834,71 @@
     "color": "#181838",
     "width": 1600,
     "height": 900
+  },
+  "guide-50-30-20-rule": {
+    "id": 5717452,
+    "query": "budget planner notebook calculator",
+    "alt": "Notebook and Planner Beside a Pen",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/5717452/",
+    "color": "#a88878",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-hard-vs-soft-credit-inquiry": {
+    "id": 5792869,
+    "query": "credit report laptop",
+    "alt": "Serious black employee typing report on laptop",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/5792869/",
+    "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-how-to-avoid-overdraft-fees": {
+    "id": 6612717,
+    "query": "bank card payment phone",
+    "alt": "A Person Tapping the Phone on a Payment Terminal",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/6612717/",
+    "color": "#181818",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-cd-ladder": {
+    "id": 5980871,
+    "query": "stacked coins",
+    "alt": "Stack of Gold Coins on a Laptop Displaying a Graph",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/5980871/",
+    "color": "#080818",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-how-to-remove-pmi": {
+    "id": 4246060,
+    "query": "new home keys",
+    "alt": "Happy diverse couple opening carton boxes in new home",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/4246060/",
+    "color": "#989898",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-term-vs-whole-life-insurance": {
+    "id": 3818537,
+    "query": "family together home",
+    "alt": "Multiethnic family sitting together at home",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/3818537/",
+    "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
   }
 }
