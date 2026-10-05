@@ -25,11 +25,11 @@
 
 /images/*
   ! Cache-Control
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
 /js/*
   ! Cache-Control
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 /favicon.svg
   ! Cache-Control

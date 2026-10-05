@@ -11,13 +11,13 @@ interface Props {
   decorative?: boolean;
 }
 const { name, class: cls, eager = false, sizes = '100vw', decorative = false } = Astro.props;
-const p = (photos as Record<string, { alt: string; width: number; height: number; color: string }>)[name];
+const p = (photos as Record<string, { id: number; alt: string; width: number; height: number; color: string }>)[name];
 ---
 {p && (
   <img
     class={cls || undefined}
-    src={`/images/photos/${name}-1600.webp`}
-    srcset={`/images/photos/${name}-800.webp 800w, /images/photos/${name}-1600.webp 1600w`}
+    src={`/images/photos/${name}-1600.webp?v=${p.id}`}
+    srcset={`/images/photos/${name}-800.webp?v=${p.id} 800w, /images/photos/${name}-1600.webp?v=${p.id} 1600w`}
     sizes={sizes}
     width={p.width}
     height={p.height}

@@ -146,11 +146,18 @@ export default function Aurora(props: AuroraProps) {
       renderer = new Renderer({
         alpha: true,
         premultipliedAlpha: true,
-        antialias: true,
-        dpr: Math.min(window.devicePixelRatio || 1, 1.5)
+        antialias: false,
+        dpr: Math.min(window.devicePixelRatio || 1, 1.25)
       });
     } catch {
-      return; // No WebGL: the CSS gradient behind the container remains.
+      return; // No WebGL: the CSS light orbs behind the container remain.
+    }
+    // Software-rendered WebGL (no GPU) would block the main thread; the CSS orbs carry the effect instead.
+    const dbg = renderer.gl.getExtension('WEBGL_debug_renderer_info');
+    const gpu = dbg ? String(renderer.gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
+    if (/swiftshader|llvmpipe|software|basic render/i.test(gpu)) {
+      renderer.gl.getExtension('WEBGL_lose_context')?.loseContext();
+      return;
     }
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let visible = true;
@@ -204,9 +211,12 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     let animateId = 0;
+    let last = -Infinity;
     const update = (t: number) => {
       if (!reduceMotion) animateId = requestAnimationFrame(update);
       if (!visible && !reduceMotion) return;
+      if (!reduceMotion && t - last < 33) return; // ~30 fps is plenty for a slow aurora
+      last = t;
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       if (program) {
         program.uniforms.uTime.value = time * speed * 0.1;
