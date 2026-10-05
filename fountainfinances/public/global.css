@@ -344,3 +344,11 @@ details.toc-mobile summary{cursor:pointer;font-weight:650;min-height:48px;displa
 .section-head.in h2::after,html:not(.fx) .section-head h2::after{transform:scaleX(1)}
 .ico{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .card:hover .ico{transform:rotate(-8deg) scale(1.12)}
+
+/* contact card + site map */
+.contact-card{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;margin:0 0 24px;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft,#f6f8f9)}
+.contact-card dt{font-weight:650;color:var(--ink)}
+.contact-card dd{margin:0;color:var(--ink-2);overflow-wrap:anywhere}
+@media (max-width:520px){.contact-card{grid-template-columns:1fr}.contact-card dd{margin-bottom:6px}}
+.sitemap-cols{columns:2 260px;column-gap:32px}
+.sitemap-cols>section{break-inside:avoid;margin-bottom:24px}

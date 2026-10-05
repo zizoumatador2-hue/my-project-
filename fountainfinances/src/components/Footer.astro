@@ -11,7 +11,7 @@ const hasAnalytics = Boolean(import.meta.env.PUBLIC_GA_ID);
       <div class="ft-brand">
         <a class="brand" href="/"><Logo /><span>Fountain Finances<small>{SITE.tagline}</small></span></a>
         <p>Independent guides, free calculators and transparent comparisons that help Americans make confident money decisions.</p>
-        <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+        <p>Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a> · <a href="/contact/">Contact form</a></p>
         {SITE.social.length > 0 && (
           <ul class="pill-list" aria-label="Fountain Finances on social media">
             {SITE.social.map((s) => <li><a href={s.url} rel="me noopener" target="_blank">{s.name}</a></li>)}
@@ -52,6 +52,7 @@ const hasAnalytics = Boolean(import.meta.env.PUBLIC_GA_ID);
           <li><a href="/affiliate-disclosure/">Affiliate disclosure</a></li>
           <li><a href="/corrections/">Corrections policy</a></li>
           <li><a href="/accessibility/">Accessibility</a></li>
+          <li><a href="/site-map/">Site map</a></li>
         </ul>
       </nav>
     </div>

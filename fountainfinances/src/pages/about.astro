@@ -2,8 +2,15 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import { SITE } from '@/data/site';
 import { abs, ORG_ID } from '@/lib/schema';
+import { HUBS } from '@/data/taxonomy';
+import { CALCULATORS } from '@/data/calculators';
+import { getCollection } from 'astro:content';
+const guideCount = (await getCollection('guides', (g) => !g.data.draft)).length;
+const topicCount = (await getCollection('topics')).length;
+const comparisonCount = (await getCollection('comparisons')).length;
 ---
 <PageLayout
+  photo="about"
   title="About Fountain Finances: Independent Personal Finance Help"
   heading="About Fountain Finances"
   description="Fountain Finances is an independent U.S. personal finance resource offering plain-English guides, free calculators and transparent product comparisons."
@@ -43,6 +50,23 @@ import { abs, ORG_ID } from '@/lib/schema';
   <h2>Our editorial team</h2>
   <p>Guides are researched and written by the <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a> and reviewed against their sources before publication. Our full research, fact-checking and update process is described in our <a href="/editorial-standards/">editorial standards and methodology</a>.</p>
 
-  <h2>Get in touch</h2>
-  <p>We read every message. Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use our <a href="/contact/">contact form</a> for questions, feedback, corrections or partnership inquiries.</p>
+  <h2>The site at a glance</h2>
+  <ul>
+    <li><strong>{guideCount} in-depth guides</strong> across {HUBS.length} sections: {HUBS.map((h, i) => <>{i > 0 && ', '}<a href={`/${h.slug}/`}>{h.shortTitle}</a></>)}.</li>
+    <li><strong>{topicCount} topic pages</strong> that collect the guides, calculators and comparisons for each subject.</li>
+    <li><strong>{CALCULATORS.length} free calculators</strong> — see <a href="/calculators/">all calculators</a>.</li>
+    <li><strong>{comparisonCount} product comparisons</strong> with a published methodology — see <a href="/best/">all comparisons</a>.</li>
+    <li>Policies: <a href="/privacy/">Privacy Policy</a>, <a href="/terms/">Terms of Use</a>, <a href="/disclaimer/">Disclaimer</a>, <a href="/affiliate-disclosure/">Advertiser &amp; affiliate disclosure</a>, <a href="/corrections/">Corrections</a> and <a href="/accessibility/">Accessibility</a>.</li>
+    <li>Every page on the site is listed on our <a href="/site-map/">site map</a>.</li>
+  </ul>
+
+  <h2>Contact information</h2>
+  <dl class="contact-card">
+    <dt>Email</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+    <dt>Contact form</dt><dd><a href="/contact/">fountainfinances.com/contact</a></dd>
+    <dt>Website</dt><dd><a href="/">{SITE.domain}</a></dd>
+    <dt>Audience</dt><dd>Consumers in the United States</dd>
+    <dt>Founded</dt><dd>{SITE.foundingYear}</dd>
+  </dl>
+  <p>We read every message and aim to reply within two business days — for questions, feedback, corrections, privacy requests or partnership inquiries.</p>
 </PageLayout>

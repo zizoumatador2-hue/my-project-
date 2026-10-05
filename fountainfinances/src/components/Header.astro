@@ -3,6 +3,8 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { NAV } from '@/data/site';
 const path = Astro.url.pathname;
+// Keeps the mobile menu just below the header, whatever the header's height (e.g. with large system fonts).
+const HDR_H = "(function(){var h=document.querySelector('.site-header');if(!h)return;var s=function(){document.documentElement.style.setProperty('--hdr-h',h.getBoundingClientRect().bottom+'px')};s();addEventListener('resize',s);addEventListener('scroll',s,{passive:true});h.addEventListener('toggle',s,true)})()";
 const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
 ---
 <header class="site-header">
@@ -31,8 +33,11 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
           <li><a href="/editorial-standards/">Editorial standards</a></li>
           <li><a href="/about/">About Fountain Finances</a></li>
           <li><a href="/contact/">Contact us</a></li>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/site-map/">Site map</a></li>
         </ul>
       </nav>
     </details>
   </div>
 </header>
+<script is:inline set:html={HDR_H}></script>

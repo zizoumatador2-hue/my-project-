@@ -46,6 +46,8 @@ const jsonLd = graph(nodes);
 const GA_ID = import.meta.env.PUBLIC_GA_ID as string | undefined;
 const GSC = import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined;
 const BING = import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined;
+/** Google AdSense publisher id (ca-pub-…). When set, Auto ads load and dist/ads.txt is written. */
+const ADSENSE = (import.meta.env.PUBLIC_ADSENSE_CLIENT as string | undefined)?.trim();
 const CSS_VERSION = '3';
 // Arms the scroll-reveal styles before first paint; falls back to static content if fx.js never runs.
 const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.add('fx');setTimeout(function(){if(!d.classList.contains('fx-ready'))d.classList.remove('fx')},2500)}})(document.documentElement)";
@@ -94,6 +96,8 @@ const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.a
     <meta name="twitter:image" content={imageUrl} />
     {GSC && <meta name="google-site-verification" content={GSC} />}
     {BING && <meta name="msvalidate.01" content={BING} />}
+    {ADSENSE && <meta name="google-adsense-account" content={ADSENSE} />}
+    {ADSENSE && !noindex && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}`} crossorigin="anonymous"></script>}
 
     <script is:inline type="application/ld+json" set:html={jsonLd}></script>
 

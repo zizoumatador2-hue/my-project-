@@ -5,6 +5,7 @@ import { abs, ORG_ID } from '@/lib/schema';
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
 ---
 <PageLayout
+  photo="contact"
   title="Contact Fountain Finances"
   heading="Contact Us"
   description="Contact the Fountain Finances editorial team with questions, feedback, corrections or partnership inquiries. We reply to most messages within two business days."
@@ -47,9 +48,15 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undef
       </form>
     </div>
     <div>
-      <h2 style="margin-top:0">Email</h2>
-      <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-      <p>We aim to reply within two business days.</p>
+      <h2 style="margin-top:0">Contact information</h2>
+      <dl class="contact-card">
+        <dt>Email</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+        <dt>Website</dt><dd><a href="/">{SITE.domain}</a></dd>
+        <dt>Response time</dt><dd>Within two business days (Monday–Friday)</dd>
+        <dt>Language</dt><dd>English</dd>
+        <dt>Advertising &amp; partnerships</dt><dd>Email us with “Partnership” in the subject line</dd>
+        <dt>Privacy requests</dt><dd>Use the form and choose “Privacy request”, or email us — see our <a href="/privacy/#rights">Privacy Policy</a></dd>
+      </dl>
       <h2>Before you write</h2>
       <ul>
         <li><strong>Questions about your own account, application or loan</strong> must go to the bank, card issuer or lender directly. We are an information website and cannot see or change accounts.</li>
