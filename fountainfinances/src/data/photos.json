@@ -1,4 +1,15 @@
 {
+  "home": {
+    "id": 4307848,
+    "query": "couple paying bills laptop",
+    "alt": "Ethnic couple laughing while man using laptop",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/4307848/",
+    "color": "#789878",
+    "width": 1600,
+    "height": 900
+  },
   "calculators": {
     "id": 8292896,
     "query": "calculator and financial documents on desk",
@@ -24,7 +35,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -40,6 +51,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4977446/",
     "color": "#d8d8d8",
+    "width": 1600,
+    "height": 900
+  },
+  "hub-personal-finance": {
+    "id": 4246240,
+    "query": "woman budget notebook calculator",
+    "alt": "Calm woman with notebook looking at boyfriend",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/4246240/",
+    "color": "#081818",
     "width": 1600,
     "height": 900
   },
@@ -62,6 +84,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/11277463/",
     "color": "#281818",
+    "width": 1600,
+    "height": 900
+  },
+  "hub-loans": {
+    "id": 3771097,
+    "query": "signing contract",
+    "alt": "Crop businessman signing contract in office",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/3771097/",
+    "color": "#282838",
     "width": 1600,
     "height": 900
   },
@@ -98,6 +131,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-balance-transfers": {
+    "id": 6994265,
+    "query": "credit cards laptop",
+    "alt": "A Person Using a Laptop Holding a Credit Card",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/6994265/",
+    "color": "#b88858",
+    "width": 1600,
+    "height": 900
+  },
   "topic-budgeting": {
     "id": 8702215,
     "query": "budget planner notebook",
@@ -106,6 +150,28 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/8702215/",
     "color": "#882818",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-cds": {
+    "id": 12920750,
+    "query": "stack of coins growth",
+    "alt": "Illustartion of Stacks of Coins and an Arrow",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/12920750/",
+    "color": "#a888d8",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-checking-accounts": {
+    "id": 12605419,
+    "query": "banking app smartphone",
+    "alt": "A Close-Up Shot of a Smartphone with an Open App",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/12605419/",
+    "color": "#080818",
     "width": 1600,
     "height": 900
   },
@@ -175,6 +241,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-emergency-funds": {
+    "id": 11348150,
+    "query": "money jar",
+    "alt": "Blank Paper, Jar with Money and a Wooden Figurine ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/11348150/",
+    "color": "#c8c8c8",
+    "width": 1600,
+    "height": 900
+  },
   "topic-financial-planning": {
     "id": 7821487,
     "query": "financial planning meeting",
@@ -194,6 +271,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/4246034/",
     "color": "#683808",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-high-yield-savings": {
+    "id": 11933549,
+    "query": "pink piggy bank",
+    "alt": "Photo of a Pink Piggy Bank ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/11933549/",
+    "color": "#986848",
     "width": 1600,
     "height": 900
   },
@@ -241,6 +329,17 @@
     "width": 1600,
     "height": 900
   },
+  "topic-personal-loans": {
+    "id": 8428059,
+    "query": "handshake deal",
+    "alt": "Businessmen Having a Deal while Doing Handshake",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/8428059/",
+    "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
+  },
   "topic-renters-insurance": {
     "id": 10827192,
     "query": "apartment living room",
@@ -249,6 +348,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10827192/",
     "color": "#c8c8c8",
+    "width": 1600,
+    "height": 900
+  },
+  "topic-saving-money": {
+    "id": 7009596,
+    "query": "saving money jar",
+    "alt": "Woman in Blue Plaid Long Sleeves and Knit Cap Holding a Glass Jar with Money ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7009596/",
+    "color": "#e8a8b8",
     "width": 1600,
     "height": 900
   },
@@ -384,6 +494,17 @@
     "width": 1600,
     "height": 900
   },
+  "guide-how-mortgage-payments-work": {
+    "id": 8293700,
+    "query": "house keys contract",
+    "alt": "Happy Couple Holding and Showing a House Key",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/8293700/",
+    "color": "#e8e8e8",
+    "width": 1600,
+    "height": 900
+  },
   "guide-how-much-house-can-i-afford": {
     "id": 7937730,
     "query": "house for sale sign",
@@ -417,6 +538,17 @@
     "width": 1600,
     "height": 900
   },
+  "guide-how-to-read-a-credit-report": {
+    "id": 8068778,
+    "query": "reading documents",
+    "alt": "Coworkers Reading Documents in Office Kitchen",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/8068778/",
+    "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
+  },
   "guide-how-to-save-money-every-month": {
     "id": 19956096,
     "query": "grocery shopping list",
@@ -425,6 +557,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/19956096/",
     "color": "#886858",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-personal-loan-vs-credit-card": {
+    "id": 6721871,
+    "query": "credit card cash",
+    "alt": "A Couple Using Digital Tablet and Credit Card",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/6721871/",
+    "color": "#f8f8f8",
     "width": 1600,
     "height": 900
   },
@@ -439,6 +582,17 @@
     "width": 1600,
     "height": 900
   },
+  "guide-types-of-insurance": {
+    "id": 7163953,
+    "query": "insurance",
+    "alt": "Health Insurance Scrabble Tiles on Planner ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7163953/",
+    "color": "#e8e8e8",
+    "width": 1600,
+    "height": 900
+  },
   "guide-what-is-a-balance-transfer": {
     "id": 7821912,
     "query": "credit cards on table",
@@ -447,6 +601,28 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/7821912/",
     "color": "#080808",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-what-is-a-high-yield-savings-account": {
+    "id": 12357434,
+    "query": "piggy bank coins",
+    "alt": "A Man Wearing Eyeglasses Piggy Bank",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/12357434/",
+    "color": "#a8a8a8",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-what-is-apr": {
+    "id": 5650048,
+    "query": "percent",
+    "alt": "Red Balloons with Percent Sign",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/5650048/",
+    "color": "#e8e8e8",
     "width": 1600,
     "height": 900
   },
@@ -472,6 +648,17 @@
     "width": 1600,
     "height": 900
   },
+  "best-cd-accounts": {
+    "id": 11899617,
+    "query": "coins stack calculator",
+    "alt": "Photograph of Stacks of Coins Near an Hourglass",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/11899617/",
+    "color": "#f8e8e8",
+    "width": 1600,
+    "height": 900
+  },
   "best-checking-accounts": {
     "id": 11363562,
     "query": "debit card payment",
@@ -491,6 +678,17 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/18859348/",
     "color": "#d8d8d8",
+    "width": 1600,
+    "height": 900
+  },
+  "best-high-yield-savings-accounts": {
+    "id": 12357588,
+    "query": "piggy bank savings",
+    "alt": "Piggy Bank and Darts ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/12357588/",
+    "color": "#088888",
     "width": 1600,
     "height": 900
   }
