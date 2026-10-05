@@ -5,6 +5,8 @@ import rehypeLinks from './src/lib/rehype-links.mjs';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
+import react from '@astrojs/react';
+
 const SITE = 'https://www.fountainfinances.com';
 
 /** Read `updated:` dates from content front matter so the sitemap carries real lastmod values. */
@@ -46,17 +48,15 @@ export default defineConfig({
   build: { format: 'directory', inlineStylesheets: 'never' },
   compressHTML: true,
   markdown: { rehypePlugins: [rehypeLinks], smartypants: true },
-  integrations: [
-    sitemap({
-      filter: (page) =>
-        !/\/(search|newsletter\/(confirmed|unsubscribed|unsubscribe|error|check-email)|contact\/thanks|404)\/?$/.test(new URL(page).pathname),
-      serialize(item) {
-        const path = new URL(item.url).pathname;
-        item.priority = priorityFor(path);
-        item.lastmod = dates.get(path) ?? SITE_UPDATED;
-        item.changefreq = /** @type {any} */ (path.startsWith('/guides/') || path.startsWith('/best/') ? 'monthly' : 'weekly');
-        return item;
-      },
-    }),
-  ],
+  integrations: [sitemap({
+    filter: (page) =>
+      !/\/(search|newsletter\/(confirmed|unsubscribed|unsubscribe|error|check-email)|contact\/thanks|404)\/?$/.test(new URL(page).pathname),
+    serialize(item) {
+      const path = new URL(item.url).pathname;
+      item.priority = priorityFor(path);
+      item.lastmod = dates.get(path) ?? SITE_UPDATED;
+      item.changefreq = /** @type {any} */ (path.startsWith('/guides/') || path.startsWith('/best/') ? 'monthly' : 'weekly');
+      return item;
+    },
+  }), react()],
 });

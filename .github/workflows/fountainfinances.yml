@@ -10,11 +10,39 @@ defaults:
   run:
     working-directory: fountainfinances
 jobs:
+  photos:
+    # Manual runs refresh the Pexels photo set and commit it, so builds never depend on Pexels.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
+      - run: npm ci
+      - name: Fetch photos from Pexels
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
+        run: node scripts/fetch-pexels.mjs
+      - name: Commit new photos
+        run: |
+          git add public/images/photos src/data/photos.json
+          if git diff --cached --quiet; then echo "No new photos"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update Pexels photos"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
   test:
+    needs: photos
+    if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
       - run: npm ci
@@ -35,7 +63,7 @@ jobs:
 
   deploy:
     needs: test
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: ${{ !failure() && !cancelled() && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')) }}
     runs-on: ubuntu-latest
     concurrency: fountainfinances-production
     env:
@@ -48,6 +76,7 @@ jobs:
       WRANGLER_SEND_METRICS: 'false'
     steps:
       - uses: actions/checkout@v4
+        with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
       - name: Resolve Cloudflare credentials (derive the account id from the token when not set)
