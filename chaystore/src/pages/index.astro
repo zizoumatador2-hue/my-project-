@@ -98,12 +98,33 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
     <p class="gallery-note">Drag or scroll to explore. Photos from <a href="https://www.pexels.com" rel="noopener">Pexels</a> · <a href="/credits/">credits</a></p>
   </section>
 
+  <section class="cinema-story" aria-labelledby="cinema-story-title" data-cinema-stage>
+    <div class="cinema-glow" aria-hidden="true"></div>
+    <div class="wrap cinema-grid">
+      <div class="cinema-copy reveal">
+        <p class="eyebrow">From leaf to cup</p>
+        <h2 id="cinema-story-title">Make better tea without turning it into homework.</h2>
+        <p>ChayStore translates tea tradition and current research into practical US kitchen guidance: familiar cup measurements, temperatures in Fahrenheit and Celsius, realistic steep times, and buying advice that explains what labels actually mean.</p>
+        <ul class="cinema-points" aria-label="What makes ChayStore useful">
+          <li><strong>Choose confidently.</strong><span>Compare chai, matcha, black, green and herbal tea before you spend.</span></li>
+          <li><strong>Brew precisely.</strong><span>Use tested ratios, water temperatures and timing for a balanced cup.</span></li>
+          <li><strong>Read critically.</strong><span>Understand caffeine, wellness claims, sourcing language and product marketing.</span></li>
+        </ul>
+        <a class="btn primary" href="/guides/how-to-brew-loose-leaf-tea/">Start with the loose-leaf brewing guide</a>
+      </div>
+      <figure class="cinema-frame reveal" data-cinema-frame>
+        <img src="/images/gallery-2-1600.webp" alt="Tea being poured into a clear glass cup in warm natural light" width="1600" height="1067" loading="lazy" decoding="async" />
+        <figcaption>Simple technique, repeatable results. Photo from Pexels.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="section sand" id="tea-guide" aria-labelledby="pillar-title">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow" style="color:var(--terra-d)">The pillar guide</p>
         <h2 id="pillar-title">The Complete Guide to Tea</h2>
-        <p>Everything in one place: what tea is, the six types, how to brew each one, the gear worth owning, how to buy and store tea, and what to read next.</p>
+        <p>Everything in one place: types of tea, water temperature and steep time, loose-leaf brewing, useful tea gear, smart buying and storage, plus clear next steps for every experience level.</p>
       </div>
       <ImageSlot src="/images/pillar-terraces-1600.webp" alt="Terraced green tea fields on a hillside with a winding path" width={1600} height={640} class="pillar-banner" pos="50% 60%" />
       <div class="pillar-wrap">
@@ -125,3 +146,4 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
     </div>
   </section>
 </BaseLayout>
+
