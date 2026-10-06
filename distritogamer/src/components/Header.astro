@@ -1,0 +1,41 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { categories } from '../data/categories';
+import { SITE } from '../config/site';
+
+const path = Astro.url.pathname;
+const primary = ['gaming-tips', 'game-guides', 'game-settings', 'gaming-performance', 'gaming-gear'];
+const nav = [
+  ...primary.map((s) => categories.find((c) => c.slug === s)!).map((c) => ({ href: `/${c.slug}/`, label: c.name })),
+  { href: '/games/', label: 'Games' },
+  { href: '/guides/', label: 'All topics' },
+];
+const active = (href: string) => path === href || path.startsWith(href);
+const menuItems = [...categories.filter((c) => c.indexable), { slug: 'games', name: 'Games', short: 'Game profiles' }];
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label={`${SITE.name} home`}><Logo /><span>Distrito<b>Gamer</b></span></a>
+    <nav class="nav" aria-label="Primary">
+      <ul>
+        {nav.map((n) => <li><a href={n.href} aria-current={active(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="hdr-actions">
+      <a class="icon-btn" href="/search/" aria-label="Search the site"><Icon name="search" /></a>
+      <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu" data-menu-btn>
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+  <div class="menu-panel" id="menu-panel" hidden data-menu-panel>
+    <nav class="wrap" aria-label="All sections">
+      <ul>
+        {menuItems.map((c) => <li><a href={`/${c.slug}/`}>{c.name}<small>{c.short}</small></a></li>)}
+        <li><a href="/guides/">All topics<small>Every guide</small></a></li>
+        <li><a href="/faq/">FAQ<small>Quick answers</small></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,16 @@
+{
+  "name": "VESA monitor arm",
+  "kind": "Desk setup",
+  "summary": "A monitor arm lets you set screen height and distance precisely, frees desk space for mouse movement and helps you keep a comfortable posture.",
+  "lookFor": [
+    "A weight and size rating that matches your monitor, with a VESA mount pattern your monitor supports",
+    "Full range of height and tilt, and tension that holds the screen without drifting",
+    "Clamp or grommet mounting that suits your desk thickness and material",
+    "Cable management channels"
+  ],
+  "suitableFor": "Players whose monitor stand takes up desk space or sits too low or high, and anyone using a lower sensitivity who needs mouse room.",
+  "pros": ["Precise ergonomics", "More usable desk area", "Easy to reposition"],
+  "cons": ["Requires a compatible monitor and desk", "A little assembly", "Cheap arms can sag over time"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

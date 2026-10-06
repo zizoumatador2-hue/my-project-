@@ -1,0 +1,17 @@
+{
+  "name": "High refresh rate gaming monitor",
+  "kind": "Monitor",
+  "summary": "A display with a high refresh rate and fast pixel response makes motion clearer and feels more responsive, provided your PC or console can actually produce frames to match.",
+  "lookFor": [
+    "Refresh rate of 144 Hz or higher for fast shooters, and a graphics card that can drive it",
+    "Variable refresh rate support (G-Sync Compatible or FreeSync) that works over your connection",
+    "Panel type and response time: look for independent measurements rather than a single manufacturer number",
+    "Resolution matched to your GPU: 1080p and 1440p are common choices for high frame rates",
+    "A stand that adjusts for height, or a VESA mount"
+  ],
+  "suitableFor": "Players of fast competitive games whose hardware already reaches high frame rates in the games they play.",
+  "pros": ["Smoother, clearer motion", "Lower display latency than a 60 Hz screen at matching frame rates", "Supports adaptive sync for tear-free play"],
+  "cons": ["No benefit if your game runs at 60 FPS", "Higher resolutions demand much more GPU power", "Panel quality varies widely at similar prices"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

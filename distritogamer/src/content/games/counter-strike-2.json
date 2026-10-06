@@ -1,0 +1,22 @@
+{
+  "name": "Counter-Strike 2",
+  "developer": "Valve",
+  "genre": "Tactical team shooter",
+  "platforms": ["PC"],
+  "summary": "Valve's free-to-play successor to CS:GO, a 5v5 bomb-defusal shooter with a deep economy, utility and precise gunplay.",
+  "overview": [
+    "Counter-Strike 2 is a round-based tactical shooter where terrorists try to plant a bomb while counter-terrorists try to prevent it or defuse it. It was released in 2023 as an upgrade to CS:GO built on the Source 2 engine.",
+    "Gunplay rewards patience and control: first-shot accuracy, spray control, movement accuracy and crosshair placement matter more than raw flicking speed. Utility such as smokes, flashes and molotovs is just as important as aim for winning rounds.",
+    "Because the game offers a built-in way to run a local practice server with bots and utility, it is one of the best games for learning through deliberate practice."
+  ],
+  "wikipedia": "https://en.wikipedia.org/wiki/Counter-Strike_2",
+  "trending": true,
+  "sections": {
+    "beginner": ["counter-strike-2-practice-guide"],
+    "advanced": ["how-to-improve-aim-in-fps-games", "how-to-build-a-gaming-warm-up-routine"],
+    "settings": ["best-sensitivity-settings-for-gaming", "best-fps-settings-for-better-performance", "how-to-reduce-input-lag-on-pc"],
+    "troubleshooting": ["how-to-increase-fps-on-pc", "fix-game-crashes-and-stuttering"]
+  },
+  "gear": ["fps-gaming-mouse", "control-mouse-pad", "high-refresh-monitor"],
+  "notes": "Console commands and map pools change between updates. If a command no longer works in your version, check the in-game console for its current name."
+}

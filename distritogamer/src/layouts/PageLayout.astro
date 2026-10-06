@@ -1,0 +1,14 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props { title: string; description: string; path: string; heading?: string; updated?: string; intro?: string; schema?: unknown[]; wide?: boolean; }
+const { title, description, path, heading, updated, intro, schema = [], wide = false } = Astro.props;
+const crumbs = [{ name: 'Home', href: '/' }, { name: heading ?? title, href: path }];
+---
+<BaseLayout title={title} description={description} path={path} crumbs={crumbs} schema={schema}>
+  <header class="page-head"><div class="wrap">
+    <h1>{heading ?? title}</h1>
+    {intro && <p class="lede">{intro}</p>}
+    {updated && <p class="updated-note" style="margin-top:10px">Last updated: <time datetime={updated}>{new Date(updated + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time></p>}
+  </div></header>
+  <div class="wrap section"><div class:list={['prose', 'legal']} style={wide ? 'max-width:none' : undefined}><slot /></div></div>
+</BaseLayout>

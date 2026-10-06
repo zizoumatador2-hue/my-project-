@@ -1,0 +1,17 @@
+{
+  "name": "Comfortable gaming headset with a clear microphone",
+  "kind": "Headset",
+  "summary": "In team games, a headset does two jobs: it lets you hear footsteps and positioning cues, and it lets your team hear you clearly. Comfort over several hours matters more than extra features.",
+  "lookFor": [
+    "Comfort: weight, clamping force, earpad material and breathability for long sessions",
+    "A stereo sound signature that is clear rather than boomy, since bass-heavy tuning can mask footsteps",
+    "A microphone that sounds clear in independent recordings, ideally detachable or retractable",
+    "Wired for simplicity, or wireless with a dongle that has low latency and battery life you can live with",
+    "Open-back designs sound spacious but leak sound; closed-back designs isolate better"
+  ],
+  "suitableFor": "Players in voice-chat team games and anyone who plays in a shared space and wants good positional hearing.",
+  "pros": ["Better positional audio than most speakers", "Clear voice communication", "Private listening"],
+  "cons": ["Comfort is very personal, and a bad fit ruins the headset", "Wireless models need charging", "Virtual surround modes help some players and hurt others"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

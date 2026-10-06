@@ -1,0 +1,26 @@
+---
+import { SITE } from '../config/site';
+const endpoint = SITE.newsletterEndpoint;
+const mail = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent('Subscribe me to the DistritoGamer newsletter')}`;
+---
+<section class="news" aria-labelledby="news-h">
+  <div>
+    <h2 id="news-h">One useful gaming email, when we have one</h2>
+    <p>New guides, settings that changed after a patch, and the occasional gear explainer. No spam, no daily filler, and you can unsubscribe at any time.</p>
+  </div>
+  {endpoint ? (
+    <form action={endpoint} method="post">
+      <label for="nl-email" class="sr">Email address</label>
+      <div class="row">
+        <input class="field" id="nl-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </div>
+      <p class="fine">We use your email only to send the newsletter. See our <a href="/privacy-policy/">privacy policy</a>.</p>
+    </form>
+  ) : (
+    <div>
+      <a class="btn btn-primary" href={mail}>Subscribe by email</a>
+      <p class="fine" style="margin-top:10px">This opens your email app with a pre-written request. See our <a href="/privacy-policy/">privacy policy</a>.</p>
+    </div>
+  )}
+</section>

@@ -51,3 +51,7 @@ tests/         unit, integration (API), e2e (Playwright)
 
 > Legal notice: transferring social-media accounts may violate the platforms' terms of service, and operating escrow
 > may be regulated activity. See [docs/SECURITY.md](docs/SECURITY.md) — obtain legal review before commercial launch.
+
+---
+
+**Also in this repository:** [`distritogamer/`](distritogamer/README.md) is a separate Astro 5 static site for distritogamer.com (gaming tips, guides and settings). It has its own `package.json`, build and CI workflow and does not touch the app above.

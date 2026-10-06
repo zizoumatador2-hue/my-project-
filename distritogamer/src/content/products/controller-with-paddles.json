@@ -1,0 +1,17 @@
+{
+  "name": "Controller with remappable back buttons",
+  "kind": "Controller",
+  "summary": "Back paddles let you keep your thumbs on the sticks while pressing actions that normally require moving a thumb to the face buttons, which is useful in shooters and action games.",
+  "lookFor": [
+    "Compatibility with your platform (PC, PlayStation, Xbox or Nintendo) and whether features work on each",
+    "Paddles you can reach comfortably without pressing them by accident",
+    "Stick quality and, where offered, replaceable stick modules, since drift is a common failure on all controllers",
+    "Adjustable trigger stops and a comfortable shape for your hand size",
+    "Wired mode available for the lowest latency and no charging worries"
+  ],
+  "suitableFor": "Controller players who want more actions available without taking their thumbs off the sticks.",
+  "pros": ["More control options without moving your thumbs", "Useful for accessibility as well as competitive play", "Many support custom profiles"],
+  "cons": ["Can cost much more than a standard controller", "Takes time to retrain habits", "Not every game or platform supports every feature"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

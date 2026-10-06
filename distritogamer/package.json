@@ -1,0 +1,24 @@
+{
+  "name": "distritogamer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/check-site.mjs",
+    "build:fast": "astro build",
+    "preview": "astro preview",
+    "check": "node scripts/check-site.mjs",
+    "images:pexels": "node scripts/fetch-pexels.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.14.0",
+    "sharp": "^0.34.0"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.2.0",
+    "@fontsource-variable/space-grotesk": "^5.2.0",
+    "node-html-parser": "^9.0.4"
+  }
+}

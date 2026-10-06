@@ -1,0 +1,22 @@
+{
+  "name": "Elden Ring",
+  "developer": "FromSoftware",
+  "genre": "Action role-playing game",
+  "platforms": ["PC", "PlayStation", "Xbox"],
+  "summary": "FromSoftware's open-world action RPG set in the Lands Between, published by Bandai Namco in 2022 and expanded by the Shadow of the Erdtree DLC.",
+  "overview": [
+    "Elden Ring is an open-world action role-playing game set in the Lands Between. You create a character, choose a starting class and explore a large map full of dungeons, bosses and optional areas, mostly without hand-holding.",
+    "The game rewards curiosity and patience. Combat is built around timing, stamina management and reading enemy attacks, and most difficulty comes from rushing or over-committing rather than from lack of stats.",
+    "Beginners do best when they learn the systems early: how to level up at Sites of Grace, how to use the Spirit Ashes and Torrent, and how to leave an area to explore elsewhere when a boss feels too hard."
+  ],
+  "wikipedia": "https://en.wikipedia.org/wiki/Elden_Ring",
+  "trending": true,
+  "sections": {
+    "beginner": ["beginners-guide-to-elden-ring", "common-mistakes-new-players-make"],
+    "advanced": ["gaming-strategies-that-work-in-any-game"],
+    "settings": ["best-controller-settings-for-competitive-gaming"],
+    "troubleshooting": ["fix-game-crashes-and-stuttering", "how-to-increase-fps-on-pc"]
+  },
+  "gear": ["controller-with-paddles"],
+  "notes": "Our Elden Ring guides explain systems and decision-making rather than listing every item location, which changes less often and is documented well by community wikis."
+}
