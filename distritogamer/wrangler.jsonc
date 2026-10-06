@@ -7,7 +7,11 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
-  "observability": { "enabled": true }
-  // After the first deploy, attach distritogamer.com in the Cloudflare dashboard:
-  // Workers & Pages -> distritogamer -> Settings -> Domains & Routes -> Add -> Custom domain.
+  "observability": { "enabled": true },
+  // Attaches the domains on deploy. Requires the distritogamer.com zone to be in the same Cloudflare account
+  // (nameservers pointed at Cloudflare); Cloudflare creates the DNS records and certificates automatically.
+  "routes": [
+    { "pattern": "distritogamer.com", "custom_domain": true },
+    { "pattern": "www.distritogamer.com", "custom_domain": true }
+  ]
 }
