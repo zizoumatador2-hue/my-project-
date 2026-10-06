@@ -11,7 +11,7 @@ const est = Math.round(monthlyPayment((v.price_cents / 100) * 0.9, 8.5, 60));
 const H = headingLevel;
 const miles = v.dist2 != null ? Math.round(Math.sqrt(v.dist2)) : null;
 ---
-<article class="vcard">
+<article class="vcard spotlight">
   <div class="vcard-media">
     {v.image_key ? (
       <img src={`/media/${v.image_key}`} alt={`${title}${v.trim ? ` ${v.trim}` : ''} for sale in ${v.city_name}, AL`} width="640" height="480"

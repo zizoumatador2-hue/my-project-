@@ -3,12 +3,13 @@ import { all, run } from './db';
 export const SETTING_DEFAULTS: Record<string, string> = {
   site_name: 'BamaMotors',
   tagline: 'Used cars for sale across Alabama, from local dealers',
-  contact_email: 'hello@bamamotors.com',
+  contact_email: 'info@christopherkunz.com',
   contact_phone: '',
   default_meta_description:
     'Shop used cars for sale in Alabama from local dealerships. Search by make, price, mileage and city — Birmingham, Huntsville, Mobile, Montgomery and more.',
   default_meta_keywords: 'used cars Alabama, used cars for sale Alabama, car dealerships Alabama, used car dealers Alabama',
   ga4_id: '',
+  adsense_client: '',
   google_site_verification: '',
   bing_site_verification: '',
   social_facebook: '',

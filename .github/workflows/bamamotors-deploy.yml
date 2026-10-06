@@ -5,6 +5,8 @@ on:
     paths: ['bamamotors/**', '.github/workflows/bamamotors-deploy.yml']
   workflow_dispatch:
 concurrency: bamamotors-deploy
+permissions:
+  contents: write
 defaults:
   run:
     working-directory: bamamotors
@@ -34,6 +36,17 @@ jobs:
           if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id"; exit 1; fi
           echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
       - run: npm ci
+      - name: Fetch licensed Pexels photos (only new ones; needs PEXELS_API_KEY secret)
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          node scripts/fetch-pexels.mjs
+          if [ -n "$(git status --porcelain public/images src/data/images.json)" ]; then
+            git config user.name "bamamotors-bot"; git config user.email "bamamotors-bot@users.noreply.github.com"
+            git add public/images src/data/images.json
+            git commit -m "BamaMotors: add Pexels photos [skip ci]"
+            git push || echo "::warning::Could not push photos back to the branch (they are still used in this deploy)"
+          fi
       - run: npm run lint
       - run: npm test
       - name: Attach custom domain (falls back to workers.dev if the zone is not on this account)

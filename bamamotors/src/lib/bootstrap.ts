@@ -1,5 +1,6 @@
 import referenceSql from '../../migrations/0002_reference_data.sql?raw';
 import contentSql from '../../migrations/0003_editorial_content.sql?raw';
+import moreGuidesSql from '../../migrations/0004_more_guides.sql?raw';
 
 /**
  * Applies the seed migrations (reference data + editorial content) the first time a fresh
@@ -10,6 +11,7 @@ import contentSql from '../../migrations/0003_editorial_content.sql?raw';
 const SEEDS: [string, string][] = [
   ['0002_reference_data.sql', referenceSql],
   ['0003_editorial_content.sql', contentSql],
+  ['0004_more_guides.sql', moreGuidesSql],
 ];
 
 let done = false;

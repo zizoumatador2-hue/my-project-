@@ -34,6 +34,7 @@
     "@types/node": "^22.20.4",
     "eslint": "^10.11.0",
     "eslint-plugin-astro": "^1.7.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.71.0",
     "vitest": "^5.0.2",

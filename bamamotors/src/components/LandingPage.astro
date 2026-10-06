@@ -14,6 +14,8 @@ import { all } from '../lib/db';
 import { BODY_TYPES, PRICE_BUCKETS } from '../lib/constants';
 import { formatPrice, formatNumber } from '../lib/format';
 import { DEALER_CARD_SQL, type DealerCard as DC } from '../lib/dealers';
+import Photo from './Photo.astro';
+import { cityImage, bodyImage } from '../lib/images';
 
 interface Props { landing: Landing; }
 const { landing: L } = Astro.props;
@@ -46,6 +48,7 @@ const dealers = L.kind === 'city' && L.city
   : [];
 const guides = await all<{ slug: string; title: string }>(env.DB, "SELECT slug, title FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC LIMIT 4");
 
+const cover = L.city ? cityImage(L.city.slug) : L.body ? bodyImage(L.body.slug) : null;
 const noindex = (total === 0 && !L.hasEditorial) || qs.sort !== 'recommended';
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
@@ -66,6 +69,12 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
       <h1>{L.h1}</h1>
       <p class="muted" style="font-size:1.05rem">{L.intro}</p>
     </header>
+    {cover && filters.page === 1 && (
+      <figure class="landing-cover">
+        <Photo img={cover} sizes="(min-width: 1240px) 1240px, 100vw" eager alt={L.city && cover.src.includes(L.city.slug) ? `${L.city.name}, Alabama` : cover.alt} />
+        <figcaption class="photo-credit">Photo: <a href={cover.pexelsUrl} rel="nofollow noopener" target="_blank">{cover.photographer} / Pexels</a></figcaption>
+      </figure>
+    )}
     {snippet && filters.page === 1 && <p class="snippet">{snippet}</p>}
     <Results filters={filters} items={items} total={total} pages={pages} origin={origin} basePath={L.path} fixed={L.filters} />
 

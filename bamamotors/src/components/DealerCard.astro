@@ -6,7 +6,7 @@ const { d } = Astro.props;
 const initials = d.name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 const miles = d.dist2 != null ? Math.round(Math.sqrt(d.dist2)) : null;
 ---
-<a class="tile" href={`/dealers/${d.slug}`}>
+<a class="tile spotlight" href={`/dealers/${d.slug}`}>
   <div class="row" style="flex-wrap:nowrap">
     {d.logo_key ? <img src={`/media/${d.logo_key}`} alt={`${d.name} logo`} width="56" height="56" loading="lazy" style="border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line)" />
       : <span class="avatar" aria-hidden="true">{initials}</span>}

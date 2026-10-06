@@ -36,6 +36,8 @@ const social = [
           <li><a href="/dealers">Car dealerships in Alabama</a></li>
           <li><a href="/financing">Car financing</a></li>
           <li><a href="/blog">Car buying guides</a></li>
+          <li><a href="/blog/used-cars-near-me-alabama">Used cars near me</a></li>
+          <li><a href="/blog/how-to-buy-a-used-car-in-alabama">How to buy a used car in Alabama</a></li>
         </ul>
       </nav>
       <nav aria-label="Company">
@@ -46,13 +48,15 @@ const social = [
           <li><a href="/for-dealers">For dealers</a></li>
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/contact">Contact us</a></li>
+          <li><a href="/editorial-policy">Editorial policy</a></li>
           <li><a href="/privacy">Privacy Policy</a></li>
           <li><a href="/terms">Terms of Use</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
         </ul>
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>© {year} BamaMotors. All rights reserved.</p>
+      <p>© {year} BamaMotors. All rights reserved.{s.contact_email && <> · <a href={`mailto:${s.contact_email}`}>{s.contact_email}</a></>}</p>
       <p>Listings, prices and vehicle details are provided by the listing dealer. Always verify with the dealer before purchase.</p>
     </div>
   </div>

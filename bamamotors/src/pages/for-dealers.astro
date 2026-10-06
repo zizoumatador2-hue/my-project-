@@ -47,7 +47,7 @@ const faq = [
       <p class="center muted">No setup fees. No per-lead charges. Cancel anytime.</p>
       <div class="grid grid-3" style="margin-top:20px">
         {Object.values(PLANS).map((p) => (
-          <div class={`plan${p.id === 'basic' ? ' popular' : ''}`}>
+          <div class={`plan spotlight${p.id === 'basic' ? ' popular star-border' : ''}`}>
             {p.id === 'basic' && <span class="badge badge-featured" style="align-self:flex-start">Most popular</span>}
             <h3 style="margin:0">{p.name}</h3>
             <div class="price">{p.priceCents ? formatPrice(p.priceCents) : '$0'}<span class="small muted">/month</span></div>

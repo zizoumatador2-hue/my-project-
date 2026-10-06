@@ -43,7 +43,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
 
   // Static-ish endpoints don't need session/settings work.
-  if (path.startsWith('/media/') || path === '/robots.txt' || path.startsWith('/sitemap')) {
+  if (path.startsWith('/media/') || path === '/robots.txt' || path === '/ads.txt' || path.startsWith('/sitemap')) {
     return withHeaders(await next(), { 'X-Content-Type-Options': 'nosniff' });
   }
 

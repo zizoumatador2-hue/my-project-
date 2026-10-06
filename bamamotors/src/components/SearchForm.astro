@@ -18,7 +18,7 @@ const prices = [5000, 7500, 10000, 12500, 15000, 20000, 25000, 30000, 40000, 500
 const mileages = [25000, 50000, 75000, 100000, 125000, 150000];
 const id = (n: string) => `${variant}-${n}`;
 ---
-<form method="get" action={action} class={variant === 'hero' ? 'search-panel' : 'filters'} role="search" aria-label="Search used cars"
+<form method="get" action={action} class={variant === 'hero' ? 'search-panel star-border' : 'filters'} role="search" aria-label="Search used cars"
   id={variant === 'sidebar' ? 'filters' : undefined} data-collapsed={variant === 'sidebar' ? 'true' : undefined} data-search-form>
   {variant === 'hero' ? (
     <>
@@ -51,7 +51,7 @@ const id = (n: string) => `${variant}-${n}`;
           <select class="select" id={id('body')} name="body"><option value="">Any body type</option>{BODY_TYPES.map((b) => <option value={b.value}>{b.value}</option>)}</select></div>
       </div>
       <div class="search-actions">
-        <button class="btn btn-primary btn-lg" type="submit"><Icon name="search" /> Find Your Car</button>
+        <button class="btn btn-primary btn-lg btn-shine" type="submit"><Icon name="search" /> Find Your Car</button>
         <button class="btn btn-outline" type="button" data-near-me><Icon name="pin" /> Use my location</button>
         <span class="small muted" data-near-status aria-live="polite"></span>
       </div>

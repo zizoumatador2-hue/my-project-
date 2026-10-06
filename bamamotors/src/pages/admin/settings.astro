@@ -13,6 +13,7 @@ if (Astro.request.method === 'POST') {
   values.dealer_auto_approve = fd.get('dealer_auto_approve') === 'on' ? '1' : '0';
   if (values.default_meta_description.length > 160) err = 'Default meta description must be 160 characters or fewer.';
   else if (values.ga4_id && !/^G-[A-Z0-9]{4,12}$/.test(values.ga4_id)) err = 'GA4 measurement ID looks like G-XXXXXXXXXX.';
+  else if (values.adsense_client && !/^ca-pub-\d{10,20}$/.test(values.adsense_client)) err = 'AdSense publisher ID looks like ca-pub-1234567890123456.';
   else if (!/^\d+$/.test(values.featured_price_cents) || !/^\d+$/.test(values.featured_days)) err = 'Featured price (cents) and days must be whole numbers.';
   else {
     await saveSettings(env.DB, values);
@@ -24,7 +25,7 @@ if (Astro.request.method === 'POST') {
 const groups: { title: string; fields: [string, string, string?][] }[] = [
   { title: 'Site', fields: [['site_name', 'Site name'], ['tagline', 'Tagline'], ['contact_email', 'Contact email'], ['contact_phone', 'Contact phone'], ['announcement', 'Announcement bar (optional)']] },
   { title: 'SEO defaults', fields: [['default_meta_description', 'Default meta description (≤ 160)', 'textarea'], ['default_meta_keywords', 'Default meta keywords']] },
-  { title: 'Search engines & analytics', fields: [['ga4_id', 'Google Analytics 4 measurement ID'], ['google_site_verification', 'Google Search Console verification code'], ['bing_site_verification', 'Bing Webmaster verification code']] },
+  { title: 'Search engines & analytics', fields: [['ga4_id', 'Google Analytics 4 measurement ID'], ['adsense_client', 'Google AdSense publisher ID (ca-pub-…)'], ['google_site_verification', 'Google Search Console verification code'], ['bing_site_verification', 'Bing Webmaster verification code']] },
   { title: 'Brand profiles (Organization sameAs)', fields: [['social_facebook', 'Facebook URL'], ['social_instagram', 'Instagram URL'], ['social_x', 'X URL'], ['social_youtube', 'YouTube URL']] },
   { title: 'Marketplace', fields: [['featured_price_cents', 'Featured listing price (cents)'], ['featured_days', 'Featured listing duration (days)']] },
 ];

@@ -7,12 +7,15 @@ import { getPost, relatedPosts } from '../../lib/blog';
 import { renderMarkdown, readingMinutes, parseFaq } from '../../lib/markdown';
 import { breadcrumbLd, faqLd, absolute } from '../../lib/seo';
 import { formatDate } from '../../lib/format';
+import Photo from '../../components/Photo.astro';
+import { postImage } from '../../lib/images';
 
 const env = Astro.locals.runtime.env;
 const site = env.SITE_URL;
 const post = await getPost(env.DB, String(Astro.params.slug));
 const preview = Astro.locals.user?.role === 'admin';
 if (!post || (post.status !== 'published' && !preview)) return Astro.rewrite('/404');
+const cover = postImage(post.slug);
 const { html, toc } = renderMarkdown(post.body, new URL(site).host);
 const faq = parseFaq(post.faq_json);
 let howto: { name: string; steps: { name: string; text: string }[] } | null;
@@ -36,7 +39,7 @@ const articleLd = {
   datePublished: published,
   dateModified: post.updated_at,
   inLanguage: 'en-US',
-  ...(post.cover_key ? { image: absolute(site, `/media/${post.cover_key}`) } : { image: absolute(site, '/og-default.png') }),
+  image: absolute(site, cover?.src ?? (post.cover_key ? `/media/${post.cover_key}` : '/og-default.png')),
   ...(post.keywords ? { keywords: post.keywords } : {}),
   articleSection: post.category_name ?? undefined,
   wordCount: post.body.split(/\s+/).length,
@@ -52,7 +55,7 @@ const initials = (post.author_name ?? 'BM').split(/\s+/).slice(0, 2).map((w) => 
 ---
 <BaseLayout title={post.meta_title || post.title} description={post.meta_description ?? post.excerpt} keywords={post.keywords ?? undefined}
   canonical={`/blog/${post.slug}`} ogType="article" published={published} modified={post.updated_at} noindex={post.status !== 'published'}
-  ogImage={post.cover_key ? `/media/${post.cover_key}` : undefined} jsonLd={[breadcrumbLd(site, crumbs), articleLd, faqLd(faq), howtoLd]}>
+  ogImage={cover?.src ?? (post.cover_key ? `/media/${post.cover_key}` : undefined)} jsonLd={[breadcrumbLd(site, crumbs), articleLd, faqLd(faq), howtoLd]}>
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />
     {post.status !== 'published' && <div class="alert alert-warn" style="margin-top:12px">Draft preview — not visible to the public.</div>}
@@ -69,6 +72,12 @@ const initials = (post.author_name ?? 'BM').split(/\s+/).slice(0, 2).map((w) => 
             <span>{readingMinutes(post.body)} min read</span>
           </div>
         </header>
+        {cover && (
+          <figure class="article-cover">
+            <Photo img={cover} sizes="(min-width: 1024px) 760px, 100vw" eager />
+            <figcaption class="photo-credit">Photo: <a href={cover.pexelsUrl} rel="nofollow noopener" target="_blank">{cover.photographer} / Pexels</a></figcaption>
+          </figure>
+        )}
         <div class="prose" set:html={html} />
         {faq.length > 0 && <div class="section-tight" style="max-width:72ch"><Faq faq={faq} /></div>}
         {post.author_name && (

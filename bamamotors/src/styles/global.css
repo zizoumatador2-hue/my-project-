@@ -343,3 +343,81 @@ tr:last-child td { border-bottom: 0; }
 
 .mobile-only { display: block; }
 @media (min-width: 1024px) { .mobile-only { display: none !important; } }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Motion effects — vanilla adaptations of React Bits components
+   (SpotlightCard, BlurText, ShinyText, CountUp, Aurora, StarBorder, FadeContent).
+   React Bits © 2026 David Haz — MIT + Commons Clause (https://github.com/DavidHDev/react-bits).
+   All effects animate only opacity/transform/filter (no layout shift) and are
+   disabled for users who prefer reduced motion.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Aurora — slow-drifting blurred light behind the hero */
+.aurora { position: absolute; inset: -20% -10% auto -10%; height: 140%; pointer-events: none; z-index: 0; filter: blur(60px); opacity: .55; }
+.aurora span { position: absolute; border-radius: 50%; mix-blend-mode: screen; will-change: transform; }
+.aurora span:nth-child(1) { width: 46vw; height: 46vw; left: -6vw; top: -10vw; background: radial-gradient(circle, #2f7ff5 0%, transparent 65%); animation: aurora-a 18s ease-in-out infinite alternate; }
+.aurora span:nth-child(2) { width: 40vw; height: 40vw; right: -8vw; top: -6vw; background: radial-gradient(circle, #d9481f 0%, transparent 62%); animation: aurora-b 22s ease-in-out infinite alternate; }
+.aurora span:nth-child(3) { width: 36vw; height: 36vw; left: 30vw; top: 10vw; background: radial-gradient(circle, #f4b942 0%, transparent 60%); opacity: .55; animation: aurora-c 26s ease-in-out infinite alternate; }
+@keyframes aurora-a { to { transform: translate3d(14vw, 8vw, 0) scale(1.15); } }
+@keyframes aurora-b { to { transform: translate3d(-12vw, 10vw, 0) scale(.9); } }
+@keyframes aurora-c { to { transform: translate3d(-10vw, -6vw, 0) scale(1.2); } }
+.hero > .wrap { position: relative; z-index: 1; }
+.hero-photo { position: absolute; inset: 0; z-index: 0; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; opacity: .22; }
+.hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(11 33 64 / 55%) 0%, rgb(11 33 64 / 92%) 100%); }
+
+/* BlurText — words resolve from a soft blur, staggered */
+.blur-text .bt-w { display: inline-block; animation: blur-in .8s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes blur-in { from { opacity: .15; filter: blur(10px); transform: translateY(-10px); } to { opacity: 1; filter: blur(0); transform: none; } }
+
+/* ShinyText — a light sweep across text or buttons */
+.shiny-text { background: linear-gradient(110deg, currentColor 40%, #fff 50%, currentColor 60%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shine-text 4s linear infinite; }
+.btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+.btn-shine::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 35%) 50%, transparent 70%); transform: translateX(-120%); animation: shine-sweep 3.6s ease-in-out infinite; }
+@keyframes shine-text { to { background-position: -220% 0; } }
+@keyframes shine-sweep { 0%, 55% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+/* SpotlightCard — radial light that follows the pointer */
+.spotlight { position: relative; --mx: 50%; --my: 50%; }
+.spotlight::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit; background: radial-gradient(380px circle at var(--mx) var(--my), rgb(217 72 31 / 9%), transparent 60%); opacity: 0; transition: opacity .35s ease; }
+.spotlight:hover::after, .spotlight:focus-within::after { opacity: 1; }
+
+/* StarBorder — a rotating light around the search panel */
+@property --sb-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.star-border { position: relative; }
+.star-border::before { content: ''; position: absolute; inset: -2px; border-radius: 20px; padding: 2px; background: conic-gradient(from var(--sb-angle), transparent 0 70%, #f4b942 80%, #d9481f 90%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: sb-spin 6s linear infinite; pointer-events: none; }
+@keyframes sb-spin { to { --sb-angle: 360deg; } }
+
+/* FadeContent — sections rise in as they scroll into view (only when JS runs) */
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.in { opacity: 1; transform: none; }
+.js .reveal-stagger > * { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 60ms); }
+.js .reveal-stagger.in > * { opacity: 1; transform: none; }
+
+/* CountUp stats band */
+.stats-band { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 768px) { .stats-band { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.stats-band .stat { text-align: center; }
+.stats-band .n { font-variant-numeric: tabular-nums; font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem); }
+
+/* Image cards for guides and cities */
+.img-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--ink); box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+.img-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); color: var(--ink); }
+.img-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #e9eef4; }
+.img-card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+.photo-credit { font-size: .72rem; color: var(--muted); }
+.quick-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 0; list-style: none; }
+.quick-chips a { display: inline-flex; padding: 7px 14px; border-radius: 999px; background: rgb(255 255 255 / 10%); border: 1px solid rgb(255 255 255 / 22%); color: #fff; text-decoration: none; font-weight: 700; font-size: .88rem; backdrop-filter: blur(4px); }
+.quick-chips a:hover { background: rgb(255 255 255 / 20%); color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora span, .blur-text .bt-w, .shiny-text, .btn-shine::after, .star-border::before { animation: none !important; }
+  .js .reveal, .js .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .shiny-text { -webkit-text-fill-color: currentColor; }
+}
+.stretched::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.article-cover { margin: 0 0 20px; border-radius: var(--radius); overflow: hidden; }
+.article-cover img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+.article-cover figcaption, .landing-cover figcaption { padding: 6px 2px 0; }
+.landing-cover { margin: 14px 0 0; border-radius: var(--radius); overflow: hidden; position: relative; }
+.landing-cover img { width: 100%; aspect-ratio: 21 / 7; object-fit: cover; }
