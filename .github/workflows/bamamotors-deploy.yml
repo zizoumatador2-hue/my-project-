@@ -107,6 +107,7 @@ jobs:
       - name: Smoke test
         run: |
           H="https://${{ steps.url.outputs.host }}"
+          sleep 20  # let the new version finish rolling out so we test it, not the previous one
           ok=0
           for i in $(seq 1 30); do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$H/") || true
