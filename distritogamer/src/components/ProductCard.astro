@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { isAffiliateReady } from '../config/site';
+interface Props { product: CollectionEntry<'products'>; }
+const { product } = Astro.props;
+const p = product.data;
+const live = isAffiliateReady(p.affiliateUrl);
+---
+<article class="product">
+  <header><h3>{p.name}</h3><span class="kind">{p.kind}</span></header>
+  <p>{p.summary}</p>
+  <dl>
+    <div><dt>What to check</dt><dd><ul>{p.lookFor.map((x) => <li>{x}</li>)}</ul></dd></div>
+    <div><dt>Who it suits</dt><dd>{p.suitableFor}</dd></div>
+  </dl>
+  <div class="proscons">
+    <div class="pros"><h4>Pros</h4><ul>{p.pros.map((x) => <li>{x}</li>)}</ul></div>
+    <div class="cons"><h4>Cons</h4><ul>{p.cons.map((x) => <li>{x}</li>)}</ul></div>
+  </div>
+  {live && (
+    <p style="margin:16px 0 0"><a class="btn btn-primary" href={p.affiliateUrl} rel="sponsored nofollow noopener" target="_blank">{p.cta}<span class="sr"> for {p.name} (affiliate link)</span></a></p>
+  )}
+</article>

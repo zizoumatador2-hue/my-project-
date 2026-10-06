@@ -1,0 +1,13 @@
+{
+  // Static site served by Cloudflare Workers Static Assets. `public/_headers` controls cache + security headers.
+  "name": "distritogamer",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true }
+  // After the first deploy, attach distritogamer.com in the Cloudflare dashboard:
+  // Workers & Pages -> distritogamer -> Settings -> Domains & Routes -> Add -> Custom domain.
+}

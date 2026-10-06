@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories } from '../data/categories';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Search', href: '/search/' }];
+---
+<BaseLayout title="Search Gaming Guides, Games and Settings" description="Search DistritoGamer for games, guides, tips, settings, hardware and troubleshooting articles." path="/search/" crumbs={crumbs} noindex>
+  <header class="page-head"><div class="wrap">
+    <h1>Search</h1>
+    <form class="search-form" role="search" action="/search/" method="get" style="margin-top:14px">
+      <label for="q" class="sr">Search guides, games and settings</label>
+      <input class="field" id="q" name="q" type="search" placeholder="Try: input lag, valorant, best sensitivity" autocomplete="off" />
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <p class="fine" style="margin-top:10px">Search covers games, guides, tips, settings, hardware and troubleshooting articles.</p>
+  </div></header>
+  <div class="wrap section">
+    <p id="status" role="status" aria-live="polite" class="updated-note"></p>
+    <div id="results" class="results"></div>
+    <noscript><p>Search needs JavaScript. You can <a href="/guides/">browse all guides</a> instead.</p></noscript>
+    <section id="browse" style="margin-top:36px" aria-labelledby="b-h">
+      <h2 id="b-h">Or browse by topic</h2>
+      <ul class="chips" style="list-style:none;padding:0">{categories.filter((c) => c.indexable).map((c) => <li><a href={`/${c.slug}/`}>{c.name}</a></li>)}</ul>
+    </section>
+  </div>
+  <script>
+    type Doc = { t: string; d: string; u: string; c: string; k: string; w: string };
+    const input = document.getElementById('q') as HTMLInputElement;
+    const out = document.getElementById('results')!;
+    const status = document.getElementById('status')!;
+    let docs: Doc[] | null = null;
+    const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}\s]/gu, ' ');
+    const stop = new Set(['the', 'a', 'an', 'to', 'in', 'of', 'for', 'and', 'on', 'how', 'is']);
+
+    async function load() {
+      if (docs) return docs;
+      const r = await fetch('/search-index.json');
+      docs = await r.json();
+      return docs!;
+    }
+    function mark(text: string, terms: string[]) {
+      const frag = document.createDocumentFragment();
+      const re = new RegExp(`(${terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'ig');
+      text.split(re).forEach((part, i) => {
+        if (i % 2 && part) { const m = document.createElement('mark'); m.textContent = part; frag.appendChild(m); }
+        else frag.appendChild(document.createTextNode(part));
+      });
+      return frag;
+    }
+    async function run() {
+      const q = input.value.trim();
+      const url = new URL(location.href);
+      q ? url.searchParams.set('q', q) : url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+      out.textContent = '';
+      const terms = norm(q).split(/\s+/).filter((t) => t && !stop.has(t));
+      if (!terms.length) { status.textContent = ''; return; }
+      const all = await load();
+      const scored = all.map((d) => {
+        const t = norm(d.t), de = norm(d.d), w = norm(d.w), c = norm(d.c);
+        let s = 0;
+        for (const term of terms) {
+          const hit = (t.includes(term) ? 5 : 0) + (w.includes(term) ? 3 : 0) + (de.includes(term) ? 2 : 0) + (c.includes(term) ? 1 : 0);
+          if (!hit) return { d, s: 0 };
+          s += hit;
+        }
+        return { d, s };
+      }).filter((x) => x.s > 0).sort((a, b) => b.s - a.s).slice(0, 20);
+      status.textContent = scored.length ? `${scored.length} result${scored.length === 1 ? '' : 's'} for "${q}"` : `No results for "${q}". Try fewer or different words, or browse by topic below.`;
+      for (const { d } of scored) {
+        const el = document.createElement('article'); el.className = 'result';
+        const pill = document.createElement('span'); pill.className = 'pill'; pill.textContent = d.c;
+        const h = document.createElement('h2'); const a = document.createElement('a'); a.href = d.u; a.appendChild(mark(d.t, terms)); h.appendChild(a);
+        const p = document.createElement('p'); p.appendChild(mark(d.d, terms));
+        el.append(pill, h, p); out.appendChild(el);
+      }
+    }
+    let timer: number;
+    input.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(run, 120); });
+    input.addEventListener('focus', () => { load(); }, { once: true });
+    input.closest('form')!.addEventListener('submit', (e) => { e.preventDefault(); run(); });
+    const initial = new URL(location.href).searchParams.get('q');
+    if (initial) { input.value = initial; run(); }
+  </script>
+</BaseLayout>

@@ -1,0 +1,22 @@
+{
+  "name": "Valorant",
+  "developer": "Riot Games",
+  "genre": "Tactical team shooter",
+  "platforms": ["PC"],
+  "summary": "Riot Games' free-to-play 5v5 tactical shooter, where precise gunplay meets agent abilities and a round-based economy.",
+  "overview": [
+    "Valorant is a round-based tactical shooter in which five attackers try to plant a bomb-like device (the Spike) at a site while five defenders try to stop them. Teams switch sides after a set number of rounds and the first to reach the winning round count takes the match.",
+    "What sets it apart from other tactical shooters is the cast of agents, each with abilities that block lines of sight, gather information, heal, or create entry opportunities. Agents fall into four broad roles: Duelists, Initiators, Controllers and Sentinels.",
+    "New players usually improve fastest by focusing on three things before anything else: crosshair placement, counter-strafing so shots are accurate, and understanding the economy so the team buys together."
+  ],
+  "wikipedia": "https://en.wikipedia.org/wiki/Valorant",
+  "trending": true,
+  "sections": {
+    "beginner": ["beginners-guide-to-valorant"],
+    "advanced": ["how-to-improve-aim-in-fps-games", "how-to-review-your-gameplay"],
+    "settings": ["best-sensitivity-settings-for-gaming", "best-fps-settings-for-better-performance"],
+    "troubleshooting": ["how-to-fix-game-lag", "fix-game-crashes-and-stuttering"]
+  },
+  "gear": ["fps-gaming-mouse", "control-mouse-pad"],
+  "notes": "Agents, maps and balance change with updates. We explain principles that stay useful and tell you when something depends on the current patch."
+}

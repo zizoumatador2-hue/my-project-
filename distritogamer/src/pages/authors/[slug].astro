@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { allArticles } from '../../lib/articles';
+import { abs } from '../../lib/utils';
+import { SITE } from '../../config/site';
+
+export async function getStaticPaths() {
+  return (await getCollection('authors')).map((a) => ({ params: { slug: a.id }, props: { author: a } }));
+}
+const { author } = Astro.props;
+const items = (await allArticles()).filter((a) => a.data.author === author.id);
+const path = `/authors/${author.id}/`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'About', href: '/about/' }, { name: author.data.name, href: path }];
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: { '@type': author.data.type, '@id': abs(path) + '#author', name: author.data.name,
+  description: author.data.bio, knowsAbout: author.data.expertise, url: abs(path), ...(author.data.type === 'Organization' ? { parentOrganization: { '@id': `${SITE.url}/#organization` } } : {}) },
+}];
+---
+<BaseLayout title={`${author.data.name}: Gaming Guides and Tips`} description={`${author.data.bio}`.slice(0, 157).replace(/\s+\S*$/, '') + '...'} path={path} crumbs={crumbs} schema={schema}>
+  <header class="page-head"><div class="wrap">
+    <h1>{author.data.name}</h1>
+    <p class="lede">{author.data.bio}</p>
+    <ul class="chips" style="list-style:none;padding:0" aria-label="Areas of expertise">{author.data.expertise.map((e) => <li><span class="pill">{e}</span></li>)}</ul>
+  </div></header>
+  <div class="wrap section">
+    <h2>Guides by {author.data.name}</h2>
+    <div class="grid c3">{items.map((a) => <ArticleCard article={a} />)}</div>
+    <p style="margin-top:32px">Learn how we work in our <a href="/editorial-policy/">editorial policy</a> and <a href="/about/">about page</a>.</p>
+  </div>
+</BaseLayout>

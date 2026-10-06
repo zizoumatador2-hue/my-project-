@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Cover from './Cover.astro';
+import { categoryBySlug } from '../data/categories';
+import { articleUrl, readingMinutes, fmtDate } from '../lib/utils';
+import { modified } from '../lib/articles';
+interface Props { article: CollectionEntry<'articles'>; level?: 2 | 3; }
+const { article, level = 3 } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+const cat = categoryBySlug(article.data.category);
+---
+<article class="card reveal" data-spot>
+  <div class="thumb"><Cover slug={article.id} alt={article.data.imageAlt} /></div>
+  <div class="card-body">
+    <span class="pill">{cat.name}</span>
+    <Heading><a href={articleUrl(article)}>{article.data.title}</a></Heading>
+    <p>{article.data.description}</p>
+    <div class="meta">
+      <span>{readingMinutes(article.body)} min read</span>
+      <span>Updated <time datetime={modified(article).toISOString().slice(0, 10)}>{fmtDate(modified(article))}</time></span>
+    </div>
+  </div>
+</article>

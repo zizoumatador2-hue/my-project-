@@ -1,0 +1,30 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getEntry } from 'astro:content';
+import { SITE } from '../config/site';
+import { abs } from '../lib/utils';
+const author = (await getEntry('authors', 'editorial-team'))!;
+const schema = [{ '@context': 'https://schema.org', '@type': 'AboutPage', url: abs('/about/'), name: 'About DistritoGamer', about: { '@id': `${SITE.url}/#organization` } }];
+---
+<PageLayout title="About DistritoGamer: Who We Are and How We Work" heading="About DistritoGamer" description="DistritoGamer is an independent gaming tips and guides publication. Learn who writes our guides, how we research them and how the site is funded." path="/about/" schema={schema}
+  intro="DistritoGamer exists to help gamers improve, tune their setups and fix problems, with guides that explain the reasoning rather than just the answer.">
+  <h2>What DistritoGamer is</h2>
+  <p>DistritoGamer is an independent publication about <strong>gaming tips, game guides, settings, performance and gear</strong>. We write for English-speaking players on PC, PlayStation, Xbox and Nintendo platforms, from complete beginners to competitive players who want a more structured way to improve.</p>
+  <p>Our tagline, <em>Play Better. Know More. Game Smarter.</em>, describes the editorial approach: practical advice first, explanation second, and no padding. The site launched in {SITE.foundingYear} and is built to grow slowly into a reference library rather than a news feed.</p>
+  <h2>Who writes the guides</h2>
+  <p>Guides are written and maintained by the <a href={`/authors/${author.id}/`}>{author.data.name}</a>. We publish under a team byline because every guide goes through the same research, writing and review process described in our <a href="/editorial-policy/">editorial policy</a>, and we do not invent individual bios or credentials to make the site look more impressive than it is.</p>
+  <p>Our areas of focus are {author.data.expertise.join(', ').toLowerCase()}. When a topic sits outside what we can responsibly explain, such as medical advice about gaming habits, we say so and point to authoritative sources instead.</p>
+  <h2>How we handle accuracy</h2>
+  <ul>
+    <li>Every guide shows a published date and an updated date. We change the updated date only when we make a substantive revision.</li>
+    <li>Factual claims that readers could reasonably doubt carry a source in the guide, usually in a &ldquo;Sources and further reading&rdquo; section.</li>
+    <li>We clearly separate general principles (which age well) from game-specific values (which change with patches). When a number depends on a patch, we say so.</li>
+    <li>We do not claim to have hands-on tested a product unless we have. Where a guide discusses a type of gear without testing it, the guide says that plainly.</li>
+  </ul>
+  <h2>How the site is funded</h2>
+  <p>DistritoGamer may earn commissions through affiliate links and may show advertising. Affiliate links appear only where a product recommendation is relevant to the guide, and commissions never decide what we recommend. Read the full <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
+  <h2>Independence</h2>
+  <p>We are not owned by, sponsored by or endorsed by any game publisher or hardware manufacturer. Game and product names are trademarks of their respective owners and are used only to identify them. If we ever publish sponsored content, it will be labeled as such at the top of the page.</p>
+  <h2>Get in touch</h2>
+  <p>Spotted a mistake, want to suggest a guide, or have a correction? Use the <a href="/contact/">contact page</a>. We read everything and fix verified errors promptly.</p>
+</PageLayout>

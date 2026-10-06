@@ -1,0 +1,58 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { SITE } from '../config/site';
+const endpoint = SITE.contactEndpoint;
+---
+<PageLayout title="Contact DistritoGamer: Corrections and Feedback" heading="Contact us" description="Contact the DistritoGamer team to report an error, suggest a guide, ask about advertising or send feedback. We read every message." path="/contact/" intro="Corrections, guide ideas, partnership questions and feedback are all welcome." wide>
+  <div style="display:grid;gap:36px;max-width:980px" class="contact-grid">
+    <div style="max-width:var(--read)">
+      <h2 style="margin-top:0">Send us a message</h2>
+      <form id="contact-form" action={endpoint || undefined} method={endpoint ? 'post' : undefined} novalidate style="display:grid;gap:16px">
+        <div><label for="c-name">Your name</label><input class="field" id="c-name" name="name" type="text" required autocomplete="name" /></div>
+        <div><label for="c-email">Email address</label><input class="field" id="c-email" name="email" type="email" required autocomplete="email" /></div>
+        <div><label for="c-topic">Topic</label>
+          <select class="field" id="c-topic" name="topic">
+            <option>Report an error or outdated advice</option>
+            <option>Suggest a guide or game</option>
+            <option>Advertising or partnerships</option>
+            <option>Privacy request</option>
+            <option>Something else</option>
+          </select></div>
+        <div><label for="c-msg">Message</label><textarea class="field" id="c-msg" name="message" required></textarea></div>
+        <p class="fine" style="margin:0">We use your details only to reply. See our <a href="/privacy-policy/">privacy policy</a>.</p>
+        <p id="form-status" role="status" aria-live="polite" class="fine" style="margin:0"></p>
+        <div><button class="btn btn-primary" type="submit">{endpoint ? 'Send message' : 'Open in my email app'}</button></div>
+      </form>
+    </div>
+    <div style="max-width:var(--read)">
+      <h2>Other ways to reach us</h2>
+      <p>Email: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+      <p>We aim to reply within a few business days. We cannot provide personal tech support for individual PCs or accounts, but our <a href="/troubleshooting/">troubleshooting guides</a> cover the most common problems.</p>
+      <h2>Reporting a mistake</h2>
+      <p>If a guide has an error, tell us which guide, what is wrong and, if you can, a source. Verified corrections are made quickly and noted on the page when significant. See our <a href="/editorial-policy/">editorial policy</a>.</p>
+    </div>
+  </div>
+  <script define:vars={{ hasEndpoint: !!endpoint, mail: SITE.contactEmail }}>
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    form.addEventListener('submit', async (e) => {
+      const f = new FormData(form);
+      const name = String(f.get('name') || '').trim(), email = String(f.get('email') || '').trim(), msg = String(f.get('message') || '').trim();
+      if (!name || !/^\S+@\S+\.\S+$/.test(email) || !msg) { e.preventDefault(); status.textContent = 'Please fill in your name, a valid email address and a message.'; return; }
+      if (hasEndpoint) {
+        e.preventDefault();
+        status.textContent = 'Sending...';
+        try {
+          const r = await fetch(form.action, { method: 'POST', body: f, headers: { Accept: 'application/json' } });
+          if (!r.ok) throw new Error('bad status');
+          form.reset(); status.textContent = 'Thanks. Your message has been sent.';
+        } catch { status.textContent = 'Sorry, that did not send. Please email us directly at ' + mail + '.'; }
+      } else {
+        e.preventDefault();
+        const body = `${msg}\n\n-- ${name} (${email})`;
+        location.href = `mailto:${mail}?subject=${encodeURIComponent('[DistritoGamer] ' + f.get('topic'))}&body=${encodeURIComponent(body)}`;
+        status.textContent = 'Your email app should open with the message ready to send.';
+      }
+    });
+  </script>
+</PageLayout>

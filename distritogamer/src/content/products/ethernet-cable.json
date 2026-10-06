@@ -1,0 +1,16 @@
+{
+  "name": "Ethernet cable (Cat 5e or better)",
+  "kind": "Networking",
+  "summary": "A wired connection is the single most reliable fix for online lag caused by unstable Wi-Fi. Any decent Cat 5e or Cat 6 cable is enough for gaming; you do not need an expensive one.",
+  "lookFor": [
+    "Cat 5e or Cat 6 rating (both support gigabit speeds)",
+    "Length long enough to reach your router without strain, with a little slack",
+    "Snag-less connectors and a flat or thin cable if you need to run it along a wall",
+    "Skip gold-plated marketing claims; they do not change gaming performance"
+  ],
+  "suitableFor": "Anyone whose PC or console is within cable reach of the router and who suffers from spikes or packet loss on Wi-Fi.",
+  "pros": ["Typically lower and more stable latency than Wi-Fi", "Very inexpensive", "No setup or drivers"],
+  "cons": ["A cable has to be run through the room", "Does nothing if the problem is your internet provider or the game's servers"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

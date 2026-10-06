@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Logo from './Logo.astro';
+interface Props { author: CollectionEntry<'authors'>; }
+const { author } = Astro.props;
+---
+<aside class="author-box" aria-label="About the author">
+  <Logo />
+  <div>
+    <h2>Written by <a href={`/authors/${author.id}/`}>{author.data.name}</a></h2>
+    <p>{author.data.bio}</p>
+    <p><a href="/editorial-policy/">How we research and update our guides</a></p>
+  </div>
+</aside>

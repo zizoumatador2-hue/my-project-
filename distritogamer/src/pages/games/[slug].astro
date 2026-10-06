@@ -1,0 +1,76 @@
+---
+import { getCollection, getEntries } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { allArticles } from '../../lib/articles';
+import { abs } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  return (await getCollection('games')).map((g) => ({ params: { slug: g.id }, props: { game: g } }));
+}
+const { game } = Astro.props;
+const g = game.data;
+const all = await allArticles();
+const byId = (ids: string[]) => ids.map((id) => all.find((a) => a.id === id)).filter(Boolean) as typeof all;
+const sections = [
+  ['beginner', 'Beginner guides'], ['advanced', 'Advanced tips'], ['settings', 'Best settings'], ['builds', 'Builds'],
+  ['weapons', 'Weapons'], ['characters', 'Characters'], ['troubleshooting', 'Troubleshooting'],
+] as const;
+const mapped = sections.map(([k, label]) => ({ label, items: byId(g.sections[k]) })).filter((s) => s.items.length);
+const tagged = all.filter((a) => a.data.game === game.id);
+const shown = new Set(mapped.flatMap((s) => s.items.map((i) => i.id)));
+const latest = tagged.filter((a) => !shown.has(a.id));
+const gear = g.gear.length ? await getEntries(g.gear.map((id) => ({ collection: 'products' as const, id }))) : [];
+const path = `/games/${game.id}/`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Games', href: '/games/' }, { name: g.name, href: path }];
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'WebPage', name: `${g.name}: guides, settings and tips`, url: abs(path),
+  about: { '@type': 'VideoGame', name: g.name, genre: g.genre, gamePlatform: g.platforms, publisher: { '@type': 'Organization', name: g.developer }, ...(g.wikipedia ? { sameAs: g.wikipedia } : {}) },
+}];
+---
+<BaseLayout title={`${g.name} Guides, Settings and Tips`} description={`${g.name} guides, settings and troubleshooting in one place: ${g.summary}`.slice(0, 160)} path={path} crumbs={crumbs} schema={schema}>
+  <header class="page-head"><div class="wrap game-hero">
+    <div>
+      <h1>{g.name}</h1>
+      <p class="lede">{g.summary}</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Developer</dt><dd>{g.developer}</dd></div>
+      <div><dt>Genre</dt><dd>{g.genre}</dd></div>
+      <div><dt>Platforms</dt><dd>{g.platforms.join(', ')}</dd></div>
+      {g.wikipedia && <div><dt>Reference</dt><dd><a href={g.wikipedia} target="_blank" rel="noopener noreferrer">Wikipedia</a></dd></div>}
+    </dl>
+  </div></header>
+  <div class="wrap section">
+    <section aria-labelledby="ov-h" class="prose" style="margin-bottom:48px">
+      <h2 id="ov-h">{g.name} overview</h2>
+      {g.overview.map((p) => <p>{p}</p>)}
+      {g.notes && <div class="callout note" role="note"><p><strong>Note:</strong> {g.notes}</p></div>}
+    </section>
+    {mapped.map((s, i) => (
+      <section style="margin-bottom:44px" aria-labelledby={`s-${i}`}>
+        <h2 id={`s-${i}`}>{s.label}</h2>
+        <div class="grid c3">{s.items.map((a) => <ArticleCard article={a} />)}</div>
+      </section>
+    ))}
+    {latest.length > 0 && (
+      <section style="margin-bottom:44px" aria-labelledby="latest-h">
+        <h2 id="latest-h">Latest {g.name} guides</h2>
+        <div class="grid c3">{latest.map((a) => <ArticleCard article={a} />)}</div>
+      </section>
+    )}
+    {mapped.length === 0 && latest.length === 0 && (
+      <div class="empty"><p style="margin:0">We are working on our first {g.name} guides. In the meantime, our <a href="/guides/">general guides</a> apply to most games.</p></div>
+    )}
+    {gear.length > 0 && (
+      <section style="margin-bottom:44px" aria-labelledby="gear-h">
+        <h2 id="gear-h">Gear for {g.name}</h2>
+        <p class="disclosure-note">Affiliate buttons, where shown, may earn us a commission at no extra cost to you. <a href="/affiliate-disclosure/">Disclosure</a>.</p>
+        <div class="products">{gear.map((p) => <ProductCard product={p} />)}</div>
+      </section>
+    )}
+    <Newsletter />
+  </div>
+</BaseLayout>

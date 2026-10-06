@@ -1,0 +1,11 @@
+---
+import { Picture } from 'astro:assets';
+import { imageFor } from '../lib/art';
+interface Props { slug: string; alt: string; eager?: boolean; sizes?: string; widths?: number[]; }
+const { slug, alt, eager = false, sizes = '(min-width: 1040px) 380px, (min-width: 640px) 50vw, 100vw', widths = [360, 560, 800] } = Astro.props;
+const img = imageFor(slug);
+---
+{img && (
+  <Picture src={img.image} alt={alt} formats={['avif', 'webp']} fallbackFormat="jpg" widths={widths} sizes={sizes}
+    loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding={eager ? 'sync' : 'async'} quality={72} />
+)}

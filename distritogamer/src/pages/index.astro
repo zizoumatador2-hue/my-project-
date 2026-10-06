@@ -1,0 +1,153 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Icon from '../components/Icon.astro';
+import Newsletter from '../components/Newsletter.astro';
+import AdSlot from '../components/AdSlot.astro';
+import FAQ from '../components/FAQ.astro';
+import { categories } from '../data/categories';
+import { allArticles } from '../lib/articles';
+import { articleUrl, abs, wordCount } from '../lib/utils';
+import { organizationSchema, websiteSchema, faqSchema } from '../lib/schema';
+import { SITE } from '../config/site';
+
+const articles = await allArticles();
+const games = (await getCollection('games')).filter((g) => g.data.trending);
+const featured = articles.filter((a) => a.data.featured).slice(0, 3);
+const popular = articles.filter((a) => a.data.popular).sort((a, b) => a.data.popular! - b.data.popular!).slice(0, 6);
+const latest = articles.slice(0, 6);
+const perf = articles.filter((a) => a.data.category === 'gaming-performance' || a.data.category === 'troubleshooting').slice(0, 3);
+const gear = articles.filter((a) => a.data.category === 'gaming-gear').slice(0, 3);
+const pillar = (await getEntry('pillar', 'gaming-tips'))!;
+const { Content, headings } = await render(pillar);
+const toc = headings.filter((h) => h.depth === 2);
+const pillarWords = wordCount(pillar.body || '');
+const faq = [
+  { q: 'What are the best gaming tips for beginners?', a: 'Learn one game at a time, keep one sensitivity and control layout long enough to build muscle memory, practice in short focused sessions, and review your mistakes instead of only counting wins.' },
+  { q: 'How do I get better at gaming?', a: 'Choose one skill to improve at a time, practice it deliberately for short sessions, review recordings of your play to find repeated mistakes, and fix your setup so hardware is never the limiting factor.' },
+  { q: 'What are the best settings for FPS games?', a: 'Prioritize a stable high frame rate and visual clarity: lower shadows and effects, keep resolution sharp, turn off motion blur, use a low-latency mode, and pick one sensitivity you can keep for months.' },
+];
+const schema = [organizationSchema(), websiteSchema(), faqSchema(faq)];
+---
+<BaseLayout
+  title="Gaming Tips, Guides and Settings | DistritoGamer"
+  rawTitle
+  description="Practical gaming tips, game guides, best settings, FPS and input lag fixes, and gear advice to help you play better and game smarter."
+  path="/"
+  schema={schema}
+  keywords={['gaming tips', 'gaming guides', 'game tips and tricks', 'best gaming settings', 'how to get better at gaming', 'increase FPS', 'reduce input lag']}
+>
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-bg" aria-hidden="true"><div class="hero-grid-lines"></div></div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Gaming tips, guides &amp; settings</p>
+        <h1 id="hero-h">Play Better. Know More. <span class="shine">Game Smarter.</span></h1>
+        <p class="lede">Practical gaming tips, detailed guides, strategies, settings, and recommendations to help you get more from every game.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/game-guides/">Explore Game Guides</a>
+          <a class="btn btn-ghost" href="/gaming-tips/">Get Gaming Tips</a>
+          <a class="btn btn-ghost" href="/game-settings/">Find the Best Settings</a>
+        </div>
+        <p class="fine" style="margin-top:18px">Independent and ad-light. <a href="/editorial-policy/">How we write our guides</a></p>
+      </div>
+      <aside class="hero-panel" aria-label="Start here">
+        <h2>Start here</h2>
+        <ul>
+          <li><a href="/gaming-tips/how-to-improve-aim-in-fps-games/">Improve your aim <span>FPS skills</span></a></li>
+          <li><a href="/gaming-performance/how-to-increase-fps-on-pc/">Increase FPS on PC <span>Performance</span></a></li>
+          <li><a href="/gaming-performance/how-to-reduce-input-lag-on-pc/">Reduce input lag <span>Responsiveness</span></a></li>
+          <li><a href="/beginner-guides/gaming-tips-for-beginners/">Tips for beginners <span>New players</span></a></li>
+          <li><a href="/gaming-gear/">Explore Gaming Gear <span>Buying guides</span></a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cats-h">
+    <div class="wrap">
+      <div class="section-head"><div><h2 id="cats-h">Browse by topic</h2><p>Everything is organized around what you are trying to do.</p></div><a class="more" href="/guides/">See all guides</a></div>
+      <div class="grid c4">
+        {categories.filter((c) => c.indexable).map((c) => (
+          <a class="cat-tile reveal" href={`/${c.slug}/`}><Icon name={c.icon} /><strong>{c.name}</strong><span>{c.short}</span></a>
+        ))}
+        <a class="cat-tile reveal" href="/games/"><Icon name="gamepad" /><strong>Games</strong><span>Game profiles</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" aria-labelledby="feat-h">
+    <div class="wrap">
+      <div class="section-head"><div><h2 id="feat-h">Featured gaming guides</h2><p>Our most complete guides on the skills and settings that make the biggest difference.</p></div></div>
+      <div class="grid c3">{featured.map((a) => <ArticleCard article={a} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="latest-h">
+    <div class="wrap">
+      <div class="section-head"><div><h2 id="latest-h">Latest gaming tips and articles</h2><p>Recently published guides and tips.</p></div><a class="more" href="/guides/">All articles</a></div>
+      <div class="grid c3">{latest.map((a) => <ArticleCard article={a} />)}</div>
+    </div>
+  </section>
+
+  <section class="section alt" aria-labelledby="pop-h">
+    <div class="wrap" style="display:grid;gap:40px">
+      <div>
+        <div class="section-head"><div><h2 id="pop-h">Popular guides</h2></div></div>
+        <ol class="panel" style="list-style:none;display:grid;gap:4px;padding:10px 20px">
+          {popular.map((a, i) => (
+            <li style="display:flex;gap:14px;align-items:center;min-height:52px;border-bottom:1px solid var(--line)"><span style="font:700 1.3rem var(--font-display);color:var(--accent);min-width:1.6em">{i + 1}</span><a href={articleUrl(a)} style="color:var(--text);text-decoration:none;font-weight:600">{a.data.title}</a></li>
+          ))}
+        </ol>
+      </div>
+      <div>
+        <div class="section-head"><div><h2 id="trend-h">Trending games</h2><p>Game profiles with guides, settings and troubleshooting in one place.</p></div><a class="more" href="/games/">All games</a></div>
+        <div class="grid c4">
+          {games.map((g) => <a class="game-card reveal" data-spot href={`/games/${g.id}/`}><strong>{g.data.name}</strong><span>{g.data.genre}</span></a>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="perf-h">
+    <div class="wrap">
+      <div class="section-head"><div><h2 id="perf-h">Gaming performance tips</h2><p>Smoother frame rates, faster response and fewer crashes from the hardware you already own.</p></div><a class="more" href="/gaming-performance/">More performance guides</a></div>
+      <div class="grid c3">{perf.map((a) => <ArticleCard article={a} />)}</div>
+    </div>
+  </section>
+
+  <section class="section alt" aria-labelledby="gear-h">
+    <div class="wrap">
+      <div class="section-head"><div><h2 id="gear-h">Recommended gaming gear guides</h2><p>Buying guides that explain which specifications matter. Some pages may contain affiliate links; <a href="/affiliate-disclosure/">here is how we handle them</a>.</p></div><a class="more" href="/gaming-gear/">Explore Gaming Gear</a></div>
+      <div class="grid c3">{gear.map((a) => <ArticleCard article={a} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" id="pillar" aria-labelledby="pillar-h">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">The pillar guide</p><h2 id="pillar-h">The complete guide to gaming tips: how to play better in any game</h2><p>About {Math.round(pillarWords / 220)} minutes of reading. Use the contents to jump to what you need, and follow the links to the in-depth guides.</p></div></div>
+      <div class="pillar">
+        <nav class="pillar-toc" aria-label="Guide contents">
+          <div class="sticky">
+            <details>
+              <summary>Contents</summary>
+              <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+            </details>
+          </div>
+        </nav>
+        <div class="prose"><Content /></div>
+      </div>
+      <AdSlot slot="home-pillar" />
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap" style="max-width:860px">
+      <FAQ items={faq} heading="Quick answers" id="faq-home" />
+      <p>More answers on our <a href="/faq/">full gaming FAQ</a>.</p>
+    </div>
+  </section>
+
+  <div class="wrap section"><Newsletter /></div>
+</BaseLayout>

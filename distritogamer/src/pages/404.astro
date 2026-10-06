@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { allArticles } from '../lib/articles';
+import ArticleCard from '../components/ArticleCard.astro';
+const popular = (await allArticles()).filter((a) => a.data.popular).sort((a, b) => a.data.popular! - b.data.popular!).slice(0, 3);
+---
+<BaseLayout title="Page Not Found" description="That page could not be found. Search the site or browse our most useful gaming guides." path="/404/" noindex>
+  <div class="wrap section">
+    <p class="eyebrow">Error 404</p>
+    <h1>This page isn't here</h1>
+    <p class="lede">The link may be old or mistyped. Try a search, or start with one of these guides.</p>
+    <div class="cta-row"><a class="btn btn-primary" href="/search/">Search the site</a><a class="btn btn-ghost" href="/guides/">Browse all guides</a></div>
+    <h2 style="margin-top:48px">Popular guides</h2>
+    <div class="grid c3">{popular.map((a) => <ArticleCard article={a} />)}</div>
+  </div>
+</BaseLayout>

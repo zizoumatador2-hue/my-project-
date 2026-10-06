@@ -1,0 +1,31 @@
+name: DistritoGamer site
+on:
+  pull_request:
+    paths: ['distritogamer/**', '.github/workflows/distritogamer.yml']
+  push:
+    branches: [main]
+    paths: ['distritogamer/**', '.github/workflows/distritogamer.yml']
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy to Cloudflare after a green build'
+        type: boolean
+        default: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults: { run: { working-directory: distritogamer } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: distritogamer/package-lock.json }
+      - run: npm ci
+      # `npm run build` = astro build + scripts/check-site.mjs (links, metadata, headings, a11y basics, sitemap, robots)
+      - run: npm run build
+      - if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy }}
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: 'false'

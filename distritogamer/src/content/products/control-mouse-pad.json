@@ -1,0 +1,16 @@
+{
+  "name": "Large control-style mouse pad",
+  "kind": "Mouse pad",
+  "summary": "Your mouse surface affects how predictable stopping and starting feels. A large, consistent cloth pad is a low-cost upgrade that also gives you room for low sensitivity settings.",
+  "lookFor": [
+    "Surface texture: control surfaces stop more easily, speed surfaces glide further",
+    "Size large enough to swipe at your chosen sensitivity without running out of room",
+    "A non-slip rubber base and stitched edges that will not fray",
+    "A flat surface that is the same across the whole pad"
+  ],
+  "suitableFor": "Anyone using a lower sensitivity, or anyone whose current surface is a desk, a worn pad or something uneven.",
+  "pros": ["Inexpensive compared with most other gear", "Improves consistency of stops", "Easy to replace when worn"],
+  "cons": ["Surface preference is subjective", "Large pads need desk space", "Cloth pads need occasional washing"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

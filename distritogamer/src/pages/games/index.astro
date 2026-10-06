@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const games = (await getCollection('games')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Games', href: '/games/' }];
+---
+<BaseLayout title="Game Profiles: Guides, Settings and Tips" description="Game profile pages that collect beginner guides, advanced tips, settings and troubleshooting for popular games in one place." path="/games/" crumbs={crumbs}>
+  <header class="page-head"><div class="wrap">
+    <h1>Game profiles</h1>
+    <p class="lede">Each profile collects the guides, settings and troubleshooting help we have for one game. We add games only when we can write something genuinely useful about them.</p>
+  </div></header>
+  <div class="wrap section">
+    <div class="grid c3">
+      {games.map((g) => (
+        <a class="game-card reveal" data-spot href={`/games/${g.id}/`}>
+          <strong>{g.data.name}</strong>
+          <span>{g.data.genre} &middot; {g.data.platforms.join(', ')}</span>
+          <span>{g.data.summary}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

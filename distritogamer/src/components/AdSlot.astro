@@ -1,0 +1,10 @@
+---
+import { SITE } from '../config/site';
+interface Props { slot?: string; }
+const { slot } = Astro.props;
+---
+{SITE.adsenseClient && slot && (
+  <aside class="ad-slot" aria-label="Advertisement" data-ad-slot={slot}>
+    <small>Advertisement</small>
+  </aside>
+)}

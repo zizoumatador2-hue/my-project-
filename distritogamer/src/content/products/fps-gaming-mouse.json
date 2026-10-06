@@ -1,0 +1,17 @@
+{
+  "name": "Lightweight FPS gaming mouse",
+  "kind": "Mouse",
+  "summary": "A lightweight, wired or low-latency wireless mouse with a modern optical sensor is the most common upgrade for players who want more consistent aim. The goal is comfort and control, not the highest number on the box.",
+  "lookFor": [
+    "Weight: lighter shapes are easier to flick and stop, but heavier ones can feel steadier for some grips",
+    "Shape and size matched to your hand length and grip style (palm, claw or fingertip)",
+    "Polling rate of at least 1000 Hz and a sensor that does not smooth or accelerate movement",
+    "Reliable, tactile main buttons and a scroll wheel with clear steps",
+    "Cable flexibility if wired, or a trusted low-latency wireless dongle if wireless"
+  ],
+  "suitableFor": "Players of tactical and arena shooters who practice aim regularly and want a mouse that disappears in the hand.",
+  "pros": ["Can make small adjustments easier and less tiring", "Good ones last for years", "Transfers across every game you play"],
+  "cons": ["Fit is personal, so a popular shape can still feel wrong to you", "Does not replace practice", "Wireless models cost more and need charging"],
+  "affiliateUrl": "AFFILIATE_LINK_PLACEHOLDER",
+  "cta": "Check price"
+}

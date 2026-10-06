@@ -1,0 +1,163 @@
+---
+import { render, getEntry, getEntries, type CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import Cover from '../components/Cover.astro';
+import FAQ from '../components/FAQ.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { SITE } from '../config/site';
+import { categoryBySlug } from '../data/categories';
+import { abs, articleUrl, fmtDate, iso, readingMinutes, wordCount } from '../lib/utils';
+import { modified, relatedArticles } from '../lib/articles';
+import { imageFor } from '../lib/art';
+import { faqSchema, howToSchema } from '../lib/schema';
+import credits from '../data/credits.json';
+
+interface Props { article: CollectionEntry<'articles'>; }
+const { article } = Astro.props;
+const d = article.data;
+const cat = categoryBySlug(d.category);
+const { Content, headings } = await render(article);
+const author = await getEntry('authors', d.author);
+const url = articleUrl(article);
+const related = await relatedArticles(article, 4);
+const products = d.products.length ? await getEntries(d.products.map((id) => ({ collection: 'products' as const, id }))) : [];
+const game = d.game ? await getEntry('games', d.game) : undefined;
+const cover = imageFor(article.id);
+const og = cover ? await getImage({ src: cover.image, width: 1200, height: 630, format: 'jpg', fit: 'cover' } as any) : undefined;
+const credit = (credits as Record<string, { photographer: string; photographerUrl: string; pageUrl: string }>)[article.id];
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const words = wordCount(article.body || '');
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: cat.name, href: `/${cat.slug}/` },
+  { name: d.title, href: url },
+];
+const schema: unknown[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${abs(url)}#article`,
+    mainEntityOfPage: abs(url),
+    headline: d.title,
+    description: d.description,
+    image: og ? [abs(og.src)] : [abs('/og-default.jpg')],
+    datePublished: d.published.toISOString(),
+    dateModified: modified(article).toISOString(),
+    author: { '@type': author?.data.type ?? 'Organization', name: author?.data.name ?? SITE.name, url: abs(`/authors/${d.author}/`) },
+    publisher: { '@id': `${SITE.url}/#organization` },
+    articleSection: cat.name,
+    keywords: d.keywords.join(', '),
+    wordCount: words,
+    inLanguage: 'en-US',
+  },
+];
+if (d.faq.length) schema.push(faqSchema(d.faq));
+if (d.howTo) schema.push(howToSchema(d.howTo, abs(url)));
+---
+<BaseLayout
+  title={d.seoTitle ?? d.title}
+  description={d.description}
+  path={url}
+  type="article"
+  image={og ? abs(og.src) : undefined}
+  imageAlt={d.imageAlt}
+  keywords={d.keywords}
+  schema={schema}
+  crumbs={crumbs}
+  published={d.published}
+  modified={modified(article)}
+  section={cat.name}
+>
+  <div class="wrap article-grid">
+    <article aria-labelledby="article-title">
+      <header class="article-head">
+        <a class="pill" href={`/${cat.slug}/`}>{cat.name}</a>
+        <h1 id="article-title">{d.title}</h1>
+        <div class="byline">
+          <span>By <strong><a href={`/authors/${d.author}/`}>{author?.data.name}</a></strong></span>
+          <span>Published <time datetime={iso(d.published)}>{fmtDate(d.published)}</time></span>
+          <span>Updated <time datetime={iso(modified(article))}>{fmtDate(modified(article))}</time></span>
+          <span>{readingMinutes(article.body)} min read</span>
+        </div>
+        {d.sponsor && (
+          <p class="disclosure-note" role="note"><strong>Sponsored content.</strong> This article was produced in partnership with {d.sponsor}. <a href="/affiliate-disclosure/">How we handle sponsorships</a>.</p>
+        )}
+        {d.hasAffiliate && (
+          <p class="disclosure-note">This guide includes buying advice. If you buy through links in it, we may earn a commission at no extra cost to you. This never changes what we recommend. <a href="/affiliate-disclosure/">Details</a>.</p>
+        )}
+      </header>
+      <figure class="cover">
+        <Cover slug={article.id} alt={d.imageAlt} eager sizes="(min-width: 1040px) 720px, 100vw" widths={[480, 720, 1080]} />
+        {credit && <figcaption class="credit">Photo by <a href={credit.photographerUrl} target="_blank" rel="noopener noreferrer">{credit.photographer}</a> on <a href={credit.pageUrl} target="_blank" rel="noopener noreferrer">Pexels</a></figcaption>}
+      </figure>
+      <section class="quick" aria-labelledby="quick-h">
+        <h2 id="quick-h">Quick answer</h2>
+        <p>{d.quickAnswer}</p>
+      </section>
+      {toc.length > 2 && (
+        <nav class="toc" aria-label="Table of contents">
+          <h2>In this guide</h2>
+          <ol>
+            {toc.filter((h) => h.depth === 2).map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+          </ol>
+        </nav>
+      )}
+      <div class="prose"><Content /></div>
+
+      {products.length > 0 && (
+        <section aria-labelledby="gear-h">
+          <h2 id="gear-h">{d.productsHeading ?? 'Gear worth considering'}</h2>
+          <p class="disclosure-note">We have not hands-on tested these product types for this guide. The details below describe what to check and who each suits. If a button is shown, it is an affiliate link. <a href="/affiliate-disclosure/">Read our disclosure</a>.</p>
+          <div class="products">{products.map((p) => <ProductCard product={p} />)}</div>
+        </section>
+      )}
+
+      <AdSlot slot="article-end" />
+      <FAQ items={d.faq} />
+
+      <aside class="learn-more" aria-label="Pillar guide">
+        <p>Want the full picture? Read our complete guide to <a href="/#pillar">gaming tips for every skill level</a>, where this topic is covered alongside every related guide.</p>
+      </aside>
+
+      {d.sources.length > 0 && (
+        <section class="sources" aria-labelledby="src-h">
+          <h2 id="src-h">Sources and further reading</h2>
+          <ul>{d.sources.map((s) => <li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a></li>)}</ul>
+        </section>
+      )}
+      {author && <AuthorBox author={author} />}
+    </article>
+
+    <aside class="side" aria-label="Related content">
+      <div class="side-sticky" style="display:grid;gap:20px">
+        {game && (
+          <section class="panel" aria-labelledby="game-h">
+            <h2 id="game-h">Game profile</h2>
+            <p style="margin:0 0 8px"><a href={`/games/${game.id}/`}>{game.data.name}</a>: overview, guides and settings</p>
+          </section>
+        )}
+        <section class="panel" aria-labelledby="rel-h">
+          <h2 id="rel-h">Related guides</h2>
+          <ul>{related.map((r) => <li><a href={articleUrl(r)}>{r.data.title}</a></li>)}</ul>
+        </section>
+        <section class="panel" aria-labelledby="cat-h">
+          <h2 id="cat-h">More in {cat.name}</h2>
+          <p style="margin:0"><a href={`/${cat.slug}/`}>Browse all {cat.name.toLowerCase()} guides</a></p>
+        </section>
+      </div>
+    </aside>
+  </div>
+  <div class="wrap" style="padding-bottom:20px">
+    <section aria-labelledby="more-h" style="margin-bottom:40px">
+      <h2 id="more-h">Keep reading</h2>
+      <div class="grid c4">{related.map((r) => <ArticleCard article={r} />)}</div>
+    </section>
+    <Newsletter />
+  </div>
+</BaseLayout>

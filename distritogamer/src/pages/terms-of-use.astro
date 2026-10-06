@@ -1,0 +1,31 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { SITE } from '../config/site';
+---
+<PageLayout title="Terms of Use and Conditions" description="The terms for using DistritoGamer: informational content, system-change risks, intellectual property, affiliate links, acceptable use and limits of liability." path="/terms-of-use/" updated="2026-10-06"
+  intro="The ground rules for using this website.">
+  <h2>Acceptance</h2>
+  <p>By accessing {SITE.domain} you agree to these terms. If you do not agree, please do not use the site.</p>
+  <h2>Informational content only</h2>
+  <p>Everything on {SITE.name} is general information and opinion about video games and gaming hardware. We try hard to be accurate, but games are patched, software changes and hardware varies. Guides are provided &ldquo;as is&rdquo; without warranties of any kind.</p>
+  <h2>Changes to your system are at your own risk</h2>
+  <p>Some guides explain how to change settings in games, Windows, drivers, BIOS or hardware. Follow them carefully, note your original settings first, and stop if something behaves unexpectedly. We are not responsible for data loss, instability, voided warranties, account actions by game publishers, or other consequences of changes you make. Never use techniques that violate a game&rsquo;s terms of service or anti-cheat rules; we do not publish cheats.</p>
+  <h2>Affiliate links, advertising and third parties</h2>
+  <p>We may earn commissions from affiliate links and display advertising (see our <a href="/affiliate-disclosure/">affiliate disclosure</a>). Transactions with merchants are between you and the merchant. We do not control third-party sites, prices, availability or policies and are not responsible for them.</p>
+  <h2>Intellectual property</h2>
+  <p>The text, layout, illustrations and original graphics on this site belong to {SITE.name} or its licensors and are protected by copyright. You may quote short excerpts with a clear link back to the source page. You may not republish or scrape substantial portions of the site without written permission. Game titles, logos and product names are trademarks of their respective owners; their use here is for identification only and does not imply affiliation or endorsement.</p>
+  <h2>Acceptable use</h2>
+  <ul>
+    <li>Do not attempt to disrupt, overload or gain unauthorized access to the site.</li>
+    <li>Do not use the site to send spam or unlawful content, including through our contact form.</li>
+    <li>Do not use automated tools to scrape the site in a way that burdens our infrastructure.</li>
+  </ul>
+  <h2>Submissions</h2>
+  <p>If you send us suggestions or corrections, you grant us permission to use them to improve the site without obligation to you. Please do not send confidential information.</p>
+  <h2>Limitation of liability</h2>
+  <p>To the fullest extent permitted by applicable law, {SITE.name} and its contributors are not liable for any indirect, incidental, special or consequential damages, or for any loss arising from your use of, or inability to use, the site or its content.</p>
+  <h2>Changes and termination</h2>
+  <p>We may update these terms and the site at any time. Continued use after changes means you accept the updated terms. We may restrict access for anyone who violates these terms.</p>
+  <h2>Contact</h2>
+  <p>Questions about these terms? Use the <a href="/contact/">contact page</a> or email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</PageLayout>

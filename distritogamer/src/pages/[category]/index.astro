@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import Icon from '../../components/Icon.astro';
+import { categories, categoryBySlug } from '../../data/categories';
+import { allArticles } from '../../lib/articles';
+import { abs } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return categories.map((c) => ({ params: { category: c.slug } }));
+}
+const cat = categoryBySlug(Astro.params.category!);
+const items = (await allArticles()).filter((a) => a.data.category === cat.slug);
+const latest = (await allArticles()).slice(0, 3);
+const crumbs = [{ name: 'Home', href: '/' }, { name: cat.name, href: `/${cat.slug}/` }];
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: cat.title, description: cat.description,
+  url: abs(`/${cat.slug}/`), isPartOf: { '@id': `${abs('/')}#website` },
+}];
+---
+<BaseLayout title={cat.title} description={cat.description} path={`/${cat.slug}/`} crumbs={crumbs} schema={schema} noindex={!cat.indexable}>
+  <header class="page-head">
+    <div class="wrap">
+      <h1>{cat.name}</h1>
+      <p class="lede">{cat.intro}</p>
+    </div>
+  </header>
+  <div class="wrap section">
+    {items.length > 0 ? (
+      <>
+        <h2 class="sr">{cat.name} guides</h2>
+        <div class="grid c3">{items.map((a) => <ArticleCard article={a} />)}</div>
+      </>
+    ) : (
+      <div class="empty">
+        <p>We only publish gaming news when it changes how you play, what you buy or how a game should be configured. Nothing has met that bar yet, so this section is intentionally empty.</p>
+        <p style="margin:0">In the meantime, <a href="/guides/">browse every guide</a> or read our <a href="/#pillar">complete guide to gaming tips</a>.</p>
+      </div>
+    )}
+
+    <section style="margin-top:56px" aria-labelledby="other-h">
+      <h2 id="other-h">Explore other topics</h2>
+      <div class="grid c4">
+        {categories.filter((c) => c.indexable && c.slug !== cat.slug).slice(0, 8).map((c) => (
+          <a class="cat-tile" href={`/${c.slug}/`}><Icon name={c.icon} /><strong>{c.name}</strong><span>{c.short}</span></a>
+        ))}
+      </div>
+    </section>
+
+    {items.length === 0 && (
+      <section style="margin-top:56px" aria-labelledby="latest-h">
+        <h2 id="latest-h">Latest guides</h2>
+        <div class="grid c3">{latest.map((a) => <ArticleCard article={a} />)}</div>
+      </section>
+    )}
+    <div style="margin-top:56px"><Newsletter /></div>
+  </div>
+</BaseLayout>

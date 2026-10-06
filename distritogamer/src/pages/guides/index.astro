@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Icon from '../../components/Icon.astro';
+import { categories } from '../../data/categories';
+import { allArticles } from '../../lib/articles';
+const articles = await allArticles();
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'All guides', href: '/guides/' }];
+---
+<BaseLayout title="All Gaming Guides, Tips and Settings" description="Browse every DistritoGamer guide by topic: gaming tips, game guides, settings, performance, gear, comparisons and troubleshooting." path="/guides/" crumbs={crumbs}>
+  <header class="page-head"><div class="wrap">
+    <h1>All gaming guides</h1>
+    <p class="lede">Every guide on the site, grouped by topic. New to a subject? Start with the first guide in each group.</p>
+  </div></header>
+  <div class="wrap section">
+    {categories.filter((c) => c.indexable).map((c) => {
+      const items = articles.filter((a) => a.data.category === c.slug);
+      return items.length ? (
+        <section style="margin-bottom:52px" aria-labelledby={`g-${c.slug}`}>
+          <div class="section-head">
+            <div><h2 id={`g-${c.slug}`}><Icon name={c.icon} />&nbsp;{c.name}</h2><p>{c.intro}</p></div>
+            <a class="more" href={`/${c.slug}/`}>View {c.name}</a>
+          </div>
+          <div class="grid c3">{items.map((a) => <ArticleCard article={a} />)}</div>
+        </section>
+      ) : null;
+    })}
+  </div>
+</BaseLayout>

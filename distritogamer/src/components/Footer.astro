@@ -1,0 +1,58 @@
+---
+import Logo from './Logo.astro';
+import { categories } from '../data/categories';
+import { SITE } from '../config/site';
+const year = new Date().getFullYear();
+const social = [
+  SITE.social.x && { label: 'X', href: SITE.social.x },
+  SITE.social.youtube && { label: 'YouTube', href: SITE.social.youtube },
+  SITE.social.reddit && { label: 'Reddit', href: SITE.social.reddit },
+].filter(Boolean) as { label: string; href: string }[];
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/" aria-label={`${SITE.name} home`}><Logo /><span>Distrito<b>Gamer</b></span></a>
+        <p style="margin-top:14px;max-width:34ch">{SITE.tagline} Independent gaming tips, guides and settings explained clearly.</p>
+        {social.length > 0 && (
+          <ul aria-label="Social profiles" style="margin-top:8px">
+            {social.map((s) => <li><a href={s.href} target="_blank" rel="noopener noreferrer me">{s.label}</a></li>)}
+          </ul>
+        )}
+      </div>
+      <nav aria-label="Topics">
+        <h2>Topics</h2>
+        <ul>
+          {categories.filter((c) => c.indexable).slice(0, 8).map((c) => <li><a href={`/${c.slug}/`}>{c.name}</a></li>)}
+          <li><a href="/games/">Game profiles</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="More topics">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="/guides/">All guides</a></li>
+          <li><a href="/search/">Search</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/rss.xml">RSS feed</a></li>
+          <li><a href="/gaming-news/">Gaming news</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="About and legal">
+        <h2>About</h2>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/editorial-policy/">Editorial policy</a></li>
+          <li><a href="/affiliate-disclosure/">Affiliate disclosure</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy-policy/">Privacy policy</a></li>
+          <li><a href="/terms-of-use/">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p style="margin:0">DistritoGamer may earn a commission when you buy through links on this site, at no extra cost to you. Commissions never decide what we recommend. <a href="/affiliate-disclosure/">Read our disclosure</a>.</p>
+      <p style="margin:0">&copy; {year} {SITE.name} ({SITE.domain}). Game and product names are trademarks of their respective owners; we are not affiliated with or endorsed by them.</p>
+    </div>
+  </div>
+</footer>
