@@ -12,7 +12,7 @@ export const SITE = {
   // Bump when /global.css changes so the long-lived cache is busted.
   assetVersion: '3',
   foundingYear: 2026,
-  contactEmail: env.PUBLIC_CONTACT_EMAIL || 'contact@distritogamer.com',
+  contactEmail: env.PUBLIC_CONTACT_EMAIL || 'info@christopherkunz.com',
   contactEndpoint: env.PUBLIC_CONTACT_ENDPOINT || '',
   newsletterEndpoint: env.PUBLIC_NEWSLETTER_ENDPOINT || '',
   adsenseClient: env.PUBLIC_ADSENSE_CLIENT || '',

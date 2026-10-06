@@ -56,7 +56,7 @@ Add real models only with facts you can verify, and do not state a test unless i
 
 Copy `.env.example` to `.env`. Everything is optional; nothing third-party loads unless configured **and** the visitor accepts the cookie notice.
 
-- `PUBLIC_SITE_URL` canonical/sitemap origin · `PUBLIC_CONTACT_EMAIL` shown in Contact/Privacy/Terms (defaults to `contact@distritogamer.com`, make sure that mailbox exists)
+- `PUBLIC_SITE_URL` canonical/sitemap origin · `PUBLIC_CONTACT_EMAIL` shown in Contact/Privacy/Terms (defaults to `info@christopherkunz.com`)
 - `PUBLIC_CONTACT_ENDPOINT` / `PUBLIC_NEWSLETTER_ENDPOINT` form-handling URLs (Formspree, Buttondown, etc.). Without them the contact form and newsletter button open the visitor's email app (`mailto:`)
 - `PUBLIC_ADSENSE_CLIENT` (`ca-pub-…`) and per-article ad slots via `<AdSlot slot="…">` · `PUBLIC_GA4_ID`
 - `PUBLIC_GSC_VERIFICATION`, `PUBLIC_BING_VERIFICATION`, `PUBLIC_SOCIAL_*` (real profiles only)
@@ -106,7 +106,7 @@ and enable GA4/AdSense only when ready.
 
 ## Before applying to AdSense — things only you can supply
 
-1. A working mailbox for `PUBLIC_CONTACT_EMAIL` and, ideally, the legal name/address of the site operator in the Privacy Policy and Terms
+1. Confirm `info@christopherkunz.com` is the right public address (change it with `PUBLIC_CONTACT_EMAIL`) and, ideally, add the legal name/address of the site operator in the Privacy Policy and Terms
    (we did not invent one). Have the Terms reviewed for your jurisdiction (no governing law is stated).
 2. Real social profiles (if any) via `PUBLIC_SOCIAL_*`.
 3. Real affiliate links, only for products you actually recommend.
