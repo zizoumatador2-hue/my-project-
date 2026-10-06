@@ -16,8 +16,8 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
       WRANGLER_SEND_METRICS: 'false'
-      # Set CUSTOM_DOMAIN (repo variable) to e.g. bamamotors.com once the domain is attached to the Worker.
-      # Until then the site runs on workers.dev and robots.txt blocks indexing (no duplicate of the real domain).
+      # Custom domain to attach (defaults to bamamotors.com; override with the BAMAMOTORS_DOMAIN repo variable).
+      # If the zone is not on the account the site stays on workers.dev with indexing blocked.
       CUSTOM_DOMAIN: ${{ vars.BAMAMOTORS_DOMAIN }}
     steps:
       - uses: actions/checkout@v4
@@ -36,16 +36,35 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
-      - name: Resolve public URL
+      - name: Attach custom domain (falls back to workers.dev if the zone is not on this account)
         id: url
         run: |
-          if [ -n "$CUSTOM_DOMAIN" ]; then HOST="$CUSTOM_DOMAIN"; ENVIRONMENT=production; else
-            SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
-            if [ -z "$SUB" ] || [ "$SUB" = "null" ]; then echo "::error::No workers.dev subdomain on this account"; exit 1; fi
-            HOST="bamamotors.$SUB.workers.dev"; ENVIRONMENT=preview
+          API=https://api.cloudflare.com/client/v4
+          AUTH="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          DOMAIN="${CUSTOM_DOMAIN:-bamamotors.com}"
+          SUB=$(curl -fsS -H "$AUTH" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain // empty' || true)
+          FALLBACK="bamamotors.$SUB.workers.dev"
+          echo "fallback=$FALLBACK" >> "$GITHUB_OUTPUT"
+          echo "zones visible to the token: $(curl -sS -H "$AUTH" "$API/zones?per_page=50" | jq -r '[.result[]?.name] | join(", ")')"
+          ZONE=$(curl -sS -H "$AUTH" "$API/zones?name=$DOMAIN" | jq -c '.result[0] // empty')
+          HOST="$FALLBACK"; ENVIRONMENT=preview
+          if [ -z "$ZONE" ]; then
+            echo "::warning::Zone $DOMAIN is not on this Cloudflare account (or the token cannot read zones). Add the domain to Cloudflare first; staying on $FALLBACK."
+          else
+            ZONE_ID=$(echo "$ZONE" | jq -r .id); ZSTATUS=$(echo "$ZONE" | jq -r .status)
+            echo "zone $DOMAIN found (status: $ZSTATUS)"
+            OK=1
+            for h in "$DOMAIN" "www.$DOMAIN"; do
+              R=$(curl -sS -X PUT -H "$AUTH" -H "Content-Type: application/json" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" \
+                -d "{\"hostname\":\"$h\",\"service\":\"bamamotors\",\"environment\":\"production\",\"zone_id\":\"$ZONE_ID\"}")
+              if [ "$(echo "$R" | jq -r .success)" = "true" ]; then echo "attached $h"; else
+                echo "::warning::Could not attach $h: $(echo "$R" | jq -c '.errors')"; [ "$h" = "$DOMAIN" ] && OK=0; fi
+            done
+            if [ "$OK" = 1 ]; then HOST="$DOMAIN"; ENVIRONMENT=production; fi
           fi
           echo "host=$HOST" >> "$GITHUB_OUTPUT"
           echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
+          echo "Deploying as $HOST ($ENVIRONMENT)"
       - name: Build
         run: SITE_URL="https://${{ steps.url.outputs.host }}" npm run build
       - name: Apply D1 migrations
@@ -74,10 +93,20 @@ jobs:
           rm -f /tmp/s.json
       - name: Smoke test
         run: |
-          sleep 8
           H="https://${{ steps.url.outputs.host }}"
-          for p in / /used-cars /used-cars/birmingham-al /blog /robots.txt /sitemap.xml; do
+          ok=0
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$H/") || true
+            if [ "$code" = "200" ]; then ok=1; break; fi
+            echo "waiting for $H (got $code)"; sleep 10
+          done
+          [ "$ok" = 1 ] || { echo "::error::$H did not come up"; exit 1; }
+          for p in /used-cars /used-cars/birmingham-al /blog /robots.txt /sitemap.xml; do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$H$p"); echo "$p → $code"; [ "$code" = "200" ] || exit 1
           done
+          if [ "${{ steps.url.outputs.environment }}" = "production" ]; then
+            echo "workers.dev → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://${{ steps.url.outputs.fallback }}/")"
+            echo "www → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://www.${{ steps.url.outputs.host }}/" || echo 'not ready yet')"
+          fi
           echo "migrations step: ${{ steps.migrate.outcome }}"
           echo "Live at $H" >> "$GITHUB_STEP_SUMMARY"

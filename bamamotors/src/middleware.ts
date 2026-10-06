@@ -29,7 +29,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const path = url.pathname;
   const isProd = env.ENVIRONMENT === 'production';
 
-  // Canonical host: collapse trailing slashes (except root) to one URL per page.
+  // Canonical host: in production every other hostname (www., workers.dev) 301s to SITE_URL's host.
+  if (isProd && (request.method === 'GET' || request.method === 'HEAD') && env.SITE_URL) {
+    const canonical = new URL(env.SITE_URL);
+    if (url.host !== canonical.host) {
+      return Response.redirect(`${canonical.origin}${path}${url.search}`, 301);
+    }
+  }
+
+  // Collapse trailing slashes (except root) to one URL per page.
   if (path.length > 1 && path.endsWith('/') && request.method === 'GET') {
     return context.redirect(path.replace(/\/+$/, '') + url.search, 301);
   }
