@@ -38,8 +38,12 @@ jobs:
       - run: npm ci
       - name: Fetch licensed Pexels photos (only new ones; needs PEXELS_API_KEY secret)
         env:
-          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || secrets.PEXELS_KEY || secrets.PEXELS || secrets.PEXELS_TOKEN || secrets.PEXELS_API || secrets.PEXEL_API_KEY || secrets.PEXELS_APIKEY || vars.PEXELS_API_KEY || vars.PEXELS_KEY || vars.PEXELS }}
+          # Booleans only — never the value.
+          HAS: "PEXELS_API_KEY=${{ secrets.PEXELS_API_KEY != '' }} PEXELS_KEY=${{ secrets.PEXELS_KEY != '' }} PEXELS=${{ secrets.PEXELS != '' }} PEXELS_TOKEN=${{ secrets.PEXELS_TOKEN != '' }} PEXELS_API=${{ secrets.PEXELS_API != '' }} PEXEL_API_KEY=${{ secrets.PEXEL_API_KEY != '' }} PEXELS_APIKEY=${{ secrets.PEXELS_APIKEY != '' }} var:PEXELS_API_KEY=${{ vars.PEXELS_API_KEY != '' }} var:PEXELS_KEY=${{ vars.PEXELS_KEY != '' }} var:PEXELS=${{ vars.PEXELS != '' }}"
         run: |
+          echo "Pexels key lookup: $HAS"
+          export PEXELS_API_KEY="$(printf '%s' "$PEXELS_API_KEY" | tr -d '[:space:]')"
           node scripts/fetch-pexels.mjs
           if [ -n "$(git status --porcelain public/images src/data/images.json)" ]; then
             git config user.name "bamamotors-bot"; git config user.email "bamamotors-bot@users.noreply.github.com"
