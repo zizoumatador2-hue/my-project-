@@ -1,0 +1,20 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { allImages } from '../lib/images';
+const list = Object.entries(allImages()).sort(([a], [b]) => a.localeCompare(b));
+---
+<ContentLayout title="Photo Credits" h1="Photo credits" path="/photo-credits" description="Credits and licenses for the photos used on BamaMotors.com, from Pexels and Wikimedia Commons.">
+  <div class="prose">
+    <p>Photos used on BamaMotors.com come from <a href="https://www.pexels.com/license/" rel="noopener" target="_blank">Pexels</a> and from <a href="https://commons.wikimedia.org/" rel="noopener" target="_blank">Wikimedia Commons</a> under free licenses (public domain, CC0, CC BY or CC BY-SA). We thank the photographers. Photos may be cropped and resized. Vehicle listing photos are supplied by the dealers that list them.</p>
+    {list.length === 0 ? <p>No stock photos are in use yet.</p> : (
+      <ul>
+        {list.map(([, img]) => (
+          <li>
+            <a href={img.sourceUrl} rel="nofollow noopener" target="_blank">{img.alt}</a> by {img.author}, {img.source}
+            {img.license && <>, {img.licenseUrl ? <a href={img.licenseUrl} rel="license nofollow noopener" target="_blank">{img.license}</a> : img.license}</>}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</ContentLayout>

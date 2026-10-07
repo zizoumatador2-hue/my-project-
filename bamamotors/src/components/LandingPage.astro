@@ -1,4 +1,5 @@
 ---
+import PhotoCredit from './PhotoCredit.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from './Breadcrumbs.astro';
 import Results from './Results.astro';
@@ -72,7 +73,7 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
     {cover && filters.page === 1 && (
       <figure class="landing-cover">
         <Photo img={cover} sizes="(min-width: 1240px) 1240px, 100vw" eager alt={L.city && cover.src.includes(L.city.slug) ? `${L.city.name}, Alabama` : cover.alt} />
-        <figcaption class="photo-credit">Photo: <a href={cover.pexelsUrl} rel="nofollow noopener" target="_blank">{cover.photographer} / Pexels</a></figcaption>
+        <PhotoCredit img={cover} />
       </figure>
     )}
     {snippet && filters.page === 1 && <p class="snippet">{snippet}</p>}

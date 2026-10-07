@@ -17,7 +17,7 @@ const manifestPath = join(root, 'src/data/images.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 const outDir = join(root, 'public/images');
 mkdirSync(outDir, { recursive: true });
-const used = new Set(Object.values(manifest).map((m) => m.pexelsUrl));
+const used = new Set(Object.values(manifest).map((m) => m.sourceUrl));
 const WIDTHS = [640, 1024, 1600];
 
 async function search(q, orientation = 'landscape') {
@@ -50,9 +50,9 @@ for (const [key, req] of Object.entries(requests)) {
       srcset: WIDTHS.map((w) => `/images/${key}-${w}.webp ${w}w`).join(', '),
       width: w0, height: h0,
       alt: (pick.alt || req.query).slice(0, 140),
-      photographer: pick.photographer,
-      photographerUrl: pick.photographer_url,
-      pexelsUrl: pick.url,
+      author: pick.photographer,
+      sourceUrl: pick.url,
+      source: 'Pexels',
     };
     used.add(pick.url);
     added++;

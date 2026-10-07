@@ -1,45 +1,203 @@
 {
-  "_comment": "Photo requests for scripts/fetch-pexels.mjs. 'require' = words that must appear in the Pexels description/URL (keeps city photos honest). Missing cities fall back to city-default.",
-  "hero": { "query": "used car dealership lot", "orientation": "landscape" },
-  "city-default": { "query": "southern small town main street cars", "orientation": "landscape" },
-  "city-birmingham-al": { "query": "Birmingham Alabama", "require": ["birmingham"] },
-  "city-huntsville-al": { "query": "Huntsville Alabama", "require": ["huntsville"] },
-  "city-mobile-al": { "query": "Mobile Alabama", "require": ["mobile", "alabama"] },
-  "city-montgomery-al": { "query": "Montgomery Alabama", "require": ["montgomery"] },
-  "city-tuscaloosa-al": { "query": "Tuscaloosa Alabama", "require": ["tuscaloosa"] },
-  "city-hoover-al": { "query": "Hoover Alabama", "require": ["hoover", "alabama"] },
-  "city-auburn-al": { "query": "Auburn Alabama", "require": ["auburn", "alabama"] },
-  "city-dothan-al": { "query": "Dothan Alabama", "require": ["dothan"] },
-  "city-decatur-al": { "query": "Decatur Alabama", "require": ["decatur", "alabama"] },
-  "city-madison-al": { "query": "Madison Alabama", "require": ["madison", "alabama"] },
-  "city-florence-al": { "query": "Florence Alabama", "require": ["florence", "alabama"] },
-  "city-gadsden-al": { "query": "Gadsden Alabama", "require": ["gadsden"] },
-  "body-trucks": { "query": "pickup truck" },
-  "body-suvs": { "query": "suv driving road" },
-  "body-sedans": { "query": "sedan car parked" },
-  "body-minivans": { "query": "minivan family" },
-  "body-coupes": { "query": "sports coupe car" },
-  "body-hatchbacks": { "query": "hatchback car" },
-  "body-convertibles": { "query": "convertible car" },
-  "post-default": { "query": "car keys new owner" },
-  "post-how-to-buy-a-used-car-in-alabama": { "query": "car salesman handing keys customer" },
-  "post-best-places-to-buy-a-used-car-in-alabama": { "query": "car dealership showroom" },
-  "post-how-much-does-a-used-car-cost-in-birmingham": { "query": "car price calculator money" },
-  "post-how-to-finance-a-used-car-in-alabama": { "query": "signing car loan contract" },
-  "post-best-used-suvs-for-alabama-drivers": { "query": "suv family road trip" },
-  "post-used-truck-buying-guide-alabama": { "query": "pickup truck countryside" },
-  "post-cars-under-10000-in-alabama": { "query": "affordable used car" },
-  "post-how-to-inspect-a-used-car-alabama": { "query": "mechanic inspecting car" },
-  "post-used-vs-new-car-alabama": { "query": "new car vs used car" },
-  "post-alabama-car-care-heat-humidity": { "query": "car maintenance summer" },
-  "post-choosing-a-car-dealership-in-alabama": { "query": "car dealer handshake" },
-  "post-how-to-list-inventory-on-bamamotors": { "query": "photographing car" },
-  "post-used-cars-near-me-alabama": { "query": "smartphone map car search" },
-  "post-alabama-car-insurance-requirements": { "query": "car insurance paperwork" },
-  "post-buying-a-used-car-from-a-private-seller-in-alabama": { "query": "private car sale" },
-  "post-trade-in-your-car-alabama": { "query": "car trade in dealership" },
-  "post-certified-pre-owned-vs-used-alabama": { "query": "car inspection checklist" },
-  "post-best-reliable-used-cars-under-15000": { "query": "reliable compact car" },
-  "post-test-drive-checklist": { "query": "test drive car" },
-  "post-used-car-red-flags": { "query": "damaged car rust" }
+  "_comment": "Photo requests. scripts/fetch-pexels.mjs uses 'query' (needs PEXELS_API_KEY); scripts/fetch-commons.mjs fills remaining slots from Wikimedia Commons using 'commons' (or 'query'). 'require' = words that must appear in the photo's title/description (keeps city photos honest). Missing cities fall back to city-default.",
+  "hero": {
+    "query": "used car dealership lot",
+    "orientation": "landscape",
+    "commons": "used car dealership"
+  },
+  "city-default": {
+    "query": "southern small town main street cars",
+    "orientation": "landscape",
+    "commons": "Alabama downtown street"
+  },
+  "city-birmingham-al": {
+    "query": "Birmingham Alabama",
+    "require": [
+      "birmingham"
+    ]
+  },
+  "city-huntsville-al": {
+    "query": "Huntsville Alabama",
+    "require": [
+      "huntsville"
+    ]
+  },
+  "city-mobile-al": {
+    "query": "Mobile Alabama",
+    "require": [
+      "mobile",
+      "alabama"
+    ]
+  },
+  "city-montgomery-al": {
+    "query": "Montgomery Alabama",
+    "require": [
+      "montgomery"
+    ]
+  },
+  "city-tuscaloosa-al": {
+    "query": "Tuscaloosa Alabama",
+    "require": [
+      "tuscaloosa"
+    ]
+  },
+  "city-hoover-al": {
+    "query": "Hoover Alabama",
+    "require": [
+      "hoover",
+      "alabama"
+    ]
+  },
+  "city-auburn-al": {
+    "query": "Auburn Alabama",
+    "require": [
+      "auburn",
+      "alabama"
+    ]
+  },
+  "city-dothan-al": {
+    "query": "Dothan Alabama",
+    "require": [
+      "dothan"
+    ]
+  },
+  "city-decatur-al": {
+    "query": "Decatur Alabama",
+    "require": [
+      "decatur",
+      "alabama"
+    ]
+  },
+  "city-madison-al": {
+    "query": "Madison Alabama",
+    "require": [
+      "madison",
+      "alabama"
+    ]
+  },
+  "city-florence-al": {
+    "query": "Florence Alabama",
+    "require": [
+      "florence",
+      "alabama"
+    ]
+  },
+  "city-gadsden-al": {
+    "query": "Gadsden Alabama",
+    "require": [
+      "gadsden"
+    ]
+  },
+  "body-trucks": {
+    "query": "pickup truck",
+    "commons": "pickup truck"
+  },
+  "body-suvs": {
+    "query": "suv driving road",
+    "commons": "sport utility vehicle"
+  },
+  "body-sedans": {
+    "query": "sedan car parked",
+    "commons": "sedan automobile"
+  },
+  "body-minivans": {
+    "query": "minivan family",
+    "commons": "minivan"
+  },
+  "body-coupes": {
+    "query": "sports coupe car",
+    "commons": "coupe automobile"
+  },
+  "body-hatchbacks": {
+    "query": "hatchback car",
+    "commons": "hatchback automobile"
+  },
+  "body-convertibles": {
+    "query": "convertible car",
+    "commons": "convertible automobile"
+  },
+  "post-default": {
+    "query": "car keys new owner",
+    "commons": "car keys"
+  },
+  "post-how-to-buy-a-used-car-in-alabama": {
+    "query": "car salesman handing keys customer",
+    "commons": "used car lot"
+  },
+  "post-best-places-to-buy-a-used-car-in-alabama": {
+    "query": "car dealership showroom",
+    "commons": "car dealership showroom"
+  },
+  "post-how-much-does-a-used-car-cost-in-birmingham": {
+    "query": "car price calculator money",
+    "commons": "Birmingham Alabama skyline"
+  },
+  "post-how-to-finance-a-used-car-in-alabama": {
+    "query": "signing car loan contract",
+    "commons": "signing contract"
+  },
+  "post-best-used-suvs-for-alabama-drivers": {
+    "query": "suv family road trip",
+    "commons": "sport utility vehicle road"
+  },
+  "post-used-truck-buying-guide-alabama": {
+    "query": "pickup truck countryside",
+    "commons": "pickup truck rural"
+  },
+  "post-cars-under-10000-in-alabama": {
+    "query": "affordable used car",
+    "commons": "compact car parked"
+  },
+  "post-how-to-inspect-a-used-car-alabama": {
+    "query": "mechanic inspecting car",
+    "commons": "car engine bay"
+  },
+  "post-used-vs-new-car-alabama": {
+    "query": "new car vs used car",
+    "commons": "car dealership lot"
+  },
+  "post-alabama-car-care-heat-humidity": {
+    "query": "car maintenance summer",
+    "commons": "car tire tread"
+  },
+  "post-choosing-a-car-dealership-in-alabama": {
+    "query": "car dealer handshake",
+    "commons": "automobile dealership"
+  },
+  "post-how-to-list-inventory-on-bamamotors": {
+    "query": "photographing car",
+    "commons": "car photography"
+  },
+  "post-used-cars-near-me-alabama": {
+    "query": "smartphone map car search",
+    "commons": "Alabama highway"
+  },
+  "post-alabama-car-insurance-requirements": {
+    "query": "car insurance paperwork",
+    "commons": "car traffic Alabama"
+  },
+  "post-buying-a-used-car-from-a-private-seller-in-alabama": {
+    "query": "private car sale",
+    "commons": "car for sale sign"
+  },
+  "post-trade-in-your-car-alabama": {
+    "query": "car trade in dealership",
+    "commons": "car dealership"
+  },
+  "post-certified-pre-owned-vs-used-alabama": {
+    "query": "car inspection checklist",
+    "commons": "car inspection"
+  },
+  "post-best-reliable-used-cars-under-15000": {
+    "query": "reliable compact car",
+    "commons": "Toyota Corolla"
+  },
+  "post-test-drive-checklist": {
+    "query": "test drive car",
+    "commons": "car dashboard steering wheel"
+  },
+  "post-used-car-red-flags": {
+    "query": "damaged car rust",
+    "commons": "rusty car"
+  }
 }

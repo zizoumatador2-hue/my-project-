@@ -1,0 +1,10 @@
+---
+import type { SiteImage } from '../lib/images';
+interface Props { img: SiteImage }
+const { img } = Astro.props;
+---
+<figcaption class="photo-credit">
+  Photo: <a href={img.sourceUrl} rel="nofollow noopener" target="_blank">{img.author}</a> / {img.source}{img.license && (
+    <>, {img.licenseUrl ? <a href={img.licenseUrl} rel="license nofollow noopener" target="_blank">{img.license}</a> : img.license}</>
+  )}
+</figcaption>
