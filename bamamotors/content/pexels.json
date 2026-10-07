@@ -8,7 +8,8 @@
     "Colorful neon street signs in Kabukichō, Shinjuku, Tokyo.jpg",
     "KTM Quad 990 neutral.jpg",
     "Mysuru Rail Museum - Inspection Car SR 07330.jpg",
-    "Maserati 250 F, Bj. 1958, Cockpit (2011-08-13 Sp).JPG"
+    "Maserati 250 F, Bj. 1958, Cockpit (2011-08-13 Sp).JPG",
+    "Maly Krashokholmsky bridge 4exp Oloneo.jpg"
   ],
   "hero": {
     "query": "used car dealership lot",
@@ -206,7 +207,14 @@
   },
   "post-certified-pre-owned-vs-used-alabama": {
     "query": "car inspection checklist",
-    "commons": "used car dealership"
+    "commons": "used car dealership",
+    "requireAny": [
+      "dealership",
+      "dealer",
+      "used car",
+      "used cars",
+      "car lot"
+    ]
   },
   "post-best-reliable-used-cars-under-15000": {
     "query": "reliable compact car",
