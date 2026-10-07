@@ -1,16 +1,4 @@
 {
-  "hero": {
-    "src": "/images/hero-1600.webp",
-    "srcset": "/images/hero-640.webp 640w, /images/hero-1024.webp 1024w, /images/hero-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "An abandoned Nissan car dealership with heavy plant overgrowth, north of Tomioka on Japan National Route 6, within the Fukushima Daiichi nuc",
-    "author": "Benlisquare",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abandoned_Nissan_dealership_with_heavy_overgrowth_within_Fukushima_evacuation_zone.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-  },
   "city-default": {
     "src": "/images/city-default-1600.webp",
     "srcset": "/images/city-default-640.webp 640w, /images/city-default-1024.webp 1024w, /images/city-default-1600.webp 1600w",
@@ -95,17 +83,6 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
-  "city-auburn-al": {
-    "src": "/images/city-auburn-al-1600.webp",
-    "srcset": "/images/city-auburn-al-640.webp 640w, /images/city-auburn-al-1024.webp 1024w, /images/city-auburn-al-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "Enjoyed visiting my Alma Mater this morning to tour @AuburnAg! Their cutting edge program prepares students to excel in the agriculture indu",
-    "author": "Office of Barry Moore",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Barry_Moore_visits_Auburn_Agriculture,_Auburn,_Alabama_(2021-09-16)_04.jpg",
-    "source": "Wikimedia Commons",
-    "license": "Public domain"
-  },
   "city-dothan-al": {
     "src": "/images/city-dothan-al-1600.webp",
     "srcset": "/images/city-dothan-al-640.webp 640w, /images/city-dothan-al-1024.webp 1024w, /images/city-dothan-al-1600.webp 1600w",
@@ -114,18 +91,6 @@
     "alt": "Dothan, Houston County, Alabama",
     "author": "Michael Rivera",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Founding_of_Dothan,_Alabama_historical_marker_front.JPG",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-  },
-  "city-decatur-al": {
-    "src": "/images/city-decatur-al-1600.webp",
-    "srcset": "/images/city-decatur-al-640.webp 640w, /images/city-decatur-al-1024.webp 1024w, /images/city-decatur-al-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "A southwest view of one of the State of Alabama buildings surrounding the State Capitol, Montgomery",
-    "author": "DXR",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:State_of_Alabama,_Administrative_Building,_at_Intersection_of_S_Decatur_St_and_Washington_Ave,_Montgomery_20160713_1.jpg",
     "source": "Wikimedia Commons",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
@@ -250,18 +215,6 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
-  "post-default": {
-    "src": "/images/post-default-1600.webp",
-    "srcset": "/images/post-default-640.webp 640w, /images/post-default-1024.webp 1024w, /images/post-default-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "Preparations for the open-air concert of the Dülmen Summer at Wiesmann Sports Cars, Dülmen, North Rhine-Westphalia, Germany",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_D%C3%BClmener_Sommer,_Open-Air-Konzert_--_2018_--_9701-3.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-  },
   "post-how-to-buy-a-used-car-in-alabama": {
     "src": "/images/post-how-to-buy-a-used-car-in-alabama-1600.webp",
     "srcset": "/images/post-how-to-buy-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-buy-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-buy-a-used-car-in-alabama-1600.webp 1600w",
@@ -297,30 +250,6 @@
     "source": "Wikimedia Commons",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
-  },
-  "post-how-to-finance-a-used-car-in-alabama": {
-    "src": "/images/post-how-to-finance-a-used-car-in-alabama-1600.webp",
-    "srcset": "/images/post-how-to-finance-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-finance-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-finance-a-used-car-in-alabama-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "Colorful neon street signs in Kabukichō, Shinjuku, Tokyo, Japan.",
-    "author": "Basile Morin",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colorful_neon_street_signs_in_Kabukich%C5%8D,_Shinjuku,_Tokyo.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-  },
-  "post-best-used-suvs-for-alabama-drivers": {
-    "src": "/images/post-best-used-suvs-for-alabama-drivers-1600.webp",
-    "srcset": "/images/post-best-used-suvs-for-alabama-drivers-640.webp 640w, /images/post-best-used-suvs-for-alabama-drivers-1024.webp 1024w, /images/post-best-used-suvs-for-alabama-drivers-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "ATV custom-made from E-ATV Eicker Germany. Basevehicle was a KTM Supermotobike, Typ SM 990 with LC8 engine.",
-    "author": "Stefan Krause, Germany",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:KTM_Quad_990_neutral.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
   },
   "post-used-truck-buying-guide-alabama": {
     "src": "/images/post-used-truck-buying-guide-alabama-1600.webp",
@@ -454,18 +383,6 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
-  "post-certified-pre-owned-vs-used-alabama": {
-    "src": "/images/post-certified-pre-owned-vs-used-alabama-1600.webp",
-    "srcset": "/images/post-certified-pre-owned-vs-used-alabama-640.webp 640w, /images/post-certified-pre-owned-vs-used-alabama-1024.webp 1024w, /images/post-certified-pre-owned-vs-used-alabama-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "Mysuru Rail Museum - Meter Gauge Inspection Car SR 07330",
-    "author": "Ingo Mehling",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mysuru_Rail_Museum_-_Inspection_Car_SR_07330.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-  },
   "post-best-reliable-used-cars-under-15000": {
     "src": "/images/post-best-reliable-used-cars-under-15000-1600.webp",
     "srcset": "/images/post-best-reliable-used-cars-under-15000-640.webp 640w, /images/post-best-reliable-used-cars-under-15000-1024.webp 1024w, /images/post-best-reliable-used-cars-under-15000-1600.webp 1600w",
@@ -478,18 +395,6 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
-  "post-test-drive-checklist": {
-    "src": "/images/post-test-drive-checklist-1600.webp",
-    "srcset": "/images/post-test-drive-checklist-640.webp 640w, /images/post-test-drive-checklist-1024.webp 1024w, /images/post-test-drive-checklist-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "Cockpit des Maserati 250 F(Baujahr 1958) von Willi Balz beim AvD-Oldtimer-Grand-Prix",
-    "author": "Lothar Spurzem",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maserati_250_F,_Bj._1958,_Cockpit_(2011-08-13_Sp).JPG",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 2.0 de",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/de/deed.en"
-  },
   "post-used-car-red-flags": {
     "src": "/images/post-used-car-red-flags-1600.webp",
     "srcset": "/images/post-used-car-red-flags-640.webp 640w, /images/post-used-car-red-flags-1024.webp 1024w, /images/post-used-car-red-flags-1600.webp 1600w",
@@ -498,6 +403,102 @@
     "alt": "Old rusty car in Ubud, Bali, Indonesia",
     "author": "Jakub Hałun",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_car_in_Ubud,_Bali,_Indonesia,_20220823_1143_0423.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "hero": {
+    "src": "/images/hero-1600.webp",
+    "srcset": "/images/hero-640.webp 640w, /images/hero-1024.webp 1024w, /images/hero-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Used Car Lot on Maui.",
+    "author": "293.xx.xxx.xx",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lono_Avenue_Value_Center_Used_Car_Lot.JPG",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "city-auburn-al": {
+    "src": "/images/city-auburn-al-1600.webp",
+    "srcset": "/images/city-auburn-al-640.webp 640w, /images/city-auburn-al-1024.webp 1024w, /images/city-auburn-al-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Samford Hall at night. One of the most photographed buildings at Auburn University. &lt;a href=\" http://en.wikipedia.org/wiki/Samford_Hall \"",
+    "author": "Robert S. Donovan",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:William_J._Samford_Hall.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "city-decatur-al": {
+    "src": "/images/city-decatur-al-1600.webp",
+    "srcset": "/images/city-decatur-al-640.webp 640w, /images/city-decatur-al-1024.webp 1024w, /images/city-decatur-al-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Decatur, Alabama from 2nd avenue",
+    "author": "WeaponizingArchitecture",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Decatur,_Alabama_(2023).jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "post-default": {
+    "src": "/images/post-default-1600.webp",
+    "srcset": "/images/post-default-640.webp 640w, /images/post-default-1024.webp 1024w, /images/post-default-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Wiesmann Spyder Concept at Wiesmann Sports Cars, Dülmen, North Rhine-Westphalia, Germany Wiesmann is a German sports car manufacturer based ",
+    "author": "Dietmar Rabich",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Wiesmann_Sports_Cars,_Wiesmann_Spyder_Concept_--_2018_--_9978.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "post-how-to-finance-a-used-car-in-alabama": {
+    "src": "/images/post-how-to-finance-a-used-car-in-alabama-1600.webp",
+    "srcset": "/images/post-how-to-finance-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-finance-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-finance-a-used-car-in-alabama-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Hyundai Santa Fe at Geneva International Motor Show 2018, Le Grand-Saconnex",
+    "author": "Matti Blume",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyundai_Santa_Fe,_GIMS_2018,_Le_Grand-Saconnex_(1X7A1735).jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "post-best-used-suvs-for-alabama-drivers": {
+    "src": "/images/post-best-used-suvs-for-alabama-drivers-1600.webp",
+    "srcset": "/images/post-best-used-suvs-for-alabama-drivers-640.webp 640w, /images/post-best-used-suvs-for-alabama-drivers-1024.webp 1024w, /images/post-best-used-suvs-for-alabama-drivers-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "SUV Kaiyi X3.",
+    "author": "Rjcastillo",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:SUV_Kaiyi_X3.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "post-certified-pre-owned-vs-used-alabama": {
+    "src": "/images/post-certified-pre-owned-vs-used-alabama-1600.webp",
+    "srcset": "/images/post-certified-pre-owned-vs-used-alabama-640.webp 640w, /images/post-certified-pre-owned-vs-used-alabama-1024.webp 1024w, /images/post-certified-pre-owned-vs-used-alabama-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Maly Krasnokholmsky Bridge, Moscow. Canon EF 200/2.8 lens. Four exposures tone-mapped in Oloneo HDR engine. Somehow, Oloneo rendered highlig",
+    "author": "Kaluga.2012",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maly_Krashokholmsky_bridge_4exp_Oloneo.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "post-test-drive-checklist": {
+    "src": "/images/post-test-drive-checklist-1600.webp",
+    "srcset": "/images/post-test-drive-checklist-640.webp 640w, /images/post-test-drive-checklist-1024.webp 1024w, /images/post-test-drive-checklist-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Volvo PV544 B18 (built in 1961) in the parking lot of the barbecue area in Merfeld, Dülmen, North Rhine-Westphalia, Germany The Volvo PV 544",
+    "author": "Dietmar Rabich",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Merfeld,_Volvo_PV_544_B18_--_2021_--_9944.jpg",
     "source": "Wikimedia Commons",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
