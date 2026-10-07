@@ -12,7 +12,9 @@ interface PageInfo { path: string; status: number; title: string; description: s
 
 function attr(tag: string, name: string): string | null {
   const m = tag.match(new RegExp(`\\s${name}=("([^"]*)"|'([^']*)')`, 'i'));
-  return m ? (m[2] ?? m[3] ?? '') : null;
+  if (m) return m[2] ?? m[3] ?? '';
+  // A bare attribute (Astro renders alt="" as `alt`) is an empty value in HTML.
+  return new RegExp(`\\s${name}(?=[\\s/>])`, 'i').test(tag) ? '' : null;
 }
 const decode = (s: string) => s.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
