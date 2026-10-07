@@ -479,18 +479,6 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
-  "post-certified-pre-owned-vs-used-alabama": {
-    "src": "/images/post-certified-pre-owned-vs-used-alabama-1600.webp",
-    "srcset": "/images/post-certified-pre-owned-vs-used-alabama-640.webp 640w, /images/post-certified-pre-owned-vs-used-alabama-1024.webp 1024w, /images/post-certified-pre-owned-vs-used-alabama-1600.webp 1600w",
-    "width": 1600,
-    "height": 900,
-    "alt": "Maly Krasnokholmsky Bridge, Moscow. Canon EF 200/2.8 lens. Four exposures tone-mapped in Oloneo HDR engine. Somehow, Oloneo rendered highlig",
-    "author": "Kaluga.2012",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maly_Krashokholmsky_bridge_4exp_Oloneo.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-  },
   "post-test-drive-checklist": {
     "src": "/images/post-test-drive-checklist-1600.webp",
     "srcset": "/images/post-test-drive-checklist-640.webp 640w, /images/post-test-drive-checklist-1024.webp 1024w, /images/post-test-drive-checklist-1600.webp 1600w",
@@ -502,5 +490,17 @@
     "source": "Wikimedia Commons",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "post-certified-pre-owned-vs-used-alabama": {
+    "src": "/images/post-certified-pre-owned-vs-used-alabama-1600.webp",
+    "srcset": "/images/post-certified-pre-owned-vs-used-alabama-640.webp 640w, /images/post-certified-pre-owned-vs-used-alabama-1024.webp 1024w, /images/post-certified-pre-owned-vs-used-alabama-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Ford car dealership Müller at the corner \"Pasewalker Str.\" and \"Blankenburger Weg\", Berlin -Französisch Buchholz. This branch offers used ca",
+    "author": "Jochen Teufel",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autohaus_M%C3%BCller_Pasewalker_Str_(2010).jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
   }
 }
