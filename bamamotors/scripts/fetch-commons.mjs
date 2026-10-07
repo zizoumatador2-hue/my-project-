@@ -17,7 +17,15 @@ const manifestPath = join(root, 'src/data/images.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 const outDir = join(root, 'public/images');
 mkdirSync(outDir, { recursive: true });
+// "_reject": Commons file titles reviewed and rejected (off-topic, wrong city, people). Slots holding one are refetched.
+const norm = (t) => decodeURIComponent(t).replace(/^.*\/wiki\//, '').replace(/^File:/, '').replace(/_/g, ' ').toLowerCase();
+const rejected = new Set((requests._reject ?? []).map(norm));
+for (const [k, m] of Object.entries(manifest)) if (m.source === 'Wikimedia Commons' && rejected.has(norm(m.sourceUrl))) delete manifest[k];
 const used = new Set(Object.values(manifest).map((m) => m.sourceUrl));
+// Never pick photos about disasters, politics or events, whatever the search matched.
+const EXCLUDE = ['abandoned', 'evacuation', 'crash', 'accident', 'wreck', 'fire', 'flood', 'visit', 'visits', 'protest', 'concert', 'funeral', 'memorial service', 'police'];
+const AUTO = ['car', 'cars', 'automobile', 'automobiles', 'vehicle', 'vehicles', 'dealership', 'dealer', 'truck', 'suv', 'pickup', 'sedan', 'coupe', 'convertible', 'minivan'];
+const hasWord = (text, w) => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`, 'i').test(text);
 const WIDTHS = [640, 1024, 1600];
 const UA = 'BamaMotorsImageFetcher/1.0 (https://bamamotors.com; info@christopherkunz.com)';
 const LICENSE_OK = /^(cc0|public domain|pd|cc by(-sa)? [1-4]\.0)/i;
@@ -39,12 +47,14 @@ async function search(q) {
 function suitable(page, req) {
   const ii = page.imageinfo?.[0];
   if (!ii || ii.mime !== 'image/jpeg' || ii.width < 1600 || ii.width < ii.height * 1.2) return false;
-  if (used.has(ii.descriptionurl)) return false;
+  if (used.has(ii.descriptionurl) || rejected.has(norm(page.title))) return false;
   if (!LICENSE_OK.test(strip(meta(ii, 'LicenseShortName')))) return false;
   if (strip(meta(ii, 'Restrictions'))) return false; // trademark / personality-rights warnings
-  if (!req.require) return true;
-  const text = `${page.title} ${strip(meta(ii, 'ImageDescription'))} ${meta(ii, 'Categories')}`.toLowerCase();
-  return req.require.every((w) => text.includes(w));
+  const text = `${page.title} ${strip(meta(ii, 'ImageDescription'))} ${meta(ii, 'Categories')}`.replace(/[_|]/g, ' ');
+  if ([...EXCLUDE, ...(req.exclude ?? [])].some((w) => hasWord(text, w))) return false;
+  if (req.require && !req.require.every((w) => hasWord(text, w))) return false;
+  const any = req.requireAny ?? (req.key.startsWith('post-') || req.key === 'hero' ? AUTO : null);
+  return !any || any.some((w) => hasWord(text, w));
 }
 
 let added = 0;
@@ -55,7 +65,7 @@ for (const [key, req] of Object.entries(requests)) {
     let pick = null;
     // Prefer community-reviewed "Quality images", then any matching photo.
     for (const attempt of [`${q} incategory:Quality_images`, q]) {
-      pick = (await search(attempt)).find((p) => suitable(p, req));
+      pick = (await search(attempt)).find((p) => suitable(p, { ...req, key }));
       if (pick) break;
     }
     if (!pick) { console.log(`- ${key}: no suitable photo for "${q}"`); continue; }
