@@ -15,7 +15,7 @@
     "query": "used car dealership lot",
     "orientation": "landscape",
     "commons": "car dealership lot cars for sale",
-    "fal": "Wide golden-hour view from a slight elevation of neat rows of used pickup trucks, SUVs and sedans on an open dealership lot, an American flag on a tall pole, tall Southern pines and a warm sunset sky",
+    "fal": "Wide golden-hour view from a slight elevation of neat rows of used pickup trucks, SUVs and sedans parked on an open lot surrounded only by tall Southern pine trees, an American flag on a tall pole, warm sunset sky, no buildings in view",
     "alt": "Rows of used trucks, SUVs and sedans on a dealership lot at sunset"
   },
   "city-default": {
@@ -139,13 +139,13 @@
   "body-hatchbacks": {
     "query": "hatchback car",
     "commons": "hatchback automobile",
-    "fal": "Side profile of a compact blue hatchback parked along a historic red brick downtown square with green awnings, bright sunny day",
-    "alt": "Compact hatchback parked on a historic downtown square"
+    "fal": "Side profile of a compact blue hatchback parked on a quiet residential street lined with large oak trees and white wooden houses with front porches, bright sunny day",
+    "alt": "Compact hatchback parked on a tree-lined residential street"
   },
   "body-convertibles": {
     "query": "convertible car",
     "commons": "convertible automobile",
-    "fal": "Distant view from behind of a convertible with the top down driving along a coastal highway beside white sand beaches and turquoise Gulf water, sunny day",
+    "fal": "High aerial drone view of a red convertible with the top down driving along a coastal highway between white sand dunes and turquoise Gulf water, sunny day",
     "alt": "Convertible with the top down on a Gulf Coast highway"
   },
   "post-default": {
@@ -228,7 +228,7 @@
   "post-trade-in-your-car-alabama": {
     "query": "car trade in dealership",
     "commons": "car dealership",
-    "fal": "A dealership appraiser holding a tablet walking along the side of a used SUV on a sunny lot, the SUV seen in side profile, background softly blurred",
+    "fal": "A man holding a tablet inspecting the side of a dark blue used SUV parked on an open gravel lot with green trees behind, sunny day, the SUV seen in side profile",
     "alt": "Appraiser checking a used SUV for a trade-in value"
   },
   "post-certified-pre-owned-vs-used-alabama": {
