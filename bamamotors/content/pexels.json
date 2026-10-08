@@ -156,11 +156,15 @@
   },
   "post-how-to-buy-a-used-car-in-alabama": {
     "query": "car salesman handing keys customer",
-    "commons": "used car lot"
+    "commons": "used car lot",
+    "fal": "A young couple walking between rows of clean used cars on a sunny open lot lined with pine trees, cars seen from the side, warm afternoon light",
+    "alt": "Couple walking between rows of used cars on a sunny lot"
   },
   "post-best-places-to-buy-a-used-car-in-alabama": {
     "query": "car dealership showroom",
-    "commons": "car dealership showroom"
+    "commons": "car dealership showroom",
+    "fal": "High aerial drone view of a large used car lot with neat rows of colorful cars and pickup trucks surrounded by green trees in the American South, sunny day",
+    "alt": "Aerial view of a used car lot surrounded by trees"
   },
   "post-how-much-does-a-used-car-cost-in-birmingham": {
     "query": "car price calculator money",
@@ -179,15 +183,21 @@
       "suv",
       "sport utility vehicle",
       "crossover"
-    ]
+    ],
+    "fal": "A family with two kids standing beside a dark green midsize SUV at a scenic overlook above forested hills, the SUV seen in side profile, golden hour",
+    "alt": "Family next to a midsize SUV at a scenic overlook"
   },
   "post-used-truck-buying-guide-alabama": {
     "query": "pickup truck countryside",
-    "commons": "pickup truck rural"
+    "commons": "pickup truck rural",
+    "fal": "Side profile of a red full-size pickup truck towing a small fishing boat along a rural two-lane road beside a calm lake at sunrise",
+    "alt": "Pickup truck towing a fishing boat beside a lake"
   },
   "post-cars-under-10000-in-alabama": {
     "query": "affordable used car",
-    "commons": "compact car parked"
+    "commons": "compact car parked",
+    "fal": "A young woman smiling next to an older silver compact sedan parked on a quiet residential street, the car seen in side profile, bright afternoon",
+    "alt": "Young driver next to an affordable compact sedan"
   },
   "post-how-to-inspect-a-used-car-alabama": {
     "query": "mechanic inspecting car",
@@ -197,27 +207,39 @@
   },
   "post-used-vs-new-car-alabama": {
     "query": "new car vs used car",
-    "commons": "car dealership lot"
+    "commons": "car dealership lot",
+    "fal": "Two sedans parked side by side on an open lot at sunset, a shiny new white sedan and a well-kept older blue sedan, both seen in side profile, trees in the background",
+    "alt": "New and used sedans parked side by side"
   },
   "post-alabama-car-care-heat-humidity": {
     "query": "car maintenance summer",
-    "commons": "car tire tread"
+    "commons": "car tire tread",
+    "fal": "Close-up of a person checking tire pressure with a gauge on a car tire on a hot sunny summer day, green trees softly blurred behind",
+    "alt": "Checking tire pressure on a hot summer day"
   },
   "post-choosing-a-car-dealership-in-alabama": {
     "query": "car dealer handshake",
-    "commons": "automobile dealership"
+    "commons": "automobile dealership",
+    "fal": "A friendly salesperson and a customer talking while walking among rows of used cars on a sunny lot with pine trees in the background, cars seen from the side",
+    "alt": "Salesperson and customer walking through a dealer lot"
   },
   "post-how-to-list-inventory-on-bamamotors": {
     "query": "photographing car",
-    "commons": "car photography"
+    "commons": "car photography",
+    "fal": "A person photographing a clean silver SUV with a smartphone on an open lot at golden hour, the SUV seen in side profile",
+    "alt": "Dealer photographing an SUV with a smartphone"
   },
   "post-used-cars-near-me-alabama": {
     "query": "smartphone map car search",
-    "commons": "Alabama highway"
+    "commons": "Alabama highway",
+    "fal": "Close-up of a hand holding a smartphone showing a simple map with colored location pins and no labels, a sunny suburban street with parked cars softly blurred behind",
+    "alt": "Smartphone map showing nearby car listings"
   },
   "post-alabama-car-insurance-requirements": {
     "query": "car insurance paperwork",
-    "commons": "car traffic Alabama"
+    "commons": "car traffic Alabama",
+    "fal": "A woman sitting in the driver's seat of a parked car looking at her smartphone and smiling, seen through the open driver's door, sunny parking area softly blurred",
+    "alt": "Driver checking her phone in a parked car"
   },
   "post-buying-a-used-car-from-a-private-seller-in-alabama": {
     "query": "private car sale",
@@ -246,7 +268,9 @@
   },
   "post-best-reliable-used-cars-under-15000": {
     "query": "reliable compact car",
-    "commons": "Toyota Corolla"
+    "commons": "Toyota Corolla",
+    "fal": "Side profile of a clean white compact sedan parked in front of a modest brick ranch house with a green lawn, bright sunny day",
+    "alt": "Compact sedan parked in front of a brick ranch house"
   },
   "post-test-drive-checklist": {
     "query": "test drive car",
@@ -256,6 +280,20 @@
   },
   "post-used-car-red-flags": {
     "query": "damaged car rust",
-    "commons": "rusty car"
+    "commons": "rusty car",
+    "fal": "Close-up of rust and bubbling paint on the lower door panel of an old car, shallow depth of field, natural light",
+    "alt": "Close-up of rust on an old car door"
+  },
+  "page-for-dealers": {
+    "query": "car dealership lot",
+    "commons": "car dealership lot",
+    "fal": "Wide golden-hour view of a well-organized independent used car lot with rows of pickup trucks and SUVs, a small plain office building, an American flag on a pole and tall Southern pines",
+    "alt": "Independent used car lot at golden hour"
+  },
+  "page-financing": {
+    "query": "car loan planning",
+    "commons": "car keys",
+    "fal": "A couple sitting at a kitchen table with a laptop seen from behind and a calculator, planning a car budget together, warm morning light",
+    "alt": "Couple planning a car budget at the kitchen table"
   }
 }

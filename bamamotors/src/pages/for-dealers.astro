@@ -7,11 +7,14 @@ import Icon from '../components/Icon.astro';
 import { PLANS } from '../lib/plans';
 import { formatPrice } from '../lib/format';
 import { breadcrumbLd, faqLd } from '../lib/seo';
+import Photo from '../components/Photo.astro';
+import { image } from '../lib/images';
 
 const env = Astro.locals.runtime.env;
 const user = Astro.locals.user;
 const s = Astro.locals.settings;
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'For Dealers', href: '/for-dealers' }];
+const heroImg = image('page-for-dealers');
 const featuredPrice = formatPrice(Number(s.featured_price_cents || 2900));
 const faq = [
   { q: 'How much does it cost to list vehicles on BamaMotors?', a: `The Free plan includes up to ${PLANS.free.vehicleLimit} active vehicles. Basic is ${formatPrice(PLANS.basic.priceCents)}/month for up to ${PLANS.basic.vehicleLimit} vehicles, and Pro is ${formatPrice(PLANS.pro.priceCents)}/month for up to ${PLANS.pro.vehicleLimit}.` },
@@ -24,6 +27,7 @@ const faq = [
 <BaseLayout title="List Your Dealership: Reach Alabama Car Buyers" description="Alabama car dealers: list your used car inventory on BamaMotors, get local leads by email, and grow with Basic and Pro plans. Start free with up to 10 vehicles."
   keywords="car dealer advertising Alabama, list used cars Alabama, auto dealer leads Alabama, dealer listings Alabama" canonical="/for-dealers" jsonLd={[breadcrumbLd(env.SITE_URL, crumbs), faqLd(faq)]}>
   <section class="hero">
+    {heroImg && <div class="hero-photo" aria-hidden="true"><Photo img={heroImg} sizes="100vw" eager alt="" /></div>}
     <div class="wrap">
       <Breadcrumbs crumbs={crumbs} />
       <h1 style="margin-top:12px">Sell more cars to Alabama shoppers</h1>
