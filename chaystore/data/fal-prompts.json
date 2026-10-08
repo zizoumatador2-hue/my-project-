@@ -2,17 +2,77 @@
   "model": "fal-ai/flux/dev",
   "style": "natural editorial food photography, soft window light, shallow depth of field, realistic textures, muted warm colors, no people, no text, no logos, no watermark",
   "images": [
-    { "slug": "moment-morning-black-tea", "size": "landscape_16_9", "alt": "Steaming mug of black tea on a sunlit kitchen counter in the morning", "prompt": "a steaming ceramic mug of black tea on a sunlit American farmhouse kitchen counter, morning light, a small plate with a buttered biscuit" },
-    { "slug": "moment-matcha-whisk", "size": "landscape_4_3", "alt": "Bright green matcha being whisked in a ceramic bowl with a bamboo whisk", "prompt": "bright green matcha being whisked in a handmade ceramic bowl with a bamboo chasen, bamboo scoop and tin beside it, on a pale wood table" },
-    { "slug": "moment-iced-tea-porch", "size": "landscape_16_9", "alt": "Tall glass of iced tea with lemon and mint on a shaded porch table", "prompt": "a tall glass of iced tea with lemon slices and mint on a shaded wooden porch table, summer afternoon, condensation on the glass, blurred green yard behind" },
-    { "slug": "moment-chai-simmer", "size": "landscape_4_3", "alt": "Saucepan of masala chai simmering with whole spices on a stovetop", "prompt": "a small steel saucepan of masala chai simmering on a stovetop, whole cinnamon sticks, cardamom pods and cloves scattered on the counter, rising steam" },
-    { "slug": "moment-loose-leaf-scoop", "size": "landscape_16_9", "alt": "Spoonful of dry loose leaf tea above a glass teapot", "prompt": "a wooden spoon lifting dry loose leaf black tea above a glass teapot, tea leaves falling, warm kitchen light" },
-    { "slug": "moment-herbal-evening", "size": "landscape_4_3", "alt": "Cup of chamomile tea beside a folded blanket and a candle in the evening", "prompt": "a cup of chamomile tea with dried flowers beside a folded wool blanket and a lit candle on a small side table, cozy living room at dusk" },
-    { "slug": "moment-green-tea-pour", "size": "landscape_16_9", "alt": "Green tea being poured from an iron kettle into a small cup", "prompt": "pale green tea being poured from a small cast iron kettle into a small white cup, steam curling, dark slate surface" },
-    { "slug": "moment-tea-shelf", "size": "landscape_4_3", "alt": "Shelf of airtight tea tins and glass jars of loose leaf tea", "prompt": "a tidy kitchen shelf with airtight tea tins and glass jars of different loose leaf teas, hand-written paper tags, warm light" },
-    { "slug": "moment-kettle-gooseneck", "size": "landscape_16_9", "alt": "Gooseneck kettle pouring hot water over tea in a pot", "prompt": "a matte black gooseneck kettle pouring hot water over loose tea in a glass pot, steam rising, light stone counter" },
-    { "slug": "moment-tea-and-book", "size": "landscape_4_3", "alt": "Cup of tea next to an open paperback book and reading glasses", "prompt": "a cup of tea beside an open paperback book and reading glasses on a rainy window seat, soft gray daylight" },
-    { "slug": "moment-oolong-gongfu", "size": "landscape_16_9", "alt": "Small gaiwan and tasting cups of oolong tea on a wooden tray", "prompt": "a small porcelain gaiwan and two tiny tasting cups of golden oolong tea on a wooden tray, rolled oolong leaves in a dish" },
-    { "slug": "moment-tea-garden-hills", "size": "landscape_16_9", "alt": "Rows of tea bushes on misty green hills at sunrise", "prompt": "rows of tea bushes on misty green hillsides at sunrise, soft golden light, wide landscape photograph" }
+    {
+      "slug": "moment-morning-black-tea",
+      "size": "landscape_16_9",
+      "alt": "Steaming mug of black tea on a sunlit kitchen counter in the morning",
+      "prompt": "a steaming ceramic mug of black tea on a sunlit American farmhouse kitchen counter, morning light, a small plate with a buttered biscuit"
+    },
+    {
+      "slug": "moment-matcha-whisk",
+      "size": "landscape_4_3",
+      "alt": "Bright green matcha being whisked in a ceramic bowl with a bamboo whisk",
+      "prompt": "bright green matcha being whisked in a handmade ceramic bowl with a bamboo chasen, bamboo scoop and tin beside it, on a pale wood table"
+    },
+    {
+      "slug": "moment-iced-tea-porch",
+      "size": "landscape_16_9",
+      "alt": "Tall glass of iced tea with lemon and mint on a shaded porch table",
+      "prompt": "a tall glass of iced tea with lemon slices and mint on a shaded wooden porch table, summer afternoon, condensation on the glass, blurred green yard behind"
+    },
+    {
+      "slug": "moment-chai-simmer",
+      "size": "landscape_4_3",
+      "alt": "Saucepan of masala chai simmering with whole spices on a stovetop",
+      "prompt": "a small steel saucepan of masala chai simmering on a stovetop, whole cinnamon sticks, cardamom pods and cloves scattered on the counter, rising steam"
+    },
+    {
+      "slug": "moment-loose-leaf-scoop",
+      "size": "landscape_16_9",
+      "alt": "Spoonful of dry loose leaf tea above a glass teapot",
+      "prompt": "a wooden spoon lifting dry loose leaf black tea above a glass teapot, tea leaves falling, warm kitchen light"
+    },
+    {
+      "slug": "moment-herbal-evening",
+      "size": "landscape_4_3",
+      "alt": "Cup of herbal tea with daisies beside a wool blanket and a lit candle",
+      "prompt": "a cup of chamomile tea with dried flowers beside a folded wool blanket and a lit candle on a small side table, cozy living room at dusk"
+    },
+    {
+      "slug": "moment-green-tea-pour",
+      "size": "landscape_16_9",
+      "alt": "Green tea being poured from a dark teapot into a small white cup on a slate board",
+      "prompt": "pale green tea being poured from a small cast iron kettle into a small white cup, steam curling, dark slate surface"
+    },
+    {
+      "slug": "moment-tea-shelf",
+      "size": "landscape_4_3",
+      "alt": "Shelf of airtight tea tins and glass jars of loose leaf tea",
+      "prompt": "a tidy kitchen shelf with plain glass jars and metal tins of different loose leaf teas, jars have no labels and no writing at all, warm light"
+    },
+    {
+      "slug": "moment-kettle-gooseneck",
+      "size": "landscape_16_9",
+      "alt": "Black gooseneck kettle pouring hot water into a glass server of dark tea on a sunlit counter",
+      "prompt": "a matte black gooseneck kettle pouring hot water over loose tea in a glass pot, steam rising, light stone counter"
+    },
+    {
+      "slug": "moment-tea-and-book",
+      "size": "landscape_4_3",
+      "alt": "Cup of tea next to an open paperback book and reading glasses",
+      "prompt": "a cup of tea beside an open paperback book and reading glasses on a rainy window seat, soft gray daylight"
+    },
+    {
+      "slug": "moment-oolong-gongfu",
+      "size": "landscape_16_9",
+      "alt": "Small gaiwan and tasting cups of oolong tea on a wooden tray",
+      "prompt": "a small porcelain gaiwan and two tiny tasting cups of golden oolong tea on a wooden tray, rolled oolong leaves in a dish"
+    },
+    {
+      "slug": "moment-tea-garden-hills",
+      "size": "landscape_16_9",
+      "alt": "Rows of tea bushes on misty green hills at sunrise",
+      "prompt": "rows of tea bushes on misty green hillsides at sunrise, soft golden light, wide landscape photograph"
+    }
   ]
 }
