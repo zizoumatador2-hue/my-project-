@@ -25,18 +25,18 @@ A **personal loan** is usually an unsecured installment loan: you receive a lump
 
 ## What affects personal loan rates
 
-- **Credit score and history** — the strongest factor in most pricing.
-- **Debt-to-income ratio** — how much of your income already goes to debt.
-- **Loan term** — longer terms often carry higher rates.
-- **Origination fees** — some lenders charge a fee, often deducted from the proceeds; it is included in the APR.
-- **Autopay or relationship discounts** — many lenders reduce the rate slightly for automatic payments.
+- **Credit score and history**: the strongest factor in most pricing.
+- **Debt-to-income ratio**: how much of your income already goes to debt.
+- **Loan term**: longer terms often carry higher rates.
+- **Origination fees**: some lenders charge a fee, often deducted from the proceeds; it is included in the APR.
+- **Autopay or relationship discounts**: many lenders reduce the rate slightly for automatic payments.
 
 ## How to compare offers
 
 1. **Prequalify** with several lenders using soft credit checks.
 2. **Compare APRs**, not interest rates, since APR includes fees.
-3. **Compare total cost** — monthly payment × number of payments, plus any fees not in the APR.
-4. **Check flexibility** — prepayment penalties, due-date changes and hardship options.
+3. **Compare total cost**: monthly payment × number of payments, plus any fees not in the APR.
+4. **Check flexibility**: prepayment penalties, due-date changes and hardship options.
 
 Run the numbers with our [personal loan calculator](/calculators/loan/) and see widely available lenders on our [personal loans comparison](/best/personal-loans/).
 

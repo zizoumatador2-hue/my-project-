@@ -8,7 +8,7 @@ export const SITE = {
   description:
     'Fountain Finances is an independent personal finance resource with plain-English guides, free financial calculators and transparent product comparisons for American consumers.',
   email: 'info.christopherkunz@gmail.com',
-  /** Founder and publisher — shown on About/Contact and in the Organization schema. */
+  /** Founder and publisher: shown on About/Contact and in the Organization schema. */
   founder: 'Christopher Kunz',
   locale: 'en_US',
   language: 'en-US',

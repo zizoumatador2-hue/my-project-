@@ -20,7 +20,7 @@ faqs:
   - q: "Is APY calculated monthly?"
     a: "APY is an annual figure. Interest is usually compounded daily or monthly and credited monthly, but the APY expresses the total effect over a year."
   - q: "Can APY change?"
-    a: "On most savings and money market accounts, yes — rates are variable. On a CD, the APY is fixed until maturity."
+    a: "On most savings and money market accounts, yes: rates are variable. On a CD, the APY is fixed until maturity."
   - q: "What is APYE?"
     a: "Annual percentage yield earned (APYE) appears on some account statements and reflects what you actually earned during the statement period, which can differ from the advertised APY if the rate or balance changed."
 sources:
@@ -31,7 +31,7 @@ sources:
     publisher: "Federal Deposit Insurance Corporation"
     url: "https://www.fdic.gov/national-rates-and-rate-caps"
   - title: "Compound Interest Calculator"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
+    publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"
 related: ["cd-ladder", "what-is-apr", "what-is-a-high-yield-savings-account", "how-compound-interest-works"]
 calculators: ["compound-interest", "cd"]
@@ -118,13 +118,13 @@ Suppose you have $15,000 to set aside for a home down payment you plan to make i
 
 *Illustrative rates only; they are not current offers.*
 
-Both accounts are federally insured and equally safe. The only difference is the yield — and over two years it is worth more than $1,100 on the same deposit. That is why checking the APY on money you keep in savings is one of the simplest financial wins available.
+Both accounts are federally insured and equally safe. The only difference is the yield, and over two years it is worth more than $1,100 on the same deposit. That is why checking the APY on money you keep in savings is one of the simplest financial wins available.
 
 If the rate on a variable account falls halfway through, your actual earnings will be lower than the estimate. For a guaranteed figure over a set period, compare the APY on a [CD](/guides/how-cds-work/) of the same length.
 
 ## How interest is actually credited
 
-Most banks calculate interest **daily** on your balance and **credit** it to your account **monthly**. Once it is credited, it starts earning interest too — that is the compounding the APY reflects. Your monthly statement shows the interest paid, and many banks also show an **annual percentage yield earned (APYE)** for the statement period. If your balance changed during the month, or the bank adjusted its rate, the APYE will differ from the advertised APY.
+Most banks calculate interest **daily** on your balance and **credit** it to your account **monthly**. Once it is credited, it starts earning interest too, that is the compounding the APY reflects. Your monthly statement shows the interest paid, and many banks also show an **annual percentage yield earned (APYE)** for the statement period. If your balance changed during the month, or the bank adjusted its rate, the APYE will differ from the advertised APY.
 
 Two practical points follow:
 
@@ -137,7 +137,7 @@ Two practical points follow:
 
 **“APY is guaranteed for a year.”** Only on fixed-rate products like CDs. On savings and money market accounts, the bank can change the rate at any time, often with little notice.
 
-**“APY and APR mean the same thing.”** They measure opposite sides of the ledger — one what you earn, the other what you pay — and APR does not include compounding.
+**“APY and APR mean the same thing.”** They measure opposite sides of the ledger (one what you earn, the other what you pay) and APR does not include compounding.
 
 **“Compounding frequency matters most.”** The difference between daily and monthly compounding at the same rate is a few cents or dollars. The rate itself matters far more.
 

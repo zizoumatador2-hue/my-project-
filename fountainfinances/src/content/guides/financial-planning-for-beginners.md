@@ -11,7 +11,7 @@ author: editorial-team
 quickAnswer: "A beginner’s financial plan has eight parts: clear goals, a net worth snapshot, a monthly budget, an emergency fund, a debt payoff plan, retirement saving (starting with any employer match), the right insurance and a yearly review. Write it down, automate the key steps and adjust as life changes."
 takeaways:
   - "Start with specific goals that have a cost and a deadline."
-  - "Build stability first — budget, emergency fund, high-interest debt — then focus on growth."
+  - "Build stability first (budget, emergency fund, high-interest debt) then focus on growth."
   - "Capture any employer retirement match; it is part of your pay."
   - "Review your plan every year and after major life events."
 faqs:
@@ -25,7 +25,7 @@ faqs:
     a: "Ask how they are paid (flat fee, hourly, percentage of assets or commissions), whether they act as a fiduciary at all times and what credentials they hold. You can check an adviser’s background with the SEC’s Investment Adviser Public Disclosure site and FINRA BrokerCheck."
 sources:
   - title: "Introduction to Investing"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
+    publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/introduction-investing"
   - title: "Retirement plans"
     publisher: "Internal Revenue Service"
@@ -60,7 +60,7 @@ related: ["50-30-20-rule", "term-vs-whole-life-insurance", "how-to-build-a-budge
 calculators: ["investment", "compound-interest", "budget"]
 ---
 
-A financial plan sounds like something only wealthy people or professionals need. In reality, it is simply a written answer to three questions: **Where am I now? Where do I want to go? How will I get there?** Anyone with an income can answer them — and the earlier you do, the more time your money has to work for you.
+A financial plan sounds like something only wealthy people or professionals need. In reality, it is simply a written answer to three questions: **Where am I now? Where do I want to go? How will I get there?** Anyone with an income can answer them, and the earlier you do, the more time your money has to work for you.
 
 This guide walks through eight steps to build your first financial plan. You can complete a first draft in an afternoon and refine it over time.
 
@@ -86,11 +86,11 @@ List everything you own (**assets**) and everything you owe (**liabilities**):
 
 > Net worth = assets − liabilities
 
-It is fine if it is negative — many people start there, especially with student loans. The point is to track the trend, ideally once or twice a year.
+It is fine if it is negative: many people start there, especially with student loans. The point is to track the trend, ideally once or twice a year.
 
 ## Step 3: Build a budget
 
-Your budget connects goals to daily life. It shows how much income is available for saving and debt payoff each month. Start with the 50/30/20 framework — 50% needs, 30% wants, 20% savings and debt — and adjust. Our guide on [how to build a monthly budget](/guides/how-to-build-a-budget/) walks through it, and the [budget calculator](/calculators/budget/) does the math.
+Your budget connects goals to daily life. It shows how much income is available for saving and debt payoff each month. Start with the 50/30/20 framework (50% needs, 30% wants, 20% savings and debt) and adjust. Our guide on [how to build a monthly budget](/guides/how-to-build-a-budget/) walks through it, and the [budget calculator](/calculators/budget/) does the math.
 
 ## Step 4: Build your emergency fund
 
@@ -98,7 +98,7 @@ An emergency fund keeps surprises from derailing the rest of your plan. Start wi
 
 ## Step 5: Tackle high-interest debt
 
-High-interest debt — especially credit cards — works against every other goal. Choose a payoff method (see [avalanche vs. snowball](/guides/debt-payoff-strategies/)) and automate it. Lower-rate debts such as a mortgage or federal student loans can usually be paid on schedule while you pursue other goals.
+High-interest debt (especially credit cards) works against every other goal. Choose a payoff method (see [avalanche vs. snowball](/guides/debt-payoff-strategies/)) and automate it. Lower-rate debts such as a mortgage or federal student loans can usually be paid on schedule while you pursue other goals.
 
 ## Step 6: Save for retirement
 
@@ -106,7 +106,7 @@ Retirement is usually the largest long-term goal, and time is your biggest advan
 
 1. **Get the full employer match.** If your employer matches 401(k) contributions, contribute at least enough to receive the full match.
 2. **Use tax-advantaged accounts.** Workplace plans like 401(k)s and 403(b)s, and individual retirement accounts (IRAs), offer tax benefits. The IRS publishes current [contribution limits and rules](https://www.irs.gov/retirement-plans).
-3. **Increase contributions over time** — for example, by 1% of pay each year or whenever you get a raise.
+3. **Increase contributions over time**: for example, by 1% of pay each year or whenever you get a raise.
 4. **Keep costs low.** Fund fees reduce long-term growth.
 
 Many planners suggest aiming for 10% to 15% of gross income over your career, including employer contributions. See the long-term effect in [how compound interest works](/guides/how-compound-interest-works/).
@@ -117,14 +117,14 @@ Many planners suggest aiming for 10% to 15% of gross income over your career, in
 
 Insurance prevents one bad event from wiping out years of progress:
 
-- **Health insurance** — medical bills are a leading financial risk.
-- **Disability insurance** — protects your income if you cannot work.
-- **Life insurance** — if anyone depends on your income. Term life is usually the most affordable way to cover that need.
-- **Auto, renters or homeowners insurance** — with liability limits high enough to protect your assets.
+- **Health insurance**: medical bills are a leading financial risk.
+- **Disability insurance**: protects your income if you cannot work.
+- **Life insurance**: if anyone depends on your income. Term life is usually the most affordable way to cover that need.
+- **Auto, renters or homeowners insurance**: with liability limits high enough to protect your assets.
 
 See our guide to [types of insurance](/guides/types-of-insurance/).
 
-Also cover the **estate basics**: name beneficiaries on retirement accounts and life insurance, and consider a will — essential if you have children — along with powers of attorney for finances and health care.
+Also cover the **estate basics**: name beneficiaries on retirement accounts and life insurance, and consider a will (essential if you have children) along with powers of attorney for finances and health care.
 
 ## Step 8: Review and adjust every year
 
@@ -153,8 +153,8 @@ If you are unsure what to do first, this sequence works for most people:
 
 ## Do you need a financial advisor?
 
-Many people can create and follow a solid plan on their own. Professional advice can help with complex situations: business ownership, equity compensation, large inheritances, divorce or complex tax planning. When choosing an adviser, ask how they are paid and whether they act as a **fiduciary** — legally required to act in your best interest. You can check backgrounds using FINRA’s [BrokerCheck](https://brokercheck.finra.org/).
+Many people can create and follow a solid plan on their own. Professional advice can help with complex situations: business ownership, equity compensation, large inheritances, divorce or complex tax planning. When choosing an adviser, ask how they are paid and whether they act as a **fiduciary**: legally required to act in your best interest. You can check backgrounds using FINRA’s [BrokerCheck](https://brokercheck.finra.org/).
 
 ## The bottom line
 
-A financial plan does not have to be complicated. Set clear goals, build stability with a budget, emergency fund and debt plan, then grow wealth through retirement saving — and protect it with insurance. Write it down, automate it and review it yearly. For more, explore our [financial planning](/financial-planning/) section and the complete [personal finance guide](/#personal-finance-guide).
+A financial plan does not have to be complicated. Set clear goals, build stability with a budget, emergency fund and debt plan, then grow wealth through retirement saving, and protect it with insurance. Write it down, automate it and review it yearly. For more, explore our [financial planning](/financial-planning/) section and the complete [personal finance guide](/#personal-finance-guide).

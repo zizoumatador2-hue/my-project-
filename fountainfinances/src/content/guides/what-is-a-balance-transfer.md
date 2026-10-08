@@ -22,7 +22,7 @@ faqs:
   - q: "Can I transfer a balance to a card I already have?"
     a: "Sometimes. Issuers occasionally offer balance transfer promotions to existing cardholders. Check your online account for offers."
   - q: "What happens if I don’t pay off the balance before the intro period ends?"
-    a: "The remaining balance starts accruing interest at the card’s regular APR from that point. Some store cards use deferred interest instead, which can charge interest retroactively — read the terms."
+    a: "The remaining balance starts accruing interest at the card’s regular APR from that point. Some store cards use deferred interest instead, which can charge interest retroactively: read the terms."
 sources:
   - title: "Credit cards"
     publisher: "Consumer Financial Protection Bureau"
@@ -54,11 +54,11 @@ calculators: ["credit-card-payoff", "debt-consolidation"]
 comparisons: ["balance-transfer-credit-cards"]
 ---
 
-If you are paying high interest on a credit card balance, a **balance transfer** can pause the interest for months and let every payment go toward the debt itself. It is one of the most effective tools for getting out of credit card debt — but only if you understand the fee, the timeline and the fine print.
+If you are paying high interest on a credit card balance, a **balance transfer** can pause the interest for months and let every payment go toward the debt itself. It is one of the most effective tools for getting out of credit card debt, but only if you understand the fee, the timeline and the fine print.
 
 ## How a balance transfer works
 
-1. You open a new card (or use an existing one) that offers a **promotional APR** on transferred balances — often 0% for a set number of months.
+1. You open a new card (or use an existing one) that offers a **promotional APR** on transferred balances, often 0% for a set number of months.
 2. You ask the new issuer to pay off some or all of your old card’s balance.
 3. That amount, plus a **balance transfer fee**, becomes a balance on the new card.
 4. You pay down the new balance during the promotional period, with little or no interest.
@@ -108,7 +108,7 @@ Compare widely available options in our [balance transfer credit cards compariso
 - **Keep paying the old card** until the transfer is complete to avoid a late payment.
 - **Avoid new purchases on the transfer card** unless purchases also have a 0% rate. Minimum payments may be applied to the lower-rate balance, though amounts above the minimum generally go to the highest-rate balance first under federal rules.
 - **Don’t miss a payment.** Some cards can end the promotional rate or apply a penalty APR after a late payment.
-- **Watch for deferred interest** on some store cards — unlike a true 0% APR, it can charge all the interest from the start if the balance is not paid in full by the deadline.
+- **Watch for deferred interest** on some store cards: unlike a true 0% APR, it can charge all the interest from the start if the balance is not paid in full by the deadline.
 
 ## Who a balance transfer is right for
 

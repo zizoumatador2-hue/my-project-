@@ -22,7 +22,7 @@ faqs:
   - q: "Is Public Service Loan Forgiveness still available?"
     a: "PSLF remains available to eligible borrowers who work full-time for qualifying government or nonprofit employers and make 120 qualifying payments under a qualifying repayment plan. Use the PSLF tools at StudentAid.gov to track your progress."
   - q: "Should I pay off student loans early?"
-    a: "If you are not pursuing forgiveness, extra payments reduce total interest — especially on higher-rate loans. Balance that goal against building an emergency fund, capturing any employer retirement match and paying down higher-interest debt."
+    a: "If you are not pursuing forgiveness, extra payments reduce total interest, especially on higher-rate loans. Balance that goal against building an emergency fund, capturing any employer retirement match and paying down higher-interest debt."
   - q: "Are student loan interest payments tax-deductible?"
     a: "You may be able to deduct up to $2,500 of student loan interest per year, subject to income limits. See IRS Publication 970 for current rules."
 sources:
@@ -55,7 +55,7 @@ When you borrow for education, the lender pays the school (and sometimes you, fo
 
 - **Principal:** the amount borrowed.
 - **Interest:** charged on the balance. On most loans, interest starts accruing when the money is disbursed. On **Direct Subsidized** federal loans, the government pays the interest while you are in school at least half-time and during certain other periods.
-- **Grace period:** a period after you leave school before repayment begins — six months for many federal loans.
+- **Grace period:** a period after you leave school before repayment begins. Six months for many federal loans.
 - **Capitalization:** unpaid interest added to your principal, after which you pay interest on it too.
 - **Servicer:** the company that handles billing and repayment plans for your loans.
 
@@ -82,7 +82,7 @@ A standard plan spreads your balance into fixed monthly payments over a set term
 
 Income-driven plans calculate your payment from your income and family size rather than your balance. They can make payments affordable when your income is low relative to your debt, and any remaining balance may be forgiven after a long repayment period.
 
-The 2025 legislation created a new income-based plan — the **Repayment Assistance Plan (RAP)** — for newer borrowers and set timelines for phasing out several older income-driven plans. Some existing borrowers can stay in or move between certain plans for a transition period. Because details depend on your loan dates and current plan, use the official plan pages at [StudentAid.gov](https://studentaid.gov/manage-loans/repayment/plans).
+The 2025 legislation created a new income-based plan (the **Repayment Assistance Plan (RAP)**) for newer borrowers and set timelines for phasing out several older income-driven plans. Some existing borrowers can stay in or move between certain plans for a transition period. Because details depend on your loan dates and current plan, use the official plan pages at [StudentAid.gov](https://studentaid.gov/manage-loans/repayment/plans).
 
 **Trade-off:** lower payments often mean more interest over time, and in some cases forgiven amounts may have tax consequences. Recertify your income on time each year.
 
@@ -105,30 +105,30 @@ Private loans follow the terms in your loan agreement. Options may include:
 - Interest-only or reduced payments while in school
 - Limited hardship forbearance
 
-Call your lender early if you are struggling — options are more limited than for federal loans, but many lenders have some hardship programs.
+Call your lender early if you are struggling: options are more limited than for federal loans, but many lenders have some hardship programs.
 
 ## Refinancing: when it helps and what you give up
 
 **Refinancing** replaces one or more student loans with a new private loan, ideally at a lower rate.
 
 - **Private loans:** refinancing can make sense if you qualify for a lower rate.
-- **Federal loans:** refinancing into a private loan **permanently forfeits** federal benefits — income-driven repayment, deferment and forbearance options, and forgiveness programs. Only consider it if you are confident you will not need those protections.
+- **Federal loans:** refinancing into a private loan **permanently forfeits** federal benefits. Income-driven repayment, deferment and forbearance options, and forgiveness programs. Only consider it if you are confident you will not need those protections.
 
 Federal loans can also be combined through a **Direct Consolidation Loan**, which simplifies payments but uses a weighted average interest rate (rounded up slightly) rather than lowering it.
 
 ## Strategies to pay less interest
 
 1. **Pay interest while in school** or during the grace period to prevent capitalization.
-2. **Enroll in autopay** — federal servicers and many private lenders offer a small rate reduction.
+2. **Enroll in autopay**: federal servicers and many private lenders offer a small rate reduction.
 3. **Pay extra and target the highest-rate loan.** Ask your servicer to apply extra payments to principal rather than advancing your due date.
 4. **Use windfalls** like tax refunds and bonuses for lump-sum payments.
-5. **Check employer benefits** — some employers help repay student loans.
+5. **Check employer benefits**: some employers help repay student loans.
 
 On a $32,000 balance at 6% over 10 years, the standard payment is about $355 a month and total interest is about $10,600. Adding $100 a month would pay the loan off almost three years sooner and save about $3,100 in interest. Try your own numbers in the [student loan calculator](/calculators/student-loan/).
 
 ## Avoiding default
 
-Federal loans generally go into **default** after about 270 days of missed payments. Consequences can include the entire balance becoming due, wage garnishment, seizure of tax refunds and serious credit damage. If you are struggling, contact your servicer before you miss payments — income-driven repayment, deferment or forbearance may be available.
+Federal loans generally go into **default** after about 270 days of missed payments. Consequences can include the entire balance becoming due, wage garnishment, seizure of tax refunds and serious credit damage. If you are struggling, contact your servicer before you miss payments: income-driven repayment, deferment or forbearance may be available.
 
 ## The bottom line
 

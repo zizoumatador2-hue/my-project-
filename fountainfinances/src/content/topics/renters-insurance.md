@@ -1,7 +1,7 @@
 ---
 title: "Renters Insurance"
 seoTitle: "Renters Insurance Explained: What It Covers and Costs"
-description: "What renters insurance covers — belongings, liability and additional living expenses — what it excludes, and how to choose limits and a deductible."
+description: "What renters insurance covers (belongings, liability and additional living expenses) what it excludes, and how to choose limits and a deductible."
 keywords: ["renters insurance", "affordable insurance", "renters insurance coverage", "types of insurance"]
 hub: insurance
 order: 4
@@ -20,7 +20,7 @@ faqs:
 
 ## What renters insurance covers
 
-- **Personal property:** your belongings, against covered events like fire, theft and certain water damage — even when they are outside your home in many cases.
+- **Personal property:** your belongings, against covered events like fire, theft and certain water damage, even when they are outside your home in many cases.
 - **Personal liability:** injuries to others or damage you accidentally cause, including legal defense.
 - **Additional living expenses:** temporary housing and costs if your rental becomes uninhabitable after a covered loss.
 - **Medical payments:** minor injuries to guests.
@@ -31,7 +31,7 @@ Floods and earthquakes are usually excluded, as is damage to the building itself
 
 ## Choosing coverage
 
-1. **Inventory your belongings** — photos or a video walkthrough make claims easier.
+1. **Inventory your belongings**: photos or a video walkthrough make claims easier.
 2. **Choose replacement cost coverage** rather than actual cash value if the budget allows.
 3. **Pick a deductible** your [emergency fund](/emergency-funds/) can cover.
 4. **Bundle** with auto insurance for a possible discount.

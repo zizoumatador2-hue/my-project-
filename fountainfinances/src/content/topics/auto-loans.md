@@ -20,15 +20,15 @@ faqs:
 
 ## How auto loans work
 
-An **auto loan** is a secured installment loan: the vehicle serves as collateral, which is why rates are usually lower than on unsecured personal loans. You repay the amount financed — the price plus taxes and fees, minus your down payment and trade-in — in fixed monthly payments.
+An **auto loan** is a secured installment loan: the vehicle serves as collateral, which is why rates are usually lower than on unsecured personal loans. You repay the amount financed (the price plus taxes and fees, minus your down payment and trade-in) in fixed monthly payments.
 
 ## What affects your auto loan rate
 
 - Your **credit score** and debt-to-income ratio.
-- **New vs. used** — used-car loans often carry higher rates.
-- **Loan term** — longer terms typically cost more.
-- **Down payment** — more down can mean better terms and less risk of negative equity.
-- **Lender** — banks, credit unions, online lenders and manufacturer-affiliated lenders all price differently.
+- **New vs. used**: used-car loans often carry higher rates.
+- **Loan term**: longer terms typically cost more.
+- **Down payment**: more down can mean better terms and less risk of negative equity.
+- **Lender**: banks, credit unions, online lenders and manufacturer-affiliated lenders all price differently.
 
 ## Smart steps when financing a car
 
@@ -38,4 +38,4 @@ An **auto loan** is a secured installment loan: the vehicle serves as collateral
 4. **Read the contract for add-ons** like extended warranties, GAP coverage and service plans, which you can often decline or buy elsewhere.
 5. **Keep the term as short as your budget allows.**
 
-Estimate your payment — including sales tax, fees and trade-in — with the [auto loan calculator](/calculators/auto-loan/), and read [how auto loans work](/guides/how-auto-loans-work/). The CFPB’s [auto loan resources](https://www.consumerfinance.gov/consumer-tools/auto-loans/) explain dealer financing in more detail.
+Estimate your payment (including sales tax, fees and trade-in) with the [auto loan calculator](/calculators/auto-loan/), and read [how auto loans work](/guides/how-auto-loans-work/). The CFPB’s [auto loan resources](https://www.consumerfinance.gov/consumer-tools/auto-loans/) explain dealer financing in more detail.

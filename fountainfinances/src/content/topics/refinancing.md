@@ -5,7 +5,7 @@ description: "When refinancing a mortgage makes sense, how to calculate your bre
 keywords: ["refinance mortgage", "when to refinance", "refinance break even", "cash out refinance"]
 hub: mortgage
 order: 4
-summary: "Replace your mortgage with a better one — when the numbers work."
+summary: "Replace your mortgage with a better one, when the numbers work."
 updated: 2026-09-28
 calculators: ["mortgage", "home-equity"]
 guides: ["how-mortgage-payments-work", "heloc-vs-home-equity-loan"]
@@ -13,7 +13,7 @@ faqs:
   - q: "How much lower does my rate need to be to refinance?"
     a: "There is no universal threshold. What matters is whether your monthly savings recover the closing costs before you expect to sell or refinance again. Calculate your break-even point."
   - q: "Does refinancing restart my loan?"
-    a: "Yes — a new loan starts a new amortization schedule. Refinancing a loan you have paid for years into a new 30-year term can lower the payment but increase total interest. Consider a shorter term."
+    a: "Yes: a new loan starts a new amortization schedule. Refinancing a loan you have paid for years into a new 30-year term can lower the payment but increase total interest. Consider a shorter term."
   - q: "Can I refinance with little equity?"
     a: "Options are limited with low equity, though some government-backed loans offer streamlined refinancing. Most conventional refinances require meaningful equity, especially to avoid mortgage insurance."
 ---

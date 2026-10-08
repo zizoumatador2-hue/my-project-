@@ -11,7 +11,7 @@ author: editorial-team
 quickAnswer: "Compound interest is interest earned on your original money plus the interest it has already earned. Each period your balance grows, so the next period’s interest is larger. The formula is A = P(1 + r/n)^(nt). Over long periods, time and regular contributions matter more than almost anything else."
 takeaways:
   - "Compounding means earning interest on interest, so growth accelerates over time."
-  - "Time is the most powerful input — starting ten years earlier can matter more than contributing more."
+  - "Time is the most powerful input: starting ten years earlier can matter more than contributing more."
   - "More frequent compounding helps slightly; the rate and time matter far more."
   - "Compounding works against you on debt such as credit cards, where unpaid interest grows your balance."
 faqs:
@@ -25,19 +25,19 @@ faqs:
     a: "Investments can compound when earnings such as dividends and gains are reinvested. Unlike savings account interest, investment returns are not guaranteed and can be negative in some years."
 sources:
   - title: "Compound Interest Calculator"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
+    publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"
   - title: "Truth in Savings (Regulation DD)"
     publisher: "Consumer Financial Protection Bureau"
     url: "https://www.consumerfinance.gov/rules-policy/regulations/1030/"
   - title: "Introduction to Investing"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
+    publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/introduction-investing"
 related: ["what-is-apy", "what-is-a-high-yield-savings-account", "financial-planning-for-beginners"]
 calculators: ["compound-interest", "investment", "cd"]
 ---
 
-Compound interest is the reason small, regular savings can become large sums — and the reason credit card balances can spiral. Understanding how it works helps you make better decisions on both sides of the ledger: saving and borrowing.
+Compound interest is the reason small, regular savings can become large sums, and the reason credit card balances can spiral. Understanding how it works helps you make better decisions on both sides of the ledger: saving and borrowing.
 
 This guide explains the idea in plain English, walks through the formula, and shows real examples. To try your own numbers, open the [compound interest calculator](/calculators/compound-interest/).
 
@@ -55,7 +55,7 @@ Here is $1,000 at 5% per year, compounded annually:
 | 10 | — | — | $1,628.89 |
 | 30 | — | — | $4,321.94 |
 
-With simple interest, you would have $1,500 after 10 years and $2,500 after 30. Compounding adds $128.89 over the first decade — and more than $1,800 over thirty years. The effect is small at first and enormous later.
+With simple interest, you would have $1,500 after 10 years and $2,500 after 30. Compounding adds $128.89 over the first decade, and more than $1,800 over thirty years. The effect is small at first and enormous later.
 
 ## The compound interest formula
 
@@ -100,7 +100,7 @@ Consider two savers who each earn 6% a year, compounded monthly:
 | Total contributed | $24,000 | $72,000 |
 | Balance at 65 | about $197,000 | about $201,000 |
 
-Saver A contributes one-third as much and ends up with almost the same amount — because the early money had 30 extra years to compound. Starting early is the closest thing to a financial superpower.
+Saver A contributes one-third as much and ends up with almost the same amount, because the early money had 30 extra years to compound. Starting early is the closest thing to a financial superpower.
 
 ### The rate matters, especially over long periods
 
@@ -114,7 +114,7 @@ $10,000 left alone for 30 years:
 
 *Annual compounding.*
 
-That is why moving savings from a low-rate account to a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) or a [CD](/guides/how-cds-work/) is worthwhile, and why long-term goals like retirement typically involve investing — accepting market risk in exchange for higher expected returns.
+That is why moving savings from a low-rate account to a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) or a [CD](/guides/how-cds-work/) is worthwhile, and why long-term goals like retirement typically involve investing: accepting market risk in exchange for higher expected returns.
 
 ### Contributions build the base
 
@@ -131,7 +131,7 @@ Some. More frequent compounding produces slightly more interest:
 | Monthly | $16,470.09 |
 | Daily | $16,486.65 |
 
-The difference between monthly and daily compounding is small. The rate and the time horizon matter far more. That is also why banks advertise **APY** — the annual percentage yield already reflects compounding, so you can compare accounts directly. Read [what is APY?](/guides/what-is-apy/) for details.
+The difference between monthly and daily compounding is small. The rate and the time horizon matter far more. That is also why banks advertise **APY**: the annual percentage yield already reflects compounding, so you can compare accounts directly. Read [what is APY?](/guides/what-is-apy/) for details.
 
 ## The Rule of 72
 
@@ -151,7 +151,7 @@ That is why paying off high-interest debt is often the best “return” availab
 
 ## Inflation: the other side of the equation
 
-Compound growth should be compared with inflation. If savings earn 2% while prices rise 3%, your purchasing power shrinks. For money you need soon, safety and access matter more than beating inflation. For long-term goals, you need growth that outpaces inflation over time — which is why retirement savings are usually invested rather than held in cash.
+Compound growth should be compared with inflation. If savings earn 2% while prices rise 3%, your purchasing power shrinks. For money you need soon, safety and access matter more than beating inflation. For long-term goals, you need growth that outpaces inflation over time, which is why retirement savings are usually invested rather than held in cash.
 
 ## Putting compound interest to work
 

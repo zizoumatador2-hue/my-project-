@@ -7,7 +7,7 @@ faqs:
   - q: "Where should a beginner start with personal finance?"
     a: "Start with a simple monthly budget so you know where your money goes. Then build a small emergency fund, make every minimum payment on time, and capture any employer retirement match before tackling bigger goals."
   - q: "What is the 50/30/20 rule?"
-    a: "It is a budgeting guideline that splits take-home pay into roughly 50% for needs, 30% for wants and 20% for savings and extra debt payments. It is a starting point, not a strict rule — adjust it to your costs and goals."
+    a: "It is a budgeting guideline that splits take-home pay into roughly 50% for needs, 30% for wants and 20% for savings and extra debt payments. It is a starting point, not a strict rule: adjust it to your costs and goals."
   - q: "How much of my income should I save?"
     a: "A common target is 20% of take-home pay across emergency savings, retirement and other goals. If that is out of reach today, start with a smaller automatic amount and increase it every time your income rises."
 ---
@@ -16,7 +16,7 @@ faqs:
 
 **Personal finance** is how you manage the money that flows through your life: what you earn, how you spend it, what you save, what you owe and how you protect it. It is less about complex investing and more about a handful of everyday decisions made consistently. The people who do well with money are rarely the ones with the most sophisticated strategies. They are the ones who have a plan, automate the important parts and avoid the expensive mistakes.
 
-This hub collects our guides, calculators and tips on the core building blocks — [budgeting](/budgeting/), [saving money](/saving-money/), [emergency funds](/emergency-funds/), [debt management](/debt-management/), [financial planning](/financial-planning/) and [day-to-day money management](/money-management/).
+This hub collects our guides, calculators and tips on the core building blocks: [budgeting](/budgeting/), [saving money](/saving-money/), [emergency funds](/emergency-funds/), [debt management](/debt-management/), [financial planning](/financial-planning/) and [day-to-day money management](/money-management/).
 
 ## The personal finance order of operations
 
@@ -30,7 +30,7 @@ It helps to tackle goals in a sensible order so each step supports the next. A w
 6. **Save for medium-term goals** such as a home down payment or a car, and increase retirement saving.
 7. **Protect your progress** with the right [insurance](/insurance/) and a basic estate plan.
 
-Not everyone will follow this exactly — someone with very high-interest debt might attack it before finishing the starter fund — but the order reflects a simple idea: stability first, then growth.
+Not everyone will follow this exactly (someone with very high-interest debt might attack it before finishing the starter fund) but the order reflects a simple idea: stability first, then growth.
 
 ## Budgeting: the foundation
 
@@ -38,7 +38,7 @@ A budget is a plan for your money before the month begins. Whether you use the 5
 
 ## Saving: building your safety net and your future
 
-Saving money is easier when it is automatic and has a clear purpose. Separate your savings by goal — an emergency fund, a travel fund, a down payment — and keep short-term savings in a federally insured account that pays a competitive rate, such as a [high-yield savings account](/high-yield-savings/). For practical ideas that do not require giving up everything you enjoy, read [how to save money every month](/guides/how-to-save-money-every-month/).
+Saving money is easier when it is automatic and has a clear purpose. Separate your savings by goal (an emergency fund, a travel fund, a down payment) and keep short-term savings in a federally insured account that pays a competitive rate, such as a [high-yield savings account](/high-yield-savings/). For practical ideas that do not require giving up everything you enjoy, read [how to save money every month](/guides/how-to-save-money-every-month/).
 
 ## Debt: using it without letting it use you
 
@@ -50,6 +50,6 @@ Financial planning connects today’s budget to tomorrow’s goals. Write down w
 
 ## Tools to get started
 
-- [Budget calculator](/calculators/budget/) — see your spending breakdown and savings rate.
-- [Emergency fund calculator](/calculators/emergency-fund/) — set a target and a timeline.
-- [Investment growth calculator](/calculators/investment/) — model long-term growth in today’s dollars.
+- [Budget calculator](/calculators/budget/): see your spending breakdown and savings rate.
+- [Emergency fund calculator](/calculators/emergency-fund/): set a target and a timeline.
+- [Investment growth calculator](/calculators/investment/): model long-term growth in today’s dollars.

@@ -1,7 +1,7 @@
 ---
 title: "Emergency Funds"
 seoTitle: "Emergency Fund Guide: How Much Emergency Savings You Need"
-description: "How much emergency savings you need, where to keep it and how to build an emergency fund quickly — with a free emergency fund calculator to set your target."
+description: "How much emergency savings you need, where to keep it and how to build an emergency fund quickly, with a free emergency fund calculator to set your target."
 keywords: ["emergency fund", "how much emergency savings", "emergency fund calculator", "how to build an emergency fund", "emergency savings guide"]
 hub: personal-finance
 order: 3
@@ -20,7 +20,7 @@ faqs:
 
 ## Why an emergency fund comes first
 
-An **emergency fund** is money set aside only for unexpected, necessary expenses and income interruptions. Without one, a surprise bill often goes on a credit card at a high interest rate — and a manageable problem becomes a long-term debt. Federal Reserve surveys of household well-being have repeatedly found that many adults would struggle to cover a modest unexpected expense with cash, which is why this is usually the first savings goal.
+An **emergency fund** is money set aside only for unexpected, necessary expenses and income interruptions. Without one, a surprise bill often goes on a credit card at a high interest rate, and a manageable problem becomes a long-term debt. Federal Reserve surveys of household well-being have repeatedly found that many adults would struggle to cover a modest unexpected expense with cash, which is why this is usually the first savings goal.
 
 ## How big should it be?
 
@@ -28,7 +28,7 @@ An **emergency fund** is money set aside only for unexpected, necessary expenses
 - **Full fund:** three to six months of essential expenses.
 - **Higher target (6–12 months):** self-employed, commission-based or seasonal income, single-income households and people in volatile industries.
 
-Essential expenses include housing, utilities, groceries, insurance, transportation, minimum debt payments and childcare — not everything you spend today.
+Essential expenses include housing, utilities, groceries, insurance, transportation, minimum debt payments and childcare, not everything you spend today.
 
 ## Where to keep it
 

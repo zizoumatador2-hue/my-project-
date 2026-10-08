@@ -18,5 +18,5 @@ const isAffiliate = Boolean(affiliateUrl);
     data-product={productId}
     data-placement={placement}
   >{label}<span class="sr-only"> at {provider} (opens in a new tab)</span> ↗</a>
-  <small class="muted" style="font-size:.78rem">{isAffiliate ? 'Affiliate link — we may earn a commission' : `On ${new URL(officialUrl).hostname.replace(/^www\./, '')}`}</small>
+  <small class="muted" style="font-size:.78rem">{isAffiliate ? 'Affiliate link: we may earn a commission' : `On ${new URL(officialUrl).hostname.replace(/^www\./, '')}`}</small>
 </span>

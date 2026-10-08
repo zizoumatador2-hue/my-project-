@@ -5,7 +5,7 @@ description: "How to build credit from scratch or rebuild it: secured cards, cre
 keywords: ["how to build credit", "build credit fast", "credit building tips", "how to establish credit"]
 hub: credit
 order: 4
-summary: "Establish credit from scratch — or rebuild it — with safe, proven tools."
+summary: "Establish credit from scratch (or rebuild it) with safe, proven tools."
 updated: 2026-09-28
 calculators: ["credit-card-payoff"]
 comparisons: ["credit-cards-for-beginners"]
@@ -33,8 +33,8 @@ Without a credit history, lenders have little to go on, which can make it hard t
 
 ## Credit building tips
 
-1. **Pay on time, every time** — payment history is the largest scoring factor.
-2. **Keep utilization low** — try to use a small share of your limit and pay the balance in full.
+1. **Pay on time, every time**: payment history is the largest scoring factor.
+2. **Keep utilization low**: try to use a small share of your limit and pay the balance in full.
 3. **Don’t apply for many cards at once.**
 4. **Keep your first accounts open** to lengthen your history.
 5. **Check your reports** at AnnualCreditReport.com to make sure accounts are reported correctly.

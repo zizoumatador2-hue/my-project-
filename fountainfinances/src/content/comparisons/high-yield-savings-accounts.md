@@ -1,14 +1,14 @@
 ---
 title: "Best High-Yield Savings Accounts: How to Compare Top Online Options"
 seoTitle: "Best High-Yield Savings Accounts of 2026: Compare Options"
-description: "Compare high-yield savings accounts from FDIC-insured online banks by features, access, fees and requirements — plus how to judge an account’s rate."
+description: "Compare high-yield savings accounts from FDIC-insured online banks by features, access, fees and requirements, plus how to judge an account’s rate."
 keywords: ["best high yield savings accounts", "high yield savings account rates", "high interest savings account", "online high yield savings", "savings account comparison"]
 hub: banking
 category: savings
 published: 2026-09-20
 updated: 2026-09-28
 author: editorial-team
-intro: "Six widely available, FDIC-insured high-yield savings options compared side by side — with the criteria that matter beyond the headline rate."
+intro: "Six widely available, FDIC-insured high-yield savings options compared side by side, with the criteria that matter beyond the headline rate."
 criteria:
   - name: "Deposit insurance"
     detail: "Every account listed is held at an FDIC-insured bank."
@@ -45,7 +45,7 @@ Most high-yield savings accounts look similar at first glance. The differences t
 - **Want everything in one place?** Choose a bank that also offers checking, so transfers are instant.
 - **Need ATM access to savings?** Few online savings accounts offer it; look for an optional ATM card.
 - **Saving for several goals?** Buckets or vaults inside one account keep goals organized.
-- **Qualifying activity required?** Some accounts pay their top rate only with direct deposit or other conditions — read the rules.
+- **Qualifying activity required?** Some accounts pay their top rate only with direct deposit or other conditions: read the rules.
 
 ## Before you open an account
 

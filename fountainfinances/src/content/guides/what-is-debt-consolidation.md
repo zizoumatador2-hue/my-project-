@@ -1,16 +1,16 @@
 ---
 title: "What Is Debt Consolidation? How It Works, Options and Risks"
 seoTitle: "What Is Debt Consolidation? Options, Pros, Cons & Risks"
-description: "How debt consolidation works, the main options — loans, balance transfers, debt management plans and home equity — and how to tell if it saves money."
+description: "How debt consolidation works, the main options (loans, balance transfers, debt management plans and home equity) and how to tell if it saves money."
 keywords: ["debt consolidation", "how debt consolidation works", "debt consolidation loans", "debt consolidation options", "debt consolidation calculator"]
 hub: loans
 topics: ["debt-consolidation", "debt-management", "personal-loans"]
 published: 2026-09-17
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "Debt consolidation combines several debts — usually credit cards — into one new debt, ideally at a lower interest rate with a single monthly payment and a fixed payoff date. Common options are personal loans, 0% balance transfer cards and nonprofit debt management plans. It saves money only if the total cost, including fees, is lower."
+quickAnswer: "Debt consolidation combines several debts (usually credit cards) into one new debt, ideally at a lower interest rate with a single monthly payment and a fixed payoff date. Common options are personal loans, 0% balance transfer cards and nonprofit debt management plans. It saves money only if the total cost, including fees, is lower."
 takeaways:
-  - "Consolidation doesn’t reduce what you owe — it changes the rate, payment and timeline."
+  - "Consolidation doesn’t reduce what you owe: it changes the rate, payment and timeline."
   - "Compare the new loan’s APR and fees against the weighted average rate on your current debts."
   - "A lower monthly payment can still cost more if the term is much longer."
   - "Consolidation only works if you stop adding new balances to the old accounts."
@@ -38,7 +38,7 @@ calculators: ["debt-consolidation", "loan", "credit-card-payoff"]
 comparisons: ["personal-loans", "balance-transfer-credit-cards"]
 ---
 
-When you are juggling several credit card balances, each with a different rate and due date, combining them into one payment can feel like a relief. That is the promise of **debt consolidation**. Done well, it lowers your interest rate, simplifies your finances and gives you a firm payoff date. Done poorly, it can cost more — or free up credit lines that get filled up again.
+When you are juggling several credit card balances, each with a different rate and due date, combining them into one payment can feel like a relief. That is the promise of **debt consolidation**. Done well, it lowers your interest rate, simplifies your finances and gives you a firm payoff date. Done poorly, it can cost more, or free up credit lines that get filled up again.
 
 This guide explains how consolidation works, compares the main options and shows how to check the math. Test your own debts in the [debt consolidation calculator](/calculators/debt-consolidation/).
 
@@ -47,7 +47,7 @@ This guide explains how consolidation works, compares the main options and shows
 You take out one new debt and use it to pay off several existing debts. Afterward, you have:
 
 - **One monthly payment** instead of several
-- **One interest rate** — ideally lower than what you were paying
+- **One interest rate**: ideally lower than what you were paying
 - **A fixed payoff date,** in the case of an installment loan
 
 The total you owe does not shrink on day one. What changes is how much interest you pay and how quickly you pay it off.
@@ -83,7 +83,7 @@ Arranged through a nonprofit credit counseling agency. The agency may negotiate 
 Borrowing against your home’s equity to pay off unsecured debt.
 
 - **Pros:** typically lower rates than unsecured credit.
-- **Cons:** your home becomes collateral — if you cannot repay, you could face foreclosure. Closing costs may apply.
+- **Cons:** your home becomes collateral, if you cannot repay, you could face foreclosure. Closing costs may apply.
 - **Best for:** homeowners with substantial equity, stable income and a firm plan to avoid new debt. See [HELOC vs. home equity loan](/guides/heloc-vs-home-equity-loan/).
 
 ### 5. 401(k) loan
@@ -107,18 +107,18 @@ Suppose you have three cards:
 
 At those payments, paying off all three would take almost four years and cost around $6,000 in interest. A 4-year personal loan at 13.5% APR with a 4% origination fee (borrowing about $12,190 so you receive $11,700) would have a payment of about $330 and total interest plus fees of about $4,140.
 
-In this example, consolidation would save roughly $1,900 **and** lower the monthly payment by about $80, while finishing at almost the same time — a clear win. But if the best rate you could get were close to your current rates, the fee could erase the savings. That is why comparing the total cost matters.
+In this example, consolidation would save roughly $1,900 **and** lower the monthly payment by about $80, while finishing at almost the same time: a clear win. But if the best rate you could get were close to your current rates, the fee could erase the savings. That is why comparing the total cost matters.
 
 The [debt consolidation calculator](/calculators/debt-consolidation/) runs this comparison with your numbers.
 
 ## Consolidation checklist
 
 1. **List your debts** with balances, APRs and payments.
-2. **Calculate your weighted average APR** — multiply each balance by its APR, add them up, divide by the total balance.
+2. **Calculate your weighted average APR**: multiply each balance by its APR, add them up, divide by the total balance.
 3. **Prequalify** with several lenders using soft credit checks.
 4. **Compare APR and total cost**, including origination fees or transfer fees.
 5. **Make sure the payment fits** your budget comfortably.
-6. **Plan to avoid new balances** — consider removing cards from your wallet and online stores.
+6. **Plan to avoid new balances**: consider removing cards from your wallet and online stores.
 
 ## Risks to understand
 

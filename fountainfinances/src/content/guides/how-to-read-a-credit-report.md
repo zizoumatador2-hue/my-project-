@@ -8,7 +8,7 @@ topics: ["credit-reports", "credit-scores"]
 published: 2026-09-27
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "A credit report has four main sections: personal information, accounts (tradelines), inquiries and negative items such as collections or public records. Review each for errors. If you find one, dispute it with the credit bureau and the company that reported it — for free. Bureaus generally must investigate within 30 days."
+quickAnswer: "A credit report has four main sections: personal information, accounts (tradelines), inquiries and negative items such as collections or public records. Review each for errors. If you find one, dispute it with the credit bureau and the company that reported it: for free. Bureaus generally must investigate within 30 days."
 takeaways:
   - "Get free reports from Equifax, Experian and TransUnion at AnnualCreditReport.com."
   - "Check every account’s status, balance, limit and payment history for accuracy."
@@ -65,7 +65,7 @@ Your credit report is the raw material for your credit score. Lenders, landlords
 
 ## Get your free credit reports
 
-Federal law gives you the right to free credit reports from each of the three nationwide credit bureaus — **Equifax, Experian and TransUnion**. The only official site is [AnnualCreditReport.com](https://www.annualcreditreport.com/), where free weekly reports are available. Be wary of look-alike sites that require payment or sign you up for subscriptions.
+Federal law gives you the right to free credit reports from each of the three nationwide credit bureaus: **Equifax, Experian and TransUnion**. The only official site is [AnnualCreditReport.com](https://www.annualcreditreport.com/), where free weekly reports are available. Be wary of look-alike sites that require payment or sign you up for subscriptions.
 
 Review all three reports, since each may contain different information.
 
@@ -74,7 +74,7 @@ Review all three reports, since each may contain different information.
 This section lists your name and name variations, current and past addresses, date of birth, Social Security number (partially masked) and sometimes employers.
 
 **Check for:**
-- Names or addresses you have never used — a possible sign of identity theft or a mixed file.
+- Names or addresses you have never used: a possible sign of identity theft or a mixed file.
 - Misspellings that could merge your file with someone else’s.
 
 Personal information does not directly affect your score, but errors here can lead to accounts that aren’t yours appearing on your report.
@@ -106,7 +106,7 @@ This is the heart of the report. Each credit account shows:
 
 **Hard inquiries** happen when you apply for credit and a lender reviews your report. They can lower your score slightly and appear on your report for two years.
 
-**Soft inquiries** — checking your own report, prequalification offers, account reviews by existing creditors — are visible only to you and do not affect your score.
+**Soft inquiries** (checking your own report, prequalification offers, account reviews by existing creditors) are visible only to you and do not affect your score.
 
 **Check for:** hard inquiries from lenders you never applied to, which can signal fraud.
 
@@ -114,9 +114,9 @@ This is the heart of the report. Each credit account shows:
 
 This section may show:
 
-- **Collection accounts** — debts sent to collection agencies.
-- **Charge-offs** — debts the lender has written off (you may still owe them).
-- **Bankruptcies** — the main public record that appears on credit reports today.
+- **Collection accounts**: debts sent to collection agencies.
+- **Charge-offs**: debts the lender has written off (you may still owe them).
+- **Bankruptcies**: the main public record that appears on credit reports today.
 
 Most negative items can be reported for **up to seven years**; Chapter 7 bankruptcy can be reported for up to **ten years**.
 
@@ -128,12 +128,12 @@ Under the Fair Credit Reporting Act, both the credit bureau and the company that
 
 1. **Document the error.** Note which bureau, which account and what is wrong.
 2. **Gather evidence:** statements, payment confirmations, letters, a police or identity theft report if relevant.
-3. **Dispute with the bureau** that shows the error — online, by mail (certified mail with return receipt is useful) or by phone. Explain clearly what is wrong and what the correct information is.
+3. **Dispute with the bureau** that shows the error: online, by mail (certified mail with return receipt is useful) or by phone. Explain clearly what is wrong and what the correct information is.
 4. **Dispute with the furnisher** (the lender or collector) as well.
 5. **Wait for the investigation.** Bureaus generally must investigate within **30 days** (sometimes 45) and send you the results. If information is changed or deleted, they must notify you.
 6. **Check your updated report.**
 
-The FTC provides [dispute instructions and sample letters](https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports). Disputing is free — you never need to pay a company to do it for you.
+The FTC provides [dispute instructions and sample letters](https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports). Disputing is free: you never need to pay a company to do it for you.
 
 ### If your dispute is rejected
 
@@ -156,4 +156,4 @@ Review all three reports at least once a year, and more often if you are plannin
 
 ## The bottom line
 
-Reading your credit report takes about 15 minutes per bureau. Check personal information, every account, inquiries and negative items; dispute anything inaccurate; and use free freezes to protect yourself. An accurate report is the foundation of a strong score — see [how credit scores work](/guides/how-credit-scores-work/) and [how to improve your credit score](/guides/how-to-improve-credit-score/).
+Reading your credit report takes about 15 minutes per bureau. Check personal information, every account, inquiries and negative items; dispute anything inaccurate; and use free freezes to protect yourself. An accurate report is the foundation of a strong score: see [how credit scores work](/guides/how-credit-scores-work/) and [how to improve your credit score](/guides/how-to-improve-credit-score/).

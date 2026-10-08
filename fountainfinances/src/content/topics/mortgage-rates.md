@@ -30,17 +30,17 @@ Mortgage rates change daily, and the rate you are offered depends heavily on you
 - Investor demand for mortgage-backed securities.
 
 **Personal factors** you can influence:
-- **Credit score** — higher scores typically qualify for lower rates.
+- **Credit score**: higher scores typically qualify for lower rates.
 - **Down payment and loan-to-value ratio.**
-- **Loan type and term** — 15-year loans usually have lower rates than 30-year loans.
+- **Loan type and term**: 15-year loans usually have lower rates than 30-year loans.
 - **Debt-to-income ratio.**
-- **Points** — paying discount points upfront can lower the rate.
+- **Points**: paying discount points upfront can lower the rate.
 
 ## How to get a better mortgage rate
 
 1. Raise your score before applying by lowering card balances and fixing report errors.
 2. Save for a larger down payment if feasible.
-3. **Compare at least three Loan Estimates** — the CFPB has found that many borrowers do not shop around, even though offers vary.
+3. **Compare at least three Loan Estimates**: the CFPB has found that many borrowers do not shop around, even though offers vary.
 4. Compare APRs and closing costs, not just the headline rate.
 5. Ask about first-time buyer programs in your state.
 

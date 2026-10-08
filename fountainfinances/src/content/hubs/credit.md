@@ -16,7 +16,7 @@ faqs:
 
 Your credit history follows you into many of the biggest financial decisions you will make. Lenders use it to decide whether to approve you for a credit card, car loan or mortgage and what interest rate to charge. Landlords may review it before renting to you, and in many states insurers use credit-based insurance scores when setting premiums. A strong credit profile can save you thousands of dollars over a lifetime simply through lower interest rates.
 
-This hub covers how [credit scores](/credit-scores/) are calculated, how to read your [credit reports](/credit-reports/), how to [build credit](/credit-building/) from scratch and how to choose and use [credit cards](/credit-cards/) — including [rewards](/credit-card-rewards/) and [balance transfers](/balance-transfers/).
+This hub covers how [credit scores](/credit-scores/) are calculated, how to read your [credit reports](/credit-reports/), how to [build credit](/credit-building/) from scratch and how to choose and use [credit cards](/credit-cards/): including [rewards](/credit-card-rewards/) and [balance transfers](/balance-transfers/).
 
 ## Credit reports vs. credit scores
 
@@ -37,7 +37,7 @@ FICO publishes the general weighting of the categories in its scores: **payment 
 
 ## Using credit cards wisely
 
-Credit cards are powerful tools when you pay the full statement balance every month: you get purchase protection, a grace period on interest and often rewards. They become expensive when you carry a balance, because card APRs are typically much higher than other forms of credit. Before choosing a card, read [how credit card interest works](/guides/how-credit-card-interest-works/) and learn how [credit card rewards](/guides/credit-card-rewards-explained/) actually add up. If you already carry balances, a [balance transfer](/guides/what-is-a-balance-transfer/) may help — or run your numbers through the [credit card payoff calculator](/calculators/credit-card-payoff/).
+Credit cards are powerful tools when you pay the full statement balance every month: you get purchase protection, a grace period on interest and often rewards. They become expensive when you carry a balance, because card APRs are typically much higher than other forms of credit. Before choosing a card, read [how credit card interest works](/guides/how-credit-card-interest-works/) and learn how [credit card rewards](/guides/credit-card-rewards-explained/) actually add up. If you already carry balances, a [balance transfer](/guides/what-is-a-balance-transfer/) may help, or run your numbers through the [credit card payoff calculator](/calculators/credit-card-payoff/).
 
 ## Your rights as a credit consumer
 

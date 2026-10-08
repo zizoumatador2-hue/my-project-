@@ -27,7 +27,7 @@ const minimum = verified(p.minimum);
       <p style="margin:0 0 12px"><strong>Worth a look for:</strong> {p.bestFor}</p>
       <dl class="kv">
         <dt>{rateLabel}</dt>
-        <dd>{rate ? <>{rate.text} <small class="muted">({rate.note})</small></> : <span>Variable — <a href={p.officialUrl} target="_blank" rel="noopener">check today’s rate</a></span>}</dd>
+        <dd>{rate ? <>{rate.text} <small class="muted">({rate.note})</small></> : <span>Variable: <a href={p.officialUrl} target="_blank" rel="noopener">check today’s rate</a></span>}</dd>
         <dt>Fees</dt>
         <dd>{fees ? <>{fees.text} <small class="muted">({fees.note})</small></> : <span>See provider’s fee schedule</span>}</dd>
         <dt>Minimums</dt>

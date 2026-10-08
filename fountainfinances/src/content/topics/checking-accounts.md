@@ -1,7 +1,7 @@
 ---
 title: "Checking Accounts"
 seoTitle: "Checking Accounts: Compare Free & Online Checking Accounts"
-description: "How to compare checking accounts: monthly fees, overdraft policies, ATM access, mobile features and FDIC insurance — including free online accounts."
+description: "How to compare checking accounts: monthly fees, overdraft policies, ATM access, mobile features and FDIC insurance, including free online accounts."
 keywords: ["checking accounts", "best checking accounts", "checking account comparison", "free checking accounts", "online checking accounts"]
 hub: banking
 order: 1
@@ -11,7 +11,7 @@ comparisons: ["checking-accounts"]
 guides: ["checking-vs-savings-account", "what-is-a-high-yield-savings-account"]
 faqs:
   - q: "What is a free checking account?"
-    a: "A checking account with no monthly maintenance fee, or one whose fee is easy to waive. Other fees — such as out-of-network ATM or overdraft fees — may still apply, so read the fee schedule."
+    a: "A checking account with no monthly maintenance fee, or one whose fee is easy to waive. Other fees (such as out-of-network ATM or overdraft fees) may still apply, so read the fee schedule."
   - q: "Do online checking accounts have ATMs?"
     a: "Many online banks give access to large fee-free ATM networks or reimburse some out-of-network ATM fees. Depositing cash can be harder, so check the options if you handle cash regularly."
   - q: "What do I need to open a checking account?"

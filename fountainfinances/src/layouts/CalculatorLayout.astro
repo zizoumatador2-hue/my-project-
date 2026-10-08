@@ -54,7 +54,7 @@ const updatedDate = new Date(updated);
       </div>
       <section class="calc-out" aria-labelledby="results-h" aria-live="polite">
         <h2 id="results-h">Your estimate</h2>
-        <p class="calc-warn" data-invalid-msg hidden>Please check the highlighted fields — one or more values are missing or out of range.</p>
+        <p class="calc-warn" data-invalid-msg hidden>Please check the highlighted fields: one or more values are missing or out of range.</p>
         <slot name="results" />
         <p class="calc-note">Estimates only. Figures are rounded and assume the inputs stay the same for the whole period.</p>
       </section>
@@ -70,7 +70,7 @@ const updatedDate = new Date(updated);
         <section aria-labelledby="learn-h">
           <h2 id="learn-h">Learn more</h2>
           <ul>
-            {guides.map((g) => <li><a href={`/guides/${g.id}/`}>{g.data.title}</a> — {g.data.description}</li>)}
+            {guides.map((g) => <li><a href={`/guides/${g.id}/`}>{g.data.title}</a>: {g.data.description}</li>)}
           </ul>
         </section>
       )}

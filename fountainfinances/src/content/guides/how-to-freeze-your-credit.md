@@ -8,7 +8,7 @@ topics: ["credit-reports", "credit-scores"]
 published: 2026-10-05
 updated: 2026-10-05
 author: editorial-team
-quickAnswer: "To freeze your credit, contact each of the three nationwide credit bureaus — Equifax, Experian and TransUnion — online, by phone or by mail. Freezes are free by federal law, take effect within one business day when requested online or by phone, and do not affect your credit score. Lift the freeze temporarily whenever you apply for credit."
+quickAnswer: "To freeze your credit, contact each of the three nationwide credit bureaus (Equifax, Experian and TransUnion) online, by phone or by mail. Freezes are free by federal law, take effect within one business day when requested online or by phone, and do not affect your credit score. Lift the freeze temporarily whenever you apply for credit."
 takeaways:
   - "Credit freezes are free at all three bureaus under federal law."
   - "You must freeze your credit separately at Equifax, Experian and TransUnion."
@@ -30,7 +30,7 @@ faqs:
     a: "Yes. You can get your free reports at AnnualCreditReport.com, and existing creditors, debt collectors and certain government agencies can still access your report."
 sources:
   - title: "Credit Freezes and Fraud Alerts"
-    publisher: "Federal Trade Commission — Consumer Advice"
+    publisher: "Federal Trade Commission: Consumer Advice"
     url: "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-and-fraud-alerts"
   - title: "What is a credit freeze or security freeze on my credit report?"
     publisher: "Consumer Financial Protection Bureau"
@@ -66,7 +66,7 @@ calculators: []
 comparisons: ["credit-cards-for-beginners"]
 ---
 
-A **credit freeze** (also called a security freeze) is one of the most effective, free ways to protect yourself from identity theft. It stops most lenders from seeing your credit report, which means a thief who has your personal information can't easily open new accounts in your name. This guide shows how to freeze — and unfreeze — your credit at each bureau. It is part of our [credit hub](/credit/) and pairs with our guide to [reading your credit report](/guides/how-to-read-a-credit-report/).
+A **credit freeze** (also called a security freeze) is one of the most effective, free ways to protect yourself from identity theft. It stops most lenders from seeing your credit report, which means a thief who has your personal information can't easily open new accounts in your name. This guide shows how to freeze (and unfreeze) your credit at each bureau. It is part of our [credit hub](/credit/) and pairs with our guide to [reading your credit report](/guides/how-to-read-a-credit-report/).
 
 ## What a credit freeze does
 
@@ -75,10 +75,10 @@ When your credit is frozen, the credit bureau will not release your report to co
 A freeze **does not**:
 
 - Affect your credit score.
-- Close or change your existing accounts — you can keep using your cards and loans.
+- Close or change your existing accounts: you can keep using your cards and loans.
 - Stop your existing creditors, debt collectors and certain government agencies from accessing your report.
 - Stop you from getting your own free reports at AnnualCreditReport.com.
-- Prevent all fraud — for example, misuse of an existing card number. Keep reviewing your statements.
+- Prevent all fraud, for example, misuse of an existing card number. Keep reviewing your statements.
 
 ## Credit freezes are free by law
 
@@ -93,11 +93,11 @@ Since September 2018, federal law has required Equifax, Experian and TransUnion 
 
 You need to contact **all three** nationwide credit bureaus, because lenders may check any one of them.
 
-- **Equifax** — equifax.com, credit freeze page, or by phone.
-- **Experian** — experian.com, freeze center, or by phone.
-- **TransUnion** — transunion.com, credit freeze page, or by phone.
+- **Equifax**: equifax.com, credit freeze page, or by phone.
+- **Experian**: experian.com, freeze center, or by phone.
+- **TransUnion**: transunion.com, credit freeze page, or by phone.
 
-Each bureau will ask for your name, address, date of birth and Social Security number, and may ask questions to confirm your identity. You'll typically create an online account or receive a PIN. **Store these credentials securely** — you'll need them to lift the freeze later.
+Each bureau will ask for your name, address, date of birth and Social Security number, and may ask questions to confirm your identity. You'll typically create an online account or receive a PIN. **Store these credentials securely**: you'll need them to lift the freeze later.
 
 The whole process usually takes 20–30 minutes for all three bureaus.
 
@@ -112,7 +112,7 @@ When you're ready to apply for a credit card, loan, apartment or new utility acc
 1. **Ask the lender which bureau it uses.** If you know, you only need to lift that one.
 2. **Log in to that bureau** and choose a **temporary lift** for a specific date range (for example, two weeks) or a **permanent removal**.
 3. **Apply.** Online and phone lifts must take effect within an hour.
-4. **Let the temporary lift expire** — the freeze returns automatically.
+4. **Let the temporary lift expire**: the freeze returns automatically.
 
 If you don't know which bureau a lender uses, lift all three for a short window.
 
@@ -130,7 +130,7 @@ A **fraud alert** is a good step if you think your information was exposed but y
 
 ## Freezing a child's credit
 
-Children rarely have credit reports, which makes them attractive targets for identity thieves — fraud can go unnoticed for years. Parents and guardians can **request a free freeze for children under 16** at each bureau. The bureau creates a record and freezes it. Requests for minors are usually made by mail with proof of identity and guardianship; check each bureau's instructions.
+Children rarely have credit reports, which makes them attractive targets for identity thieves: fraud can go unnoticed for years. Parents and guardians can **request a free freeze for children under 16** at each bureau. The bureau creates a record and freezes it. Requests for minors are usually made by mail with proof of identity and guardianship; check each bureau's instructions.
 
 ## When should you freeze your credit?
 
@@ -145,4 +145,4 @@ If you do become a victim of identity theft, go to **IdentityTheft.gov** to repo
 
 ## The bottom line
 
-Freezing your credit is free, takes about half an hour and doesn't affect your score. Lifting it when you need credit takes minutes. Combined with regular checks of your reports and statements, it is one of the best protections available to consumers. Once your reports are secure, focus on the habits that build strong credit — see our guides on [how to build credit](/guides/how-to-build-credit/) and [how credit scores work](/guides/how-credit-scores-work/).
+Freezing your credit is free, takes about half an hour and doesn't affect your score. Lifting it when you need credit takes minutes. Combined with regular checks of your reports and statements, it is one of the best protections available to consumers. Once your reports are secure, focus on the habits that build strong credit: see our guides on [how to build credit](/guides/how-to-build-credit/) and [how credit scores work](/guides/how-credit-scores-work/).

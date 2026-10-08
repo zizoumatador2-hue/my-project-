@@ -5,7 +5,7 @@ description: "How credit card rewards work: cash back vs. points vs. miles, how 
 keywords: ["credit card rewards", "cash back credit cards", "points vs miles", "rewards credit card comparison"]
 hub: credit
 order: 5
-summary: "Earn real value from cash back, points and miles — without overspending."
+summary: "Earn real value from cash back, points and miles, without overspending."
 updated: 2026-09-28
 calculators: ["credit-card-payoff"]
 guides: ["credit-card-rewards-explained", "how-credit-card-interest-works"]
@@ -21,7 +21,7 @@ faqs:
 ## Three kinds of rewards
 
 - **Cash back:** a percentage of spending returned as a statement credit, deposit or check. Some cards pay a flat rate on everything; others pay more in rotating or fixed categories.
-- **Points:** flexible currency you redeem for travel, gift cards, merchandise or cash — often at different values depending on how you redeem.
+- **Points:** flexible currency you redeem for travel, gift cards, merchandise or cash, often at different values depending on how you redeem.
 - **Miles:** points tied to an airline or hotel program, usually most valuable for flights or stays with that brand and its partners.
 
 ## How to value rewards

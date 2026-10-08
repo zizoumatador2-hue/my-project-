@@ -13,7 +13,7 @@ takeaways:
   - "Personal loans offer fixed rates, fixed payments and a set payoff date; credit cards are revolving and flexible."
   - "For borrowers with good credit, personal loan APRs are often lower than ongoing card APRs."
   - "A 0% intro APR card can beat a loan if you can repay before the promotion ends."
-  - "Always compare total cost — interest plus fees — not just the monthly payment."
+  - "Always compare total cost (interest plus fees) not just the monthly payment."
 faqs:
   - q: "Is a personal loan cheaper than a credit card?"
     a: "Often, for borrowers with good credit who need to repay over several years. But a 0% intro APR card can be cheaper for balances you can pay off during the promotional period. Compare APRs and fees for your situation."
@@ -38,7 +38,7 @@ calculators: ["loan", "credit-card-payoff", "debt-consolidation"]
 comparisons: ["personal-loans", "balance-transfer-credit-cards"]
 ---
 
-When you need to pay for something you cannot cover with savings — a medical bill, a home repair, consolidating existing balances — two of the most common options are a **personal loan** and a **credit card**. They work very differently, and choosing the wrong one can cost you hundreds or thousands of dollars in interest.
+When you need to pay for something you cannot cover with savings (a medical bill, a home repair, consolidating existing balances) two of the most common options are a **personal loan** and a **credit card**. They work very differently, and choosing the wrong one can cost you hundreds or thousands of dollars in interest.
 
 This guide compares them side by side, walks through real cost examples and gives you a simple way to decide. Use the [loan calculator](/calculators/loan/) and the [credit card payoff calculator](/calculators/credit-card-payoff/) to test your numbers.
 
@@ -73,19 +73,19 @@ Assume good credit and no new charges. We compare three paths:
 
 *Illustrative figures. Loan fee assumed paid from savings; actual rates and fees depend on the lender and your credit.*
 
-The card at a standard APR costs more than twice as much as the loan at the same monthly payment. But the 0% intro card is the cheapest option — *if* you can afford roughly $578 a month and pay it off before the promotion ends.
+The card at a standard APR costs more than twice as much as the loan at the same monthly payment. But the 0% intro card is the cheapest option: *if* you can afford roughly $578 a month and pay it off before the promotion ends.
 
 ## When a personal loan is better
 
 - **The expense is large** and you need more than a year or two to repay it.
 - **You want a predictable payment** and a definite end date.
-- **You are consolidating several card balances** into one lower-rate payment — see [what is debt consolidation?](/guides/what-is-debt-consolidation/)
+- **You are consolidating several card balances** into one lower-rate payment: see [what is debt consolidation?](/guides/what-is-debt-consolidation/)
 - **You do not trust yourself with an open credit line.** A loan cannot be re-borrowed once repaid.
 - **Your credit qualifies you for an APR well below your card’s rate.**
 
 ## When a credit card is better
 
-- **The purchase is small** and you can pay the full statement balance by the due date — you pay no interest at all.
+- **The purchase is small** and you can pay the full statement balance by the due date: you pay no interest at all.
 - **You qualify for a 0% intro APR** on purchases or balance transfers and can repay the balance before it ends. See [what is a balance transfer?](/guides/what-is-a-balance-transfer/)
 - **You want purchase protections** such as disputing charges with your issuer under federal billing error rules.
 - **You need flexible, ongoing access** for expenses that arrive gradually.
@@ -96,7 +96,7 @@ The card at a standard APR costs more than twice as much as the loan at the same
 
 - **Origination fees** may be deducted from the amount you receive, so borrow enough to cover what you need. The fee is included in the APR.
 - **Prepayment penalties** are uncommon but exist.
-- **Your rate depends on your credit.** Borrowers with fair credit may be quoted APRs close to — or above — card rates.
+- **Your rate depends on your credit.** Borrowers with fair credit may be quoted APRs close to (or above) card rates.
 
 **Credit cards**
 
@@ -114,8 +114,8 @@ The card at a standard APR costs more than twice as much as the loan at the same
 
 ## What about your credit score?
 
-Both products can help your credit if you pay on time. Applying for either usually causes a hard inquiry, which may lower your score slightly for a short time. Moving card balances to an installment loan lowers your **credit utilization**, which can help your score — as long as you do not run the cards back up.
+Both products can help your credit if you pay on time. Applying for either usually causes a hard inquiry, which may lower your score slightly for a short time. Moving card balances to an installment loan lowers your **credit utilization**, which can help your score, as long as you do not run the cards back up.
 
 ## The bottom line
 
-For large expenses you will repay over years, a fixed-rate personal loan usually costs less and keeps you on a clear schedule. For small purchases you pay in full — or balances you can clear during a 0% promotion — a credit card can cost nothing at all. Compare widely available lenders in our [personal loans comparison](/best/personal-loans/) and learn more in the [loans hub](/loans/).
+For large expenses you will repay over years, a fixed-rate personal loan usually costs less and keeps you on a clear schedule. For small purchases you pay in full (or balances you can clear during a 0% promotion) a credit card can cost nothing at all. Compare widely available lenders in our [personal loans comparison](/best/personal-loans/) and learn more in the [loans hub](/loans/).

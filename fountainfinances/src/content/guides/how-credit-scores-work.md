@@ -42,13 +42,13 @@ related: ["hard-vs-soft-credit-inquiry", "how-to-improve-credit-score", "how-to-
 calculators: ["credit-card-payoff"]
 ---
 
-Your credit score is one of the most influential numbers in your financial life. It helps determine whether you are approved for a credit card, auto loan or mortgage, and it strongly influences the interest rate you pay — which can mean thousands of dollars over the life of a loan. Yet many people are unsure how the number is actually calculated.
+Your credit score is one of the most influential numbers in your financial life. It helps determine whether you are approved for a credit card, auto loan or mortgage, and it strongly influences the interest rate you pay, which can mean thousands of dollars over the life of a loan. Yet many people are unsure how the number is actually calculated.
 
 This guide explains where credit scores come from, the five factors that drive them, what counts as a good score and the common myths worth ignoring. When you are ready to take action, our companion guide on [how to improve your credit score](/guides/how-to-improve-credit-score/) turns this knowledge into a plan.
 
 ## Where your credit score comes from
 
-A credit score starts with your **credit reports**. Three nationwide credit bureaus — **Equifax, Experian and TransUnion** — collect information from lenders about your accounts: balances, limits, payment history, when accounts were opened and more.
+A credit score starts with your **credit reports**. Three nationwide credit bureaus (**Equifax, Experian and TransUnion**) collect information from lenders about your accounts: balances, limits, payment history, when accounts were opened and more.
 
 Scoring companies such as **FICO** and **VantageScore** then apply mathematical models to that report data to produce a number that predicts how likely you are to become 90 or more days late on a payment in the future. Lenders use that prediction, along with your income and other information, to make decisions.
 
@@ -93,7 +93,7 @@ This factor looks at how much you owe, especially relative to your available cre
 
 If you have $2,000 in balances across cards with $10,000 in total limits, your utilization is 20%. Scoring models look at your overall utilization and at individual cards.
 
-Lower is better. Many experts suggest keeping utilization under 30%, and people with the highest scores often use under 10%. Importantly, utilization has no long-term “memory” in most models — pay balances down and your score can recover as soon as the new balances are reported.
+Lower is better. Many experts suggest keeping utilization under 30%, and people with the highest scores often use under 10%. Importantly, utilization has no long-term “memory” in most models: pay balances down and your score can recover as soon as the new balances are reported.
 
 **Action:** Pay balances down before the statement closing date, or make multiple payments during the month, so a lower balance is reported.
 
@@ -113,7 +113,7 @@ Rate shopping is treated differently. When you shop for a mortgage, auto loan or
 
 ### 5. Credit mix — about 10%
 
-Having experience with different types of credit — revolving accounts (credit cards) and installment loans (auto, student, mortgage, personal) — can help slightly. This is the least important factor, and it is never a good reason to take on debt you do not need.
+Having experience with different types of credit (revolving accounts (credit cards) and installment loans (auto, student, mortgage, personal)) can help slightly. This is the least important factor, and it is never a good reason to take on debt you do not need.
 
 ## What is not in your credit score
 
@@ -129,7 +129,7 @@ Your credit score does **not** consider:
 
 ## FICO vs. VantageScore
 
-**FICO** scores are the most widely used in lending decisions, and there are many versions — including older versions that mortgage lenders have long used and industry-specific scores for auto lending and credit cards.
+**FICO** scores are the most widely used in lending decisions, and there are many versions, including older versions that mortgage lenders have long used and industry-specific scores for auto lending and credit cards.
 
 **VantageScore** was created by the three credit bureaus and is used by many free credit monitoring services. Recent versions also range from 300 to 850 and consider similar information, though the models weigh factors differently and can score thin credit files that FICO may not.
 
@@ -141,7 +141,7 @@ When you apply for credit, a lender typically:
 
 1. Pulls your credit report and one or more scores (a hard inquiry).
 2. Reviews your income, employment and existing debts.
-3. Decides whether to approve you and at what rate — a practice called risk-based pricing.
+3. Decides whether to approve you and at what rate: a practice called risk-based pricing.
 
 If you are denied or offered worse terms based on your credit report, federal law generally requires the lender to send you an **adverse action notice** or risk-based pricing notice explaining the key factors and how to get a free copy of your report.
 

@@ -5,7 +5,7 @@ description: "How balance transfer credit cards work: 0% intro APR offers, trans
 keywords: ["balance transfer credit cards", "best balance transfer cards", "0 percent balance transfer cards", "balance transfer offers"]
 hub: credit
 order: 6
-summary: "Use a 0% intro APR to pay down card debt faster — if the math works."
+summary: "Use a 0% intro APR to pay down card debt faster, if the math works."
 updated: 2026-09-28
 calculators: ["credit-card-payoff", "debt-consolidation"]
 comparisons: ["balance-transfer-credit-cards"]
@@ -26,7 +26,7 @@ A **balance transfer** moves debt from one or more credit cards to a new card, u
 ## Do the math before you apply
 
 1. **Estimate the interest you would pay** on your current card over the promo period. The [credit card payoff calculator](/calculators/credit-card-payoff/) can help.
-2. **Calculate the transfer fee** — a percentage of the amount you move.
+2. **Calculate the transfer fee**: a percentage of the amount you move.
 3. **Divide the balance (plus fee) by the number of promo months** to find the monthly payment needed to clear it in time.
 
 If the fee is far less than the interest you would save and you can afford the payment, a transfer can make sense.

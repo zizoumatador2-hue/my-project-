@@ -16,11 +16,11 @@ const lines = [
 const faqs = [
   {
     q: 'What is a good savings percentage for a monthly budget?',
-    a: 'A common benchmark is saving at least 20% of take-home pay, which is the "savings" share of the 50/30/20 rule. If that is not realistic yet, start with any consistent amount — even 5% — and raise it each time your income rises or a debt is paid off.',
+    a: 'A common benchmark is saving at least 20% of take-home pay, which is the "savings" share of the 50/30/20 rule. If that is not realistic yet, start with any consistent amount (even 5%) and raise it each time your income rises or a debt is paid off.',
   },
   {
     q: 'Should I use gross income or take-home pay in a budget?',
-    a: 'Use take-home pay — the amount that actually lands in your bank account after taxes, retirement contributions and payroll deductions. Budgeting from gross income overstates what you can spend.',
+    a: 'Use take-home pay, the amount that actually lands in your bank account after taxes, retirement contributions and payroll deductions. Budgeting from gross income overstates what you can spend.',
   },
   {
     q: 'What if my expenses are higher than my income?',
@@ -59,7 +59,7 @@ const faqs = [
   </div>
 
   <h2>How to use this budget calculator</h2>
-  <p>Enter your monthly <strong>take-home pay</strong> — what reaches your checking account after taxes and payroll deductions — and then your typical spending in each category. The calculator totals your expenses, shows how much income is left over, and converts that leftover into a <strong>savings rate</strong>, the share of your income you are keeping.</p>
+  <p>Enter your monthly <strong>take-home pay</strong> (what reaches your checking account after taxes and payroll deductions) and then your typical spending in each category. The calculator totals your expenses, shows how much income is left over, and converts that leftover into a <strong>savings rate</strong>, the share of your income you are keeping.</p>
   <p>The fastest way to get accurate numbers is to pull the last two or three months of bank and credit card statements and average each category. Estimates from memory are almost always too low, especially for food, subscriptions and "miscellaneous" spending.</p>
 
   <h2>How the numbers are calculated</h2>
@@ -71,7 +71,7 @@ const faqs = [
   </ul>
 
   <h2>Comparing your results with the 50/30/20 rule</h2>
-  <p>The 50/30/20 rule is a simple starting framework: roughly <strong>50% of take-home pay for needs</strong> (housing, utilities, groceries, insurance, minimum debt payments), <strong>30% for wants</strong> and <strong>20% for savings and extra debt payoff</strong>. It is not a law of nature — in high-cost cities housing alone can take 40% or more — but it is a useful way to see which part of your budget is under pressure.</p>
+  <p>The 50/30/20 rule is a simple starting framework: roughly <strong>50% of take-home pay for needs</strong> (housing, utilities, groceries, insurance, minimum debt payments), <strong>30% for wants</strong> and <strong>20% for savings and extra debt payoff</strong>. It is not a law of nature (in high-cost cities housing alone can take 40% or more) but it is a useful way to see which part of your budget is under pressure.</p>
   <div class="table-scroll">
     <table>
       <caption class="sr-only">50/30/20 budget example on $5,000 take-home pay</caption>
@@ -83,7 +83,7 @@ const faqs = [
       </tbody>
     </table>
   </div>
-  <p>If your leftover amount is small or negative, our step-by-step guide on <a href="/guides/how-to-build-a-budget/">how to build a monthly budget</a> walks through choosing a budgeting method and trimming the categories that matter most. Once you have a surplus, direct it first toward an emergency cushion — the <a href="/calculators/emergency-fund/">emergency fund calculator</a> will tell you how big it should be.</p>
+  <p>If your leftover amount is small or negative, our step-by-step guide on <a href="/guides/how-to-build-a-budget/">how to build a monthly budget</a> walks through choosing a budgeting method and trimming the categories that matter most. Once you have a surplus, direct it first toward an emergency cushion: the <a href="/calculators/emergency-fund/">emergency fund calculator</a> will tell you how big it should be.</p>
 </CalculatorLayout>
 
 <script>
@@ -108,9 +108,9 @@ const faqs = [
     const housing = v.income > 0 ? (v.housing / v.income) * 100 : 0;
     out('tip').textContent =
       r.remaining < 0
-        ? 'Your expenses exceed your income. Start with the largest bars above — small cuts to big categories add up fastest.'
+        ? 'Your expenses exceed your income. Start with the largest bars above: small cuts to big categories add up fastest.'
         : r.savingsRate >= 20
-          ? 'You are keeping 20% or more of your income — a strong position for building savings and paying down debt.'
+          ? 'You are keeping 20% or more of your income: a strong position for building savings and paying down debt.'
           : housing > 35
             ? 'Housing takes more than 35% of your income, which leaves less room for saving. It is the category with the biggest long-term impact.'
             : 'Try to raise your savings rate toward 20% over time by redirecting raises and paid-off debt payments into savings.';

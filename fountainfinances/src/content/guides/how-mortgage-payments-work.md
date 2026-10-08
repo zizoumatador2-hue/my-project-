@@ -1,14 +1,14 @@
 ---
 title: "How Mortgage Payments Work: Principal, Interest, Escrow and PMI"
 seoTitle: "How Mortgage Payments Work: PITI, Amortization & Escrow"
-description: "How mortgage payments work: principal and interest, amortization, escrow for taxes and insurance, PMI and how extra payments shorten your loan — with examples."
+description: "How mortgage payments work: principal and interest, amortization, escrow for taxes and insurance, PMI and how extra payments shorten your loan, with examples."
 keywords: ["how mortgage payments work", "mortgage payment calculator", "monthly mortgage calculator", "mortgage amortization", "PMI"]
 hub: mortgage
 topics: ["mortgage-basics", "mortgage-rates", "refinancing"]
 published: 2026-09-12
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "A monthly mortgage payment usually has four parts — principal, interest, property taxes and homeowners insurance (PITI) — plus mortgage insurance if your down payment was small. Early payments go mostly to interest; over time more goes to principal. Taxes and insurance are collected into an escrow account and paid by your servicer."
+quickAnswer: "A monthly mortgage payment usually has four parts (principal, interest, property taxes and homeowners insurance (PITI)) plus mortgage insurance if your down payment was small. Early payments go mostly to interest; over time more goes to principal. Taxes and insurance are collected into an escrow account and paid by your servicer."
 takeaways:
   - "Principal and interest stay the same on a fixed-rate loan, but the split between them changes every month."
   - "Escrow payments can rise or fall when property taxes or insurance premiums change."
@@ -90,17 +90,17 @@ On the $340,000 loan above:
 | Payment 180 (year 15) | about $1,341 | about $808 |
 | Payment 360 (final) | about $12 | about $2,137 |
 
-Over 30 years, total interest on this loan would be about $434,000 — more than the amount borrowed. That is why rate, term and extra payments matter so much.
+Over 30 years, total interest on this loan would be about $434,000: more than the amount borrowed. That is why rate, term and extra payments matter so much.
 
 ## What escrow is and why it changes
 
 Most lenders require an **escrow account** (also called an impound account). Each month, part of your payment goes into the account, and your servicer uses it to pay property taxes and homeowners insurance when they are due.
 
-Once a year, the servicer performs an **escrow analysis**. If taxes or insurance went up, your monthly payment increases — even on a fixed-rate loan. If there is a shortage, you may be asked to pay it as a lump sum or spread over the next year. If there is a surplus above a set amount, you generally receive a refund.
+Once a year, the servicer performs an **escrow analysis**. If taxes or insurance went up, your monthly payment increases, even on a fixed-rate loan. If there is a shortage, you may be asked to pay it as a lump sum or spread over the next year. If there is a surplus above a set amount, you generally receive a refund.
 
 ## Private mortgage insurance (PMI)
 
-If you put less than 20% down on a conventional loan, lenders usually require **PMI**, which protects the lender — not you — if you default. It is typically charged monthly as a percentage of the loan.
+If you put less than 20% down on a conventional loan, lenders usually require **PMI**, which protects the lender (not you) if you default. It is typically charged monthly as a percentage of the loan.
 
 Under the federal Homeowners Protection Act, for most conventional loans:
 

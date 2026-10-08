@@ -13,7 +13,7 @@ faqs:
   - q: "Does homeowners insurance cover floods?"
     a: "Standard homeowners policies generally exclude flood damage. Flood insurance is available through the National Flood Insurance Program (NFIP) and some private insurers, and may be required by your lender in high-risk flood zones."
   - q: "How much homeowners insurance do I need?"
-    a: "Dwelling coverage should be enough to rebuild your home at current construction costs — which can differ from its market value. Add enough personal property and liability coverage to protect your belongings and assets."
+    a: "Dwelling coverage should be enough to rebuild your home at current construction costs, which can differ from its market value. Add enough personal property and liability coverage to protect your belongings and assets."
   - q: "Is homeowners insurance required?"
     a: "No law requires it, but mortgage lenders almost always require it as a condition of the loan."
 ---
@@ -39,4 +39,4 @@ Floods, earthquakes, routine wear and tear, pest damage and neglected maintenanc
 
 ## Saving on home insurance
 
-Compare quotes annually, bundle with auto insurance, raise your deductible if your savings allow, install protective devices, and ask about discounts for a new roof or claims-free history. Your premium is often paid through your mortgage escrow account — see [how mortgage payments work](/guides/how-mortgage-payments-work/).
+Compare quotes annually, bundle with auto insurance, raise your deductible if your savings allow, install protective devices, and ask about discounts for a new roof or claims-free history. Your premium is often paid through your mortgage escrow account: see [how mortgage payments work](/guides/how-mortgage-payments-work/).

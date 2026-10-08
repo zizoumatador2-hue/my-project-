@@ -14,7 +14,7 @@ faqs:
 
 ## Borrowing with your eyes open
 
-A loan lets you pay for something today and spread the cost over time — but that convenience has a price. The two numbers that matter most are the **APR**, which captures the yearly cost of borrowing including many fees, and the **total amount you will repay** over the life of the loan. Two loans with similar monthly payments can differ by thousands of dollars in total cost.
+A loan lets you pay for something today and spread the cost over time, but that convenience has a price. The two numbers that matter most are the **APR**, which captures the yearly cost of borrowing including many fees, and the **total amount you will repay** over the life of the loan. Two loans with similar monthly payments can differ by thousands of dollars in total cost.
 
 This hub covers [personal loans](/personal-loans/), [auto loans](/auto-loans/), [student loans](/student-loans/) and [debt consolidation](/debt-consolidation/), plus calculators to estimate payments before you apply.
 
@@ -47,4 +47,4 @@ Most personal, auto and student loans are **installment loans**: you borrow a fi
 
 ## Protecting yourself
 
-Legitimate lenders disclose the APR and total cost before you sign, as the Truth in Lending Act requires. Be wary of any lender that guarantees approval regardless of credit, asks for an upfront fee before funding a loan, or pressures you to decide immediately — these are common signs of scams described by the [Federal Trade Commission](https://consumer.ftc.gov/). If you are struggling with existing debt, a nonprofit credit counselor may be able to help you build a plan.
+Legitimate lenders disclose the APR and total cost before you sign, as the Truth in Lending Act requires. Be wary of any lender that guarantees approval regardless of credit, asks for an upfront fee before funding a loan, or pressures you to decide immediately: these are common signs of scams described by the [Federal Trade Commission](https://consumer.ftc.gov/). If you are struggling with existing debt, a nonprofit credit counselor may be able to help you build a plan.

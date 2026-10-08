@@ -36,7 +36,7 @@ Card issuers must present key terms in a standardized table in the application, 
 
 ## Credit cards for beginners
 
-If you have little or no credit history, a **secured card** — backed by a refundable deposit — or a **starter card** with a low limit and no annual fee can help you build credit. Use it for small, planned purchases and pay the statement in full. See our comparison of [credit cards for beginners](/best/credit-cards-for-beginners/) and read [how to build credit](/guides/how-to-build-credit/).
+If you have little or no credit history, a **secured card** (backed by a refundable deposit) or a **starter card** with a low limit and no annual fee can help you build credit. Use it for small, planned purchases and pay the statement in full. See our comparison of [credit cards for beginners](/best/credit-cards-for-beginners/) and read [how to build credit](/guides/how-to-build-credit/).
 
 ## Use cards without paying interest
 

@@ -14,7 +14,7 @@ faqs:
 
 ## Understanding your biggest loan
 
-For most Americans, a mortgage is the largest and longest financial commitment they will ever make. Small differences matter enormously: on a 30-year loan, a rate just half a percentage point lower can save tens of thousands of dollars over the life of the loan. Understanding how mortgages work — before you talk to a lender — puts you in a much stronger position.
+For most Americans, a mortgage is the largest and longest financial commitment they will ever make. Small differences matter enormously: on a 30-year loan, a rate just half a percentage point lower can save tens of thousands of dollars over the life of the loan. Understanding how mortgages work (before you talk to a lender) puts you in a much stronger position.
 
 This hub covers [mortgage basics](/mortgage-basics/), how [mortgage rates](/mortgage-rates/) are set, guidance for [first-time home buyers](/first-time-home-buyers/), when [refinancing](/refinancing/) makes sense and how to use [home equity](/home-equity/).
 
@@ -44,4 +44,4 @@ The Consumer Financial Protection Bureau encourages borrowers to get **Loan Esti
 
 ## Home equity and refinancing
 
-As you pay down your loan and your home appreciates, you build **equity**. You can tap it with a home equity loan, a HELOC or a cash-out refinance — each with different costs and risks. Compare them in [HELOC vs. home equity loan](/guides/heloc-vs-home-equity-loan/) and estimate your borrowing power with the [home equity calculator](/calculators/home-equity/).
+As you pay down your loan and your home appreciates, you build **equity**. You can tap it with a home equity loan, a HELOC or a cash-out refinance: each with different costs and risks. Compare them in [HELOC vs. home equity loan](/guides/heloc-vs-home-equity-loan/) and estimate your borrowing power with the [home equity calculator](/calculators/home-equity/).

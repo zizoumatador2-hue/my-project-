@@ -16,7 +16,7 @@ faqs:
 
 Budgeting and saving build your financial foundation; insurance protects it. A single car accident, house fire, lawsuit or death in the family can undo years of careful saving. Insurance transfers the risk of those large, unpredictable losses to an insurer in exchange for a predictable premium.
 
-The goal is not to insure against everything. It is to insure against losses you could not afford to absorb on your own — and to handle smaller costs with your [emergency fund](/emergency-funds/).
+The goal is not to insure against everything. It is to insure against losses you could not afford to absorb on your own, and to handle smaller costs with your [emergency fund](/emergency-funds/).
 
 This hub covers [auto insurance](/auto-insurance/), [home insurance](/home-insurance/), [renters insurance](/renters-insurance/) and [life insurance](/life-insurance/). For an overview of every major type, start with our guide to the [types of insurance](/guides/types-of-insurance/).
 
@@ -38,7 +38,7 @@ This hub covers [auto insurance](/auto-insurance/), [home insurance](/home-insur
 2. **Set limits that match your exposure.** State minimum auto liability limits are often far lower than the cost of a serious accident.
 3. **Choose a deductible you can pay from savings.** A higher deductible lowers premiums but only makes sense if you have the cash.
 4. **Compare at least three quotes** with the same coverage limits and deductibles so the prices are truly comparable.
-5. **Review every year** and after major life events — a move, a marriage, a new child or a new home.
+5. **Review every year** and after major life events: a move, a marriage, a new child or a new home.
 
 ## Checking an insurer
 

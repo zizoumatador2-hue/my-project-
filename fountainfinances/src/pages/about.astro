@@ -19,20 +19,20 @@ const comparisonCount = (await getCollection('comparisons')).length;
 >
   <h2>What Fountain Finances is</h2>
   <p><strong>Fountain Finances</strong> is an independent financial education and comparison website for consumers in the United States. We publish in-depth guides on budgeting, saving, credit, banking, loans, mortgages and insurance; build free calculators that show the real cost of financial decisions; and compare widely available financial products using criteria we publish openly.</p>
-  <p>Our name reflects what we believe good financial decisions create: a steady source of stability that keeps growing over time. The fountain in our logo rises from a solid base — the same way lasting financial health grows from the basics done well.</p>
+  <p>Our name reflects what we believe good financial decisions create: a steady source of stability that keeps growing over time. The fountain in our logo rises from a solid base, the same way lasting financial health grows from the basics done well.</p>
 
   <h2>What we are not</h2>
-  <p>Fountain Finances is <strong>not</strong> a bank, lender, credit card issuer, broker, insurance company or registered investment adviser. We do not hold customer money, make loans, process applications or make credit decisions. Nothing on this site is individualized financial, investment, tax, legal or credit advice. When a decision depends on your full circumstances, we encourage you to speak with a qualified professional — and to confirm every rate, fee and term directly with the provider.</p>
+  <p>Fountain Finances is <strong>not</strong> a bank, lender, credit card issuer, broker, insurance company or registered investment adviser. We do not hold customer money, make loans, process applications or make credit decisions. Nothing on this site is individualized financial, investment, tax, legal or credit advice. When a decision depends on your full circumstances, we encourage you to speak with a qualified professional, and to confirm every rate, fee and term directly with the provider.</p>
 
   <h2>Who we serve</h2>
   <p>We write for everyday Americans: people building their first budget, paying down credit cards, choosing a savings account, shopping for a car loan or buying a first home. We assume no prior knowledge, define every term we use and focus on the decisions that have the largest effect on your finances.</p>
 
   <h2>What you can do here</h2>
   <ul>
-    <li><strong>Learn</strong> — read <a href="/guides/">guides</a> that explain how financial products and decisions actually work, with sources you can check.</li>
-    <li><strong>Calculate</strong> — use <a href="/calculators/">free calculators</a> for budgets, loans, mortgages, credit card payoff, savings growth and more. Everything runs in your browser; we never see the numbers you enter.</li>
-    <li><strong>Compare</strong> — review <a href="/best/">side-by-side comparisons</a> that list products alphabetically with their trade-offs rather than declaring a single winner.</li>
-    <li><strong>Plan</strong> — follow our <a href="/#personal-finance-guide">complete personal finance guide</a> from first budget to long-term goals.</li>
+    <li><strong>Learn</strong>: read <a href="/guides/">guides</a> that explain how financial products and decisions actually work, with sources you can check.</li>
+    <li><strong>Calculate</strong>: use <a href="/calculators/">free calculators</a> for budgets, loans, mortgages, credit card payoff, savings growth and more. Everything runs in your browser; we never see the numbers you enter.</li>
+    <li><strong>Compare</strong>: review <a href="/best/">side-by-side comparisons</a> that list products alphabetically with their trade-offs rather than declaring a single winner.</li>
+    <li><strong>Plan</strong>: follow our <a href="/#personal-finance-guide">complete personal finance guide</a> from first budget to long-term goals.</li>
   </ul>
 
   <h2>Our principles</h2>
@@ -57,8 +57,8 @@ const comparisonCount = (await getCollection('comparisons')).length;
   <ul>
     <li><strong>{guideCount} in-depth guides</strong> across {HUBS.length} sections: {HUBS.map((h, i) => <>{i > 0 && ', '}<a href={`/${h.slug}/`}>{h.shortTitle}</a></>)}.</li>
     <li><strong>{topicCount} topic pages</strong> that collect the guides, calculators and comparisons for each subject.</li>
-    <li><strong>{CALCULATORS.length} free calculators</strong> — see <a href="/calculators/">all calculators</a>.</li>
-    <li><strong>{comparisonCount} product comparisons</strong> with a published methodology — see <a href="/best/">all comparisons</a>.</li>
+    <li><strong>{CALCULATORS.length} free calculators</strong>: see <a href="/calculators/">all calculators</a>.</li>
+    <li><strong>{comparisonCount} product comparisons</strong> with a published methodology: see <a href="/best/">all comparisons</a>.</li>
     <li>Policies: <a href="/privacy/">Privacy Policy</a>, <a href="/terms/">Terms of Use</a>, <a href="/disclaimer/">Disclaimer</a>, <a href="/affiliate-disclosure/">Advertiser &amp; affiliate disclosure</a>, <a href="/corrections/">Corrections</a> and <a href="/accessibility/">Accessibility</a>.</li>
     <li>Every page on the site is listed on our <a href="/site-map/">site map</a>.</li>
   </ul>
@@ -72,5 +72,5 @@ const comparisonCount = (await getCollection('comparisons')).length;
     <dt>Founder &amp; publisher</dt><dd>{SITE.founder}</dd>
     <dt>Founded</dt><dd>{SITE.foundingYear}</dd>
   </dl>
-  <p>We read every message and aim to reply within two business days — for questions, feedback, corrections, privacy requests or partnership inquiries.</p>
+  <p>We read every message and aim to reply within two business days, whether you have questions, feedback, corrections, privacy requests or partnership inquiries.</p>
 </PageLayout>

@@ -9,7 +9,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undef
   title="Contact Fountain Finances"
   heading="Contact Us"
   description="Contact the Fountain Finances editorial team with questions, feedback, corrections or partnership inquiries. We reply to most messages within two business days."
-  lede="Questions, feedback, a correction or a partnership idea — we read every message."
+  lede="Questions, feedback, a correction or a partnership idea: we read every message."
   showUpdated={false}
   schema={[{ '@type': 'ContactPage', url: abs('/contact/'), name: 'Contact Fountain Finances', about: { '@id': ORG_ID } }]}
 >
@@ -56,7 +56,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undef
         <dt>Response time</dt><dd>Within two business days (Monday–Friday)</dd>
         <dt>Language</dt><dd>English</dd>
         <dt>Advertising &amp; partnerships</dt><dd>Email us with “Partnership” in the subject line</dd>
-        <dt>Privacy requests</dt><dd>Use the form and choose “Privacy request”, or email us — see our <a href="/privacy/#rights">Privacy Policy</a></dd>
+        <dt>Privacy requests</dt><dd>Use the form and choose “Privacy request”, or email us (see our <a href="/privacy/#rights">Privacy Policy</a>)</dd>
       </dl>
       <h2>Before you write</h2>
       <ul>
@@ -79,7 +79,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undef
       if (!d.get('consent')) return 'Please tick the consent box so we can reply.';
       return null;
     },
-    success: 'Thank you — your message has been sent. We’ll reply by email.',
+    success: 'Thank you. Your message has been sent. We’ll reply by email.',
     event: 'contact_submit',
   });
 </script>

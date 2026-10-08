@@ -13,14 +13,14 @@ takeaways:
   - "High-yield accounts carry the same FDIC or NCUA insurance as any other bank deposit account."
   - "Rates are variable and tend to move with the broader interest rate environment."
   - "They are ideal for emergency funds and short-term goals, not for long-term investing."
-  - "Compare APY, fees, minimums, transfer speed and the bank’s rate history — not only today’s rate."
+  - "Compare APY, fees, minimums, transfer speed and the bank’s rate history, not only today’s rate."
 faqs:
   - q: "How much interest will I earn in a high-yield savings account?"
     a: "Multiply your balance by the APY for a rough one-year estimate. $10,000 at a 4.00% APY earns about $400 in a year if the rate stays the same. Use our compound interest calculator for other amounts and time frames."
   - q: "Is interest from a high-yield savings account taxable?"
     a: "Yes. Interest is generally taxable as ordinary income in the year it is credited. Your bank reports interest of $10 or more on Form 1099-INT."
   - q: "How many high-yield savings accounts should I have?"
-    a: "One is enough for many people, but some open several accounts — or use a bank that offers sub-accounts — to separate goals like an emergency fund, travel and a down payment."
+    a: "One is enough for many people, but some open several accounts (or use a bank that offers sub-accounts) to separate goals like an emergency fund, travel and a down payment."
   - q: "Can I lose money in a high-yield savings account?"
     a: "Insured balances do not lose value from market movements or bank failure up to insurance limits. Fees can reduce your balance, and inflation can reduce purchasing power if it exceeds your APY."
   - q: "How quickly can I withdraw money?"
@@ -61,7 +61,7 @@ A high-yield savings account works like any other savings account:
 2. **Interest accrues**, typically compounded daily and credited monthly.
 3. **You withdraw** by transferring money to your checking account, usually within one to three business days.
 
-The key difference is the rate. Because interest compounds — you earn interest on your interest — a higher APY makes a noticeable difference over time. Our guide on [what APY means](/guides/what-is-apy/) explains the calculation in detail.
+The key difference is the rate. Because interest compounds (you earn interest on your interest) a higher APY makes a noticeable difference over time. Our guide on [what APY means](/guides/what-is-apy/) explains the calculation in detail.
 
 ### Rates are variable
 
@@ -116,28 +116,28 @@ A **money market account** is a deposit account (different from a money market *
 - Variable rates can fall
 - Transfers to other banks can take a few days
 - Many providers are online-only, with limited or no cash deposit options
-- Returns may lag inflation over long periods — not a substitute for long-term investing
+- Returns may lag inflation over long periods, not a substitute for long-term investing
 
 ## When to use a high-yield savings account
 
 High-yield savings accounts are well suited for:
 
-- **Your emergency fund** — see our [emergency fund guide](/guides/emergency-fund-guide/)
+- **Your emergency fund**: see our [emergency fund guide](/guides/emergency-fund-guide/)
 - **Short-term goals** in the next one to three years: a car, a wedding, travel
 - **A home down payment** you plan to use soon
 - **Sinking funds** for annual expenses like insurance premiums and holidays
 - **Cash waiting to be invested**
 
-For money you will not need for many years, such as retirement savings, long-term investments have historically offered higher growth potential — along with the risk of loss.
+For money you will not need for many years, such as retirement savings, long-term investments have historically offered higher growth potential: along with the risk of loss.
 
 ## What to compare before opening an account
 
-1. **APY** — and how it has changed over time. A consistently competitive bank may be better than one with a short-lived promotional rate.
-2. **Fees** — the best accounts have no monthly maintenance fees.
-3. **Minimums** — to open, and to earn the advertised rate.
-4. **Rate tiers** — some accounts pay the top rate only on part of your balance.
-5. **Access** — transfer limits, speed, ATM card availability and a linked checking account.
-6. **Insurance** — confirm the bank or credit union’s status directly.
+1. **APY**: and how it has changed over time. A consistently competitive bank may be better than one with a short-lived promotional rate.
+2. **Fees**: the best accounts have no monthly maintenance fees.
+3. **Minimums**: to open, and to earn the advertised rate.
+4. **Rate tiers**: some accounts pay the top rate only on part of your balance.
+5. **Access**: transfer limits, speed, ATM card availability and a linked checking account.
+6. **Insurance**: confirm the bank or credit union’s status directly.
 7. **Customer service and app quality.**
 
 You can review widely available options in our [high-yield savings accounts comparison](/best/high-yield-savings-accounts/).

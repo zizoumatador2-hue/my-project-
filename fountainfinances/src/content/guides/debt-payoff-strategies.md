@@ -37,12 +37,12 @@ related: ["how-to-pay-off-credit-card-debt", "what-is-debt-consolidation", "how-
 calculators: ["credit-card-payoff", "debt-consolidation"]
 ---
 
-Paying off several debts at once can feel overwhelming, especially when each has a different balance, rate and due date. A clear strategy turns that pile into an ordered list with a finish line. The two most popular approaches — the **avalanche** and the **snowball** — both work. They simply optimize for different things.
+Paying off several debts at once can feel overwhelming, especially when each has a different balance, rate and due date. A clear strategy turns that pile into an ordered list with a finish line. The two most popular approaches (the **avalanche** and the **snowball**) both work. They simply optimize for different things.
 
 ## The foundation both methods share
 
 1. **List every debt:** balance, APR, minimum payment and due date.
-2. **Set a total monthly debt budget** — the amount you can put toward debt each month, above the minimums if possible. A [monthly budget](/guides/how-to-build-a-budget/) will show how much you can spare.
+2. **Set a total monthly debt budget**: the amount you can put toward debt each month, above the minimums if possible. A [monthly budget](/guides/how-to-build-a-budget/) will show how much you can spare.
 3. **Pay the minimum on every debt** to avoid late fees and credit damage.
 4. **Put every extra dollar toward one target debt.**
 5. **When the target is paid off, roll its entire payment into the next target.**
@@ -110,7 +110,7 @@ In this case, both methods finish at about the same time. The avalanche saves ro
 
 ### Increase your monthly debt budget
 
-- Trim flexible spending — see [how to save money every month](/guides/how-to-save-money-every-month/).
+- Trim flexible spending: see [how to save money every month](/guides/how-to-save-money-every-month/).
 - Direct windfalls and raises to debt.
 - Sell items you no longer use.
 
@@ -132,7 +132,7 @@ If a debt collector contacts you, you have rights under the Fair Debt Collection
 
 ## Staying motivated
 
-- **Track progress visually** — a chart or a list you cross off.
+- **Track progress visually**: a chart or a list you cross off.
 - **Celebrate milestones** in small, inexpensive ways.
 - **Automate payments** so progress happens even in busy months.
 - **Review monthly** and adjust your budget as needed.

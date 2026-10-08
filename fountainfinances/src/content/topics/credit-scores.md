@@ -20,7 +20,7 @@ faqs:
 
 ## What a credit score is
 
-A **credit score** is a three-digit number that estimates how likely you are to repay borrowed money on time. Lenders use it — along with your income and other information — to decide whether to approve an application and what rate to offer. The most widely used scores come from **FICO** and **VantageScore**, both of which typically range from 300 to 850.
+A **credit score** is a three-digit number that estimates how likely you are to repay borrowed money on time. Lenders use it (along with your income and other information) to decide whether to approve an application and what rate to offer. The most widely used scores come from **FICO** and **VantageScore**, both of which typically range from 300 to 850.
 
 ## Credit score ranges
 
@@ -40,7 +40,7 @@ According to FICO, its scores are based on **payment history (35%)**, **amounts 
 
 ## Credit score tips
 
-1. Pay every bill on time — set up autopay for at least the minimum.
+1. Pay every bill on time: set up autopay for at least the minimum.
 2. Keep credit card balances low relative to limits; many experts suggest under 30%, and lower is better.
 3. Avoid opening several new accounts in a short time.
 4. Keep older accounts open if they have no annual fee.

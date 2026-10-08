@@ -5,7 +5,7 @@ description: "How to calculate home equity, how home equity loans and HELOCs wor
 keywords: ["home equity", "home equity loan", "home equity loan rates", "home equity calculator", "HELOC vs home equity loan"]
 hub: mortgage
 order: 5
-summary: "Understand and tap the value you’ve built in your home — carefully."
+summary: "Understand and tap the value you’ve built in your home: carefully."
 updated: 2026-09-28
 calculators: ["home-equity", "mortgage"]
 guides: ["heloc-vs-home-equity-loan", "what-is-debt-consolidation"]
@@ -32,7 +32,7 @@ Lenders typically limit total borrowing to a set **combined loan-to-value ratio 
 
 ## Good and risky uses
 
-Borrowing against equity can be reasonable for home improvements that add value, or to replace much higher-interest debt with a plan to repay it. It is risky for discretionary spending, because **your home secures the loan** — if you cannot repay, you could lose it.
+Borrowing against equity can be reasonable for home improvements that add value, or to replace much higher-interest debt with a plan to repay it. It is risky for discretionary spending, because **your home secures the loan**: if you cannot repay, you could lose it.
 
 ## Tax note
 

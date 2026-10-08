@@ -1,7 +1,7 @@
 ---
 title: "Best Balance Transfer Credit Cards: 0% Intro APR Cards Compared"
 seoTitle: "Best Balance Transfer Credit Cards of 2026: 0% APR Compared"
-description: "Compare balance transfer credit cards with 0% intro APR offers by transfer window, fees and fine print — and learn how to check if a transfer saves money."
+description: "Compare balance transfer credit cards with 0% intro APR offers by transfer window, fees and fine print, and learn how to check if a transfer saves money."
 keywords: ["best balance transfer cards", "balance transfer credit cards", "0 percent balance transfer cards", "balance transfer offers"]
 hub: credit
 category: balance-transfer
@@ -41,7 +41,7 @@ calculators: ["credit-card-payoff", "debt-consolidation"]
 ## Run the numbers before applying
 
 1. **Find the transfer fee** in the card’s pricing table and multiply it by your balance.
-2. **Estimate the interest you’d pay** by keeping the balance where it is — try the [credit card payoff calculator](/calculators/credit-card-payoff/).
+2. **Estimate the interest you’d pay** by keeping the balance where it is: try the [credit card payoff calculator](/calculators/credit-card-payoff/).
 3. **Divide the balance plus fee by the intro months** to get your required payment.
 
 If the fee is much smaller than the interest you’d save and the payment fits your budget, a transfer can make sense. Read the full walkthrough in [what is a balance transfer?](/guides/what-is-a-balance-transfer/).

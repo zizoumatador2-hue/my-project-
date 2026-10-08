@@ -13,7 +13,7 @@ takeaways:
   - "Lenders focus on your debt-to-income (DTI) ratio, credit score, down payment and cash reserves."
   - "Being approved for a loan is not the same as being able to afford it comfortably."
   - "Budget for closing costs, moving costs, maintenance and an emergency fund that survives closing."
-  - "Interest rates change affordability dramatically — recalculate whenever rates move."
+  - "Interest rates change affordability dramatically: recalculate whenever rates move."
 faqs:
   - q: "How much house can I afford on $75,000 a year?"
     a: "Using the 28% guideline, about $1,750 a month for principal, interest, taxes and insurance. With a 6.5% rate, 1.1% property tax, $1,800 insurance, 10% down and no other debts, that supports a price of roughly $240,000. Use our affordability calculator for your exact figures."
@@ -37,14 +37,14 @@ related: ["how-to-remove-pmi", "how-mortgage-payments-work", "first-time-home-bu
 calculators: ["home-affordability", "mortgage"]
 ---
 
-The question “how much house can I afford?” really has two answers. The first is **what a lender will approve** — a number based on ratios and credit. The second is **what you can comfortably pay** while still saving, handling repairs and living your life. This guide covers both. For a quick estimate, open the [home affordability calculator](/calculators/home-affordability/).
+The question “how much house can I afford?” really has two answers. The first is **what a lender will approve**: a number based on ratios and credit. The second is **what you can comfortably pay** while still saving, handling repairs and living your life. This guide covers both. For a quick estimate, open the [home affordability calculator](/calculators/home-affordability/).
 
 ## The 28/36 rule
 
 A long-standing lending guideline uses two ratios based on **gross monthly income** (before taxes):
 
-- **Front-end ratio (28%):** housing costs — principal, interest, property taxes, homeowners insurance, mortgage insurance and HOA dues — should be at or below about 28% of gross income.
-- **Back-end ratio (36%):** all monthly debt payments including housing — car loans, student loans, card minimums — should be at or below about 36%.
+- **Front-end ratio (28%):** housing costs (principal, interest, property taxes, homeowners insurance, mortgage insurance and HOA dues) should be at or below about 28% of gross income.
+- **Back-end ratio (36%):** all monthly debt payments including housing (car loans, student loans, card minimums) should be at or below about 36%.
 
 The lower of the two limits sets your maximum housing payment.
 
@@ -58,15 +58,15 @@ Gross income of $100,000 a year = $8,333 a month. Existing debts: $500 a month.
 | Back-end 36% | $8,333 × 0.36 − $500 | $2,500 |
 | **Limit** | Lower of the two | **$2,333** |
 
-Many loan programs allow higher ratios — sometimes 43% or more for total debt — especially with strong credit or large reserves. But higher ratios leave less margin for everything else.
+Many loan programs allow higher ratios (sometimes 43% or more for total debt) especially with strong credit or large reserves. But higher ratios leave less margin for everything else.
 
 ## From a payment to a price
 
 Once you know your target payment, the price you can afford depends on:
 
-- **Interest rate** — the biggest swing factor.
-- **Down payment** — more down means a smaller loan.
-- **Property taxes** — which vary widely by location.
+- **Interest rate**: the biggest swing factor.
+- **Down payment**: more down means a smaller loan.
+- **Property taxes**: which vary widely by location.
 - **Homeowners insurance** and **HOA dues.**
 - **Mortgage insurance** if you put less than 20% down on a conventional loan.
 
@@ -86,12 +86,12 @@ A two-point change in rates moves the affordable price by roughly $60,000. That 
 
 ## What lenders actually look at
 
-1. **Credit score** — affects approval and your rate.
-2. **Debt-to-income ratio** — as above.
-3. **Down payment** — and where the money came from.
-4. **Employment and income stability** — typically two years of history.
-5. **Cash reserves** — savings left after closing, measured in months of payments.
-6. **The property** — appraisal and condition.
+1. **Credit score**: affects approval and your rate.
+2. **Debt-to-income ratio**: as above.
+3. **Down payment**: and where the money came from.
+4. **Employment and income stability**: typically two years of history.
+5. **Cash reserves**: savings left after closing, measured in months of payments.
+6. **The property**: appraisal and condition.
 
 ## Down payment: how much do you need?
 
@@ -108,7 +108,7 @@ A larger down payment lowers your monthly payment, can reduce your rate and may 
 
 This is where many first-time buyers get surprised:
 
-- **Closing costs:** lender fees, appraisal, title insurance, recording fees and prepaid taxes and insurance — often a few percent of the loan amount.
+- **Closing costs:** lender fees, appraisal, title insurance, recording fees and prepaid taxes and insurance, often a few percent of the loan amount.
 - **Moving and setup:** movers, furniture, window coverings, tools.
 - **Maintenance and repairs:** a common planning guideline is 1% to 2% of the home’s value per year, more for older homes.
 - **Utilities:** usually higher in a house than an apartment.
@@ -122,13 +122,13 @@ Instead of starting with what a lender allows, start with your [monthly budget](
 
 1. Take your current take-home pay.
 2. Subtract savings goals (retirement, emergency fund) and non-housing expenses.
-3. What remains is the most you can spend on housing — including maintenance and utilities.
+3. What remains is the most you can spend on housing, including maintenance and utilities.
 
 If that number is lower than the lender’s maximum, trust your budget.
 
 ## Ways to afford more house (safely)
 
-- **Raise your credit score** to qualify for a lower rate — see [how to improve your credit score](/guides/how-to-improve-credit-score/).
+- **Raise your credit score** to qualify for a lower rate: see [how to improve your credit score](/guides/how-to-improve-credit-score/).
 - **Pay down debts** to lower your back-end ratio.
 - **Save a larger down payment.**
 - **Explore first-time buyer programs** and down payment assistance through your state housing finance agency.

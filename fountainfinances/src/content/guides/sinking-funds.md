@@ -12,7 +12,7 @@ quickAnswer: "A sinking fund is money you set aside a little at a time for a spe
 takeaways:
   - "Sinking funds are for planned, predictable costs; emergency funds are for surprises."
   - "Monthly amount = cost ÷ months until the bill is due."
-  - "Annual and semi-annual bills are the usual budget-breakers — start with those."
+  - "Annual and semi-annual bills are the usual budget-breakers: start with those."
   - "Keep sinking funds in an insured savings account, ideally one that pays a competitive APY."
   - "Automate the transfers on payday so the money is there when the bill arrives."
 faqs:
@@ -52,7 +52,7 @@ calculators: ["budget", "emergency-fund"]
 comparisons: ["high-yield-savings-accounts"]
 ---
 
-Most budgets don't fail because of the rent. They fail because of the bills that show up once or twice a year — the car insurance premium, the holiday season, the vet visit, the new set of tires. A **sinking fund** turns those budget-breakers into small, predictable monthly amounts. This guide explains how sinking funds work, how they differ from an emergency fund and how to set them up in under an hour. It complements our guides to the [50/30/20 rule](/guides/50-30-20-rule/) and [building a monthly budget](/guides/how-to-build-a-budget/).
+Most budgets don't fail because of the rent. They fail because of the bills that show up once or twice a year: the car insurance premium, the holiday season, the vet visit, the new set of tires. A **sinking fund** turns those budget-breakers into small, predictable monthly amounts. This guide explains how sinking funds work, how they differ from an emergency fund and how to set them up in under an hour. It complements our guides to the [50/30/20 rule](/guides/50-30-20-rule/) and [building a monthly budget](/guides/how-to-build-a-budget/).
 
 ## What is a sinking fund?
 
@@ -60,9 +60,9 @@ A **sinking fund** is money you save gradually for a specific, expected expense.
 
 Three things define a sinking fund:
 
-1. **A specific purpose** — "car insurance," not "general savings."
-2. **A target amount** — what you expect the expense to cost.
-3. **A deadline** — when the money will be needed.
+1. **A specific purpose**: "car insurance," not "general savings."
+2. **A target amount**: what you expect the expense to cost.
+3. **A deadline**: when the money will be needed.
 
 ## Sinking fund vs. emergency fund
 
@@ -111,7 +111,7 @@ The calculation is simple:
 
 If an expense is due soon and you're starting late, the monthly amount will be higher the first time around. Once the cycle resets, it drops to the steady annual rate.
 
-For costs that recur but vary — like car repairs — use your average over the past two or three years. If you have no history, a modest starting amount (say $50 a month) is better than nothing.
+For costs that recur but vary (like car repairs) use your average over the past two or three years. If you have no history, a modest starting amount (say $50 a month) is better than nothing.
 
 ## How to set up sinking funds
 
@@ -120,7 +120,7 @@ For costs that recur but vary — like car repairs — use your average over the
 3. **Calculate the monthly amount** with the formula above.
 4. **Choose where to keep the money.** A separate, insured savings account works well. Many online banks let you open multiple savings "buckets" or nickname sub-accounts, so each fund has its own balance. Because the money may sit for months, a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) earns noticeably more than a typical savings account. Compare options on our [high-yield savings accounts page](/best/high-yield-savings-accounts/).
 5. **Automate the transfers** for payday. Our free [budget calculator](/calculators/budget/) helps you see where the monthly total fits.
-6. **Pay the bill from the fund** when it arrives — and start saving for the next one.
+6. **Pay the bill from the fund** when it arrives, and start saving for the next one.
 
 ### One account or several?
 
@@ -131,7 +131,7 @@ Either approach is fine. The key is that sinking-fund money is not mixed with yo
 
 ## Fitting sinking funds into your budget
 
-Sinking funds don't add a new expense — they spread costs you already have more evenly. In a [50/30/20 budget](/guides/50-30-20-rule/), the monthly amounts for needs (insurance, registration) sit in the 50% needs bucket, wants (vacations, gifts) in the 30% bucket, and longer-term goals in the 20% savings bucket.
+Sinking funds don't add a new expense: they spread costs you already have more evenly. In a [50/30/20 budget](/guides/50-30-20-rule/), the monthly amounts for needs (insurance, registration) sit in the 50% needs bucket, wants (vacations, gifts) in the 30% bucket, and longer-term goals in the 20% savings bucket.
 
 If the total feels too large right now, start with the two or three biggest irregular bills, especially those that have pushed you onto a credit card in the past. Avoiding even one surprise card balance can save real money: carrying a balance at a typical card APR quickly costs more than the interest a savings account earns, as our guide to [how credit card interest works](/guides/how-credit-card-interest-works/) shows.
 

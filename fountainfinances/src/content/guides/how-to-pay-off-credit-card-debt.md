@@ -8,7 +8,7 @@ topics: ["credit-cards", "debt-management", "balance-transfers"]
 published: 2026-09-08
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "To pay off credit card debt, stop adding new charges, list every balance with its APR, pay the minimum on all cards and put every extra dollar toward one card at a time — the highest APR (avalanche) or smallest balance (snowball). Lowering your rate with a balance transfer or consolidation loan can speed things up."
+quickAnswer: "To pay off credit card debt, stop adding new charges, list every balance with its APR, pay the minimum on all cards and put every extra dollar toward one card at a time: the highest APR (avalanche) or smallest balance (snowball). Lowering your rate with a balance transfer or consolidation loan can speed things up."
 takeaways:
   - "Paying only the minimum can stretch payoff over many years and cost thousands in interest."
   - "The avalanche method saves the most money; the snowball method builds momentum."
@@ -66,7 +66,7 @@ This guide lays out eight steps, compares the two most popular payoff methods an
 
 ## Why minimum payments keep you stuck
 
-Minimum payments are usually a small percentage of the balance plus interest and fees. Much of each payment covers interest, so the balance shrinks slowly. Under the Credit CARD Act, your statement must show how long it would take to pay off the balance making only minimum payments — and that figure is often measured in years.
+Minimum payments are usually a small percentage of the balance plus interest and fees. Much of each payment covers interest, so the balance shrinks slowly. Under the Credit CARD Act, your statement must show how long it would take to pay off the balance making only minimum payments, and that figure is often measured in years.
 
 Consider a $6,500 balance at 22.9% APR:
 
@@ -125,7 +125,7 @@ The speed of your payoff depends on how much you pay above the minimums. Places 
 - **Your budget.** Build or review a [monthly budget](/guides/how-to-build-a-budget/) and redirect money from flexible categories.
 - **Recurring bills.** Shop your insurance, phone and internet plans.
 - **Subscriptions** you rarely use.
-- **Windfalls** — tax refunds, bonuses and gifts.
+- **Windfalls**: tax refunds, bonuses and gifts.
 - **Unused items** you can sell.
 - **Temporary extra income** from overtime or a side job.
 
@@ -145,7 +145,7 @@ A card with a **0% introductory APR on balance transfers** can pause interest fo
 
 ### Debt consolidation loan
 
-A fixed-rate **personal loan** can pay off several cards, leaving you with one payment and a set payoff date. It helps only if the APR — including any origination fee — is lower than your card rates. Compare your options with the [debt consolidation calculator](/calculators/debt-consolidation/) and read [what is debt consolidation?](/guides/what-is-debt-consolidation/).
+A fixed-rate **personal loan** can pay off several cards, leaving you with one payment and a set payoff date. It helps only if the APR (including any origination fee) is lower than your card rates. Compare your options with the [debt consolidation calculator](/calculators/debt-consolidation/) and read [what is debt consolidation?](/guides/what-is-debt-consolidation/).
 
 ### Nonprofit debt management plan
 
@@ -153,13 +153,13 @@ A nonprofit credit counseling agency can set up a **debt management plan**, ofte
 
 ## Step 7: Roll your payments forward
 
-When a card reaches zero, do not treat the freed-up money as extra spending money. Add that card’s full payment to the next card on your list. Each payoff makes the next one faster — the “snowball” or “avalanche” effect.
+When a card reaches zero, do not treat the freed-up money as extra spending money. Add that card’s full payment to the next card on your list. Each payoff makes the next one faster: the “snowball” or “avalanche” effect.
 
 ## Step 8: Stay out of debt for good
 
 - **Build an emergency fund** of at least one month of expenses, then grow it to three to six months. See our [emergency fund guide](/guides/emergency-fund-guide/).
 - **Pay statement balances in full** every month going forward, so you never pay interest on purchases.
-- **Keep paid-off cards open** if they have no annual fee — it helps your credit utilization and history.
+- **Keep paid-off cards open** if they have no annual fee: it helps your credit utilization and history.
 - **Review your spending monthly** to catch problems early.
 
 ## Watch out for debt relief scams

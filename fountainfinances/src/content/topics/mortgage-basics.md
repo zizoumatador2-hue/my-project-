@@ -22,7 +22,7 @@ faqs:
 
 - **Principal:** the amount you borrow.
 - **Interest rate:** the cost of borrowing, fixed or adjustable.
-- **APR:** the rate plus certain fees, expressed yearly — useful for comparing lenders.
+- **APR:** the rate plus certain fees, expressed yearly. Useful for comparing lenders.
 - **Term:** most often 30 or 15 years.
 - **Down payment:** your upfront cash contribution.
 - **PMI:** private mortgage insurance, usually required on conventional loans with less than 20% down.
@@ -31,7 +31,7 @@ faqs:
 
 ## Fixed-rate vs. adjustable-rate mortgages
 
-A **fixed-rate mortgage** keeps the same rate for the life of the loan, so principal and interest never change. An **adjustable-rate mortgage (ARM)** — for example, a 5/6 ARM — has a fixed rate for an initial period, then adjusts periodically within caps. ARMs can start lower but carry the risk of higher payments later.
+A **fixed-rate mortgage** keeps the same rate for the life of the loan, so principal and interest never change. An **adjustable-rate mortgage (ARM)** (for example, a 5/6 ARM) has a fixed rate for an initial period, then adjusts periodically within caps. ARMs can start lower but carry the risk of higher payments later.
 
 ## The path to a mortgage
 

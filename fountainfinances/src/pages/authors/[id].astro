@@ -34,7 +34,7 @@ const node = author.type === 'Person'
       <ul>{author.expertise.map((e) => <li>{e}</li>)}</ul>
       {author.credentials.length > 0 && (<><h2>Credentials</h2><ul>{author.credentials.map((c) => <li>{c}</li>)}</ul></>)}
       <h2>How we work</h2>
-      <p>Every guide starts from primary sources — federal agencies such as the CFPB, FDIC, Federal Reserve, IRS and U.S. Department of Education, and the official disclosures of banks, card issuers and lenders. Drafts are checked against those sources before publication, and each guide lists what we relied on. When rules or products change, we update the guide and its “last updated” date. Read the full process in our <a href="/editorial-standards/">editorial standards</a>.</p>
+      <p>Every guide starts from primary sources: federal agencies such as the CFPB, FDIC, Federal Reserve, IRS and U.S. Department of Education, and the official disclosures of banks, card issuers and lenders. Drafts are checked against those sources before publication, and each guide lists what we relied on. When rules or products change, we update the guide and its “last updated” date. Read the full process in our <a href="/editorial-standards/">editorial standards</a>.</p>
       <h2>Contact the editors</h2>
       <p>Questions, feedback or a correction? Email <a href={`mailto:${author.email ?? SITE.email}`}>{author.email ?? SITE.email}</a> or use our <a href="/contact/">contact form</a>.</p>
     </div>

@@ -34,10 +34,10 @@ A **high-yield savings account (HYSA)** is a savings account that pays an intere
 
 ## What to check before opening one
 
-- **APY and how often it changes** — look at the bank’s rate history, not just today’s rate.
-- **Fees and minimums** — the best accounts have no monthly fees and low or no minimums.
+- **APY and how often it changes**: look at the bank’s rate history, not just today’s rate.
+- **Fees and minimums**: the best accounts have no monthly fees and low or no minimums.
 - **Transfer limits and speed** to and from your checking account.
-- **Insurance** — confirm the bank on the FDIC’s BankFind tool. If a fintech app holds deposits at a partner bank, read how insurance applies.
+- **Insurance**: confirm the bank on the FDIC’s BankFind tool. If a fintech app holds deposits at a partner bank, read how insurance applies.
 
 ## See the difference
 

@@ -11,7 +11,7 @@ author: editorial-team
 quickAnswer: "A CD (certificate of deposit) is a bank or credit union deposit that pays a fixed rate for a fixed term, such as 6 months or 5 years. You agree not to withdraw the money until the CD matures; withdrawing early usually costs a penalty. CDs are federally insured up to $250,000 per depositor, per institution, per ownership category."
 takeaways:
   - "CDs lock in a fixed APY for the full term, protecting you if rates fall."
-  - "Early withdrawal penalties — often several months of interest — make CDs best for money you won’t need."
+  - "Early withdrawal penalties (often several months of interest) make CDs best for money you won’t need."
   - "At maturity there is a short grace period before most CDs renew automatically."
   - "A CD ladder spreads money across terms so part of it becomes available regularly."
 faqs:
@@ -31,7 +31,7 @@ sources:
     publisher: "Federal Deposit Insurance Corporation"
     url: "https://www.fdic.gov/national-rates-and-rate-caps"
   - title: "Certificates of Deposit (CDs)"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
+    publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/introduction-investing/investing-basics/investment-products/certificates-deposit-cds"
   - title: "Topic No. 403, Interest Received"
     publisher: "Internal Revenue Service"
@@ -41,11 +41,11 @@ calculators: ["cd", "compound-interest"]
 comparisons: ["cd-accounts"]
 ---
 
-Certificates of deposit are one of the oldest and simplest savings products: you deposit money, agree to leave it alone for a set time and receive a guaranteed rate in return. That simplicity makes them a useful tool for specific goals — as long as you understand the trade-offs. Estimate your earnings with our [CD calculator](/calculators/cd/).
+Certificates of deposit are one of the oldest and simplest savings products: you deposit money, agree to leave it alone for a set time and receive a guaranteed rate in return. That simplicity makes them a useful tool for specific goals, as long as you understand the trade-offs. Estimate your earnings with our [CD calculator](/calculators/cd/).
 
 ## How a CD works, step by step
 
-1. **Choose a term** — commonly 3, 6, 9 or 12 months, or 2, 3, 4 or 5 years.
+1. **Choose a term**: commonly 3, 6, 9 or 12 months, or 2, 3, 4 or 5 years.
 2. **Deposit your money.** Many CDs have a minimum opening deposit; some have none.
 3. **Earn a fixed rate.** The **APY** is locked for the entire term.
 4. **Leave the money alone** until the maturity date.
@@ -57,7 +57,7 @@ Interest is usually compounded daily or monthly. You can often choose to have it
 
 CD rates generally follow the broader interest rate environment. When market rates are high, banks pay more to attract deposits; when rates fall, new CD rates fall too. Each bank also sets its own rates based on how much funding it needs.
 
-- **Longer terms** often — but not always — pay more. When the yield curve is “inverted,” shorter CDs can pay more than longer ones.
+- **Longer terms** often (but not always) pay more. When the yield curve is “inverted,” shorter CDs can pay more than longer ones.
 - **Online banks and credit unions** frequently offer higher rates than large branch banks.
 - **Promotional or “special” terms** (such as an 11-month CD) can pay more than standard terms.
 
@@ -65,7 +65,7 @@ The FDIC publishes [national average rates](https://www.fdic.gov/national-rates-
 
 ## Early withdrawal penalties
 
-The trade-off for a guaranteed rate is limited access. If you withdraw before maturity, most banks charge a penalty — typically a set number of days’ or months’ worth of interest, and often more for longer terms.
+The trade-off for a guaranteed rate is limited access. If you withdraw before maturity, most banks charge a penalty, typically a set number of days’ or months’ worth of interest, and often more for longer terms.
 
 **Example:** A $10,000 CD at a 4.50% APY with a 90-day interest penalty. The penalty would be roughly $111. If you withdraw after only a month, the penalty can exceed the interest you have earned, reducing your principal.
 
@@ -73,7 +73,7 @@ Always read the penalty terms before opening a CD, and only deposit money you ar
 
 ## What happens at maturity
 
-Most banks send a notice before your CD matures. After the maturity date, there is usually a **grace period** — often about 7 to 10 days — to withdraw or change terms without a penalty. If you do nothing, many CDs **automatically renew** for the same term at whatever rate the bank is paying then, which may be lower. Put the maturity date on your calendar.
+Most banks send a notice before your CD matures. After the maturity date, there is usually a **grace period** (often about 7 to 10 days) to withdraw or change terms without a penalty. If you do nothing, many CDs **automatically renew** for the same term at whatever rate the bank is paying then, which may be lower. Put the maturity date on your calendar.
 
 ## Types of CDs
 
@@ -118,7 +118,7 @@ CDs at FDIC-member banks are insured up to **$250,000 per depositor, per insured
 
 ## Taxes
 
-CD interest is generally taxed as ordinary income in the year it is credited to your account — even if the CD has not matured. Your bank reports it on Form 1099-INT. Holding CDs in a tax-advantaged account such as an IRA can defer or avoid tax on the interest.
+CD interest is generally taxed as ordinary income in the year it is credited to your account, even if the CD has not matured. Your bank reports it on Form 1099-INT. Holding CDs in a tax-advantaged account such as an IRA can defer or avoid tax on the interest.
 
 ## When a CD makes sense
 

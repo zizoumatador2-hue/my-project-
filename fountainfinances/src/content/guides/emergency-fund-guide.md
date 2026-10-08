@@ -1,7 +1,7 @@
 ---
 title: "How Much Emergency Savings Should You Have? A Complete Emergency Fund Guide"
 seoTitle: "How Much Emergency Savings Do You Need? Emergency Fund Guide"
-description: "How much emergency savings you need, how to calculate your target, where to keep it and a step-by-step plan to build an emergency fund — even on a tight budget."
+description: "How much emergency savings you need, how to calculate your target, where to keep it and a step-by-step plan to build an emergency fund, even on a tight budget."
 keywords: ["how much emergency savings", "emergency fund", "how to build an emergency fund", "emergency savings guide", "emergency fund calculator"]
 hub: personal-finance
 topics: ["emergency-funds", "saving-money"]
@@ -10,7 +10,7 @@ updated: 2026-09-28
 author: editorial-team
 quickAnswer: "Most people should keep three to six months of essential expenses in an emergency fund. Aim for six months or more if your income is irregular, you are the only earner or you have dependents. Keep it in a separate, federally insured savings account that you can reach within a day or two."
 takeaways:
-  - "Base your target on essential expenses — housing, food, utilities, insurance, transportation and minimum debt payments — not total spending."
+  - "Base your target on essential expenses (housing, food, utilities, insurance, transportation and minimum debt payments) not total spending."
   - "Start with a starter fund of about one month of expenses, then build toward three to six months."
   - "Keep the money in an FDIC- or NCUA-insured high-yield savings account, separate from checking."
   - "Automate deposits and send windfalls straight to the fund to reach your goal faster."
@@ -55,7 +55,7 @@ related: ["sinking-funds", "how-to-build-a-budget", "what-is-a-high-yield-saving
 calculators: ["emergency-fund", "budget", "compound-interest"]
 ---
 
-An emergency fund is the unglamorous foundation of every sound financial plan. It is the money that stands between an unexpected expense and a credit card balance at 20%-plus interest — or between a job loss and missed rent. The Federal Reserve’s annual survey of household economic well-being has repeatedly found that a significant share of American adults would not cover a modest unexpected expense entirely with cash or its equivalent. An emergency fund changes that.
+An emergency fund is the unglamorous foundation of every sound financial plan. It is the money that stands between an unexpected expense and a credit card balance at 20%-plus interest, or between a job loss and missed rent. The Federal Reserve’s annual survey of household economic well-being has repeatedly found that a significant share of American adults would not cover a modest unexpected expense entirely with cash or its equivalent. An emergency fund changes that.
 
 This guide explains exactly how much you need, how to calculate your personal number, where to keep the money and how to build the fund step by step. To get your target in two minutes, use our [emergency fund calculator](/calculators/emergency-fund/).
 
@@ -73,7 +73,7 @@ It is **not** for predictable costs, even large ones. Holidays, annual insurance
 
 ## How much emergency savings do you need?
 
-The standard guideline is **three to six months of essential expenses**. Where you should land in that range — or beyond it — depends on how stable your income is and how many people depend on it.
+The standard guideline is **three to six months of essential expenses**. Where you should land in that range (or beyond it) depends on how stable your income is and how many people depend on it.
 
 | Your situation | Suggested target |
 |---|---|
@@ -86,7 +86,7 @@ The standard guideline is **three to six months of essential expenses**. Where y
 
 ### Essential expenses, not total spending
 
-Your target is based on what you *must* pay if your income stopped — not everything you spend today. In a real emergency you would cut dining out, streaming, travel and shopping quickly. Essential expenses usually include:
+Your target is based on what you *must* pay if your income stopped, not everything you spend today. In a real emergency you would cut dining out, streaming, travel and shopping quickly. Essential expenses usually include:
 
 - Rent or mortgage, including property taxes and insurance
 - Utilities, phone and internet
@@ -111,13 +111,13 @@ Suppose your essential expenses are:
 | Other essentials | $150 |
 | **Total** | **$3,330** |
 
-Three months of coverage is **$9,990**; six months is **$19,980**. If you already have $2,500 saved and can add $400 a month, reaching the six-month goal would take about three and a half years before interest — which is why it helps to break the goal into milestones.
+Three months of coverage is **$9,990**; six months is **$19,980**. If you already have $2,500 saved and can add $400 a month, reaching the six-month goal would take about three and a half years before interest, which is why it helps to break the goal into milestones.
 
 ## Start with a starter fund
 
 A $20,000 goal can feel impossible. Break it down:
 
-1. **Milestone 1: $1,000 or one month of essentials.** This covers many common emergencies — a car repair, an urgent dental visit — and prevents new credit card debt.
+1. **Milestone 1: $1,000 or one month of essentials.** This covers many common emergencies (a car repair, an urgent dental visit) and prevents new credit card debt.
 2. **Milestone 2: three months of essentials.** A meaningful cushion against a short job search.
 3. **Milestone 3: your full target.** Three to six months or more, depending on your situation.
 
@@ -129,7 +129,7 @@ Your emergency fund has three jobs, in this order: **be safe, be available, earn
 
 ### Safe
 
-Keep it in an account insured by the **FDIC** (banks) or **NCUA** (credit unions). Insured deposits are protected up to $250,000 per depositor, per institution, for each account ownership category. Do not invest your emergency fund in stocks or crypto — their value can drop exactly when you need the money, such as during a recession when layoffs are more common.
+Keep it in an account insured by the **FDIC** (banks) or **NCUA** (credit unions). Insured deposits are protected up to $250,000 per depositor, per institution, for each account ownership category. Do not invest your emergency fund in stocks or crypto: their value can drop exactly when you need the money, such as during a recession when layoffs are more common.
 
 ### Available
 
@@ -147,7 +147,7 @@ Keep your emergency fund in a different account from everyday checking so you ar
 
 ### 1. Automate it
 
-Set up an automatic transfer from checking to your emergency savings account on every payday. Even $50 per paycheck adds up to $1,300 a year on a biweekly schedule. Automation removes the monthly decision — and the temptation to skip.
+Set up an automatic transfer from checking to your emergency savings account on every payday. Even $50 per paycheck adds up to $1,300 a year on a biweekly schedule. Automation removes the monthly decision, and the temptation to skip.
 
 ### 2. Split your direct deposit
 
@@ -185,7 +185,7 @@ Before you withdraw, ask three questions:
 2. **Is it necessary?** Is it essential for health, safety, housing or keeping your income?
 3. **Is it urgent?** Does it need to be handled now?
 
-If the answer to all three is yes, use the fund — that is exactly what it is for. Do not feel guilty. Using it to avoid high-interest debt is the fund doing its job.
+If the answer to all three is yes, use the fund, that is exactly what it is for. Do not feel guilty. Using it to avoid high-interest debt is the fund doing its job.
 
 ## Refilling the fund
 
@@ -198,7 +198,7 @@ After an emergency, make rebuilding your top savings priority. Restart automatic
 - **Using it for planned expenses.** Create separate sinking funds instead.
 - **Setting the target too low** for an irregular income.
 - **Never updating the target.** Revisit it when your rent, family size or job changes.
-- **Hoarding far too much.** Beyond 12 months of expenses, extra cash may be better directed to retirement or other goals — unless you have a specific reason to hold more.
+- **Hoarding far too much.** Beyond 12 months of expenses, extra cash may be better directed to retirement or other goals, unless you have a specific reason to hold more.
 
 ## The bottom line
 

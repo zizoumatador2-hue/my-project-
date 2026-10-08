@@ -13,7 +13,7 @@ takeaways:
   - "Start preparing six to twelve months ahead: credit, savings and debt-to-income ratio."
   - "FHA, VA, USDA and low-down-payment conventional loans can reduce the cash you need upfront."
   - "State housing finance agencies often offer down payment assistance for first-time buyers."
-  - "Get Loan Estimates from several lenders — the standardized form makes comparison easy."
+  - "Get Loan Estimates from several lenders: the standardized form makes comparison easy."
 faqs:
   - q: "How long does it take to buy a house?"
     a: "Shopping can take weeks to months depending on the market. Once an offer is accepted, closing commonly takes 30 to 45 days, depending on the loan and the transaction."
@@ -66,7 +66,7 @@ related: ["how-to-remove-pmi", "how-much-house-can-i-afford", "how-mortgage-paym
 calculators: ["home-affordability", "mortgage"]
 ---
 
-Buying your first home is exciting — and full of unfamiliar terms, forms and deadlines. The process becomes far less stressful when you know what is coming. This guide walks you through each step, from preparing your finances months ahead to picking up the keys.
+Buying your first home is exciting, and full of unfamiliar terms, forms and deadlines. The process becomes far less stressful when you know what is coming. This guide walks you through each step, from preparing your finances months ahead to picking up the keys.
 
 ## Before you start: is now the right time?
 
@@ -128,7 +128,7 @@ Many **state housing finance agencies** and local governments offer help for fir
 - **Below-market interest rates**
 - **Mortgage credit certificates** that provide a federal tax credit for a portion of mortgage interest, where available
 
-These programs usually have income limits, purchase price limits and a homebuyer education requirement. Many define a “first-time buyer” as someone who has not owned a principal residence in the past three years. A HUD-approved housing counselor — you can search for one through the [CFPB](https://www.consumerfinance.gov/find-a-housing-counselor/) — can help you find programs in your area, often for free.
+These programs usually have income limits, purchase price limits and a homebuyer education requirement. Many define a “first-time buyer” as someone who has not owned a principal residence in the past three years. A HUD-approved housing counselor (you can search for one through the [CFPB](https://www.consumerfinance.gov/find-a-housing-counselor/)) can help you find programs in your area, often for free.
 
 ## Step 6: Get preapproved
 
@@ -146,7 +146,7 @@ Work with a real estate agent or on your own to find homes within your budget. R
 When you make an offer, your agent will typically help you include:
 
 - **Price and earnest money deposit**
-- **Contingencies** — financing, inspection and appraisal contingencies protect you if the loan falls through, the inspection reveals problems or the home appraises low
+- **Contingencies**: financing, inspection and appraisal contingencies protect you if the loan falls through, the inspection reveals problems or the home appraises low
 - **Closing date**
 
 ## Step 8: Compare Loan Estimates and lock your rate
@@ -168,12 +168,12 @@ Multiple mortgage credit inquiries within a short shopping period generally coun
 
 ## Step 10: Review the Closing Disclosure and close
 
-At least **three business days before closing**, you will receive a **Closing Disclosure** with the final terms and costs. Compare it with your Loan Estimate and ask about any differences. Do a final walk-through of the home, then sign the documents, pay your cash to close (usually by wire — confirm wiring instructions by phone with a known number to avoid wire fraud) and receive your keys.
+At least **three business days before closing**, you will receive a **Closing Disclosure** with the final terms and costs. Compare it with your Loan Estimate and ask about any differences. Do a final walk-through of the home, then sign the documents, pay your cash to close (usually by wire: confirm wiring instructions by phone with a known number to avoid wire fraud) and receive your keys.
 
 ## After you move in
 
 - Set up **autopay** for your mortgage.
-- Start a **home maintenance fund** — a common guideline is 1%–2% of the home’s value per year.
+- Start a **home maintenance fund**: a common guideline is 1%–2% of the home’s value per year.
 - Keep copies of closing documents.
 - Watch for your first **escrow analysis**; your payment may change if taxes or insurance change.
 

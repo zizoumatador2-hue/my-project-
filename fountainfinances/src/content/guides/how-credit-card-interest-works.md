@@ -1,14 +1,14 @@
 ---
 title: "How Credit Card Interest Works (and How to Read Your Statement)"
 seoTitle: "How Credit Card Interest Works: APR, Grace Period & Statement"
-description: "How credit card interest is calculated — daily rates, average daily balance and grace periods — and how to read each section of your card statement."
+description: "How credit card interest is calculated (daily rates, average daily balance and grace periods) and how to read each section of your card statement."
 keywords: ["how credit card interest works", "credit card interest calculator", "how to read a credit card statement", "credit card APR", "grace period"]
 hub: credit
 topics: ["credit-cards", "balance-transfers"]
 published: 2026-09-18
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "Most card issuers divide your APR by 365 to get a daily rate and apply it to your average daily balance during the billing cycle. If you pay the full statement balance by the due date, the grace period means you usually pay no interest on new purchases. Carry any balance and interest is charged — often on new purchases too."
+quickAnswer: "Most card issuers divide your APR by 365 to get a daily rate and apply it to your average daily balance during the billing cycle. If you pay the full statement balance by the due date, the grace period means you usually pay no interest on new purchases. Carry any balance and interest is charged, often on new purchases too."
 takeaways:
   - "Paying the full statement balance by the due date avoids purchase interest on most cards."
   - "Interest is typically calculated daily using the average daily balance method."
@@ -38,7 +38,7 @@ calculators: ["credit-card-payoff"]
 comparisons: ["balance-transfer-credit-cards", "credit-cards-for-beginners"]
 ---
 
-Credit cards can be completely free to use — or one of the most expensive ways to borrow money. The difference comes down to understanding how interest is calculated and how the **grace period** works. This guide explains both, then walks through your monthly statement section by section.
+Credit cards can be completely free to use, or one of the most expensive ways to borrow money. The difference comes down to understanding how interest is calculated and how the **grace period** works. This guide explains both, then walks through your monthly statement section by section.
 
 ## The grace period: how to pay zero interest
 
@@ -49,7 +49,7 @@ If you pay your **full statement balance** by the due date, you generally pay **
 If you pay less than the full statement balance:
 
 - The unpaid amount starts accruing interest.
-- On most cards, you **lose the grace period** — new purchases start accruing interest immediately.
+- On most cards, you **lose the grace period**: new purchases start accruing interest immediately.
 - You usually need to pay the full balance for one or two cycles to restore the grace period.
 
 ## How interest is calculated
@@ -75,7 +75,7 @@ The issuer adds up your balance at the end of each day in the billing cycle and 
 > Interest = average daily balance × daily rate × days in cycle
 > = $2,333.33 × 0.000658 × 30 ≈ **$46.03**
 
-Many issuers compound daily, so interest is charged on the previous day’s interest too — which is why the effective cost can be slightly higher than the APR suggests.
+Many issuers compound daily, so interest is charged on the previous day’s interest too, which is why the effective cost can be slightly higher than the APR suggests.
 
 A simpler monthly approximation is balance × APR ÷ 12. Our [credit card payoff calculator](/calculators/credit-card-payoff/) uses this and lands very close to what you will actually pay.
 
@@ -98,17 +98,17 @@ Every statement follows a similar format, required by federal rules.
 
 ### 1. Account summary
 
-Shows your previous balance, payments, credits, purchases, balance transfers, cash advances, fees, interest and new balance. The **new balance** is the **statement balance** — pay this to avoid interest.
+Shows your previous balance, payments, credits, purchases, balance transfers, cash advances, fees, interest and new balance. The **new balance** is the **statement balance**: pay this to avoid interest.
 
 ### 2. Payment information
 
-- **Payment due date** — pay by this date to avoid a late fee.
-- **Minimum payment due** — the least you can pay to keep the account in good standing.
-- **Late payment warning** — the fee and any penalty APR if you pay late.
+- **Payment due date**: pay by this date to avoid a late fee.
+- **Minimum payment due**: the least you can pay to keep the account in good standing.
+- **Late payment warning**: the fee and any penalty APR if you pay late.
 
 ### 3. Minimum payment warning
 
-A table shows how long it would take to pay off your balance making only minimum payments, and the total cost — plus how much you would need to pay each month to pay it off in three years. This box is one of the most useful parts of the statement.
+A table shows how long it would take to pay off your balance making only minimum payments, and the total cost, plus how much you would need to pay each month to pay it off in three years. This box is one of the most useful parts of the statement.
 
 ### 4. Notice of changes
 
@@ -120,7 +120,7 @@ Every purchase, payment, credit and fee. Review this monthly for errors or fraud
 
 ### 6. Interest charge calculation
 
-Lists each balance type, its APR and the interest charged. Check whether interest was charged at all — if you pay in full each month, it should be zero.
+Lists each balance type, its APR and the interest charged. Check whether interest was charged at all, if you pay in full each month, it should be zero.
 
 ### 7. Year-to-date totals
 
@@ -137,7 +137,7 @@ On a $5,000 balance at 22% APR, a payment that covers just the monthly interest 
 1. **Pay the statement balance in full** whenever possible.
 2. **Set up autopay** for at least the minimum to avoid late fees and penalty APRs.
 3. **Avoid cash advances.**
-4. **Pay early and often** if you carry a balance — lowering your average daily balance reduces interest.
+4. **Pay early and often** if you carry a balance: lowering your average daily balance reduces interest.
 5. **Ask for a lower APR** if you have a good payment history.
 6. **Consider a balance transfer** to a 0% intro APR card if you have a payoff plan. See [what is a balance transfer?](/guides/what-is-a-balance-transfer/)
 

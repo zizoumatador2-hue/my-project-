@@ -33,14 +33,14 @@ Nearly every state requires liability insurance, and required minimums vary by s
 
 ## How premiums are set
 
-Insurers consider your driving record, claims history, vehicle, where you live and park, how much you drive, your coverage and deductibles, and — in many states — a credit-based insurance score. Rules on which factors are allowed vary by state.
+Insurers consider your driving record, claims history, vehicle, where you live and park, how much you drive, your coverage and deductibles, and (in many states) a credit-based insurance score. Rules on which factors are allowed vary by state.
 
 ## Ways to lower your premium
 
 1. **Compare quotes** from several insurers every year or two, using identical coverage.
 2. **Raise your deductible** if your emergency fund can cover it.
 3. **Bundle** auto with home or renters insurance.
-4. **Ask about discounts** — safe driver, good student, multi-car, low mileage, anti-theft and paid-in-full.
+4. **Ask about discounts**: safe driver, good student, multi-car, low mileage, anti-theft and paid-in-full.
 5. **Drop collision/comprehensive** on an older car worth little, if you can absorb the loss.
 
 Learn how auto coverage fits with other policies in our [types of insurance guide](/guides/types-of-insurance/).

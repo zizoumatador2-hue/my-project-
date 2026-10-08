@@ -7,7 +7,7 @@ const { sources } = Astro.props;
     <h2 id="sources-h">Sources</h2>
     <ol>
       {sources.map((s) => (
-        <li><a href={s.url} target="_blank" rel="noopener">{s.title}</a> — {s.publisher}</li>
+        <li><a href={s.url} target="_blank" rel="noopener">{s.title}</a>: {s.publisher}</li>
       ))}
     </ol>
   </section>

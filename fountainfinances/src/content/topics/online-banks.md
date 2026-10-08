@@ -5,7 +5,7 @@ description: "How online banks work, why they often pay higher rates and charge 
 keywords: ["online banks", "online high yield savings", "online checking accounts", "digital banks"]
 hub: banking
 order: 5
-summary: "Higher rates and fewer fees — with a few trade-offs to understand."
+summary: "Higher rates and fewer fees, with a few trade-offs to understand."
 updated: 2026-09-28
 calculators: ["compound-interest"]
 comparisons: ["high-yield-savings-accounts", "checking-accounts", "cd-accounts"]
@@ -34,7 +34,7 @@ faqs:
 
 ## Confirm insurance before you deposit
 
-Look for the bank’s legal name — which may differ from its brand name — and check it using the FDIC’s [BankFind](https://banks.data.fdic.gov/bankfind-suite/bankfind) or the NCUA’s credit union locator. For fintech apps, read the disclosures explaining which partner bank holds deposits and how pass-through insurance applies.
+Look for the bank’s legal name (which may differ from its brand name) and check it using the FDIC’s [BankFind](https://banks.data.fdic.gov/bankfind-suite/bankfind) or the NCUA’s credit union locator. For fintech apps, read the disclosures explaining which partner bank holds deposits and how pass-through insurance applies.
 
 ## A common setup
 

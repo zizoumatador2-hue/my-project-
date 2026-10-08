@@ -8,7 +8,7 @@ topics: ["cds", "savings-accounts", "high-yield-savings"]
 published: 2026-10-05
 updated: 2026-10-05
 author: editorial-team
-quickAnswer: "A CD ladder spreads your savings across several certificates of deposit with staggered maturity dates — for example, 1, 2, 3, 4 and 5 years. As each CD matures, you either use the money or reinvest it in a new long-term CD. The result is regular access to part of your cash while most of it earns longer-term rates."
+quickAnswer: "A CD ladder spreads your savings across several certificates of deposit with staggered maturity dates, for example, 1, 2, 3, 4 and 5 years. As each CD matures, you either use the money or reinvest it in a new long-term CD. The result is regular access to part of your cash while most of it earns longer-term rates."
 takeaways:
   - "A ladder balances higher long-term CD rates with regular access to your money."
   - "A classic ladder uses equal amounts in 1- to 5-year CDs, then rolls each maturing CD into a new 5-year CD."
@@ -28,7 +28,7 @@ faqs:
     a: "Brokered CDs bought through a brokerage account can make laddering convenient, but they work differently: they are usually sold on the secondary market rather than redeemed early, and their price can fall if rates rise. Read the terms before buying."
 sources:
   - title: "Certificates of Deposit (CDs)"
-    publisher: "U.S. Securities and Exchange Commission — Investor.gov"
+    publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/introduction-investing/investing-basics/investment-products/certificates-deposit-cds"
   - title: "National Rates and Rate Caps"
     publisher: "Federal Deposit Insurance Corporation"
@@ -76,7 +76,7 @@ When a rung matures, you have two choices:
 3. When the 1-year CD matures, reinvest it in a new **5-year** CD.
 4. Repeat each year.
 
-After the first four years, **every CD in the ladder is a 5-year CD earning a 5-year rate — yet one matures every year.** That's the core benefit: long-term rates with annual access.
+After the first four years, **every CD in the ladder is a 5-year CD earning a 5-year rate, yet one matures every year.** That's the core benefit: long-term rates with annual access.
 
 ## Example: a $10,000 CD ladder
 
@@ -93,11 +93,11 @@ The APYs below are **hypothetical** and chosen only to illustrate the math; chec
 
 From year one onward, about $2,000 plus interest becomes available every year. If you reinvest each maturing rung in a new 5-year CD, the whole ladder gradually earns the 5-year rate.
 
-For comparison, putting the full $10,000 in a single 5-year CD at 4.00% would grow to about **$12,166.53** — more interest, but no access to any of it for five years without an early withdrawal penalty. You can run your own scenarios in our [CD calculator](/calculators/cd/).
+For comparison, putting the full $10,000 in a single 5-year CD at 4.00% would grow to about **$12,166.53**: more interest, but no access to any of it for five years without an early withdrawal penalty. You can run your own scenarios in our [CD calculator](/calculators/cd/).
 
 ## Other ladder designs
 
-- **Short ladder (3, 6, 9 and 12 months):** useful when you'll need the money within a year or two — for example, for a down payment or tuition.
+- **Short ladder (3, 6, 9 and 12 months):** useful when you'll need the money within a year or two, for example, for a down payment or tuition.
 - **Mini ladder (6, 12 and 18 months):** a middle ground with frequent access.
 - **Barbell:** money split between very short and very long CDs, with nothing in the middle. It keeps some cash liquid while locking in a long-term rate on the rest.
 - **Bullet:** several CDs that all mature around the same date, timed for one known expense.
@@ -108,13 +108,13 @@ For comparison, putting the full $10,000 in a single 5-year CD at 4.00% would gr
 
 - **Predictable access** to part of your money at regular intervals.
 - **Locks in rates**, which protects your earnings if rates fall.
-- **Less timing risk** — you aren't betting everything on today's rate.
+- **Less timing risk**: you aren't betting everything on today's rate.
 - **Principal protection** at insured institutions up to coverage limits.
 
 **Cons**
 
 - **Lower flexibility than savings.** Money between maturity dates is locked up.
-- **Early withdrawal penalties** if you need cash before a rung matures — often several months of interest.
+- **Early withdrawal penalties** if you need cash before a rung matures, often several months of interest.
 - **Rates can rise** after you lock in, and only maturing rungs benefit.
 - **More to manage:** several accounts, maturity dates and renewal decisions.
 
@@ -133,11 +133,11 @@ Many savers use both: an emergency fund in a [high-yield savings account](/guide
 
 - **Compare APY, not just the rate.** [APY](/guides/what-is-apy/) includes compounding and is the fair way to compare CDs.
 - **Read the early withdrawal penalty.** It varies by bank and term.
-- **Watch minimum deposits** — some CDs require $500 or $1,000.
+- **Watch minimum deposits**: some CDs require $500 or $1,000.
 - **Mind insurance limits.** FDIC and NCUA insurance covers $250,000 per depositor, per insured institution, per ownership category. Spread larger ladders across institutions.
 - **Mark maturity dates** in your calendar so you choose what happens during the grace period instead of accepting an automatic renewal.
 - **Consider no-penalty CDs** for a shorter rung if you want extra flexibility.
 
 ## Is a CD ladder right for you?
 
-A CD ladder suits savers who already have an emergency fund, want guaranteed returns on money they won't need for months or years, and value predictable access. If you need flexibility above all, a high-yield savings account may serve you better. If your horizon is longer than five years and you can accept market risk, diversified investments may offer higher expected returns — see our [financial planning guide](/guides/financial-planning-for-beginners/).
+A CD ladder suits savers who already have an emergency fund, want guaranteed returns on money they won't need for months or years, and value predictable access. If you need flexibility above all, a high-yield savings account may serve you better. If your horizon is longer than five years and you can accept market risk, diversified investments may offer higher expected returns: see our [financial planning guide](/guides/financial-planning-for-beginners/).

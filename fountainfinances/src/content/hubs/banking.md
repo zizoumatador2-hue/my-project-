@@ -32,7 +32,7 @@ Rates on savings accounts are variable and move with the broader interest rate e
 
 ## Deposit insurance: the most important feature
 
-Before comparing rates, make sure an account is federally insured. The **FDIC** insures deposits at member banks and the **NCUA** insures deposits at federally insured credit unions — each up to $250,000 per depositor, per institution, for each ownership category (such as individual, joint and certain retirement accounts). Some fintech apps are not banks themselves and hold your money at partner banks; read their disclosures to understand how and when insurance applies. You can confirm a bank’s status with the FDIC’s [BankFind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
+Before comparing rates, make sure an account is federally insured. The **FDIC** insures deposits at member banks and the **NCUA** insures deposits at federally insured credit unions: each up to $250,000 per depositor, per institution, for each ownership category (such as individual, joint and certain retirement accounts). Some fintech apps are not banks themselves and hold your money at partner banks; read their disclosures to understand how and when insurance applies. You can confirm a bank’s status with the FDIC’s [BankFind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
 
 ## Earn more on your savings
 

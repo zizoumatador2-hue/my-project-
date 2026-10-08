@@ -24,11 +24,11 @@ Managing money well is less about finance knowledge and more about **simple syst
 
 ## A simple account setup
 
-- **Checking account** — receives your paycheck and pays bills.
-- **Emergency savings** — a separate [high-yield savings account](/high-yield-savings/) you do not touch for everyday spending.
-- **Goal savings** — additional savings buckets for travel, a car or a down payment.
-- **Retirement accounts** — a workplace plan and/or an IRA.
-- **One or two credit cards** — used for planned purchases and paid in full every month.
+- **Checking account**: receives your paycheck and pays bills.
+- **Emergency savings**: a separate [high-yield savings account](/high-yield-savings/) you do not touch for everyday spending.
+- **Goal savings**: additional savings buckets for travel, a car or a down payment.
+- **Retirement accounts**: a workplace plan and/or an IRA.
+- **One or two credit cards**: used for planned purchases and paid in full every month.
 
 Understanding the difference between these accounts is the first step; our guide to [checking vs. savings accounts](/guides/checking-vs-savings-account/) explains when to use each.
 
@@ -36,10 +36,10 @@ Understanding the difference between these accounts is the first step; our guide
 
 1. **Automate the essentials:** savings transfers, retirement contributions and fixed bills.
 2. **Keep a one-month buffer** in checking to avoid overdrafts and timing stress.
-3. **Check your accounts weekly** — five minutes to spot errors, fraud or overspending early.
+3. **Check your accounts weekly**: five minutes to spot errors, fraud or overspending early.
 4. **Build credit deliberately.** Read [how to build credit](/guides/how-to-build-credit/).
 5. **Avoid lifestyle creep.** When income rises, raise savings before raising spending.
-6. **Learn one concept a month** — APR, APY, compound interest — and your decisions will improve steadily.
+6. **Learn one concept a month** (APR, APY, compound interest) and your decisions will improve steadily.
 
 ## Tools that help
 

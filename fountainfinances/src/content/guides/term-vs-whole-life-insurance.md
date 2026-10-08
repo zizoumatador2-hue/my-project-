@@ -12,7 +12,7 @@ quickAnswer: "Term life insurance covers you for a set period, such as 20 or 30 
 takeaways:
   - "Term life covers a fixed period at a lower cost; whole life covers your entire life and builds cash value."
   - "For the same death benefit, whole life premiums are typically many times higher than term premiums."
-  - "Most people need life insurance while others depend on their income — a period term coverage fits well."
+  - "Most people need life insurance while others depend on their income: a period term coverage fits well."
   - "Whole life can suit lifelong needs, such as a dependent with special needs or certain estate plans."
   - "Estimate coverage from debts, income replacement, future costs such as college, and existing savings."
 faqs:
@@ -28,7 +28,7 @@ faqs:
     a: "Group life insurance is a useful benefit, but coverage is often one or two times salary and usually ends if you leave the job. Many people with dependents add an individual term policy they control."
 sources:
   - title: "Life insurance"
-    publisher: "National Association of Insurance Commissioners — Consumer Insight"
+    publisher: "National Association of Insurance Commissioners: Consumer Insight"
     url: "https://content.naic.org/consumer/life-insurance.htm"
   - title: "Insurance basics: life insurance"
     publisher: "Insurance Information Institute"
@@ -42,12 +42,12 @@ Life insurance protects the people who depend on you if you die. The biggest dec
 
 ## How term life insurance works
 
-**Term life insurance** covers you for a fixed period — commonly 10, 15, 20 or 30 years. If you die during the term, your beneficiaries receive the **death benefit**, usually tax-free. If you outlive the term, coverage ends and no benefit is paid.
+**Term life insurance** covers you for a fixed period: commonly 10, 15, 20 or 30 years. If you die during the term, your beneficiaries receive the **death benefit**, usually tax-free. If you outlive the term, coverage ends and no benefit is paid.
 
 Key features:
 
 - **Level premiums** for the whole term on most policies.
-- **No cash value** — you're paying only for protection.
+- **No cash value**: you're paying only for protection.
 - **Lower cost**, especially when you're young and healthy.
 - **Renewal and conversion options** on many policies, which let you extend coverage or switch to permanent insurance without a new medical exam, within limits.
 
@@ -77,11 +77,11 @@ Other permanent types include **universal life** (flexible premiums and death be
 
 ## Why most families start with term
 
-Most people need life insurance for a specific period — while children are growing up, while a mortgage is outstanding, or until retirement savings can support a surviving spouse. Term coverage matches that need at a price that lets a family buy **enough** coverage.
+Most people need life insurance for a specific period, while children are growing up, while a mortgage is outstanding, or until retirement savings can support a surviving spouse. Term coverage matches that need at a price that lets a family buy **enough** coverage.
 
 Because whole life costs much more per dollar of death benefit, families on a budget sometimes buy too little whole life coverage when they could have afforded a much larger term policy. Being underinsured is the bigger risk.
 
-Some people pair term insurance with investing the premium difference in retirement accounts. That can work well, but only if the difference is actually invested consistently — and investments carry market risk that whole life's guarantees don't.
+Some people pair term insurance with investing the premium difference in retirement accounts. That can work well, but only if the difference is actually invested consistently, and investments carry market risk that whole life's guarantees don't.
 
 ## When whole life can make sense
 
@@ -108,7 +108,7 @@ A practical estimate adds up what your family would need and subtracts what's al
 
 ## Tips for buying life insurance
 
-- **Buy while you're young and healthy** — premiums are based largely on age and health at application.
+- **Buy while you're young and healthy**: premiums are based largely on age and health at application.
 - **Match the term to your longest need**, such as when your youngest child will be financially independent or your mortgage will be paid off.
 - **Compare quotes** from several insurers and check the insurer's financial strength ratings.
 - **Look for conversion rights** on term policies in case your needs change.
@@ -117,4 +117,4 @@ A practical estimate adds up what your family would need and subtracts what's al
 
 ## The bottom line
 
-For most households, life insurance is about replacing income during the years others depend on it, and **term life** does that job at the lowest cost. **Whole life** offers lifetime coverage and cash value, which can fit specific long-term needs if the premiums are comfortably affordable. Whatever you choose, build it into your overall plan — our [financial planning guide for beginners](/guides/financial-planning-for-beginners/) shows how insurance fits alongside an emergency fund, debt payoff and retirement saving.
+For most households, life insurance is about replacing income during the years others depend on it, and **term life** does that job at the lowest cost. **Whole life** offers lifetime coverage and cash value, which can fit specific long-term needs if the premiums are comfortably affordable. Whatever you choose, build it into your overall plan: our [financial planning guide for beginners](/guides/financial-planning-for-beginners/) shows how insurance fits alongside an emergency fund, debt payoff and retirement saving.

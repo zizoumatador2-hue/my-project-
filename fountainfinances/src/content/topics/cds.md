@@ -21,7 +21,7 @@ faqs:
 
 ## How a CD works
 
-A **certificate of deposit (CD)** is a savings account that pays a **fixed rate** for a **fixed term** — commonly three months to five years. In exchange for the certainty of the rate, you agree to leave the money untouched until the CD matures. Withdrawing early usually triggers a penalty, often a set number of months of interest.
+A **certificate of deposit (CD)** is a savings account that pays a **fixed rate** for a **fixed term**: commonly three months to five years. In exchange for the certainty of the rate, you agree to leave the money untouched until the CD matures. Withdrawing early usually triggers a penalty, often a set number of months of interest.
 
 ## Types of CDs
 
@@ -33,10 +33,10 @@ A **certificate of deposit (CD)** is a savings account that pays a **fixed rate*
 
 ## CD ladders
 
-A **CD ladder** divides your money across several terms — for example, one-, two-, three-, four- and five-year CDs. As each matures, you reinvest in a new five-year CD. The ladder gives you regular access to part of your money while capturing longer-term rates on the rest.
+A **CD ladder** divides your money across several terms, for example, one-, two-, three-, four- and five-year CDs. As each matures, you reinvest in a new five-year CD. The ladder gives you regular access to part of your money while capturing longer-term rates on the rest.
 
 ## Should you choose a CD?
 
-CDs make sense for money with a known date — a down payment, tuition or a planned purchase — and when you want to lock in a rate before rates fall. For an emergency fund that must be available immediately, a [high-yield savings account](/high-yield-savings/) is usually the better fit.
+CDs make sense for money with a known date (a down payment, tuition or a planned purchase) and when you want to lock in a rate before rates fall. For an emergency fund that must be available immediately, a [high-yield savings account](/high-yield-savings/) is usually the better fit.
 
 Estimate earnings with the [CD calculator](/calculators/cd/), read [how CDs work](/guides/how-cds-work/) and compare banks on our [CD accounts comparison](/best/cd-accounts/).

@@ -1,7 +1,7 @@
 ---
 title: "Best CD Accounts: Compare CD Rates, Terms and Penalties"
 seoTitle: "Best CD Accounts of 2026: Compare CD Rates, Terms & Penalties"
-description: "Compare CD options from FDIC-insured banks: term lengths, no-penalty CDs, early withdrawal penalties and maturity rules — and how to judge a CD rate."
+description: "Compare CD options from FDIC-insured banks: term lengths, no-penalty CDs, early withdrawal penalties and maturity rules, and how to judge a CD rate."
 keywords: ["best CD rates", "CD account rates", "certificate of deposit rates", "CD rates", "CD calculator"]
 hub: banking
 category: cd
@@ -41,8 +41,8 @@ calculators: ["cd", "compound-interest"]
 ## How to compare CDs
 
 1. **Compare APYs for the same term** on each bank’s site.
-2. **Read the early withdrawal penalty** — longer terms usually carry larger penalties.
-3. **Check the maturity rules** — grace period length and automatic renewal.
-4. **Decide how interest is paid** — added to the CD or sent to another account.
+2. **Read the early withdrawal penalty**: longer terms usually carry larger penalties.
+3. **Check the maturity rules**: grace period length and automatic renewal.
+4. **Decide how interest is paid**: added to the CD or sent to another account.
 
 A CD makes the most sense for money you won’t need until a known date. For your emergency fund, a [high-yield savings account](/best/high-yield-savings-accounts/) is usually a better fit. Estimate earnings with the [CD calculator](/calculators/cd/) and read [how CDs work](/guides/how-cds-work/).

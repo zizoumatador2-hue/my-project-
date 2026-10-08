@@ -34,7 +34,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undef
         if (!data.get('consent')) return 'Please confirm you would like to receive the newsletter.';
         return null;
       },
-      success: 'Almost done — check your inbox and click the link to confirm your subscription.',
+      success: 'Almost done. Check your inbox and click the link to confirm your subscription.',
       event: 'newsletter_signup',
     }),
   );

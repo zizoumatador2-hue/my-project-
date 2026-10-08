@@ -11,7 +11,7 @@ calculators: ["compound-interest", "budget"]
 guides: ["how-to-save-money-every-month", "what-is-a-high-yield-savings-account", "how-compound-interest-works"]
 faqs:
   - q: "What is the fastest way to save money?"
-    a: "Focus on your largest expenses first — housing, transportation and food — and on recurring bills like insurance, phone and subscriptions. One change to a big recurring cost saves more than dozens of small sacrifices."
+    a: "Focus on your largest expenses first (housing, transportation and food) and on recurring bills like insurance, phone and subscriptions. One change to a big recurring cost saves more than dozens of small sacrifices."
   - q: "Where should I keep money I am saving?"
     a: "Keep short-term savings in a federally insured savings account, ideally a high-yield account that pays a competitive APY, separate from your everyday checking account."
   - q: "How much should I save each month?"
@@ -25,7 +25,7 @@ People who save consistently rarely rely on willpower. They set up a system: sav
 ## The highest-impact ways to save
 
 1. **Automate a transfer to savings** on the day you are paid, before you can spend it.
-2. **Renegotiate or shop recurring bills** — car and home insurance, phone and internet plans — once a year.
+2. **Renegotiate or shop recurring bills** (car and home insurance, phone and internet plans) once a year.
 3. **Cancel unused subscriptions.** Review your statements for charges you have forgotten about.
 4. **Plan meals and grocery trips.** Food is one of the largest flexible categories in most budgets.
 5. **Pay off high-interest debt.** Every dollar of credit card interest you avoid is a guaranteed saving.
@@ -34,7 +34,7 @@ People who save consistently rarely rely on willpower. They set up a system: sav
 
 ## Make your savings earn more
 
-Where you keep savings matters. Traditional savings accounts at many large banks pay very little, while [high-yield savings accounts](/high-yield-savings/) and [CDs](/cds/) often pay far more — with the same FDIC or NCUA insurance protection. The [compound interest calculator](/calculators/compound-interest/) shows how the rate and regular deposits add up over time.
+Where you keep savings matters. Traditional savings accounts at many large banks pay very little, while [high-yield savings accounts](/high-yield-savings/) and [CDs](/cds/) often pay far more, with the same FDIC or NCUA insurance protection. The [compound interest calculator](/calculators/compound-interest/) shows how the rate and regular deposits add up over time.
 
 ## Go deeper
 

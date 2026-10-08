@@ -8,16 +8,16 @@ topics: ["banking-fees", "checking-accounts", "online-banks"]
 published: 2026-10-05
 updated: 2026-10-05
 author: editorial-team
-quickAnswer: "To avoid overdraft fees, opt out of overdraft coverage for debit card and ATM transactions, turn on low-balance alerts, link a savings account for overdraft transfers, keep a small buffer in checking and consider a bank that doesn't charge overdraft fees at all. If you are charged, ask the bank to waive it — first-time requests are often granted."
+quickAnswer: "To avoid overdraft fees, opt out of overdraft coverage for debit card and ATM transactions, turn on low-balance alerts, link a savings account for overdraft transfers, keep a small buffer in checking and consider a bank that doesn't charge overdraft fees at all. If you are charged, ask the bank to waive it: first-time requests are often granted."
 takeaways:
   - "Banks can't charge overdraft fees on ATM and one-time debit card transactions unless you opt in."
   - "Low-balance alerts and a small cushion prevent most overdrafts."
   - "Linking savings for overdraft transfers usually costs far less than an overdraft fee."
   - "Many banks and credit unions now offer accounts with no overdraft fees."
-  - "If you are charged a fee, ask for a refund — banks often waive the first one."
+  - "If you are charged a fee, ask for a refund: banks often waive the first one."
 faqs:
   - q: "What is the difference between an overdraft fee and an NSF fee?"
-    a: "An overdraft fee is charged when the bank pays a transaction even though you don't have enough money. A non-sufficient funds (NSF) fee is charged when the bank declines or returns the payment instead. Either way, check your bank's fee schedule — many banks have reduced or eliminated these fees."
+    a: "An overdraft fee is charged when the bank pays a transaction even though you don't have enough money. A non-sufficient funds (NSF) fee is charged when the bank declines or returns the payment instead. Either way, check your bank's fee schedule: many banks have reduced or eliminated these fees."
   - q: "Can I opt out of overdraft protection?"
     a: "Yes. For ATM withdrawals and one-time debit card purchases, overdraft coverage is opt-in under federal rules, so you can decline it or revoke it at any time. Those transactions will then be declined at no charge if you don't have enough money."
   - q: "Will a bank refund an overdraft fee?"
@@ -33,7 +33,7 @@ sources:
   - title: "Overdraft and account fees"
     publisher: "Consumer Financial Protection Bureau"
     url: "https://www.consumerfinance.gov/consumer-tools/bank-accounts/"
-  - title: "Electronic Fund Transfers (Regulation E), 12 CFR 1005.17 — requirements for overdraft services"
+  - title: "Electronic Fund Transfers (Regulation E), 12 CFR 1005.17: requirements for overdraft services"
     publisher: "Consumer Financial Protection Bureau"
     url: "https://www.consumerfinance.gov/rules-policy/regulations/1005/17/"
 related: ["checking-vs-savings-account", "what-is-a-high-yield-savings-account", "how-to-build-a-budget", "sinking-funds"]
@@ -41,7 +41,7 @@ calculators: ["budget", "emergency-fund"]
 comparisons: ["checking-accounts", "high-yield-savings-accounts"]
 ---
 
-An overdraft fee can turn a $5 coffee into a $40 mistake. The good news is that most overdraft fees are avoidable with a few settings and habits — and some banks no longer charge them at all. This guide explains how overdraft and non-sufficient funds (NSF) fees work and nine practical ways to stop paying them. It is part of our [banking hub](/banking/); for broader account choices, see [checking vs. savings accounts](/guides/checking-vs-savings-account/).
+An overdraft fee can turn a $5 coffee into a $40 mistake. The good news is that most overdraft fees are avoidable with a few settings and habits, and some banks no longer charge them at all. This guide explains how overdraft and non-sufficient funds (NSF) fees work and nine practical ways to stop paying them. It is part of our [banking hub](/banking/); for broader account choices, see [checking vs. savings accounts](/guides/checking-vs-savings-account/).
 
 ## How overdraft fees work
 
@@ -56,7 +56,7 @@ Some banks also charge an **extended overdraft fee** if your balance stays negat
 
 ## Your rights under federal rules
 
-Under Regulation E, banks **cannot charge overdraft fees on ATM withdrawals and one-time debit card purchases unless you opt in**. If you haven't opted in, those transactions are simply declined when you don't have enough money — no fee.
+Under Regulation E, banks **cannot charge overdraft fees on ATM withdrawals and one-time debit card purchases unless you opt in**. If you haven't opted in, those transactions are simply declined when you don't have enough money: no fee.
 
 The opt-in rule does **not** cover checks, recurring debit card payments (such as subscriptions) or ACH payments like bill pay. Those can still trigger overdraft or NSF fees depending on your bank's policies.
 
@@ -68,15 +68,15 @@ Check your account settings or call your bank to confirm you are **not** opted i
 
 ### 2. Turn on low-balance alerts
 
-Most banks let you set a text or app alert when your balance drops below an amount you choose — say $100. Add alerts for large withdrawals and for every deposit so you always know where you stand.
+Most banks let you set a text or app alert when your balance drops below an amount you choose: say $100. Add alerts for large withdrawals and for every deposit so you always know where you stand.
 
 ### 3. Link a savings account for overdraft transfers
 
-**Overdraft protection transfers** move money from a linked savings account to cover a shortfall. Many banks charge nothing for the transfer, and others charge much less than an overdraft fee. Keeping a few hundred dollars in a linked savings account — ideally separate from your [emergency fund](/guides/emergency-fund-guide/) — is a cheap insurance policy.
+**Overdraft protection transfers** move money from a linked savings account to cover a shortfall. Many banks charge nothing for the transfer, and others charge much less than an overdraft fee. Keeping a few hundred dollars in a linked savings account (ideally separate from your [emergency fund](/guides/emergency-fund-guide/)) is a cheap insurance policy.
 
 ### 4. Keep a buffer in checking
 
-Treat a small amount — $100 to $200, or more if your bills are large — as zero. If your "real" balance never dips below the buffer, timing mismatches between deposits and payments won't cause overdrafts.
+Treat a small amount ($100 to $200, or more if your bills are large) as zero. If your "real" balance never dips below the buffer, timing mismatches between deposits and payments won't cause overdrafts.
 
 ### 5. Track pending transactions, not just the balance
 
@@ -112,10 +112,10 @@ If you are charged a fee, **ask for it to be waived**. Banks frequently refund a
 1. **Deposit money as soon as possible** to bring the balance positive and avoid extended fees.
 2. **Pause automatic payments** that might hit while the balance is negative.
 3. **Ask for a fee refund.**
-4. **Find the cause** — a timing problem, a forgotten subscription, an irregular bill — and fix it with one of the strategies above.
+4. **Find the cause** (a timing problem, a forgotten subscription, an irregular bill) and fix it with one of the strategies above.
 
 Unpaid negative balances can lead the bank to close the account and report it to checking account reporting agencies such as ChexSystems, which can make it harder to open a new account. If your account is closed, look for "second chance" checking accounts.
 
 ## The bottom line
 
-Most overdraft fees come from a handful of fixable causes. Opt out of debit card overdraft coverage, set alerts, keep a small cushion and link a savings account — or choose a bank that doesn't charge overdraft fees at all. Then put the money you save to work in a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) instead of paying it to your bank.
+Most overdraft fees come from a handful of fixable causes. Opt out of debit card overdraft coverage, set alerts, keep a small cushion and link a savings account, or choose a bank that doesn't charge overdraft fees at all. Then put the money you save to work in a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) instead of paying it to your bank.

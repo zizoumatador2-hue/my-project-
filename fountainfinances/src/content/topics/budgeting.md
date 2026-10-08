@@ -20,7 +20,7 @@ faqs:
 
 ## What a budget does for you
 
-A **budget** is a plan that assigns your income to expenses, savings and debt payments before the month begins. It replaces guesswork with a clear picture of where your money goes, and it makes sure your priorities — an emergency fund, paying off a credit card, a vacation — get funded first instead of from whatever is left over.
+A **budget** is a plan that assigns your income to expenses, savings and debt payments before the month begins. It replaces guesswork with a clear picture of where your money goes, and it makes sure your priorities (an emergency fund, paying off a credit card, a vacation) get funded first instead of from whatever is left over.
 
 ## Popular budgeting methods
 

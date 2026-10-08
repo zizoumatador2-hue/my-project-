@@ -20,7 +20,7 @@ faqs:
 
 ## A plan connects today to tomorrow
 
-**Financial planning** is the process of setting goals and organizing your money to reach them. It connects the everyday — your budget and spending — with the long term: a home, your children’s education, retirement. You do not need a large income or a professional advisor to start. You need clear goals and a system.
+**Financial planning** is the process of setting goals and organizing your money to reach them. It connects the everyday (your budget and spending) with the long term: a home, your children’s education, retirement. You do not need a large income or a professional advisor to start. You need clear goals and a system.
 
 ## The building blocks of a financial plan
 

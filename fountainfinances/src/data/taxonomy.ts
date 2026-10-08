@@ -24,7 +24,7 @@ export const HUBS: Hub[] = [
     seoTitle: 'Personal Finance Guide: Budgeting, Saving & Debt Basics',
     description:
       'Practical personal finance guides for beginners and beyond: budgeting, saving money, emergency funds, debt management and financial planning.',
-    lede: 'The everyday decisions that shape your financial life — how you budget, save, handle debt and plan ahead.',
+    lede: 'The everyday decisions that shape your financial life: how you budget, save, handle debt and plan ahead.',
     keywords: ['personal finance', 'personal finance tips', 'personal finance for beginners', 'how to manage money'],
     icon: 'wallet',
   },
@@ -78,7 +78,7 @@ export const HUBS: Hub[] = [
     shortTitle: 'Insurance',
     seoTitle: 'Insurance Guide: Auto, Home, Renters & Life Insurance Basics',
     description:
-      'Understand the main types of insurance — auto, home, renters and life — what coverage you actually need and how to compare policies fairly.',
+      'Understand the main types of insurance (auto, home, renters and life), what coverage you actually need and how to compare policies fairly.',
     lede: 'Insurance protects the financial progress you have already made. Here is how to buy the right amount.',
     keywords: ['types of insurance', 'insurance comparison', 'affordable insurance'],
     icon: 'shield',

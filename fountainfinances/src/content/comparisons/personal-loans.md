@@ -1,7 +1,7 @@
 ---
 title: "Best Personal Loans: Compare Online Lenders"
 seoTitle: "Best Personal Loans of 2026: Compare Online Lenders"
-description: "Compare personal loan lenders by prequalification, credit fit, fees and direct creditor payment — plus how to compare offers by APR and total cost."
+description: "Compare personal loan lenders by prequalification, credit fit, fees and direct creditor payment, plus how to compare offers by APR and total cost."
 keywords: ["best personal loans", "personal loan comparison", "personal loan rates", "personal loans for bad credit", "personal loans"]
 hub: loans
 category: personal-loans
@@ -43,7 +43,7 @@ calculators: ["loan", "debt-consolidation"]
 1. **Prequalify with several lenders** that use soft inquiries.
 2. **Compare APRs** for the same loan amount and term.
 3. **Calculate total cost:** monthly payment × number of payments.
-4. **Check the fee structure** — an origination fee reduces the cash you receive.
+4. **Check the fee structure**: an origination fee reduces the cash you receive.
 5. **Look for flexibility:** autopay discounts, due-date changes and hardship options.
 
 Use the [loan calculator](/calculators/loan/) to compare offers, and read [personal loan vs. credit card](/guides/personal-loan-vs-credit-card/) to decide whether a loan is the right tool.

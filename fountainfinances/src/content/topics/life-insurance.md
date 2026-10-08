@@ -11,7 +11,7 @@ calculators: ["investment", "budget"]
 guides: ["types-of-insurance", "financial-planning-for-beginners"]
 faqs:
   - q: "Who needs life insurance?"
-    a: "Anyone whose death would create financial hardship for others — for example, parents of young children, a spouse who relies on your income, or co-signers on debts. Single people with no dependents often need little or none."
+    a: "Anyone whose death would create financial hardship for others, for example, parents of young children, a spouse who relies on your income, or co-signers on debts. Single people with no dependents often need little or none."
   - q: "Is term or whole life insurance better?"
     a: "Term life is usually far cheaper and covers a set period, such as 20 or 30 years, which fits most families’ needs. Permanent policies like whole life cost more and combine coverage with a cash value component; they suit specific estate or long-term needs."
   - q: "Does employer life insurance count?"

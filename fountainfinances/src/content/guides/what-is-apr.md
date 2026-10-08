@@ -16,7 +16,7 @@ takeaways:
   - "APR is for borrowing; APY is for saving and includes compounding."
 faqs:
   - q: "Is a lower APR always better?"
-    a: "For comparable loans, a lower APR means a lower yearly cost of borrowing. Also compare the term and total cost — a lower APR spread over a much longer term can still cost more in total interest."
+    a: "For comparable loans, a lower APR means a lower yearly cost of borrowing. Also compare the term and total cost: a lower APR spread over a much longer term can still cost more in total interest."
   - q: "What is a good APR on a credit card?"
     a: "It depends on the market and your credit. Compare offers against the Federal Reserve’s published average rates for credit card plans. Any APR matters less if you pay your balance in full every month."
   - q: "Why is my mortgage APR higher than my interest rate?"
@@ -37,11 +37,11 @@ related: ["what-is-apy", "how-credit-card-interest-works", "personal-loan-vs-cre
 calculators: ["loan", "credit-card-payoff", "mortgage"]
 ---
 
-APR shows up on every loan offer, credit card application and mortgage disclosure — but many people are not sure what it includes or how it differs from the interest rate. Understanding APR is one of the simplest ways to avoid overpaying when you borrow.
+APR shows up on every loan offer, credit card application and mortgage disclosure, but many people are not sure what it includes or how it differs from the interest rate. Understanding APR is one of the simplest ways to avoid overpaying when you borrow.
 
 ## APR in one sentence
 
-**APR, or annual percentage rate, is the yearly cost of borrowing money, expressed as a percentage.** Federal law — the Truth in Lending Act and its implementing rule, Regulation Z — requires lenders to disclose it so consumers can compare credit offers on a consistent basis.
+**APR, or annual percentage rate, is the yearly cost of borrowing money, expressed as a percentage.** Federal law (the Truth in Lending Act and its implementing rule, Regulation Z) requires lenders to disclose it so consumers can compare credit offers on a consistent basis.
 
 ## APR vs. interest rate
 
@@ -67,10 +67,10 @@ Offer A advertises a lower interest rate, but its fee makes it more expensive. T
 
 For credit cards, the APR is essentially the interest rate on balances you carry. Most cards have several APRs:
 
-- **Purchase APR** — for everyday purchases.
-- **Balance transfer APR** — sometimes 0% for an introductory period.
-- **Cash advance APR** — usually higher, with no grace period.
-- **Penalty APR** — may apply after a late payment.
+- **Purchase APR**: for everyday purchases.
+- **Balance transfer APR**: sometimes 0% for an introductory period.
+- **Cash advance APR**: usually higher, with no grace period.
+- **Penalty APR**: may apply after a late payment.
 
 Card APRs are usually **variable**, tied to an index such as the prime rate plus a margin. When the index moves, your APR moves.
 
@@ -102,19 +102,19 @@ A savings account advertising a 4.00% APY earns slightly more than one paying 4.
 
 ## What affects the APR you are offered
 
-- **Credit score and history** — the biggest factor in most pricing.
+- **Credit score and history**: the biggest factor in most pricing.
 - **Debt-to-income ratio.**
-- **Loan term** — longer terms can carry higher rates.
-- **Collateral** — secured loans usually have lower APRs.
-- **Market rates** — influenced by the broader interest rate environment.
+- **Loan term**: longer terms can carry higher rates.
+- **Collateral**: secured loans usually have lower APRs.
+- **Market rates**: influenced by the broader interest rate environment.
 
 ## How to use APR to compare offers
 
 1. **Compare the same loan type, amount and term.**
-2. **Use APR as the headline cost** — it captures fees the interest rate hides.
-3. **Then check the total cost** — monthly payment × number of payments, plus any fees not in the APR.
+2. **Use APR as the headline cost**: it captures fees the interest rate hides.
+3. **Then check the total cost**: monthly payment × number of payments, plus any fees not in the APR.
 4. **Read the fine print** for prepayment penalties, late fees and whether the rate is fixed or variable.
 
 ## The bottom line
 
-APR is the price tag on borrowed money. Always compare offers by APR and total cost rather than by monthly payment or advertised interest rate alone — and remember that on a credit card, paying in full each month makes the APR irrelevant. Learn more in our [loans hub](/loans/).
+APR is the price tag on borrowed money. Always compare offers by APR and total cost rather than by monthly payment or advertised interest rate alone, and remember that on a credit card, paying in full each month makes the APR irrelevant. Learn more in our [loans hub](/loans/).

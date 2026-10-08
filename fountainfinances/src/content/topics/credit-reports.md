@@ -12,14 +12,14 @@ faqs:
   - q: "Where can I get a free credit report?"
     a: "AnnualCreditReport.com is the only website authorized by federal law to provide free reports from Equifax, Experian and TransUnion. Free weekly reports are available there."
   - q: "How do I dispute an error on my credit report?"
-    a: "File a dispute with the credit bureau that shows the error — online, by mail or by phone — and include supporting documents. You can also dispute directly with the company that reported the information. Bureaus generally must investigate within 30 days."
+    a: "File a dispute with the credit bureau that shows the error (online, by mail or by phone) and include supporting documents. You can also dispute directly with the company that reported the information. Bureaus generally must investigate within 30 days."
   - q: "What is a credit freeze?"
     a: "A credit freeze restricts access to your credit report so new creditors cannot open accounts in your name. It is free to place and lift at each of the three bureaus and does not affect your score."
 ---
 
 ## What is in your credit report
 
-Your **credit report** is a record of how you have used credit. The three nationwide credit bureaus — **Equifax, Experian and TransUnion** — each keep one. Reports typically include:
+Your **credit report** is a record of how you have used credit. The three nationwide credit bureaus (**Equifax, Experian and TransUnion**) each keep one. Reports typically include:
 
 - **Identifying information:** name, addresses, date of birth and employers.
 - **Accounts:** credit cards, loans and mortgages, with balances, limits and payment history.
@@ -34,7 +34,7 @@ Most negative information, such as late payments and collection accounts, can re
 
 ## Check your reports regularly
 
-Get free reports from all three bureaus at [AnnualCreditReport.com](https://www.annualcreditreport.com/). Look for accounts you do not recognize, incorrect late payments, wrong balances and personal details that are not yours — any of which could signal an error or identity theft.
+Get free reports from all three bureaus at [AnnualCreditReport.com](https://www.annualcreditreport.com/). Look for accounts you do not recognize, incorrect late payments, wrong balances and personal details that are not yours: any of which could signal an error or identity theft.
 
 ## Fixing errors
 
