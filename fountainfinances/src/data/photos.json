@@ -36,7 +36,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -68,26 +68,24 @@
     "height": 900
   },
   "hub-credit": {
-    "id": 62219,
-    "query": "three plain unbranded credit cards in muted navy, teal and charcoal fanned out o",
-    "alt": "Plain credit cards resting on a leather wallet on a walnut table",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#282828",
+    "id": 9810169,
+    "query": "credit card payment",
+    "alt": "Person Holding Credit Card and Payment Terminal",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/9810169/",
+    "color": "#f8f8f8",
     "width": 1600,
     "height": 900
   },
   "hub-banking": {
-    "id": 73410,
-    "query": "a classic American neoclassical stone bank building with tall columns and wide s",
-    "alt": "A classic stone bank building with tall columns at golden hour",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#080808",
+    "id": 11277463,
+    "query": "bank building",
+    "alt": "Bank Building During Night Time",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/11277463/",
+    "color": "#281818",
     "width": 1600,
     "height": 900
   },
@@ -116,7 +114,7 @@
     "height": 900
   },
   "hub-insurance": {
-    "id": 16674,
+    "id": 16675,
     "query": "a cozy two-story family home sheltered under a large oak tree during a gentle ev",
     "alt": "A family home sheltered by a large oak tree on a rainy evening",
     "photographer": "Fountain Finances",
@@ -946,7 +944,7 @@
     "height": 900
   },
   "topic-savings-accounts": {
-    "id": 62129,
+    "id": 62130,
     "query": "a glossy white ceramic piggy bank on a sunny windowsill next to a small potted p",
     "alt": "A white ceramic piggy bank on a sunny windowsill next to a small plant",
     "photographer": "Fountain Finances",

@@ -6,15 +6,6 @@ on:
     branches: [main]
     paths: ['fountainfinances/**', '.github/workflows/fountainfinances.yml']
   workflow_dispatch:
-    inputs:
-      flux_nonce:
-        description: Single-use nonce for /api/imggen (original images)
-        required: false
-        default: ''
-      flux_only:
-        description: Optional comma-separated slots to (re)generate
-        required: false
-        default: ''
 defaults:
   run:
     working-directory: fountainfinances
@@ -42,14 +33,6 @@ jobs:
           [ -s .cache/pexels-index.jsonl ] && exit 0
           pip install --quiet pyarrow
           python3 scripts/pexels-index.py
-      - name: Generate original images (FLUX.1 schnell via /api/imggen)
-        if: inputs.flux_nonce != ''
-        env:
-          FLUX_NONCE: ${{ inputs.flux_nonce }}
-          FLUX_ONLY: ${{ inputs.flux_only }}
-        run: |
-          echo "::add-mask::$FLUX_NONCE"
-          node scripts/fetch-flux.mjs
       - name: Fetch photos from Pexels
         run: node scripts/fetch-pexels.mjs
       - name: Commit new photos
