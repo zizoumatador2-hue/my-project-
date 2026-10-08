@@ -33,7 +33,7 @@ sources:
   - title: "Introduction to Investing"
     publisher: "U.S. Securities and Exchange Commission: Investor.gov"
     url: "https://www.investor.gov/introduction-investing"
-related: ["what-is-apy", "what-is-a-high-yield-savings-account", "financial-planning-for-beginners"]
+related: ["roth-ira-vs-traditional-ira", "what-is-apy", "what-is-a-high-yield-savings-account", "financial-planning-for-beginners"]
 calculators: ["compound-interest", "investment", "cd"]
 ---
 

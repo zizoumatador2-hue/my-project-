@@ -33,7 +33,7 @@ sources:
   - title: "Consumer Credit - G.19"
     publisher: "Board of Governors of the Federal Reserve System"
     url: "https://www.federalreserve.gov/releases/g19/current/default.htm"
-related: ["what-is-debt-consolidation", "what-is-apr", "how-credit-card-interest-works"]
+related: ["debt-to-income-ratio", "what-is-debt-consolidation", "what-is-apr", "how-credit-card-interest-works"]
 calculators: ["loan", "credit-card-payoff", "debt-consolidation"]
 comparisons: ["personal-loans", "balance-transfer-credit-cards"]
 ---

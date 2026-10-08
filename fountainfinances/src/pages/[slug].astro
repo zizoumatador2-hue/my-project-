@@ -99,7 +99,7 @@ const schema = [
 <BaseLayout title={seoTitle} description={description} keywords={keywords} path={path} crumbs={crumbs} schema={schema} image={ogImage(props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`, props.kind === 'topic' ? `hub-${props.entry.data.hub}` : undefined)}>
   <PageHead photo={props.kind === 'hub' ? `hub-${props.entry.id}` : `topic-${props.entry.id}`} fallback={props.kind === 'topic' ? `hub-${props.entry.data.hub}` : undefined}>
       <Breadcrumbs items={crumbs} />
-      <h1>{props.kind === 'hub' ? hub.title : title}</h1>
+      <h1>{seoTitle.replace(/\s*\|\s*Fountain Finances$/, '')}</h1>
       <p class="lede">{lede}</p>
       <div class="meta-line"><span>By <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a></span><span>Updated <time datetime={isoDay(updated)}>{fmtDate(updated)}</time></span></div>
   </PageHead>

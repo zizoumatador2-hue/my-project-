@@ -56,7 +56,7 @@ howTo:
       text: "Keep no-annual-fee cards open and use them occasionally to preserve your credit history."
     - name: "Monitor your progress"
       text: "Track your score monthly and review your reports regularly for new errors or fraud."
-related: ["hard-vs-soft-credit-inquiry", "how-credit-scores-work", "how-to-read-a-credit-report", "how-to-pay-off-credit-card-debt"]
+related: ["credit-utilization-ratio", "hard-vs-soft-credit-inquiry", "how-credit-scores-work", "how-to-read-a-credit-report", "how-to-pay-off-credit-card-debt"]
 calculators: ["credit-card-payoff"]
 ---
 

@@ -51,7 +51,7 @@ howTo:
       text: "Confirm the account is reported correctly and track your progress."
     - name: "Graduate carefully"
       text: "After several months, ask about upgrading to an unsecured card and add accounts only when you need them."
-related: ["how-credit-scores-work", "how-to-improve-credit-score", "credit-card-rewards-explained"]
+related: ["credit-utilization-ratio", "how-credit-scores-work", "how-to-improve-credit-score", "credit-card-rewards-explained"]
 calculators: ["credit-card-payoff"]
 comparisons: ["credit-cards-for-beginners"]
 ---

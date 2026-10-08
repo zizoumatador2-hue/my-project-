@@ -47,7 +47,7 @@ howTo:
       text: "Divide the annual premium by 12."
     - name: "Add mortgage insurance and HOA dues"
       text: "Include PMI if you put less than 20% down on a conventional loan, and any monthly HOA dues."
-related: ["how-to-remove-pmi", "how-much-house-can-i-afford", "first-time-home-buyer-guide", "heloc-vs-home-equity-loan"]
+related: ["mortgage-closing-costs", "how-to-remove-pmi", "how-much-house-can-i-afford", "first-time-home-buyer-guide", "heloc-vs-home-equity-loan"]
 calculators: ["mortgage", "home-affordability"]
 ---
 
