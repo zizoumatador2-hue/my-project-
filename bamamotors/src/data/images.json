@@ -139,7 +139,8 @@
     "alt": "Full-size pickup truck parked on a dirt road beside a cotton field",
     "author": "BamaMotors",
     "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
-    "source": "fal.ai"
+    "source": "fal.ai",
+    "prompt": "A clean late-model full-size pickup truck with a plain unbadged grille, parked on a red clay dirt road beside a cotton field in rural Alabama, late afternoon light"
   },
   "body-suvs": {
     "src": "/images/body-suvs-1600.webp",
@@ -157,67 +158,62 @@
     "srcset": "/images/body-sedans-640.webp 640w, /images/body-sedans-1024.webp 1024w, /images/body-sedans-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Cadillac Sedan de Ville, 1959, 6400 cm\u00b3, 325 PS, 180 km/h",
-    "author": "Berthold Werner",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cadillac_Sedan_de_Ville_BW_2017-07-16_13-24-59.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Silver midsize sedan parked on a tree-lined residential street",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A silver midsize sedan parked on a quiet tree-lined residential street with brick houses in a Southern suburb, morning light"
   },
   "body-minivans": {
     "src": "/images/body-minivans-1600.webp",
     "srcset": "/images/body-minivans-640.webp 640w, /images/body-minivans-1024.webp 1024w, /images/body-minivans-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Mercedes-Benz_T-Class_(W420) at Automesse Ludwigsburg 2022",
-    "author": "Alexander Migl",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_T-Class_(W420)_Automesse_Ludwigsburg_2022_1X7A5899.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Minivan with its sliding door open in a suburban driveway",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A modern minivan with its sliding door open in a suburban driveway, sports bags and a cooler being loaded, warm evening light"
   },
   "body-coupes": {
     "src": "/images/body-coupes-1600.webp",
     "srcset": "/images/body-coupes-640.webp 640w, /images/body-coupes-1024.webp 1024w, /images/body-coupes-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Triumph TR4 at the mountain race in W\u00fcrgau 2017",
-    "author": "Ermell",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:W%C3%BCrgau_Bergrennen2017_Triumph_TR4_0148.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Sporty two-door coupe on a winding road above a lake",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A sporty two-door coupe on a winding mountain road overlooking a lake and forest in north Alabama, golden hour"
   },
   "body-hatchbacks": {
     "src": "/images/body-hatchbacks-1600.webp",
     "srcset": "/images/body-hatchbacks-640.webp 640w, /images/body-hatchbacks-1024.webp 1024w, /images/body-hatchbacks-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Volkswagen_Golf_IV_hatchback_V5 in Stuttgart",
-    "author": "Alexander-93",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_IV_hatchback_V5_DSC_0646.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Compact hatchback parked on a historic downtown square",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A compact hatchback parked downtown in a historic Southern small town square with brick storefronts, bright day"
   },
   "body-convertibles": {
     "src": "/images/body-convertibles-1600.webp",
     "srcset": "/images/body-convertibles-640.webp 640w, /images/body-convertibles-1024.webp 1024w, /images/body-convertibles-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Volkswagen Beetle 1303 in the Dernekamp hamlet, Kirchspiel, D\u00fclmen, North Rhine-Westphalia, Germany The Volkswagen 1303 was a further develo",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Kirchspiel,_VW_1303_--_2017_--_2279.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Convertible with the top down on a Gulf Coast road",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A convertible with the top down driving along a coastal road near white sand beaches on the Gulf Coast, blue sky"
   },
   "post-how-to-buy-a-used-car-in-alabama": {
     "src": "/images/post-how-to-buy-a-used-car-in-alabama-1600.webp",
     "srcset": "/images/post-how-to-buy-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-buy-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-buy-a-used-car-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Aerial photograph of a parking lot in Gro\u00df-Gerau",
+    "alt": "Aerial photograph of a parking lot in Groß-Gerau",
     "author": "Matti Blume",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parking_lot,_Gross-Gerau_(P1090665).jpg",
     "source": "Wikimedia Commons",
@@ -265,7 +261,7 @@
     "srcset": "/images/post-cars-under-10000-in-alabama-640.webp 640w, /images/post-cars-under-10000-in-alabama-1024.webp 1024w, /images/post-cars-under-10000-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Institute of Mathematics and Computer Science from the parking garage at Coesfelder Kreuz in M\u00fcnster, North Rhine-Westphalia, Germany",
+    "alt": "Institute of Mathematics and Computer Science from the parking garage at Coesfelder Kreuz in Münster, North Rhine-Westphalia, Germany",
     "author": "Dietmar Rabich",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnster,_Parkhaus_am_Coesfelder_Kreuz_--_2019_--_0023.jpg",
     "source": "Wikimedia Commons",
@@ -277,12 +273,11 @@
     "srcset": "/images/post-how-to-inspect-a-used-car-alabama-640.webp 640w, /images/post-how-to-inspect-a-used-car-alabama-1024.webp 1024w, /images/post-how-to-inspect-a-used-car-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Each year in Bay Ridge, Brooklyn they hold The Raggamuffin Parade, which is a cross between s atreet fair, and a costume parade for children",
-    "author": "emilydickinsonridesabmx from Fort Hamilton Brooklyn, New York, USA",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lots_of_Carbon_Fiber_in_this_Corvette_Engine_Bay_(5049453782).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    "alt": "Mechanic inspecting the underside of a used car on a lift",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A mechanic in a clean independent repair shop inspecting the underside of a used sedan on a lift with a flashlight"
   },
   "post-used-vs-new-car-alabama": {
     "src": "/images/post-used-vs-new-car-alabama-1600.webp",
@@ -325,7 +320,7 @@
     "srcset": "/images/post-how-to-list-inventory-on-bamamotors-640.webp 640w, /images/post-how-to-list-inventory-on-bamamotors-1024.webp 1024w, /images/post-how-to-list-inventory-on-bamamotors-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Toyota GR Supra (in the showroom of Auto Bertels) in D\u00fclmen, North Rhine-Westphalia, Germany",
+    "alt": "Toyota GR Supra (in the showroom of Auto Bertels) in Dülmen, North Rhine-Westphalia, Germany",
     "author": "Dietmar Rabich",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Auto_Bertels,_Toyota_GR_Supra_--_2021_--_9539_(bw).jpg",
     "source": "Wikimedia Commons",
@@ -361,24 +356,22 @@
     "srcset": "/images/post-buying-a-used-car-from-a-private-seller-in-alabama-640.webp 640w, /images/post-buying-a-used-car-from-a-private-seller-in-alabama-1024.webp 1024w, /images/post-buying-a-used-car-from-a-private-seller-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "London Classic Car Show Olympia 2020",
-    "author": "tonylanciabeta",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:London_Classic_Car_Show_Olympia_2020_Fiat_124_for_sale_-_49572392633.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    "alt": "Buyer and private seller shaking hands next to a used sedan",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Two neighbors shaking hands in a suburban driveway next to a used sedan with a for sale sign in the window, afternoon light"
   },
   "post-trade-in-your-car-alabama": {
     "src": "/images/post-trade-in-your-car-alabama-1600.webp",
     "srcset": "/images/post-trade-in-your-car-alabama-640.webp 640w, /images/post-trade-in-your-car-alabama-1024.webp 1024w, /images/post-trade-in-your-car-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Rear light of a Mercedes-Benz C-Klasse Cabrio at car dealer Beresa in M\u00fcnster, North Rhine-Westphalia, Germany",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnster,_Beresa,_Mercedes-Benz_C-Klasse_Cabrio_--_2018_--_1757.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Appraiser checking a used SUV for a trade-in value",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A dealership appraiser walking around a used SUV with a tablet, checking the paint and tires on a sunny lot"
   },
   "post-best-reliable-used-cars-under-15000": {
     "src": "/images/post-best-reliable-used-cars-under-15000-1600.webp",
@@ -398,7 +391,7 @@
     "width": 1600,
     "height": 900,
     "alt": "Old rusty car in Ubud, Bali, Indonesia",
-    "author": "Jakub Ha\u0142un",
+    "author": "Jakub Hałun",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_car_in_Ubud,_Bali,_Indonesia,_20220823_1143_0423.jpg",
     "source": "Wikimedia Commons",
     "license": "CC BY-SA 4.0",
@@ -444,22 +437,22 @@
     "srcset": "/images/post-default-640.webp 640w, /images/post-default-1024.webp 1024w, /images/post-default-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Wiesmann Spyder Concept at Wiesmann Sports Cars, D\u00fclmen, North Rhine-Westphalia, Germany Wiesmann is a German sports car manufacturer based ",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Wiesmann_Sports_Cars,_Wiesmann_Spyder_Concept_--_2018_--_9978.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Car keys being handed to a buyer at a dealership desk",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Close-up of a salesperson handing a set of car keys to a smiling buyer across a desk in a bright dealership showroom"
   },
   "post-how-to-finance-a-used-car-in-alabama": {
     "src": "/images/post-how-to-finance-a-used-car-in-alabama-1600.webp",
     "srcset": "/images/post-how-to-finance-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-finance-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-finance-a-used-car-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Couple reviewing an auto loan offer at a finance desk",
+    "alt": "Couple shaking hands with a salesperson at a dealership desk",
     "author": "BamaMotors",
     "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
-    "source": "fal.ai"
+    "source": "fal.ai",
+    "prompt": "A smiling couple shaking hands with a salesperson across a desk in a bright car dealership showroom, a car key fob on the desk, showroom cars softly blurred in the background"
   },
   "post-best-used-suvs-for-alabama-drivers": {
     "src": "/images/post-best-used-suvs-for-alabama-drivers-1600.webp",
@@ -478,23 +471,21 @@
     "srcset": "/images/post-test-drive-checklist-640.webp 640w, /images/post-test-drive-checklist-1024.webp 1024w, /images/post-test-drive-checklist-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Volvo PV544 B18 (built in 1961) in the parking lot of the barbecue area in Merfeld, D\u00fclmen, North Rhine-Westphalia, Germany The Volvo PV 544",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Merfeld,_Volvo_PV_544_B18_--_2021_--_9944.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Driver's view on a test drive along a country road",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "View from the driver's seat of a used car on a two-lane country road, hands on the steering wheel, dashboard visible, sunny day"
   },
   "post-certified-pre-owned-vs-used-alabama": {
     "src": "/images/post-certified-pre-owned-vs-used-alabama-1600.webp",
     "srcset": "/images/post-certified-pre-owned-vs-used-alabama-640.webp 640w, /images/post-certified-pre-owned-vs-used-alabama-1024.webp 1024w, /images/post-certified-pre-owned-vs-used-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Ford car dealership M\u00fcller at the corner \"Pasewalker Str.\" and \"Blankenburger Weg\", Berlin -Franz\u00f6sisch Buchholz. This branch offers used ca",
-    "author": "Jochen Teufel",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autohaus_M%C3%BCller_Pasewalker_Str_(2010).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "alt": "Inspection checklist on the hood of a used car",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A multi-point inspection checklist on a clipboard resting on the hood of a clean used car in a service bay"
   }
 }
