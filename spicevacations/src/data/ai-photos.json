@@ -1,0 +1,202 @@
+{
+  "home/hero": {
+    "id": "ai-home--hero",
+    "base": "/ai/home--hero",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A couple walking hand in hand along a tropical beach at sunset",
+    "avg": "#a39d87",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1344007092,
+    "prompt": "a couple seen from behind or in silhouette, faces not visible, walking hand in hand along a quiet tropical beach at golden-hour sunset, gentle waves, palm trees, wide cinematic composition with empty sky on the left for a headline",
+    "megapixels": 2
+  },
+  "home/band": {
+    "id": "ai-home--band",
+    "base": "/ai/home--band",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "Overwater bungalows above a calm turquoise lagoon at dusk",
+    "avg": "#8eadae",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1589741334,
+    "prompt": "overwater bungalows on stilts above a calm turquoise lagoon at dusk, wooden walkway, soft pink and orange sky reflected in the water, serene, wide panoramic view",
+    "megapixels": 2
+  },
+  "vacation-types/romantic-getaways": {
+    "id": "ai-vacation-types--romantic-getaways",
+    "base": "/ai/vacation-types--romantic-getaways",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A candlelit dinner for two on an ocean-view terrace at twilight",
+    "avg": "#50616b",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 668402174,
+    "prompt": "a couple seen from behind or in silhouette, faces not visible, sharing a candlelit dinner on a wooden terrace overlooking the ocean at twilight, string lights, wine glasses, intimate atmosphere",
+    "megapixels": 2
+  },
+  "vacation-types/couples-vacations": {
+    "id": "ai-vacation-types--couples-vacations",
+    "base": "/ai/vacation-types--couples-vacations",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "Two people kayaking across clear turquoise water near a tropical coast",
+    "avg": "#72aca5",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1347738837,
+    "prompt": "a couple seen from behind or in silhouette, faces not visible, kayaking side by side across clear turquoise water near a green tropical coastline on a sunny morning, aerial three-quarter view",
+    "megapixels": 2
+  },
+  "vacation-types/honeymoon-vacations": {
+    "id": "ai-vacation-types--honeymoon-vacations",
+    "base": "/ai/vacation-types--honeymoon-vacations",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A honeymoon suite terrace with a private plunge pool facing the sea",
+    "avg": "#90aaae",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1424746766,
+    "prompt": "luxury honeymoon suite with an open terrace and private plunge pool facing a turquoise sea, rose petals on white linen, sheer curtains moving in the breeze, morning light",
+    "megapixels": 2
+  },
+  "vacation-types/adults-only-resorts": {
+    "id": "ai-vacation-types--adults-only-resorts",
+    "base": "/ai/vacation-types--adults-only-resorts",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "An infinity pool merging with the ocean horizon at a quiet resort",
+    "avg": "#a7b2b4",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 602967831,
+    "prompt": "quiet adults-only resort infinity pool merging with the ocean horizon, two empty sun loungers with towels, palm shadows, calm late-afternoon light, minimalist architecture",
+    "megapixels": 2
+  },
+  "vacation-types/all-inclusive-resorts": {
+    "id": "ai-vacation-types--all-inclusive-resorts",
+    "base": "/ai/vacation-types--all-inclusive-resorts",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A beachfront resort pool with a swim-up bar and palm trees",
+    "avg": "#5f9599",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 121293909,
+    "prompt": "beachfront all-inclusive resort pool area with a swim-up bar, palm trees and white sand beach beyond, tropical cocktails on the bar, bright sunny Caribbean day, no people in focus",
+    "megapixels": 2
+  },
+  "vacation-types/luxury-vacations": {
+    "id": "ai-vacation-types--luxury-vacations",
+    "base": "/ai/vacation-types--luxury-vacations",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A clifftop villa terrace with a private pool overlooking the coast at sunset",
+    "avg": "#8a806a",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 109281767,
+    "prompt": "elegant clifftop villa terrace at sunset overlooking a dramatic coastline, private infinity pool, outdoor lounge furniture, champagne on a table, refined luxury atmosphere",
+    "megapixels": 2
+  },
+  "vacation-types/beach-vacations": {
+    "id": "ai-vacation-types--beach-vacations",
+    "base": "/ai/vacation-types--beach-vacations",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "Two beach chairs under an umbrella on a white-sand beach with turquoise water",
+    "avg": "#b0c2cc",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 693532387,
+    "prompt": "pristine white-sand beach with crystal-clear turquoise water and a leaning palm tree, two beach chairs under an umbrella, bright midday sun, aerial three-quarter angle",
+    "megapixels": 2
+  },
+  "vacation-types/weekend-getaways": {
+    "id": "ai-vacation-types--weekend-getaways",
+    "base": "/ai/vacation-types--weekend-getaways",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A cabin porch with two coffee mugs overlooking a lake in autumn",
+    "avg": "#626761",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1526351024,
+    "prompt": "cozy wooden cabin porch overlooking a misty lake surrounded by autumn foliage, two coffee mugs and a blanket on a bench, early morning light, peaceful",
+    "megapixels": 2
+  }
+}
