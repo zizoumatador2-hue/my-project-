@@ -1,0 +1,23 @@
+---
+// Image slot. With no `src`, renders a CSS-only placeholder block (no image files needed).
+// Photos are WebP pairs: /images/<name>-1600.webp and /images/<name>-800.webp (srcset is derived).
+interface Props { src?: string; alt?: string; width?: number; height?: number; class?: string; eager?: boolean; pos?: string; sizes?: string }
+const { src = '', alt = '', width = 1600, height = 900, class: cls = '', eager = false, pos = '', sizes = '(min-width: 1120px) 1120px, 100vw' } = Astro.props;
+const small = src.includes('-1600.') ? src.replace('-1600.', '-800.') : '';
+---
+<div class={`ph ${cls}`} style={`aspect-ratio:${width}/${height}`} role={src ? undefined : 'presentation'}>
+  {src && (
+    <img
+      src={src}
+      srcset={small ? `${small} 800w, ${src} 1600w` : undefined}
+      sizes={small ? sizes : undefined}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+      decoding="async"
+      style={pos ? `object-position:${pos}` : undefined}
+    />
+  )}
+</div>

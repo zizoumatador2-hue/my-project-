@@ -1,0 +1,11 @@
+---
+import { breadcrumbs } from '../lib/schema';
+interface Props { items: { name: string; path: string }[] }
+const { items } = Astro.props;
+---
+<nav class="crumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    {items.map((it, i) => <li>{i < items.length - 1 ? <a href={it.path}>{it.name}</a> : <span aria-current="page">{it.name}</span>}</li>)}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbs(items))} />

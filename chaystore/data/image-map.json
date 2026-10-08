@@ -1,0 +1,186 @@
+{
+ "articles": {
+  "how-to-brew-loose-leaf-tea": {
+   "id": 1362537,
+   "alt": "Glass teapot with a steel infuser, two double-walled cups and loose tea leaves on a white table",
+   "pos": ""
+  },
+  "how-much-tea-per-cup": {
+   "id": 4390014,
+   "alt": "Cup of black tea beside small bowls of loose tea leaves and a wooden spoon on a white background",
+   "pos": ""
+  },
+  "water-temperature-for-green-tea": {
+   "id": 19300588,
+   "alt": "Hand pouring hot water from a cast-iron kettle into a small cup",
+   "pos": "50% 55%"
+  },
+  "how-to-make-iced-tea": {
+   "id": 1484678,
+   "alt": "Tall glass of iced tea with a straw and a small bowl on a dark table",
+   "pos": "50% 40%"
+  },
+  "how-to-store-loose-leaf-tea": {
+   "id": 4044070,
+   "alt": "Glass storage jars filled with loose tea and dried herbs on a wooden shelf",
+   "pos": ""
+  },
+  "loose-leaf-tea-vs-tea-bags": {
+   "id": 6448535,
+   "alt": "Loose black tea leaves spilling from a white cup beside sugar cubes",
+   "pos": ""
+  },
+  "how-to-make-chai-at-home": {
+   "id": 33789289,
+   "alt": "Spiced black tea in a glass cup with a cinnamon stick, star anise and lemon slices on a dark surface",
+   "pos": ""
+  },
+  "masala-chai-vs-chai-latte": {
+   "id": 1717767,
+   "alt": "Cup of spiced tea with an orange slice next to a bowl of cinnamon sticks on a wooden board",
+   "pos": ""
+  },
+  "earl-grey-tea": {
+   "id": 3873198,
+   "alt": "Top view of a dark ceramic mug of hot tea with a lemon slice",
+   "pos": ""
+  },
+  "assam-vs-darjeeling-tea": {
+   "id": 33437258,
+   "alt": "Rolling green hills covered with tea plantations in morning mist",
+   "pos": ""
+  },
+  "how-to-make-matcha-latte": {
+   "id": 8634757,
+   "alt": "Close-up of a frothy matcha latte in a teal ceramic cup",
+   "pos": ""
+  },
+  "matcha-vs-green-tea": {
+   "id": 8004563,
+   "alt": "Bamboo whisk, a spoon of matcha powder and a glass of iced matcha on a pale surface",
+   "pos": "50% 55%"
+  },
+  "best-matcha-for-beginners": {
+   "id": 8474082,
+   "alt": "Small bowl of matcha powder beside a bamboo whisk in bright sunlight",
+   "pos": "50% 40%"
+  },
+  "jasmine-tea-vs-green-tea": {
+   "id": 7138780,
+   "alt": "Glass cup of golden jasmine tea with white jasmine blossoms on a wooden table",
+   "pos": ""
+  },
+  "what-is-kahwa-tea": {
+   "id": 19040147,
+   "alt": "Cup of red tea with a silver teapot, a candle and orange flowers on a wooden tray",
+   "pos": "50% 55%"
+  },
+  "caffeine-free-tea-list": {
+   "id": 6694167,
+   "alt": "Wooden spoons holding dried chamomile flowers and lavender on white marble",
+   "pos": ""
+  },
+  "best-tea-for-sleep": {
+   "id": 17125143,
+   "alt": "Cup of chamomile tea with daisies resting on an open book",
+   "pos": "50% 35%"
+  },
+  "tea-for-digestion": {
+   "id": 1417945,
+   "alt": "Glass cup of tea with fresh green mint leaves on a burlap mat",
+   "pos": ""
+  },
+  "how-much-caffeine-in-tea-vs-coffee": {
+   "id": 370018,
+   "alt": "Glass cup of black tea steeping on a sunlit windowsill",
+   "pos": ""
+  },
+  "is-it-safe-to-drink-tea-every-day": {
+   "id": 6874185,
+   "alt": "Person in a knitted sweater holding a cup of tea in both hands",
+   "pos": "50% 60%"
+  },
+  "best-electric-kettle-for-tea": {
+   "id": 16696855,
+   "alt": "Steam rising from a kettle beside a glowing pot in a dark kitchen",
+   "pos": "50% 35%"
+  },
+  "best-tea-infusers": {
+   "id": 18946746,
+   "alt": "Hand holding a ceramic cup with a mesh tea infuser and green tea inside",
+   "pos": ""
+  },
+  "sencha-vs-matcha": {
+   "id": 5946632,
+   "alt": "Hands whisking matcha in a bowl beside a small teapot and tea cups",
+   "pos": "50% 35%"
+  },
+  "best-chai-tea-brands": {
+   "id": 6560260,
+   "alt": "Open hands holding star anise and a cinnamon stick",
+   "pos": ""
+  },
+  "tea-for-stress-and-anxiety": {
+   "id": 11012771,
+   "alt": "Woman in a cozy sweater sitting by a window holding a cup of tea",
+   "pos": "50% 45%"
+  },
+  "best-teapots-for-loose-leaf": {
+   "id": 33118330,
+   "alt": "Flat lay of a dark teapot, small bowls of loose tea and white tea cups",
+   "pos": "50% 40%"
+  }
+ },
+ "gallery": [
+  {
+   "id": 9464939,
+   "text": "Steam"
+  },
+  {
+   "id": 15906020,
+   "text": "Winter pour"
+  },
+  {
+   "id": 1362537,
+   "text": "Glass teapot"
+  },
+  {
+   "id": 32695045,
+   "text": "Iced matcha"
+  },
+  {
+   "id": 7138780,
+   "text": "Jasmine"
+  },
+  {
+   "id": 19880782,
+   "text": "Tea for two"
+  },
+  {
+   "id": 33789289,
+   "text": "Spiced tea"
+  },
+  {
+   "id": 8634757,
+   "text": "Matcha latte"
+  },
+  {
+   "id": 17125143,
+   "text": "Chamomile"
+  },
+  {
+   "id": 6871921,
+   "text": "Tea terraces"
+  }
+ ],
+ "extra": {
+  "hub-brewing": 19880782,
+  "hub-chai-black-tea": 905485,
+  "hub-green-tea-matcha": 32695045,
+  "hub-herbal-tea": 8446866,
+  "hub-tea-gear": 15906020,
+  "hub-tea-wellness": 12932972,
+  "hero-steam": 9464939,
+  "pillar-terraces": 6871921
+ }
+}

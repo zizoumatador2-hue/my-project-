@@ -1,0 +1,166 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import FAQ from '../components/FAQ.astro';
+import TOC from '../components/TOC.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { HUBS, SITE } from '../lib/site';
+import { allArticles, hubUrl, iso } from '../lib/content';
+import { organization, website, faqPage } from '../lib/schema';
+import AuroraBg from '../components/react/AuroraBg';
+import ShinyEyebrow from '../components/react/ShinyEyebrow';
+import HeroLead from '../components/react/HeroLead';
+import Stats from '../components/react/Stats';
+import HubGrid from '../components/react/HubGrid';
+import TeaGallery from '../components/react/TeaGallery';
+import TeaMarquee from '../components/react/TeaMarquee';
+import Moments from '../components/react/Moments';
+import falManifest from '../../data/fal-images.json';
+import ImageSlot from '../components/ImageSlot.astro';
+import { allWords } from '../lib/content';
+
+const articles = await allArticles();
+const parts = (await getCollection('pillar')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(parts.map((p) => render(p)));
+const headings = rendered.flatMap((r) => r.headings);
+const count = (h: string) => articles.filter((a) => a.data.hub === h).length;
+const latest = articles.slice(0, 6);
+const faq = [
+  { q: 'What is the best way to start learning about tea?', a: 'Start with one tea from each main family (black, green, oolong, white) and one herbal infusion, brew each with the right water temperature and time, and take notes. Comparing them side by side teaches more than reading about them.' },
+  { q: 'Is loose-leaf tea better than tea bags?', a: 'Loose-leaf tea usually contains larger pieces of leaf that have room to expand, which tends to give a fuller, more nuanced cup. Good tea bags exist, though, and bags are more convenient. Our loose-leaf versus tea bags guide explains the trade-offs.' },
+  { q: 'What water temperature should I use for tea?', a: 'Use freshly boiled water, about 212°F (100°C), for black and herbal teas. Use cooler water, roughly 160–185°F (70–85°C), for green and white teas so they do not turn bitter. Oolong sits in between.' },
+  { q: 'How much caffeine is in tea compared with coffee?', a: 'Tea generally contains less caffeine than the same volume of coffee, but the amount varies widely by tea type, leaf quantity and steeping time. Herbal infusions are usually caffeine-free.' },
+  { q: 'How long does loose-leaf tea stay fresh?', a: 'Stored airtight, away from light, heat, moisture and strong odors, most teas stay pleasant for many months. Green and delicate teas fade fastest. Always check the packaging date and use your nose.' },
+  { q: 'Is ChayStore a shop?', a: 'No. ChayStore is an independent guide to tea. We do not sell tea. Some pages may contain affiliate links, which we disclose clearly.' },
+];
+const schema = [organization(), website(), faqPage(faq)];
+const hubData = Object.entries(HUBS).map(([id, h]) => ({ id, name: h.name, blurb: h.blurb, count: count(id), image: `/images/hub-${id}-800.webp` }));
+const totalWords = Math.round((await allWords()) / 1000) * 1000;
+const stats = [
+  { value: articles.length, label: 'in-depth guides' },
+  { value: Object.keys(HUBS).length, label: 'topic hubs' },
+  { value: totalWords, label: 'words of guidance', suffix: '+' },
+];
+const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Winter pour"}, {"id": 1362537, "text": "Glass teapot"}, {"id": 32695045, "text": "Iced matcha"}, {"id": 7138780, "text": "Jasmine"}, {"id": 19880782, "text": "Tea for two"}, {"id": 33789289, "text": "Spiced tea"}, {"id": 8634757, "text": "Matcha latte"}, {"id": 17125143, "text": "Chamomile"}, {"id": 6871921, "text": "Tea terraces"}].map((g, i) => ({ image: `/images/gallery-${i + 1}-800.webp`, text: g.text }));
+---
+<BaseLayout
+  title="Tea Guide: Types of Tea, Brewing & Buying | ChayStore"
+  description="The complete guide to tea: every type explained, how to brew each one, what gear you need, and how to choose and store tea at home."
+  path="/"
+  schema={schema}
+  progress
+  keywords="tea guide, types of tea, how to brew tea, loose leaf tea, chai, matcha, green tea, black tea, herbal tea"
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <AuroraBg client:idle />
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="letterbox top" aria-hidden="true"></div>
+    <div class="letterbox bot" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-inner" data-parallax="0.18">
+        <p class="eyebrow"><ShinyEyebrow client:idle text={`Independent tea guides · Updated ${iso(new Date('2026-10-04'))}`} /></p>
+        <h1 id="hero-title">Every great cup of tea starts with <em>knowing the leaf.</em></h1>
+        <div class="lead"><HeroLead client:idle text="Clear, research-based guides to chai, green tea, matcha, black tea and herbal infusions. How to brew them, how to choose them, and how to enjoy them at home." /></div>
+        <div class="cta-row">
+          <a class="btn primary" href="#tea-guide">Read the complete tea guide</a>
+          <a class="btn ghost" href="/guides/">Browse all guides</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo" data-parallax="-0.06" aria-hidden="true"><img src="/images/hero-steam-800.webp" alt="" width="800" height="1000" decoding="async" fetchpriority="low" /></div>
+    <div class="scroll-cue" aria-hidden="true"></div>
+  </section>
+
+  <section class="stats-band" aria-label="Site at a glance"><div class="wrap"><Stats client:visible stats={stats} /></div></section>
+
+  <section class="section dark" aria-labelledby="hubs-h">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 id="hubs-h">Explore tea by topic</h2>
+        <p>Six topic hubs. Start with whichever part of tea you want to learn first. Pick the part of tea you want to master first.</p>
+      </div>
+      <HubGrid client:visible hubs={hubData} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="latest-h">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 id="latest-h">Featured guides</h2>
+        <p>Practical answers to the questions tea drinkers search for most.</p>
+      </div>
+      <ul class="grid">{latest.map((a) => <ArticleCard a={a} />)}</ul>
+      <p class="reveal" style="margin-top:1.5rem"><a class="btn primary" href="/guides/">See all {articles.length} guides</a></p>
+    </div>
+  </section>
+
+  <div class="marquee-band" aria-hidden="true"><TeaMarquee client:visible /></div>
+
+  {falManifest.images.length > 0 && (
+    <section class="section" aria-labelledby="moments-h">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="moments-h">Tea, the way it fits into a day</h2>
+          <p>Mornings, porches, rainy afternoons and quiet evenings. Images created for ChayStore with an AI image generator.</p>
+        </div>
+        <Moments client:visible items={falManifest.images} />
+      </div>
+    </section>
+  )}
+
+  <section class="dark-gallery" aria-label="Tea in pictures">
+    <TeaGallery client:visible items={gallery} />
+    <p class="gallery-note">Drag or scroll to explore. Photos from <a href="https://www.pexels.com" rel="noopener">Pexels</a> · <a href="/credits/">credits</a></p>
+  </section>
+
+  <section class="cinema-story" aria-labelledby="cinema-story-title" data-cinema-stage>
+    <div class="cinema-glow" aria-hidden="true"></div>
+    <div class="wrap cinema-grid">
+      <div class="cinema-copy reveal">
+        <p class="eyebrow">From leaf to cup</p>
+        <h2 id="cinema-story-title">Make better tea without turning it into homework.</h2>
+        <p>ChayStore translates tea tradition and current research into practical US kitchen guidance: familiar cup measurements, temperatures in Fahrenheit and Celsius, realistic steep times, and buying advice that explains what labels actually mean.</p>
+        <ul class="cinema-points" aria-label="What makes ChayStore useful">
+          <li><strong>Choose confidently.</strong><span>Compare chai, matcha, black, green and herbal tea before you spend.</span></li>
+          <li><strong>Brew precisely.</strong><span>Use tested ratios, water temperatures and timing for a balanced cup.</span></li>
+          <li><strong>Read critically.</strong><span>Understand caffeine, wellness claims, sourcing language and product marketing.</span></li>
+        </ul>
+        <a class="btn primary" href="/guides/how-to-brew-loose-leaf-tea/">Start with the loose-leaf brewing guide</a>
+      </div>
+      <figure class="cinema-frame reveal" data-cinema-frame>
+        <img src="/images/gallery-2-1600.webp" alt="Tea being poured into a clear glass cup in warm natural light" width="1600" height="1067" loading="lazy" decoding="async" />
+        <figcaption>Simple technique, repeatable results. Photo from Pexels.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section sand" id="tea-guide" aria-labelledby="pillar-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" style="color:var(--terra-d)">The pillar guide</p>
+        <h2 id="pillar-title">The Complete Guide to Tea</h2>
+        <p>Everything in one place: types of tea, water temperature and steep time, loose-leaf brewing, useful tea gear, smart buying and storage, plus clear next steps for every experience level.</p>
+      </div>
+      <ImageSlot src="/images/pillar-terraces-1600.webp" alt="Terraced green tea fields on a hillside with a winding path" width={1600} height={640} class="pillar-banner" pos="50% 60%" />
+      <div class="pillar-wrap">
+        <article class="prose pillar" aria-label="The Complete Guide to Tea">
+          {rendered.map((r) => <r.Content />)}
+        </article>
+        <aside class="aside" aria-label="Guide navigation">
+          <TOC headings={headings} title="Guide contents" />
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" style="max-width:var(--prose)">
+      <FAQ items={faq} />
+      <AdSlot />
+      <AuthorBox />
+    </div>
+  </section>
+</BaseLayout>
+

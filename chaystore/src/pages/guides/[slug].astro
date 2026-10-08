@@ -1,0 +1,78 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ImageSlot from '../../components/ImageSlot.astro';
+import FAQ from '../../components/FAQ.astro';
+import TOC from '../../components/TOC.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import AffiliateNotice from '../../components/AffiliateNotice.astro';
+import WellnessNotice from '../../components/WellnessNotice.astro';
+import { SITE, HUBS } from '../../lib/site';
+import { allArticles, fmt, hubUrl, iso, readMins, url } from '../../lib/content';
+import { article as articleSchema, faqPage, howTo } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const all = await allArticles();
+  return all.map((a) => ({ params: { slug: a.id }, props: { a } }));
+}
+const { a } = Astro.props;
+const all = await allArticles();
+const { Content, headings } = await render(a);
+const d = a.data;
+const hub = HUBS[d.hub];
+const path = url(a);
+const mins = readMins(a.body ?? '');
+let related = d.related.map((id) => all.find((x) => x.id === id)).filter(Boolean) as typeof all;
+if (related.length < 3) related = [...related, ...all.filter((x) => x.id !== a.id && x.data.hub === d.hub && !related.includes(x))].slice(0, 3);
+const schema = [
+  articleSchema({ title: d.title, description: d.description, path, published: iso(d.publishDate), modified: iso(d.modifiedDate), image: d.image || undefined }),
+  faqPage(d.faq),
+  ...(d.howto ? [howTo({ name: d.title, totalTime: d.howto.totalTime, steps: d.howto.steps })] : []),
+];
+---
+<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} published={iso(d.publishDate)} modified={iso(d.modifiedDate)} progress keywords={d.keyword} image={d.image || undefined} imageAlt={d.imageAlt || undefined}>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: hub.name, path: hubUrl(d.hub) }, { name: d.title, path }]} />
+  <div class="wrap">
+    <header class="article-head">
+      <p class="eyebrow" style="color:var(--terra-d);margin-bottom:.4rem"><a href={hubUrl(d.hub)} style="color:inherit;text-decoration:none">{hub.name}</a></p>
+      <h1>{d.title}</h1>
+      <p class="meta">
+        <span>By <a href="/about/">{SITE.author}</a></span>
+        <span>Published <time datetime={iso(d.publishDate)}>{fmt(d.publishDate)}</time></span>
+        <span>Updated <time datetime={iso(d.modifiedDate)}>{fmt(d.modifiedDate)}</time></span>
+        <span>{mins} min read</span>
+      </p>
+    </header>
+    <figure class="article-hero reveal" style="margin:0">
+      <ImageSlot src={d.image} alt={d.imageAlt} width={d.image ? 1600 : 2100} height={d.image ? 900 : 420} eager pos={d.imagePos} />
+      {d.imageId && <figcaption class="credit">Photo via <a href={`https://www.pexels.com/photo/${d.imageId}/`} rel="noopener">Pexels</a> · <a href="/credits/">credits</a></figcaption>}
+    </figure>
+    <div class="article-layout" style="margin-top:2rem">
+      <article class="prose">
+        {d.wellness && <WellnessNotice />}
+        {d.gear && <AffiliateNotice />}
+        <section class="box takeaways" aria-labelledby="kt-h">
+          <h2 id="kt-h">Key takeaways</h2>
+          <ul>{d.keyTakeaways.map((k) => <li>{k}</li>)}</ul>
+        </section>
+        <Content />
+        <AdSlot />
+        <FAQ items={d.faq} />
+        <p>Want the bigger picture? Read our <a href="/#tea-guide">complete guide to tea</a> or explore more in <a href={hubUrl(d.hub)}>{hub.name}</a>.</p>
+        <AuthorBox />
+      </article>
+      <aside class="aside" aria-label="Article navigation">
+        <TOC headings={headings} />
+        <AdSlot slot="sidebar" />
+      </aside>
+    </div>
+    <section class="related" aria-labelledby="rel-h">
+      <h2 id="rel-h">Related guides</h2>
+      <ul class="grid">{related.map((r) => <ArticleCard a={r} />)}</ul>
+    </section>
+  </div>
+  <div style="height:4rem"></div>
+</BaseLayout>

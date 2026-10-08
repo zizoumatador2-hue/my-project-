@@ -1,0 +1,22 @@
+---
+import { HUBS, SITE } from '../lib/site';
+const { path = '/' } = Astro.props;
+const SHORT: Record<string, string> = { brewing: 'Brewing', 'chai-black-tea': 'Chai & Black Tea', 'green-tea-matcha': 'Green Tea & Matcha', 'herbal-tea': 'Herbal', 'tea-gear': 'Gear', 'tea-wellness': 'Wellness' };
+const links = [
+  { href: '/guides/', label: 'Guides' },
+  ...Object.keys(HUBS).map((id) => ({ href: `/category/${id}/`, label: SHORT[id] })),
+];
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="ChayStore home">Chay<b>Store</b></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle sr" aria-label="Toggle menu" />
+    <label for="nav-toggle" class="nav-btn" aria-hidden="true">☰</label>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {links.map((l) => <li><a href={l.href} aria-current={path === l.href || (l.href !== '/guides/' && path.startsWith(l.href)) ? 'page' : undefined}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="nav-cta" href={SITE.contactUrl} target="_blank" rel="noopener">Contact us</a>
+  </div>
+</header>

@@ -1,0 +1,21 @@
+---
+import DocLayout from '../layouts/DocLayout.astro';
+import { SITE } from '../lib/site';
+---
+<DocLayout title="Privacy Policy" description="How ChayStore handles data, cookies, analytics, advertising and affiliate links, and the choices available to you." path="/privacy/" updated="2026-10-04">
+  <p>This Privacy Policy explains how ChayStore.com ("ChayStore", "we") handles information when you visit this site.</p>
+  <h2>Information we collect</h2>
+  <p>ChayStore does not offer accounts, comments or online checkout, and we do not ask you to submit personal information through the site. If you email us or use our contact site, we receive your email address and the message you send and use them only to reply.</p>
+  <h2>Cookies and analytics</h2>
+  <p>The site is designed to work without cookies. If we enable analytics (for example Google Analytics 4), we will ask for your consent first and load it only if you accept. You can decline and still use the whole site.</p>
+  <h2>Advertising and affiliate links</h2>
+  <p>We may display ads from third-party networks and may use affiliate links. These partners may use cookies or similar technologies to measure performance and show relevant ads, subject to their own privacy policies and to your consent where required. Where we use such services, we will update this page and our consent controls.</p>
+  <h2>Server logs</h2>
+  <p>Our hosting provider may keep standard server logs (such as IP address, browser type and requested pages) for security and reliability.</p>
+  <h2>Your choices and rights</h2>
+  <p>Depending on where you live (for example California or the EU/UK), you may have rights to access, correct or delete personal information, or to opt out of certain sharing. Because we collect almost no personal data, most requests can be handled by email at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or through our <a href={SITE.contactUrl} rel="noopener">contact site</a>.</p>
+  <h2>Children</h2>
+  <p>This site is not directed to children under 13 and we do not knowingly collect their information.</p>
+  <h2>Changes</h2>
+  <p>We may update this policy and will change the date above when we do.</p>
+</DocLayout>

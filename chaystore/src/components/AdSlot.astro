@@ -1,0 +1,7 @@
+---
+// Ad placeholder. Disabled until an ad network is approved: flip ADS_ENABLED in src/lib/site.ts.
+// When enabled, the reserved min-height prevents layout shift (CLS).
+import { ADS_ENABLED } from '../lib/site';
+const { slot = 'in-content' } = Astro.props;
+---
+{ADS_ENABLED && <div class="adslot" data-slot={slot} aria-label="Advertisement">Advertisement</div>}

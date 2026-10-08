@@ -1,0 +1,9 @@
+# Fallback deployment: serves the built static site from Workers Static Assets.
+# Used by CI only when the API token cannot deploy to Cloudflare Pages.
+name = "chaystore"
+compatibility_date = "2026-09-01"
+
+[assets]
+directory = "./dist"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
