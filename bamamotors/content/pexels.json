@@ -208,7 +208,7 @@
   "post-used-vs-new-car-alabama": {
     "query": "new car vs used car",
     "commons": "car dealership lot",
-    "fal": "Two sedans parked side by side on an open lot at sunset, a shiny new white sedan and a well-kept older blue sedan, both seen in side profile, trees in the background",
+    "fal": "Side profile view of two sedans parked one behind the other on an open lot at sunset, a shiny new white sedan and a well-kept older blue sedan, trees in the background, both cars seen strictly from the side",
     "alt": "New and used sedans parked side by side"
   },
   "post-alabama-car-care-heat-humidity": {
@@ -232,8 +232,8 @@
   "post-used-cars-near-me-alabama": {
     "query": "smartphone map car search",
     "commons": "Alabama highway",
-    "fal": "Close-up of a hand holding a smartphone showing a simple map with colored location pins and no labels, a sunny suburban street with parked cars softly blurred behind",
-    "alt": "Smartphone map showing nearby car listings"
+    "fal": "View from the back seat of a driver on a sunny suburban street, a phone mounted on the dashboard showing a colorful map, the phone small and softly out of focus, houses and parked cars ahead",
+    "alt": "Driver following a phone map on a suburban street"
   },
   "post-alabama-car-insurance-requirements": {
     "query": "car insurance paperwork",
