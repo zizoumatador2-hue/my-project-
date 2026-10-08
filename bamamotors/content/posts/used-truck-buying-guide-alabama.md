@@ -1,7 +1,7 @@
 ---
 title: Used Truck Buying Guide for Alabama
 category: vehicle-reviews
-excerpt: Pickups are an Alabama staple. Learn how to choose a used truck — cab and bed configurations, towing, 4WD — and exactly what to inspect before you buy.
+excerpt: Pickups are an Alabama staple. Learn how to choose a used truck (cab and bed configurations, towing, 4WD) and exactly what to inspect before you buy.
 meta_description: Buying a used truck in Alabama? Compare pickup sizes, cab and bed styles, 4WD and towing, and use our inspection checklist for used pickup trucks.
 keywords: used trucks Alabama, used trucks for sale Alabama, used pickup trucks Alabama, used F-150 Alabama, used Silverado Alabama
 faq: [{"q":"What is the most popular used truck in Alabama?","a":"Full-size pickups such as the Ford F-150, Chevrolet Silverado 1500, Ram 1500 and GMC Sierra 1500 are among the most common trucks on Alabama dealer lots, along with midsize trucks like the Toyota Tacoma."},{"q":"Should I buy a 4WD truck in Alabama?","a":"Buy 4WD if you drive on farm roads, launch boats or go off-road. For mostly paved driving, a 2WD truck costs less to buy and can use less fuel."},{"q":"How do I know if a used truck was used for heavy towing?","a":"Look for wear on the hitch receiver and wiring, ask for service records, check the transmission fluid color and smell, and have a mechanic look at the rear suspension and brakes."}]
@@ -30,7 +30,7 @@ Alabama's paved roads rarely require four-wheel drive, but hunters, farmers, boa
 
 ## Used truck inspection checklist
 
-1. **Frame:** look for rust, cracks, welds or bends — especially on Gulf Coast trucks.
+1. **Frame:** Look for rust, cracks, welds or bends, especially on Gulf Coast trucks.
 2. **Bed and tailgate:** heavy denting, rust-through or a sagging tailgate signals hard use.
 3. **Hitch and wiring:** worn receivers and trailer wiring suggest regular towing.
 4. **Transmission:** shifts should be smooth; fluid shouldn't smell burnt.

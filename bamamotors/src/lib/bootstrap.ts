@@ -1,9 +1,10 @@
 import referenceSql from '../../migrations/0002_reference_data.sql?raw';
 import contentSql from '../../migrations/0003_editorial_content.sql?raw';
 import moreGuidesSql from '../../migrations/0004_more_guides.sql?raw';
+import copyRefreshSql from '../../migrations/0005_copy_refresh.sql?raw';
 
 /**
- * Applies the seed migrations (reference data + editorial content) the first time a fresh
+ * Applies the seed migrations (reference data, editorial content, copy refreshes) the first time a
  * database is used, when the deploy pipeline could not run `wrangler d1 migrations apply`
  * (e.g. a CI token without D1 permission). Idempotent: every INSERT becomes INSERT OR IGNORE,
  * and each file is recorded in d1_migrations exactly like wrangler would, so wrangler skips it later.
@@ -12,6 +13,7 @@ const SEEDS: [string, string][] = [
   ['0002_reference_data.sql', referenceSql],
   ['0003_editorial_content.sql', contentSql],
   ['0004_more_guides.sql', moreGuidesSql],
+  ['0005_copy_refresh.sql', copyRefreshSql],
 ];
 
 let done = false;

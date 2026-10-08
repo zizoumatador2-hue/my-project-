@@ -51,7 +51,7 @@ const inv = (k: string) => (errors[k] ? 'true' : undefined);
   </fieldset>
   <fieldset><legend>Description & features</legend>
     <div class="form-grid">
-      <div class="field full"><label for="v-desc">Description</label><textarea class="textarea" id="v-desc" name="description" rows="6" maxlength="8000" aria-describedby="v-desc-hint">{val('description')}</textarea><span class="hint" id="v-desc-hint">Describe condition, recent service and what makes this vehicle a good buy. Write your own text — don't copy from other websites.</span></div>
+      <div class="field full"><label for="v-desc">Description</label><textarea class="textarea" id="v-desc" name="description" rows="6" maxlength="8000" aria-describedby="v-desc-hint">{val('description')}</textarea><span class="hint" id="v-desc-hint">Describe condition, recent service and what makes this vehicle a good buy. Write your own text. Don't copy from other websites.</span></div>
       <div class="field full"><label for="v-features">Features</label><textarea class="textarea" id="v-features" name="features" rows="4" aria-describedby="v-feat-hint">{val('features')}</textarea><span class="hint" id="v-feat-hint">One per line, e.g. Backup camera, Apple CarPlay, Heated seats.</span></div>
     </div>
   </fieldset>
@@ -66,7 +66,7 @@ const inv = (k: string) => (errors[k] ? 'true' : undefined);
   </fieldset>
   <fieldset><legend>Listing status</legend>
     <div class="field" style="max-width:320px"><label for="v-status">Status</label>
-      <select class="select" id="v-status" name="status">{[['active', 'Active — visible to shoppers'], ['draft', 'Draft — hidden'], ['sold', 'Sold'], ['archived', 'Archived']].map(([v, l]) => <option value={v} selected={v === (val('status') || 'active')}>{l}</option>)}</select></div>
+      <select class="select" id="v-status" name="status">{[['active', 'Active (visible to shoppers)'], ['draft', 'Draft (hidden)'], ['sold', 'Sold'], ['archived', 'Archived']].map(([v, l]) => <option value={v} selected={v === (val('status') || 'active')}>{l}</option>)}</select></div>
   </fieldset>
   <div class="row"><button class="btn btn-primary btn-lg" type="submit">{submitLabel}</button><slot name="actions" /></div>
 </form>

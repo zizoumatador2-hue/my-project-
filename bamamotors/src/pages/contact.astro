@@ -30,7 +30,7 @@ if (Astro.request.method === 'POST') {
     else {
       await insert(env.DB, 'INSERT INTO contact_messages (name, email, subject, message) VALUES (?,?,?,?)', [p.data.name, p.data.email, p.data.subject, p.data.message]);
       await notifyAdmins(env.DB, 'New contact message', `${p.data.name}: ${p.data.subject}`, '/admin/messages');
-      if (s.contact_email) await sendEmail(env, s.contact_email, `[BamaMotors contact] ${p.data.subject} — ${p.data.name}`, `From: ${p.data.name} <${p.data.email}>\n\n${p.data.message}`);
+      if (s.contact_email) await sendEmail(env, s.contact_email, `[BamaMotors contact] ${p.data.subject}, ${p.data.name}`, `From: ${p.data.name} <${p.data.email}>\n\n${p.data.message}`);
       sent = true;
     }
   }
@@ -40,7 +40,7 @@ const subjects = [['general', 'General question'], ['dealer', 'Dealer sales & pl
 <ContentLayout title="Contact BamaMotors" h1="Contact us" path="/contact" description="Contact the BamaMotors team with questions about searching used cars in Alabama, dealer plans, listings or privacy requests.">
   <div class="vd-layout">
     <div>
-      {sent ? <div class="alert alert-ok" role="status">Thanks — your message was sent. We usually reply within one business day.</div> : (
+      {sent ? <div class="alert alert-ok" role="status">Thanks. Your message was sent. We usually reply within one business day.</div> : (
         <form method="post" class="card card-pad" novalidate>
           {errors._ && <div class="alert alert-err" role="alert">{errors._}</div>}
           <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
@@ -60,7 +60,7 @@ const subjects = [['general', 'General question'], ['dealer', 'Dealer sales & pl
         <h2 style="font-size:1.1rem">Other ways to reach us</h2>
         {s.contact_email && <p><strong>Email:</strong> <a href={`mailto:${s.contact_email}`}>{s.contact_email}</a></p>}
         {s.contact_phone && <p><strong>Phone:</strong> <a href={`tel:${s.contact_phone.replace(/[^\d+]/g, '')}`}>{s.contact_phone}</a></p>}
-        <p class="small muted">Questions about a specific vehicle? Please contact the dealer directly from the listing — they have the most accurate information.</p>
+        <p class="small muted">Questions about a specific vehicle? Please contact the dealer directly from the listing. They have the most accurate information.</p>
         <p class="small"><a href="/faq">Read the FAQ</a></p>
       </div>
     </aside>

@@ -1,8 +1,8 @@
 ---
 title: "Cars Under $10,000 in Alabama: What to Expect and How to Buy Smart"
 category: used-car-prices
-excerpt: Shopping for a cheap used car in Alabama? Here's what a budget under $10,000 or $5,000 typically buys, which red flags to avoid, and how to stretch your money.
-meta_description: Cars under $10,000 in Alabama — what to expect under $10k and $5k, red flags, inspection tips and how to find cheap used cars for sale near you.
+excerpt: Shopping for a cheap used car in Alabama? See what a budget under $10,000 or $5,000 typically buys, which red flags to avoid, and how to stretch your money.
+meta_description: Cars under $10,000 in Alabama: what to expect under $10k and $5k, red flags, inspection tips and how to find cheap used cars for sale near you.
 keywords: cars under $10,000 Alabama, cars under $5,000 Alabama, cheap used cars Alabama, affordable used cars Alabama
 faq: [{"q":"Can I find a reliable car under $10,000 in Alabama?","a":"Yes, but condition and maintenance history matter more than age or brand at this price. Budget for an independent inspection and set aside money for tires, brakes or fluids."},{"q":"What should I avoid when buying a cheap used car?","a":"Avoid salvage or flood titles you weren't told about, cars with warning lights on, sellers who refuse an inspection, and deals that require payment before you see the car."},{"q":"Are cars under $5,000 worth it?","a":"They can be for buyers who pay cash and can handle some repairs. Expect higher mileage and wear, and get an inspection before buying."}]
 ---
@@ -18,7 +18,7 @@ Under $5,000, expect older vehicles with significant mileage. These can still ma
 
 ## Red flags on budget cars
 
-- **Title brands** — salvage, rebuilt or flood titles lower value and can affect insurance.
+- **Title brands:** Salvage, rebuilt or flood titles lower value and can affect insurance.
 - **Warning lights** on the dashboard.
 - **No service records** at all.
 - **Fresh undercoating** or new carpet in an old car, which can hide rust or flood damage.
@@ -28,7 +28,7 @@ Under $5,000, expect older vehicles with significant mileage. These can still ma
 
 1. Leave 10–15% of your budget for tax, title, registration and immediate maintenance.
 2. Check the title history and open recalls using the VIN.
-3. Get an independent inspection — it's the best $100–$200 you'll spend.
+3. Get an independent inspection. It's the best $100–$200 you'll spend.
 4. Compare out-the-door prices across dealers.
 
 For the full process, read [how to buy a used car in Alabama](/blog/how-to-buy-a-used-car-in-alabama).

@@ -1,8 +1,8 @@
 ---
 title: "How to Choose a Car Dealership Near You in Alabama"
 category: alabama-car-buying
-excerpt: Not all dealerships are the same. Use this checklist to find a trustworthy car dealer near you in Alabama — reviews, pricing transparency, inspections and after-sale support.
-meta_description: How to choose a car dealership near you in Alabama — check reviews, pricing transparency, inspections, financing and after-sale support. A local checklist.
+excerpt: Not all dealerships are the same. Use this checklist to find a trustworthy car dealer near you in Alabama: reviews, pricing transparency, inspections and after-sale support.
+meta_description: How to choose a car dealership near you in Alabama: check reviews, pricing transparency, inspections, financing and after-sale support. A local checklist.
 keywords: car dealerships near me Alabama, used car dealers near me, auto dealers near me, car dealers Alabama
 faq: [{"q":"How do I find car dealerships near me in Alabama?","a":"Use the dealer directory on BamaMotors and enter your ZIP code or tap Use my location to see nearby dealerships, their inventory, hours and reviews."},{"q":"What makes a car dealer trustworthy?","a":"Transparent, written out-the-door pricing, willingness to allow an independent inspection, clear answers about vehicle history, and a track record of resolving customer issues."},{"q":"Should I buy from a dealer far away to save money?","a":"Sometimes a distant dealer has a better price, but factor in travel time, the difficulty of returning for issues, and the convenience of local service."}]
 ---
@@ -12,7 +12,7 @@ faq: [{"q":"How do I find car dealerships near me in Alabama?","a":"Use the deal
 
 Proximity matters for test drives, paperwork and follow-up service. On BamaMotors you can open the [Alabama dealer directory](/dealers), enter your ZIP code or tap **Use my location**, and see dealers sorted by distance.
 
-## 2. Read reviews — and responses
+## 2. Read reviews and dealer responses
 
 Look for patterns, not one-off complaints. Pay attention to how the dealer responds to criticism. BamaMotors only shows reviews from signed-in shoppers after moderation.
 

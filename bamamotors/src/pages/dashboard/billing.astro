@@ -49,7 +49,7 @@ const online = stripeEnabled(env);
   {sub?.status === 'requested' && <div class="alert alert-info" style="margin-top:16px">Your request to switch to the <strong>{PLANS[sub.plan as PlanId].name}</strong> plan was received. Our team will contact you to complete billing.</div>}
   {sub?.status === 'past_due' && <div class="alert alert-err" style="margin-top:16px">Your last payment failed. Update your payment method to keep your plan.</div>}
   {sub?.status === 'active' && sub.current_period_end && <p class="muted" style="margin-top:12px">{sub.cancel_at_period_end ? 'Cancels' : 'Renews'} on {formatDate(sub.current_period_end)} · billed via {sub.provider === 'stripe' ? 'Stripe' : 'invoice'}</p>}
-  {!online && <p class="small muted" style="margin-top:12px">Online card payments are not enabled yet — choosing a plan sends a request and our team invoices you directly.</p>}
+  {!online && <p class="small muted" style="margin-top:12px">Online card payments are not enabled yet. Choosing a plan sends a request and our team invoices you directly.</p>}
 
   <div class="grid grid-3" style="margin-top:20px">
     {Object.values(PLANS).map((p) => (

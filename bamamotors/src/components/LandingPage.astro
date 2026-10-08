@@ -60,6 +60,7 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
   keywords={L.keywords}
   canonical={canonical}
   noindex={noindex}
+  ads={total > 0 || L.hasEditorial}
   prev={filters.page > 1 ? (filters.page === 2 ? L.path : `${L.path}?page=${filters.page - 1}`) : null}
   next={filters.page < pages ? `${L.path}?page=${filters.page + 1}` : null}
   jsonLd={[breadcrumbLd(site, L.crumbs), faqLd(L.faq), itemListLd(site, L.h1, items.map((v) => ({ slug: v.slug, title: `${v.year} ${v.make_name} ${v.model_name}` })))]}

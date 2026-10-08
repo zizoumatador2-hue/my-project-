@@ -25,7 +25,7 @@ const uploadErr = Astro.url.searchParams.get('upload_err');
     </div>
   ) : <p class="muted">No photos yet. Listings with photos get far more attention from shoppers.</p>}
   <div class="dropzone" data-dropzone data-vehicle={vehicleId}>
-    <p style="margin:0 0 8px"><strong>Add photos</strong> — drag & drop or choose files (JPEG, PNG or WebP, up to 8 MB each). Photos are resized and optimized in your browser before upload.</p>
+    <p style="margin:0 0 8px"><strong>Add photos:</strong> drag & drop or choose files (JPEG, PNG or WebP, up to 8 MB each). Photos are resized and optimized in your browser before upload.</p>
     <form method="post" action={`/api/vehicles/${vehicleId}/images`} enctype="multipart/form-data" data-upload-form>
       <input type="file" name="large" accept="image/jpeg,image/png,image/webp" multiple data-files aria-label="Choose photos" />
       <noscript><button class="btn btn-outline btn-sm" type="submit">Upload</button></noscript>

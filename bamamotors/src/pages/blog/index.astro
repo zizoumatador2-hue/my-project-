@@ -15,13 +15,13 @@ const pages = Math.max(1, Math.ceil(total / PER));
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Buying Guides', href: '/blog' }];
 const site = Astro.locals.runtime.env.SITE_URL;
 ---
-<BaseLayout title={`Car Buying Guides for Alabama Drivers${page > 1 ? ` – Page ${page}` : ''}`} description="Practical, Alabama-specific guides to buying, financing and maintaining a used car — titles, registration, inspections, prices and more."
+<BaseLayout title={`Car Buying Guides for Alabama Drivers${page > 1 ? ` – Page ${page}` : ''}`} description="Practical, Alabama-specific guides to buying, financing and maintaining a used car: titles, registration, inspections, prices and more."
   keywords="car buying guide Alabama, buying a used car Alabama, used car tips, car financing Alabama" canonical={page > 1 ? `/blog?page=${page}` : '/blog'}
   jsonLd={[breadcrumbLd(site, crumbs), { '@context': 'https://schema.org', '@type': 'Blog', name: 'BamaMotors Car Buying Guides', url: `${site}/blog` }]}>
   <div class="wrap" style="padding-bottom:56px">
     <Breadcrumbs crumbs={crumbs} />
     <h1 style="margin-top:12px">Car buying guides for Alabama drivers</h1>
-    <p class="muted" style="max-width:760px">Straightforward advice from the BamaMotors editorial team on buying, financing and caring for a used car in Alabama — with links to official sources.</p>
+    <p class="muted" style="max-width:760px">Straightforward advice from the BamaMotors editorial team on buying, financing and caring for a used car in Alabama, with links to official sources.</p>
     <nav aria-label="Guide categories"><ul class="chips" style="margin:16px 0 24px">{cats.map((c) => <li><a class="chip" href={`/blog/category/${c.slug}`}>{c.name} <span class="count">({c.n})</span></a></li>)}</ul></nav>
     {posts.length ? <div class="grid grid-3">{posts.map((p) => <PostCard p={p} />)}</div> : <EmptyState title="No guides published yet" icon="file" />}
     <Pagination page={page} pages={pages} href={(p) => (p === 1 ? '/blog' : `/blog?page=${p}`)} />

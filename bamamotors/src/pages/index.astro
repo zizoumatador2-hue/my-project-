@@ -46,8 +46,8 @@ const faq = [
   { q: 'How do dealers list vehicles on BamaMotors?', a: 'Dealers create an account, complete their profile and add inventory from the dealer dashboard. The Free plan includes up to 10 active listings.' },
 ];
 ---
-<BaseLayout title="Used Cars for Sale in Alabama | BamaMotors – Local Alabama Car Dealers"
-  description="Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code — Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers."
+<BaseLayout title="BamaMotors: Used Cars from Local Alabama Dealers"
+  description="Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code: Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers."
   keywords="used cars Alabama, used cars for sale Alabama, used cars near me Alabama, cars for sale Alabama, car dealerships Alabama, used car dealers Alabama, cheap used cars Alabama, used trucks Alabama, used SUVs Alabama"
   canonical="/" jsonLd={[organizationLd(site, Astro.locals.settings), websiteLd(site), faqLd(faq)]}>
   <section class="hero">
@@ -55,7 +55,7 @@ const faq = [
     <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap">
       <h1 class="blur-text" aria-label={h1}>{h1.split(' ').map((w, i) => <><span class="bt-w" style={`--i:${i}`} aria-hidden="true">{w}</span>{' '}</>)}</h1>
-      <p class="lead">Search {counts && counts.vehicles > 0 ? `${formatNumber(counts.vehicles)} used cars, trucks and SUVs` : 'used cars, trucks and SUVs'} from Alabama dealerships — from Huntsville to Mobile. Compare prices, then contact the dealer directly.</p>
+      <p class="lead">Search {counts && counts.vehicles > 0 ? `${formatNumber(counts.vehicles)} used cars, trucks and SUVs` : 'used cars, trucks and SUVs'} from Alabama dealerships, from Huntsville to Mobile. Compare prices, then contact the dealer directly.</p>
       <SearchForm variant="hero" />
       <ul class="quick-chips" aria-label="Popular searches">
         <li><a href="/used-cars/under-10000">Cars under $10k</a></li>
@@ -131,7 +131,7 @@ const faq = [
       <ol class="steps reveal-stagger">
         <li><h3>Search local inventory</h3><p class="muted" style="margin:0">Filter used cars by make, price, mileage, city or ZIP code radius across Alabama.</p></li>
         <li><h3>Compare & save</h3><p class="muted" style="margin:0">See photos, specs, vehicle history and dealer details. Save favorites to your free account.</p></li>
-        <li><h3>Contact the dealer</h3><p class="muted" style="margin:0">Request a price, schedule a test drive or ask about financing — straight to the dealership.</p></li>
+        <li><h3>Contact the dealer</h3><p class="muted" style="margin:0">Request a price, schedule a test drive or ask about financing. Your request goes straight to the dealership.</p></li>
         <li><h3>Buy with confidence</h3><p class="muted" style="margin:0">Use our Alabama guides for inspections, out-the-door pricing, title and registration.</p></li>
       </ol>
     </div>
@@ -141,7 +141,7 @@ const faq = [
     <div class="wrap grid grid-2" style="align-items:center">
       <div>
         <h2 id="fin-title">Financing your next car in Alabama</h2>
-        <p>Estimate your monthly payment, learn how auto loans work, and send a financing inquiry to a local dealer — all before you visit the lot.</p>
+        <p>Estimate your monthly payment, learn how auto loans work, and send a financing inquiry to a local dealer, all before you visit the lot.</p>
       </div>
       <div class="row" style="justify-content:flex-start">
         <a class="btn btn-primary btn-lg" href="/financing"><Icon name="dollar" /> Explore Financing</a>
@@ -156,7 +156,7 @@ const faq = [
         <h2 id="seo-title">Your local marketplace for used cars in Alabama</h2>
         <div class="grid grid-2" style="gap:32px">
           <div>
-            <p>BamaMotors was built for Alabama drivers. Instead of sorting through national listings from dealers hundreds of miles away, you can search <strong>used cars for sale in Alabama</strong> from dealerships you can actually visit — in <a href="/used-cars/birmingham-al">Birmingham</a>, <a href="/used-cars/huntsville-al">Huntsville</a>, <a href="/used-cars/mobile-al">Mobile</a>, <a href="/used-cars/montgomery-al">Montgomery</a>, <a href="/used-cars/tuscaloosa-al">Tuscaloosa</a> and towns across the state.</p>
+            <p>BamaMotors was built for Alabama drivers. Instead of sorting through national listings from dealers hundreds of miles away, you can search <strong>used cars for sale in Alabama</strong> from dealerships you can actually visit. In <a href="/used-cars/birmingham-al">Birmingham</a>, <a href="/used-cars/huntsville-al">Huntsville</a>, <a href="/used-cars/mobile-al">Mobile</a>, <a href="/used-cars/montgomery-al">Montgomery</a>, <a href="/used-cars/tuscaloosa-al">Tuscaloosa</a> and towns across the state.</p>
             <h3>Trucks, SUVs and affordable cars</h3>
             <p>Alabama loves its pickups, and our <a href="/used-cars/trucks">used trucks</a> and <a href="/used-cars/suvs">used SUVs</a> pages make it easy to compare them. Shopping on a budget? Browse <a href="/used-cars/under-10000">cars under $10,000</a> from local dealers.</p>
           </div>
@@ -164,7 +164,7 @@ const faq = [
             <h3>Know before you buy</h3>
             <p>Alabama doesn't require a state safety inspection, so we publish practical guides on <a href="/blog/how-to-inspect-a-used-car-alabama">inspecting a used car</a>, <a href="/blog/how-to-buy-a-used-car-in-alabama">title and registration</a> and <a href="/blog/how-to-finance-a-used-car-in-alabama">financing</a>. Every listing shows the dealer's disclosed vehicle history and a link to check recalls with <a href="https://www.nhtsa.gov/recalls" rel="noopener" target="_blank">NHTSA</a>.</p>
             <h3>Straight to the dealer</h3>
-            <p>When you send a request, it goes directly to the dealership that owns the vehicle — no call centers, no reselling your information.</p>
+            <p>When you send a request, it goes directly to the dealership that owns the vehicle. No call centers, no reselling your information.</p>
           </div>
         </div>
       </article>

@@ -18,10 +18,10 @@ const faq = [
   { q: 'Do you charge per lead?', a: 'No. Leads are included on every plan, including Free. Shoppers contact you directly and you own the relationship.' },
   { q: 'What is a featured listing?', a: `Featured vehicles appear first in search results and on the homepage. Basic and Pro include featured slots, and individual vehicles can be featured for ${featuredPrice} per ${s.featured_days || 30} days.` },
   { q: 'How are dealers verified?', a: 'Our team reviews every new dealership account before its listings go live. We may contact you to confirm your business details.' },
-  { q: 'Can I import my inventory automatically?', a: 'Today vehicles are added from your dashboard. Our platform is designed to accept licensed inventory feeds — contact us if you want to connect your DMS or feed provider.' },
+  { q: 'Can I import my inventory automatically?', a: 'Today vehicles are added from your dashboard. Our platform is designed to accept licensed inventory feeds. Contact us if you want to connect your DMS or feed provider.' },
 ];
 ---
-<BaseLayout title="List Your Dealership – Reach Alabama Car Shoppers" description="Alabama car dealers: list your used car inventory on BamaMotors, get local leads by email, and grow with Basic and Pro plans. Start free with up to 10 vehicles."
+<BaseLayout title="List Your Dealership: Reach Alabama Car Buyers" description="Alabama car dealers: list your used car inventory on BamaMotors, get local leads by email, and grow with Basic and Pro plans. Start free with up to 10 vehicles."
   keywords="car dealer advertising Alabama, list used cars Alabama, auto dealer leads Alabama, dealer listings Alabama" canonical="/for-dealers" jsonLd={[breadcrumbLd(env.SITE_URL, crumbs), faqLd(faq)]}>
   <section class="hero">
     <div class="wrap">
@@ -37,7 +37,7 @@ const faq = [
   <section class="section">
     <div class="wrap grid grid-3">
       <div class="panel"><Icon name="pin" size={28} /><h2 style="font-size:1.15rem;margin-top:8px">Local search visibility</h2><p class="muted" style="margin:0">Your vehicles appear on city pages like “used cars in Birmingham” and in ZIP-code radius searches.</p></div>
-      <div class="panel"><Icon name="inbox" size={28} /><h2 style="font-size:1.15rem;margin-top:8px">Leads without the middleman</h2><p class="muted" style="margin:0">Contact, price, test-drive and financing requests go straight to you — manage them in one dashboard.</p></div>
+      <div class="panel"><Icon name="inbox" size={28} /><h2 style="font-size:1.15rem;margin-top:8px">Leads without the middleman</h2><p class="muted" style="margin:0">Contact, price, test-drive and financing requests go straight to you. Manage them in one dashboard.</p></div>
       <div class="panel"><Icon name="chart" size={28} /><h2 style="font-size:1.15rem;margin-top:8px">Simple analytics</h2><p class="muted" style="margin:0">See views, saves and leads for each vehicle so you know what's working.</p></div>
     </div>
   </section>
@@ -63,7 +63,7 @@ const faq = [
     <div class="wrap" style="max-width:780px">
       <h2 id="signup-title">Create your dealer account</h2>
       {user ? (
-        <div class="alert alert-info">You're signed in as {user.email}. {user.role === 'dealer' ? <a href="/dashboard">Go to your dealer dashboard</a> : <>Dealer accounts use a separate login — <a href="/contact">contact us</a> to convert this account, or sign out and register your dealership.</>}</div>
+        <div class="alert alert-info">You're signed in as {user.email}. {user.role === 'dealer' ? <a href="/dashboard">Go to your dealer dashboard</a> : <>Dealer accounts use a separate login. <a href="/contact">Contact us</a> to convert this account, or sign out and register your dealership.</>}</div>
       ) : <DealerSignupForm action="/signup?type=dealer" />}
     </div>
   </section>

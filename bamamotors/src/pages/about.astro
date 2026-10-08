@@ -3,13 +3,13 @@ import ContentLayout from '../layouts/ContentLayout.astro';
 import { organizationLd } from '../lib/seo';
 const site = Astro.locals.runtime.env.SITE_URL;
 ---
-<ContentLayout title="About BamaMotors – Alabama's Local Car Marketplace" h1="About BamaMotors" path="/about"
+<ContentLayout title="About BamaMotors: Alabama's Local Car Marketplace" h1="About BamaMotors" path="/about"
   description="BamaMotors is a local automotive marketplace helping people in Alabama find used cars and connect with local dealerships. Learn who we are and how we work."
   jsonLd={[{ ...organizationLd(site, Astro.locals.settings), '@type': 'Organization' }, { '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About BamaMotors', url: `${site}/about` }]}>
   <div class="prose">
     <p class="snippet"><strong>BamaMotors</strong> is a local automotive marketplace helping people in Alabama find used cars and connect with local dealerships. Shoppers search inventory for free; dealers list vehicles and receive leads directly.</p>
     <h2>Why we built BamaMotors</h2>
-    <p>Buying a car in <a href="https://en.wikipedia.org/wiki/Alabama" rel="noopener" target="_blank">Alabama</a> often means scrolling through national sites full of vehicles hundreds of miles away. We think local shoppers deserve a faster way to see what's actually for sale nearby — in Birmingham, Huntsville, Mobile, Montgomery and every town in between — and local dealers deserve a marketplace built for their community.</p>
+    <p>Buying a car in <a href="https://en.wikipedia.org/wiki/Alabama" rel="noopener" target="_blank">Alabama</a> often means scrolling through national sites full of vehicles hundreds of miles away. We think local shoppers deserve a faster way to see what's actually for sale nearby (in Birmingham, Huntsville, Mobile, Montgomery and every town in between) and local dealers deserve a marketplace built for their community.</p>
     <h2>What we do</h2>
     <ul>
       <li><strong>For shoppers:</strong> a fast search across Alabama dealer inventory, with filters for price, mileage, body type, city and ZIP-code radius, plus honest buying guides.</li>

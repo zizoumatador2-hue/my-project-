@@ -87,7 +87,7 @@ export async function resolveLanding(db: D1Database, slug: string, sub?: string)
         h1: `Used Cars ${price.label} for Sale in Alabama`,
         description: `Find cheap used cars ${price.label.toLowerCase()} for sale in Alabama from local dealers. Compare affordable cars by mileage, city and body type.`,
         keywords: `cars ${price.label.toLowerCase()} Alabama, cheap used cars Alabama, affordable used cars Alabama, cheap cars for sale Alabama`,
-        intro: `Shopping on a budget? These are affordable used cars priced ${price.label.toLowerCase()} from Alabama dealerships. At this price, condition and maintenance history matter more than age — read our guide to cars under $10,000 before you buy.`,
+        intro: `Shopping on a budget? These are affordable used cars priced ${price.label.toLowerCase()} from Alabama dealerships. At this price, condition and maintenance history matter more than age. Read our guide to cars under $10,000 before you buy.`,
         content: null, faq: genericFaq(`used cars ${price.label.toLowerCase()}`, 'Sort by lowest price or narrow down by city, body type and mileage.'),
         filters: { maxPrice: price.max }, crumbs: [...base, { name: price.label, href: `/used-cars/${price.slug}` }],
         hasEditorial: false, statsWhere: { sql: ' AND v.price_cents <= ?', params: [price.max * 100] },

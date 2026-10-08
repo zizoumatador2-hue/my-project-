@@ -59,7 +59,7 @@ const initials = (post.author_name ?? 'BM').split(/\s+/).slice(0, 2).map((w) => 
   ogImage={cover?.src ?? (post.cover_key ? `/media/${post.cover_key}` : undefined)} jsonLd={[breadcrumbLd(site, crumbs), articleLd, faqLd(faq), howtoLd]}>
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />
-    {post.status !== 'published' && <div class="alert alert-warn" style="margin-top:12px">Draft preview — not visible to the public.</div>}
+    {post.status !== 'published' && <div class="alert alert-warn" style="margin-top:12px">Draft preview, not visible to the public.</div>}
     <div class="article-layout">
       <article>
         <header>

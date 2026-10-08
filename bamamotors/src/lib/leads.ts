@@ -32,7 +32,7 @@ export async function createLead(env: Env, input: LeadInput, ctx: { userId: numb
     );
     if (!v || v.status === 'draft' || v.status === 'archived') return { ok: false, error: 'This vehicle is no longer available.' };
     dealerId = v.dealer_id;
-    vehicleLabel = `${vehicleTitle(v)} — ${formatPrice(v.price_cents)}`;
+    vehicleLabel = `${vehicleTitle(v)}, ${formatPrice(v.price_cents)}`;
     vehicleSlug = v.slug;
   }
 
@@ -68,7 +68,7 @@ export async function createLead(env: Env, input: LeadInput, ctx: { userId: numb
   ].filter(Boolean).join('\n');
 
   if (dealer) {
-    await notify(db, dealer.owner_user_id, `New lead: ${kind}`, `${input.name}${vehicleLabel ? ` — ${vehicleLabel}` : ''}`, `/dashboard/leads/${id}`);
+    await notify(db, dealer.owner_user_id, `New lead: ${kind}`, `${input.name}${vehicleLabel ? `, ${vehicleLabel}` : ''}`, `/dashboard/leads/${id}`);
     await sendEmail(env, dealer.email, `New BamaMotors lead: ${kind}`, `${summary}\n\nManage this lead: ${site}/dashboard/leads/${id}`);
   } else {
     await notifyAdmins(db, `New site lead: ${kind}`, input.name, `/admin/leads?id=${id}`);
@@ -76,7 +76,7 @@ export async function createLead(env: Env, input: LeadInput, ctx: { userId: numb
   await sendEmail(
     env,
     input.email,
-    'We received your request — BamaMotors',
+    'BamaMotors: we received your request',
     `Hi ${input.name},\n\nThanks for your ${kind.toLowerCase()} request${dealer ? ` for ${dealer.name}` : ''}. ` +
       `${dealer ? 'The dealership' : 'Our team'} will reply using the contact details you provided.\n\n${summary}\n\n— BamaMotors\n${site}`,
   );

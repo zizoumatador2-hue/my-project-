@@ -56,7 +56,7 @@ export async function createDealer(
     'Welcome to BamaMotors for Dealers',
     `Thanks for registering ${data.dealer_name} on BamaMotors.\n\n` +
       (finalStatus === 'pending'
-        ? 'Our team is reviewing your dealership. You can start adding inventory now — listings go live as soon as your account is approved.\n\n'
+        ? 'Our team is reviewing your dealership. You can start adding inventory now. Listings go live as soon as your account is approved.\n\n'
         : 'Your dealership is live. Add your first vehicles from the dashboard.\n\n') +
       `Dashboard: ${site}/dashboard\n\n— BamaMotors`,
   );

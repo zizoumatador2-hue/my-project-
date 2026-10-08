@@ -58,15 +58,15 @@ const faq = [
 ];
 const site = env.SITE_URL;
 ---
-<BaseLayout title={`Car Dealerships in Alabama – Used Car Dealers Near You${page > 1 ? ` – Page ${page}` : ''}`}
-  description="Find car dealerships and used car dealers in Alabama. See inventory, hours, reviews and contact info — search by city or ZIP to find auto dealers near you."
+<BaseLayout title={`Car Dealerships in Alabama Near You${page > 1 ? ` – Page ${page}` : ''}`}
+  description="Find car dealerships and used car dealers in Alabama. See inventory, hours, reviews and contact info. Search by city or ZIP to find auto dealers near you."
   keywords="car dealerships Alabama, used car dealers Alabama, car dealerships near me Alabama, auto dealers near me, used car dealership Alabama"
-  canonical={page > 1 && !filtered ? `/dealers?page=${page}` : '/dealers'} noindex={filtered}
+  canonical={page > 1 && !filtered ? `/dealers?page=${page}` : '/dealers'} noindex={filtered} ads={total > 0}
   jsonLd={[breadcrumbLd(site, crumbs), faqLd(faq)]}>
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />
     <h1 style="margin-top:12px">Car Dealerships in Alabama</h1>
-    <p class="muted" style="max-width:780px">Browse used car dealers and auto dealerships across Alabama. See each dealer's current inventory, hours and customer reviews, then contact them directly — or search by ZIP code to find car dealerships near you.</p>
+    <p class="muted" style="max-width:780px">Browse used car dealers and auto dealerships across Alabama. See each dealer's current inventory, hours and customer reviews, then contact them directly, or search by ZIP code to find car dealerships near you.</p>
     <form method="get" action="/dealers" class="panel toolbar" role="search" aria-label="Search dealers" data-search-form>
       <div class="field"><label for="dq">Dealer name</label><input class="input" id="dq" name="q" value={q} placeholder="e.g. Auto Group" /></div>
       <div class="field"><label for="dcity">City</label>

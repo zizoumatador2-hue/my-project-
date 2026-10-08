@@ -6,7 +6,7 @@ export const SETTING_DEFAULTS: Record<string, string> = {
   contact_email: 'info.christopherkunz.com',
   contact_phone: '',
   default_meta_description:
-    'Shop used cars for sale in Alabama from local dealerships. Search by make, price, mileage and city — Birmingham, Huntsville, Mobile, Montgomery and more.',
+    'Shop used cars for sale in Alabama from local dealerships. Search by make, price, mileage and city: Birmingham, Huntsville, Mobile, Montgomery and more.',
   default_meta_keywords: 'used cars Alabama, used cars for sale Alabama, car dealerships Alabama, used car dealers Alabama',
   ga4_id: '',
   adsense_client: '',

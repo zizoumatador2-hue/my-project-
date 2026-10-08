@@ -2,7 +2,7 @@
 title: "Used vs. New Car: Which Is the Better Buy in Alabama?"
 category: car-buying-guides
 excerpt: New cars offer the latest features and full warranties; used cars save money on depreciation. Compare costs, insurance, financing and warranties side by side.
-meta_description: Used vs new car in Alabama — compare depreciation, price, sales tax, insurance, financing rates and warranty coverage to decide which is right for you.
+meta_description: Used vs new car in Alabama: compare depreciation, price, sales tax, insurance, financing rates and warranty coverage to decide which is right for you.
 keywords: used vs new car, should I buy a used car, used cars Alabama, certified pre-owned Alabama
 faq: [{"q":"Is it cheaper to buy a used car than a new car?","a":"Usually yes. New cars lose a large share of their value in the first few years, so a used car lets the first owner absorb that depreciation. Used car loans can carry higher interest rates, though, so compare total cost."},{"q":"What is the middle ground between new and used?","a":"Certified pre-owned vehicles are late-model used cars that passed an inspection program and often include an extended warranty."},{"q":"Do I pay sales tax on used cars in Alabama?","a":"Yes. Alabama's automotive sales tax applies to both new and used vehicle purchases, plus local taxes where you live."}]
 ---
@@ -13,7 +13,7 @@ faq: [{"q":"Is it cheaper to buy a used car than a new car?","a":"Usually yes. N
 | Factor | New car | Used car |
 |---|---|---|
 | Purchase price | Highest | Lower for the same model |
-| Depreciation | Steepest in the first years | Slower — the first owner took the biggest hit |
+| Depreciation | Steepest in the first years | Slower; the first owner took the biggest hit |
 | Sales tax | Based on the higher price | Based on a lower price |
 | Insurance | Often higher | Often lower |
 | Financing rates | Promotional rates sometimes available | Usually somewhat higher |

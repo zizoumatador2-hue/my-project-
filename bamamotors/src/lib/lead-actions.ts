@@ -27,7 +27,7 @@ export async function handleLeadPost(env: Env, lead: LeadRow, fd: FormData, acto
     if (body.length < 2) return 'Write a message first.';
     let emailed = 0;
     if (action === 'reply') {
-      const subject = `Re: your inquiry${lead.vehicle_label ? ` about the ${lead.vehicle_label.split(' — ')[0]}` : ''}`;
+      const subject = `Re: your inquiry${lead.vehicle_label ? ` about the ${lead.vehicle_label.split(', ')[0]}` : ''}`;
       emailed = (await sendEmail(env, lead.email, subject, `Hi ${lead.name},\n\n${body}\n\n— ${replyFrom}\n(sent via BamaMotors)`)) ? 1 : 0;
       if (lead.status === 'new') await run(env.DB, "UPDATE leads SET status = 'contacted', updated_at = ? WHERE id = ?", [nowIso(), lead.id]);
     }

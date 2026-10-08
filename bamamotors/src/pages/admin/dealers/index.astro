@@ -18,7 +18,7 @@ if (Astro.request.method === 'POST') {
     await db.prepare(`UPDATE dealers SET status = ?, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id IN (${ids.map(() => '?').join(',')})`).bind(status, ...ids).run();
     for (const t of targets) {
       await audit(db, admin.id, 'dealer.status', 'dealer', t.id, { status });
-      if (status === 'active' && t.status === 'pending') await sendEmail(env, t.email, 'Your BamaMotors dealership is approved', `Good news — ${t.name} is now live on BamaMotors. Your active vehicles are visible to shoppers.\n\n${env.SITE_URL}/dashboard`);
+      if (status === 'active' && t.status === 'pending') await sendEmail(env, t.email, 'Your BamaMotors dealership is approved', `Good news! ${t.name} is now live on BamaMotors. Your active vehicles are visible to shoppers.\n\n${env.SITE_URL}/dashboard`);
     }
     return Astro.redirect(`/admin/dealers${Astro.url.search}${Astro.url.search ? '&' : '?'}ok=bulk`, 303);
   }

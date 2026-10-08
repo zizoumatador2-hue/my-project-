@@ -41,12 +41,12 @@ const specs: [string, string | null][] = [
   ['VIN', v.vin], ['Stock #', v.stock_number], ['Location', `${v.city_name}, AL ${v.zip}`],
 ];
 const faq = [
-  { q: `Is this ${title} still available?`, a: sold ? `No — this ${title} has been sold. Browse similar vehicles below or search more ${v.make_name} ${v.model_name} listings in Alabama.` : `It was listed as available when this page was last updated on ${formatDate(v.updated_at)}. Use Contact Dealer to confirm availability with ${v.dealer_name}.` },
-  { q: `How much is this ${v.year} ${v.make_name} ${v.model_name}?`, a: `The dealer's asking price is ${price}. Sales tax, title, registration and dealer fees are extra — request an itemized out-the-door price from ${v.dealer_name}.` },
+  { q: `Is this ${title} still available?`, a: sold ? `No. This ${title} has been sold. Browse similar vehicles below or search more ${v.make_name} ${v.model_name} listings in Alabama.` : `It was listed as available when this page was last updated on ${formatDate(v.updated_at)}. Use Contact Dealer to confirm availability with ${v.dealer_name}.` },
+  { q: `How much is this ${v.year} ${v.make_name} ${v.model_name}?`, a: `The dealer's asking price is ${price}. Sales tax, title, registration and dealer fees are extra. Request an itemized out-the-door price from ${v.dealer_name}.` },
   { q: 'Can I finance this vehicle?', a: `Yes, you can send a financing inquiry to ${v.dealer_name} using the Financing tab. The estimated payment shown on this page is only an example and is not a loan offer.` },
   { q: 'Where is this vehicle located?', a: `This vehicle is at ${v.dealer_name} in ${v.dealer_city}, AL. Schedule a test drive to see it in person.` },
 ];
-const description = `${sold ? 'SOLD: ' : ''}${title} for sale in ${v.city_name}, AL — ${price}, ${formatNumber(v.mileage)} miles, ${v.transmission.toLowerCase()}, ${v.drivetrain}. Offered by ${v.dealer_name}. See photos, specs and history.`.slice(0, 160);
+const description = `${sold ? 'SOLD: ' : ''}${title} for sale in ${v.city_name}, AL: ${price}, ${formatNumber(v.mileage)} miles, ${v.transmission.toLowerCase()}, ${v.drivetrain}. Offered by ${v.dealer_name}. See photos, specs and history.`.slice(0, 160);
 const descParas = (v.description ?? '').split(/\n{2,}/).filter(Boolean);
 const productLd = {
   '@context': 'https://schema.org',
@@ -171,7 +171,7 @@ const productLd = {
                 <select class="select" id="calc-term" data-calc-term>{[36, 48, 60, 72].map((t) => <option value={t} selected={t === 60}>{t} months</option>)}</select></div>
             </div>
             <p style="margin:14px 0 4px">Estimated payment: <strong style="font-size:1.4rem;color:var(--brand)" data-calc-out>${formatNumber(estPayment)}/mo</strong></p>
-            <p class="small muted">Estimate only, excluding tax, title and fees. Not a loan offer — your rate depends on credit and lender approval.</p>
+            <p class="small muted">Estimate only, excluding tax, title and fees. Not a loan offer. Your rate depends on credit and lender approval.</p>
             {!sold && <a class="btn btn-dark" href="#lead-form" data-open-lead="financing">Ask {v.dealer_name} about financing</a>}
           </div>
         </section>

@@ -28,6 +28,6 @@ const v = (k: string) => values[k] ?? '';
       <div class="field full"><label for="p-howto">HowTo steps (optional)</label><textarea class="textarea" id="p-howto" name="howto" rows="5" placeholder="Step name | Step description (one per line)">{v('howto')}</textarea></div>
     </div>
   </fieldset>
-  {!isNew && <label class="check" style="margin:8px 0 16px"><input type="checkbox" name="substantial" /> This is a substantial update — show a new “Updated” date</label>}
+  {!isNew && <label class="check" style="margin:8px 0 16px"><input type="checkbox" name="substantial" /> This is a substantial update (show a new “Updated” date)</label>}
   <div class="row"><button class="btn btn-primary" type="submit">Save post</button><slot /></div>
 </form>

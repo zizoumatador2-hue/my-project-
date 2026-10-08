@@ -34,7 +34,7 @@ const logoErr = Astro.url.searchParams.get('logo_err');
         <input class="input" id={`dp-${f.name}`} name={f.name} type={f.type as 'text'} value={f.value} aria-invalid={errors[f.name] ? 'true' : undefined} />
         {errors[f.name] && <span class="field-error">{errors[f.name]}</span>}</div>
     ))}
-    <div class="field full"><label for="dp-desc">About the dealership</label><textarea class="textarea" id="dp-desc" name="description" rows="5">{v('description', d.description)}</textarea><span class="hint">Tell shoppers what makes your dealership different — in your own words.</span></div>
+    <div class="field full"><label for="dp-desc">About the dealership</label><textarea class="textarea" id="dp-desc" name="description" rows="5">{v('description', d.description)}</textarea><span class="hint">Tell shoppers what makes your dealership different. In your own words.</span></div>
   </div>
   <fieldset style="margin-top:16px"><legend>Business hours</legend>
     <div class="form-grid">{DAYS.map(([k, label]) => <div class="field"><label for={`h-${k}`}>{label}</label><input class="input" id={`h-${k}`} name={`hours_${k}`} value={v(`hours_${k}`, hours[k])} placeholder="9:00 AM – 7:00 PM or Closed" /></div>)}</div>

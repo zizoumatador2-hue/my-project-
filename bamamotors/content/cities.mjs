@@ -6,7 +6,7 @@ export const cities = [
   {
     slug: 'birmingham-al', name: 'Birmingham', county: 'Jefferson County', lat: 33.5186, lng: -86.8104, featured: 1, sort: 1,
     intro:
-      'Shop used cars for sale in Birmingham, AL from local dealerships across the Magic City and the wider metro — Hoover, Vestavia Hills, Homewood, Trussville and Bessemer. Compare prices, mileage and dealer details, then contact the dealer directly.',
+      'Shop used cars for sale in Birmingham, AL from local dealerships across the Magic City and the wider metro: Hoover, Vestavia Hills, Homewood, Trussville and Bessemer. Compare prices, mileage and dealer details, then contact the dealer directly.',
     body: `## Buying a used car in Birmingham
 
 Birmingham is Alabama's largest metro area, and that scale works in a shopper's favor: more dealerships means more choice and more room to compare prices on the same model. Commuters who split time between downtown, UAB and the southern suburbs put real miles on I-65, I-20/59 and I-459, so it pays to look closely at how a vehicle was driven, not just how old it is.
@@ -15,7 +15,7 @@ Birmingham is Alabama's largest metro area, and that scale works in a shopper's 
 
 - **Highway vs. city miles.** A higher-mileage car used for interstate commuting can be in better mechanical shape than a low-mileage car that lived in stop-and-go traffic. Ask the dealer for service records.
 - **Hills and brakes.** Neighborhoods on Red Mountain and Shades Mountain are hard on brakes and transmissions. Listen for grinding and feel for shuddering on a test drive.
-- **Summer heat.** Test the A/C at full blast for several minutes — a weak system is a common and expensive surprise in central Alabama summers.
+- **Summer heat.** Test the A/C at full blast for several minutes. A weak system is a common and expensive surprise in central Alabama summers.
 
 ### Where Birmingham drivers shop
 
@@ -37,11 +37,11 @@ After purchase, the vehicle is titled and registered through the county. Jeffers
       'Find used cars for sale in Huntsville, AL from dealers across the Rocket City, Madison, Athens, Decatur and the Tennessee Valley. Filter by make, price and mileage and send your questions straight to local dealerships.',
     body: `## Used cars in Huntsville and the Tennessee Valley
 
-Huntsville is one of the fastest-growing cities in Alabama, anchored by Redstone Arsenal, NASA's Marshall Space Flight Center and Cummings Research Park. A growing population means steady demand for dependable commuter cars, family SUVs and pickups — and a busy used car market along Memorial Parkway, University Drive and the I-565 corridor.
+Huntsville is one of the fastest-growing cities in Alabama, anchored by Redstone Arsenal, NASA's Marshall Space Flight Center and Cummings Research Park. A growing population means steady demand for dependable commuter cars, family SUVs and pickups, and a busy used car market along Memorial Parkway, University Drive and the I-565 corridor.
 
 ### Tips for Huntsville shoppers
 
-- **Commute first.** Many Huntsville drivers commute to Redstone Arsenal or Research Park daily. Fuel economy and comfort matter more than you think on a year of I-565 traffic — compare MPG in the listing specs.
+- **Commute first.** Many Huntsville drivers commute to Redstone Arsenal or Research Park daily. Fuel economy and comfort matter more than you think on a year of I-565 traffic. Compare MPG in the listing specs.
 - **Look beyond city limits.** Madison, Athens and Decatur dealers are a short drive away. A 50-mile radius search around a Huntsville ZIP code often surfaces more choices at competitive prices.
 - **Newer vehicles are common.** With vehicles now being built nearby, the market includes plenty of late-model inventory. Compare certified pre-owned options alongside standard used cars.
 
@@ -63,7 +63,7 @@ Ready to narrow it down? Start with [used SUVs](/used-cars/huntsville-al/suvs) o
       'Browse used cars for sale in Mobile, AL from dealerships in Mobile, Daphne, Spanish Fort, Saraland and across the Gulf Coast. Compare prices and mileage, and contact local dealers directly.',
     body: `## Buying a used car on the Gulf Coast
 
-Mobile is Alabama's port city, and life on Mobile Bay comes with a few things inland buyers don't have to think about as much: salt air, humidity and hurricane season. That doesn't make Gulf Coast cars a bad buy — it just means an informed inspection is worth the extra ten minutes.
+Mobile is Alabama's port city, and life on Mobile Bay comes with a few things inland buyers don't have to think about as much: salt air, humidity and hurricane season. That doesn't make Gulf Coast cars a bad buy. It just means an informed inspection is worth the extra ten minutes.
 
 ### Gulf Coast inspection checklist
 
@@ -99,7 +99,7 @@ Montgomery sits where I-65 meets I-85, making it a crossroads for drivers headin
 
 ### After you buy
 
-You'll register the vehicle with your county of residence. Montgomery County residents can use county license offices — check current requirements and fees before you visit. Our [Alabama used car buying guide](/blog/how-to-buy-a-used-car-in-alabama) walks through the title and registration steps.`,
+You'll register the vehicle with your county of residence. Montgomery County residents can use county license offices. Check current requirements and fees before you visit. Our [Alabama used car buying guide](/blog/how-to-buy-a-used-car-in-alabama) walks through the title and registration steps.`,
     faq: [
       { q: 'Does the Montgomery search include Prattville and Wetumpka?', a: 'Yes. The default search area covers dealers within about 30 miles of Montgomery, which includes Prattville, Millbrook and Wetumpka.' },
       { q: 'I am stationed at Maxwell AFB. Can I buy a car quickly?', a: 'Yes. Getting pre-approved for a loan and having your insurance information ready speeds things up. Use Request Price to get an out-the-door quote from the dealer before you visit.' },
@@ -110,20 +110,20 @@ You'll register the vehicle with your county of residence. Montgomery County res
   {
     slug: 'tuscaloosa-al', name: 'Tuscaloosa', county: 'Tuscaloosa County', lat: 33.2098, lng: -87.5692, featured: 1, sort: 5,
     intro:
-      'Find used cars for sale in Tuscaloosa, AL from dealerships in Tuscaloosa and Northport. Great for students, families and commuters — filter by price, mileage and body type, and contact dealers directly.',
+      'Find used cars for sale in Tuscaloosa, AL from dealerships in Tuscaloosa and Northport. Great for students, families and commuters. Filter by price, mileage and body type, and contact dealers directly.',
     body: `## Used cars in Tuscaloosa and Northport
 
 Tuscaloosa is home to the University of Alabama and sits on I-20/59 about an hour southwest of Birmingham. The Mercedes-Benz plant in nearby Vance makes West Alabama an automotive town, and the local used car market ranges from affordable first cars for students to late-model SUVs for families.
 
 ### Buying your first car as a student
 
-- **Set a total budget.** Include insurance, tax, title and registration — not just the sticker price. Cars under $10,000 are popular; browse [cars under $10,000](/used-cars/under-10000) to see what's available.
+- **Set a total budget.** Include insurance, tax, title and registration, not just the sticker price. Cars under $10,000 are popular; browse [cars under $10,000](/used-cars/under-10000) to see what's available.
 - **Prioritize reliability.** A well-maintained compact sedan with complete service records is often a smarter buy than a newer car with an unknown history.
 - **Bring a second opinion.** An independent pre-purchase inspection costs far less than an unexpected repair.
 
 ### Game day and beyond
 
-Tuscaloosa traffic on home football weekends is legendary. If you're shopping in the fall, plan dealer visits for weekdays — you'll get more of the salesperson's time and an easier test drive.
+Tuscaloosa traffic on home football weekends is legendary. If you're shopping in the fall, plan dealer visits for weekdays. You'll get more of the salesperson's time and an easier test drive.
 
 ### Families and commuters
 
@@ -141,13 +141,13 @@ For drivers commuting to Birmingham, highway comfort and fuel economy matter. Ch
       "Shop used cars for sale in Hoover, AL from dealers along US-31, the I-459 corridor and across Birmingham's southern suburbs, including Pelham, Helena and Alabaster.",
     body: `## Used cars in Hoover
 
-Hoover is one of Alabama's largest cities and straddles Jefferson and Shelby counties just south of Birmingham. With the Riverchase Galleria area, US-31 and I-459 nearby, it's a convenient base for car shopping across the south metro — from Hoover itself down through Pelham, Helena and Alabaster.
+Hoover is one of Alabama's largest cities and straddles Jefferson and Shelby counties just south of Birmingham. With the Riverchase Galleria area, US-31 and I-459 nearby, it's a convenient base for car shopping across the south metro, from Hoover itself down through Pelham, Helena and Alabaster.
 
 ### Why shop Hoover dealers
 
 - **Suburban families.** Hoover's market leans toward three-row SUVs, minivans and crossovers. If you need seating for seven, filter by body type and look at [SUVs in the Hoover area](/used-cars/hoover-al/suvs).
 - **Two counties, one search.** Because Hoover spans two counties, your registration office depends on where you live, not where you buy. Check your county before you head out with paperwork.
-- **Close to Birmingham selection.** Hoover shoppers can easily compare with Birmingham-area inventory — just widen the radius.
+- **Close to Birmingham selection.** Hoover shoppers can easily compare with Birmingham-area inventory. Just widen the radius.
 
 ### Test-drive route idea
 
@@ -186,7 +186,7 @@ Get an out-the-door price in writing, review any add-on products carefully, and 
   {
     slug: 'dothan-al', name: 'Dothan', county: 'Houston County', lat: 31.2232, lng: -85.3905, featured: 1, sort: 8,
     intro:
-      'Browse used cars for sale in Dothan, AL from dealerships across the Wiregrass region — Dothan, Enterprise, Ozark and surrounding communities. Compare prices and contact dealers directly.',
+      'Browse used cars for sale in Dothan, AL from dealerships across the Wiregrass region: Dothan, Enterprise, Ozark and surrounding communities. Compare prices and contact dealers directly.',
     body: `## Used cars in Dothan and the Wiregrass
 
 Dothan is the hub of Alabama's Wiregrass region in the southeast corner of the state, near both Georgia and Florida. Known for its peanut industry, the area's economy mixes agriculture, healthcare and the military community connected to nearby Fort Novosel. That mix shows up on dealer lots: work trucks, family SUVs and dependable commuter cars.
@@ -242,7 +242,7 @@ Madison is a fast-growing city on Huntsville's west side, spanning Madison and L
 ### Tips for Madison buyers
 
 - **Family-sized choices.** Madison's suburbs favor SUVs and minivans. Compare [used SUVs in Madison](/used-cars/madison-al/suvs) by mileage and price.
-- **Check your county.** Madison spans two counties — you'll register in the county where you live.
+- **Check your county.** Madison spans two counties. You'll register in the county where you live.
 - **Lean on Huntsville inventory.** Huntsville dealers are minutes away; widen your radius to compare the whole metro.
 
 ### Test-drive smarter
@@ -258,7 +258,7 @@ Drive a mix of I-565 and local roads, test the infotainment and driver-assist fe
   {
     slug: 'florence-al', name: 'Florence', county: 'Lauderdale County', lat: 34.7998, lng: -87.6773, featured: 1, sort: 11,
     intro:
-      'Find used cars for sale in Florence, AL and the Shoals — Muscle Shoals, Sheffield and Tuscumbia. Compare prices and mileage from local dealers and contact them directly.',
+      'Find used cars for sale in Florence, AL and the Shoals: Muscle Shoals, Sheffield and Tuscumbia. Compare prices and mileage from local dealers and contact them directly.',
     body: `## Used cars in Florence and the Shoals
 
 Florence is the largest city in the Shoals, the four-city area on the Tennessee River that includes Muscle Shoals, Sheffield and Tuscumbia. Home to the University of North Alabama and a famous music heritage, the Shoals has an independent, close-knit car market where local reputation matters.
@@ -267,7 +267,7 @@ Florence is the largest city in the Shoals, the four-city area on the Tennessee 
 
 - **Cross the river.** Dealers are spread across both sides of the Tennessee River. A 25-mile radius around Florence includes the whole Shoals.
 - **Students and first cars.** UNA students often shop for affordable, reliable sedans. See [cars under $10,000](/used-cars/under-10000) for budget options.
-- **Local reputation.** Read dealer reviews on BamaMotors and ask neighbors — in a smaller market, a dealer's reputation is easy to check.
+- **Local reputation.** Read dealer reviews on BamaMotors and ask neighbors. In a smaller market, a dealer's reputation is easy to check.
 
 ### Inspection reminders
 
