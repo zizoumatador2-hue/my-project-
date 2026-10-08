@@ -1,6 +1,9 @@
 name: ChayStore (generate images with fal.ai)
 
 on:
+  push:
+    branches: [ccr-e0043d8a-w9hvge]
+    paths: ['.github/workflows/chaystore-fal-images.yml']
   workflow_dispatch:
     inputs:
       only:
