@@ -4,3 +4,4 @@ the components themselves are not redistributed or sold).
 
 Local changes: BlurText accepts an `as` element and renders readable text without JavaScript; CountUp renders its
 final value on the server; Aurora pauses off-screen, honors prefers-reduced-motion and degrades gracefully without WebGL.
+StarBorder and GradientText are rewritten as server-rendered Astro components with CSS-only animation (no JavaScript).

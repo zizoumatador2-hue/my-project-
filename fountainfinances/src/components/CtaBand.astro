@@ -1,4 +1,5 @@
 ---
+import StarBorder from './reactbits/StarBorder.astro';
 interface Props { heading: string; text: string; href: string; label: string }
 const { heading, text, href, label } = Astro.props;
 ---
@@ -7,5 +8,5 @@ const { heading, text, href, label } = Astro.props;
     <h2>{heading}</h2>
     <p>{text}</p>
   </div>
-  <a class="btn btn-primary" href={href} data-track="cta_click" data-placement="cta-band">{label}</a>
+  <StarBorder href={href} data-track="cta_click" data-placement="cta-band">{label}</StarBorder>
 </aside>

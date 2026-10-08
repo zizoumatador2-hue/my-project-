@@ -3,18 +3,83 @@
   "width": 1280,
   "height": 720,
   "images": [
-    { "slot": "home", "seed": 41027, "alt": "A laptop, coffee mugs and a budget planner on a sunlit kitchen table at home", "prompt": "a bright modern American kitchen in late afternoon golden light, an open laptop, two coffee mugs and a closed leather planner on a warm oak table, a fruit bowl and plants, softly blurred background with large windows" },
-    { "slot": "hub-personal-finance", "seed": 51388, "alt": "A calculator, notebook, pen and a few dollar bills arranged on a light wooden desk", "prompt": "overhead flat lay on a light oak desk, a closed linen notebook, a simple calculator, a brass pen, a small stack of folded US dollar bills and a ceramic coffee cup, soft diffused daylight, clean minimal composition" },
-    { "slot": "hub-credit", "seed": 62219, "alt": "Plain credit cards resting on a leather wallet on a walnut table", "prompt": "three plain unbranded credit cards in muted navy, teal and charcoal fanned out on a brown leather wallet on a walnut table, dramatic soft window light, close-up product photography" },
-    { "slot": "hub-banking", "seed": 73410, "alt": "A classic stone bank building with tall columns at golden hour", "prompt": "a classic American neoclassical stone bank building with tall columns and wide steps at golden hour, low angle, clear blue sky, no signage, architectural photography" },
-    { "slot": "hub-loans", "seed": 84452, "alt": "A pen and reading glasses resting on a folder of loan documents", "prompt": "a tidy wooden desk with a closed manila folder of documents, a fountain pen and reading glasses resting on top, soft window light from the side, calm professional mood" },
-    { "slot": "hub-mortgage", "seed": 95563, "alt": "A craftsman-style suburban house with a front porch at sunset", "prompt": "a craftsman-style suburban American house with a covered front porch, white trim and a green lawn at sunset, warm lights glowing in the windows, mature trees, real estate photography, no people" },
-    { "slot": "hub-insurance", "seed": 16674, "alt": "A family home sheltered by a large oak tree on a rainy evening", "prompt": "a cozy two-story family home sheltered under a large oak tree during a gentle evening rain, warm light in the windows, wet driveway reflections, cinematic and reassuring mood, no people" },
-    { "slot": "guide-sinking-funds", "seed": 27785, "alt": "Glass jars holding coins and folded bills on a kitchen shelf, each with a blank tag", "prompt": "a row of glass mason jars on a wooden kitchen shelf, each holding US coins and folded dollar bills, each jar tied with a blank kraft paper tag, soft morning light, shallow depth of field" },
-    { "slot": "guide-how-to-freeze-your-credit", "seed": 38896, "alt": "A laptop and a closed metal padlock on a desk in a dim home office", "prompt": "a closed brushed steel padlock resting beside a laptop on a dark wooden desk in a dim home office, cool blue rim light and a warm desk lamp, security concept, moody and clean" },
-    { "slot": "guide-what-is-debt-consolidation", "seed": 49907, "alt": "Loose envelopes and paper bills gathered into one neat stack beside a calculator", "prompt": "top-down view of a wooden desk where scattered envelopes and paper bills are being gathered into one neat squared stack, a simple calculator and a pen beside it, soft daylight, organized feeling" },
-    { "slot": "topic-credit-scores", "seed": 51018, "alt": "A smartphone face down beside a notebook and coffee on a home office desk", "prompt": "a calm home office desk by a window with a smartphone lying face down, an open blank notebook, a pencil and a cup of coffee, a small succulent, morning light, optimistic mood" },
-    { "slot": "topic-savings-accounts", "seed": 62129, "alt": "A white ceramic piggy bank on a sunny windowsill next to a small plant", "prompt": "a glossy white ceramic piggy bank on a sunny windowsill next to a small potted plant, soft pastel morning light, clean minimal composition, gentle shadows" },
-    { "slot": "topic-banking-fees", "seed": 73230, "alt": "An unbranded ATM on a city street at dusk with reflections on wet pavement", "prompt": "a modern unbranded ATM kiosk set into a brick wall on an American city street at dusk, softly glowing blank screen, reflections on wet pavement, cinematic blue hour light, no people" }
+    {
+      "slot": "home",
+      "seed": 41027,
+      "alt": "A laptop, coffee mugs and a budget planner on a sunlit kitchen table at home",
+      "prompt": "a bright modern American kitchen in late afternoon golden light, an open laptop, two coffee mugs and a closed leather planner on a warm oak table, a fruit bowl and plants, softly blurred background with large windows"
+    },
+    {
+      "slot": "hub-personal-finance",
+      "seed": 51388,
+      "alt": "A calculator, notebook, pen and a few dollar bills arranged on a light wooden desk",
+      "prompt": "overhead flat lay on a light oak desk, a closed linen notebook, a simple calculator, a brass pen, a small stack of folded US dollar bills and a ceramic coffee cup, soft diffused daylight, clean minimal composition"
+    },
+    {
+      "slot": "hub-credit",
+      "seed": 70331,
+      "alt": "Plain credit cards resting on a leather wallet on a walnut table",
+      "prompt": "two completely blank matte credit cards with no printing at all, solid deep teal and charcoal, resting at an angle on a brown leather wallet on a walnut table, the card faces softly out of focus, warm window light, close-up product photography"
+    },
+    {
+      "slot": "hub-banking",
+      "seed": 81547,
+      "alt": "Tall stone columns of a classic bank building at golden hour",
+      "prompt": "close-up low angle view of tall fluted stone columns of a neoclassical building at golden hour, warm sunlight on limestone, deep blue sky, plain smooth stone without any carved words, architectural detail photography"
+    },
+    {
+      "slot": "hub-loans",
+      "seed": 84452,
+      "alt": "A pen and reading glasses resting on a folder of loan documents",
+      "prompt": "a tidy wooden desk with a closed manila folder of documents, a fountain pen and reading glasses resting on top, soft window light from the side, calm professional mood"
+    },
+    {
+      "slot": "hub-mortgage",
+      "seed": 95563,
+      "alt": "A craftsman-style suburban house with a front porch at sunset",
+      "prompt": "a craftsman-style suburban American house with a covered front porch, white trim and a green lawn at sunset, warm lights glowing in the windows, mature trees, real estate photography, no people"
+    },
+    {
+      "slot": "hub-insurance",
+      "seed": 19982,
+      "alt": "A family home sheltered by a large oak tree on a rainy evening",
+      "prompt": "full-bleed photograph of a cozy two-story family home sheltered under a large oak tree during a gentle evening rain, warm light in the windows, wet driveway reflections, reassuring mood, no people, edge to edge composition"
+    },
+    {
+      "slot": "guide-sinking-funds",
+      "seed": 30417,
+      "alt": "Glass jars holding coins and folded bills on a kitchen shelf",
+      "prompt": "a row of four clear glass mason jars on a light wooden kitchen shelf holding US coins and folded green bills, plain unmarked jars with no labels and no writing, soft morning light, shallow depth of field"
+    },
+    {
+      "slot": "guide-how-to-freeze-your-credit",
+      "seed": 38896,
+      "alt": "A laptop and a closed metal padlock on a desk in a dim home office",
+      "prompt": "a closed brushed steel padlock resting beside a laptop on a dark wooden desk in a dim home office, cool blue rim light and a warm desk lamp, security concept, moody and clean"
+    },
+    {
+      "slot": "guide-what-is-debt-consolidation",
+      "seed": 49907,
+      "alt": "Loose envelopes and paper bills gathered into one neat stack beside a calculator",
+      "prompt": "top-down view of a wooden desk where scattered envelopes and paper bills are being gathered into one neat squared stack, a simple calculator and a pen beside it, soft daylight, organized feeling"
+    },
+    {
+      "slot": "topic-credit-scores",
+      "seed": 51018,
+      "alt": "A smartphone face down beside a notebook and coffee on a home office desk",
+      "prompt": "a calm home office desk by a window with a smartphone lying face down, an open blank notebook, a pencil and a cup of coffee, a small succulent, morning light, optimistic mood"
+    },
+    {
+      "slot": "topic-savings-accounts",
+      "seed": 64458,
+      "alt": "A white ceramic piggy bank on a sunny windowsill next to a small plant",
+      "prompt": "one single glossy white ceramic piggy bank in side profile on a sunny white windowsill next to a small potted succulent, soft morning light, clean minimal composition, gentle shadows"
+    },
+    {
+      "slot": "topic-banking-fees",
+      "seed": 73230,
+      "alt": "An unbranded ATM on a city street at dusk with reflections on wet pavement",
+      "prompt": "a modern unbranded ATM kiosk set into a brick wall on an American city street at dusk, softly glowing blank screen, reflections on wet pavement, cinematic blue hour light, no people"
+    }
   ]
 }

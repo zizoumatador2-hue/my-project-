@@ -1,0 +1,11 @@
+---
+// Adapted from React Bits StarBorder: rendered on the server with pure CSS, so it ships no JavaScript.
+interface Props { href: string; color?: string; speed?: string; class?: string; [k: string]: unknown }
+const { href, color = '#7fe0d8', speed = '6s', class: cls = '', ...rest } = Astro.props;
+const glow = `radial-gradient(circle, ${color}, transparent 10%)`;
+---
+<a href={href} class={`star-border ${cls}`} style={`--sb-speed:${speed}`} {...rest}>
+  <span class="sb-glow sb-bottom" style={`background:${glow}`} aria-hidden="true"></span>
+  <span class="sb-glow sb-top" style={`background:${glow}`} aria-hidden="true"></span>
+  <span class="sb-inner"><slot /></span>
+</a>

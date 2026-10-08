@@ -1,0 +1,7 @@
+---
+// Adapted from React Bits GradientText: a CSS-only animated gradient fill, no JavaScript.
+interface Props { colors?: string[]; speed?: number; as?: string }
+const { colors = ['#0f766e', '#1f8f87', '#a8701a'], speed = 8, as: Tag = 'span' } = Astro.props;
+const bg = `linear-gradient(to right, ${[...colors, colors[0]].join(', ')})`;
+---
+<Tag class="gradient-text" style={`background-image:${bg};--gt-speed:${speed}s`}><slot /></Tag>
