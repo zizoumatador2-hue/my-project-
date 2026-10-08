@@ -1,7 +1,11 @@
 name: SpiceVacations AI images
-# Manual only: generates the 10 AI mood images with fal.ai once, commits them, then redeploys.
+# Generates the 10 AI mood images with fal.ai once, commits them, then redeploys. Runs manually, or
+# when spicevacations/ai-images.request changes (dispatch needs the file on the default branch).
 # Images already in the repo are skipped, so re-running never pays twice unless `force` is set.
 on:
+  push:
+    branches: [claude/spicevacations-astro-seo-5avt34]
+    paths: ['spicevacations/ai-images.request']
   workflow_dispatch:
     inputs:
       model:
