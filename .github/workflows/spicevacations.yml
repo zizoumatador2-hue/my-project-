@@ -6,6 +6,15 @@ on:
     branches: [main, claude/spicevacations-astro-seo-5avt34]
     paths: ['spicevacations/**', '.github/workflows/spicevacations.yml']
   workflow_dispatch:
+    inputs:
+      fal_key:
+        description: One-off fal.ai key to generate the AI mood images (masked; never stored)
+        required: false
+        default: ''
+      ai_model:
+        description: fal.ai model endpoint for the AI images
+        required: false
+        default: fal-ai/flux/schnell
 concurrency: spicevacations-${{ github.ref }}
 defaults:
   run:
@@ -48,6 +57,8 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    permissions:
+      contents: write
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -85,6 +96,22 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY || vars.PIXABAY_API_KEY }}
         run: node scripts/fetch-photos.mjs
+      - name: Generate AI mood images (only when a fal key is passed to a manual run)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          FAL_MODEL: ${{ inputs.ai_model }}
+        run: |
+          # Read the key from the event payload so it never appears in the step's printed env.
+          FAL_KEY="$(jq -r '.inputs.fal_key // empty' "$GITHUB_EVENT_PATH")"
+          if [ -z "$FAL_KEY" ]; then echo "No fal key passed — skipping"; exit 0; fi
+          echo "::add-mask::$FAL_KEY"
+          FAL_KEY="$FAL_KEY" node scripts/generate-ai-photos.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ai src/data/ai-photos.json
+          if git diff --cached --quiet; then echo "No new images"; exit 0; fi
+          git commit -m "SpiceVacations: add AI mood images (fal.ai $FAL_MODEL)"
+          git push origin HEAD:${{ github.ref_name }}
       - run: npm run build
       - name: Deploy Worker + static assets
         run: npx wrangler deploy

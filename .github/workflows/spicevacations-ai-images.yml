@@ -10,7 +10,7 @@ on:
     inputs:
       model:
         description: fal.ai model endpoint
-        default: fal-ai/flux-2-pro
+        default: fal-ai/flux/schnell
       force:
         description: Regenerate images that already exist (costs again)
         type: boolean

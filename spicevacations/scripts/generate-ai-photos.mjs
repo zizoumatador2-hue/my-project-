@@ -5,7 +5,7 @@
 //
 //   FAL_KEY=... node scripts/generate-ai-photos.mjs [--force] [--only=home/hero]
 //
-// FAL_MODEL picks the fal endpoint (default: FLUX.2 [pro]).
+// FAL_MODEL picks the fal endpoint (default: FLUX.1 [schnell], about $0.003 per megapixel).
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -14,7 +14,7 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const OUT = join(ROOT, 'public/ai');
 const MANIFEST = join(ROOT, 'src/data/ai-photos.json');
 const KEY = (process.env.FAL_KEY || '').trim();
-const MODEL = (process.env.FAL_MODEL || 'fal-ai/flux-2-pro').trim();
+const MODEL = (process.env.FAL_MODEL || 'fal-ai/flux/schnell').trim();
 const FORCE = process.argv.includes('--force');
 const ONLY = process.argv.find((a) => a.startsWith('--only='))?.slice(7);
 const WIDTH = 1536;
@@ -83,6 +83,7 @@ async function generate(prompt) {
       prompt: `${prompt}. ${STYLE}`,
       image_size: { width: WIDTH, height: HEIGHT },
       num_images: 1,
+      ...(MODEL.includes('schnell') ? { num_inference_steps: 4 } : {}),
       output_format: 'jpeg',
       enable_safety_checker: true,
     }),
