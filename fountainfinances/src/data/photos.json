@@ -36,7 +36,7 @@
   "best": {
     "id": 10223868,
     "query": "comparing credit cards hands",
-    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop\u00a0",
+    "alt": "A Side View of a Senior Male Hands Holding a Credit Card and Typing on a Laptop ",
     "photographer": "Pexels",
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/10223868/",
@@ -851,6 +851,18 @@
     "width": 1600,
     "height": 900
   },
+  "guide-sinking-funds": {
+    "id": 27785,
+    "query": "a row of glass mason jars on a wooden kitchen shelf, each holding US coins and f",
+    "alt": "Glass jars holding coins and folded bills on a kitchen shelf, each with a blank tag",
+    "photographer": "Fountain Finances",
+    "photographerUrl": "https://fountainfinances.com/",
+    "pageUrl": "https://fountainfinances.com/",
+    "source": "original",
+    "color": "#684828",
+    "width": 1600,
+    "height": 900
+  },
   "guide-hard-vs-soft-credit-inquiry": {
     "id": 5792869,
     "query": "credit report laptop",
@@ -859,6 +871,18 @@
     "photographerUrl": "https://www.pexels.com/",
     "pageUrl": "https://www.pexels.com/photo/5792869/",
     "color": "#f8f8f8",
+    "width": 1600,
+    "height": 900
+  },
+  "guide-how-to-freeze-your-credit": {
+    "id": 38896,
+    "query": "a closed brushed steel padlock resting beside a laptop on a dark wooden desk in ",
+    "alt": "A laptop and a closed metal padlock on a desk in a dim home office",
+    "photographer": "Fountain Finances",
+    "photographerUrl": "https://fountainfinances.com/",
+    "pageUrl": "https://fountainfinances.com/",
+    "source": "original",
+    "color": "#183848",
     "width": 1600,
     "height": 900
   },
@@ -895,75 +919,25 @@
     "width": 1600,
     "height": 900
   },
-  "guide-sinking-funds": {
-    "id": 27785,
-    "query": "a row of glass mason jars on a wooden kitchen shelf, each holding US coins and f",
-    "alt": "Glass jars holding coins and folded bills on a kitchen shelf, each with a blank tag",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#684828",
+  "guide-credit-utilization-ratio": {
+    "id": 10020082,
+    "query": "credit card bill laptop",
+    "alt": "Calculator and a Credit Card Next to a Laptop ",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/10020082/",
+    "color": "#d8c8b8",
     "width": 1600,
     "height": 900
   },
-  "guide-how-to-freeze-your-credit": {
-    "id": 38896,
-    "query": "a closed brushed steel padlock resting beside a laptop on a dark wooden desk in ",
-    "alt": "A laptop and a closed metal padlock on a desk in a dim home office",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#183848",
-    "width": 1600,
-    "height": 900
-  },
-  "guide-what-is-debt-consolidation": {
-    "id": 49907,
-    "query": "top-down view of a wooden desk where scattered envelopes and paper bills are bei",
-    "alt": "Loose envelopes and paper bills gathered into one neat stack beside a calculator",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#e8f8f8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-credit-scores": {
-    "id": 51018,
-    "query": "a calm home office desk by a window with a smartphone lying face down, an open b",
-    "alt": "A smartphone face down beside a notebook and coffee on a home office desk",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
+  "guide-mortgage-closing-costs": {
+    "id": 7014466,
+    "query": "house keys signing papers",
+    "alt": "Designer choosing photo on paper sheet in house",
+    "photographer": "Pexels",
+    "photographerUrl": "https://www.pexels.com/",
+    "pageUrl": "https://www.pexels.com/photo/7014466/",
     "color": "#e8e8e8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-savings-accounts": {
-    "id": 62130,
-    "query": "a glossy white ceramic piggy bank on a sunny windowsill next to a small potted p",
-    "alt": "A white ceramic piggy bank on a sunny windowsill next to a small plant",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#f8f8f8",
-    "width": 1600,
-    "height": 900
-  },
-  "topic-banking-fees": {
-    "id": 73230,
-    "query": "a modern unbranded ATM kiosk set into a brick wall on an American city street at",
-    "alt": "An unbranded ATM on a city street at dusk with reflections on wet pavement",
-    "photographer": "Fountain Finances",
-    "photographerUrl": "https://fountainfinances.com/",
-    "pageUrl": "https://fountainfinances.com/",
-    "source": "original",
-    "color": "#382818",
     "width": 1600,
     "height": 900
   }
