@@ -28,7 +28,7 @@ window.gtag =
     window.dataLayer!.push(arguments);
   };
 const GRANTED = { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' };
-window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+// Consent defaults (denied) are set earlier by /consent-default.js, before the AdSense tag in <head>.
 
 function getConsent(): Consent {
   try {
@@ -69,11 +69,10 @@ function send(event: string, props: Props) {
   window.gtag?.('event', event, props);
 }
 
-/** AdSense: loads only when a publisher ID is configured, and fills each <ins class="adsbygoogle"> slot once. */
+/** AdSense: the tag itself loads in <head> (Base.astro); this fills each labeled <ins class="adsbygoogle"> slot once. */
 function loadAds() {
   const client = document.body.dataset.adsense;
   if (!client) return;
-  loadScript(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`, { crossorigin: 'anonymous' }, true);
   document.querySelectorAll('ins.adsbygoogle').forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}));
 }
 

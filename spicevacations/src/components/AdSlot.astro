@@ -1,11 +1,12 @@
 ---
+import { SITE } from '../data/site';
 /* A clearly labeled display-ad slot. Renders nothing until both the AdSense client and the slot ID
    are configured, so the site never shows empty boxes or placeholder ads. */
 interface Props {
   slot?: string;
   class?: string;
 }
-const client = /^ca-pub-\d{10,20}$/.test(import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '') ? (import.meta.env.PUBLIC_ADSENSE_CLIENT as string) : '';
+const client = /^ca-pub-\d{10,20}$/.test(SITE.adsenseClient) ? SITE.adsenseClient : '';
 const slot = Astro.props.slot ?? import.meta.env.PUBLIC_ADSENSE_SLOT_ARTICLE ?? '';
 const show = Boolean(client && /^\d{6,}$/.test(slot));
 ---

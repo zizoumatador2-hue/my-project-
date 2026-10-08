@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro';
+import { SITE } from '../data/site';
 
 /** ads.txt is generated from the configured AdSense client so it can never list a wrong or placeholder publisher. */
 export const GET: APIRoute = () => {
-  const client = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '';
+  const client = SITE.adsenseClient;
   const pub = /^ca-pub-(\d{10,20})$/.exec(client)?.[1];
   const body = pub
     ? `google.com, pub-${pub}, DIRECT, f08c47fec0942fa0\n`

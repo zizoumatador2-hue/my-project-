@@ -31,7 +31,7 @@ const jsonld = JSON.stringify(graph(...schema)).replace(/</g, '\\u003c');
 const plausible = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
 const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
 /** AdSense publisher client (ca-pub-…). Ads and the verification meta tag only appear once this is set. */
-const adsense = /^ca-pub-\d{10,20}$/.test(import.meta.env.PUBLIC_ADSENSE_CLIENT ?? '') ? (import.meta.env.PUBLIC_ADSENSE_CLIENT as string) : '';
+const adsense = /^ca-pub-\d{10,20}$/.test(SITE.adsenseClient) ? SITE.adsenseClient : '';
 ---
 
 <!doctype html>
@@ -46,6 +46,9 @@ const adsense = /^ca-pub-\d{10,20}$/.test(import.meta.env.PUBLIC_ADSENSE_CLIENT 
     <link rel="alternate" hreflang="x-default" href={canonical} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     {adsense && <meta name="google-adsense-account" content={adsense} />}
+    {/* Consent Mode defaults must run before the AdSense tag, so both are plain external scripts here in <head>. */}
+    {adsense && <script is:inline src="/consent-default.js" />}
+    {adsense && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsense}`} crossorigin="anonymous" />}
     <meta name="p:domain_verify" content="dab06d7936ae1b4ec7cb471d375eccae" />
     <meta name="theme-color" content="#0B1F3A" />
     <meta name="color-scheme" content="light" />

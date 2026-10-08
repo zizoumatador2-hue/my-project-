@@ -10,6 +10,8 @@ export const SITE = {
   description:
     'SpiceVacations.com helps couples find romantic getaways, adults-only and all-inclusive resorts, beach escapes and vacation deals across the USA, Mexico and the Caribbean.',
   foundingYear: 2026,
+  /** Google AdSense publisher client. Public by design (it appears in every page's ad code and ads.txt). */
+  adsenseClient: ((import.meta.env.PUBLIC_ADSENSE_CLIENT as string | undefined) || 'ca-pub-8532224804732263').trim(),
   twitter: '',
   sameAs: [] as string[],
 };
