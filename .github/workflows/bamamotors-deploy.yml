@@ -83,6 +83,16 @@ jobs:
             done
             if [ "$OK" = 1 ]; then HOST="$DOMAIN"; ENVIRONMENT=production; fi
           fi
+          # Extra domains point at the same Worker; the app 301-redirects them to SITE_URL.
+          for EXTRA in bamamoutours.com; do
+            EZ=$(curl -sS -H "$AUTH" "$API/zones?name=$EXTRA" | jq -r '.result[0].id // empty')
+            if [ -z "$EZ" ]; then echo "::warning::$EXTRA is not on this Cloudflare account yet; add it to Cloudflare to redirect it."; continue; fi
+            for h in "$EXTRA" "www.$EXTRA"; do
+              R=$(curl -sS -X PUT -H "$AUTH" -H "Content-Type: application/json" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" \
+                -d "{\"hostname\":\"$h\",\"service\":\"bamamotors\",\"environment\":\"production\",\"zone_id\":\"$EZ\"}")
+              if [ "$(echo "$R" | jq -r .success)" = "true" ]; then echo "attached $h"; else echo "::warning::Could not attach $h: $(echo "$R" | jq -c '.errors')"; fi
+            done
+          done
           echo "host=$HOST" >> "$GITHUB_OUTPUT"
           echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
           echo "Deploying as $HOST ($ENVIRONMENT)"
