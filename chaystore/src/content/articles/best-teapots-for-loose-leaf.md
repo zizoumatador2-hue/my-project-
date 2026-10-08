@@ -133,7 +133,7 @@ If you want your tea to stay warm for a long time, a tea cozy (a fabric cover) o
 - **Filters:** use a small brush to clean the mesh.
 - **Storage:** store with the lid off or ajar so air circulates and odors do not build up.
 
-## Common mistakes
+## Easy fixes
 
 | Mistake | Better approach |
 | --- | --- |
@@ -148,6 +148,6 @@ If you want your tea to stay warm for a long time, a tea cozy (a fabric cover) o
 
 If a teapot does not suit you, a French press, a gaiwan (a lidded bowl) or a mug with an infuser also works. A kettle with a built-in infuser basket exists, though it limits temperature control. For iced tea in large batches, see [how to make iced tea](/guides/how-to-make-iced-tea/).
 
-## Summary
+## Picking one
 
 Pick a teapot by its filter, material, size, lid and spout, not only its look. Glazed ceramic is a safe all-purpose choice, glass is great for watching leaves, and cast iron or clay suits specific uses. Care for it well and it will last for years. For more gear advice, explore the [Tea Gear hub](/category/tea-gear/) and our [complete guide to tea](/#tea-guide).

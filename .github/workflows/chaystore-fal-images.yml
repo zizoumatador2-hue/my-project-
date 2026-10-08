@@ -1,0 +1,68 @@
+name: ChayStore (generate images with fal.ai)
+
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Optional: comma-separated slugs to (re)generate; empty = all missing"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      FAL_KEY: ${{ secrets.FAL_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check key
+        run: |
+          if [ -z "$(printf '%s' "$FAL_KEY" | tr -d '[:space:]')" ]; then
+            echo "::error::Repository secret FAL_KEY is missing. Create a key at fal.ai (Dashboard > API Keys) and add it under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+      - name: Install ImageMagick
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp >/dev/null
+      - name: Generate
+        working-directory: chaystore
+        run: |
+          set -e
+          KEY="$(printf '%s' "$FAL_KEY" | tr -d '[:space:]')"
+          echo "::add-mask::$KEY"
+          MODEL=$(jq -r .model data/fal-prompts.json)
+          STYLE=$(jq -r .style data/fal-prompts.json)
+          ONLY="${{ github.event.inputs.only }}"
+          mkdir -p public/images
+          jq -c '.images[]' data/fal-prompts.json | while read -r row; do
+            slug=$(echo "$row" | jq -r .slug)
+            if [ -n "$ONLY" ] && ! echo ",$ONLY," | grep -q ",$slug,"; then continue; fi
+            if [ -z "$ONLY" ] && [ -f "public/images/$slug-1600.webp" ]; then echo "$slug: exists, skipping"; continue; fi
+            prompt="$(echo "$row" | jq -r .prompt), $STYLE"
+            size=$(echo "$row" | jq -r .size)
+            body=$(jq -n --arg p "$prompt" --arg s "$size" '{prompt:$p,image_size:$s,num_images:1,enable_safety_checker:true,output_format:"jpeg"}')
+            resp=$(curl -sS -X POST "https://fal.run/$MODEL" -H "Authorization: Key $KEY" -H "Content-Type: application/json" -d "$body")
+            url=$(echo "$resp" | jq -r '.images[0].url // empty')
+            if [ -z "$url" ]; then echo "::error::$slug: no image returned ($(echo "$resp" | jq -c '.detail // .error // .' | cut -c1-200))"; exit 1; fi
+            curl -sS -L "$url" -o "/tmp/$slug.jpg"
+            convert "/tmp/$slug.jpg" -resize 1600x -strip -quality 80 "public/images/$slug-1600.webp"
+            convert "/tmp/$slug.jpg" -resize 800x  -strip -quality 78 "public/images/$slug-800.webp"
+            echo "$slug: ok"
+          done
+      - name: Write manifest
+        working-directory: chaystore
+        run: |
+          jq '{images: [ .images[] | {slug, alt} ]}' data/fal-prompts.json > /tmp/m.json
+          # keep only entries whose files exist
+          jq -c '.images[]' /tmp/m.json | while read -r r; do s=$(echo "$r" | jq -r .slug); [ -f "public/images/$s-1600.webp" ] && echo "$r"; done | jq -s '{images: .}' > data/fal-images.json
+          jq '.images|length' data/fal-images.json
+      - name: Commit images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add chaystore/public/images chaystore/data/fal-images.json
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -m "ChayStore: add fal.ai generated images"
+          git push

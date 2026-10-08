@@ -155,6 +155,6 @@ Blending is easier than it sounds. Start with a base herb that has body, such as
 
 Quality herbal tea is made of recognizable pieces: whole flowers, leaves, seeds and chunks of root or peel. A heavy dusty powder in a tea bag is more likely to taste flat. Smell the dry herbs if you can. They should smell fresh, not musty. Check the ingredients for sweeteners or flavoring you do not want, and look for a date. If you drink herbal tea every day, vary your choices rather than relying on one herb in large amounts. For safety questions about daily habits, see [is it safe to drink tea every day](/guides/is-it-safe-to-drink-tea-every-day/).
 
-## Summary
+## What to keep in the cupboard
 
 Caffeine-free tea is an easy way to enjoy a warm drink at any hour. Choose pure herbal infusions, read labels for hidden caffeine, and brew with hot water for several minutes. Explore more in the [Herbal Tea hub](/category/herbal-tea/).

@@ -145,6 +145,6 @@ Two other Indian regions are good to explore once you have tried Assam and Darje
 
 When you shop for Assam or Darjeeling, check whether the label names an estate, a flush and a harvest year. These details suggest the seller knows the tea. For Assam, look for descriptions such as "orange pekoe," "golden tips" or "second flush," which hint at leaf style and season. For Darjeeling, be wary of very low prices for "first flush" tea, since genuine first flush is a limited seasonal product. Buy in small quantities, because Darjeeling in particular loses its aroma, and store it as described in [how to store loose leaf tea](/guides/how-to-store-loose-leaf-tea/).
 
-## Summary
+## Which to start with
 
 Assam is bold, malty and best with milk. Darjeeling is delicate, floral and best plain. Both are excellent examples of what Indian black tea offers. Explore more in the [Chai & Black Tea hub](/category/chai-black-tea/).

@@ -15,6 +15,9 @@ import HeroLead from '../components/react/HeroLead';
 import Stats from '../components/react/Stats';
 import HubGrid from '../components/react/HubGrid';
 import TeaGallery from '../components/react/TeaGallery';
+import TeaMarquee from '../components/react/TeaMarquee';
+import Moments from '../components/react/Moments';
+import falManifest from '../../data/fal-images.json';
 import ImageSlot from '../components/ImageSlot.astro';
 import { allWords } from '../lib/content';
 
@@ -76,7 +79,7 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
     <div class="wrap">
       <div class="section-head reveal">
         <h2 id="hubs-h">Explore tea by topic</h2>
-        <p>Six hubs, each one a deep dive. Pick the part of tea you want to master first.</p>
+        <p>Six topic hubs. Start with whichever part of tea you want to learn first. Pick the part of tea you want to master first.</p>
       </div>
       <HubGrid client:visible hubs={hubData} />
     </div>
@@ -92,6 +95,20 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
       <p class="reveal" style="margin-top:1.5rem"><a class="btn primary" href="/guides/">See all {articles.length} guides</a></p>
     </div>
   </section>
+
+  <div class="marquee-band" aria-hidden="true"><TeaMarquee client:visible /></div>
+
+  {falManifest.images.length > 0 && (
+    <section class="section" aria-labelledby="moments-h">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="moments-h">Tea, the way it fits into a day</h2>
+          <p>Mornings, porches, rainy afternoons and quiet evenings. Illustrations created for ChayStore.</p>
+        </div>
+        <Moments client:visible items={falManifest.images} />
+      </div>
+    </section>
+  )}
 
   <section class="dark-gallery" aria-label="Tea in pictures">
     <TeaGallery client:visible items={gallery} />

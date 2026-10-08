@@ -138,7 +138,7 @@ Use about 1 tablespoon of the mix per 8 oz cup, steep for 5 to 7 minutes, and st
 
 A little honey or warm milk is a traditional comfort for many people. They are not required, and sugar late at night is not ideal for everyone. Choose what you enjoy.
 
-## Common mistakes
+## Mistakes worth avoiding
 
 | Mistake | Better approach |
 | --- | --- |
@@ -162,6 +162,6 @@ Some people prefer not to use herbal tea at all because of allergies, medication
 
 If you want to learn what works for you, jot down a few notes for two weeks: what you drank, what time, when you went to bed, and how you felt the next day. Include caffeine from all sources and note any evening alcohol. Patterns often emerge, such as noticing that even a mid-afternoon green tea affects your sleep. Bring the diary to a healthcare provider if sleep problems persist, since it gives them useful information.
 
-## Summary
+## A calmer evening
 
 Chamomile, lemon balm, lavender, rooibos and similar teas make pleasant, caffeine-free evening drinks. Evidence for sleep effects is limited, but the ritual of a warm cup can help you relax. Be careful with herbs if you are pregnant, take medications or have a medical condition. For more calming options, browse the [Herbal Tea hub](/category/herbal-tea/).

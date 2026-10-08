@@ -127,6 +127,6 @@ Once you know sencha and matcha, explore more of the family:
 - **Kukicha:** made from stems, light and creamy.
 - **Bancha:** a more mature leaf, more robust and less delicate.
 
-## Summary
+## Which one to buy first
 
 Sencha is a sun-grown, steeped green tea that is light, fresh and easy. Matcha is a shade-grown, powdered green tea that is rich, creamy and more intense. Neither is better; they are two ways to enjoy Japanese green tea. Explore more in the [Green Tea & Matcha hub](/category/green-tea-matcha/).

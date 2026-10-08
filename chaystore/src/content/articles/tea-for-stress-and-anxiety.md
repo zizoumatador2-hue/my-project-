@@ -107,7 +107,7 @@ Check with a healthcare professional about herbal teas if you:
 
 Everyone feels stressed or anxious sometimes. But if your worry is persistent, hard to control, affects your sleep, work or relationships, or comes with physical symptoms such as chest pain or shortness of breath, please contact a healthcare professional. Effective help exists, including therapy and, when appropriate, medication. Tea is a pleasant addition to self-care, not a substitute for care.
 
-## Common mistakes
+## Quick fixes
 
 | Mistake | Better approach |
 | --- | --- |
@@ -125,6 +125,6 @@ When the day feels heavy, a short, structured pause works better than drinking t
 
 If you do drink caffeinated tea, timing helps. Many people find that having caffeine with food, rather than on an empty stomach, feels gentler. Others notice that caffeine after midday affects their sleep and next-day mood. A simple experiment is to keep a short note for a week with what you drank, when, and how you felt an hour later. If a pattern appears, such as jitters after matcha but not after a mild white tea, adjust accordingly. Our guides on [matcha vs green tea](/guides/matcha-vs-green-tea/) and [sencha vs matcha](/guides/sencha-vs-matcha/) explain why matcha tends to deliver more caffeine per serving.
 
-## Summary
+## Keeping it in perspective
 
 A warm, caffeine-free cup of tea can be a soothing pause. Chamomile, lemon balm, lavender and rooibos are popular choices, but none is a treatment for anxiety, and caffeine in other teas can make some people feel more on edge. Pay attention to how you feel, ask a professional about herbs if you take medicine or are pregnant, and seek help if anxiety is persistent. Explore more in the [Tea & Wellness hub](/category/tea-wellness/).

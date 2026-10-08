@@ -145,6 +145,6 @@ Pay attention to your body. Common signals that tea may not be agreeing with you
 
 Older adults may be more sensitive to caffeine and may take medications that interact with it. People with reflux may do better with lower-acid or non-mint teas. Athletes may use tea for hydration and light caffeine, but should watch total intake. People who are trying to increase iron intake should keep tea between meals. Children and teens should limit caffeine, and herbal teas for children need professional guidance. These are general notes, and a clinician can tailor advice to your situation. For options with no caffeine, see our [caffeine-free tea list](/guides/caffeine-free-tea-list/).
 
-## Summary
+## The practical answer
 
 A daily cup or several of tea is a normal, enjoyable habit for most healthy adults. Keep an eye on caffeine, iron needs, medications and the temperature of your drink, and ask a professional if you have a health condition or are pregnant. For more, browse the [Tea & Wellness hub](/category/tea-wellness/).

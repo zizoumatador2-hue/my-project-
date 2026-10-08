@@ -181,6 +181,6 @@ The right tool depends on your routine. An electric kettle is fast, safe and eas
 
 Boil only the water you need. Fill to just above the cup amount, and use the minimum fill line as a guide. Keep your kettle on a stable, heat-safe surface away from the edge of the counter, and keep the cord from dangling. If you have children, choose a model with a cool-touch exterior and a locking lid, and place it where small hands cannot reach. After use, empty any remaining water, which keeps scale from building and keeps the next cup fresher.
 
-## Summary
+## Before you buy
 
 For tea, choose an electric kettle with temperature control if you drink green or white tea, a size that fits your habits, durable materials and good safety features. A gooseneck is nice if you like precise pouring. For further reading, explore the [Tea Gear hub](/category/tea-gear/) and our [complete guide to tea](/#tea-guide).

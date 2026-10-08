@@ -17,8 +17,9 @@ interface Props {
   progress?: boolean;
   keywords?: string;
   image?: string;
+  imageAlt?: string;
 }
-const { title, description, path, type = 'website', schema = [], noindex = false, published, modified, progress = false, keywords, image = '/images/hero-steam-1600.webp' } = Astro.props;
+const { title, description, path, type = 'website', schema = [], noindex = false, published, modified, progress = false, keywords, image = '/images/hero-steam-1600.webp', imageAlt = 'A carefully brewed cup of tea featured by ChayStore' } = Astro.props;
 const canonical = abs(path);
 const withSite = `${title} | ${SITE.name}`;
 const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
@@ -31,7 +32,6 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <meta name="author" content={SITE.author} />
-  {keywords && <meta name="keywords" content={keywords} />}
   <link rel="canonical" href={canonical} />
   <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
   <meta name="theme-color" content="#0d1a12" />
@@ -46,7 +46,7 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content="en_US" />
   <meta property="og:image" content={abs(image)} />
-  <meta property="og:image:alt" content="A carefully brewed cup of tea featured by ChayStore" />
+  <meta property="og:image:alt" content={imageAlt} />
   {published && <meta property="article:published_time" content={published} />}
   {modified && <meta property="article:modified_time" content={modified} />}
   <meta name="twitter:card" content="summary_large_image" />

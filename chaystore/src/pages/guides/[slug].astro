@@ -33,7 +33,7 @@ const schema = [
   ...(d.howto ? [howTo({ name: d.title, totalTime: d.howto.totalTime, steps: d.howto.steps })] : []),
 ];
 ---
-<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} published={iso(d.publishDate)} modified={iso(d.modifiedDate)} progress keywords={d.keyword} image={d.image || undefined}>
+<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} published={iso(d.publishDate)} modified={iso(d.modifiedDate)} progress keywords={d.keyword} image={d.image || undefined} imageAlt={d.imageAlt || undefined}>
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: hub.name, path: hubUrl(d.hub) }, { name: d.title, path }]} />
   <div class="wrap">
     <header class="article-head">

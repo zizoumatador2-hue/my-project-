@@ -248,3 +248,14 @@ h4{font-size:1.15rem;margin:1.6rem 0 .5rem}
 @media (max-width:820px){.cinema-grid{grid-template-columns:1fr}.cinema-frame{max-width:520px;margin-inline:auto}.cinema-points li{grid-template-columns:1fr;gap:.15rem}}
 @media (prefers-reduced-motion:reduce){.cinema-glow{display:none}.cinema-frame{transform:none;transition:none}.cinema-frame::after{display:none}}
 
+
+/* Tea word band (React Bits ScrollVelocity) */
+.marquee-band{overflow:hidden;padding:1.25rem 0;background:var(--ink,#0d1a12);color:var(--cream,#f6efe3);border-block:1px solid rgba(255,255,255,.08)}
+.marquee-text{font-family:'Fraunces Variable','Fraunces',serif;font-size:clamp(1.6rem,4vw,2.8rem);white-space:nowrap;opacity:.9}
+.marquee-still{text-align:center;font-family:'Fraunces Variable','Fraunces',serif;font-size:1.4rem;margin:0}
+
+/* Photo moments (React Bits TiltedCard) */
+.moments{list-style:none;margin:2rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:1.25rem}
+.moments li{aspect-ratio:4/3;min-width:0}
+.moments .tilted-card-figure{height:100%}
+.moments img{object-fit:cover;border-radius:14px}

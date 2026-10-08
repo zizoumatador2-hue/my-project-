@@ -136,7 +136,7 @@ Earl Grey is also an ingredient. To infuse milk or cream for custards, panna cot
 
 If you are new to Earl Grey, a classic blend on a black tea base is the easiest introduction. If you find it too perfumed, try Lady Grey, which is usually gentler, or a version on a green tea base. If you love strong flavor, look for blends labeled "double bergamot." Read reviews, because brands differ widely in how much bergamot they use. Whatever you choose, store it separately from other teas so the scent does not travel, as described in [how to store loose leaf tea](/guides/how-to-store-loose-leaf-tea/).
 
-## Summary
+## The short version
 
 Earl Grey is a black tea scented with bergamot, with a bright citrus aroma and a smooth, brisk taste. It contains caffeine, brews in minutes and comes in many variations. Choose a quality blend, brew it at the right temperature and enjoy it plain or with milk, honey or lemon.
 

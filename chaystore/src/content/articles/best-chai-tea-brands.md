@@ -130,6 +130,6 @@ Chai can be adapted to many diets. For a **dairy-free** chai, brew a strong spic
 
 In stores, you can usually check the packaging date and ingredient list in person, which is a real advantage for spiced products. Online, look for sellers that publish a full ingredient list, packing dates, and clear return policies, and read reviews with a critical eye. Be cautious about products with exaggerated health claims, and compare the price per serving rather than the price per package. Buy the smallest size first, because spices lose aroma faster than the tea itself, and keep what you buy sealed and cool.
 
-## Summary
+## How to choose
 
 Choose the chai format that suits your routine, then check the ingredients, sugar, freshness and price per serving. A strong black tea base with real spices will taste better than a long list of flavorings. For recipes, comparisons and more, visit the [Chai & Black Tea hub](/category/chai-black-tea/) and our [complete guide to tea](/#tea-guide).

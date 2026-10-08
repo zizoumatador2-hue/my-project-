@@ -131,7 +131,7 @@ Store jasmine tea in an airtight, opaque container away from light, heat and oth
 
 Neither is "better." Jasmine tea is a great choice if you enjoy floral aromas and a gentle, perfumed cup. Plain green tea is better if you want to taste the character of a specific leaf, or you do not like floral scents. Many people keep both.
 
-## Common mistakes
+## Common slip-ups
 
 | Mistake | Fix |
 | --- | --- |
@@ -157,6 +157,6 @@ Jasmine tea is a staple at Chinese restaurants, where it is often served free wi
 
 If you like jasmine, you may enjoy other scented teas, such as rose black tea, osmanthus oolong or lychee black tea. These use blossoms or fruit aromas to flavor tea, usually on a black or oolong base. Compare them with unscented teas to appreciate how scent changes the cup. For a broader introduction to green tea in general, read [matcha vs green tea](/guides/matcha-vs-green-tea/), and our [complete guide to tea](/#tea-guide) explains scented and flavored teas.
 
-## Summary
+## Bottom line
 
 Jasmine tea is green tea with a floral scent, and it behaves like green tea in the cup: brew it at around 175–185°F, steep briefly and enjoy several infusions. Explore more flavors in the [Green Tea & Matcha hub](/category/green-tea-matcha/).

@@ -149,7 +149,7 @@ Do not give herbal teas to infants or young children without guidance from a ped
 - Consider whole herbs or loose leaf blends over very fine tea-bag dust. See [loose leaf tea vs tea bags](/guides/loose-leaf-tea-vs-tea-bags/).
 - Buy small amounts and use them within a year.
 
-## Common mistakes
+## What usually goes wrong
 
 | Mistake | Better approach |
 | --- | --- |
@@ -171,6 +171,6 @@ If you want to support your digestion, think about the bigger picture. A varied 
 
 Digestive teas do not have to be hot. Peppermint and ginger make refreshing iced teas, and fennel tea can be served cool. Brew double strength, strain, chill and serve with lemon or mint. For methods, see [how to make iced tea](/guides/how-to-make-iced-tea/). Cold drinks can be more comfortable than hot ones for some people after a heavy meal, while others prefer warm. Choose what feels best for you.
 
-## Summary
+## Where this leaves you
 
 Peppermint, ginger, fennel and chamomile are comforting after-meal teas with long traditions of use. They are no substitute for medical care, and responses vary. Choose gentle herbs, brew them properly and consult a professional about symptoms that persist. Learn more in the [Herbal Tea hub](/category/herbal-tea/), and for general safety questions, read [is it safe to drink tea every day](/guides/is-it-safe-to-drink-tea-every-day/).

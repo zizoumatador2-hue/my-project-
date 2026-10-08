@@ -139,7 +139,7 @@ Kahwa is sold as ready-made blends of green tea with saffron, cardamom, cinnamon
 
 Serve kahwa in small cups after a meal, with dry fruits, almond biscuits, or light pastries. It also works as a warming drink on a cold day.
 
-## Common mistakes
+## Mistakes worth avoiding
 
 | Mistake | Better approach |
 | --- | --- |
@@ -161,6 +161,6 @@ The ingredients are simple, so quality matters. Choose a decent green tea, since
 
 Traditionally, kahwa is prepared in a samovar, which keeps water hot for hours, and the spices and tea are placed in the central chamber. At home, a saucepan is perfectly fine. If you have a thermos, you can also steep spices and tea in a thermos for a short time, though be careful to strain the tea, since leaving green tea in hot water for long periods makes it bitter. For general advice on brewing temperature and timing, see [water temperature for green tea](/guides/water-temperature-for-green-tea/).
 
-## Summary
+## Try it this weekend
 
 Kahwa is a Kashmiri green tea infused with saffron and warm spices. It tastes light, floral and gently sweet, and it is easy to make at home. If you enjoy it, explore more green tea styles, such as [jasmine tea vs green tea](/guides/jasmine-tea-vs-green-tea/), or browse the [Green Tea & Matcha hub](/category/green-tea-matcha/) and our [complete guide to tea](/#tea-guide).

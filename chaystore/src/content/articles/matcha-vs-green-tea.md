@@ -168,6 +168,6 @@ Only if it is powdered tea made for that. Ordinary green tea leaves do not disso
 
 If you prefer a quiet ritual and enjoy the sensory process, matcha rewards that effort. If your mornings are rushed, steeped green tea is easier, particularly in a travel mug with an infuser. For parties, a pot of steeped tea is easier to serve than individual bowls of matcha. If you cook or bake, matcha is the more versatile ingredient. If you want to experiment with brewing temperatures and flavors, steeped green tea gives you far more variety. Many people keep both, and our guides to [how to make a matcha latte](/guides/how-to-make-matcha-latte/) and [best matcha for beginners](/guides/best-matcha-for-beginners/) can help you start.
 
-## Summary
+## The takeaway
 
 Matcha is whole-leaf, shade-grown, powdered green tea, richer and stronger. Steeped green tea is lighter, more varied and more economical. Both are worth trying. For more options, browse the [Green Tea & Matcha hub](/category/green-tea-matcha/).

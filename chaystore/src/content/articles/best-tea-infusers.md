@@ -140,7 +140,7 @@ For pearl-style jasmine teas, see [jasmine tea vs green tea](/guides/jasmine-tea
 - **Cold brew pitcher with a filter:** good for refrigerator tea.
 - **Reusable or disposable tea bags** that you fill yourself.
 
-## Common mistakes
+## Where people go wrong
 
 | Mistake | Better approach |
 | --- | --- |
@@ -181,6 +181,6 @@ At your desk, a mug with a lid and a basket infuser is the easiest setup. At hom
 
 A good stainless-steel infuser can last for years if you rinse it right after use and clean it regularly. Do not use steel wool, which scratches the mesh. If your infuser gets stained or smelly, soak it in hot water with baking soda, then rinse well. Replace silicone or plastic parts that crack or discolor. Keep it dry between uses, and store it where air can circulate. For more on the brewing process itself, read [how to brew loose leaf tea](/guides/how-to-brew-loose-leaf-tea/), and if you are choosing a kettle, see the [best electric kettle for tea](/guides/best-electric-kettle-for-tea/).
 
-## Summary
+## Our pick, in plain terms
 
 Choose a roomy, fine-mesh infuser made from durable, easy-to-clean material, and match it to your tea and vessel. For more gear advice, explore the [Tea Gear hub](/category/tea-gear/) and our [complete guide to tea](/#tea-guide).
