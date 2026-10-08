@@ -136,24 +136,20 @@
     "srcset": "/images/body-trucks-640.webp 640w, /images/body-trucks-1024.webp 1024w, /images/body-trucks-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "1956 Chevrolet 3200 Pickup Truck, licence plate modified.",
-    "author": "Palauenc05",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chevy_Pickup_1956.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Full-size pickup truck parked on a dirt road beside a cotton field",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai"
   },
   "body-suvs": {
     "src": "/images/body-suvs-1600.webp",
     "srcset": "/images/body-suvs-640.webp 640w, /images/body-suvs-1024.webp 1024w, /images/body-suvs-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "A Hummer vehicle in Neckarwestheim, Baden-Württemberg.",
-    "author": "Felix König",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hummer_Neckarwestheim_2013.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    "alt": "Midsize SUV driving on a two-lane highway through green hills",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai"
   },
   "body-sedans": {
     "src": "/images/body-sedans-1600.webp",
@@ -412,12 +408,10 @@
     "srcset": "/images/hero-640.webp 640w, /images/hero-1024.webp 1024w, /images/hero-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Used Car Lot on Maui.",
-    "author": "293.xx.xxx.xx",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lono_Avenue_Value_Center_Used_Car_Lot.JPG",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "alt": "Rows of used trucks, SUVs and sedans on a dealership lot at sunset",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai"
   },
   "city-auburn-al": {
     "src": "/images/city-auburn-al-1600.webp",
@@ -460,12 +454,10 @@
     "srcset": "/images/post-how-to-finance-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-finance-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-finance-a-used-car-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Hyundai Santa Fe at Geneva International Motor Show 2018, Le Grand-Saconnex",
-    "author": "Matti Blume",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyundai_Santa_Fe,_GIMS_2018,_Le_Grand-Saconnex_(1X7A1735).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Couple reviewing an auto loan offer at a finance desk",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai"
   },
   "post-best-used-suvs-for-alabama-drivers": {
     "src": "/images/post-best-used-suvs-for-alabama-drivers-1600.webp",
