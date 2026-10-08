@@ -45,12 +45,6 @@
       "prompt": "pale green tea being poured from a small cast iron kettle into a small white cup, steam curling, dark slate surface"
     },
     {
-      "slug": "moment-tea-shelf",
-      "size": "landscape_4_3",
-      "alt": "Shelf of airtight tea tins and glass jars of loose leaf tea",
-      "prompt": "a tidy kitchen shelf with plain glass jars and metal tins of different loose leaf teas, jars have no labels and no writing at all, warm light"
-    },
-    {
       "slug": "moment-kettle-gooseneck",
       "size": "landscape_16_9",
       "alt": "Black gooseneck kettle pouring hot water into a glass server of dark tea on a sunlit counter",
