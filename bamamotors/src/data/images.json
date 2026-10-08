@@ -284,7 +284,7 @@
     "author": "BamaMotors",
     "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
     "source": "fal.ai",
-    "prompt": "Two sedans parked side by side on an open lot at sunset, a shiny new white sedan and a well-kept older blue sedan, both seen in side profile, trees in the background"
+    "prompt": "Side profile view of two sedans parked one behind the other on an open lot at sunset, a shiny new white sedan and a well-kept older blue sedan, trees in the background, both cars seen strictly from the side"
   },
   "post-alabama-car-care-heat-humidity": {
     "src": "/images/post-alabama-car-care-heat-humidity-1600.webp",
@@ -324,11 +324,11 @@
     "srcset": "/images/post-used-cars-near-me-alabama-640.webp 640w, /images/post-used-cars-near-me-alabama-1024.webp 1024w, /images/post-used-cars-near-me-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Smartphone map showing nearby car listings",
+    "alt": "Driver following a phone map on a suburban street",
     "author": "BamaMotors",
     "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
     "source": "fal.ai",
-    "prompt": "Close-up of a hand holding a smartphone showing a simple map with colored location pins and no labels, a sunny suburban street with parked cars softly blurred behind"
+    "prompt": "View from the back seat of a driver on a sunny suburban street, a phone mounted on the dashboard showing a colorful map, the phone small and softly out of focus, houses and parked cars ahead"
   },
   "post-alabama-car-insurance-requirements": {
     "src": "/images/post-alabama-car-insurance-requirements-1600.webp",
