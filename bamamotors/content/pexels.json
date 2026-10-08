@@ -15,7 +15,7 @@
     "query": "used car dealership lot",
     "orientation": "landscape",
     "commons": "car dealership lot cars for sale",
-    "fal": "Wide golden-hour view of a tidy independent used car dealership lot in a small Alabama town: neat rows of late-model pickup trucks, SUVs and sedans, an American flag on a pole, tall Southern pines and a warm sunset sky",
+    "fal": "Wide golden-hour view from a slight elevation of neat rows of used pickup trucks, SUVs and sedans on an open dealership lot, an American flag on a tall pole, tall Southern pines and a warm sunset sky",
     "alt": "Rows of used trucks, SUVs and sedans on a dealership lot at sunset"
   },
   "city-default": {
@@ -109,8 +109,8 @@
   "body-trucks": {
     "query": "pickup truck",
     "commons": "pickup truck",
-    "fal": "A clean late-model full-size pickup truck with a plain unbadged grille, parked on a red clay dirt road beside a cotton field in rural Alabama, late afternoon light",
-    "alt": "Full-size pickup truck parked on a dirt road beside a cotton field"
+    "fal": "Side profile view from a distance of a dark gray full-size pickup truck parked on a red clay dirt road beside a cotton field in rural Alabama, golden hour, wide landscape",
+    "alt": "Pickup truck parked on a red clay road beside a cotton field"
   },
   "body-suvs": {
     "query": "suv driving road",
@@ -121,32 +121,32 @@
   "body-sedans": {
     "query": "sedan car parked",
     "commons": "sedan automobile",
-    "fal": "A silver midsize sedan parked on a quiet tree-lined residential street with brick houses in a Southern suburb, morning light",
-    "alt": "Silver midsize sedan parked on a tree-lined residential street"
+    "fal": "Rear three-quarter view of a silver midsize sedan driving away down a quiet tree-lined residential street with brick houses, morning light, shallow depth of field",
+    "alt": "Silver sedan on a tree-lined residential street"
   },
   "body-minivans": {
     "query": "minivan family",
     "commons": "minivan",
-    "fal": "A modern minivan with its sliding door open in a suburban driveway, sports bags and a cooler being loaded, warm evening light",
-    "alt": "Minivan with its sliding door open in a suburban driveway"
+    "fal": "A family loading plain duffel bags into the open sliding side door of a white minivan in a suburban driveway at sunset, the minivan seen from the side",
+    "alt": "Family loading bags into a minivan in a suburban driveway"
   },
   "body-coupes": {
     "query": "sports coupe car",
     "commons": "coupe automobile",
-    "fal": "A sporty two-door coupe on a winding mountain road overlooking a lake and forest in north Alabama, golden hour",
-    "alt": "Sporty two-door coupe on a winding road above a lake"
+    "fal": "Distant aerial view of a red two-door sports coupe on a winding mountain road above a lake and forest in north Alabama, golden hour",
+    "alt": "Red sports coupe on a winding road above a lake"
   },
   "body-hatchbacks": {
     "query": "hatchback car",
     "commons": "hatchback automobile",
-    "fal": "A compact hatchback parked downtown in a historic Southern small town square with brick storefronts, bright day",
+    "fal": "Side profile of a compact blue hatchback parked along a historic red brick downtown square with green awnings, bright sunny day",
     "alt": "Compact hatchback parked on a historic downtown square"
   },
   "body-convertibles": {
     "query": "convertible car",
     "commons": "convertible automobile",
-    "fal": "A convertible with the top down driving along a coastal road near white sand beaches on the Gulf Coast, blue sky",
-    "alt": "Convertible with the top down on a Gulf Coast road"
+    "fal": "Distant view from behind of a convertible with the top down driving along a coastal highway beside white sand beaches and turquoise Gulf water, sunny day",
+    "alt": "Convertible with the top down on a Gulf Coast highway"
   },
   "post-default": {
     "query": "car keys new owner",
@@ -192,7 +192,7 @@
   "post-how-to-inspect-a-used-car-alabama": {
     "query": "mechanic inspecting car",
     "commons": "car engine bay",
-    "fal": "A mechanic in a clean independent repair shop inspecting the underside of a used sedan on a lift with a flashlight",
+    "fal": "A mechanic using a flashlight to inspect the underside of a car raised on a lift in a clean repair shop, viewed from the side, workshop softly blurred",
     "alt": "Mechanic inspecting the underside of a used car on a lift"
   },
   "post-used-vs-new-car-alabama": {
@@ -222,13 +222,13 @@
   "post-buying-a-used-car-from-a-private-seller-in-alabama": {
     "query": "private car sale",
     "commons": "car for sale sign",
-    "fal": "Two neighbors shaking hands in a suburban driveway next to a used sedan with a for sale sign in the window, afternoon light",
+    "fal": "Two men shaking hands beside a used sedan in a suburban driveway, the car seen in side profile, warm afternoon light",
     "alt": "Buyer and private seller shaking hands next to a used sedan"
   },
   "post-trade-in-your-car-alabama": {
     "query": "car trade in dealership",
     "commons": "car dealership",
-    "fal": "A dealership appraiser walking around a used SUV with a tablet, checking the paint and tires on a sunny lot",
+    "fal": "A dealership appraiser holding a tablet walking along the side of a used SUV on a sunny lot, the SUV seen in side profile, background softly blurred",
     "alt": "Appraiser checking a used SUV for a trade-in value"
   },
   "post-certified-pre-owned-vs-used-alabama": {
@@ -251,8 +251,8 @@
   "post-test-drive-checklist": {
     "query": "test drive car",
     "commons": "car interior dashboard",
-    "fal": "View from the driver's seat of a used car on a two-lane country road, hands on the steering wheel, dashboard visible, sunny day",
-    "alt": "Driver's view on a test drive along a country road"
+    "fal": "View through the windshield from the driver's seat of a two-lane country road lined with green trees, hands resting on the top of the steering wheel rim, sunny day",
+    "alt": "Driver's view of a country road during a test drive"
   },
   "post-used-car-red-flags": {
     "query": "damaged car rust",

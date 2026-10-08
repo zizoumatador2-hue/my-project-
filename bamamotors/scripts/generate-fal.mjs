@@ -13,7 +13,7 @@ const KEY = process.env.FAL_KEY;
 if (!KEY) { console.log('FAL_KEY not set — skipping fal.ai generation.'); process.exit(0); }
 const force = process.argv.includes('--force');
 const MODEL = 'fal-ai/flux-pro/v1.1-ultra';
-const STYLE = 'Photorealistic editorial photograph, natural light, shot on a full-frame camera, sharp focus, true-to-life colors. Vehicles have plain grilles with no manufacturer emblems or badges. No text, no signs with lettering, no paperwork, no logos, no license plates, no watermarks.';
+const STYLE = 'Photorealistic editorial photograph, natural light, shot on a full-frame camera, sharp focus, true-to-life colors. Generic unbranded vehicles seen from the side or from a distance. Clean scene without any writing, signage, logos or license plates.';
 const requests = JSON.parse(readFileSync(join(root, 'content/pexels.json'), 'utf8'));
 const manifestPath = join(root, 'src/data/images.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
