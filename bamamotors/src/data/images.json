@@ -213,24 +213,22 @@
     "srcset": "/images/post-how-to-buy-a-used-car-in-alabama-640.webp 640w, /images/post-how-to-buy-a-used-car-in-alabama-1024.webp 1024w, /images/post-how-to-buy-a-used-car-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Aerial photograph of a parking lot in Groß-Gerau",
-    "author": "Matti Blume",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parking_lot,_Gross-Gerau_(P1090665).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+    "alt": "Couple walking between rows of used cars on a sunny lot",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A young couple walking between rows of clean used cars on a sunny open lot lined with pine trees, cars seen from the side, warm afternoon light"
   },
   "post-best-places-to-buy-a-used-car-in-alabama": {
     "src": "/images/post-best-places-to-buy-a-used-car-in-alabama-1600.webp",
     "srcset": "/images/post-best-places-to-buy-a-used-car-in-alabama-640.webp 640w, /images/post-best-places-to-buy-a-used-car-in-alabama-1024.webp 1024w, /images/post-best-places-to-buy-a-used-car-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "BYD showroom at The Westlight building in Berlin",
-    "author": "Matti Blume",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:BYD,_Westlight,_Berlin_(P1031497).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+    "alt": "Aerial view of a used car lot surrounded by trees",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "High aerial drone view of a large used car lot with neat rows of colorful cars and pickup trucks surrounded by green trees in the American South, sunny day"
   },
   "post-how-much-does-a-used-car-cost-in-birmingham": {
     "src": "/images/post-how-much-does-a-used-car-cost-in-birmingham-1600.webp",
@@ -249,24 +247,22 @@
     "srcset": "/images/post-used-truck-buying-guide-alabama-640.webp 640w, /images/post-used-truck-buying-guide-alabama-1024.webp 1024w, /images/post-used-truck-buying-guide-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Volkswagen Amarok showed in La Rural, Argentina",
-    "author": "Ezarate",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:VWAmarok-LaRural-00914.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Pickup truck towing a fishing boat beside a lake",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Side profile of a red full-size pickup truck towing a small fishing boat along a rural two-lane road beside a calm lake at sunrise"
   },
   "post-cars-under-10000-in-alabama": {
     "src": "/images/post-cars-under-10000-in-alabama-1600.webp",
     "srcset": "/images/post-cars-under-10000-in-alabama-640.webp 640w, /images/post-cars-under-10000-in-alabama-1024.webp 1024w, /images/post-cars-under-10000-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Institute of Mathematics and Computer Science from the parking garage at Coesfelder Kreuz in Münster, North Rhine-Westphalia, Germany",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnster,_Parkhaus_am_Coesfelder_Kreuz_--_2019_--_0023.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Young driver next to an affordable compact sedan",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A young woman smiling next to an older silver compact sedan parked on a quiet residential street, the car seen in side profile, bright afternoon"
   },
   "post-how-to-inspect-a-used-car-alabama": {
     "src": "/images/post-how-to-inspect-a-used-car-alabama-1600.webp",
@@ -284,72 +280,66 @@
     "srcset": "/images/post-used-vs-new-car-alabama-640.webp 640w, /images/post-used-vs-new-car-alabama-1024.webp 1024w, /images/post-used-vs-new-car-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Smith-Gandy car dealership, Seattle, Washington, U.S., circa 1960s. The Smith-Gandy Ford dealership, founded 1946, was at the corner of Bore",
-    "author": "Seattle Municipal Archives from Seattle, WA",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seattle_-_Smith-Gandy_car_dealership,_circa_1960s_(55091228432).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    "alt": "New and used sedans parked side by side",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Two sedans parked side by side on an open lot at sunset, a shiny new white sedan and a well-kept older blue sedan, both seen in side profile, trees in the background"
   },
   "post-alabama-car-care-heat-humidity": {
     "src": "/images/post-alabama-car-care-heat-humidity-1600.webp",
     "srcset": "/images/post-alabama-car-care-heat-humidity-640.webp 640w, /images/post-alabama-car-care-heat-humidity-1024.webp 1024w, /images/post-alabama-car-care-heat-humidity-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "car tire",
-    "author": "Jbobby",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tire_tread_.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "alt": "Checking tire pressure on a hot summer day",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Close-up of a person checking tire pressure with a gauge on a car tire on a hot sunny summer day, green trees softly blurred behind"
   },
   "post-choosing-a-car-dealership-in-alabama": {
     "src": "/images/post-choosing-a-car-dealership-in-alabama-1600.webp",
     "srcset": "/images/post-choosing-a-car-dealership-in-alabama-640.webp 640w, /images/post-choosing-a-car-dealership-in-alabama-1024.webp 1024w, /images/post-choosing-a-car-dealership-in-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Mercedes-Benz dealership, Munich, Germany",
-    "author": "Diego Delso",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Concesionario_de_Mercedes-Benz,_M%C3%BAnich,_Alemania,_2013-03-30,_DD_25.JPG",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    "alt": "Salesperson and customer walking through a dealer lot",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A friendly salesperson and a customer talking while walking among rows of used cars on a sunny lot with pine trees in the background, cars seen from the side"
   },
   "post-how-to-list-inventory-on-bamamotors": {
     "src": "/images/post-how-to-list-inventory-on-bamamotors-1600.webp",
     "srcset": "/images/post-how-to-list-inventory-on-bamamotors-640.webp 640w, /images/post-how-to-list-inventory-on-bamamotors-1024.webp 1024w, /images/post-how-to-list-inventory-on-bamamotors-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Toyota GR Supra (in the showroom of Auto Bertels) in Dülmen, North Rhine-Westphalia, Germany",
-    "author": "Dietmar Rabich",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Auto_Bertels,_Toyota_GR_Supra_--_2021_--_9539_(bw).jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Dealer photographing an SUV with a smartphone",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A person photographing a clean silver SUV with a smartphone on an open lot at golden hour, the SUV seen in side profile"
   },
   "post-used-cars-near-me-alabama": {
     "src": "/images/post-used-cars-near-me-alabama-1600.webp",
     "srcset": "/images/post-used-cars-near-me-alabama-640.webp 640w, /images/post-used-cars-near-me-alabama-1024.webp 1024w, /images/post-used-cars-near-me-alabama-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Pineapple Highway off I-65, Greenville, Alabama, 31 August 2021",
-    "author": "Infrogmation",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pineapple_Highway_off_I-65,_Greenville,_Alabama,_31_August_2021_-_Shell_Gas_Station.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Smartphone map showing nearby car listings",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Close-up of a hand holding a smartphone showing a simple map with colored location pins and no labels, a sunny suburban street with parked cars softly blurred behind"
   },
   "post-alabama-car-insurance-requirements": {
     "src": "/images/post-alabama-car-insurance-requirements-1600.webp",
     "srcset": "/images/post-alabama-car-insurance-requirements-640.webp 640w, /images/post-alabama-car-insurance-requirements-1024.webp 1024w, /images/post-alabama-car-insurance-requirements-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "A south view of the Alabama State Capitol, as seen from the Alabama Archives",
-    "author": "DXR",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alabama_State_Capitol,_Montgomery,_South_view_20160713_1.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Driver checking her phone in a parked car",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A woman sitting in the driver's seat of a parked car looking at her smartphone and smiling, seen through the open driver's door, sunny parking area softly blurred"
   },
   "post-buying-a-used-car-from-a-private-seller-in-alabama": {
     "src": "/images/post-buying-a-used-car-from-a-private-seller-in-alabama-1600.webp",
@@ -378,24 +368,22 @@
     "srcset": "/images/post-best-reliable-used-cars-under-15000-640.webp 640w, /images/post-best-reliable-used-cars-under-15000-1024.webp 1024w, /images/post-best-reliable-used-cars-under-15000-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Toyota Corolla Cross Hybrid in Stuttgart",
-    "author": "Alexander-93",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Toyota_Corolla_Cross_Hybrid_1X7A1861.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Compact sedan parked in front of a brick ranch house",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Side profile of a clean white compact sedan parked in front of a modest brick ranch house with a green lawn, bright sunny day"
   },
   "post-used-car-red-flags": {
     "src": "/images/post-used-car-red-flags-1600.webp",
     "srcset": "/images/post-used-car-red-flags-640.webp 640w, /images/post-used-car-red-flags-1024.webp 1024w, /images/post-used-car-red-flags-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "Old rusty car in Ubud, Bali, Indonesia",
-    "author": "Jakub Hałun",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_car_in_Ubud,_Bali,_Indonesia,_20220823_1143_0423.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Close-up of rust on an old car door",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Close-up of rust and bubbling paint on the lower door panel of an old car, shallow depth of field, natural light"
   },
   "hero": {
     "src": "/images/hero-1600.webp",
@@ -459,12 +447,11 @@
     "srcset": "/images/post-best-used-suvs-for-alabama-drivers-640.webp 640w, /images/post-best-used-suvs-for-alabama-drivers-1024.webp 1024w, /images/post-best-used-suvs-for-alabama-drivers-1600.webp 1600w",
     "width": 1600,
     "height": 900,
-    "alt": "SUV Kaiyi X3.",
-    "author": "Rjcastillo",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:SUV_Kaiyi_X3.jpg",
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    "alt": "Family next to a midsize SUV at a scenic overlook",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A family with two kids standing beside a dark green midsize SUV at a scenic overlook above forested hills, the SUV seen in side profile, golden hour"
   },
   "post-test-drive-checklist": {
     "src": "/images/post-test-drive-checklist-1600.webp",
@@ -487,5 +474,27 @@
     "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
     "source": "fal.ai",
     "prompt": "A multi-point inspection checklist on a clipboard resting on the hood of a clean used car in a service bay"
+  },
+  "page-for-dealers": {
+    "src": "/images/page-for-dealers-1600.webp",
+    "srcset": "/images/page-for-dealers-640.webp 640w, /images/page-for-dealers-1024.webp 1024w, /images/page-for-dealers-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Independent used car lot at golden hour",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "Wide golden-hour view of a well-organized independent used car lot with rows of pickup trucks and SUVs, a small plain office building, an American flag on a pole and tall Southern pines"
+  },
+  "page-financing": {
+    "src": "/images/page-financing-1600.webp",
+    "srcset": "/images/page-financing-640.webp 640w, /images/page-financing-1024.webp 1024w, /images/page-financing-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Couple planning a car budget at the kitchen table",
+    "author": "BamaMotors",
+    "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
+    "source": "fal.ai",
+    "prompt": "A couple sitting at a kitchen table with a laptop seen from behind and a calculator, planning a car budget together, warm morning light"
   }
 }
