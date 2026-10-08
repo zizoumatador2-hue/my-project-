@@ -27,7 +27,7 @@ const EXCLUDE = ['abandoned', 'evacuation', 'crash', 'accident', 'wreck', 'fire'
 const AUTO = ['car', 'cars', 'automobile', 'automobiles', 'vehicle', 'vehicles', 'dealership', 'dealer', 'truck', 'suv', 'pickup', 'sedan', 'coupe', 'convertible', 'minivan'];
 const hasWord = (text, w) => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`, 'i').test(text);
 const WIDTHS = [640, 1024, 1600];
-const UA = 'BamaMotorsImageFetcher/1.0 (https://bamamotors.com; info@christopherkunz.com)';
+const UA = 'BamaMotorsImageFetcher/1.0 (https://bamamotors.com; info.christopherkunz@gmail.com)';
 const LICENSE_OK = /^(cc0|public domain|pd|cc by(-sa)? [1-4]\.0)/i;
 
 const strip = (html = '') => html.replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/\s+/g, ' ').replace(/ ([,.;:])/g, '$1').trim();
