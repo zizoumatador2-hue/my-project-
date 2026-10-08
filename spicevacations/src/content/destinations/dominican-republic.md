@@ -1,7 +1,7 @@
 ---
 name: Dominican Republic
 metaTitle: Dominican Republic Vacations for Couples | SpiceVacations
-metaDescription: "Dominican Republic for couples: Punta Cana and Cap Cana resorts, Saona Island, Samaná's whale season and Santo Domingo's Colonial Zone. When to go and where to stay."
+metaDescription: "Dominican Republic for couples: Punta Cana and Cap Cana resorts, Saona Island, Samaná whale season and the Colonial Zone, plus when to go and where to stay."
 scene: beach
 palette: teal
 imageAlt: Illustrated Caribbean beach in Punta Cana with palm trees and turquoise water

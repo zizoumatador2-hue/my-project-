@@ -16,7 +16,10 @@ features: [Victorian castle on a lake, Miles of hiking trails, Spa, Meals includ
 goodToKnow:
   - Rates have traditionally included meals and many activities; confirm your package.
   - Fall foliage weekends book far in advance.
-updated: 2026-10-05
+updated: 2026-10-08
+faqs:
+  - q: Is Mohonk Mountain House all-inclusive?
+    a: Not in the beach-resort sense, but many Mohonk room rates include meals along with access to the trails, lake and many activities. Spa treatments and some experiences cost extra, so check exactly what your rate includes.
 ---
 
 Mohonk Mountain House has welcomed guests since the 1800s. The rambling Victorian castle sits on a glacial lake high in the Shawangunk Ridge, surrounded by trails, gardens and rustic gazebos.

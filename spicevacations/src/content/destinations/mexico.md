@@ -1,6 +1,6 @@
 ---
 name: Mexico
-metaTitle: "Mexico Vacations for Couples: Cancun to Cabo | SpiceVacations"
+metaTitle: "Mexico Vacations for Couples: Cancun to Cabo"
 metaDescription: "Mexico vacations for couples: compare the Riviera Maya, Cancun, Tulum, Los Cabos and Puerto Vallarta, with adults-only resorts, best seasons and planning tips."
 scene: tropical
 palette: teal

@@ -1,7 +1,7 @@
 ---
 name: Secrets Maroma Beach Riviera Cancun
 metaTitle: Secrets Maroma Beach Riviera Cancun Guide | SpiceVacations
-metaDescription: Secrets Maroma Beach Riviera Cancun is an adults-only all-inclusive on celebrated Maroma Beach. What it offers couples, who it suits and how to check availability.
+metaDescription: "Secrets Maroma Beach is an adults-only all-inclusive on celebrated Maroma Beach in the Riviera Maya. What it offers couples, who it suits and booking tips."
 scene: beach
 palette: teal
 imageAlt: Illustrated white-sand beach with palms and calm turquoise water on the Riviera Maya

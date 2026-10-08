@@ -1,7 +1,7 @@
 ---
 title: "All-Inclusive Vacations for Couples: Where to Go and How to Choose"
 metaTitle: "All-Inclusive Vacations for Couples: Complete Guide"
-metaDescription: "Plan all-inclusive vacations for couples with confidence: the best destinations, adults-only vs. couples-only resorts, what's included and how to pick the right one."
+metaDescription: "Plan all-inclusive vacations for couples: the best destinations, adults-only vs. couples-only resorts, what is included and how to pick the right resort."
 scene: pool
 palette: teal
 imageAlt: Illustrated adults-only resort pool with palm trees beside a turquoise sea

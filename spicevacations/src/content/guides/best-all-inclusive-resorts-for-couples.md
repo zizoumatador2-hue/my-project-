@@ -1,7 +1,7 @@
 ---
 title: "Best All-Inclusive Resorts for Couples: 12 Romantic Picks"
 metaTitle: "Best All-Inclusive Resorts for Couples: 12 Top Picks"
-metaDescription: "The best all-inclusive resorts for couples in Mexico, Jamaica, the Bahamas, the Dominican Republic and Antigua, compared by vibe, beach, dining and who they suit."
+metaDescription: "The best all-inclusive resorts for couples in Mexico, Jamaica, the Bahamas, the Dominican Republic and Antigua, compared by vibe, beach, dining and fit."
 scene: overwater
 palette: gold
 imageAlt: Illustrated overwater structures on a calm Caribbean bay at golden hour

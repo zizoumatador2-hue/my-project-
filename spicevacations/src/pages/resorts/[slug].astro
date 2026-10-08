@@ -39,11 +39,36 @@ const crumbs = [
 const img = x.image || `/art/${x.scene}-${x.palette}.svg`;
 const locality = x.location.split(',').slice(0, -1).join(',').trim() || x.location;
 const country = x.location.split(',').pop()!.trim();
+/* Common "People also ask" questions, answered only from facts already in this entry. */
+const isAI = x.resortTypes.includes('all-inclusive');
+const autoFaqs = [
+  {
+    q: `Is ${x.name} adults-only?`,
+    a: x.adultsOnly
+      ? `Yes. ${x.name} is an adults-only property, which makes it a quiet choice for couples. Minimum ages can differ by resort, so confirm the current policy before you book.`
+      : `No. ${x.name} is not an adults-only property, although it is a popular choice with couples. If you want a child-free stay, see our guide to the best adults-only resorts.`,
+  },
+  {
+    q: `Is ${x.name} all-inclusive?`,
+    a: isAI
+      ? `Yes. ${x.name} is an all-inclusive resort, so meals, drinks and many activities are included in the rate. Some extras, such as spa treatments or premium dining, can cost more, so check what your rate covers.`
+      : `No. ${x.name} is not an all-inclusive resort, so plan for meals and drinks on top of your room rate. Some rates include breakfast or resort credits; check the details when you compare prices.`,
+  },
+  ...(dest
+    ? [
+        {
+          q: `When is the best time to visit ${x.name}?`,
+          a: `${dest.data.bestTimeNote} Prices and availability at ${x.name} change by season, so compare a few dates before you book.`,
+        },
+      ]
+    : []),
+];
+const faqs = [...x.faqs, ...autoFaqs.filter((f) => !x.faqs.some((o) => o.q.toLowerCase() === f.q.toLowerCase()))];
 const schema = [
   webPage({ path, title: x.metaTitle, description: x.metaDescription }),
   breadcrumbList(crumbs),
   lodging({ path, name: x.name, description: x.summary, image: img, locality, country, amenities: x.features, rating: x.rating ? { value: x.rating.value, count: x.rating.count } : undefined }),
-  faqPage(x.faqs, path),
+  faqPage(faqs, path),
 ];
 ---
 
@@ -113,7 +138,7 @@ const schema = [
           )
         }
 
-        <FaqList faqs={x.faqs} />
+        <FaqList faqs={faqs} />
       </div>
 
       <aside class="article-aside" aria-label="Resort at a glance">

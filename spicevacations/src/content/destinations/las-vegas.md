@@ -1,7 +1,7 @@
 ---
 name: Las Vegas
 metaTitle: Las Vegas Couples Getaways & Romantic Ideas | SpiceVacations
-metaDescription: "Plan a Las Vegas couples vacation beyond the casinos: the best shows, romantic dinners, desert adventures and quiet resorts, plus when to visit and how to budget."
+metaDescription: "Plan a Las Vegas couples vacation beyond the casinos: the best shows, romantic dinners, desert trips and quiet resorts, plus when to go and how to budget."
 scene: desert
 palette: dusk
 imageAlt: Illustrated Las Vegas skyline in the desert at dusk with a glowing sun

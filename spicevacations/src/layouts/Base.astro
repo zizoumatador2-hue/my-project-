@@ -17,9 +17,12 @@ interface Props {
   /** Extra JSON-LD nodes; Organization and WebSite are always included. */
   schema?: (object | null | undefined | false)[];
   preloadImage?: string;
+  /** Responsive preload: must match the LCP <img> srcset/sizes so the browser fetches one file, not two. */
+  preloadSrcset?: string;
+  preloadSizes?: string;
 }
 
-const { title, description, ogType = 'website', noindex = false, schema = [], preloadImage } = Astro.props;
+const { title, description, ogType = 'website', noindex = false, schema = [], preloadImage, preloadSrcset, preloadSizes } = Astro.props;
 const path = Astro.url.pathname;
 const canonical = Astro.props.canonical ?? new URL(path, SITE.url).toString();
 const ogSlug = path === '/' ? 'home' : path.replace(/^\/|\/$/g, '').replace(/\//g, '--');
@@ -50,7 +53,7 @@ const adsense = /^ca-pub-\d{10,20}$/.test(import.meta.env.PUBLIC_ADSENSE_CLIENT 
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} imagesrcset={preloadSrcset} imagesizes={preloadSrcset ? preloadSizes : undefined} fetchpriority="high" />}
 
     <meta property="og:site_name" content={SITE.domain} />
     <meta property="og:locale" content={SITE.locale} />

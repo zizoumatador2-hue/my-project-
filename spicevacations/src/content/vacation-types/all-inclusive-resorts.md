@@ -1,6 +1,6 @@
 ---
 name: All-Inclusive Resorts
-metaTitle: All-Inclusive Resorts & Vacations | SpiceVacations
+metaTitle: "All-Inclusive Resort Picks for Couples by Destination"
 metaDescription: Compare all-inclusive resorts in Mexico, Jamaica, the Bahamas and the Dominican Republic. Learn what is included and how to choose the right resort for two.
 scene: beach
 palette: teal

@@ -1,6 +1,6 @@
 ---
 name: Romantic Getaways
-metaTitle: Romantic Getaways for Couples | SpiceVacations
+metaTitle: "Romantic Getaway Ideas: Resorts, Places & Deals"
 metaDescription: Romantic getaways for every budget and style, from beach escapes and wine country weekends to adults-only resorts. Compare ideas and plan a trip for two.
 scene: sunset
 palette: dusk

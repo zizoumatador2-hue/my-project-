@@ -1,6 +1,6 @@
 ---
 name: Couples Vacations
-metaTitle: Couples Vacations & Trip Ideas for Two | SpiceVacations
+metaTitle: "Couples Trip Ideas: Resorts & Destinations for Two"
 metaDescription: Couples vacations for every travel style, from all-inclusive beach resorts to road trips and city breaks. Find the right trip for two with honest advice.
 scene: tropical
 palette: coral

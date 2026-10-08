@@ -1,7 +1,7 @@
 ---
 name: Hotel Xcaret Arte
 metaTitle: "Hotel Xcaret Arte: Adults-Only Guide | SpiceVacations"
-metaDescription: Hotel Xcaret Arte is an adults-only, all-inclusive resort in Playa del Carmen celebrating Mexican art and culture. What to expect, who it suits and booking tips.
+metaDescription: "Hotel Xcaret Arte is an adults-only, all-inclusive resort in Playa del Carmen celebrating Mexican art and culture. What to expect, who it suits and tips."
 scene: tropical
 palette: gold
 imageAlt: Illustrated tropical cove with palms and a small island in golden light

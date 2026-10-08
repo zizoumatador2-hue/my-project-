@@ -1,7 +1,7 @@
 ---
 name: Excellence Playa Mujeres
 metaTitle: Excellence Playa Mujeres Review for Couples | SpiceVacations
-metaDescription: Excellence Playa Mujeres is an adults-only, all-inclusive resort north of Cancun. See who it suits, room tips, what to expect and how to check live availability.
+metaDescription: "Excellence Playa Mujeres is an adults-only, all-inclusive resort north of Cancun. Who it suits, room tips, what to expect and how to check availability."
 scene: pool
 palette: teal
 imageAlt: Illustrated adults-only resort pool with palm trees beside a turquoise sea

@@ -1,7 +1,7 @@
 ---
 title: "Best Romantic Getaways in Florida: 12 Escapes for Couples"
 metaTitle: "Best Romantic Getaways in Florida: 12 Couples Escapes"
-metaDescription: "Discover the 12 best romantic getaways in Florida, from Key West sunsets and private islands to Gulf Coast beaches, with when to go and where couples should stay."
+metaDescription: "The 12 best romantic getaways in Florida, from Key West sunsets and private islands to Gulf Coast beaches, with when to go and where couples should stay."
 scene: sunset
 palette: coral
 imageAlt: Illustrated Florida sunset over calm water with a sailboat on the horizon

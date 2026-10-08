@@ -1,7 +1,7 @@
 ---
 title: "Romantic Getaways in the USA: 14 No-Passport Escapes"
 metaTitle: "Romantic Getaways in the USA: 14 No-Passport Escapes"
-metaDescription: "The best romantic getaways in the USA, from Hawaii and the Florida Keys to Napa, Big Sur, Sedona and Charleston. Where to go, when and where couples should stay."
+metaDescription: "The best romantic getaways in the USA, from Hawaii and the Florida Keys to Napa, Big Sur, Sedona and Charleston: where to go, when, and where to stay."
 scene: cliffs
 palette: gold
 imageAlt: Illustrated California coastline with cliffs above the Pacific at golden hour

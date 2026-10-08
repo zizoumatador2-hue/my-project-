@@ -44,7 +44,7 @@ export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
   output: 'static',
-  build: { format: 'directory', inlineStylesheets: 'auto' },
+  build: { format: 'directory', inlineStylesheets: 'always' },
   compressHTML: true,
   markdown: { rehypePlugins: [rehypeSpice], smartypants: true },
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },

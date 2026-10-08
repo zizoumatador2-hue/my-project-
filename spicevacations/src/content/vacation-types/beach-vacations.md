@@ -1,6 +1,6 @@
 ---
 name: Beach Vacations
-metaTitle: Beach Vacations for Couples | SpiceVacations
+metaTitle: "Beach Vacation Ideas for Couples: Resorts & Places"
 metaDescription: The best beach vacations in the USA, Mexico and the Caribbean, compared by water, weather, budget and vibe. Find a beach escape that fits your style and dates.
 scene: beach
 palette: gold

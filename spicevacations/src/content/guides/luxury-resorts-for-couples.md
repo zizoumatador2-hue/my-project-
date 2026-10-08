@@ -1,7 +1,7 @@
 ---
 title: "Luxury Resorts for Couples: 14 Romantic Splurges"
 metaTitle: "Luxury Resorts for Couples: 14 Romantic Splurges"
-metaDescription: "The best luxury resorts for couples: Piton-view sanctuaries, clifftop retreats, private islands and adults-only hideaways in Hawaii, the Caribbean and California."
+metaDescription: "The best luxury resorts for couples: Piton-view sanctuaries, clifftop retreats, private islands and adults-only hideaways in Hawaii, the Caribbean and Big Sur."
 scene: mountains
 palette: gold
 imageAlt: Illustrated twin volcanic peaks above a Caribbean bay at golden hour

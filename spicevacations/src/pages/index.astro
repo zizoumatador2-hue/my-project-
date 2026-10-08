@@ -64,7 +64,7 @@ const stats = [
 ];
 ---
 
-<Base title={title} description={metaDescription} schema={schema} preloadImage={heroSrc}>
+<Base title={title} description={metaDescription} schema={schema} preloadImage={heroSrc} preloadSrcset={heroPhoto ? srcsetOf(heroPhoto) : undefined} preloadSizes="100vw">
   <!-- HERO -->
   <section class="hero cine cine--letterbox" aria-labelledby="hero-title" data-cine-hero>
     <div class="hero__media" data-hero-media>

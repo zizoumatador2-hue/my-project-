@@ -1,6 +1,6 @@
 ---
 name: Sanctuary Cap Cana
-metaTitle: "Sanctuary Cap Cana: Adults-Only Resort Guide | SpiceVacations"
+metaTitle: "Sanctuary Cap Cana: Adults-Only Resort Guide"
 metaDescription: Sanctuary Cap Cana is an adults-only, all-inclusive resort in the upscale Cap Cana enclave of the Dominican Republic. What to expect and who it suits best.
 scene: cliffs
 palette: teal

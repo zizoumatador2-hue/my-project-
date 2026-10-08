@@ -1,6 +1,6 @@
 ---
 title: Caribbean All-Inclusive Shoulder-Season Savings
-metaTitle: Caribbean All-Inclusive Shoulder-Season Deals | SpiceVacations
+metaTitle: "Caribbean All-Inclusive Deals in Shoulder Season"
 metaDescription: "When Caribbean all-inclusive resorts are often cheaper: late April to early June. How shoulder season works, what to watch for and how to compare live rates."
 scene: beach
 palette: teal

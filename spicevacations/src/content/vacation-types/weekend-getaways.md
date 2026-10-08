@@ -1,6 +1,6 @@
 ---
 name: Weekend Getaways
-metaTitle: Weekend Getaways for Couples | SpiceVacations
+metaTitle: "Weekend Getaway Ideas for Couples: Places & Stays"
 metaDescription: Weekend getaways for couples that are easy to plan and hard to forget. Browse drive-to escapes from New York, Florida weekend trips and short-flight ideas.
 scene: lake
 palette: gold

@@ -1,7 +1,7 @@
 ---
 name: Hotel Wailea
 metaTitle: "Hotel Wailea Maui: Adults-Only Guide | SpiceVacations"
-metaDescription: Hotel Wailea is an adults-only, all-suite boutique hotel on the hills above Wailea, Maui, with ocean views and a romantic, quiet atmosphere. Who it suits and tips.
+metaDescription: "Hotel Wailea is an adults-only, all-suite boutique hotel above Wailea, Maui, with ocean views and a quiet, romantic feel. Who it suits and planning tips."
 scene: volcano
 palette: coral
 imageAlt: Illustrated Maui hillside with a volcano and ocean view at sunset

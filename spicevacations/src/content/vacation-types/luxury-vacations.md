@@ -1,6 +1,6 @@
 ---
 name: Luxury Vacations
-metaTitle: Luxury Vacations & Resorts for Couples | SpiceVacations
+metaTitle: "Luxury Travel Ideas for Couples: Resorts & Places"
 metaDescription: Luxury vacations for couples, from Hawaii's grand resorts to Caribbean hideaways and Big Sur cliffs. See where a splurge is worth it and how to plan well.
 scene: cliffs
 palette: dusk

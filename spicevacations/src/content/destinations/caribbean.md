@@ -1,6 +1,6 @@
 ---
 name: Caribbean
-metaTitle: "Caribbean Vacations for Couples: Island Guide | SpiceVacations"
+metaTitle: "Caribbean Vacations for Couples | SpiceVacations"
 metaDescription: "Caribbean vacations for couples: compare St. Lucia, Turks and Caicos, Aruba, Antigua and more by beaches, resorts, season and budget. Find your island for two."
 scene: overwater
 palette: coral

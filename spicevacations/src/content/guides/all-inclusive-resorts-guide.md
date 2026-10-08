@@ -1,7 +1,7 @@
 ---
 title: "All-Inclusive Resorts: The Complete Guide to What's Included and How to Choose"
 metaTitle: "All-Inclusive Resorts: What's Included & How to Choose"
-metaDescription: "Everything to know about all-inclusive resorts: what's included, hidden extras, pros and cons, how to compare resorts, and whether all-inclusive is worth it for you."
+metaDescription: "All inclusive resorts explained: what is included, hidden extras, pros and cons, how to compare resorts, and whether all-inclusive is worth it for you."
 scene: beach
 palette: teal
 imageAlt: Illustrated palm-lined beach with turquoise water and a setting sun

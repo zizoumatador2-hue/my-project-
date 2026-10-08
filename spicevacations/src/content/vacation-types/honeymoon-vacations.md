@@ -1,6 +1,6 @@
 ---
 name: Honeymoon Vacations
-metaTitle: Honeymoon Vacations & Destinations | SpiceVacations
+metaTitle: "Honeymoon Vacation Ideas: Resorts, Places & Planning"
 metaDescription: Plan honeymoon vacations with confidence. Compare honeymoon destinations and resorts in Hawaii, Mexico and the Caribbean, with timing tips and budgets.
 scene: overwater
 palette: teal

@@ -1,7 +1,7 @@
 ---
 name: Breathless Cabo San Lucas
-metaTitle: "Breathless Cabo San Lucas: Adults-Only Guide | SpiceVacations"
-metaDescription: Breathless Cabo San Lucas is a lively adults-only, all-inclusive resort on Medano Beach with views of El Arco. Who it suits, what to expect and tips for couples.
+metaTitle: "Breathless Cabo San Lucas Review for Couples"
+metaDescription: "Breathless Cabo San Lucas is a lively adults-only, all-inclusive resort on Medano Beach with El Arco views. Who it suits, what to expect and couples tips."
 scene: desert
 palette: coral
 imageAlt: Illustrated desert coastline in Los Cabos with a glowing sunset

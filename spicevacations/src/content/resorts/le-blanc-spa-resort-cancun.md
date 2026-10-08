@@ -1,7 +1,7 @@
 ---
 name: Le Blanc Spa Resort Cancun
 metaTitle: Le Blanc Spa Resort Cancun for Couples | SpiceVacations
-metaDescription: Le Blanc Spa Resort Cancun is an adults-only, all-inclusive luxury resort in Cancun's Hotel Zone with butler service and a large spa. Who it suits and booking tips.
+metaDescription: "Le Blanc Spa Resort Cancun: an adults-only, all-inclusive luxury resort in the Hotel Zone with butler service and a large spa. Who it suits and booking tips."
 scene: pool
 palette: coral
 imageAlt: Illustrated luxury pool deck overlooking the Caribbean at sunset
