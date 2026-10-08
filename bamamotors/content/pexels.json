@@ -109,7 +109,7 @@
   "body-trucks": {
     "query": "pickup truck",
     "commons": "pickup truck",
-    "fal": "A clean late-model full-size pickup truck parked on a red clay dirt road beside a cotton field in rural Alabama, late afternoon light",
+    "fal": "A clean late-model full-size pickup truck with a plain unbadged grille, parked on a red clay dirt road beside a cotton field in rural Alabama, late afternoon light",
     "alt": "Full-size pickup truck parked on a dirt road beside a cotton field"
   },
   "body-suvs": {
@@ -169,8 +169,8 @@
   "post-how-to-finance-a-used-car-in-alabama": {
     "query": "signing car loan contract",
     "commons": "automobile showroom",
-    "fal": "A couple reviewing an auto loan offer and a payment worksheet with a calculator at a dealership finance desk",
-    "alt": "Couple reviewing an auto loan offer at a finance desk"
+    "fal": "A smiling couple shaking hands with a salesperson across a desk in a bright car dealership showroom, a car key fob on the desk, showroom cars softly blurred in the background",
+    "alt": "Couple shaking hands with a salesperson at a dealership desk"
   },
   "post-best-used-suvs-for-alabama-drivers": {
     "query": "suv family road trip",

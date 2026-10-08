@@ -17,6 +17,7 @@ export interface SiteImage {
   source: 'Pexels' | 'Wikimedia Commons' | 'fal.ai';
   license?: string;
   licenseUrl?: string;
+  prompt?: string;
 }
 
 const images = manifest as Record<string, SiteImage>;

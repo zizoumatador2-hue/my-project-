@@ -13,7 +13,7 @@ const KEY = process.env.FAL_KEY;
 if (!KEY) { console.log('FAL_KEY not set — skipping fal.ai generation.'); process.exit(0); }
 const force = process.argv.includes('--force');
 const MODEL = 'fal-ai/flux-pro/v1.1-ultra';
-const STYLE = 'Photorealistic editorial photograph, natural light, shot on a full-frame camera, sharp focus, true-to-life colors. No text, no logos, no brand badges, no readable license plates, no watermarks.';
+const STYLE = 'Photorealistic editorial photograph, natural light, shot on a full-frame camera, sharp focus, true-to-life colors. Vehicles have plain grilles with no manufacturer emblems or badges. No text, no signs with lettering, no paperwork, no logos, no license plates, no watermarks.';
 const requests = JSON.parse(readFileSync(join(root, 'content/pexels.json'), 'utf8'));
 const manifestPath = join(root, 'src/data/images.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
@@ -38,7 +38,8 @@ async function generate(prompt) {
 let added = 0, failed = 0;
 for (const [key, req] of Object.entries(requests)) {
   if (key.startsWith('_') || !req.fal) continue;
-  if (manifest[key]?.source === 'fal.ai' && !force) continue;
+  // Regenerate only when the slot isn't a fal.ai image yet or its prompt was edited in content/pexels.json.
+  if (manifest[key]?.source === 'fal.ai' && manifest[key].prompt === req.fal && !force) continue;
   try {
     const buf = await generate(req.fal);
     let w0 = 0, h0 = 0;
@@ -54,12 +55,14 @@ for (const [key, req] of Object.entries(requests)) {
       author: 'BamaMotors',
       sourceUrl: 'https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra',
       source: 'fal.ai',
+      prompt: req.fal,
     };
     added++;
     console.log(`+ ${key}`);
   } catch (e) {
     failed++;
     console.log(`! ${key}: ${e.message}`);
+    if (/fal\.ai 40[13]/.test(e.message)) { console.log('::warning::fal.ai rejected FAL_KEY (invalid or revoked). Update the FAL_KEY secret.'); break; }
   }
 }
 writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
