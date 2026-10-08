@@ -1,1 +1,52 @@
-{ "images": [] }
+{
+  "images": [
+    {
+      "slug": "moment-morning-black-tea",
+      "alt": "Steaming mug of black tea on a sunlit kitchen counter in the morning"
+    },
+    {
+      "slug": "moment-matcha-whisk",
+      "alt": "Bright green matcha being whisked in a ceramic bowl with a bamboo whisk"
+    },
+    {
+      "slug": "moment-iced-tea-porch",
+      "alt": "Tall glass of iced tea with lemon and mint on a shaded porch table"
+    },
+    {
+      "slug": "moment-chai-simmer",
+      "alt": "Saucepan of masala chai simmering with whole spices on a stovetop"
+    },
+    {
+      "slug": "moment-loose-leaf-scoop",
+      "alt": "Spoonful of dry loose leaf tea above a glass teapot"
+    },
+    {
+      "slug": "moment-herbal-evening",
+      "alt": "Cup of chamomile tea beside a folded blanket and a candle in the evening"
+    },
+    {
+      "slug": "moment-green-tea-pour",
+      "alt": "Green tea being poured from an iron kettle into a small cup"
+    },
+    {
+      "slug": "moment-tea-shelf",
+      "alt": "Shelf of airtight tea tins and glass jars of loose leaf tea"
+    },
+    {
+      "slug": "moment-kettle-gooseneck",
+      "alt": "Gooseneck kettle pouring hot water over tea in a pot"
+    },
+    {
+      "slug": "moment-tea-and-book",
+      "alt": "Cup of tea next to an open paperback book and reading glasses"
+    },
+    {
+      "slug": "moment-oolong-gongfu",
+      "alt": "Small gaiwan and tasting cups of oolong tea on a wooden tray"
+    },
+    {
+      "slug": "moment-tea-garden-hills",
+      "alt": "Rows of tea bushes on misty green hills at sunrise"
+    }
+  ]
+}
