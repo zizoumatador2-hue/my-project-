@@ -1,0 +1,51 @@
+name: SpiceVacations AI images
+# Manual only: generates the 10 AI mood images with fal.ai once, commits them, then redeploys.
+# Images already in the repo are skipped, so re-running never pays twice unless `force` is set.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: fal.ai model endpoint
+        default: fal-ai/flux-2-pro
+      force:
+        description: Regenerate images that already exist (costs again)
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: write
+concurrency: spicevacations-ai-images
+defaults:
+  run:
+    working-directory: spicevacations
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: spicevacations/package-lock.json }
+      - run: npm ci
+      - name: Generate images with fal.ai
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          FAL_MODEL: ${{ inputs.model }}
+        run: |
+          if [ -z "$FAL_KEY" ]; then echo "::error::Add the FAL_KEY repository secret first"; exit 1; fi
+          node scripts/generate-ai-photos.mjs ${{ inputs.force && '--force' || '' }} | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ai src/data/ai-photos.json
+          if git diff --cached --quiet; then echo "No new images"; exit 0; fi
+          git commit -m "SpiceVacations: add AI mood images (fal.ai ${{ inputs.model }})"
+          git push
+      - name: Redeploy the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/spicevacations.yml/dispatches" \
+            -d "{\"ref\":\"${{ github.ref_name }}\"}"

@@ -12,20 +12,27 @@ export interface Photo {
   photographerUrl: string;
   url: string;
   representative?: boolean;
-  /** Library the photo came from ("Pexels" or "Pixabay"); older manifests omit it. */
+  /** Library the photo came from ("Pexels", "Pixabay" or "AI"); older manifests omit it. */
   source?: string;
+  /** True for images generated with AI (scripts/generate-ai-photos.mjs); always labeled on the page. */
+  ai?: boolean;
+}
+
+function readJson(file: string): Record<string, Photo> {
+  const p = join(process.cwd(), 'src/data', file);
+  try {
+    return existsSync(p) ? (JSON.parse(readFileSync(p, 'utf8')) as Record<string, Photo>) : {};
+  } catch {
+    return {};
+  }
 }
 
 let cache: Record<string, Photo> | undefined;
 export function photos(): Record<string, Photo> {
   if (cache) return cache;
   // Resolved from the project root: this module is bundled into dist/ during the build.
-  const p = join(process.cwd(), 'src/data/photos.json');
-  try {
-    cache = existsSync(p) ? (JSON.parse(readFileSync(p, 'utf8')) as Record<string, Photo>) : {};
-  } catch {
-    cache = {};
-  }
+  // Committed AI images take precedence over fetched stock photos for the same page.
+  cache = { ...readJson('photos.json'), ...readJson('ai-photos.json') };
   return cache;
 }
 
