@@ -35,6 +35,10 @@ for base in https://fountainfinances.com "$PAGES"; do
   out "- $base guide page x-robots-tag: ${G:-none} · meta robots: $(grep -o '<meta name="robots" content="[^"]*' /tmp/gb | sed 's/.*content="//')"
 done
 
+out "### AdSense"
+out "- https://fountainfinances.com/ads.txt → $(curl -s -m 15 -w ' (HTTP %{http_code})' https://fountainfinances.com/ads.txt | tr '\n' ' ')"
+out "- AdSense script on homepage: $(curl -s -m 15 https://fountainfinances.com/ | grep -o 'adsbygoogle.js?client=ca-pub-[0-9]*' | head -1 || echo missing)"
+
 out "### Search engine presence"
 for q in "site:fountainfinances.com" "site:fountainfinances.pages.dev"; do
   n=$(curl -s -m 20 -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' "https://www.bing.com/search?q=$(printf %s "$q" | jq -sRr @uri)&setlang=en-US&cc=US" | grep -o 'class="sb_count"[^<]*<[^>]*>[^<]*' | sed 's/<[^>]*>//g;s/class="sb_count"//' | head -1)
