@@ -162,7 +162,9 @@ for (const [slot, query] of Object.entries(slots)) {
   await sleep(KEY ? 250 : 400);
 }
 
-const sorted = Object.fromEntries(Object.keys(slots).filter((k) => photos[k]).map((k) => [k, photos[k]]));
+// Keep entries for slots outside images.json too (e.g. original images), listed after the Pexels slots.
+const order = [...Object.keys(slots), ...Object.keys(photos).filter((k) => !(k in slots))];
+const sorted = Object.fromEntries(order.filter((k) => photos[k]).map((k) => [k, photos[k]]));
 // Only rewrite the metadata when photos changed, so no-op runs don't create commits.
 if (fetched) writeFileSync(META, JSON.stringify(sorted, null, 2) + '\n');
 console.log(`Done: ${fetched} new, ${failed} failed, ${Object.keys(sorted).length}/${Object.keys(slots).length} slots have photos`);
