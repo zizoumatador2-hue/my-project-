@@ -1,0 +1,33 @@
+name: MarketTriggers (generate package-lock.json)
+# Workers Builds installs with `npm ci`, which needs a lockfile. This generates it and
+# commits it to the site branch and the production branch (markettriggers-live).
+on:
+  push:
+    branches: [claude/markettriggers-site]
+    paths: ['.github/workflows/markettriggers-lockfile.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Generate lockfile and verify npm ci + build
+        working-directory: markettriggers
+        run: |
+          npm install --no-audit --no-fund
+          rm -rf node_modules
+          npm ci --no-audit --no-fund
+          npm run build
+      - name: Commit and push to both branches
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add markettriggers/package-lock.json
+          git commit -m "MarketTriggers: add package-lock.json for Workers Builds (npm ci)"
+          git push origin HEAD:claude/markettriggers-site
+          git push origin HEAD:markettriggers-live
