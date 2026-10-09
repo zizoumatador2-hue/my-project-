@@ -13,6 +13,8 @@ interface Props {
   categoryLabel: string;
   categoryHref: string;
   faq?: { question: string; answer: string }[];
+  image?: string;
+  imageAlt?: string;
 }
 
 const {
@@ -25,7 +27,10 @@ const {
   categoryLabel,
   categoryHref,
   faq = [],
+  image,
+  imageAlt = '',
 } = Astro.props;
+const imgUrl = image ? `https://markettriggers.com/images/${image}-1344.webp` : 'https://markettriggers.com/og-home.jpg';
 
 const dateFmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -35,7 +40,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: title,
   description,
-  image: ['https://markettriggers.com/og-home.jpg'],
+  image: [imgUrl],
   inLanguage: 'en-US',
   datePublished: publishDate.toISOString(),
   dateModified: (modifiedDate ?? publishDate).toISOString(),
@@ -70,6 +75,8 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
   publishDate={publishDate}
   modifiedDate={modifiedDate}
   schema={schema}
+  image={image ? `/images/${image}-1344.webp` : '/og-home.jpg'}
+  preloadImage={image ? { srcset: `/images/${image}-768.webp 768w, /images/${image}-1344.webp 1344w`, sizes: '(max-width: 800px) 100vw, 760px' } : undefined}
 >
   <div class="disclaimer-strip">
     Educational content only — not personalized financial, investment, or trading advice.
@@ -94,6 +101,20 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
 
   <div class="container">
     <article class="article-body">
+      {image && (
+        <figure class="photo" style="margin-top:0;">
+          <img
+            src={`/images/${image}-1344.webp`}
+            srcset={`/images/${image}-768.webp 768w, /images/${image}-1344.webp 1344w`}
+            sizes="(max-width: 800px) 100vw, 760px"
+            width="1344"
+            height="768"
+            alt={imageAlt}
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )}
       <slot />
 
       {faq.length > 0 && (
@@ -114,7 +135,7 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
           <strong>{author}</strong>
           <p style="margin:4px 0 0; font-size:0.9rem; color:var(--color-text-muted);">
             The MarketTriggers Editorial Team researches and writes original, source-checked explainers on the economic indicators and market events that move U.S. markets.
-            <a href="/about/">More about our editorial process &rarr;</a>
+            <a href="/editorial-policy/">How we research and fact-check &rarr;</a>
           </p>
         </div>
       </div>

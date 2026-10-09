@@ -29,6 +29,8 @@ const articles = defineCollection({
     primaryKeyword: z.string(),
     secondaryKeywords: z.array(z.string()).default([]),
     author: z.string().default('MarketTriggers Editorial Team'),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
     draft: z.boolean().default(false),
     faq: z
       .array(
