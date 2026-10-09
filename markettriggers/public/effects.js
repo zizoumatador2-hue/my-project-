@@ -60,9 +60,51 @@
     });
   }
 
+  /* Table of contents: highlight the section being read */
+  var tocLinks = document.querySelectorAll('.article-toc a');
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    var map = {};
+    tocLinks.forEach(function (a) { map[decodeURIComponent(a.hash.slice(1))] = a; });
+    var current = null;
+    var tio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && map[en.target.id]) {
+          if (current) current.classList.remove('is-current');
+          current = map[en.target.id]; current.classList.add('is-current');
+        }
+      });
+    }, { rootMargin: '0px 0px -70% 0px' });
+    Object.keys(map).forEach(function (id) { var h = document.getElementById(id); if (h) tio.observe(h); });
+  }
+
   if (reduce) {
     document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-revealed'); });
     return;
+  }
+
+  /* Headline reveal: split the title into words (text stays one accessible string) */
+  document.querySelectorAll('[data-split]').forEach(function (h) {
+    var text = h.textContent.trim();
+    h.setAttribute('aria-label', text);
+    h.innerHTML = text.split(/\s+/).map(function (w, i) {
+      var span = document.createElement('span');
+      span.className = 'w'; span.setAttribute('aria-hidden', 'true');
+      span.style.setProperty('--i', i); span.textContent = w;
+      return span.outerHTML;
+    }).join(' ');
+  });
+
+  /* Magnetic buttons: drift a few pixels toward the cursor (desktop pointers only) */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.btn').forEach(function (b) {
+      b.classList.add('is-magnetic');
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        b.style.transform = 'translate(' + (dx * 0.18) + 'px,' + (dy * 0.28) + 'px)';
+      });
+      b.addEventListener('pointerleave', function () { b.style.transform = ''; });
+    });
   }
 
   /* Scroll-velocity ticker: drifts slowly, speeds up with scroll speed and direction */
@@ -103,7 +145,7 @@
   }
 
   /* Scroll reveal (fade + rise) */
-  var revealEls = document.querySelectorAll('[data-reveal], .pillar-body h2, .pillar-body table, .pillar-body .callout');
+  var revealEls = document.querySelectorAll('[data-reveal], .pillar-body h2, .pillar-body table, .pillar-body .callout, .article-body table, .article-body .callout, .related .card');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

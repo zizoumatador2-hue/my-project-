@@ -1,21 +1,34 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('articles', ({ data }) => !data.draft);
-  return entries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  return entries.map((entry) => {
+    const others = entries
+      .filter((e) => e.id !== entry.id)
+      .sort((a, b) => {
+        const sa = a.data.category === entry.data.category ? 1 : 0;
+        const sb = b.data.category === entry.data.category ? 1 : 0;
+        if (sa !== sb) return sb - sa;
+        return b.data.publishDate.getTime() - a.data.publishDate.getTime();
+      })
+      .slice(0, 3);
+    return { params: { slug: entry.id }, props: { entry, related: others } };
+  });
 }
 
 interface Props {
   entry: CollectionEntry<'articles'>;
+  related: CollectionEntry<'articles'>[];
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { entry, related } = Astro.props;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2 && !/^(sources|related reading)$/i.test(h.text));
+const words = (entry.body ?? '').replace(/[#*`>|\-]/g, ' ').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(words / 238));
 
 const categoryMap: Record<string, { label: string; href: string }> = {
   'economic-indicators': { label: 'Economic Indicators', href: '/economic-indicators/' },
@@ -39,6 +52,20 @@ const cat = categoryMap[entry.data.category];
   faq={entry.data.faq}
   image={entry.data.image}
   imageAlt={entry.data.imageAlt}
+  toc={toc}
+  readingMinutes={readingMinutes}
 >
   <Content />
+  <Fragment slot="related">
+  {related.length > 0 && (
+    <section class="related" aria-labelledby="related-heading">
+      <h2 id="related-heading">Keep reading</h2>
+      <div class="related__grid">
+        {related.map((r) => (
+          <ArticleCard entry={r} categoryLabel={categoryMap[r.data.category].label} />
+        ))}
+      </div>
+    </section>
+  )}
+  </Fragment>
 </ArticleLayout>
