@@ -4,6 +4,8 @@ name: MarketTriggers (Cloudflare Pages)
 # - any other branch -> preview deploy on *.pages.dev (never touches production or DNS)
 on:
   push:
+    # markettriggers-live is built and deployed by Cloudflare Workers Builds (connected to this repo).
+    branches-ignore: [markettriggers-live]
     paths: ['markettriggers/**', '.github/workflows/markettriggers-deploy.yml']
   workflow_dispatch:
 concurrency: markettriggers-deploy

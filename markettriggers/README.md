@@ -26,5 +26,5 @@ Astro 5 static site — U.S. financial education. English, mobile-first, AdSense
 - Submit `https://markettriggers.com/sitemap-index.xml` in Google Search Console and Bing Webmaster Tools.
 
 ## Deploys (GitHub Actions → Cloudflare Pages)
-- Push to `markettriggers-live` → production on markettriggers.com (attaches domain + DNS).
+- Push to `markettriggers-live` → Cloudflare Workers Builds (connected in the Cloudflare dashboard) builds `markettriggers/` and runs `npx wrangler deploy --config wrangler.assets.toml`. No API token is stored in GitHub.
 - Push to any other branch → preview on `<branch>.markettriggers.pages.dev`.
