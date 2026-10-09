@@ -3,7 +3,7 @@ name: MarketTriggers (diagnose domain, read-only)
 on:
   push:
     paths: ['.github/workflows/markettriggers-diagnose.yml']
-    # rev 5
+    # rev 6
   workflow_dispatch:
 jobs:
   diagnose:
