@@ -3,12 +3,6 @@ main = "worker/src/index.ts"
 compatibility_date = "2026-09-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Route to custom domain
-routes = [
-  { pattern = "trusttransfer.reputationsdefender.com", zone_name = "reputationsdefender.com" },
-  { pattern = "marketplace.reputationsdefender.com", zone_name = "reputationsdefender.com" }
-]
-
 [assets]
 directory = "./dist"
 binding = "ASSETS"
