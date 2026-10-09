@@ -1,6 +1,6 @@
 ---
 title: "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons"
-description: "A company beats estimates and its stock drops. The usual culprits: weak guidance, a low-quality beat, sky-high expectations, or margins. Here's how to spot each."
+description: "A company beats estimates and its stock drops anyway. The usual culprits: weak guidance, a low-quality beat, or sky-high expectations. How to spot each."
 publishDate: 2026-10-09
 category: stock-market-triggers
 series: market-trigger-breakdown
