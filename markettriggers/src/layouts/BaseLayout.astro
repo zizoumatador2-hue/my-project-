@@ -63,7 +63,7 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     img,svg{max-width:100%;display:block}
     a{color:var(--color-primary);text-decoration:none}
     .container{max-width:1180px;margin:0 auto;padding:0 20px}
-    .site-header{border-bottom:1px solid #e3e6ea;position:sticky;top:0;background:rgba(255,255,255,.97);z-index:50}
+    .site-header{border-bottom:1px solid #e3e6ea;position:sticky;top:0;background:#fff;z-index:50}
     .site-header__inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1180px;margin:0 auto}
     .brand{font-weight:700;font-size:1.35rem;color:#082b66}
     .progress-bar{position:fixed;top:0;left:0;right:0;height:3px;transform:scaleX(0)}
@@ -77,8 +77,8 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   </style>
 
   <!-- Non-critical CSS, loaded async -->
-  <link rel="preload" as="style" href="/global.css?v=3" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="/global.css?v=3" /></noscript>
+  <link rel="preload" as="style" href="/global.css?v=4" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/global.css?v=4" /></noscript>
 
   {schemaList.map((s) => (
     <script type="application/ld+json" set:html={JSON.stringify(s)} />
@@ -102,7 +102,7 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   <Footer />
   <button class="to-top" type="button" aria-label="Back to top">&uarr;</button>
   <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Cookie choices" hidden>
-    <p>We use cookies to measure traffic and show ads. Choose whether ads can be personalized. <a href="/privacy-policy/">Privacy Policy</a></p>
+    <p>We use cookies for traffic stats and ads. Allow personalized ads? <a href="/privacy-policy/">Privacy Policy</a></p>
     <div class="cookie-bar__actions">
       <button type="button" class="btn" data-consent="accept">Accept all</button>
       <button type="button" class="btn btn--ghost" data-consent="reject">Essential only</button>

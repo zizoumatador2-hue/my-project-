@@ -549,3 +549,11 @@ a.card { -webkit-user-drag: none; }
 .hub-topics .card__title { margin-top: 0; }
 
 @media (prefers-reduced-motion: reduce) { .photo img { transition: none; } }
+
+.site-header { background: #fff; }
+@media (max-width: 640px) {
+  .cookie-bar { left: 10px; right: 10px; bottom: 10px; padding: 10px 12px; gap: 8px; font-size: .84rem; }
+  .cookie-bar p { flex-basis: 100%; }
+  .cookie-bar__actions { width: 100%; }
+  .cookie-bar__actions .btn { flex: 1; justify-content: center; min-height: 44px; padding: 8px 12px; }
+}

@@ -60,7 +60,7 @@ export const hubs: Record<string, Hub> = {
   'stock-market-triggers': {
     slug: 'stock-market-triggers',
     label: 'Stock Market Triggers',
-    title: 'Stock Market Triggers: Earnings, Guidance and Corporate News',
+    title: 'Stock Market Triggers: Earnings and Corporate News',
     heading: 'Stock Market Triggers',
     description:
       'How earnings reports, guidance, analyst ratings, buybacks, dividends, IPOs, mergers, and SEC filings move individual stocks and sometimes the whole market.',
@@ -173,7 +173,7 @@ export const hubs: Record<string, Hub> = {
   'market-events': {
     slug: 'market-events',
     label: 'Market Events',
-    title: 'Market Events: Fed Meetings, Data Releases and What to Watch',
+    title: 'Market Events: Fed Meetings and Key Data Releases',
     heading: 'Market Events',
     description:
       'A guide to the scheduled events that move U.S. markets: FOMC meetings, CPI and jobs report days, earnings season, options expiration, and index rebalancing.',
