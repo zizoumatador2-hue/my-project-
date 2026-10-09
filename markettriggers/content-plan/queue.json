@@ -1,0 +1,714 @@
+{
+  "site": "https://markettriggers.com",
+  "cadence": "one article every 2 days",
+  "rules": [
+    "Publish the first item with status 'queued' whose date is today or earlier; if several are overdue, publish only the oldest one per run.",
+    "1500-2300 words, natural American English, 40-60 word direct answer first, sourced facts only (official primary sources), 3-4 FAQ entries, 2+ internal links to published articles + 1 link to the matching hub page and 1 to the homepage guide.",
+    "Never invent statistics, quotes or dates. Label hypotheticals. No personalized advice.",
+    "After publishing set status to 'published' and add publishedOn; never reuse a slug."
+  ],
+  "items": [
+    {
+      "n": 1,
+      "date": "2026-10-09",
+      "slug": "how-does-inflation-affect-stocks",
+      "title": "How Does Inflation Affect Stocks? What Investors Should Know",
+      "primaryKeyword": "how does inflation affect stocks",
+      "category": "economic-indicators",
+      "image": "grocery-prices",
+      "status": "published"
+    },
+    {
+      "n": 2,
+      "date": "2026-10-09",
+      "slug": "what-happens-to-stocks-when-the-fed-cuts-rates",
+      "title": "What Happens to Stocks When the Fed Cuts Rates?",
+      "primaryKeyword": "what happens to stocks when the fed cuts rates",
+      "category": "market-events",
+      "image": "washington-columns",
+      "status": "published"
+    },
+    {
+      "n": 3,
+      "date": "2026-10-09",
+      "slug": "why-do-stocks-fall-after-earnings",
+      "title": "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons",
+      "primaryKeyword": "why do stocks fall after earnings",
+      "category": "stock-market-triggers",
+      "image": "boardroom-earnings",
+      "status": "published"
+    },
+    {
+      "n": 4,
+      "date": "2026-10-11",
+      "slug": "how-to-read-an-earnings-report",
+      "title": "How to Read an Earnings Report in 10 Minutes",
+      "primaryKeyword": "how to read an earnings report",
+      "secondaryKeywords": [
+        "earnings report explained",
+        "EPS vs revenue",
+        "earnings call"
+      ],
+      "category": "stock-market-triggers",
+      "series": "investor-guide",
+      "image": "boardroom-earnings",
+      "status": "queued"
+    },
+    {
+      "n": 5,
+      "date": "2026-10-13",
+      "slug": "what-is-earnings-guidance",
+      "title": "What Is Earnings Guidance and Why Does It Move Stocks?",
+      "primaryKeyword": "what is earnings guidance",
+      "secondaryKeywords": [
+        "forward guidance stocks",
+        "guidance cut",
+        "raised guidance"
+      ],
+      "category": "stock-market-triggers",
+      "series": "market-trigger-breakdown",
+      "image": "boardroom-earnings",
+      "status": "queued"
+    },
+    {
+      "n": 6,
+      "date": "2026-10-15",
+      "slug": "gaap-vs-adjusted-earnings",
+      "title": "GAAP vs. Adjusted Earnings: What Investors Should Know",
+      "primaryKeyword": "gaap vs adjusted earnings",
+      "secondaryKeywords": [
+        "non-GAAP earnings",
+        "adjusted EPS",
+        "one-time items"
+      ],
+      "category": "stock-market-triggers",
+      "series": "investor-guide",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 7,
+      "date": "2026-10-17",
+      "slug": "cpi-vs-pce",
+      "title": "CPI vs. PCE: Which Inflation Number Moves Markets?",
+      "primaryKeyword": "cpi vs pce",
+      "secondaryKeywords": [
+        "PCE price index",
+        "Fed inflation target",
+        "core PCE"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "grocery-prices",
+      "status": "queued"
+    },
+    {
+      "n": 8,
+      "date": "2026-10-19",
+      "slug": "what-is-core-cpi",
+      "title": "What Is Core CPI and Why Does the Fed Watch It?",
+      "primaryKeyword": "what is core cpi",
+      "secondaryKeywords": [
+        "core inflation",
+        "headline vs core CPI",
+        "CPI report"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "grocery-prices",
+      "status": "queued"
+    },
+    {
+      "n": 9,
+      "date": "2026-10-21",
+      "slug": "fomc-meeting-day-what-to-watch",
+      "title": "FOMC Meeting Day: What to Watch, Hour by Hour",
+      "primaryKeyword": "fomc meeting explained",
+      "secondaryKeywords": [
+        "Fed statement",
+        "Fed press conference",
+        "FOMC minutes"
+      ],
+      "category": "market-events",
+      "series": "economic-event-explained",
+      "image": "washington-columns",
+      "status": "queued"
+    },
+    {
+      "n": 10,
+      "date": "2026-10-23",
+      "slug": "how-interest-rates-affect-stock-valuations",
+      "title": "How Interest Rates Affect Stock Valuations",
+      "primaryKeyword": "how do interest rates affect stocks",
+      "secondaryKeywords": [
+        "discount rate stocks",
+        "rates and P/E ratio",
+        "growth stocks and rates"
+      ],
+      "category": "investor-education",
+      "series": "investor-guide",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 11,
+      "date": "2026-10-25",
+      "slug": "how-the-jobs-report-moves-the-stock-market",
+      "title": "How the Jobs Report Moves the Stock Market",
+      "primaryKeyword": "how does the jobs report affect the stock market",
+      "secondaryKeywords": [
+        "nonfarm payrolls",
+        "unemployment rate stocks",
+        "average hourly earnings"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "home-investor",
+      "status": "queued"
+    },
+    {
+      "n": 12,
+      "date": "2026-10-27",
+      "slug": "initial-jobless-claims-explained",
+      "title": "What Are Initial Jobless Claims and Why Do They Matter?",
+      "primaryKeyword": "initial jobless claims",
+      "secondaryKeywords": [
+        "weekly jobless claims",
+        "continuing claims",
+        "layoffs indicator"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "home-investor",
+      "status": "queued"
+    },
+    {
+      "n": 13,
+      "date": "2026-10-29",
+      "slug": "producer-price-index-explained",
+      "title": "The Producer Price Index (PPI) Explained",
+      "primaryKeyword": "producer price index explained",
+      "secondaryKeywords": [
+        "PPI vs CPI",
+        "wholesale inflation",
+        "PPI report"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "grocery-prices",
+      "status": "queued"
+    },
+    {
+      "n": 14,
+      "date": "2026-10-31",
+      "slug": "ism-manufacturing-pmi-explained",
+      "title": "The ISM Manufacturing PMI Explained",
+      "primaryKeyword": "ism manufacturing pmi",
+      "secondaryKeywords": [
+        "PMI 50 level",
+        "ISM services PMI",
+        "new orders index"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 15,
+      "date": "2026-11-02",
+      "slug": "stock-market-correction-vs-bear-market",
+      "title": "Stock Market Correction vs. Bear Market: What's the Difference?",
+      "primaryKeyword": "correction vs bear market",
+      "secondaryKeywords": [
+        "what is a stock market correction",
+        "bear market definition",
+        "pullback"
+      ],
+      "category": "investor-education",
+      "series": "investor-guide",
+      "image": "storm-skyline",
+      "status": "queued"
+    },
+    {
+      "n": 16,
+      "date": "2026-11-04",
+      "slug": "what-is-the-vix",
+      "title": "What Is the VIX? The Market's Fear Gauge Explained",
+      "primaryKeyword": "what is the vix",
+      "secondaryKeywords": [
+        "VIX index",
+        "volatility index",
+        "fear gauge"
+      ],
+      "category": "investor-education",
+      "series": "investor-guide",
+      "image": "storm-skyline",
+      "status": "queued"
+    },
+    {
+      "n": 17,
+      "date": "2026-11-06",
+      "slug": "retail-sales-report-explained",
+      "title": "Retail Sales Report: Why Wall Street Cares",
+      "primaryKeyword": "retail sales report explained",
+      "secondaryKeywords": [
+        "retail sales control group",
+        "consumer spending stocks",
+        "holiday sales"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "grocery-prices",
+      "status": "queued"
+    },
+    {
+      "n": 18,
+      "date": "2026-11-08",
+      "slug": "consumer-confidence-vs-consumer-sentiment",
+      "title": "Consumer Confidence vs. Consumer Sentiment: What's the Difference?",
+      "primaryKeyword": "consumer confidence vs consumer sentiment",
+      "secondaryKeywords": [
+        "Conference Board index",
+        "University of Michigan sentiment",
+        "inflation expectations"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "home-investor",
+      "status": "queued"
+    },
+    {
+      "n": 19,
+      "date": "2026-11-10",
+      "slug": "what-is-gdp-and-why-it-matters",
+      "title": "What Is GDP and Why Does It Matter to Investors?",
+      "primaryKeyword": "what is gdp and why does it matter",
+      "secondaryKeywords": [
+        "GDP report",
+        "advance GDP estimate",
+        "GDP and stocks"
+      ],
+      "category": "economic-indicators",
+      "series": "economic-event-explained",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 20,
+      "date": "2026-11-12",
+      "slug": "yield-curve-inversion-explained",
+      "title": "Yield Curve Inversion: What It Means for Stocks",
+      "primaryKeyword": "yield curve inversion explained",
+      "secondaryKeywords": [
+        "inverted yield curve recession",
+        "2s10s spread",
+        "yield curve"
+      ],
+      "category": "economic-indicators",
+      "series": "investor-guide",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 21,
+      "date": "2026-11-14",
+      "slug": "what-is-the-10-year-treasury-yield",
+      "title": "What Is the 10-Year Treasury Yield and Why Does It Matter?",
+      "primaryKeyword": "10 year treasury yield",
+      "secondaryKeywords": [
+        "treasury yields and stocks",
+        "mortgage rates and 10-year",
+        "bond yields"
+      ],
+      "category": "economic-indicators",
+      "series": "investor-guide",
+      "image": "washington-columns",
+      "status": "queued"
+    },
+    {
+      "n": 22,
+      "date": "2026-11-16",
+      "slug": "stocks-and-bonds-falling-together",
+      "title": "Stocks vs. Bonds: Why They Sometimes Fall Together",
+      "primaryKeyword": "why stocks and bonds fall together",
+      "secondaryKeywords": [
+        "stock bond correlation",
+        "60/40 portfolio",
+        "bonds as diversifier"
+      ],
+      "category": "investor-education",
+      "series": "investor-guide",
+      "image": "storm-skyline",
+      "status": "queued"
+    },
+    {
+      "n": 23,
+      "date": "2026-11-18",
+      "slug": "what-is-the-fed-dot-plot",
+      "title": "What Is the Fed Dot Plot and How to Read It",
+      "primaryKeyword": "fed dot plot explained",
+      "secondaryKeywords": [
+        "Summary of Economic Projections",
+        "dot plot meaning",
+        "rate projections"
+      ],
+      "category": "market-events",
+      "series": "economic-event-explained",
+      "image": "washington-columns",
+      "status": "queued"
+    },
+    {
+      "n": 24,
+      "date": "2026-11-20",
+      "slug": "what-is-quantitative-tightening",
+      "title": "What Is Quantitative Tightening (QT)?",
+      "primaryKeyword": "what is quantitative tightening",
+      "secondaryKeywords": [
+        "QT vs QE",
+        "Fed balance sheet",
+        "quantitative easing"
+      ],
+      "category": "market-events",
+      "series": "economic-event-explained",
+      "image": "washington-columns",
+      "status": "queued"
+    },
+    {
+      "n": 25,
+      "date": "2026-11-22",
+      "slug": "taper-tantrum-2013-lessons",
+      "title": "The 2013 Taper Tantrum: What It Teaches Investors",
+      "primaryKeyword": "taper tantrum",
+      "secondaryKeywords": [
+        "Bernanke taper",
+        "bond market selloff",
+        "Fed guidance"
+      ],
+      "category": "investor-education",
+      "series": "market-trigger-breakdown",
+      "image": "washington-columns",
+      "status": "queued"
+    },
+    {
+      "n": 26,
+      "date": "2026-11-24",
+      "slug": "are-stock-buybacks-good",
+      "title": "Are Stock Buybacks Good for Investors?",
+      "primaryKeyword": "are stock buybacks good",
+      "secondaryKeywords": [
+        "share repurchase",
+        "buyback EPS",
+        "buybacks vs dividends"
+      ],
+      "category": "stock-market-triggers",
+      "series": "investor-guide",
+      "image": "boardroom-earnings",
+      "status": "queued"
+    },
+    {
+      "n": 27,
+      "date": "2026-11-26",
+      "slug": "ex-dividend-date-explained",
+      "title": "Ex-Dividend Date Explained (With Examples)",
+      "primaryKeyword": "ex-dividend date explained",
+      "secondaryKeywords": [
+        "record date",
+        "dividend capture",
+        "payment date"
+      ],
+      "category": "stock-market-triggers",
+      "series": "investor-guide",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 28,
+      "date": "2026-11-28",
+      "slug": "what-is-a-stock-split",
+      "title": "What Is a Stock Split and Does It Matter?",
+      "primaryKeyword": "what is a stock split",
+      "secondaryKeywords": [
+        "reverse stock split",
+        "stock split explained",
+        "split-adjusted"
+      ],
+      "category": "stock-market-triggers",
+      "series": "investor-guide",
+      "image": "home-investor",
+      "status": "queued"
+    },
+    {
+      "n": 29,
+      "date": "2026-11-30",
+      "slug": "ipo-lockup-expiration-explained",
+      "title": "IPO Lockup Expiration Explained",
+      "primaryKeyword": "ipo lockup expiration",
+      "secondaryKeywords": [
+        "lockup period",
+        "insider selling after IPO",
+        "IPO stock drop"
+      ],
+      "category": "stock-market-triggers",
+      "series": "market-trigger-breakdown",
+      "image": "boardroom-earnings",
+      "status": "queued"
+    },
+    {
+      "n": 30,
+      "date": "2026-12-02",
+      "slug": "sec-filings-that-move-stocks",
+      "title": "SEC Filings That Move Stocks: 8-K, 10-Q, Form 4, 13D",
+      "primaryKeyword": "sec filings explained",
+      "secondaryKeywords": [
+        "8-K filing",
+        "Form 4 insider",
+        "Schedule 13D"
+      ],
+      "category": "stock-market-triggers",
+      "series": "investor-guide",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 31,
+      "date": "2026-12-04",
+      "slug": "insider-buying-and-selling",
+      "title": "Insider Buying and Selling: What Form 4 Tells You",
+      "primaryKeyword": "insider buying",
+      "secondaryKeywords": [
+        "insider trading legal",
+        "Form 4 filing",
+        "insider selling stock"
+      ],
+      "category": "stock-market-triggers",
+      "series": "market-trigger-breakdown",
+      "image": "boardroom-earnings",
+      "status": "queued"
+    },
+    {
+      "n": 32,
+      "date": "2026-12-06",
+      "slug": "cyclical-vs-defensive-stocks",
+      "title": "Cyclical vs. Defensive Stocks Explained",
+      "primaryKeyword": "cyclical vs defensive stocks",
+      "secondaryKeywords": [
+        "defensive sectors",
+        "cyclical sectors",
+        "recession stocks"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 33,
+      "date": "2026-12-08",
+      "slug": "which-sectors-do-best-when-rates-fall",
+      "title": "Which Sectors Do Best When Interest Rates Fall?",
+      "primaryKeyword": "best sectors when interest rates fall",
+      "secondaryKeywords": [
+        "rate cut sectors",
+        "rate sensitive stocks",
+        "sector rotation rates"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 34,
+      "date": "2026-12-10",
+      "slug": "how-oil-prices-affect-the-stock-market",
+      "title": "How Oil Prices Affect the Stock Market",
+      "primaryKeyword": "how do oil prices affect stocks",
+      "secondaryKeywords": [
+        "oil and stocks",
+        "energy stocks",
+        "OPEC+ decisions"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "oil-pumpjacks",
+      "status": "queued"
+    },
+    {
+      "n": 35,
+      "date": "2026-12-12",
+      "slug": "how-a-strong-dollar-affects-us-stocks",
+      "title": "How a Strong Dollar Affects U.S. Stocks",
+      "primaryKeyword": "how does the dollar affect stocks",
+      "secondaryKeywords": [
+        "strong dollar multinationals",
+        "DXY",
+        "currency and earnings"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 36,
+      "date": "2026-12-14",
+      "slug": "growth-vs-value-stocks-and-rates",
+      "title": "Growth vs. Value Stocks: How Interest Rates Pick a Winner",
+      "primaryKeyword": "growth vs value stocks",
+      "secondaryKeywords": [
+        "value stocks rising rates",
+        "growth stocks",
+        "style rotation"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 37,
+      "date": "2026-12-16",
+      "slug": "small-caps-vs-large-caps",
+      "title": "Small Caps vs. Large Caps: What the Russell 2000 Signals",
+      "primaryKeyword": "small caps vs large caps",
+      "secondaryKeywords": [
+        "Russell 2000",
+        "small cap stocks rates",
+        "market breadth"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 38,
+      "date": "2026-12-18",
+      "slug": "how-interest-rates-affect-bank-stocks",
+      "title": "How Interest Rates Affect Bank Stocks",
+      "primaryKeyword": "how do interest rates affect bank stocks",
+      "secondaryKeywords": [
+        "net interest margin",
+        "bank stocks yield curve",
+        "regional banks"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "washington-columns",
+      "status": "queued"
+    },
+    {
+      "n": 39,
+      "date": "2026-12-20",
+      "slug": "why-reits-fall-when-rates-rise",
+      "title": "Why REITs Fall When Interest Rates Rise",
+      "primaryKeyword": "reits and interest rates",
+      "secondaryKeywords": [
+        "REIT stocks",
+        "real estate sector",
+        "dividend stocks rates"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 40,
+      "date": "2026-12-22",
+      "slug": "how-tariffs-affect-the-stock-market",
+      "title": "How Tariffs Affect the Stock Market",
+      "primaryKeyword": "how do tariffs affect the stock market",
+      "secondaryKeywords": [
+        "tariffs and stocks",
+        "trade war stocks",
+        "import costs"
+      ],
+      "category": "market-events",
+      "series": "market-trigger-breakdown",
+      "image": "oil-pumpjacks",
+      "status": "queued"
+    },
+    {
+      "n": 41,
+      "date": "2026-12-24",
+      "slug": "stock-market-circuit-breakers-explained",
+      "title": "Stock Market Circuit Breakers Explained",
+      "primaryKeyword": "stock market circuit breakers",
+      "secondaryKeywords": [
+        "market-wide circuit breaker",
+        "trading halt",
+        "limit up limit down"
+      ],
+      "category": "market-events",
+      "series": "investor-guide",
+      "image": "storm-skyline",
+      "status": "queued"
+    },
+    {
+      "n": 42,
+      "date": "2026-12-26",
+      "slug": "options-expiration-day-explained",
+      "title": "Options Expiration Day Explained: What Happens to Stocks?",
+      "primaryKeyword": "options expiration day",
+      "secondaryKeywords": [
+        "monthly opex",
+        "triple witching",
+        "quad witching"
+      ],
+      "category": "market-events",
+      "series": "market-trigger-breakdown",
+      "image": "notebook-chart",
+      "status": "queued"
+    },
+    {
+      "n": 43,
+      "date": "2026-12-28",
+      "slug": "how-index-rebalancing-moves-stocks",
+      "title": "How Index Rebalancing Moves Stocks",
+      "primaryKeyword": "s&p 500 index rebalancing",
+      "secondaryKeywords": [
+        "S&P 500 addition",
+        "index inclusion effect",
+        "passive fund flows"
+      ],
+      "category": "market-events",
+      "series": "market-trigger-breakdown",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    },
+    {
+      "n": 44,
+      "date": "2026-12-30",
+      "slug": "what-does-priced-in-mean",
+      "title": "What Does \"Priced In\" Mean in the Stock Market?",
+      "primaryKeyword": "what does priced in mean",
+      "secondaryKeywords": [
+        "buy the rumor sell the news",
+        "market expectations",
+        "fed funds futures"
+      ],
+      "category": "investor-education",
+      "series": "investor-guide",
+      "image": "home-investor",
+      "status": "queued"
+    },
+    {
+      "n": 45,
+      "date": "2027-01-01",
+      "slug": "sector-rotation-explained",
+      "title": "Sector Rotation Explained: How Money Moves Through the Market",
+      "primaryKeyword": "sector rotation explained",
+      "secondaryKeywords": [
+        "business cycle sectors",
+        "sector rotation strategy",
+        "defensive rotation"
+      ],
+      "category": "market-sectors",
+      "series": "sector-impact",
+      "image": "skyline-sunrise",
+      "status": "queued"
+    }
+  ]
+}
