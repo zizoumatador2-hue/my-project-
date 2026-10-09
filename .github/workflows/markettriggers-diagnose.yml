@@ -3,7 +3,7 @@ name: MarketTriggers (diagnose domain, read-only)
 on:
   push:
     paths: ['.github/workflows/markettriggers-diagnose.yml']
-    # rev 2
+    # rev 3
   workflow_dispatch:
 jobs:
   diagnose:
@@ -35,10 +35,16 @@ jobs:
           n "pages-projects: $(echo "$P" | jq -c '{ok:.success,err:.errors[0].message,p:[.result[]? | {name,subdomain,domains}]}')"
           n "markettriggers-domains: $(curl -sS -H "$H" "$API/accounts/$ACC/pages/projects/markettriggers/domains" | jq -c '[.result[]? | {name,status,v:.validation_data.status,ve:.validation_data.error_message,vf:.verification_data.status,vfe:.verification_data.error_message}]')"
           n "public-dns markettriggers.com: A=$(dig +short markettriggers.com A | tr '\n' ' ') CNAME=$(dig +short markettriggers.com CNAME) NS=$(dig +short markettriggers.com NS | tr '\n' ' ')"
+      - name: Crawler access
+        run: |
+          T="$(printf '%s' "$T" | tr -d '[:space:]')"; echo "::add-mask::$T"
+          API=https://api.cloudflare.com/client/v4; H="Authorization: Bearer $T"
+          ZID=$(curl -sS -H "$H" "$API/zones?name=markettriggers.com" | jq -r '.result[0].id // empty')
+          n() { echo "::notice::$*"; }
           n "public-dns www: $(dig +short www.markettriggers.com | tr '\n' ' ')"
           n "http-head: $(curl -sSI https://markettriggers.com/ | grep -iE '^(HTTP|server|cf-ray|x-powered|location)' | tr '\r\n' ' ')"
           curl -sS https://markettriggers.com/robots.txt > /tmp/robots.txt; n "robots-bytes: $(wc -c < /tmp/robots.txt)"
-          i=0; while IFS= read -r line; do i=$((i+1)); [ -n "$line" ] && n "robots[$i]: $line"; [ $i -ge 60 ] && break; done < /tmp/robots.txt
+          n "robots: $(grep -v '^#' /tmp/robots.txt | grep -v '^$' | head -60 | tr '\n' '|' )"
           for UA in "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "Mediapartners-Google" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36"; do
             n "fetch as [$UA]: $(curl -sS -o /dev/null -w '%{http_code} %{size_download}B' -A "$UA" https://markettriggers.com/)"
           done
