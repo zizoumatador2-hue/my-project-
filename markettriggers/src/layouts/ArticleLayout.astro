@@ -15,6 +15,8 @@ interface Props {
   faq?: { question: string; answer: string }[];
   image?: string;
   imageAlt?: string;
+  toc?: { slug: string; text: string }[];
+  readingMinutes?: number;
 }
 
 const {
@@ -29,6 +31,8 @@ const {
   faq = [],
   image,
   imageAlt = '',
+  toc = [],
+  readingMinutes,
 } = Astro.props;
 const imgUrl = image ? `https://markettriggers.com/images/${image}-1344.webp` : 'https://markettriggers.com/og-home.jpg';
 
@@ -89,13 +93,14 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
         { label: title },
       ]}
     />
-    <h1>{title}</h1>
+    <h1 data-split>{title}</h1>
     <div class="article-meta">
       <span>By {author}</span>
       <span>Published <time datetime={publishDate.toISOString()}>{dateFmt(publishDate)}</time></span>
       {modifiedDate && (
         <span>Updated <time datetime={modifiedDate.toISOString()}>{dateFmt(modifiedDate)}</time></span>
       )}
+      {readingMinutes && <span>{readingMinutes} min read</span>}
     </div>
   </div>
 
@@ -114,6 +119,14 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
             decoding="async"
           />
         </figure>
+      )}
+      {toc.length > 2 && (
+        <details class="article-toc" open>
+          <summary>In this article</summary>
+          <ol>
+            {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+          </ol>
+        </details>
       )}
       <slot />
 
@@ -139,6 +152,7 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
           </p>
         </div>
       </div>
+      <slot name="related" />
     </article>
   </div>
 </BaseLayout>

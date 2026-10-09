@@ -557,3 +557,31 @@ a.card { -webkit-user-drag: none; }
   .cookie-bar__actions { width: 100%; }
   .cookie-bar__actions .btn { flex: 1; justify-content: center; min-height: 44px; padding: 8px 12px; }
 }
+
+/* ---------- Article reading aids (v5) ---------- */
+.article-body h2, .article-body h3 { scroll-margin-top: 88px; }
+.article-toc {
+  margin: 0 0 28px; padding: 14px 18px; border: 1px solid var(--color-border);
+  border-radius: var(--radius); background: var(--color-bg-alt);
+}
+.article-toc summary { cursor: pointer; font-weight: 700; font-size: .95rem; list-style-position: outside; }
+.article-toc ol { margin: 10px 0 2px; padding-left: 22px; font-size: .93rem; line-height: 1.55; }
+.article-toc li { margin: 3px 0; }
+.article-toc a { color: var(--color-text-muted); text-decoration: none; border-left: 2px solid transparent; padding-left: 8px; margin-left: -10px; display: inline-block; transition: color .2s, border-color .2s; }
+.article-toc a:hover, .article-toc a.is-current { color: var(--color-primary); border-left-color: var(--color-accent); }
+
+.related { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--color-border); }
+.related h2 { margin-top: 0; }
+.related__grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+/* Title reveal: words rise in one after another */
+[data-split] .w { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(4px);
+  animation: mt-word .7s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 45ms); }
+@keyframes mt-word { to { opacity: 1; transform: none; filter: none; } }
+
+/* Magnetic buttons */
+.btn.is-magnetic { transition: transform .25s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-split] .w { animation: none; opacity: 1; transform: none; filter: none; }
+}
