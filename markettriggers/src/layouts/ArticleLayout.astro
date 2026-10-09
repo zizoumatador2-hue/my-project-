@@ -35,6 +35,8 @@ const articleSchema = {
   '@type': 'Article',
   headline: title,
   description,
+  image: ['https://markettriggers.com/og-home.jpg'],
+  inLanguage: 'en-US',
   datePublished: publishDate.toISOString(),
   dateModified: (modifiedDate ?? publishDate).toISOString(),
   author: { '@type': 'Organization', name: author },

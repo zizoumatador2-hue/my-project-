@@ -2,9 +2,9 @@
 
 **The stock market moves when investors change their expectations about future corporate profits, interest rates, or risk.** Economic data, Federal Reserve decisions, company earnings, and unexpected events are the most common triggers. Prices react less to the news itself than to how far the news differs from what investors already expected.
 
-That last sentence is the single most useful idea on this page, so it is worth slowing down on. A jobs report showing strong hiring can send stocks lower. A company can post record profits and watch its shares fall. A Fed rate cut can be followed by a selloff. None of these outcomes are contradictions once you understand that markets trade on *surprise relative to expectations*, not on whether news is good or bad in isolation.
+If you remember one thing from this guide, make it that. A jobs report showing strong hiring can send stocks lower. A company can post record profits and watch its shares fall. A Fed rate cut can be followed by a selloff. None of that is a contradiction. Markets trade on *surprise relative to expectations*, not on whether a headline sounds good or bad.
 
-This guide is the hub of MarketTriggers.com. It walks through every major category of market trigger — economic indicators, central bank policy, corporate events, sector dynamics, and shocks — and explains the mechanism behind each one. Where a topic deserves a deeper treatment, you will find links to dedicated explainers in our [Economic Indicators](/economic-indicators/), [Stock Market Triggers](/stock-market-triggers/), [Market Sectors](/market-sectors/), [Investor Education](/investor-education/), and [Market Events](/market-events/) sections.
+This guide is the hub of MarketTriggers.com. It walks through every major category of market trigger (economic indicators, central bank policy, corporate events, sector dynamics, and shocks) and explains the mechanism behind each one. Where a topic deserves a deeper treatment, you will find links to dedicated explainers in our [Economic Indicators](/economic-indicators/), [Stock Market Triggers](/stock-market-triggers/), [Market Sectors](/market-sectors/), [Investor Education](/investor-education/), and [Market Events](/market-events/) sections.
 
 <div class="callout">
 <strong>How to use this guide.</strong> If you are new to markets, read it top to bottom; each section builds on the one before. If you came here because something moved today, jump to the <a href="#trigger-explorer">Trigger Impact Explorer</a> or the <a href="#a-typical-week-of-us-market-triggers">weekly market calendar</a>, then come back to the section that explains the mechanism.
@@ -44,18 +44,23 @@ This is why you will see headlines like "Stocks slide despite earnings beat." Th
 
 ### "Priced in": what it means and why it matters
 
-When investors say an event is "priced in," they mean that current prices already reflect the widely expected outcome. If a Federal Reserve rate cut is widely anticipated weeks before the meeting, bond and stock prices will have adjusted in advance. The announcement itself then carries little new information, and the market's attention shifts to the details — the statement's wording, the Fed chair's press conference, and the projections for future meetings.
+When investors say an event is "priced in," they mean that current prices already reflect the widely expected outcome. If a Federal Reserve rate cut is widely anticipated weeks before the meeting, bond and stock prices will have adjusted in advance. The announcement itself then carries little new information, and the market's attention shifts to the details: the statement's wording, the Fed chair's press conference, and the projections for future meetings.
 
 One practical tool for gauging what's priced in for the Fed is the futures market for the federal funds rate. Tools such as the CME FedWatch Tool translate futures prices into implied probabilities for each possible outcome at upcoming meetings. If a cut is implied at very high probability, a cut will not surprise anyone; a decision to hold would.
 
 ## The main categories of market triggers
 
+<figure class="photo">
+<img src="/images/home-investor-1344.webp" srcset="/images/home-investor-768.webp 768w, /images/home-investor-1344.webp 1344w" sizes="(max-width: 800px) 100vw, 760px" width="1344" height="768" loading="lazy" decoding="async" alt="Investor working at a home desk by a sunny window with a laptop, notebook and coffee" />
+<figcaption>Most market-moving news reaches investors the same way it reaches everyone else: on a screen, before the opening bell.</figcaption>
+</figure>
+
 We organize market triggers into five families. The rest of this guide takes them one at a time.
 
-1. **Economic indicators** — scheduled government and private data releases about inflation, jobs, growth, spending, and sentiment.
-2. **Monetary policy** — decisions and communication from the Federal Reserve, plus the Treasury market's reaction to them.
-3. **Corporate triggers** — earnings reports, guidance, analyst actions, buybacks, dividends, IPOs, mergers, and regulatory filings.
-4. **Sector and industry dynamics** — why the same news lifts one part of the market and drags on another.
-5. **Shocks and structural events** — unexpected crises, geopolitical events, policy changes, and market-structure mechanics like circuit breakers and index rebalancing.
+1. **Economic indicators:** scheduled government and private data releases about inflation, jobs, growth, spending, and sentiment.
+2. **Monetary policy:** decisions and communication from the Federal Reserve, plus the Treasury market's reaction to them.
+3. **Corporate triggers:** earnings reports, guidance, analyst actions, buybacks, dividends, IPOs, mergers, and regulatory filings.
+4. **Sector and industry dynamics:** why the same news lifts one part of the market and drags on another.
+5. **Shocks and structural events:** unexpected crises, geopolitical events, policy changes, and market-structure mechanics like circuit breakers and index rebalancing.
 
 These families overlap constantly. An inflation report (family 1) matters largely because of what it implies for the Fed (family 2), which then affects which sectors lead or lag (family 4). Keeping the families distinct is still useful, because it tells you where to look first.

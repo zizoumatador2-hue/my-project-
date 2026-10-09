@@ -20,7 +20,7 @@ The word "often" in that table is deliberate. These are tendencies investors hav
 
 ## Risk management: using market triggers responsibly
 
-Understanding why markets move is not the same as being able to predict the next move — and it should not encourage anyone to take on risk they do not understand. A few principles from established investor education resources, including the SEC's [Investor.gov](https://www.investor.gov/), are worth repeating:
+Understanding why markets move is not the same as being able to predict the next move, and it shouldn't encourage anyone to take on risk they do not understand. A few principles from established investor education resources, including the SEC's [Investor.gov](https://www.investor.gov/), are worth repeating:
 
 - **Know your time horizon.** Money you need soon should generally not be exposed to sharp short-term swings.
 - **Diversify.** Spreading investments across asset classes, sectors, and companies reduces the impact of any single trigger.
@@ -46,10 +46,10 @@ Learn more on our [About page](/about/), or [contact our editors](/contact/) if 
 
 This guide is the starting point. Each section links to a deeper library of explainers:
 
-- **[Economic Indicators](/economic-indicators/)** — CPI, PCE, jobs, GDP, retail sales, PMIs, consumer confidence, and Treasury yields, each explained in depth.
-- **[Stock Market Triggers](/stock-market-triggers/)** — earnings, guidance, analyst actions, buybacks, dividends, IPOs, and corporate events.
-- **[Market Sectors](/market-sectors/)** — how technology, financials, energy, health care, real estate, consumer, and industrial companies respond to the economy.
-- **[Investor Education](/investor-education/)** — foundations like bull and bear markets, volatility, risk management, and how rates and inflation affect investments.
-- **[Market Events](/market-events/)** — previews of upcoming economic releases and policy meetings, with what investors will be watching.
+- **[Economic Indicators](/economic-indicators/)**: CPI, PCE, jobs, GDP, retail sales, PMIs, consumer confidence, and Treasury yields, each explained in depth.
+- **[Stock Market Triggers](/stock-market-triggers/)**: earnings, guidance, analyst actions, buybacks, dividends, IPOs, and corporate events.
+- **[Market Sectors](/market-sectors/)**: how technology, financials, energy, health care, real estate, consumer, and industrial companies respond to the economy.
+- **[Investor Education](/investor-education/)**: foundations like bull and bear markets, volatility, risk management, and how rates and inflation affect investments.
+- **[Market Events](/market-events/)**: previews of upcoming economic releases and policy meetings, with what investors will be watching.
 
 We also publish recurring series designed to keep you current: **Market Trigger of the Day**, **Weekly Market Triggers**, **Economic Event Explained**, **Why the Market Moved**, **Sector Impact**, **Investor Guide**, and **Market Trigger Breakdown**. Each series follows a consistent structure, so you always know what you are reading.

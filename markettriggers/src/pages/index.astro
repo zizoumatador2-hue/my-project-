@@ -15,6 +15,11 @@ import * as P7 from '../pillar/07-howto.md';
 import * as P8 from '../pillar/08-education.md';
 
 const parts = [P1, P2, P3, P4, P5, P6, P7, P8];
+const wordCount = parts
+  .map((p) => p.rawContent().replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length)
+  .reduce((a, b) => a + b, 0);
+const readingMinutes = Math.max(1, Math.round(wordCount / 238));
+const tickerItems = ['CPI', 'Jobs Report', 'FOMC Decision', 'Earnings Season', 'GDP', 'Retail Sales', 'PCE Inflation', '10-Year Yield', 'Jobless Claims', 'ISM PMI', 'VIX', 'Consumer Confidence'];
 const tocItems = parts
   .flatMap((p) => p.getHeadings())
   .filter((h) => h.depth === 2);
@@ -60,26 +65,35 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': 'https://markettriggers.com/#organization',
     name: 'MarketTriggers.com',
-    url: 'https://markettriggers.com',
-    logo: 'https://markettriggers.com/logo.png',
+    url: 'https://markettriggers.com/',
+    logo: { '@type': 'ImageObject', url: 'https://markettriggers.com/logo.png', width: 512, height: 512 },
     email: 'info.christopherkunz@gmail.com',
     description: 'Independent U.S. financial education publication explaining the economic indicators, corporate events, and market signals that move U.S. financial markets.',
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': 'https://markettriggers.com/#website',
     name: 'MarketTriggers.com',
-    url: 'https://markettriggers.com',
+    url: 'https://markettriggers.com/',
+    inLanguage: 'en-US',
+    publisher: { '@id': 'https://markettriggers.com/#organization' },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'What Moves the Stock Market? The Complete Guide to Market Triggers',
+    headline: 'What Moves the Stock Market? Understanding the Triggers Behind Every Move',
+    description: 'How inflation, jobs reports, Federal Reserve decisions, earnings, and sector shifts drive U.S. stocks, bonds, and the dollar.',
+    image: ['https://markettriggers.com/og-home.jpg', 'https://markettriggers.com/images/skyline-sunrise-1344.webp'],
+    inLanguage: 'en-US',
+    wordCount,
+    articleSection: 'Investor Education',
     datePublished: published.toISOString(),
     dateModified: modified.toISOString(),
     author: { '@type': 'Organization', name: 'MarketTriggers Editorial Team', url: 'https://markettriggers.com/about/' },
-    publisher: { '@type': 'Organization', name: 'MarketTriggers.com', logo: { '@type': 'ImageObject', url: 'https://markettriggers.com/logo.png' } },
+    publisher: { '@id': 'https://markettriggers.com/#organization' },
     mainEntityOfPage: 'https://markettriggers.com/',
   },
   {
@@ -109,13 +123,26 @@ const schema = [
 const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <BaseLayout
-  title="What Moves the Stock Market? A Guide to Market Triggers"
-  description="Learn what moves the stock market: how inflation, jobs data, the Fed, earnings, and sector shifts trigger price moves — explained clearly for U.S. investors."
+  title="What Moves the Stock Market? Market Triggers Explained"
+  description="What moves the stock market? See how inflation, jobs reports, Fed decisions, earnings, and sector shifts drive U.S. stocks, with a 6-step framework you can reuse."
+  image="/og-home.jpg"
+  preloadImage={{ srcset: '/images/skyline-sunrise-768.webp 768w, /images/skyline-sunrise-1344.webp 1344w', sizes: '100vw' }}
   canonicalPath="/"
   schema={schema}
 >
-  <section class="hero hero--aurora">
-    <div class="container">
+  <section class="hero hero--photo">
+    <img
+      class="hero__bg"
+      src="/images/skyline-sunrise-1344.webp"
+      srcset="/images/skyline-sunrise-768.webp 768w, /images/skyline-sunrise-1344.webp 1344w"
+      sizes="100vw"
+      width="1344"
+      height="768"
+      alt="Lower Manhattan skyline at sunrise seen across the East River"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="container hero__inner">
       <p class="hero__eyebrow">The Complete Guide</p>
       <h1><span class="shiny-text">What Moves the Stock Market?</span> Understanding the Triggers Behind Every Move</h1>
       <p class="hero__lede">
@@ -125,13 +152,23 @@ const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', mo
         <a href="#trigger-explorer" class="btn" data-spark>Try the Trigger Explorer</a>
         <a href="#how-to-analyze-any-market-trigger-in-6-steps" class="btn btn--ghost" data-spark>The 6-step framework</a>
       </div>
-      <p class="article-meta" style="margin-top:18px;">
+      <p class="article-meta hero__meta">
         <span>By <a href="/about/">MarketTriggers Editorial Team</a></span>
         <span>Updated <time datetime={modified.toISOString()}>{dateFmt(modified)}</time></span>
-        <span>Educational content — not financial advice</span>
+        <span>{readingMinutes} min read</span>
       </p>
     </div>
   </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      {[0, 1].map(() => (
+        <span class="ticker__group">
+          {tickerItems.map((t) => (<span class="ticker__item">{t}</span>))}
+        </span>
+      ))}
+    </div>
+  </div>
 
   {latest.length > 0 && (
     <section class="latest container" aria-labelledby="latest-heading">
@@ -149,7 +186,7 @@ const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', mo
 
   <div class="pillar-wrap">
     <aside class="pillar-toc" aria-label="Table of contents">
-      <h2>On this page</h2>
+      <p class="pillar-toc__title">On this page</p>
       <ol>
         {tocItems.map((h) => (
           <li><a href={`#${h.slug}`}>{h.text}</a></li>
@@ -161,6 +198,27 @@ const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', mo
     </aside>
 
     <article class="pillar-body">
+      <details class="mobile-toc">
+        <summary>Jump to a section</summary>
+        <ol>
+          {tocItems.map((h) => (
+            <li><a href={`#${h.slug}`}>{h.text}</a></li>
+          ))}
+          <li><a href="#home-faq">FAQ</a></li>
+        </ol>
+      </details>
+
+      <section class="takeaways" aria-labelledby="takeaways-heading">
+        <h2 id="takeaways-heading">Key takeaways</h2>
+        <ul>
+          <li><strong>Surprise beats news.</strong> Prices move on the gap between what happened and what investors expected, not on whether the headline sounds good or bad.</li>
+          <li><strong>Three channels.</strong> Every trigger works through earnings expectations, interest rates, risk appetite, or some mix of the three.</li>
+          <li><strong>The Fed sits at the center.</strong> Inflation and jobs data matter so much because they shape what the Federal Reserve does next.</li>
+          <li><strong>Sectors react differently.</strong> The same report can lift energy stocks and sink real estate on the same morning.</li>
+          <li><strong>First moves often reverse.</strong> The reaction that lasts usually shows up after investors read past the headline.</li>
+        </ul>
+      </section>
+
       <P1.Content />
       <TriggerExplorer />
       <P2.Content />

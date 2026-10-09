@@ -4,6 +4,11 @@ Economic data and Fed policy move the whole market. Company-specific events dete
 
 ### Earnings reports
 
+<figure class="photo">
+<img src="/images/boardroom-earnings-1344.webp" srcset="/images/boardroom-earnings-768.webp 768w, /images/boardroom-earnings-1344.webp 1344w" sizes="(max-width: 800px) 100vw, 760px" width="1344" height="768" loading="lazy" decoding="async" alt="Executive team reviewing printed bar charts around a conference table high above a city" />
+<figcaption>Quarterly results and forward guidance are the biggest scheduled catalysts for individual stocks.</figcaption>
+</figure>
+
 Public companies in the U.S. report financial results every quarter. The quarterly report is filed with the Securities and Exchange Commission on **Form 10-Q**, and the annual report on **Form 10-K**. Most companies also publish a press release and hold a conference call with analysts on the day results come out, typically before the market opens or after it closes.
 
 **Earnings season** begins a few weeks after each calendar quarter ends. Large banks are usually among the first major companies to report, and their results are watched as an early read on the economy and the health of consumers and businesses.
@@ -25,7 +30,7 @@ Pay attention, too, to how a company beats. A beat driven by a one-time tax bene
 
 #### When earnings move the whole market
 
-Results from a few very large companies can move indexes on their own because of their weight in market-cap-weighted indexes such as the S&P 500 and the Nasdaq-100. Reports from major technology companies, in particular, can affect sentiment across an entire sector and the broader market — especially when they discuss spending plans that matter to suppliers.
+Results from a few very large companies can move indexes on their own because of their weight in market-cap-weighted indexes such as the S&P 500 and the Nasdaq-100. Reports from major technology companies, in particular, can affect sentiment across an entire sector and the broader market, especially when they discuss spending plans that matter to suppliers.
 
 ### Analyst upgrades, downgrades, and price targets
 
@@ -47,7 +52,7 @@ A few things worth keeping in mind:
 
 An **initial public offering (IPO)** is a company's first sale of stock to the public. Strong IPO activity is often a sign of healthy risk appetite. Large, high-profile IPOs can also draw investor capital toward a sector.
 
-**Secondary offerings**, in which a company issues additional shares, dilute existing shareholders and often push the stock price down in the short term. **Lockup expirations** — the end of the period, often around six months after an IPO, during which insiders are restricted from selling — can create selling pressure.
+**Secondary offerings**, in which a company issues additional shares, dilute existing shareholders and often push the stock price down in the short term. **Lockup expirations** can also create selling pressure. A lockup is the period, often around six months after an IPO, during which insiders are restricted from selling.
 
 ### Mergers, acquisitions, and other corporate actions
 
@@ -63,4 +68,4 @@ Other corporate events that can trigger large moves include:
 
 ### SEC filings that act as triggers
 
-Companies must disclose material events promptly on **Form 8-K**. Investors also watch **Form 4** filings, which report insider purchases and sales, and **Schedule 13D** filings, which are required when an investor acquires more than 5% of a company's shares with the intent to influence it — often a sign of activist involvement. All of these are freely available through the SEC's [EDGAR database](https://www.sec.gov/edgar/search/).
+Companies must disclose material events promptly on **Form 8-K**. Investors also watch **Form 4** filings, which report insider purchases and sales, and **Schedule 13D** filings, which are required when an investor acquires more than 5% of a company's shares with the intent to influence it, often a sign of activist involvement. All of these are freely available through the SEC's [EDGAR database](https://www.sec.gov/edgar/search/).

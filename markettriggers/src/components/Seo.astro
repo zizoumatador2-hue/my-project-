@@ -7,6 +7,7 @@ interface Props {
   publishDate?: Date;
   modifiedDate?: Date;
   image?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -17,17 +18,18 @@ const {
   publishDate,
   modifiedDate,
   image = '/og-default.png',
+  noindex = false,
 } = Astro.props;
 
 const site = 'https://markettriggers.com';
 const canonicalUrl = new URL(canonicalPath, site).toString();
 const imageUrl = new URL(image, site).toString();
-const fullTitle = title.includes('MarketTriggers') ? title : `${title} | MarketTriggers.com`;
+const fullTitle = title.includes('MarketTriggers') ? title : `${title} | MarketTriggers`;
 ---
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
-<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
 
 <meta property="og:type" content={type} />
 <meta property="og:title" content={fullTitle} />
@@ -35,6 +37,8 @@ const fullTitle = title.includes('MarketTriggers') ? title : `${title} | MarketT
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:site_name" content="MarketTriggers.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:image:alt" content={title} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />

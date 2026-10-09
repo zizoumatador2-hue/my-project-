@@ -18,6 +18,7 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft))
   title="All Articles — Market Triggers Explained"
   description="Every MarketTriggers.com explainer in one place: economic indicators, Fed policy, earnings, sector impact, and investor education for U.S. markets."
   canonicalPath="/articles/"
+  noindex={articles.length === 0}
 >
   <div class="container" style="padding:32px 20px 48px;">
     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'All Articles' }]} />

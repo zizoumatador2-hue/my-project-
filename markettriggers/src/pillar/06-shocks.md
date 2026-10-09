@@ -4,7 +4,12 @@ Not every trigger appears on a calendar. Some of the most powerful market moves 
 
 ### Unexpected events and risk appetite
 
-Pandemics, financial crises, wars, terrorist attacks, natural disasters, and sudden political developments tend to work primarily through the **risk appetite** channel. Investors demand more compensation for holding risky assets, so stocks, high-yield bonds, and other risk assets fall, while assets considered safer — often U.S. Treasuries, and sometimes the U.S. dollar and gold — tend to attract buyers. This is called a **flight to safety**.
+<figure class="photo">
+<img src="/images/storm-skyline-1344.webp" srcset="/images/storm-skyline-768.webp 768w, /images/storm-skyline-1344.webp 1344w" sizes="(max-width: 800px) 100vw, 760px" width="1344" height="768" loading="lazy" decoding="async" alt="Dark storm clouds over a city skyline with a break of sunlight on one tower" />
+<figcaption>Unscheduled shocks work mainly through risk appetite: investors demand more compensation for uncertainty.</figcaption>
+</figure>
+
+Pandemics, financial crises, wars, terrorist attacks, natural disasters, and sudden political developments tend to work primarily through the **risk appetite** channel. Investors demand more compensation for holding risky assets, so stocks, high-yield bonds, and other risk assets fall, while assets considered safer tend to attract buyers. Those are often U.S. Treasuries, and sometimes the U.S. dollar and gold. This is called a **flight to safety**.
 
 The COVID-19 selloff in early 2020 was an extreme example: stocks fell at a historically rapid pace as uncertainty about the economic impact of the pandemic surged, before large-scale monetary and fiscal support helped markets recover. The episode showed both the speed of shock-driven declines and the power of a policy response to change the trajectory.
 
@@ -23,7 +28,7 @@ Circuit breakers were triggered several times in March 2020. They exist to give 
 
 ### Fiscal policy, trade, and regulation
 
-Government decisions on taxes, spending, tariffs, and regulation can affect entire industries. Tariff announcements, for example, can affect importers, exporters, and companies with complex global supply chains. Debates over the federal debt ceiling have periodically raised concerns in Treasury markets. Changes to industry rules — in banking, health care, energy, or technology — can reshape the outlook for specific sectors. Because these events are political, they are often difficult to predict and can generate prolonged uncertainty rather than a single sharp move.
+Government decisions on taxes, spending, tariffs, and regulation can affect entire industries. Tariff announcements, for example, can affect importers, exporters, and companies with complex global supply chains. Debates over the federal debt ceiling have periodically raised concerns in Treasury markets. Changes to industry rules in banking, health care, energy, or technology can reshape the outlook for specific sectors. Because these events are political, they are often difficult to predict and can generate prolonged uncertainty rather than a single sharp move.
 
 ### Index rebalancing, options expiration, and flows
 

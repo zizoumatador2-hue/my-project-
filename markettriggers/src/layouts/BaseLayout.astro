@@ -12,6 +12,8 @@ interface Props {
   modifiedDate?: Date;
   image?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  preloadImage?: { srcset: string; sizes: string };
 }
 
 const {
@@ -23,12 +25,16 @@ const {
   modifiedDate,
   image,
   schema,
+  noindex = false,
+  preloadImage,
 } = Astro.props;
+
+const ADSENSE_CLIENT = 'ca-pub-8532224804732263';
 
 const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,7 +46,13 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     publishDate={publishDate}
     modifiedDate={modifiedDate}
     image={image}
+    noindex={noindex}
   />
+  <meta name="theme-color" content="#0b3d91" />
+  <meta name="google-adsense-account" content={ADSENSE_CLIENT} />
+  {preloadImage && (
+    <link rel="preload" as="image" imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />
+  )}
 
   <!-- Critical above-the-fold CSS -->
   <style is:inline>
@@ -57,21 +69,28 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     .progress-bar{position:fixed;top:0;left:0;right:0;height:3px;transform:scaleX(0)}
     .to-top{position:fixed;opacity:0;pointer-events:none}
     .skip-link{position:absolute;left:-9999px}
+    .cookie-bar[hidden]{display:none}
+    .hero--photo{position:relative;overflow:hidden;background:#0b1c3a;min-height:440px}
+    .hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     .nav-toggle{display:none}
     @media (max-width:860px){.main-nav{display:none}.nav-toggle{display:inline-block}}
   </style>
 
   <!-- Non-critical CSS, loaded async -->
-  <link rel="preload" as="style" href="/global.css?v=2" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="/global.css?v=2" /></noscript>
+  <link rel="preload" as="style" href="/global.css?v=3" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/global.css?v=3" /></noscript>
 
   {schemaList.map((s) => (
     <script type="application/ld+json" set:html={JSON.stringify(s)} />
   ))}
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <!-- Consent Mode v2 defaults must run before the AdSense tag -->
+  <script is:inline src="/consent-default.js"></script>
+  <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
   <link rel="alternate" type="application/rss+xml" title="MarketTriggers.com" href="/rss.xml" />
-  <script is:inline src="/effects.js?v=2" defer></script>
+  <script is:inline src="/effects.js?v=3" defer></script>
 </head>
 <body>
   <div class="progress-bar" aria-hidden="true"></div>
@@ -82,5 +101,12 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   </main>
   <Footer />
   <button class="to-top" type="button" aria-label="Back to top">&uarr;</button>
+  <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Cookie choices" hidden>
+    <p>We use cookies to measure traffic and show ads. Choose whether ads can be personalized. <a href="/privacy-policy/">Privacy Policy</a></p>
+    <div class="cookie-bar__actions">
+      <button type="button" class="btn" data-consent="accept">Accept all</button>
+      <button type="button" class="btn btn--ghost" data-consent="reject">Essential only</button>
+    </div>
+  </div>
 </body>
 </html>

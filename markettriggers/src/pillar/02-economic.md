@@ -2,9 +2,14 @@
 
 Economic indicators are the most predictable market triggers because their release dates are published months in advance. That predictability is exactly why they matter: investors position ahead of them, and the release forces a fast re-evaluation of those positions.
 
-The U.S. data that markets watch most closely comes from a handful of federal agencies — mainly the **Bureau of Labor Statistics (BLS)**, the **Bureau of Economic Analysis (BEA)**, and the **Census Bureau** — along with a few private organizations such as the Institute for Supply Management and The Conference Board. Most major government reports are released at 8:30 a.m. Eastern Time, an hour before the regular stock market session opens, which is why stock index futures often move sharply right before the opening bell.
+The U.S. data that markets watch most closely comes from a handful of federal agencies, mainly the **Bureau of Labor Statistics (BLS)**, the **Bureau of Economic Analysis (BEA)**, and the **Census Bureau**, along with a few private organizations such as the Institute for Supply Management and The Conference Board. Most major government reports are released at 8:30 a.m. Eastern Time, an hour before the regular stock market session opens, which is why stock index futures often move sharply right before the opening bell.
 
 ### Inflation: CPI, PCE, and PPI
+
+<figure class="photo">
+<img src="/images/grocery-prices-1344.webp" srcset="/images/grocery-prices-768.webp 768w, /images/grocery-prices-1344.webp 1344w" sizes="(max-width: 800px) 100vw, 760px" width="1344" height="768" loading="lazy" decoding="async" alt="Shopper placing fresh vegetables and bread into a paper grocery bag in a supermarket" />
+<figcaption>The Consumer Price Index tracks what households pay for everyday goods and services, from groceries to rent.</figcaption>
+</figure>
 
 Inflation data has been the single most influential category of economic release in recent years, because inflation drives Federal Reserve policy and Fed policy drives interest rates.
 
@@ -15,15 +20,15 @@ Inflation data has been the single most influential category of economic release
 
 Markets also pay close attention to the *month-over-month* change, not only the year-over-year figure. The year-over-year number is influenced by what happened twelve months earlier (the "base effect"), while the monthly change shows current momentum.
 
-**The Personal Consumption Expenditures (PCE) Price Index** is published by the BEA. It is the Federal Reserve's preferred inflation gauge, and the Fed's 2% inflation target is defined in terms of PCE. Because CPI comes out earlier in the month, a large portion of the PCE result can often be estimated in advance, so PCE releases tend to produce smaller surprises — but not always.
+**The Personal Consumption Expenditures (PCE) Price Index** is published by the BEA. It is the Federal Reserve's preferred inflation gauge, and the Fed's 2% inflation target is defined in terms of PCE. Because CPI comes out earlier in the month, a large portion of the PCE result can often be estimated in advance, so PCE releases tend to produce smaller surprises. Not always, though.
 
 **The Producer Price Index (PPI)**, also from the BLS, measures prices received by domestic producers. It is sometimes read as an early hint of cost pressures that may later reach consumers.
 
 #### How inflation data moves markets
 
-A hotter-than-expected inflation reading typically raises expectations that the Fed will keep interest rates higher for longer. Treasury yields tend to rise, the U.S. dollar often strengthens, and stocks — especially long-duration growth stocks whose value depends heavily on earnings far in the future — tend to come under pressure. A cooler-than-expected reading usually produces the opposite pattern.
+A hotter-than-expected inflation reading typically raises expectations that the Fed will keep interest rates higher for longer. Treasury yields tend to rise, the U.S. dollar often strengthens, and stocks tend to come under pressure. Long-duration growth stocks, whose value depends heavily on earnings far in the future, usually feel it most. A cooler-than-expected reading usually produces the opposite pattern.
 
-The 2022 period is the clearest recent example of this channel at work. As inflation ran far above the Fed's target and the central bank raised rates aggressively, both stocks and bonds declined during the year — an unusual combination that reflected the dominance of the interest-rate channel. You can read the full mechanics in our explainer on [how inflation affects stocks](/investor-education/).
+The 2022 period is the clearest recent example of this channel at work. As inflation ran far above the Fed's target and the central bank raised rates aggressively, both stocks and bonds declined during the year, an unusual combination that reflected the dominance of the interest-rate channel. You can read the full mechanics in our explainer on [how inflation affects stocks](/investor-education/).
 
 <div class="callout callout--watch">
 <strong>What to watch:</strong> In an inflation report, look beyond the headline. Shelter costs, services excluding housing, and used vehicle prices have all been important sub-components that drove market reactions in different periods. The details often tell a different story than the headline number.
@@ -42,19 +47,19 @@ The market's reaction to jobs data depends on the economic backdrop. When inflat
 
 Other employment releases worth knowing:
 
-- **Initial jobless claims** — published weekly (on Thursdays) by the Department of Labor. Because it is weekly, it is one of the most timely signals of layoffs.
-- **JOLTS (Job Openings and Labor Turnover Survey)** — a BLS report on job openings, hires, and quits. A high quits rate tends to signal workers' confidence in finding new jobs.
-- **ADP National Employment Report** — a private-sector estimate released shortly before the official jobs report. It does not reliably predict the BLS number but can still move markets.
+- **Initial jobless claims:** published weekly (on Thursdays) by the Department of Labor. Because it is weekly, it is one of the most timely signals of layoffs.
+- **JOLTS (Job Openings and Labor Turnover Survey):** a BLS report on job openings, hires, and quits. A high quits rate tends to signal workers' confidence in finding new jobs.
+- **ADP National Employment Report:** a private-sector estimate released shortly before the official jobs report. It does not reliably predict the BLS number but can still move markets.
 
 ### Growth: GDP and its components
 
 **Gross Domestic Product (GDP)** measures the total value of goods and services produced in the U.S. economy. The BEA publishes it quarterly in three rounds: an **advance estimate** about a month after the quarter ends, followed by a **second** and **third** estimate as more data comes in. The advance estimate usually gets the most market attention because it is the newest information.
 
-GDP is a backward-looking number — by the time it arrives, the quarter it describes is over — so it often moves markets less than inflation or jobs data. Investors focus on the components that hint at what comes next:
+GDP looks backward. By the time it arrives, the quarter it describes is over, so it often moves markets less than inflation or jobs data. Investors focus on the components that hint at what comes next:
 
-- **Personal consumption** — consumer spending makes up the largest share of U.S. GDP.
-- **Business investment** — a signal of corporate confidence.
-- **Inventories and net exports** — volatile items that can swing the headline without saying much about underlying demand.
+- **Personal consumption:** consumer spending makes up the largest share of U.S. GDP.
+- **Business investment:** a signal of corporate confidence.
+- **Inventories and net exports:** volatile items that can swing the headline without saying much about underlying demand.
 
 A useful habit is to look at "final sales to private domestic purchasers," a measure that strips out the most volatile pieces and is often considered a cleaner read on underlying demand.
 
@@ -65,13 +70,13 @@ A useful habit is to look at "final sales to private domestic purchasers," a mea
 Two sentiment surveys are widely followed:
 
 - **The Conference Board Consumer Confidence Index**, which leans more toward views on the job market.
-- **The University of Michigan Surveys of Consumers**, which also includes consumers' expectations for future inflation — a figure the Fed pays attention to.
+- **The University of Michigan Surveys of Consumers**, which also includes consumers' expectations for future inflation, a figure the Fed pays attention to.
 
 Sentiment surveys can diverge from actual spending. People sometimes say they feel pessimistic while continuing to spend. That gap is itself a useful piece of information.
 
 ### Business activity: PMIs and manufacturing data
 
-The **ISM Manufacturing PMI** and **ISM Services PMI**, published by the Institute for Supply Management early each month, are survey-based indicators of business activity. A reading above 50 generally indicates expansion; below 50 indicates contraction. Their sub-indexes — new orders, prices paid, employment — are often watched as early signals for the official data that follows.
+The **ISM Manufacturing PMI** and **ISM Services PMI**, published by the Institute for Supply Management early each month, are survey-based indicators of business activity. A reading above 50 generally indicates expansion; below 50 indicates contraction. Their sub-indexes for new orders, prices paid, and employment are often watched as early signals for the official data that follows.
 
 Because these surveys come out early in the month and ask about current conditions, they are among the most timely snapshots of the economy available.
 

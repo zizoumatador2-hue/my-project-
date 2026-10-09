@@ -4,6 +4,11 @@ If you could follow only one source of market-moving news, it should be the Fede
 
 ### How the Fed sets policy
 
+<figure class="photo">
+<img src="/images/washington-columns-1344.webp" srcset="/images/washington-columns-768.webp 768w, /images/washington-columns-1344.webp 1344w" sizes="(max-width: 800px) 100vw, 760px" width="1344" height="768" loading="lazy" decoding="async" alt="Neoclassical marble government building with columns in Washington, D.C., framed by cherry blossoms at dusk" />
+<figcaption>Interest-rate decisions made in Washington ripple through mortgages, corporate borrowing, and stock valuations.</figcaption>
+</figure>
+
 The Fed's monetary policy decisions are made by the **Federal Open Market Committee (FOMC)**, which holds eight regularly scheduled meetings per year. The committee has twelve voting members: the seven members of the Board of Governors, the president of the Federal Reserve Bank of New York, and four of the remaining eleven regional Reserve Bank presidents, who serve one-year rotating terms.
 
 The Fed operates under a **dual mandate** from Congress: to pursue maximum employment and stable prices. Its main tool is the target range for the **federal funds rate**, the interest rate at which banks lend reserves to each other overnight. Changes in that rate ripple outward into Treasury yields, mortgage rates, corporate borrowing costs, and credit card rates.
@@ -41,7 +46,7 @@ The Treasury market translates Fed policy and economic expectations into prices.
 - **The 2-year Treasury yield** is highly sensitive to expectations for Fed policy over the next couple of years.
 - **The 10-year Treasury yield** reflects longer-term growth and inflation expectations, plus a "term premium" for holding long-dated bonds. It is a key benchmark for mortgage rates and for stock valuations.
 
-The **yield curve** shows yields across maturities. Normally, longer-term bonds yield more than shorter-term bonds. When short-term yields rise above long-term yields, the curve is said to be **inverted**. Yield curve inversions have preceded many U.S. recessions, which is why they draw so much attention — but the timing between inversion and recession has varied widely, and an inversion is not a guarantee. The Federal Reserve Bank of St. Louis publishes free yield data through its [FRED database](https://fred.stlouisfed.org/).
+The **yield curve** shows yields across maturities. Normally, longer-term bonds yield more than shorter-term bonds. When short-term yields rise above long-term yields, the curve is said to be **inverted**. Yield curve inversions have preceded many U.S. recessions, which is why they draw so much attention. But the timing between inversion and recession has varied widely, and an inversion is not a guarantee. The Federal Reserve Bank of St. Louis publishes free yield data through its [FRED database](https://fred.stlouisfed.org/).
 
 #### Historical example: the 2013 "taper tantrum"
 

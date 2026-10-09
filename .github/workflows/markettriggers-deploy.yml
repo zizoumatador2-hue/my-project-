@@ -23,14 +23,8 @@ jobs:
         with: { node-version: 22 }
       - run: npm install --no-audit --no-fund
       - run: npm run build
-      - name: Check internal links
-        run: |
-          # every internal href in the built HTML must resolve to a file in dist/
-          fail=0
-          for href in $(grep -rhoE 'href="/[^"#?]*' dist --include=*.html | sed 's/href="//' | sort -u); do
-            p="dist$href"; [ -f "$p" ] || [ -f "${p%/}/index.html" ] || [ -f "$p.html" ] || { echo "::error::broken internal link: $href"; fail=1; }
-          done
-          exit $fail
+      - name: Check links, anchors and images
+        run: node scripts/check-links.mjs
       - name: Decide target
         id: target
         run: |
@@ -89,6 +83,7 @@ jobs:
             echo "$D: $(echo "$R" | jq -r 'if .success then "attached (status: " + (.result.status // "pending") + ")" else (.errors[0].message // "failed") end')"
           done
       - name: Point DNS at the Pages project (logs replaced records)
+        continue-on-error: true
         if: ${{ steps.target.outputs.kind == 'production' && steps.pages.outcome == 'success' }}
         env:
           DNS_TOKEN: ${{ secrets.CLOUDFLARE_DNS_TOKEN }}

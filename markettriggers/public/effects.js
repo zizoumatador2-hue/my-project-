@@ -42,9 +42,64 @@
     });
   }
 
+  /* Cookie choice: shown once; "Accept all" upgrades Consent Mode, "Essential only" keeps ads non-personalized */
+  var bar2 = document.getElementById('cookie-bar');
+  var choice = null;
+  try { choice = localStorage.getItem('mt:consent'); } catch (e) {}
+  if (bar2 && !choice) {
+    bar2.hidden = false;
+    bar2.querySelectorAll('[data-consent]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-consent');
+        try { localStorage.setItem('mt:consent', v); } catch (e) {}
+        if (v === 'accept' && window.gtag) {
+          window.gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+        }
+        bar2.hidden = true;
+      });
+    });
+  }
+
   if (reduce) {
     document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-revealed'); });
     return;
+  }
+
+  /* Scroll-velocity ticker: drifts slowly, speeds up with scroll speed and direction */
+  var track = document.querySelector('.ticker__track');
+  if (track) {
+    var x = 0, last = window.scrollY, boost = 0, half = 0;
+    var measure = function () { var g = track.querySelector('.ticker__group'); half = g ? g.offsetWidth : 0; };
+    measure(); window.addEventListener('resize', measure);
+    var visible = true;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(track);
+    }
+    var step = function () {
+      var y = window.scrollY, dy = y - last; last = y;
+      boost = boost * 0.9 + dy * 0.35;
+      if (visible && half) {
+        x -= 0.45 + boost;
+        if (x <= -half) x += half;
+        if (x > 0) x -= half;
+        track.style.transform = 'translate3d(' + x + 'px,0,0)';
+      }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* Tilted photos on hover (desktop pointers only) */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.photo img').forEach(function (img) {
+      img.addEventListener('pointermove', function (e) {
+        var r = img.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        img.style.transform = 'perspective(900px) rotateX(' + (-py * 5) + 'deg) rotateY(' + (px * 6) + 'deg) scale(1.015)';
+        img.style.boxShadow = '0 18px 40px rgba(15,23,42,.18)';
+      });
+      img.addEventListener('pointerleave', function () { img.style.transform = ''; img.style.boxShadow = ''; });
+    });
   }
 
   /* Scroll reveal (fade + rise) */

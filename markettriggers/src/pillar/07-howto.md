@@ -2,6 +2,11 @@
 
 The most useful skill this site can teach is a repeatable process for making sense of market-moving news. Here is the one we use for every article we publish.
 
+<figure class="photo">
+<img src="/images/notebook-chart-1344.webp" srcset="/images/notebook-chart-768.webp 768w, /images/notebook-chart-1344.webp 1344w" sizes="(max-width: 800px) 100vw, 760px" width="1344" height="768" loading="lazy" decoding="async" alt="Open notebook with a hand-drawn line chart beside a pen, reading glasses and a cup of coffee" />
+<figcaption>A repeatable checklist turns a confusing headline into a chain of cause and effect.</figcaption>
+</figure>
+
 1. **Identify the trigger precisely.** Name the specific data point, statement, or event — "core CPI rose more than expected month over month," not "inflation worries."
 2. **Find the expectation.** What did economists, analysts, or futures markets expect before the event? Check the consensus estimate and, for Fed decisions, implied probabilities from futures markets.
 3. **Measure the surprise.** How large was the gap between actual and expected? Was the surprise in the headline, the details, or the guidance?
@@ -13,7 +18,7 @@ Initial reactions are frequently reversed. A sharp move in the first minutes aft
 
 ### Worked example: a hotter-than-expected CPI report
 
-Let's walk through a hypothetical scenario to show the framework in action. (This is an illustration, not a description of a real release.)
+Here's how the framework handles a made-up but realistic scenario. (It's an illustration, not a real release.)
 
 - **Trigger:** Core CPI rises more than the consensus estimate on a month-over-month basis, driven mainly by services prices.
 - **Expectation:** Futures markets had been pricing a meaningful chance of a Fed rate cut at the next meeting.
