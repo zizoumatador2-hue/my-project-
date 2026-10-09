@@ -473,3 +473,12 @@ code { background: var(--color-bg-alt); padding: 2px 6px; border-radius: 4px; fo
 .quiz__score { font-weight: 700; padding: 14px; border-radius: 8px; background: var(--color-bg-alt); }
 
 .latest { padding: 40px 0 8px; }
+
+/* ===== Text selection: everything readable is selectable ===== */
+body, main, article, .card, .card *, summary, .explorer, .quiz, .hero, .site-footer {
+  -webkit-user-select: text;
+  user-select: text;
+}
+a.card { -webkit-user-drag: none; }
+::selection { background: rgba(11, 61, 145, 0.22); color: inherit; }
+.site-footer ::selection { background: rgba(255, 255, 255, 0.3); color: #fff; }

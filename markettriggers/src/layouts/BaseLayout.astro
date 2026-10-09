@@ -62,8 +62,8 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   </style>
 
   <!-- Non-critical CSS, loaded async -->
-  <link rel="preload" as="style" href="/global.css" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="/global.css" /></noscript>
+  <link rel="preload" as="style" href="/global.css?v=2" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/global.css?v=2" /></noscript>
 
   {schemaList.map((s) => (
     <script type="application/ld+json" set:html={JSON.stringify(s)} />
