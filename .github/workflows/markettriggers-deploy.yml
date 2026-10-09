@@ -24,7 +24,10 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: npm install --no-audit --no-fund
-      - run: npm run build
+      - name: Build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log || { grep -iE "error|failed|invalid|expected|at |→|✘" build.log | tail -25 | while IFS= read -r l; do echo "::error::$l"; done; exit 1; }
       - name: Check links, anchors and images
         run: node scripts/check-links.mjs
       - name: Decide target
