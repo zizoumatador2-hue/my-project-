@@ -1,7 +1,13 @@
-# Fallback deployment: serves the built static site from Workers Static Assets.
-# Used by CI only when the API token cannot deploy to Cloudflare Pages.
+# Production: markettriggers.com and www are served from Workers Static Assets.
+# Custom domains create their own DNS records, so no DNS-edit token is needed.
 name = "markettriggers"
 compatibility_date = "2026-09-01"
+workers_dev = true
+
+routes = [
+  { pattern = "markettriggers.com", custom_domain = true },
+  { pattern = "www.markettriggers.com", custom_domain = true },
+]
 
 [assets]
 directory = "./dist"

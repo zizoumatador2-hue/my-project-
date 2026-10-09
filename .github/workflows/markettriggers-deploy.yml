@@ -63,66 +63,34 @@ jobs:
           npx --yes wrangler@4 pages deploy dist --project-name "$PROJECT" --branch "${{ steps.target.outputs.branch }}" --commit-dirty=true | tee deploy.log
           URL=$(grep -Eo 'https://[a-z0-9.-]+\.pages\.dev' deploy.log | tail -1)
           echo "url=$URL" >> "$GITHUB_OUTPUT"
-      - name: Fallback, serve from Workers static assets (production only)
-        id: worker
-        if: ${{ steps.pages.outcome != 'success' && steps.target.outputs.kind == 'production' }}
+      - name: Free the hostnames from the old pending Pages hookups (production only)
+        if: ${{ steps.target.outputs.kind == 'production' }}
+        continue-on-error: true
         run: |
-          echo "::warning::Pages deploy failed. Deploying the static site as a Worker instead."
-          npx --yes wrangler@4 deploy --config wrangler.assets.toml
-          SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
-          echo "url=https://markettriggers.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+          for D in $DOMAIN www.$DOMAIN; do
+            R=$(curl -sS -X DELETE -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains/$D")
+            echo "::notice::pages-domain $D removal: $(echo "$R" | jq -c '{ok:.success,err:.errors[0].message}')"
+          done
+      - name: Serve markettriggers.com from Workers static assets (production only)
+        id: worker
+        if: ${{ steps.target.outputs.kind == 'production' }}
+        run: |
+          npx --yes wrangler@4 deploy --config wrangler.assets.toml 2>&1 | tee worker.log
+          echo "::notice::worker-deploy: $(grep -E 'markettriggers|Deployed|custom domain|error|Error' worker.log | tr '\n' ' ' | cut -c1-600)"
       - name: Fail if nothing was deployed
         if: ${{ steps.pages.outcome != 'success' && steps.worker.outcome != 'success' }}
         run: |
-          echo "::error::Deploy failed on Pages and on the fallback. Check token permissions."
+          echo "::error::Deploy failed on Pages and on Workers."
           exit 1
-      - name: Attach custom domains
-        if: ${{ steps.target.outputs.kind == 'production' && steps.pages.outcome == 'success' }}
-        run: |
-          for D in $DOMAIN www.$DOMAIN; do
-            R=$(curl -sS -X POST -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
-              "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" -d "{\"name\":\"$D\"}")
-            echo "$D: $(echo "$R" | jq -r 'if .success then "attached (status: " + (.result.status // "pending") + ")" else (.errors[0].message // "failed") end')"
-          done
-      - name: Point DNS at the Pages project (logs replaced records)
-        continue-on-error: true
-        if: ${{ steps.target.outputs.kind == 'production' && steps.pages.outcome == 'success' }}
-        env:
-          DNS_TOKEN: ${{ secrets.CLOUDFLARE_DNS_TOKEN }}
-        run: |
-          T="$(printf '%s' "${DNS_TOKEN:-$CLOUDFLARE_API_TOKEN}" | tr -d '[:space:]')"
-          echo "::add-mask::$T"
-          API="https://api.cloudflare.com/client/v4"; H="Authorization: Bearer $T"
-          Z=$(curl -sS -H "$H" "$API/zones?name=$DOMAIN")
-          ZID=$(echo "$Z" | jq -r '.result[0].id // empty')
-          if [ -z "$ZID" ]; then
-            echo "::error::Zone $DOMAIN not visible to this token ($(echo "$Z" | jq -r '.errors[0].message // "no zone"')). Add CLOUDFLARE_DNS_TOKEN with Zone > DNS > Edit for $DOMAIN."; exit 1
-          fi
-          echo "zone status: $(echo "$Z" | jq -r '.result[0].status')"
-          fail=0
-          for N in $DOMAIN www.$DOMAIN; do
-            L=$(curl -sS -H "$H" "$API/zones/$ZID/dns_records?name=$N&per_page=100")
-            if [ "$(echo "$L" | jq -r '.success')" != "true" ]; then
-              echo "::error::$N: cannot read DNS records ($(echo "$L" | jq -r '.errors[0].message // "unknown"'))"; fail=1; continue
-            fi
-            echo "$N: existing records: $(echo "$L" | jq -c '[.result[] | {type, content, proxied}]')"
-            OK=$(echo "$L" | jq -r --arg t "$PROJECT.pages.dev" '[.result[] | select(.type=="CNAME" and .content==$t)] | length')
-            if [ "$OK" != "0" ]; then echo "$N: CNAME to $PROJECT.pages.dev already present"; continue; fi
-            for row in $(echo "$L" | jq -r '.result[] | select(.type=="A" or .type=="AAAA" or .type=="CNAME") | "\(.id):\(.type):\(.content)"'); do
-              id="${row%%:*}"; echo "$N: replacing ${row#*:}"
-              curl -sS -X DELETE -H "$H" "$API/zones/$ZID/dns_records/$id" | jq -r 'if .success then "  deleted" else "  delete failed: " + (.errors[0].message // "?") end'
-            done
-            R=$(curl -sS -X POST -H "$H" -H "Content-Type: application/json" "$API/zones/$ZID/dns_records" \
-              -d "{\"type\":\"CNAME\",\"name\":\"$N\",\"content\":\"$PROJECT.pages.dev\",\"proxied\":true,\"ttl\":1}")
-            echo "$N: $(echo "$R" | jq -r 'if .success then "CNAME created" else "FAILED: " + (.errors[0].message // "?") end')"
-            echo "$R" | jq -e '.success' >/dev/null || fail=1
-          done
-          exit $fail
-      - name: Report custom-domain status
+      - name: Report domain status
         if: ${{ always() && steps.target.outputs.kind == 'production' }}
         run: |
-          curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/domains" \
-            | jq -r '.result[]? | "\(.name): status=\(.status) error=\(.validation_data.error_message // .verification_data.error_message // "-")"' || true
+          API=https://api.cloudflare.com/client/v4; H="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          echo "::notice::worker-domains: $(curl -sS -H "$H" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" | jq -c '[.result[]? | select(.hostname|test("markettriggers")) | {hostname,service,cert_id}]')"
+          sleep 20
+          echo "::notice::public-dns: root=$(dig +short $DOMAIN | tr '\n' ' ') www=$(dig +short www.$DOMAIN | tr '\n' ' ')"
+          echo "::notice::live-title: $(curl -sSL --max-time 20 https://$DOMAIN/ | grep -oE '<title>[^<]*' | head -1)"
       - name: Screenshots of the preview (preview deploys only)
         if: ${{ steps.target.outputs.kind == 'preview' && steps.pages.outcome == 'success' }}
         continue-on-error: true
