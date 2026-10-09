@@ -3,7 +3,7 @@ name: MarketTriggers (diagnose domain, read-only)
 on:
   push:
     paths: ['.github/workflows/markettriggers-diagnose.yml']
-    # rev 8
+    # rev 9
   workflow_dispatch:
 jobs:
   diagnose:
@@ -56,5 +56,5 @@ jobs:
         run: |
           n() { echo "::notice::$*"; }
           for P in /articles/how-does-inflation-affect-stocks/ /articles/what-happens-to-stocks-when-the-fed-cuts-rates/ /articles/why-do-stocks-fall-after-earnings/ /editorial-policy/ /articles/; do
-            n "live $P: $(curl -sS -o /tmp/p.html -w '%{http_code}' https://markettriggers.com$P) $(grep -oE '<title>[^<]*' /tmp/p.html | head -1 | cut -c8-90)"
+            n "live $P: $(curl -sS -o /tmp/p.html -w '%{http_code}' https://markettriggers.com$P) $(grep -oE '<title>[^<]*' /tmp/p.html | head -1 | cut -c8-90) toc=$(grep -c 'article-toc' /tmp/p.html) read=$(grep -oE '[0-9]+ min read' /tmp/p.html | head -1) related=$(grep -c 'related-heading' /tmp/p.html) css=$(grep -oE 'global.css\?v=[0-9]+' /tmp/p.html | head -1)"
           done
