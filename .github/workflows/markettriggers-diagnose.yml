@@ -1,0 +1,40 @@
+name: MarketTriggers (diagnose domain, read-only)
+# Read-only: reports what the Cloudflare token can see about markettriggers.com. Changes nothing.
+on:
+  push:
+    paths: ['.github/workflows/markettriggers-diagnose.yml']
+  workflow_dispatch:
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      T: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
+      DNS_T: ${{ secrets.CLOUDFLARE_DNS_TOKEN }}
+      ACC_IN: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Diagnose
+        run: |
+          T="$(printf '%s' "$T" | tr -d '[:space:]')"; echo "::add-mask::$T"
+          API=https://api.cloudflare.com/client/v4; H="Authorization: Bearer $T"
+          n() { echo "::notice::$*"; }
+          n "dns-token-secret-present=$([ -n "$DNS_T" ] && echo yes || echo no)"
+          n "token-verify: $(curl -sS -H "$H" $API/user/tokens/verify | jq -c '{ok:.success,status:.result.status,err:.errors[0].message}')"
+          ACC="$(printf '%s' "$ACC_IN" | tr -d '[:space:]')"
+          [ -z "$ACC" ] && ACC=$(curl -sS -H "$H" "$API/accounts?per_page=5" | jq -r '.result[0].id // empty')
+          n "accounts: $(curl -sS -H "$H" "$API/accounts?per_page=5" | jq -c '[.result[]? | .name]')"
+          Z=$(curl -sS -H "$H" "$API/zones?name=markettriggers.com")
+          n "zone: $(echo "$Z" | jq -c '{ok:.success,err:.errors[0].message,n:(.result|length),status:.result[0].status,plan:.result[0].plan.name,ns:.result[0].name_servers,account:.result[0].account.name,perms:.result[0].permissions}')"
+          ZID=$(echo "$Z" | jq -r '.result[0].id // empty')
+          if [ -n "$ZID" ]; then
+            n "dns-read(deploy token): $(curl -sS -H "$H" "$API/zones/$ZID/dns_records?per_page=50" | jq -c '{ok:.success,err:.errors[0].message,records:[.result[]? | {type,name,content,proxied}]}')"
+            n "workers-routes: $(curl -sS -H "$H" "$API/zones/$ZID/workers/routes" | jq -c '{ok:.success,err:.errors[0].message,routes:[.result[]? | {pattern,script}]}')"
+          fi
+          n "worker-custom-domains: $(curl -sS -H "$H" "$API/accounts/$ACC/workers/domains" | jq -c '{ok:.success,err:.errors[0].message,d:[.result[]? | select(.hostname|test("markettriggers")) | {hostname,service}]}')"
+          P=$(curl -sS -H "$H" "$API/accounts/$ACC/pages/projects?per_page=50")
+          n "pages-projects: $(echo "$P" | jq -c '{ok:.success,err:.errors[0].message,p:[.result[]? | {name,subdomain,domains}]}')"
+          n "markettriggers-domains: $(curl -sS -H "$H" "$API/accounts/$ACC/pages/projects/markettriggers/domains" | jq -c '[.result[]? | {name,status,v:.validation_data.status,ve:.validation_data.error_message,vf:.verification_data.status,vfe:.verification_data.error_message}]')"
+          n "public-dns markettriggers.com: A=$(dig +short markettriggers.com A | tr '\n' ' ') CNAME=$(dig +short markettriggers.com CNAME) NS=$(dig +short markettriggers.com NS | tr '\n' ' ')"
+          n "public-dns www: $(dig +short www.markettriggers.com | tr '\n' ' ')"
+          n "http-head: $(curl -sSI https://markettriggers.com/ | grep -iE '^(HTTP|server|cf-ray|x-powered|location)' | tr '\r\n' ' ')"
+          n "robots: $(curl -sS https://markettriggers.com/robots.txt | head -c 200 | tr '\n' ' ')"
+          n "title: $(curl -sSL https://markettriggers.com/ | grep -oE '<title>[^<]*' | head -1)"
