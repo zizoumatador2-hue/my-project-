@@ -20,6 +20,17 @@
     update();
   }
 
+  /* Let readers select text inside linked cards: a click that ends a text
+     selection does not follow the link (a normal click still does). */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a.card');
+    if (!link) return;
+    var sel = window.getSelection && window.getSelection();
+    if (sel && !sel.isCollapsed && sel.toString().trim() && link.contains(sel.anchorNode)) {
+      e.preventDefault();
+    }
+  });
+
   /* Back to top button */
   var top = document.querySelector('.to-top');
   if (top) {
