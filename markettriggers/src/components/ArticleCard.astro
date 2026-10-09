@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'articles'>;
+  categoryLabel: string;
+}
+const { entry, categoryLabel } = Astro.props;
+const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<a href={`/articles/${entry.id}/`} class="card" style="display:block;">
+  <div class="card__eyebrow">{categoryLabel}</div>
+  <h3 class="card__title">{entry.data.title}</h3>
+  <p style="font-size:0.92rem; color:var(--color-text-muted); margin:0 0 10px;">{entry.data.description}</p>
+  <div class="card__meta">
+    <time datetime={entry.data.publishDate.toISOString()}>{dateFmt(entry.data.publishDate)}</time>
+  </div>
+</a>

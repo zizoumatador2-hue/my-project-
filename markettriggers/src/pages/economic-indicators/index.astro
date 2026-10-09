@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === 'economic-indicators');
+const articles = allArticles.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+<BaseLayout
+  title="U.S. Economic Indicators Explained"
+  description="How inflation, interest rates, Fed decisions, jobs data, GDP, and other economic indicators move U.S. financial markets — explained clearly for everyday investors."
+  canonicalPath="/economic-indicators/"
+>
+  <div class="container" style="padding-top:32px;">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Economic Indicators' }]} />
+    <h1>U.S. Economic Indicators</h1>
+    <p class="hero__lede">
+      Economic indicators are the data releases that investors watch most closely because they shape expectations about growth, inflation, and Federal Reserve policy. Explore how each major report — from the Consumer Price Index to the monthly jobs report — can move stocks, bonds, and the dollar.
+    </p>
+  </div>
+  <div class="container" style="padding-bottom:48px;">
+    {articles.length > 0 ? (
+      <div class="grid grid--3">
+        {articles.map((entry) => (
+          <ArticleCard entry={entry} categoryLabel="Economic Indicators" />
+        ))}
+      </div>
+    ) : (
+      <p style="color:var(--color-text-muted);">New explainers in this category are published weekly. Check back soon, or see our <a href="/">homepage guide</a> in the meantime.</p>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === 'stock-market-triggers');
+const articles = allArticles.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+<BaseLayout
+  title="Stock Market Triggers Explained"
+  description="How earnings reports, analyst upgrades and downgrades, buybacks, dividends, and major corporate announcements move individual stocks and the broader market."
+  canonicalPath="/stock-market-triggers/"
+>
+  <div class="container" style="padding-top:32px;">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Stock Market Triggers' }]} />
+    <h1>Stock Market Triggers</h1>
+    <p class="hero__lede">
+      Beyond the economy-wide picture, individual stocks and sectors react to company-specific news. Here's how earnings season, guidance changes, buybacks, and analyst actions become market-moving events.
+    </p>
+  </div>
+  <div class="container" style="padding-bottom:48px;">
+    {articles.length > 0 ? (
+      <div class="grid grid--3">
+        {articles.map((entry) => (<ArticleCard entry={entry} categoryLabel="Stock Market Triggers" />))}
+      </div>
+    ) : (
+      <p style="color:var(--color-text-muted);">New explainers in this category are published weekly. Check back soon, or see our <a href="/">homepage guide</a> in the meantime.</p>
+    )}
+  </div>
+</BaseLayout>

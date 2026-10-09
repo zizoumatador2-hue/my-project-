@@ -1,0 +1,121 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  publishDate: Date;
+  modifiedDate?: Date;
+  author: string;
+  category: string;
+  categoryLabel: string;
+  categoryHref: string;
+  faq?: { question: string; answer: string }[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  publishDate,
+  modifiedDate,
+  author,
+  categoryLabel,
+  categoryHref,
+  faq = [],
+} = Astro.props;
+
+const dateFmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: publishDate.toISOString(),
+  dateModified: (modifiedDate ?? publishDate).toISOString(),
+  author: { '@type': 'Organization', name: author },
+  publisher: {
+    '@type': 'Organization',
+    name: 'MarketTriggers.com',
+    logo: { '@type': 'ImageObject', url: 'https://markettriggers.com/logo.png' },
+  },
+  mainEntityOfPage: new URL(canonicalPath, 'https://markettriggers.com').toString(),
+};
+
+const faqSchema = faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    }
+  : null;
+
+const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  type="article"
+  publishDate={publishDate}
+  modifiedDate={modifiedDate}
+  schema={schema}
+>
+  <div class="disclaimer-strip">
+    Educational content only — not personalized financial, investment, or trading advice.
+  </div>
+  <div class="article-header container">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: categoryLabel, href: categoryHref },
+        { label: title },
+      ]}
+    />
+    <h1>{title}</h1>
+    <div class="article-meta">
+      <span>By {author}</span>
+      <span>Published <time datetime={publishDate.toISOString()}>{dateFmt(publishDate)}</time></span>
+      {modifiedDate && (
+        <span>Updated <time datetime={modifiedDate.toISOString()}>{dateFmt(modifiedDate)}</time></span>
+      )}
+    </div>
+  </div>
+
+  <div class="container">
+    <article class="article-body">
+      <slot />
+
+      {faq.length > 0 && (
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently Asked Questions</h2>
+          {faq.map((item) => (
+            <details class="faq-item">
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </section>
+      )}
+
+      <div class="author-box">
+        <div class="author-box__avatar" aria-hidden="true">MT</div>
+        <div>
+          <strong>{author}</strong>
+          <p style="margin:4px 0 0; font-size:0.9rem; color:var(--color-text-muted);">
+            The MarketTriggers Editorial Team researches and writes original, source-checked explainers on the economic indicators and market events that move U.S. markets.
+            <a href="/about/">More about our editorial process &rarr;</a>
+          </p>
+        </div>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

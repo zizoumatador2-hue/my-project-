@@ -1,0 +1,208 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import TriggerExplorer from '../components/TriggerExplorer.astro';
+import Quiz from '../components/Quiz.astro';
+
+import * as P1 from '../pillar/01-intro.md';
+import * as P2 from '../pillar/02-economic.md';
+import * as P3 from '../pillar/03-fed.md';
+import * as P4 from '../pillar/04-corporate.md';
+import * as P5 from '../pillar/05-sectors.md';
+import * as P6 from '../pillar/06-shocks.md';
+import * as P7 from '../pillar/07-howto.md';
+import * as P8 from '../pillar/08-education.md';
+
+const parts = [P1, P2, P3, P4, P5, P6, P7, P8];
+const tocItems = parts
+  .flatMap((p) => p.getHeadings())
+  .filter((h) => h.depth === 2);
+
+const published = new Date('2026-10-09');
+const modified = new Date('2026-10-09');
+
+const categoryLabels: Record<string, string> = {
+  'economic-indicators': 'Economic Indicators',
+  'stock-market-triggers': 'Stock Market Triggers',
+  'market-sectors': 'Market Sectors',
+  'investor-education': 'Investor Education',
+  'market-events': 'Market Events',
+};
+const latest = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 6);
+
+const faq = [
+  {
+    question: 'What moves the stock market the most?',
+    answer: 'Over time, stock prices follow corporate earnings and interest rates. In the short term, the biggest moves usually come from surprises in inflation data, jobs reports, Federal Reserve decisions, major company earnings, and unexpected shocks.',
+  },
+  {
+    question: 'Why do stocks sometimes fall on good news?',
+    answer: 'Because markets trade on expectations. If good news was already expected and priced in, or if it raises the odds of higher interest rates, stocks can fall even when the headline sounds positive.',
+  },
+  {
+    question: 'What time are most U.S. economic reports released?',
+    answer: 'Many major government reports, including CPI and the monthly jobs report, are released at 8:30 a.m. Eastern Time, before the regular stock market session opens at 9:30 a.m. ET.',
+  },
+  {
+    question: 'How often does the Federal Reserve meet?',
+    answer: 'The Federal Open Market Committee holds eight regularly scheduled meetings per year. It can also hold unscheduled meetings when conditions require.',
+  },
+  {
+    question: 'Is MarketTriggers.com financial advice?',
+    answer: 'No. MarketTriggers.com publishes general educational content about how markets work. It does not provide personalized investment, financial, tax, or legal advice.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'MarketTriggers.com',
+    url: 'https://markettriggers.com',
+    logo: 'https://markettriggers.com/logo.png',
+    email: 'info.christopherkunz@gmail.com',
+    description: 'Independent U.S. financial education publication explaining the economic indicators, corporate events, and market signals that move U.S. financial markets.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'MarketTriggers.com',
+    url: 'https://markettriggers.com',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'What Moves the Stock Market? The Complete Guide to Market Triggers',
+    datePublished: published.toISOString(),
+    dateModified: modified.toISOString(),
+    author: { '@type': 'Organization', name: 'MarketTriggers Editorial Team', url: 'https://markettriggers.com/about/' },
+    publisher: { '@type': 'Organization', name: 'MarketTriggers.com', logo: { '@type': 'ImageObject', url: 'https://markettriggers.com/logo.png' } },
+    mainEntityOfPage: 'https://markettriggers.com/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to analyze any market trigger in 6 steps',
+    step: [
+      'Identify the trigger precisely',
+      'Find the expectation',
+      'Measure the surprise',
+      'Identify the channel',
+      'Map the impact',
+      'Decide what to watch next',
+    ].map((name, i) => ({ '@type': 'HowToStep', position: i + 1, name })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+const dateFmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout
+  title="What Moves the Stock Market? A Guide to Market Triggers"
+  description="Learn what moves the stock market: how inflation, jobs data, the Fed, earnings, and sector shifts trigger price moves — explained clearly for U.S. investors."
+  canonicalPath="/"
+  schema={schema}
+>
+  <section class="hero hero--aurora">
+    <div class="container">
+      <p class="hero__eyebrow">The Complete Guide</p>
+      <h1><span class="shiny-text">What Moves the Stock Market?</span> Understanding the Triggers Behind Every Move</h1>
+      <p class="hero__lede">
+        Inflation reports, jobs data, Federal Reserve decisions, earnings, and sector shifts — here's how each one moves U.S. stocks, bonds, and the dollar, and how to read the next one yourself.
+      </p>
+      <div class="hero__ctas">
+        <a href="#trigger-explorer" class="btn" data-spark>Try the Trigger Explorer</a>
+        <a href="#how-to-analyze-any-market-trigger-in-6-steps" class="btn btn--ghost" data-spark>The 6-step framework</a>
+      </div>
+      <p class="article-meta" style="margin-top:18px;">
+        <span>By <a href="/about/">MarketTriggers Editorial Team</a></span>
+        <span>Updated <time datetime={modified.toISOString()}>{dateFmt(modified)}</time></span>
+        <span>Educational content — not financial advice</span>
+      </p>
+    </div>
+  </section>
+
+  {latest.length > 0 && (
+    <section class="latest container" aria-labelledby="latest-heading">
+      <div class="section-head">
+        <h2 id="latest-heading" style="border:0;padding:0;margin:0;">Latest analysis</h2>
+        <a href="/articles/">All articles &rarr;</a>
+      </div>
+      <div class="grid grid--3">
+        {latest.map((entry) => (
+          <ArticleCard entry={entry} categoryLabel={categoryLabels[entry.data.category]} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <div class="pillar-wrap">
+    <aside class="pillar-toc" aria-label="Table of contents">
+      <h2>On this page</h2>
+      <ol>
+        {tocItems.map((h) => (
+          <li><a href={`#${h.slug}`}>{h.text}</a></li>
+        ))}
+        <li><a href="#trigger-explorer">Trigger Impact Explorer</a></li>
+        <li><a href="#quiz-heading">Test yourself</a></li>
+        <li><a href="#home-faq">FAQ</a></li>
+      </ol>
+    </aside>
+
+    <article class="pillar-body">
+      <P1.Content />
+      <TriggerExplorer />
+      <P2.Content />
+      <P3.Content />
+      <P4.Content />
+      <P5.Content />
+      <P6.Content />
+      <P7.Content />
+      <P8.Content />
+      <Quiz />
+
+      <section aria-labelledby="home-faq">
+        <h2 id="home-faq">Frequently asked questions</h2>
+        {faq.map((item) => (
+          <details class="faq-item">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+        <p style="margin-top:1em;">More questions? See our full <a href="/faq/">FAQ page</a>.</p>
+      </section>
+
+      <div class="callout" style="margin-top:2em;">
+        <strong>Important:</strong> The information on MarketTriggers.com is for general educational purposes only and is not investment, financial, tax, or legal advice. Investing involves risk, including possible loss of principal. Past market behavior does not guarantee future results.
+      </div>
+    </article>
+  </div>
+
+  <script>
+    // Highlight the active TOC link while scrolling
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.pillar-toc a'));
+    const targets = links
+      .map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if ('IntersectionObserver' in window && targets.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          links.forEach((a) => a.classList.toggle('is-active', a.hash === `#${entry.target.id}`));
+        });
+      }, { rootMargin: '0px 0px -70% 0px' });
+      targets.forEach((t) => io.observe(t));
+    }
+  </script>
+</BaseLayout>

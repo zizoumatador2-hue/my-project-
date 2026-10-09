@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+  modifiedDate?: Date;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  type = 'website',
+  publishDate,
+  modifiedDate,
+  image = '/og-default.png',
+} = Astro.props;
+
+const site = 'https://markettriggers.com';
+const canonicalUrl = new URL(canonicalPath, site).toString();
+const imageUrl = new URL(image, site).toString();
+const fullTitle = title.includes('MarketTriggers') ? title : `${title} | MarketTriggers.com`;
+---
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content="MarketTriggers.com" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+{type === 'article' && publishDate && (
+  <meta property="article:published_time" content={publishDate.toISOString()} />
+)}
+{type === 'article' && modifiedDate && (
+  <meta property="article:modified_time" content={modifiedDate.toISOString()} />
+)}

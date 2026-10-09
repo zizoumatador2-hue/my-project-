@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === 'investor-education');
+const articles = allArticles.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+<BaseLayout
+  title="Investor Education: How Markets Work"
+  description="Clear, jargon-free explainers on how financial markets work — bull and bear markets, volatility, risk management, interest rates, inflation, bonds, and the U.S. dollar."
+  canonicalPath="/investor-education/"
+>
+  <div class="container" style="padding-top:32px;">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Investor Education' }]} />
+    <h1>Investor Education</h1>
+    <p class="hero__lede">
+      Before you can understand why a market moved, it helps to understand how markets work in the first place. These guides cover the foundational concepts every investor should know.
+    </p>
+  </div>
+  <div class="container" style="padding-bottom:48px;">
+    {articles.length > 0 ? (
+      <div class="grid grid--3">
+        {articles.map((entry) => (<ArticleCard entry={entry} categoryLabel="Investor Education" />))}
+      </div>
+    ) : (
+      <p style="color:var(--color-text-muted);">New guides in this category are published weekly. Check back soon, or see our <a href="/">homepage guide</a> in the meantime.</p>
+    )}
+  </div>
+</BaseLayout>

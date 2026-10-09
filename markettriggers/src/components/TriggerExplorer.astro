@@ -1,0 +1,137 @@
+---
+// Interactive explorer: pick a trigger, see commonly observed tendencies.
+const triggers = [
+  {
+    id: 'cpi-hot',
+    label: 'Inflation comes in hotter than expected',
+    channel: 'Interest rates',
+    stocks: 'Often lower, led by rate-sensitive growth stocks',
+    yields: 'Often higher, especially the 2-year',
+    dollar: 'Often stronger',
+    sectorsUp: 'Energy, sometimes financials',
+    sectorsDown: 'Technology, real estate, utilities, small caps',
+    watch: 'PPI, PCE price index, Fed officials’ comments',
+    link: '/economic-indicators/',
+  },
+  {
+    id: 'jobs-weak',
+    label: 'Jobs report is much weaker than expected',
+    channel: 'Earnings expectations and risk appetite',
+    stocks: 'Mixed: rate-cut hopes vs. growth fears',
+    yields: 'Often lower',
+    dollar: 'Often weaker',
+    sectorsUp: 'Defensives: utilities, staples, health care',
+    sectorsDown: 'Cyclicals: consumer discretionary, industrials, small caps',
+    watch: 'Weekly jobless claims, revisions, next FOMC meeting',
+    link: '/economic-indicators/',
+  },
+  {
+    id: 'fed-dovish',
+    label: 'The Fed signals faster rate cuts than expected',
+    channel: 'Interest rates',
+    stocks: 'Often higher',
+    yields: 'Often lower',
+    dollar: 'Often weaker',
+    sectorsUp: 'Real estate, utilities, growth stocks, small caps',
+    sectorsDown: 'Sometimes bank margins in focus',
+    watch: 'Dot plot, press conference, upcoming inflation data',
+    link: '/economic-indicators/',
+  },
+  {
+    id: 'earnings-guide-down',
+    label: 'A mega-cap company lowers its guidance',
+    channel: 'Earnings expectations',
+    stocks: 'Company falls; may weigh on its sector and the index',
+    yields: 'Usually limited direct effect',
+    dollar: 'Usually limited direct effect',
+    sectorsUp: 'Competitors, if share gains are expected',
+    sectorsDown: 'Suppliers and peers with similar exposure',
+    watch: 'Peer earnings, analyst revisions, conference call details',
+    link: '/stock-market-triggers/',
+  },
+  {
+    id: 'oil-spike',
+    label: 'Oil prices spike on a supply disruption',
+    channel: 'Earnings expectations and inflation',
+    stocks: 'Mixed; broad market often pressured',
+    yields: 'Can rise on inflation concerns',
+    dollar: 'Mixed',
+    sectorsUp: 'Energy producers',
+    sectorsDown: 'Airlines, transports, consumer discretionary',
+    watch: 'EIA inventory data, OPEC+ decisions, inflation expectations',
+    link: '/market-sectors/',
+  },
+  {
+    id: 'crisis',
+    label: 'A sudden financial or geopolitical shock',
+    channel: 'Risk appetite',
+    stocks: 'Often sharply lower; VIX rises',
+    yields: 'Often lower as investors seek safety',
+    dollar: 'Often stronger',
+    sectorsUp: 'Defensive sectors relatively',
+    sectorsDown: 'Cyclicals, small caps, high-yield credit',
+    watch: 'Policy responses, credit spreads, VIX',
+    link: '/investor-education/',
+  },
+];
+---
+<section class="explorer" id="trigger-explorer" aria-labelledby="explorer-heading" data-reveal>
+  <h2 id="explorer-heading">Trigger Impact Explorer</h2>
+  <p>Choose a scenario to see how markets have <em>commonly</em> tended to react. These are educational patterns, not predictions — the actual response always depends on expectations and context.</p>
+
+  <div class="explorer__tabs" role="tablist" aria-label="Market trigger scenarios">
+    {triggers.map((t, i) => (
+      <button
+        role="tab"
+        class="explorer__tab"
+        id={`tab-${t.id}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-controls={`panel-${t.id}`}
+        tabindex={i === 0 ? 0 : -1}
+      >{t.label}</button>
+    ))}
+  </div>
+
+  {triggers.map((t, i) => (
+    <div
+      role="tabpanel"
+      class="explorer__panel spotlight"
+      id={`panel-${t.id}`}
+      aria-labelledby={`tab-${t.id}`}
+      hidden={i !== 0}
+    >
+      <p class="explorer__channel"><strong>Main channel:</strong> {t.channel}</p>
+      <dl class="explorer__grid">
+        <div><dt>Stocks</dt><dd>{t.stocks}</dd></div>
+        <div><dt>Treasury yields</dt><dd>{t.yields}</dd></div>
+        <div><dt>U.S. dollar</dt><dd>{t.dollar}</dd></div>
+        <div><dt>Sectors that may hold up</dt><dd>{t.sectorsUp}</dd></div>
+        <div><dt>Sectors that may lag</dt><dd>{t.sectorsDown}</dd></div>
+        <div><dt>What to watch next</dt><dd>{t.watch}</dd></div>
+      </dl>
+      <a href={t.link} class="explorer__more">Read the full explainer &rarr;</a>
+    </div>
+  ))}
+</section>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.explorer__tab'));
+  const select = (tab: HTMLButtonElement) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute('aria-controls') || '');
+      if (panel) panel.hidden = !on;
+    });
+  };
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      select(next);
+      next.focus();
+    });
+  });
+</script>

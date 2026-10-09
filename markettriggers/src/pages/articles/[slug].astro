@@ -1,0 +1,42 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('articles', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'articles'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const categoryMap: Record<string, { label: string; href: string }> = {
+  'economic-indicators': { label: 'Economic Indicators', href: '/economic-indicators/' },
+  'stock-market-triggers': { label: 'Stock Market Triggers', href: '/stock-market-triggers/' },
+  'market-sectors': { label: 'Market Sectors', href: '/market-sectors/' },
+  'investor-education': { label: 'Investor Education', href: '/investor-education/' },
+  'market-events': { label: 'Market Events', href: '/market-events/' },
+};
+const cat = categoryMap[entry.data.category];
+---
+<ArticleLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  canonicalPath={`/articles/${entry.id}/`}
+  publishDate={entry.data.publishDate}
+  modifiedDate={entry.data.modifiedDate}
+  author={entry.data.author}
+  category={entry.data.category}
+  categoryLabel={cat.label}
+  categoryHref={cat.href}
+  faq={entry.data.faq}
+>
+  <Content />
+</ArticleLayout>

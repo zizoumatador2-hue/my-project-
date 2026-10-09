@@ -1,0 +1,88 @@
+---
+const questions = [
+  {
+    q: 'A company beats analysts’ earnings estimates, but its stock falls. What is the most likely explanation?',
+    options: [
+      'The stock market was closed',
+      'Investors expected an even bigger beat, or guidance disappointed',
+      'Earnings never affect stock prices',
+    ],
+    answer: 1,
+    explain: 'Markets react to surprise relative to expectations. A beat that was already priced in, or weaker forward guidance, can push shares lower.',
+  },
+  {
+    q: 'Which inflation measure does the Federal Reserve use to define its 2% target?',
+    options: ['Consumer Price Index (CPI)', 'Producer Price Index (PPI)', 'Personal Consumption Expenditures (PCE) Price Index'],
+    answer: 2,
+    explain: 'The Fed’s 2% goal is defined in terms of the PCE price index, published by the Bureau of Economic Analysis.',
+  },
+  {
+    q: 'When Treasury bond prices rise, what happens to their yields?',
+    options: ['Yields rise', 'Yields fall', 'Yields are unaffected'],
+    answer: 1,
+    explain: 'Bond prices and yields move in opposite directions.',
+  },
+  {
+    q: 'Which group of sectors is usually considered defensive?',
+    options: ['Utilities, consumer staples, health care', 'Energy, materials, industrials', 'Technology, consumer discretionary, financials'],
+    answer: 0,
+    explain: 'Defensive sectors sell goods and services people keep buying in good times and bad.',
+  },
+  {
+    q: 'What does the VIX measure?',
+    options: ['The price of gold', 'Expected 30-day volatility of the S&P 500', 'The number of stocks hitting new highs'],
+    answer: 1,
+    explain: 'The Cboe Volatility Index is derived from S&P 500 options prices and is often called the market’s fear gauge.',
+  },
+];
+---
+<section class="quiz" aria-labelledby="quiz-heading" data-reveal>
+  <h2 id="quiz-heading">Test yourself: 5 quick questions</h2>
+  <p>See how much of this guide stuck. Pick an answer to reveal the explanation.</p>
+  <ol class="quiz__list">
+    {questions.map((item, qi) => (
+      <li class="quiz__item" data-answer={item.answer}>
+        <p class="quiz__q"><strong>{item.q}</strong></p>
+        <div class="quiz__options" role="group" aria-label={`Question ${qi + 1} options`}>
+          {item.options.map((opt, oi) => (
+            <button type="button" class="quiz__opt" data-index={oi}>{opt}</button>
+          ))}
+        </div>
+        <p class="quiz__explain" hidden aria-live="polite">{item.explain}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="quiz__score" aria-live="polite" hidden></p>
+</section>
+
+<script>
+  const items = document.querySelectorAll<HTMLLIElement>('.quiz__item');
+  const scoreEl = document.querySelector<HTMLParagraphElement>('.quiz__score');
+  let answered = 0;
+  let correct = 0;
+  items.forEach((item) => {
+    const answer = Number(item.dataset.answer);
+    const buttons = item.querySelectorAll<HTMLButtonElement>('.quiz__opt');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (item.dataset.done) return;
+        item.dataset.done = '1';
+        const chosen = Number(btn.dataset.index);
+        buttons.forEach((b) => {
+          b.disabled = true;
+          if (Number(b.dataset.index) === answer) b.classList.add('is-correct');
+        });
+        if (chosen !== answer) btn.classList.add('is-wrong');
+        else correct++;
+        answered++;
+        const ex = item.querySelector<HTMLParagraphElement>('.quiz__explain');
+        if (ex) ex.hidden = false;
+        if (answered === items.length && scoreEl) {
+          scoreEl.hidden = false;
+          scoreEl.textContent = `You scored ${correct} out of ${items.length}. ` +
+            (correct === items.length ? 'Excellent — you’re reading markets like a pro.' : 'Scroll back to the sections you missed for a quick refresher.');
+        }
+      });
+    });
+  });
+</script>

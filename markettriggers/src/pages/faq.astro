@@ -1,0 +1,56 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const groups = [
+  {
+    heading: 'About MarketTriggers.com',
+    items: [
+      { q: 'What is MarketTriggers.com?', a: 'MarketTriggers.com is an independent financial education publication that explains the economic indicators, Federal Reserve decisions, corporate events, and sector dynamics that move U.S. financial markets.' },
+      { q: 'Is the content on this site financial advice?', a: 'No. Everything we publish is general educational content. We do not provide personalized investment, financial, tax, or legal advice, and we do not recommend buying or selling specific securities.' },
+      { q: 'Where does your information come from?', a: 'We prioritize primary and institutional sources, including the Bureau of Labor Statistics, Bureau of Economic Analysis, Census Bureau, Federal Reserve, U.S. Treasury, SEC filings, and company reports. We cite our sources in each article.' },
+      { q: 'How often is new content published?', a: 'We publish new explainers regularly and update existing articles when data is revised or our explanations can be improved. Each article shows when it was published and last updated. You can follow new articles through our RSS feed.' },
+      { q: 'How do I report an error?', a: 'Email info.christopherkunz@gmail.com with the page URL and the statement you believe is incorrect. We review every correction request.' },
+    ],
+  },
+  {
+    heading: 'Understanding market triggers',
+    items: [
+      { q: 'What is a market trigger?', a: 'A market trigger is any event or piece of information that causes investors to change their expectations about corporate profits, interest rates, or risk, leading to a change in asset prices. Common triggers include economic data releases, Federal Reserve decisions, earnings reports, and unexpected events.' },
+      { q: 'Why do markets react to expectations rather than the news itself?', a: 'Prices already reflect what investors expect. When news matches expectations, there is little new information to act on. Prices move most when results differ meaningfully from what was anticipated.' },
+      { q: 'What is the difference between headline and core inflation?', a: 'Headline inflation includes all items in the price index. Core inflation excludes food and energy, which tend to be volatile, and is often viewed as a better gauge of underlying inflation trends.' },
+      { q: 'Why do interest rates matter so much for stocks?', a: 'Higher interest rates reduce the present value of future corporate earnings, make bonds more competitive with stocks, and raise borrowing costs for businesses and consumers. Growth stocks are often the most sensitive.' },
+      { q: 'What is a yield curve inversion?', a: 'An inversion occurs when shorter-term Treasury yields rise above longer-term yields. Inversions have preceded many U.S. recessions, but the timing has varied widely and an inversion does not guarantee a recession.' },
+    ],
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: groups.flatMap((g) => g.items).map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+---
+<PageLayout
+  title="FAQ — Frequently Asked Questions"
+  heading="Frequently Asked Questions"
+  description="Answers to common questions about MarketTriggers.com and about how inflation, interest rates, earnings, and other triggers move U.S. markets."
+  canonicalPath="/faq/"
+  schema={schema}
+>
+  {groups.map((g) => (
+    <section>
+      <h2>{g.heading}</h2>
+      {g.items.map((i) => (
+        <details class="faq-item">
+          <summary>{i.q}</summary>
+          <p>{i.a}</p>
+        </details>
+      ))}
+    </section>
+  ))}
+  <p style="margin-top:2em;">Still have a question? <a href="/contact/">Contact us</a>, or read our <a href="/">complete guide to what moves the stock market</a>.</p>
+</PageLayout>
