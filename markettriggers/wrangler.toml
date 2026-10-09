@@ -1,0 +1,15 @@
+# Production: Cloudflare Workers Builds deploys this static site (markettriggers.com + www).
+# Custom domains create their own DNS records.
+name = "markettriggers"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+routes = [
+  { pattern = "markettriggers.com", custom_domain = true },
+  { pattern = "www.markettriggers.com", custom_domain = true },
+]
+
+[assets]
+directory = "./dist"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
