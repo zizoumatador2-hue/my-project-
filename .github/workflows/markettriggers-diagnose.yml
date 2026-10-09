@@ -3,6 +3,7 @@ name: MarketTriggers (diagnose domain, read-only)
 on:
   push:
     paths: ['.github/workflows/markettriggers-diagnose.yml']
+    # rev 2
   workflow_dispatch:
 jobs:
   diagnose:
@@ -36,5 +37,11 @@ jobs:
           n "public-dns markettriggers.com: A=$(dig +short markettriggers.com A | tr '\n' ' ') CNAME=$(dig +short markettriggers.com CNAME) NS=$(dig +short markettriggers.com NS | tr '\n' ' ')"
           n "public-dns www: $(dig +short www.markettriggers.com | tr '\n' ' ')"
           n "http-head: $(curl -sSI https://markettriggers.com/ | grep -iE '^(HTTP|server|cf-ray|x-powered|location)' | tr '\r\n' ' ')"
-          n "robots: $(curl -sS https://markettriggers.com/robots.txt | head -c 200 | tr '\n' ' ')"
+          curl -sS https://markettriggers.com/robots.txt > /tmp/robots.txt; n "robots-bytes: $(wc -c < /tmp/robots.txt)"
+          i=0; while IFS= read -r line; do i=$((i+1)); [ -n "$line" ] && n "robots[$i]: $line"; [ $i -ge 60 ] && break; done < /tmp/robots.txt
+          for UA in "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "Mediapartners-Google" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36"; do
+            n "fetch as [$UA]: $(curl -sS -o /dev/null -w '%{http_code} %{size_download}B' -A "$UA" https://markettriggers.com/)"
+          done
+          n "www: $(curl -sS -o /dev/null -w '%{http_code} -> %{redirect_url}' https://www.markettriggers.com/)"
+          n "bot-mgmt: $(curl -sS -H "$H" "$API/zones/$ZID/bot_management" | jq -c '{ok:.success,err:.errors[0].message,r:.result}')"
           n "title: $(curl -sSL https://markettriggers.com/ | grep -oE '<title>[^<]*' | head -1)"
