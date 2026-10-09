@@ -24,3 +24,7 @@ Astro 5 static site — U.S. financial education. English, mobile-first, AdSense
 - Publish at least 15–20 full, original articles (category pages are thin until then).
 - Replace the placeholder in `public/ads.txt` with your publisher ID after approval.
 - Submit `https://markettriggers.com/sitemap-index.xml` in Google Search Console and Bing Webmaster Tools.
+
+## Deploys (GitHub Actions → Cloudflare Pages)
+- Push to `markettriggers-live` → production on markettriggers.com (attaches domain + DNS).
+- Push to any other branch → preview on `<branch>.markettriggers.pages.dev`.
