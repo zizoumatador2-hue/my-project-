@@ -3,7 +3,7 @@ name: MarketTriggers (diagnose domain, read-only)
 on:
   push:
     paths: ['.github/workflows/markettriggers-diagnose.yml']
-    # rev 3
+    # rev 4
   workflow_dispatch:
 jobs:
   diagnose:
@@ -44,7 +44,8 @@ jobs:
           n "public-dns www: $(dig +short www.markettriggers.com | tr '\n' ' ')"
           n "http-head: $(curl -sSI https://markettriggers.com/ | grep -iE '^(HTTP|server|cf-ray|x-powered|location)' | tr '\r\n' ' ')"
           curl -sS https://markettriggers.com/robots.txt > /tmp/robots.txt; n "robots-bytes: $(wc -c < /tmp/robots.txt)"
-          n "robots: $(grep -v '^#' /tmp/robots.txt | grep -v '^$' | head -60 | tr '\n' '|' )"
+          n "robots-sitemap-lines: $(grep -i "sitemap" /tmp/robots.txt | tr "\n" "|")"
+          n "robots-tail: $(grep -v "^#" /tmp/robots.txt | grep -v "^$" | tail -8 | tr "\n" "|")"
           for UA in "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "Mediapartners-Google" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36"; do
             n "fetch as [$UA]: $(curl -sS -o /dev/null -w '%{http_code} %{size_download}B' -A "$UA" https://markettriggers.com/)"
           done
