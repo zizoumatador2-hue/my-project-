@@ -3,7 +3,7 @@ name: MarketTriggers (diagnose domain, read-only)
 on:
   push:
     paths: ['.github/workflows/markettriggers-diagnose.yml']
-    # rev 7
+    # rev 8
   workflow_dispatch:
 jobs:
   diagnose:
@@ -52,6 +52,9 @@ jobs:
           n "www: $(curl -sS -o /dev/null -w '%{http_code} -> %{redirect_url}' https://www.markettriggers.com/)"
           n "bot-mgmt: $(curl -sS -H "$H" "$API/zones/$ZID/bot_management" | jq -c '{ok:.success,err:.errors[0].message,r:.result}')"
           n "title: $(curl -sSL https://markettriggers.com/ | grep -oE '<title>[^<]*' | head -1)"
+      - name: Live pages
+        run: |
+          n() { echo "::notice::$*"; }
           for P in /articles/how-does-inflation-affect-stocks/ /articles/what-happens-to-stocks-when-the-fed-cuts-rates/ /articles/why-do-stocks-fall-after-earnings/ /editorial-policy/ /articles/; do
             n "live $P: $(curl -sS -o /tmp/p.html -w '%{http_code}' https://markettriggers.com$P) $(grep -oE '<title>[^<]*' /tmp/p.html | head -1 | cut -c8-90)"
           done
