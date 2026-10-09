@@ -56,7 +56,7 @@ howTo:
       text: "Review health, disability, life, property and liability insurance and name beneficiaries."
     - name: "Review every year"
       text: "Update the plan annually and after major life events."
-related: ["roth-ira-vs-traditional-ira", "50-30-20-rule", "term-vs-whole-life-insurance", "how-to-build-a-budget", "emergency-fund-guide", "how-compound-interest-works"]
+related: ["how-to-start-investing-for-beginners", "roth-ira-vs-traditional-ira", "50-30-20-rule", "term-vs-whole-life-insurance", "how-to-build-a-budget", "emergency-fund-guide", "how-compound-interest-works"]
 calculators: ["investment", "compound-interest", "budget"]
 ---
 
