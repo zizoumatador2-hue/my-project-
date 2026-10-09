@@ -1,0 +1,39 @@
+name: MarketTriggers (fetch images)
+# Downloads already-generated images listed in markettriggers/data/fal-images.json,
+# converts them to WebP (1344w + 768w), and commits them to markettriggers/public/images.
+# No generation happens here, so it costs nothing.
+on:
+  push:
+    paths: ['markettriggers/data/fal-images.json', '.github/workflows/markettriggers-images.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp >/dev/null
+      - name: Download and convert
+        working-directory: markettriggers
+        run: |
+          set -e
+          mkdir -p public/images
+          jq -c '.images[]' data/fal-images.json | while read -r row; do
+            slug=$(echo "$row" | jq -r .slug); url=$(echo "$row" | jq -r .url)
+            if [ -f "public/images/$slug-1344.webp" ]; then echo "$slug: exists"; continue; fi
+            curl -fsSL "$url" -o "/tmp/$slug.jpg"
+            convert "/tmp/$slug.jpg" -resize 1344x -strip -quality 80 "public/images/$slug-1344.webp"
+            convert "/tmp/$slug.jpg" -resize 768x  -strip -quality 78 "public/images/$slug-768.webp"
+            echo "$slug: ok"
+          done
+          ls -la public/images
+      - name: Commit images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add markettriggers/public/images
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -m "MarketTriggers: add site images"
+          git push
