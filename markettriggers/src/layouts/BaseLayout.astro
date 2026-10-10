@@ -77,8 +77,8 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   </style>
 
   <!-- Non-critical CSS, loaded async -->
-  <link rel="preload" as="style" href="/global.css?v=7" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="/global.css?v=7" /></noscript>
+  <link rel="preload" as="style" href="/global.css?v=8" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/global.css?v=8" /></noscript>
 
   {schemaList.map((s) => (
     <script type="application/ld+json" set:html={JSON.stringify(s)} />
@@ -90,7 +90,7 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   <script is:inline src="/consent-default.js"></script>
   <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
   <link rel="alternate" type="application/rss+xml" title="MarketTriggers.com" href="/rss.xml" />
-  <script is:inline src="/effects.js?v=4" defer></script>
+  <script is:inline src="/effects.js?v=5" defer></script>
 </head>
 <body>
   <div class="progress-bar" aria-hidden="true"></div>

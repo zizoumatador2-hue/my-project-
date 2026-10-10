@@ -613,3 +613,6 @@ a.card:hover .card__title { color: var(--color-primary); }
 @media (max-width: 860px) {
   .main-nav.is-open { box-shadow: 0 18px 30px rgba(15,23,42,.14); border-bottom: 1px solid var(--color-border); }
 }
+
+.article-header { padding-left: 20px; padding-right: 20px; }
+.article-toc--plain ol { list-style: none; padding-left: 0; }

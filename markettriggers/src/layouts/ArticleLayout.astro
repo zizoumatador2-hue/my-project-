@@ -34,6 +34,7 @@ const {
   toc = [],
   readingMinutes,
 } = Astro.props;
+const tocPlain = toc.some((h) => /^\d+[.)]/.test(h.text));
 const imgUrl = image ? `https://markettriggers.com/images/${image}-1344.webp` : 'https://markettriggers.com/og-home.jpg';
 
 const dateFmt = (d: Date) =>
@@ -121,7 +122,7 @@ const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
       )}
       {toc.length > 2 && (
         <aside class="article-aside" aria-label="Table of contents">
-        <details class="article-toc" open>
+        <details class={`article-toc${tocPlain ? ' article-toc--plain' : ''}`} open>
           <summary>In this article</summary>
           <ol>
             {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
