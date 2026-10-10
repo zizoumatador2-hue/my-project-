@@ -5,8 +5,8 @@ hub: brewing
 keyword: "how to start a tea collection"
 publishDate: 2026-10-10
 modifiedDate: 2026-10-10
-image: ""
-imageAlt: ""
+image: "/images/how-to-start-a-tea-collection-1600.webp"
+imageAlt: "Glass jars of loose leaf tea and a handwritten tasting notebook on a wooden shelf by a window"
 imageAltSuggestion: "Shelf with several small glass jars of loose tea leaves and a handwritten tasting notebook"
 imagePos: ""
 keyTakeaways:

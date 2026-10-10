@@ -5,8 +5,8 @@ hub: herbal-tea
 keyword: "how to make herbal tea at home"
 publishDate: 2026-10-10
 modifiedDate: 2026-10-10
-image: ""
-imageAlt: ""
+image: "/images/how-to-make-herbal-tea-at-home-1600.webp"
+imageAlt: "Glass mug of pale herbal infusion with mint leaves and chamomile flowers on folded linen"
 imageAltSuggestion: "Clear mug of pale herbal infusion with fresh mint leaves and dried chamomile flowers on a linen cloth"
 imagePos: ""
 keyTakeaways:

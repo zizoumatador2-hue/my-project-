@@ -5,8 +5,8 @@ hub: tea-gear
 keyword: "best tea gifts"
 publishDate: 2026-10-10
 modifiedDate: 2026-10-10
-image: ""
-imageAlt: ""
+image: "/images/tea-gift-ideas-people-actually-use-1600.webp"
+imageAlt: "Kraft paper gift box beside a glass teapot, a tin of loose leaf tea and a ceramic cup"
 imageAltSuggestion: "Wrapped gift box beside a glass teapot, a tin of loose leaf tea and a small cup on a wooden table"
 imagePos: ""
 keyTakeaways:
