@@ -24,7 +24,7 @@ const {
 const site = 'https://markettriggers.com';
 const canonicalUrl = new URL(canonicalPath, site).toString();
 const imageUrl = new URL(image, site).toString();
-const fullTitle = title.includes('MarketTriggers') ? title : `${title} | MarketTriggers`;
+const fullTitle = title.includes('MarketTriggers') || title.length + 17 > 65 ? title : `${title} | MarketTriggers`;
 ---
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
