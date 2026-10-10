@@ -1,0 +1,46 @@
+---
+/**
+ * The only component allowed to render a booking CTA. It never receives a raw
+ * partner URL: it calls getAffiliateUrl(), which returns an internal /go/ link
+ * (tracked server-side) or, if no active partner exists, our own page.
+ */
+import { getAffiliateUrl, type AffiliateTarget } from '../lib/affiliate';
+import Icon from './Icon.astro';
+interface Props {
+  target: AffiliateTarget;
+  label?: string;
+  fallbackLabel?: string;
+  placement: string;
+  size?: 'sm' | 'md';
+  variant?: 'spice' | 'navy';
+  showPartner?: boolean;
+  class?: string;
+}
+const { target, label = 'Check Availability', fallbackLabel = 'View details', placement, size = 'md', variant = 'spice', showPartner = false, class: cls } =
+  Astro.props;
+const link = getAffiliateUrl(target);
+---
+
+{
+  link.sponsored ? (
+    <a
+      class:list={['btn', { 'btn--sm': size === 'sm', 'btn--navy': variant === 'navy' }, cls]}
+      href={link.href}
+      rel="sponsored nofollow noopener"
+      target="_blank"
+      data-affiliate={link.id}
+      data-partner={link.partnerName}
+      data-placement={placement}
+    >
+      {label}
+      <Icon name="external" size={18} />
+      <span class="sr-only">(opens {link.partnerName} in a new tab)</span>
+    </a>
+  ) : (
+    <a class:list={['btn', { 'btn--sm': size === 'sm', 'btn--navy': variant === 'navy' }, cls]} href={link.href}>
+      {fallbackLabel}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  )
+}
+{showPartner && link.sponsored && <span class="price-note">on {link.partnerName} · Prices vary. Check availability.</span>}

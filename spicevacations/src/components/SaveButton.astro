@@ -1,0 +1,15 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  id: string;
+  title: string;
+  href: string;
+  img: string;
+  kind: string;
+}
+const { id, title, href, img, kind } = Astro.props;
+---
+
+<button class="save-btn" type="button" aria-pressed="false" aria-label={`Save ${title} to saved trips`} data-save={id} data-title={title} data-href={href} data-img={img} data-kind={kind}>
+  <Icon name="heart" />
+</button>

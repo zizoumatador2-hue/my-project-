@@ -1,0 +1,116 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { getDestinations, getVacationTypes, RESORT_TYPE_LABEL } from '../lib/content';
+import { MONTHS_LONG } from '../data/site';
+import { breadcrumbList, webPage } from '../lib/schema';
+
+const destinations = await getDestinations();
+const types = await getVacationTypes();
+const path = '/search/';
+const title = 'Search Vacations, Resorts & Guides | SpiceVacations';
+const description = 'Search SpiceVacations by destination, trip style, budget, travel month, travelers and activities to find romantic getaways, resorts, deals and guides for two.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Search', href: path }];
+const activities = ['Snorkeling', 'Spa', 'Wine', 'Hiking', 'Shows', 'Whale watching', 'Beach', 'Culture'];
+---
+
+<Base title={title} description={description} noindex schema={[webPage({ path, title, description, type: 'SearchResultsPage' }), breadcrumbList(crumbs)]}>
+  <PageHero title="Search vacations" crumbs={crumbs} lead="Filter destinations, resorts, deals and guides. Your filters are saved in the URL, so you can share the results." />
+
+  <div class="container section--tight">
+    <form class="info-card filters" action="/search/" method="get" data-search-form role="search" aria-label="Filter vacations">
+      <div class="field q">
+        <label for="s-q">Keywords</label>
+        <div class="q-wrap"><Icon name="search" /><input class="input" id="s-q" name="q" type="search" placeholder="e.g. adults-only Cancun, Napa, honeymoon" autocomplete="off" /></div>
+      </div>
+      <div class="filter-grid">
+        <div class="field"><label for="s-kind">Show</label>
+          <select class="select" id="s-kind" name="kind"><option value="">Everything</option><option value="destination">Destinations</option><option value="resort">Resorts</option><option value="guide">Guides</option><option value="deal">Deals</option></select></div>
+        <div class="field"><label for="s-dest">Destination</label>
+          <select class="select" id="s-dest" name="destination"><option value="">Any</option>{destinations.map((d) => <option value={d.id}>{d.data.name}</option>)}</select></div>
+        <div class="field"><label for="s-region">Region</label>
+          <select class="select" id="s-region" name="region"><option value="">Any</option><option value="usa">United States</option><option value="mexico">Mexico</option><option value="caribbean">Caribbean</option></select></div>
+        <div class="field"><label for="s-type">Vacation type</label>
+          <select class="select" id="s-type" name="type"><option value="">Any</option>{types.map((t) => <option value={t.id}>{t.data.name}</option>)}</select></div>
+        <div class="field"><label for="s-rt">Resort type</label>
+          <select class="select" id="s-rt" name="resortType"><option value="">Any</option>{Object.entries(RESORT_TYPE_LABEL).map(([k, v]) => <option value={k}>{v}</option>)}</select></div>
+        <div class="field"><label for="s-budget">Budget style</label>
+          <select class="select" id="s-budget" name="budget"><option value="">Any</option><option value="value">Value</option><option value="mid-range">Mid-range</option><option value="splurge">Splurge</option></select></div>
+        <div class="field"><label for="s-month">Travel month</label>
+          <select class="select" id="s-month" name="month"><option value="">Any</option>{MONTHS_LONG.map((m, i) => <option value={i + 1}>{m}</option>)}</select></div>
+        <div class="field"><label for="s-who">Travelers</label>
+          <select class="select" id="s-who" name="travelers"><option value="">Anyone</option><option value="couples">Couples</option><option value="honeymooners">Honeymooners</option><option value="friends">Friends</option><option value="families">Families</option><option value="solo">Solo</option></select></div>
+        <div class="field"><label for="s-adults">Adults</label><input class="input" id="s-adults" name="adults" type="number" min="1" max="12" placeholder="2" /></div>
+        <div class="field"><label for="s-children">Children</label><input class="input" id="s-children" name="children" type="number" min="0" max="10" placeholder="0" /></div>
+        <div class="field"><label for="s-act">Activity</label>
+          <select class="select" id="s-act" name="activity"><option value="">Any</option>{activities.map((a) => <option value={a.toLowerCase()}>{a}</option>)}</select></div>
+      </div>
+      <div class="cluster mt-2">
+        <button class="btn" type="submit"><Icon name="sliders" /> Apply filters</button>
+        <a class="btn btn--ghost" href="/search/">Clear all</a>
+      </div>
+      <p class="small muted mt-2 mb-0">Ratings are shown only where a verified, sourced rating exists. Prices vary and are set by providers.</p>
+    </form>
+
+    <div class="mt-4"><Disclosure compact /></div>
+    <p class="mt-3" aria-live="polite" data-search-count>Loading results…</p>
+    <div class="grid grid-3" data-search-results>
+      <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+    </div>
+    <nav class="pager mt-4" aria-label="Pagination" data-search-pager></nav>
+    <noscript><p class="notice">Search filtering needs JavaScript. You can still browse <a href="/destinations/">destinations</a>, <a href="/resorts/">resorts</a> and <a href="/guides/">guides</a>.</p></noscript>
+  </div>
+</Base>
+
+<style>
+  .filter-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    margin-top: 12px;
+  }
+  .q-wrap {
+    position: relative;
+  }
+  .q-wrap :global(svg) {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    color: var(--gray-500);
+  }
+  .q-wrap .input {
+    padding-left: 44px;
+  }
+  .pager {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pager :global(a),
+  .pager :global(span) {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0 12px;
+    border-radius: 12px;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .pager :global([aria-current='page']) {
+    background: var(--navy);
+    color: var(--white);
+  }
+</style>
+
+<script>
+  import { initSearch } from '../scripts/search-ui';
+  initSearch();
+</script>

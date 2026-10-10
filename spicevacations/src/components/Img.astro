@@ -1,0 +1,35 @@
+---
+/**
+ * Content image. Priority: an editor-supplied photo (`image`), then the licensed stock photo
+ * fetched for this entry (`pkey`, see scripts/fetch-photos.mjs), then the brand illustration.
+ */
+import { photoFor, srcOf, srcsetOf } from '../lib/photos';
+interface Props {
+  data: { image?: string; imageAlt: string; scene: string; palette: string };
+  pkey?: string;
+  eager?: boolean;
+  class?: string;
+  sizes?: string;
+  parallax?: boolean;
+}
+const { data, pkey, eager = false, class: cls, sizes = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw', parallax = false } = Astro.props;
+const photo = data.image ? undefined : photoFor(pkey);
+const src = data.image || (photo ? srcOf(photo, 960) : `/art/${data.scene}-${data.palette}.svg`);
+const alt = photo?.alt ? `${photo.alt}${photo.representative ? ' (representative photo of the area)' : ''}` : data.imageAlt;
+---
+
+<img
+  src={src}
+  srcset={photo ? srcsetOf(photo) : undefined}
+  sizes={photo ? sizes : undefined}
+  alt={alt}
+  width="1600"
+  height="1000"
+  loading={eager ? 'eager' : 'lazy'}
+  decoding={eager ? 'sync' : 'async'}
+  fetchpriority={eager ? 'high' : undefined}
+  class={cls}
+  style={photo ? `background:${photo.avg}` : undefined}
+  data-parallax={parallax ? '' : undefined}
+  draggable="false"
+/>

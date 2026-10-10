@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import { SITE } from '../data/site';
+import { graph } from '../lib/schema';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path of an OG image (1200×630). Defaults to the generated image for this URL. */
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  canonical?: string;
+  /** Extra JSON-LD nodes; Organization and WebSite are always included. */
+  schema?: (object | null | undefined | false)[];
+  preloadImage?: string;
+  /** Responsive preload: must match the LCP <img> srcset/sizes so the browser fetches one file, not two. */
+  preloadSrcset?: string;
+  preloadSizes?: string;
+}
+
+const { title, description, ogType = 'website', noindex = false, schema = [], preloadImage, preloadSrcset, preloadSizes } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = Astro.props.canonical ?? new URL(path, SITE.url).toString();
+const ogSlug = path === '/' ? 'home' : path.replace(/^\/|\/$/g, '').replace(/\//g, '--');
+const ogImage = new URL(Astro.props.ogImage ?? `/og/${ogSlug}.png`, SITE.url).toString();
+const jsonld = JSON.stringify(graph(...schema)).replace(/</g, '\\u003c');
+const plausible = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN ?? '';
+const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
+/** AdSense publisher client (ca-pub-…). Ads and the verification meta tag only appear once this is set. */
+const adsense = /^ca-pub-\d{10,20}$/.test(SITE.adsenseClient) ? SITE.adsenseClient : '';
+---
+
+<!doctype html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en-US" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    {adsense && <meta name="google-adsense-account" content={adsense} />}
+    {/* Consent Mode defaults must run before the AdSense tag, so both are plain external scripts here in <head>. */}
+    {adsense && <script is:inline src="/consent-default.js" />}
+    {adsense && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsense}`} crossorigin="anonymous" />}
+    <meta name="p:domain_verify" content="dab06d7936ae1b4ec7cb471d375eccae" />
+    <meta name="theme-color" content="#0B1F3A" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} imagesrcset={preloadSrcset} imagesizes={preloadSrcset ? preloadSizes : undefined} fetchpriority="high" />}
+
+    <meta property="og:site_name" content={SITE.domain} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {SITE.twitter && <meta name="twitter:site" content={SITE.twitter} />}
+
+    <script type="application/ld+json" set:html={jsonld} />
+    <slot name="head" />
+  </head>
+  <body data-plausible={plausible || undefined} data-ga4={ga4 || undefined} data-adsense={adsense || undefined}>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <CookieBanner />
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

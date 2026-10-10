@@ -1,0 +1,32 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { breadcrumbList, faqPage, webPage } from '../lib/schema';
+
+interface Props {
+  title: string;
+  metaTitle: string;
+  description: string;
+  lead?: string;
+  updated?: string;
+  noindex?: boolean;
+  type?: string;
+  faqs?: { q: string; a: string }[];
+}
+const { title, metaTitle, description, lead, updated, noindex = false, type, faqs = [] } = Astro.props;
+const path = Astro.url.pathname;
+const crumbs = [{ name: 'Home', href: '/' }, { name: title, href: path }];
+const schema = [webPage({ path, title: metaTitle, description, type }), breadcrumbList(crumbs), faqPage(faqs, path)];
+---
+
+<Base title={metaTitle} description={description} noindex={noindex} schema={schema}>
+  <PageHero title={title} lead={lead} crumbs={crumbs} />
+  <div class="container section--tight">
+    <div class="narrow">
+      {updated && <p class="small muted">Last updated: {updated}</p>}
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </div>
+</Base>

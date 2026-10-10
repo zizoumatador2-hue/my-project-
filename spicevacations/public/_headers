@@ -1,0 +1,34 @@
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://plausible.io https://www.googletagmanager.com https://challenges.cloudflare.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.adtrafficquality.google https://fundingchoicesmessages.google.com https://*.google.com https://*.doubleclick.net https://*.googletagservices.com https://*.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://plausible.io https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google; frame-src https://challenges.cloudflare.com https://*.googlesyndication.com https://*.googletagservices.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/art/*
+  Cache-Control: public, max-age=2592000
+
+/og/*
+  Cache-Control: public, max-age=604800
+
+/go-map.json
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=300
+
+/search-index.json
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=300
+
+/admin/*
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com https://identity.netlify.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://*.githubusercontent.com; frame-ancestors 'none'
+  X-Robots-Tag: noindex, nofollow
+
+/pins/*
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=604800

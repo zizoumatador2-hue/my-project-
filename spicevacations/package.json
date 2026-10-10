@@ -1,0 +1,38 @@
+{
+  "name": "spicevacations",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/art.mjs && astro build && node scripts/postbuild.mjs",
+    "preview": "npm run build && wrangler dev",
+    "check": "astro check && tsc -p tsconfig.worker.json",
+    "audit:seo": "node scripts/seo-audit.mjs",
+    "import:content": "node scripts/import-content.mjs",
+    "icons": "node scripts/icons.mjs",
+    "test": "vitest run",
+    "deploy": "npm run build && wrangler deploy",
+    "report:content": "node scripts/content-report.mjs",
+    "qa": "node scripts/qa-crawl.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "astro": "^5.18.2",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260928.1",
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^5.4.2",
+    "playwright": "^1.63.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.2",
+    "wrangler": "^4.143.0"
+  }
+}

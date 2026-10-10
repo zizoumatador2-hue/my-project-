@@ -1,0 +1,32 @@
+---
+import type { Destination } from '../lib/content';
+import { url, REGION_LABEL, TRAVELER_LABEL } from '../lib/content';
+import Img from './Img.astro';
+import SaveButton from './SaveButton.astro';
+interface Props {
+  d: Destination;
+  headingLevel?: 2 | 3;
+}
+const { d, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}` as 'h3';
+const href = url.destination(d.id);
+const img = d.data.image || `/art/${d.data.scene}-${d.data.palette}.svg`;
+---
+
+<article class="card" data-reveal>
+  <div class="card__media">
+    <Img data={d.data} pkey={`destinations/${d.id}`} />
+    <div class="card__badges"><span class="badge badge--glass">{REGION_LABEL[d.data.region]}</span></div>
+    <SaveButton id={`destination:${d.id}`} title={d.data.name} href={href} img={img} kind="Destination" />
+  </div>
+  <div class="card__body">
+    <p class="card__kicker">{d.data.state ?? d.data.country}</p>
+    <H class="card__title"><a href={href}>{d.data.name}</a></H>
+    <p class="card__text">{d.data.tagline}</p>
+    <div class="card__chips">{d.data.idealFor.slice(0, 3).map((t) => <span class="chip">{TRAVELER_LABEL[t]}</span>)}</div>
+    <div class="card__footer">
+      <span class="price-note">Best: {d.data.bestTimeNote.split('.')[0]}</span>
+      <a class="link-arrow" href={href} aria-hidden="true" tabindex="-1">Explore</a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,35 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Img from './Img.astro';
+import PhotoCredit from './PhotoCredit.astro';
+import type { Crumb } from '../lib/schema';
+interface Props {
+  title: string;
+  lead?: string;
+  eyebrow?: string;
+  crumbs?: Crumb[];
+  media?: { image?: string; imageAlt: string; scene: string; palette: string };
+  /** Photo manifest key, e.g. "destinations/hawaii". */
+  pkey?: string;
+}
+const { title, lead, eyebrow, crumbs, media, pkey } = Astro.props;
+---
+
+<section class:list={['page-hero', 'cine', { 'page-hero--plain': !media }]} data-cine-hero>
+  {
+    media && (
+      <div class="page-hero__media" data-hero-media>
+        <Img data={media} pkey={pkey} eager sizes="100vw" />
+      </div>
+    )
+  }
+  <div class="cine__grain" aria-hidden="true"></div>
+  <div class="container">
+    {crumbs && <Breadcrumbs crumbs={crumbs} />}
+    {eyebrow && <p class="eyebrow shiny" style="color:var(--gold)">{eyebrow}</p>}
+    <h1 data-split>{title}</h1>
+    {lead && <p class="lead" data-fade-up>{lead}</p>}
+    <slot />
+  </div>
+  {media && <PhotoCredit pkey={pkey} />}
+</section>

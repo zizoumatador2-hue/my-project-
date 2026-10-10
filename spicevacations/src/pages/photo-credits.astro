@@ -1,0 +1,64 @@
+---
+import Page from '../layouts/Page.astro';
+import { photos } from '../lib/photos';
+const list = Object.entries(photos())
+  .map(([key, p]) => ({ key, ...p }))
+  .sort((a, b) => a.key.localeCompare(b.key));
+const pageHref = (key: string) => (key.startsWith('home/') ? '/' : `/${key}/`);
+---
+
+<Page
+  title="Photo credits"
+  metaTitle="Photo Credits | SpiceVacations"
+  description="Credits for the photographs used on SpiceVacations.com. Photos are provided by talented photographers on Pexels and Pixabay under their free licenses."
+  updated="October 5, 2026"
+>
+  <p>
+    The photographs on SpiceVacations.com come from photographers who share their work on <a href="https://www.pexels.com/" rel="noopener">Pexels</a> and
+    <a href="https://pixabay.com/" rel="noopener">Pixabay</a>, used under the <a href="https://www.pexels.com/license/" rel="noopener">Pexels license</a>
+    and the <a href="https://pixabay.com/service/license-summary/" rel="noopener">Pixabay content license</a>. Photos marked "representative" show the
+    destination or the type of setting, not the exact resort. A few mood images on the home page and vacation-type pages are generated with AI and labeled "AI-generated image"; they never depict a specific resort. Where no photo is listed, the page uses an original SpiceVacations illustration.
+  </p>
+  {
+    list.length > 0 ? (
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Photographer</th>
+              <th>Original</th>
+            </tr>
+          </thead>
+          <tbody>
+            {list.map((p) => (
+              <tr>
+                <td>
+                  <a href={pageHref(p.key)}>{p.key}</a>
+                  {p.representative && <span class="muted small"> (representative)</span>}
+                </td>
+                {p.ai ? (
+                  <>
+                    <td>AI-generated image</td>
+                    <td>Created by SpiceVacations</td>
+                  </>
+                ) : (
+                  <>
+                    <td>
+                      <a href={p.photographerUrl} rel="noopener nofollow">{p.photographer}</a>
+                    </td>
+                    <td>
+                      <a href={p.url} rel="noopener nofollow">View on {p.source ?? 'Pexels'}</a>
+                    </td>
+                  </>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <p>All images currently on the site are original SpiceVacations illustrations.</p>
+    )
+  }
+</Page>

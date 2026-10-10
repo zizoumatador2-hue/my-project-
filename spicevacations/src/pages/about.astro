@@ -1,0 +1,46 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+---
+
+<Page
+  title="About SpiceVacations"
+  metaTitle="About SpiceVacations: Travel Guides for Couples"
+  description="SpiceVacations.com is an independent travel publisher helping couples plan romantic getaways. Our standards, how we pick resorts and how we earn money."
+  lead="We help couples find escapes worth taking: honest, useful and beautifully simple."
+  type="AboutPage"
+>
+  <h2>Our story</h2>
+  <p>
+    SpiceVacations.com started with a simple frustration: planning a romantic getaway meant wading through listicles padded with filler, fake
+    "limited-time" prices and reviews nobody could verify. We wanted a place that answered the questions couples actually ask. Where should we go
+    for three days? Is an adults-only all-inclusive worth it? When is the Caribbean quieter? And we wanted to answer them honestly.
+  </p>
+  <p>Our tagline says it all: <strong>{SITE.tagline}</strong> We focus on couples, honeymooners and anyone planning time away together, with trips across the United States, Mexico and the Caribbean.</p>
+
+  <h2>What we publish</h2>
+  <ul>
+    <li><strong>Destination guides</strong> covering when to go, where to stay and what to do as a couple.</li>
+    <li><strong>Resort profiles</strong> explaining who each property suits, with practical "good to know" details.</li>
+    <li><strong>In-depth planning guides</strong>, from our <a href="/">complete romantic getaways guide</a> to budget advice like <a href="/guides/best-couples-vacations-under-2000/">couples vacations under $2,000</a>.</li>
+    <li><strong>Deal timing</strong> that explains when trips tend to be better value, without invented prices.</li>
+    <li><strong>A free trip planner</strong>, <a href="/plan-my-vacation/">Plan My Vacation</a>, that matches your budget and style to places we've reviewed.</li>
+  </ul>
+
+  <h2>Our editorial standards</h2>
+  <ol>
+    <li><strong>No fake data.</strong> We never invent prices, ratings, reviews, awards or availability. If we don't have a verified price, we say "Prices vary. Check availability."</li>
+    <li><strong>Only properties we can describe accurately.</strong> We feature established resorts and destinations with well-documented facts, and we note when policies (like minimum ages or inclusions) should be confirmed directly.</li>
+    <li><strong>Independent recommendations.</strong> Affiliate partnerships never decide what we recommend or how we rank it. Read our <a href="/affiliate-disclosure/">affiliate disclosure</a>.</li>
+    <li><strong>Regular updates.</strong> Every guide shows its last-updated date. If you spot something out of date, <a href="/contact/">tell us</a> and we'll fix it.</li>
+  </ol>
+
+  <h2>What we are not</h2>
+  <p>
+    SpiceVacations.com is a publisher, not a travel agency. We are not a hotel, airline, cruise line or tour operator, and we don't take bookings or
+    payments. When you click "Check Availability," you go to a partner site where the provider sets the final price, availability and terms.
+  </p>
+
+  <h2>Get in touch</h2>
+  <p>Questions, corrections or partnership ideas? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use our <a href="/contact/">contact form</a>.</p>
+</Page>

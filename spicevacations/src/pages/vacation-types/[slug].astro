@@ -1,0 +1,130 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResortCard from '../../components/ResortCard.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import DestinationCard from '../../components/DestinationCard.astro';
+import DealCard from '../../components/DealCard.astro';
+import FaqList from '../../components/FaqList.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getVacationTypes, lookup, url } from '../../lib/content';
+import { breadcrumbList, faqPage, itemList, webPage } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  return (await getVacationTypes()).map((t) => ({ params: { slug: t.id }, props: { t } }));
+}
+const { t } = Astro.props as { t: Awaited<ReturnType<typeof getVacationTypes>>[number] };
+const { Content } = await render(t);
+const L = await lookup();
+const x = t.data;
+const path = url.vacationType(t.id);
+const resorts = [...L.resorts.values()].filter((r) => r.data.vacationTypes.includes(t.id));
+const dests = [...L.destinations.values()].filter((d) => d.data.vacationTypes.includes(t.id));
+const guides = [...L.guides.values()].filter((g) => g.data.category === t.id || g.id === x.pillarGuide);
+const deals = [...L.deals.values()].filter((d) => d.data.vacationType === t.id);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Vacation types', href: '/vacation-types/' },
+  { name: x.name, href: path },
+];
+const schema = [
+  webPage({ path, title: x.metaTitle, description: x.metaDescription, type: 'CollectionPage' }),
+  breadcrumbList(crumbs),
+  resorts.length ? itemList(`${x.name}: resorts`, resorts.map((r) => ({ name: r.data.name, href: url.resort(r.id) }))) : null,
+  faqPage(x.faqs, path),
+];
+---
+
+<Base title={x.metaTitle} description={x.metaDescription} noindex={x.noindex} canonical={x.canonical} schema={schema}>
+  <PageHero title={x.name} lead={x.summary} crumbs={crumbs} media={x} pkey={`vacation-types/${t.id}`} eyebrow="Vacation type">
+    <div class="cluster mt-3">
+      <a class="btn" href={`/search/?type=${t.id}`}>Browse {x.name.toLowerCase()}</a>
+      <a class="btn btn--light" href={`/plan-my-vacation/?type=${t.id}`}>Get a personal shortlist</a>
+    </div>
+  </PageHero>
+
+  <div class="container section--tight">
+    <div class="prose narrow">
+      <Content />
+    </div>
+  </div>
+
+  {
+    dests.length > 0 && (
+      <section class="section section--white">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <div>
+              <p class="eyebrow">Where to go</p>
+              <h2>Top destinations for {x.name.toLowerCase()}</h2>
+            </div>
+          </div>
+          <div class="grid grid-3" data-stagger>
+            {dests.map((d) => (
+              <DestinationCard d={d} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    resorts.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <div>
+              <p class="eyebrow">Where to stay</p>
+              <h2>Resorts for {x.name.toLowerCase()}</h2>
+              <p>Hand-picked properties. Prices vary and are set by the provider.</p>
+            </div>
+          </div>
+          <Disclosure compact />
+          <div class="grid grid-3 mt-3" data-stagger>
+            {resorts.map((r) => (
+              <ResortCard r={r} destinationName={L.destinations.get(r.data.destination)?.data.name ?? ''} placement={`type-${t.id}`} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    deals.length > 0 && (
+      <section class="section section--sand">
+        <div class="container">
+          <h2 data-reveal>Deal timing</h2>
+          <div class="grid grid-3 mt-3" data-stagger>
+            {deals.map((d) => (
+              <DealCard deal={d} destinationName={L.destinations.get(d.data.destination)?.data.name ?? ''} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    guides.length > 0 && (
+      <section class="section section--white">
+        <div class="container">
+          <h2 data-reveal>{x.name} guides</h2>
+          <div class="grid grid-3 mt-3" data-stagger>
+            {guides.map((g) => (
+              <GuideCard g={g} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <div class="container section--tight narrow">
+    <FaqList faqs={x.faqs} />
+  </div>
+  <NewsletterBand />
+</Base>

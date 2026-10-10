@@ -1,0 +1,126 @@
+{
+  "$comment": "Central Affiliate Link Registry. Components never contain partner URLs: they ask getAffiliateUrl() for a /go/<id> link, and the Worker redirects. Set trackingId once you are approved by a network; set active=false to switch a partner off site-wide (CTAs then fall back to our own pages).",
+  "partners": [
+    {
+      "id": "booking",
+      "name": "Booking.com",
+      "network": "Booking.com Affiliate Partner Program",
+      "productTypes": [
+        "hotel",
+        "resort"
+      ],
+      "urlTemplate": "https://www.booking.com/searchresults.html?ss={query}",
+      "trackingParam": "aid",
+      "trackingId": "",
+      "utm": {
+        "utm_source": "spicevacations",
+        "utm_medium": "affiliate"
+      },
+      "active": true
+    },
+    {
+      "id": "expedia",
+      "name": "Expedia",
+      "network": "Expedia Group Affiliate Program",
+      "productTypes": [
+        "hotel",
+        "resort"
+      ],
+      "urlTemplate": "https://www.expedia.com/Hotel-Search?destination={query}",
+      "trackingParam": "affcid",
+      "trackingId": "",
+      "utm": {
+        "utm_source": "spicevacations",
+        "utm_medium": "affiliate"
+      },
+      "active": true
+    },
+    {
+      "id": "expedia-flights",
+      "name": "Expedia Flights",
+      "network": "Expedia Group Affiliate Program",
+      "productTypes": [
+        "flight"
+      ],
+      "urlTemplate": "https://www.expedia.com/Flights",
+      "trackingParam": "affcid",
+      "trackingId": "",
+      "utm": {
+        "utm_source": "spicevacations",
+        "utm_medium": "affiliate"
+      },
+      "active": true
+    },
+    {
+      "id": "viator",
+      "name": "Viator",
+      "network": "Viator Partner Program",
+      "productTypes": [
+        "tour"
+      ],
+      "urlTemplate": "https://www.viator.com/searchResults/all?text={query}",
+      "trackingParam": "pid",
+      "trackingId": "",
+      "utm": {
+        "utm_source": "spicevacations",
+        "utm_medium": "affiliate"
+      },
+      "active": true
+    },
+    {
+      "id": "cruise-partner",
+      "name": "Cruise partner",
+      "network": "Configure your cruise network (e.g. CJ, Impact)",
+      "productTypes": [
+        "cruise"
+      ],
+      "urlTemplate": "",
+      "trackingParam": "",
+      "trackingId": "",
+      "utm": {},
+      "active": false
+    },
+    {
+      "id": "car-partner",
+      "name": "Car rental partner",
+      "network": "Configure your car rental network",
+      "productTypes": [
+        "car"
+      ],
+      "urlTemplate": "",
+      "trackingParam": "",
+      "trackingId": "",
+      "utm": {},
+      "active": false
+    },
+    {
+      "id": "insurance-partner",
+      "name": "Travel insurance partner",
+      "network": "Configure your travel insurance network",
+      "productTypes": [
+        "insurance"
+      ],
+      "urlTemplate": "",
+      "trackingParam": "",
+      "trackingId": "",
+      "utm": {},
+      "active": false
+    }
+  ],
+  "defaults": {
+    "hotel": "booking",
+    "resort": "booking",
+    "flight": "expedia-flights",
+    "car": "car-partner",
+    "tour": "viator",
+    "cruise": "cruise-partner",
+    "insurance": "insurance-partner"
+  },
+  "overrides": {
+    "$comment": "Optional per-item links: key = <kind>:<slug>, value = { partner, query } or { partner, url }.",
+    "resort:jade-mountain": {
+      "partner": "booking",
+      "query": "Jade Mountain Saint Lucia"
+    }
+  }
+}

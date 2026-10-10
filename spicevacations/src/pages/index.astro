@@ -1,0 +1,426 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import TypeTile from '../components/TypeTile.astro';
+import DestinationCard from '../components/DestinationCard.astro';
+import ResortCard from '../components/ResortCard.astro';
+import DealCard from '../components/DealCard.astro';
+import GuideCard from '../components/GuideCard.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Disclosure from '../components/Disclosure.astro';
+import FaqList from '../components/FaqList.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import { lookup, url } from '../lib/content';
+import { faqPage, howTo, itemList, webPage, article } from '../lib/schema';
+import { MONTHS_LONG } from '../data/site';
+import { photoFor, srcOf, srcsetOf } from '../lib/photos';
+import PhotoCredit from '../components/PhotoCredit.astro';
+
+const L = await lookup();
+const destinations = [...L.destinations.values()];
+const resorts = [...L.resorts.values()];
+const guides = [...L.guides.values()];
+const types = [...L.vacationTypes.values()];
+const deals = [...L.deals.values()];
+const destName = (id: string) => L.destinations.get(id)?.data.name ?? '';
+
+const featuredDest = destinations.filter((d) => d.data.featured).slice(0, 6);
+const featuredResorts = resorts.filter((r) => r.data.featured).concat(resorts.filter((r) => !r.data.featured && r.data.budgetStyle === 'splurge')).slice(0, 6);
+const adultsOnly = resorts.filter((r) => r.data.adultsOnly && !featuredResorts.includes(r)).slice(0, 6);
+const usDest = destinations.filter((d) => d.data.region === 'usa');
+const tropics = destinations.filter((d) => d.data.region !== 'usa');
+const romanticResorts = resorts.filter((r) => r.data.vacationTypes.includes('romantic-getaways') && !featuredResorts.includes(r) && !adultsOnly.includes(r)).slice(0, 3);
+const inspiration = guides.filter((g) => g.data.featured).concat(guides.filter((g) => !g.data.featured)).slice(0, 6);
+
+const chapters = (await getCollection('pages', (p) => p.id.startsWith('home-'))).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(chapters.map(async (c) => ({ c, ...(await render(c)) })));
+const chapter = (n: number) => rendered.find((r) => r.c.data.order === n)!;
+const toc = rendered.flatMap((r) => r.headings.filter((h) => h.depth === 2));
+const words = chapters.reduce((n, c) => n + (c.body ?? '').split(/\s+/).filter(Boolean).length, 0);
+const faqs = chapters.flatMap((c) => c.data.faqs);
+const how = chapters.find((c) => c.data.howTo)?.data.howTo;
+
+const title = 'Romantic Getaways for Couples: The Complete 2026 Guide';
+const metaDescription =
+  'Plan romantic getaways that feel effortless: 12 couples destinations, 30 hand-picked resorts, honest deal timing and a free trip planner for two.';
+const updated = new Date('2026-09-25');
+const schema = [
+  webPage({ path: '/', title, description: metaDescription }),
+  article({ path: '/', title: 'Romantic Getaways: The Complete Guide for Couples', description: metaDescription, image: '/og/home.png', published: new Date('2026-09-01'), updated, words, keywords: ['romantic getaways', 'couples vacations', 'romantic weekend getaways', 'adults only resorts', 'all inclusive resorts for couples'], section: 'Romantic getaways' }),
+  faqPage(faqs, '/'),
+  how ? howTo(how, '/') : null,
+  itemList('Featured destinations for couples', featuredDest.map((d) => ({ name: d.data.name, href: url.destination(d.id) }))),
+];
+const heroWords = ['Find', 'Your', 'Next'];
+const heroPhoto = photoFor('home/hero');
+const heroSrc = heroPhoto ? srcOf(heroPhoto) : '/art/sunset-coral.svg';
+const bandPhoto = photoFor('home/band');
+const stats = [
+  { n: destinations.length, label: 'destinations for couples' },
+  { n: resorts.length, label: 'hand-picked resorts' },
+  { n: guides.length, label: 'in-depth travel guides' },
+  { n: 0, label: 'invented prices or fake reviews' },
+];
+---
+
+<Base title={title} description={metaDescription} schema={schema} preloadImage={heroSrc} preloadSrcset={heroPhoto ? srcsetOf(heroPhoto) : undefined} preloadSizes="100vw">
+  <!-- HERO -->
+  <section class="hero cine cine--letterbox" aria-labelledby="hero-title" data-cine-hero>
+    <div class="hero__media" data-hero-media>
+      <img
+        src={heroSrc}
+        srcset={heroPhoto ? srcsetOf(heroPhoto) : undefined}
+        sizes={heroPhoto ? '100vw' : undefined}
+        alt={heroPhoto?.alt || 'Illustrated beach at sunset with palm trees, the setting for a romantic getaway for couples'}
+        width="1600"
+        height="1000"
+        fetchpriority="high"
+        decoding="sync"
+        style={heroPhoto ? `background:${heroPhoto.avg}` : undefined}
+      />
+    </div>
+    <div class="cine__leak" aria-hidden="true"></div>
+    <div class="cine__grain" aria-hidden="true"></div>
+    <div class="cine__bars" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <div>
+        <p class="eyebrow shiny"><Icon name="sparkles" size={16} /> Couples resorts, beach escapes &amp; honest deals</p>
+        <h1 id="hero-title">
+          <span class="hero__kicker" data-blur-in>Romantic Getaways for Couples</span>
+          {heroWords.map((w, i) => <span class="word" style={`--i:${i + 1}`}>{w}</span>)}<span class="word" style="--i:4"><em class="gradient-text">Escape</em></span>
+        </h1>
+        <p class="lead">Discover romantic getaways, unforgettable resorts, beach escapes and vacation deals made for your next adventure.</p>
+        <div class="hero__ctas">
+          <a class="btn" href="#explore" data-magnet>Explore Vacations <Icon name="arrow-right" /></a>
+          <a class="btn btn--light" href="/plan-my-vacation/" data-magnet>Find a Getaway</a>
+        </div>
+      </div>
+
+      <form class="glass hero-search float" action="/search/" method="get" role="search" aria-labelledby="hero-search-title" data-event="search">
+        <h2 id="hero-search-title">Where to next?</h2>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+          <div class="field">
+            <label for="hs-dest">Destination</label>
+            <select class="select" id="hs-dest" name="destination">
+              <option value="">Anywhere</option>
+              {destinations.map((d) => <option value={d.id}>{d.data.name}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="hs-type">Trip style</label>
+            <select class="select" id="hs-type" name="type">
+              <option value="">Any style</option>
+              {types.map((t) => <option value={t.id}>{t.data.name}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="hs-month">When</label>
+            <select class="select" id="hs-month" name="month">
+              <option value="">Any month</option>
+              {MONTHS_LONG.map((m, i) => <option value={i + 1}>{m}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="hs-who">Who's going</label>
+            <select class="select" id="hs-who" name="travelers">
+              <option value="couples">Couple</option>
+              <option value="honeymooners">Honeymooners</option>
+              <option value="friends">Friends</option>
+              <option value="families">Family</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn--block mt-2" type="submit"><Icon name="search" /> Search vacations</button>
+      </form>
+    </div>
+    <a class="scroll-cue" href="#explore" aria-label="Scroll to explore"><span></span></a>
+    <PhotoCredit pkey="home/hero" />
+  </section>
+
+  <!-- STATS (CountUp on real numbers) -->
+  <section class="stats-band" aria-label="SpiceVacations at a glance">
+    <div class="container stats-grid">
+      {
+        stats.map((x) => (
+          <div class="stat" data-reveal>
+            <span class="stat__n" data-countup={x.n}>
+              {x.n}
+            </span>
+            <span class="stat__l">{x.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- QUICK ANSWER + SEARCH SHORTCUTS -->
+  <section class="section--tight section--white" id="explore" aria-labelledby="quick-title">
+    <div class="container">
+      <div class="grid grid-2" style="align-items:center">
+        <div class="snippet" data-reveal>
+          <h2 id="quick-title" style="font-size:var(--step-2)">What makes the best romantic getaways?</h2>
+          <p>
+            The best romantic getaways combine easy travel, real privacy and one or two shared experiences you'll remember. For a weekend, choose a place
+            within about three hours, like the Florida Keys or the Hudson Valley. For a week, adults-only resorts in Mexico, Hawaii and the Caribbean deliver
+            the most relaxation per dollar.
+          </p>
+        </div>
+        <div data-reveal>
+          <p class="label">Popular searches</p>
+          <ul class="pill-list mt-2">
+            <li><a class="chip" href="/search/?type=adults-only-resorts">Adults-only resorts</a></li>
+            <li><a class="chip" href="/search/?type=all-inclusive-resorts">All-inclusive for couples</a></li>
+            <li><a class="chip" href="/search/?type=weekend-getaways">Weekend getaways</a></li>
+            <li><a class="chip" href="/search/?type=honeymoon-vacations">Honeymoon destinations</a></li>
+            <li><a class="chip" href="/search/?region=usa&type=beach-vacations">U.S. beach vacations</a></li>
+            <li><a class="chip" href="/search/?budget=value">Affordable getaways</a></li>
+            <li><a class="chip" href="/search/?type=luxury-vacations">Luxury resorts</a></li>
+            <li><a class="chip" href="/search/?region=mexico">Mexico for couples</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VACATION TYPES CAROUSEL -->
+  <section class="section" aria-labelledby="types-title">
+    <div class="container">
+      <SectionHeader eyebrow="Vacation types" title="Choose your kind of escape" id="types-title" text="Drag, swipe or use the arrows to explore trip styles.">
+        <div class="carousel-nav">
+          <button class="icon-btn" type="button" data-carousel-prev="types-carousel" aria-label="Previous vacation types"><Icon name="chevron-left" /></button>
+          <button class="icon-btn" type="button" data-carousel-next="types-carousel" aria-label="Next vacation types"><Icon name="chevron-right" /></button>
+        </div>
+      </SectionHeader>
+      <div class="carousel" id="types-carousel" data-carousel role="list">
+        {types.map((t) => <div role="listitem"><TypeTile t={t} /></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED DESTINATIONS -->
+  <section class="section section--white" aria-labelledby="dest-title">
+    <div class="container">
+      <SectionHeader eyebrow="Featured destinations" title="Best vacation spots for couples" id="dest-title" text="From no-passport favorites to island escapes, these are the places couples return to again and again.">
+        <a class="link-arrow" href="/destinations/">All destinations</a>
+      </SectionHeader>
+      <div class="grid grid-3" data-stagger>
+        {featuredDest.map((d) => <DestinationCard d={d} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED RESORTS -->
+  <section class="section" aria-labelledby="resorts-title">
+    <div class="container">
+      <SectionHeader eyebrow="Featured resorts" title="Luxury resorts for couples" id="resorts-title" text="Hand-picked for privacy, service and settings you'll talk about for years.">
+        <a class="link-arrow" href="/resorts/">All resorts</a>
+      </SectionHeader>
+      <Disclosure compact />
+      <div class="grid grid-3 mt-3" data-stagger>
+        {featuredResorts.map((r) => <ResortCard r={r} destinationName={destName(r.data.destination)} placement="home-featured" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS -->
+  <section class="section section--sand" aria-labelledby="deals-title">
+    <div class="container">
+      <SectionHeader eyebrow="Vacation deals" title="Best vacation deals, without the hype" id="deals-title" text="We track when great trips tend to be better value. No fake countdowns, no invented prices.">
+        <a class="link-arrow" href="/deals/">All deals</a>
+      </SectionHeader>
+      <div class="grid grid-3" data-stagger>
+        {deals.slice(0, 3).map((d) => <DealCard deal={d} destinationName={destName(d.data.destination)} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ROMANTIC GETAWAYS (pillar part 1) -->
+  <section class="section" aria-labelledby="pillar-title" id="guide">
+    <div class="container">
+      <div class="article-layout">
+        <article>
+          <p class="eyebrow">The complete guide</p>
+          <h2 id="pillar-title" style="font-size:var(--step-4)">Romantic getaways: everything you need to plan the perfect escape for two</h2>
+          <p class="muted small">By the SpiceVacations Editorial Team · Updated September 25, 2026 · {Math.round(words / 230)} min read</p>
+          <div class="prose mt-3">
+            {(() => { const C = chapter(1).Content; return <C />; })()}
+          </div>
+          {
+            romanticResorts.length > 0 && (
+              <div class="grid grid-3 mt-4" data-stagger>
+                {romanticResorts.map((r) => <ResortCard r={r} destinationName={destName(r.data.destination)} placement="home-romantic" />)}
+              </div>
+            )
+          }
+        </article>
+        <aside class="article-aside" aria-label="Guide contents">
+          <nav class="toc" aria-labelledby="home-toc">
+            <h2 id="home-toc">In this guide</h2>
+            <ol>
+              {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+              <li><a href="#faq">Romantic getaways FAQ</a></li>
+            </ol>
+          </nav>
+          <div class="info-card mt-3">
+            <h2>Want a shortlist?</h2>
+            <p class="small muted">Answer a few questions and we'll match you with real destinations and resorts.</p>
+            <a class="btn btn--sm btn--block" href="/plan-my-vacation/">Plan my vacation</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL-VELOCITY MARQUEE -->
+  <div class="marquee" aria-hidden="true" data-marquee>
+    <div class="marquee__track">
+      {[0, 1].map(() => destinations.map((d) => <a href={url.destination(d.id)} tabindex="-1">{d.data.name}<span>✦</span></a>))}
+    </div>
+  </div>
+
+  <!-- CINEMATIC PARALLAX BAND -->
+  <section class="cine-band cine" aria-labelledby="band-title">
+    <div class="cine-band__media">
+      {
+        bandPhoto ? (
+          <img src={srcOf(bandPhoto)} srcset={srcsetOf(bandPhoto)} sizes="100vw" alt={bandPhoto.alt} width="1600" height="1000" loading="lazy" data-parallax />
+        ) : (
+          <img src="/art/overwater-teal.svg" alt="Illustrated overwater bungalows on a calm turquoise lagoon" width="1600" height="1000" loading="lazy" data-parallax />
+        )
+      }
+    </div>
+    <div class="cine__grain" aria-hidden="true"></div>
+    <div class="container cine-band__inner">
+      <p class="eyebrow shiny">Slow down together</p>
+      <h2 id="band-title" data-split>The best trips are measured in sunsets, not sights.</h2>
+      <p class="lead">Fewer plans, better rooms and one unforgettable experience: that's our formula for every getaway we recommend.</p>
+      <a class="btn" href="/plan-my-vacation/" data-magnet>Plan your escape</a>
+    </div>
+    <PhotoCredit pkey="home/band" />
+  </section>
+
+  <!-- ADULTS-ONLY -->
+  <section class="section section--white" aria-labelledby="adults-title">
+    <div class="container">
+      <SectionHeader eyebrow="Adults-only resorts" title="Best adults-only resorts for a quieter escape" id="adults-title" text="Calm pools, grown-up dining and no kids' clubs.">
+        <a class="link-arrow" href="/vacation-types/adults-only-resorts/">All adults-only resorts</a>
+      </SectionHeader>
+      <div class="grid grid-3" data-stagger>
+        {adultsOnly.map((r) => <ResortCard r={r} destinationName={destName(r.data.destination)} placement="home-adults-only" />)}
+      </div>
+      <div class="prose narrow mt-4">
+        {(() => { const C = chapter(2).Content; return <C />; })()}
+      </div>
+    </div>
+  </section>
+
+  <!-- US DESTINATIONS -->
+  <section class="section" aria-labelledby="us-title">
+    <div class="container">
+      <SectionHeader eyebrow="Popular U.S. destinations" title="Romantic getaways in the USA" id="us-title" text="No passport, easy flights and endless variety, from Big Sur to the Florida Keys.">
+        <a class="link-arrow" href="/guides/romantic-getaways-in-the-usa/">U.S. romantic getaways guide</a>
+      </SectionHeader>
+      <div class="grid grid-3" data-stagger>
+        {usDest.map((d) => <DestinationCard d={d} />)}
+      </div>
+      <div class="prose narrow mt-4">
+        {(() => { const C = chapter(3).Content; return <C />; })()}
+      </div>
+    </div>
+  </section>
+
+  <!-- CARIBBEAN & MEXICO -->
+  <section class="section section--navy" aria-labelledby="tropics-title">
+    <div class="container">
+      <SectionHeader eyebrow="Caribbean & Mexico" title="All-inclusive vacations for couples in the tropics" id="tropics-title" text="Turquoise water, adults-only resorts and short flights from most U.S. cities.">
+        <a class="link-arrow" style="color:var(--gold)" href="/guides/caribbean-vacations-for-couples/">Caribbean for couples</a>
+      </SectionHeader>
+      <div class="grid grid-3" data-stagger>
+        {tropics.map((d) => <DestinationCard d={d} />)}
+      </div>
+    </div>
+  </section>
+  <section class="section section--white" aria-label="Caribbean and Mexico guide">
+    <div class="container prose narrow">
+      {(() => { const C = chapter(4).Content; return <C />; })()}
+    </div>
+  </section>
+
+  <!-- INSPIRATION -->
+  <section class="section" aria-labelledby="insp-title">
+    <div class="container">
+      <SectionHeader eyebrow="Travel inspiration" title="Guides for couples who love to travel" id="insp-title">
+        <a class="link-arrow" href="/guides/">All guides</a>
+      </SectionHeader>
+      <div class="grid grid-3" data-stagger>
+        {inspiration.map((g) => <GuideCard g={g} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANNING, BUDGETS, FAQ (pillar part 5) -->
+  <section class="section section--white" aria-label="Planning your romantic getaway">
+    <div class="container narrow">
+      <div class="prose">
+        {(() => { const C = chapter(5).Content; return <C />; })()}
+      </div>
+      {
+        how && (
+          <section class="info-card mt-4" aria-labelledby="how-title">
+            <h2 id="how-title">{how.name}</h2>
+            <ol class="steps">
+              {how.steps.map((s, i) => (
+                <li id={`step-${i + 1}`}>
+                  <strong>{s.name}.</strong> {s.text}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )
+      }
+      <FaqList faqs={faqs} title="Romantic getaways FAQ" />
+      <p class="small muted mt-3">Last updated {updated.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}. Spotted something out of date? <a href="/contact/">Tell us</a>.</p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section" aria-labelledby="nl-title">
+    <div class="container">
+      <div class="cta-band" data-reveal>
+        <div class="grid grid-2" style="align-items:center">
+          <div>
+            <p class="eyebrow">Newsletter</p>
+            <h2 id="nl-title">Get one great getaway idea every month</h2>
+            <p class="lead">Seasonal timing tips, new resort reviews and honest deal alerts. Always free.</p>
+          </div>
+          <NewsletterForm id="home" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section--tight" aria-labelledby="final-title">
+    <div class="container center">
+      <h2 id="final-title" data-reveal>Ready for your next escape?</h2>
+      <p class="lead" data-reveal>Tell us your budget and style, and we'll suggest real destinations and resorts in seconds.</p>
+      <div class="cluster mt-3" style="justify-content:center" data-reveal>
+        <a class="btn" href="/plan-my-vacation/">Plan my vacation</a>
+        <a class="btn btn--ghost" href="/destinations/">Browse destinations</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps {
+    padding-left: 1.3em;
+    display: grid;
+    gap: 12px;
+  }
+  .steps li::marker {
+    color: var(--coral-text);
+    font-weight: 800;
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+import { photoFor } from '../lib/photos';
+interface Props {
+  pkey?: string;
+}
+const p = photoFor(Astro.props.pkey);
+---
+
+{
+  p?.ai && (
+    <p class="photo-credit">
+      AI-generated image · <a href="/editorial-policy/">how we use AI images</a>
+    </p>
+  )
+}
+{
+  p && !p.ai && (
+    <p class="photo-credit">
+      {p.representative ? 'Representative photo of the area · ' : 'Photo: '}
+      <a href={p.photographerUrl} rel="noopener nofollow" target="_blank">
+        {p.photographer}
+      </a>{' '}
+      on{' '}
+      <a href={p.url} rel="noopener nofollow" target="_blank">
+        {p.source ?? 'Pexels'}
+      </a>
+    </p>
+  )
+}

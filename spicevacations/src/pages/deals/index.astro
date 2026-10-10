@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import DealCard from '../../components/DealCard.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getDeals, lookup, url } from '../../lib/content';
+import { breadcrumbList, itemList, webPage } from '../../lib/schema';
+
+const deals = await getDeals();
+const L = await lookup();
+const path = '/deals/';
+const metaTitle = 'Vacation Deals for Couples: When to Book | SpiceVacations';
+const description = 'Honest vacation deals for couples: the seasons and days when resorts, hotels and cruises are often better value, with tips and links to check live prices.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Deals', href: path }];
+const schema = [webPage({ path, title: metaTitle, description, type: 'CollectionPage' }), breadcrumbList(crumbs), itemList('Vacation deals', deals.map((d) => ({ name: d.data.title, href: url.deal(d.id) })))];
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <PageHero title="Vacation Deals, Minus the Hype" lead="No fake countdowns, no invented 'from' prices. Just the windows when great trips are often better value, and quick links to check live rates." crumbs={crumbs} pkey="vacation-types/cruise-vacations" media={{ scene: 'cruise', palette: 'gold', imageAlt: 'Illustrated cruise ship on a golden sea' }} />
+  <div class="container section--tight">
+    <Disclosure />
+    <h2 class="mt-4">Current deal timing</h2>
+    <div class="grid grid-3 mt-3" data-stagger>
+      {deals.map((d) => <DealCard deal={d} destinationName={L.destinations.get(d.data.destination)?.data.name ?? ''} />)}
+    </div>
+    <div class="info-card mt-4">
+      <h2>How we pick deals</h2>
+      <p class="mb-0">
+        We look for recurring patterns, like shoulder seasons and midweek pricing, rather than one-off promotions that expire before you read them. For
+        a deeper strategy, read <a href="/guides/how-to-find-vacation-deals/">how to find vacation deals</a> and our guide to <a href="/guides/all-inclusive-vacation-deals/">all-inclusive vacation deals</a>.
+      </p>
+    </div>
+  </div>
+  <NewsletterBand />
+</Base>
