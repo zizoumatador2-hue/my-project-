@@ -365,3 +365,17 @@ details.toc-mobile summary{cursor:pointer;font-weight:650;min-height:48px;displa
 .gradient-text{background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gt-move var(--gt-speed,8s) linear infinite}
 @keyframes gt-move{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media (prefers-reduced-motion:reduce){.star-border .sb-glow,.gradient-text{animation:none}}
+/* Hero effects, CSS only (replaces the WebGL aurora, BlurText, ShinyText and Magnet islands) */
+.hero-aurora{overflow:hidden;pointer-events:none}
+.hero-aurora::before,.hero-aurora::after{content:"";position:absolute;width:70%;height:70%;border-radius:50%;filter:blur(60px);opacity:.55;will-change:transform}
+.hero-aurora::before{left:-10%;top:-20%;background:radial-gradient(circle,#0a6a6b,transparent 70%);animation:ff-drift-a 18s ease-in-out infinite alternate}
+.hero-aurora::after{right:-15%;bottom:-25%;background:radial-gradient(circle,#e2b65a,transparent 70%);animation:ff-drift-b 22s ease-in-out infinite alternate}
+@keyframes ff-drift-a{to{transform:translate(12%,8%) scale(1.08)}}
+@keyframes ff-drift-b{to{transform:translate(-10%,-6%) scale(1.05)}}
+.hero-title .w{display:inline-block;opacity:0;transform:translateY(.45em);animation:ff-word-in .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes ff-word-in{to{opacity:1;transform:none}}
+.shiny-text{background:linear-gradient(90deg,#9fd9d6 0%,#ffffff 50%,#9fd9d6 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ff-text-shine 4s linear infinite}
+@media (prefers-reduced-motion:reduce){
+  .hero-aurora::before,.hero-aurora::after,.shiny-text{animation:none}
+  .hero-title .w{opacity:1;transform:none;animation:none}
+}

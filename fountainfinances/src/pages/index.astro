@@ -5,12 +5,8 @@ import Icon from '@/components/Icon.astro';
 import Photo from '@/components/Photo.astro';
 import { ogImage } from '@/lib/og';
 import PhotoCredit from '@/components/PhotoCredit.astro';
-import Aurora from '@/components/reactbits/Aurora';
-import BlurText from '@/components/reactbits/BlurText';
-import ShinyText from '@/components/reactbits/ShinyText';
-import CountUp from '@/components/reactbits/CountUp';
-import Magnet from '@/components/reactbits/Magnet';
 import GradientText from '@/components/reactbits/GradientText.astro';
+import CountUp from '@/components/reactbits/CountUp';
 import CalcCard from '@/components/CalcCard.astro';
 import GuideCard from '@/components/GuideCard.astro';
 import Faq from '@/components/Faq.astro';
@@ -72,7 +68,7 @@ const schema = [
   <section class="hero hero-cine" aria-labelledby="hero-h" data-glow>
     <div class="hero-media" aria-hidden="true">
       <Photo name="home" class="kenburns" eager decorative />
-      <div class="hero-aurora"><Aurora client:idle colorStops={['#0a6a6b', '#e2b65a', '#1f8f8f']} amplitude={1.1} blend={0.6} speed={0.6} /></div>
+      <div class="hero-aurora"></div>
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
       <div class="orb orb-3"></div>
@@ -82,12 +78,12 @@ const schema = [
     </div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow eyebrow-light"><ShinyText client:idle text="Independent personal finance for Americans" color="#9fd9d6" shineColor="#ffffff" speed={3} delay={1.5} /></span>
-        <BlurText client:load as="h1" id="hero-h" className="hero-title" text="Make Smarter Money Decisions" delay={120} animateBy="words" direction="bottom" />
+        <span class="eyebrow eyebrow-light"><span class="shiny-text">Independent personal finance for Americans</span></span>
+        <h1 id="hero-h" class="hero-title"><span class="w" style="--d:0.00s">Make</span> <span class="w" style="--d:0.12s">Smarter</span> <span class="w" style="--d:0.24s">Money</span> <span class="w" style="--d:0.36s">Decisions</span></h1>
         <p class="hero-lede anim" style="--a:.55s">Compare financial products, understand your options, and use practical tools to take control of your finances.</p>
         <div class="hero-cta anim" style="--a:.75s">
-          <Magnet client:idle padding={60} magnetStrength={4}><a class="btn btn-primary btn-glow" href="/calculators/" data-track="cta_click" data-placement="hero">Explore Financial Tools</a></Magnet>
-          <Magnet client:idle padding={60} magnetStrength={4}><a class="btn btn-glass" href="/best/" data-track="cta_click" data-placement="hero">Compare Financial Products</a></Magnet>
+          <a class="btn btn-primary btn-glow" href="/calculators/" data-track="cta_click" data-placement="hero">Explore Financial Tools</a>
+          <a class="btn btn-glass" href="/best/" data-track="cta_click" data-placement="hero">Compare Financial Products</a>
         </div>
         <ul class="hero-points anim" style="--a:.95s">
           <li><Icon name="check" size={18} />Free calculators, no sign-up</li>
@@ -111,9 +107,9 @@ const schema = [
 
   <section class="stats-band" aria-label="Fountain Finances at a glance">
     <div class="wrap stats">
-      <div class="stat"><strong><CountUp client:visible to={CALCULATORS.length} duration={1.6} /></strong><span>free calculators</span></div>
-      <div class="stat"><strong><CountUp client:visible to={guides.length} duration={1.8} /></strong><span>in-depth guides</span></div>
-      <div class="stat"><strong><CountUp client:visible to={comparisons.length} duration={1.4} /></strong><span>product comparisons</span></div>
+      <div class="stat"><strong><CountUp to={CALCULATORS.length} duration={1.6} /></strong><span>free calculators</span></div>
+      <div class="stat"><strong><CountUp to={guides.length} duration={1.8} /></strong><span>in-depth guides</span></div>
+      <div class="stat"><strong><CountUp to={comparisons.length} duration={1.4} /></strong><span>product comparisons</span></div>
       <div class="stat"><strong>$0</strong><span>cost to you, no sign-up</span></div>
     </div>
   </section>
