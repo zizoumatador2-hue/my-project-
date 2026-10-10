@@ -48,9 +48,7 @@ const GSC = import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined;
 const BING = import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined;
 /** Google AdSense publisher id (ca-pub-…). When set, Auto ads load and dist/ads.txt is written. */
 const ADSENSE = (import.meta.env.PUBLIC_ADSENSE_CLIENT as string | undefined)?.trim();
-const CSS_VERSION = '6';
-// Arms the scroll-reveal styles before first paint; falls back to static content if fx.js never runs.
-const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.add('fx');setTimeout(function(){if(!d.classList.contains('fx-ready'))d.classList.remove('fx')},2500)}})(document.documentElement)";
+const CSS_VERSION = '7';
 ---
 <!doctype html>
 <html lang="en-US" dir="ltr">
@@ -66,7 +64,6 @@ const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.a
     <meta name="format-detection" content="telephone=no" />
     <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-var.woff2" as="font" type="font/woff2" crossorigin />
-    <script is:inline set:html={FX_BOOT}></script>
     <style is:inline set:html={critical}></style>
     <!-- Render-blocking on purpose: deferring it caused layout shifts (CLS) on calculators and lists. -->
     <link rel="stylesheet" href={`/global.css?v=${CSS_VERSION}`} />
@@ -118,6 +115,7 @@ const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.a
   </head>
   <body>
     <a class="skip" href="#main">Skip to main content</a>
+    <div class="progress" aria-hidden="true"></div>
     <Header />
     <main id="main" tabindex="-1">
       <slot />
@@ -136,6 +134,5 @@ const FX_BOOT = "(function(d){if('IntersectionObserver' in window){d.classList.a
       </>
     )}
     <script src="/js/track.js" defer></script>
-    <script src={`/js/fx.js?v=${CSS_VERSION}`} defer></script>
   </body>
 </html>

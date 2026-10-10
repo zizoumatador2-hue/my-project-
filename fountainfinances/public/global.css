@@ -332,16 +332,14 @@ details.toc-mobile summary{cursor:pointer;font-weight:650;min-height:48px;displa
 .marquee-track li::after{content:"";width:6px;height:6px;border-radius:50%;background:#e2b65a;margin-left:44px;box-shadow:0 0 12px #e2b65a}
 @keyframes ff-marquee{to{transform:translateX(-50%)}}
 .site-header{transition:background .3s ease,box-shadow .3s ease}
-.site-header.scrolled{box-shadow:0 8px 30px rgba(15,29,43,.12)}
+.site-header{box-shadow:0 1px 0 rgba(15,29,43,.06)}
 .btn{position:relative;overflow:hidden}
 .btn::after{content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s ease;pointer-events:none}
 .btn:hover::after{left:130%}
 .btn-primary{transition:transform .25s ease,box-shadow .25s ease,background .2s}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(10,106,107,.35)}
-.card.tilt{transform-style:preserve-3d;will-change:transform}
 .section-head h2{position:relative;display:inline-block;margin-bottom:.55em}
 .section-head h2::after{content:"";position:absolute;left:0;bottom:-6px;height:3px;width:100%;border-radius:3px;background:linear-gradient(90deg,#13a3a0,#e2b65a);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.2,.7,.2,1) .2s}
-.section-head.in h2::after,html:not(.fx) .section-head h2::after{transform:scaleX(1)}
 .ico{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .card:hover .ico{transform:rotate(-8deg) scale(1.12)}
 
@@ -378,4 +376,43 @@ details.toc-mobile summary{cursor:pointer;font-weight:650;min-height:48px;displa
 @media (prefers-reduced-motion:reduce){
   .hero-aurora::before,.hero-aurora::after,.shiny-text{animation:none}
   .hero-title .w{opacity:1;transform:none;animation:none}
+}
+
+/* ===== Effects, CSS only (replaces fx.js: scroll reveal, progress bar, tilt, parallax, pointer glow) ===== */
+/* Reading progress: a bar that grows with the page scroll, driven by the browser */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#13a3a0,#e2b65a);pointer-events:none}
+@supports (animation-timeline: scroll()){
+  .progress{animation:ff-progress linear both;animation-timeline:scroll(root)}
+}
+@keyframes ff-progress{to{transform:scaleX(1)}}
+
+/* Scroll reveal: content is always visible, and fades up as it enters the viewport where supported */
+@supports (animation-timeline: view()) and (animation-range: entry 0% entry 30%) {
+  .card,.stat,.cta-band,.calc-card,.section-head,.product,.hub-block{
+    animation:ff-rise linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 35%;
+  }
+  .section-head h2::after{transform:scaleX(0);animation:ff-underline .8s ease both;animation-timeline:view();animation-range:entry 0% entry 40%}
+}
+@keyframes ff-rise{from{opacity:0;transform:translate3d(0,24px,0)}to{opacity:1;transform:none}}
+@keyframes ff-underline{to{transform:scaleX(1)}}
+
+/* Photo headers drift slightly as you scroll */
+@supports (animation-timeline: view()) {
+  .ph-media{animation:ff-drift linear both;animation-timeline:view()}
+}
+@keyframes ff-drift{from{transform:translate3d(0,-6%,0)}to{transform:translate3d(0,6%,0)}}
+
+/* Hero light: a soft drifting glow instead of pointer tracking */
+.hero-cine::after{content:"";position:absolute;z-index:-1;inset:-20%;pointer-events:none;background:radial-gradient(closest-side,rgba(127,224,217,.14),transparent);animation:ff-glow 14s ease-in-out infinite alternate}
+@keyframes ff-glow{from{transform:translate3d(-6%,-4%,0)}to{transform:translate3d(6%,4%,0)}}
+
+/* Calls to action: a static soft shadow instead of a pulsing one */
+.btn-glow{animation:none;box-shadow:0 10px 30px rgba(10,106,107,.45)}
+
+/* Respect reduced motion: no movement, content stays fully visible */
+@media (prefers-reduced-motion:reduce){
+  .progress,.card,.stat,.cta-band,.calc-card,.section-head,.section-head h2::after,.product,.hub-block,.ph-media,.hero-cine::after,.kenburns,.grain,.marquee .marquee-track{animation:none!important}
+  .section-head h2::after{transform:scaleX(1)}
 }

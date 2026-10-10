@@ -7,7 +7,7 @@ const H = headingLevel;
 const photo = `guide-${slug}`;
 const has = photo in photos;
 ---
-<article class="card" data-reveal>
+<article class="card">
   {has && <div class="card-media"><Photo name={photo} decorative sizes="(min-width: 1000px) 380px, (min-width: 700px) 50vw, 100vw" /></div>}
   {kicker && <div class="kicker">{kicker}</div>}
   <H><a href={`/guides/${slug}/`}>{title}</a></H>

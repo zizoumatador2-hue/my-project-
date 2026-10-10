@@ -11,7 +11,7 @@ const photo = [Astro.props.photo, fallback].find((p) => !!p && p in photos);
 const has = !!photo;
 ---
 <div class:list={['page-head', has && 'ph']}>
-  {has && <div class="ph-media" data-parallax aria-hidden="true"><Photo name={photo!} eager decorative /></div>}
+  {has && <div class="ph-media" aria-hidden="true"><Photo name={photo!} eager decorative /></div>}
   <div class="wrap">
     <slot />
   </div>
