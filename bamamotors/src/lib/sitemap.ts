@@ -40,10 +40,11 @@ export async function landingEntries(db: D1Database): Promise<UrlEntry[]> {
 let indexableCache: { at: number; paths: Set<string> } | null = null;
 /**
  * Paths of landing pages that are indexable right now (same rule as the sitemap). Templates use it to link only to
- * landing pages worth crawling, instead of to hundreds of empty city/body/model combinations. Cached per isolate for 60 s.
+ * landing pages worth crawling, instead of to hundreds of empty city/body/model combinations. Cached per isolate for
+ * `ttlMs` (production only; elsewhere links must match the noindex decision immediately, e.g. right after a sale).
  */
-export async function indexableLandingPaths(db: D1Database): Promise<Set<string>> {
-  if (indexableCache && Date.now() - indexableCache.at < 60_000) return indexableCache.paths;
+export async function indexableLandingPaths(db: D1Database, ttlMs = 0): Promise<Set<string>> {
+  if (ttlMs > 0 && indexableCache && Date.now() - indexableCache.at < ttlMs) return indexableCache.paths;
   const paths = new Set((await landingEntries(db)).map((e) => e.loc));
   indexableCache = { at: Date.now(), paths };
   return paths;

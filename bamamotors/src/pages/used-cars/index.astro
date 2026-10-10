@@ -17,7 +17,7 @@ const filtered = countActiveFilters(filters) > 0 || filters.sort !== 'recommende
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Used Cars', href: '/used-cars' }];
 const cities = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM cities WHERE is_featured = 1 ORDER BY sort_order');
 const makes = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM makes WHERE is_popular = 1 ORDER BY name');
-const indexable = await indexableLandingPaths(env.DB);
+const indexable = await indexableLandingPaths(env.DB, env.ENVIRONMENT === 'production' ? 60_000 : 0);
 const bodyLinks = BODY_TYPES.slice(0, 6).filter((b) => indexable.has(`/used-cars/${b.slug}`));
 const makeLinks = makes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';

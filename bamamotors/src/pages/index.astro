@@ -30,7 +30,7 @@ const bodyCount = Object.fromEntries(bodies.map((b) => [b.body_type, b.n]));
 const site = env.SITE_URL;
 const heroImg = image('hero');
 // Link only to landing pages that are indexable now (live inventory), never to empty make/body pages.
-const indexable = await indexableLandingPaths(db);
+const indexable = await indexableLandingPaths(db, env.ENVIRONMENT === 'production' ? 60_000 : 0);
 const makeTiles = makes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
 const browseChips = [
   ...BODY_TYPES.slice(0, 7).map((b) => ({ href: `/used-cars/${b.slug}`, label: `Used ${b.plural}`, n: bodyCount[b.value] })),

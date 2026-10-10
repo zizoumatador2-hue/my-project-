@@ -24,7 +24,7 @@ if (!post) {
 if (!post || (post.status !== 'published' && !preview)) return Astro.rewrite('/404');
 const cover = postImage(post.slug);
 const rendered = renderMarkdown(post.body, new URL(site).host);
-const html = resolveLandingLinks(rendered.html, await indexableLandingPaths(env.DB));
+const html = resolveLandingLinks(rendered.html, await indexableLandingPaths(env.DB, env.ENVIRONMENT === 'production' ? 60_000 : 0));
 const { toc } = rendered;
 const faq = parseFaq(post.faq_json);
 let howto: { name: string; steps: { name: string; text: string }[] } | null;
