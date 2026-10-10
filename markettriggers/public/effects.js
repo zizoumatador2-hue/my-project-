@@ -75,6 +75,10 @@
       });
     }, { rootMargin: '0px 0px -70% 0px' });
     Object.keys(map).forEach(function (id) { var h = document.getElementById(id); if (h) tio.observe(h); });
+    var firstH = document.getElementById(Object.keys(map)[0]);
+    window.addEventListener('scroll', function () {
+      if (current && firstH && firstH.getBoundingClientRect().top > window.innerHeight * 0.3) { current.classList.remove('is-current'); current = null; }
+    }, { passive: true });
   }
 
   if (reduce) {
