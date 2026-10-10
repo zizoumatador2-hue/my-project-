@@ -57,7 +57,7 @@ for (const [vpName, opts] of Object.entries(VIEWPORTS)) {
     const loadMs = Date.now() - t0;
     await page.waitForTimeout(600);
     // scroll through to trigger reveals / lazy images
-    await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } window.scrollTo(0, 0); });
+    await page.evaluate(async () => { for (let y = 0; y < document.documentElement.scrollHeight; y += 500) { window.scrollTo({ top: y, behavior: 'instant' }); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo({ top: 0, behavior: 'instant' }); });
     await page.waitForTimeout(500);
     const m = await page.evaluate(() => {
       const de = document.documentElement;
@@ -97,9 +97,10 @@ for (const [vpName, opts] of Object.entries(VIEWPORTS)) {
       if (m.title.length > 70) issue(where, `title length ${m.title.length}`);
       if (m.ld.includes('INVALID')) issue(where, 'invalid JSON-LD');
     }
+    if (m.hiddenReveal) issue(where, `${m.hiddenReveal} reveal elements never shown`);
     if (m.cls > 0.1) issue(where, `layout shift CLS ${m.cls.toFixed(3)}`);
     const slug = (url.replace(BASE, '').replace(/\//g, '_') || '_home').replace(/^_|_$/g, '') || 'home';
-    if (vpName === 'mobile' || vpName === 'desktop') await page.screenshot({ path: `${OUT}/shots/${vpName}-${slug}.jpg`, type: 'jpeg', quality: 55, fullPage: true });
+    if (vpName === 'mobile' || vpName === 'desktop') await page.screenshot({ path: `${OUT}/shots/${vpName}-${slug}.jpg`, type: 'jpeg', quality: 55, fullPage: true, scale: 'css' });
     await page.close();
   }
   await ctx.close();
