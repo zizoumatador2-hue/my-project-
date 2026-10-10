@@ -1,0 +1,37 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+---
+<PageLayout
+  photo="legal"
+  title="Affiliate & Advertiser Disclosure"
+  heading="Affiliate Disclosure"
+  description="How Fountain Finances makes money, how affiliate links are labeled, and why compensation never affects which products we include or how we describe them."
+  lede="How we make money, and the firewall that keeps it separate from our editorial work."
+>
+  <h2>How Fountain Finances is funded</h2>
+  <p>Our guides, calculators and comparisons are free. To support the Site we may earn revenue from:</p>
+  <ul>
+    <li><strong>Affiliate links:</strong> a company may pay us a commission when you click a link on our Site and open an account, apply for or buy a product.</li>
+    <li><strong>Display advertising:</strong> ads served by Google AdSense may appear on some pages. They are labeled, visually separated from editorial content and chosen by Google, not by us. Advertisers have no influence on our guides, calculators or comparisons. See the <a href="/privacy/#advertising">Advertising section of our Privacy Policy</a> for how ad cookies work and how to opt out.</li>
+    <li><strong>Sponsorships:</strong> any sponsored content will be clearly labeled “Sponsored.”</li>
+  </ul>
+  <p>Using an affiliate link never costs you more. The price, rate and terms you receive are set by the provider.</p>
+
+  <h2>How affiliate links are labeled</h2>
+  <p>Every affiliate link is labeled “Affiliate link” next to the button, and the product card carries an “Affiliate” badge. Links to providers we do not have a relationship with are marked with the provider’s own website address instead. For search engines, affiliate links carry the <code>rel="sponsored"</code> attribute, as Google recommends. This is consistent with the Federal Trade Commission’s guidance that endorsements and material connections be clearly disclosed.</p>
+
+  <h2>What compensation does not affect</h2>
+  <ul>
+    <li><strong>Which products we include.</strong> Inclusion depends on our published eligibility criteria, not on payment. Products without any business relationship appear alongside those with one.</li>
+    <li><strong>Order.</strong> Comparison lists are alphabetical.</li>
+    <li><strong>What we say.</strong> Every product listing includes cons and important considerations. Partners cannot review or approve our content.</li>
+    <li><strong>Our guides.</strong> Educational articles are written to answer the reader’s question, not to promote a product.</li>
+  </ul>
+
+  <h2>Current relationships</h2>
+  <p>We will list every provider with which we have an active affiliate or sponsorship agreement on this page. Where a product listing has no affiliate label, we have no compensation arrangement for that link.</p>
+
+  <h2>Questions</h2>
+  <p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. See also our <a href="/editorial-standards/">editorial standards</a>.</p>
+</PageLayout>

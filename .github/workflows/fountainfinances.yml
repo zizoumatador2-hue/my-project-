@@ -1,0 +1,218 @@
+name: FountainFinances.com
+on:
+  pull_request:
+    paths: ['fountainfinances/**', '.github/workflows/fountainfinances.yml']
+  push:
+    branches: [main]
+    paths: ['fountainfinances/**', '.github/workflows/fountainfinances.yml']
+  workflow_dispatch:
+defaults:
+  run:
+    working-directory: fountainfinances
+jobs:
+  photos:
+    # Manual runs refresh the Pexels photo set and commit it, so builds never depend on Pexels.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || vars.PEXELS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
+      - run: npm ci
+      - name: Cache the Pexels photo index
+        uses: actions/cache@v4
+        with: { path: fountainfinances/.cache/pexels-index.jsonl, key: pexels-index-v1 }
+      - name: Build a keyless Pexels photo index (only used when no API key is set)
+        if: env.PEXELS_API_KEY == ''
+        run: |
+          [ -s .cache/pexels-index.jsonl ] && exit 0
+          pip install --quiet pyarrow
+          python3 scripts/pexels-index.py
+      - name: Fetch photos from Pexels
+        run: node scripts/fetch-pexels.mjs
+      - name: Commit new photos
+        run: |
+          git add -A public/images/photos src/data/photos.json
+          if git diff --cached --quiet; then echo "No new photos"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update Pexels photos"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+  test:
+    needs: photos
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+      - run: npm run build
+      - run: npm run qa
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+      - name: Browser sweep of every page (mobile + desktop)
+        run: |
+          npx astro preview --port 4321 &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://localhost:4321/ && break; sleep 1; done
+          npm run sweep
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with: { name: fountainfinances-test-results, path: fountainfinances/test-results }
+
+  deploy:
+    needs: test
+    if: ${{ !failure() && !cancelled() && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')) }}
+    runs-on: ubuntu-latest
+    concurrency: fountainfinances-production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+      PUBLIC_GA_ID: ${{ vars.PUBLIC_GA_ID }}
+      PUBLIC_GSC_VERIFICATION: ${{ vars.PUBLIC_GSC_VERIFICATION }}
+      PUBLIC_BING_VERIFICATION: ${{ vars.PUBLIC_BING_VERIFICATION }}
+      PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+      PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT || 'ca-pub-8532224804732263' }}
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
+      - name: Resolve Cloudflare credentials (derive the account id from the token when not set)
+        run: |
+          TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          if [ -z "$TOKEN" ]; then echo "::error::Set the CLOUDFLARE_API_TOKEN repository secret (see fountainfinances/README.md)"; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          ACC="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          if [ -z "$ACC" ]; then
+            ACC=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty')
+          fi
+          if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id — add a CLOUDFLARE_ACCOUNT_ID secret"; exit 1; fi
+          echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
+      - run: npm ci
+      - name: Provision D1 database (idempotent) and write its id into wrangler.toml
+        id: d1
+        continue-on-error: true
+        run: |
+          ID=$(npx wrangler d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const db=JSON.parse(s).find(d=>d.name==='fountainfinances-db');process.stdout.write(db?db.uuid:'')})")
+          if [ -z "$ID" ]; then
+            npx wrangler d1 create fountainfinances-db
+            ID=$(npx wrangler d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{process.stdout.write(JSON.parse(s).find(d=>d.name==='fountainfinances-db').uuid)})")
+          fi
+          sed -i "s/^database_id = .*/database_id = \"$ID\"/" wrangler.toml
+          npx wrangler d1 migrations apply fountainfinances-db --remote
+      - name: D1 status
+        if: steps.d1.outcome != 'success'
+        run: echo "::notice::The token cannot manage D1; deploying with the database id committed in wrangler.toml."
+      - run: npm run build
+      - name: Deploy to Cloudflare Pages
+        id: pages
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npx wrangler pages project list | grep -q 'fountainfinances' || npx wrangler pages project create fountainfinances --production-branch main
+          if ! npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true 2>&1 | tee deploy.log; then
+            echo "::warning::Deploy with the D1 binding failed; retrying without it (forms will show a 'temporarily unavailable' message)."
+            python3 -c "import re;p='wrangler.toml';s=open(p).read();open(p,'w').write(re.sub(r'\n\[\[d1_databases\]\][\s\S]*$','\n',s))"
+            npx wrangler pages deploy dist --project-name fountainfinances --branch main --commit-dirty=true 2>&1 | tee deploy.log
+          fi
+          grep -q 'Deployment complete' deploy.log
+          URL=$(grep -Eo 'https://[a-z0-9.-]+\.pages\.dev' deploy.log | tail -1)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Fallback — serve the site from Workers static assets (token without Pages permission)
+        id: worker
+        if: steps.pages.outcome != 'success'
+        run: |
+          echo "::warning::Pages deploy failed (the token likely lacks 'Cloudflare Pages: Edit'). Deploying the static site as a Worker instead; /api forms stay offline until Pages works."
+          npx wrangler deploy --config wrangler.assets.toml
+          SUB=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
+          echo "url=https://fountainfinances.$SUB.workers.dev" >> "$GITHUB_OUTPUT"
+      - name: Pages secrets (rate-limit salt, generated once)
+        if: steps.pages.outcome == 'success'
+        continue-on-error: true
+        run: |
+          if ! npx wrangler pages secret list --project-name fountainfinances 2>/dev/null | grep -q IP_HASH_SALT; then
+            openssl rand -hex 32 | npx wrangler pages secret put IP_HASH_SALT --project-name fountainfinances
+          fi
+      - name: Connect FountainFinances.com (Pages custom domains, DNS, apex → www redirect)
+        if: steps.pages.outcome == 'success'
+        continue-on-error: true
+        run: bash scripts/connect-domain.sh
+      - name: Verify the deployed site serves this build
+        if: steps.pages.outcome == 'success'
+        run: |
+          sleep 20
+          for u in "${{ steps.pages.outputs.url }}" "https://fountainfinances.pages.dev" "https://fountainfinances.com"; do
+            html=$(curl -fsSL "$u/") || { echo "::warning::$u not reachable"; continue; }
+            for marker in hero-cine marquee-track "/js/fx.js?v=" astro-island; do
+              echo "$html" | grep -q -- "$marker" && echo "ok   $u has $marker" || echo "::warning::$u is missing $marker"
+            done
+          done
+      - name: The real domain must stay indexable
+        if: steps.pages.outcome == 'success'
+        run: |
+          H=$(curl -sSI -m 20 https://fountainfinances.com/guides/what-is-apr/ | tr -d '\r')
+          if echo "$H" | grep -qi '^x-robots-tag:.*noindex'; then
+            echo "::error::fountainfinances.com is sending X-Robots-Tag: noindex — the edge Worker is not stripping it. Fix before search engines see it."
+            exit 1
+          fi
+          echo "fountainfinances.com is indexable"
+      - name: Notify search engines (IndexNow) once the domain serves this site
+        if: steps.pages.outcome == 'success'
+        continue-on-error: true
+        run: bash scripts/indexnow.sh
+      - name: Report live URL
+        run: |
+          URL="${{ steps.pages.outputs.url || steps.worker.outputs.url }}"
+          echo "Live URL: $URL"
+          echo "### Live URL: $URL" >> "$GITHUB_STEP_SUMMARY"
+
+  diagnose:
+    # Manual runs end with a report on the live site: DNS, indexing signals, forms and Lighthouse scores.
+    needs: deploy
+    if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.event_name == 'workflow_dispatch' && github.ref_name || '' }}" }
+      - name: Live diagnostics
+        run: |
+          bash scripts/diagnose-live.sh
+          echo "--- robots.txt as served on fountainfinances.com"; curl -s https://fountainfinances.com/robots.txt | head -40
+          echo "--- scripts injected into the served HTML"; curl -s https://fountainfinances.com/ | grep -o '<script[^>]*src="[^"]*"' | sort -u
+          echo "--- response headers"; curl -sI https://fountainfinances.com/ | tr -d '\r' | grep -iE 'server|cf-|alt-svc|content-security|x-robots|link' 
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: fountainfinances/package-lock.json }
+      - name: Check every outbound source link
+        continue-on-error: true
+        run: |
+          npm ci --silent
+          npm run build > /dev/null
+          node scripts/qa.mjs --external | tee qa-external.txt
+          { echo "### Outbound links"; grep -E "ERROR external|external links" qa-external.txt || echo "- all outbound links respond"; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Lighthouse (mobile)
+        run: |
+          echo "### Lighthouse (mobile)" >> "$GITHUB_STEP_SUMMARY"
+          for path in / /guides/how-to-build-a-budget/ /calculators/mortgage/; do
+            npx -y lighthouse@12 "https://fountainfinances.com$path" --quiet --output=json --output-path=lh.json \
+              --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless=new --no-sandbox" || continue
+            line=$(jq -r '"\(.categories.performance.score*100|round) perf · \(.categories.accessibility.score*100|round) a11y · \(.categories["best-practices"].score*100|round) best · \(.categories.seo.score*100|round) SEO · LCP \(.audits["largest-contentful-paint"].displayValue) · CLS \(.audits["cumulative-layout-shift"].displayValue) · TBT \(.audits["total-blocking-time"].displayValue)"' lh.json)
+            echo "- \`$path\`: $line" | tee -a "$GITHUB_STEP_SUMMARY"
+            jq -r '[.audits[] | select(.score != null and .score < 0.9 and (.details.type // "") != "debugdata") | "  - \(.id): \(.title)"] | .[:8][]' lh.json | tee -a "$GITHUB_STEP_SUMMARY"
+            jq -r '.audits["errors-in-console"].details.items[]? | "    console: \(.source // "") \(.description // "" | .[0:200]) \(.sourceLocation.url // "")"' lh.json
+            jq -r '.audits["robots-txt"].details.items[]? | "    robots.txt line \(.index // ""): \(.line // "") — \(.message // "")"' lh.json
+            jq -r '.audits["inspector-issues"].details.items[]? | "    issue: \(.issueType // "") \(.subItems.items[]?.url // "")"' lh.json | head -5
+          done

@@ -1,0 +1,99 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'How is credit card interest calculated?',
+    a: 'Most issuers divide the APR by 365 to get a daily periodic rate and apply it to your average daily balance over the billing cycle. This calculator uses a monthly approximation (APR ÷ 12), which lands very close to what you will actually pay.',
+  },
+  {
+    q: 'Why does my balance barely move when I pay the minimum?',
+    a: 'Minimum payments are often set at a small percentage of the balance plus interest, so most of the payment covers that month’s interest. Your statement is required to show how long payoff would take at the minimum: it is usually years.',
+  },
+  {
+    q: 'What if my payment is too low to pay off the balance?',
+    a: 'If your monthly payment is equal to or less than the interest charged each month, the balance will never go down. The calculator flags this and shows the minimum payment needed to make progress.',
+  },
+  {
+    q: 'Is a balance transfer a better option?',
+    a: 'A balance transfer to a card with a 0% intro APR can save a lot of interest if you can pay the balance off before the promotion ends and the transfer fee is lower than the interest you would otherwise pay. See our [balance transfer guide](/guides/what-is-a-balance-transfer/).',
+  },
+];
+---
+<CalculatorLayout slug="credit-card-payoff" faqs={faqs}>
+  <form slot="form" class="calc-form" id="cc-form" novalidate>
+    <fieldset>
+      <legend>Your card</legend>
+      <Field id="balance" label="Current balance" value={6500} prefix="$" min={1} />
+      <div class="row2">
+        <Field id="apr" label="APR" value={22.9} suffix="%" max={60} hint="Find it on your statement." />
+        <Field id="payment" label="Monthly payment" value={250} prefix="$" min={1} />
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Goal (optional)</legend>
+      <Field id="target" label="Pay it off in" value={24} suffix="months" min={1} max={600} hint="We’ll show the payment needed to hit this date." />
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="months">—</p>
+    <p class="big-sub">estimated time to pay off</p>
+    <p class="calc-warn" data-out="warn" hidden></p>
+    <ul class="stat-list">
+      <li><span>Total interest</span><span data-out="interest">—</span></li>
+      <li><span>Total amount paid</span><span data-out="paid">—</span></li>
+      <li><span>First month’s interest</span><span data-out="first">—</span></li>
+    </ul>
+    <ul class="stat-list">
+      <li><span data-out="goal-label">Payment to finish in 24 months</span><span data-out="goal">—</span></li>
+      <li><span>Interest at that payment</span><span data-out="goal-int">—</span></li>
+    </ul>
+  </div>
+
+  <h2>How to use the credit card payoff calculator</h2>
+  <p>Enter your card’s current balance, its <strong>APR</strong> (listed on your monthly statement) and the fixed amount you plan to pay each month. The calculator shows how many months it will take to reach a zero balance, the total interest you will pay and the total amount leaving your account: assuming you stop adding new charges.</p>
+  <p>Use the optional goal field to reverse the question: pick a payoff date, and the calculator returns the monthly payment needed to get there.</p>
+
+  <h2>Why the payment amount matters so much</h2>
+  <p>Credit card interest compounds on whatever balance remains. On a $6,500 balance at 22.9% APR, the first month’s interest is about $124. A $150 payment leaves only $26 to reduce the balance, while a $300 payment puts $176 toward it, which is why a modest increase in your payment can cut payoff time by years.</p>
+
+  <h2>Strategies to pay off card debt faster</h2>
+  <ul>
+    <li><strong>Pay more than the minimum</strong> and set it up as an automatic payment so it happens every month.</li>
+    <li><strong>Target one card at a time</strong> using the avalanche (highest APR first) or snowball (smallest balance first) method.</li>
+    <li><strong>Ask for a lower APR.</strong> A history of on-time payments gives you leverage.</li>
+    <li><strong>Consider a balance transfer or consolidation loan</strong> if you qualify for a meaningfully lower rate.</li>
+  </ul>
+  <p>Our step-by-step guide on <a href="/guides/how-to-pay-off-credit-card-debt/">how to pay off credit card debt</a> explains each method, and <a href="/guides/how-credit-card-interest-works/">how credit card interest works</a> shows how to read the numbers on your statement.</p>
+</CalculatorLayout>
+
+<script>
+  import { creditCardPayoff, paymentToPayOffIn } from '@/lib/finance';
+  import { bindCalculator, usd, months } from '@/lib/calc-ui';
+  const form = document.getElementById('cc-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'credit-card-payoff', (v) => {
+    const r = creditCardPayoff(v.balance, v.apr, v.payment);
+    const warn = out('warn');
+    if (!r.paysOff) {
+      out('months').textContent = 'Never';
+      warn.hidden = false;
+      warn.textContent = `At ${usd(v.payment)} a month, interest (${usd(r.minimumToProgress, true)}/month) outpaces your payment. Pay more than ${usd(Math.ceil(r.minimumToProgress + 1))} to start reducing the balance.`;
+      out('interest').textContent = '—';
+      out('paid').textContent = '—';
+    } else {
+      warn.hidden = true;
+      out('months').textContent = months(r.months);
+      out('interest').textContent = usd(r.totalInterest);
+      out('paid').textContent = usd(r.totalPaid);
+    }
+    out('first').textContent = usd(r.minimumToProgress, true);
+    const t = Math.round(v.target);
+    const gp = paymentToPayOffIn(v.balance, v.apr, t);
+    out('goal-label').textContent = `Payment to finish in ${t} months`;
+    out('goal').textContent = usd(gp, true);
+    out('goal-int').textContent = usd(gp * t - v.balance);
+  });
+</script>

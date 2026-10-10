@@ -1,0 +1,13 @@
+[
+  {
+    "id": "editorial-team",
+    "name": "Fountain Finances Editorial Team",
+    "type": "Organization",
+    "role": "Research, writing and editing",
+    "bio": "The Fountain Finances editorial team researches and writes every guide on this site. We build each article from primary sources — the Consumer Financial Protection Bureau, the Federal Reserve, the FDIC, the IRS, the U.S. Department of Education and official lender and bank disclosures — and we re-check the facts on a published review schedule. Our goal is simple: explain money decisions clearly enough that you can make them yourself.",
+    "expertise": ["Budgeting and saving", "Consumer credit", "Bank accounts and deposit insurance", "Consumer loans", "Mortgages", "Insurance basics"],
+    "credentials": [],
+    "email": "info.christopherkunz@gmail.com",
+    "sameAs": []
+  }
+]

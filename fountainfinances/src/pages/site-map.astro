@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HUBS } from '@/data/taxonomy';
+import { CALCULATORS } from '@/data/calculators';
+import { abs } from '@/lib/schema';
+
+const guides = await getCollection('guides', (g) => !g.data.draft);
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const comparisons = await getCollection('comparisons');
+const byTitle = <T extends { data: { title: string } }>(a: T, b: T) => a.data.title.localeCompare(b.data.title);
+---
+<PageLayout
+  title="Site Map: Every Guide, Calculator and Page"
+  heading="Site Map"
+  description="Every page on Fountain Finances in one place: personal finance guides by topic, free calculators, product comparisons, and company and policy pages."
+  lede="Every page on Fountain Finances, grouped by section."
+  showUpdated={false}
+  schema={[{ '@type': 'WebPage', url: abs('/site-map/'), name: 'Fountain Finances site map' }]}
+>
+  <div class="sitemap-cols">
+    {HUBS.map((h) => {
+      const hubGuides = guides.filter((g) => g.data.hub === h.slug).sort(byTitle);
+      const hubTopics = topics.filter((t) => t.data.hub === h.slug);
+      return (
+        <section aria-labelledby={`sm-${h.slug}`}>
+          <h2 id={`sm-${h.slug}`}><a href={`/${h.slug}/`}>{h.title}</a></h2>
+          <ul>
+            {hubTopics.map((t) => <li><a href={`/${t.id}/`}>{t.data.title}</a></li>)}
+            {hubGuides.map((g) => <li><a href={`/guides/${g.id}/`}>{g.data.title}</a></li>)}
+          </ul>
+        </section>
+      );
+    })}
+    <section aria-labelledby="sm-calc">
+      <h2 id="sm-calc"><a href="/calculators/">Calculators</a></h2>
+      <ul>{CALCULATORS.map((c) => <li><a href={`/calculators/${c.slug}/`}>{c.name}</a></li>)}</ul>
+    </section>
+    <section aria-labelledby="sm-best">
+      <h2 id="sm-best"><a href="/best/">Product comparisons</a></h2>
+      <ul>{comparisons.sort(byTitle).map((c) => <li><a href={`/best/${c.id}/`}>{c.data.title}</a></li>)}</ul>
+    </section>
+    <section aria-labelledby="sm-co">
+      <h2 id="sm-co">Company</h2>
+      <ul>
+        <li><a href="/about/">About us</a></li>
+        <li><a href="/contact/">Contact us</a></li>
+        <li><a href="/editorial-standards/">Editorial standards</a></li>
+        <li><a href="/authors/editorial-team/">Our editorial team</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/guides/">All guides</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/search/">Search</a></li>
+      </ul>
+    </section>
+    <section aria-labelledby="sm-legal">
+      <h2 id="sm-legal">Policies</h2>
+      <ul>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Use</a></li>
+        <li><a href="/disclaimer/">Financial Disclaimer</a></li>
+        <li><a href="/affiliate-disclosure/">Advertiser &amp; Affiliate Disclosure</a></li>
+        <li><a href="/corrections/">Corrections Policy</a></li>
+        <li><a href="/accessibility/">Accessibility Statement</a></li>
+      </ul>
+    </section>
+  </div>
+</PageLayout>

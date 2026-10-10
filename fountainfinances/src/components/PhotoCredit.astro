@@ -1,0 +1,15 @@
+---
+import photos from '@/data/photos.json';
+
+interface Props { name: string; class?: string }
+const { name, class: cls = '' } = Astro.props;
+// Original images (source: 'original') are our own and carry no third-party credit line.
+const entry = (photos as Record<string, { photographer: string; photographerUrl: string; pageUrl: string; source?: string }>)[name];
+const p = entry && entry.source !== 'original' ? entry : undefined;
+const byline = p && p.photographer !== 'Pexels' ? p.photographer : null;
+---
+{p && (
+  <p class={`photo-credit ${cls}`.trim()}>
+    {byline ? <>Photo: <a href={p.pageUrl} rel="noopener" target="_blank">{byline}</a> / Pexels</> : <>Photo: <a href={p.pageUrl} rel="noopener" target="_blank">Pexels</a></>}
+  </p>
+)}

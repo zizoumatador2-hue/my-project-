@@ -1,0 +1,14 @@
+---
+interface Props { author: { id: string; name: string; bio: string; role: string }; reviewer?: { id: string; name: string; role: string } }
+const { author, reviewer } = Astro.props;
+const initials = author.name.split(' ').filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('');
+---
+<aside class="author-box" aria-label="About the author">
+  <div class="avatar" aria-hidden="true">{initials}</div>
+  <div>
+    <h2>Written by <a href={`/authors/${author.id}/`}>{author.name}</a></h2>
+    <p>{author.bio}</p>
+    {reviewer && <p><strong>Reviewed by</strong> <a href={`/authors/${reviewer.id}/`}>{reviewer.name}</a>, {reviewer.role}</p>}
+    <p><a href="/editorial-standards/">How we research and fact-check our content</a></p>
+  </div>
+</aside>
