@@ -2273,3 +2273,8 @@ dialog.modal::backdrop {
   text-transform: uppercase;
   color: var(--muted, #5b6676);
 }
+
+/* Long URLs in running text (e.g. policy links) must wrap instead of forcing a sideways scroll on phones. */
+main a {
+  overflow-wrap: anywhere;
+}
