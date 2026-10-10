@@ -80,7 +80,7 @@ const questions = [
         if (answered === items.length && scoreEl) {
           scoreEl.hidden = false;
           scoreEl.textContent = `You scored ${correct} out of ${items.length}. ` +
-            (correct === items.length ? 'Excellent — you’re reading markets like a pro.' : 'Scroll back to the sections you missed for a quick refresher.');
+            (correct === items.length ? 'Excellent. You’re reading markets like a pro.' : 'Scroll back to the sections you missed for a quick refresher.');
         }
       });
     });

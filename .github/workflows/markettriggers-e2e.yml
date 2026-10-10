@@ -25,5 +25,5 @@ jobs:
         working-directory: markettriggers
         run: |
           git config user.name "e2e-bot"; git config user.email "e2e-bot@users.noreply.github.com"
-          cp -r e2e-out /tmp/out
+          cp -r e2e-out /tmp/out && cd "$GITHUB_WORKSPACE"
           git checkout --orphan mt-e2e-tmp && git rm -rfq . && cp -r /tmp/out/* . && git add -A && git commit -qm "E2E ${GITHUB_SHA::7}" && git push -fq origin HEAD:mt-e2e

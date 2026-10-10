@@ -15,7 +15,7 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 <BaseLayout
-  title="All Articles — Market Triggers Explained"
+  title="All Articles: Market Triggers Explained"
   description="Every MarketTriggers.com explainer in one place: economic indicators, Fed policy, earnings, sector impact, and investor education for U.S. markets."
   canonicalPath="/articles/"
   noindex={articles.length === 0}
