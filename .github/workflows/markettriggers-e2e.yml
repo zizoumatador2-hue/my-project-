@@ -1,0 +1,29 @@
+name: MarketTriggers (browser E2E audit)
+# Real Chromium against the live site: every page x 4 viewports, console/network errors, layout, flows.
+on:
+  push:
+    branches: [claude/markettriggers-site]
+    paths: ['markettriggers/scripts/e2e.mjs', '.github/workflows/markettriggers-e2e.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Install Playwright Chromium
+        working-directory: markettriggers
+        run: mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright@1.48.2 --no-audit --no-fund >/dev/null && npx playwright install --with-deps chromium >/dev/null
+      - name: Run audit
+        working-directory: markettriggers
+        run: mkdir -p e2e-out && cp scripts/e2e.mjs /tmp/pw/e2e.mjs && node /tmp/pw/e2e.mjs https://markettriggers.com "$PWD/e2e-out" | tee e2e-out/log.txt
+      - name: Publish results to mt-e2e branch
+        if: always()
+        working-directory: markettriggers
+        run: |
+          git config user.name "e2e-bot"; git config user.email "e2e-bot@users.noreply.github.com"
+          cp -r e2e-out /tmp/out
+          git checkout --orphan mt-e2e-tmp && git rm -rfq . && cp -r /tmp/out/* . && git add -A && git commit -qm "E2E ${GITHUB_SHA::7}" && git push -fq origin HEAD:mt-e2e
