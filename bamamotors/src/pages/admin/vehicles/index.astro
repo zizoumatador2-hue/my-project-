@@ -6,6 +6,7 @@ import { all, first, nowIso, audit } from '../../../lib/db';
 import { formatPrice, formatNumber, formatDate } from '../../../lib/format';
 import { featureVehicle, unfeatureVehicle } from '../../../lib/billing';
 import { deleteVehicle } from '../../../lib/vehicle-save';
+import { isVehicleStatus } from '../../../lib/constants';
 
 const env = Astro.locals.runtime.env;
 const db = env.DB;
@@ -17,7 +18,7 @@ if (Astro.request.method === 'POST') {
   const rows = ids.length ? await all<{ id: number; dealer_id: number }>(db, `SELECT id, dealer_id FROM vehicles WHERE id IN (${ids.map(() => '?').join(',')})`, ids) : [];
   if (action.startsWith('status_')) {
     const status = action.slice(7);
-    if (['active', 'draft', 'sold', 'archived'].includes(status)) {
+    if (isVehicleStatus(status)) {
       await db.batch(rows.map((r) => db.prepare('UPDATE vehicles SET status = ?, updated_at = ? WHERE id = ?').bind(status, nowIso(), r.id)));
       await audit(db, admin.id, 'vehicle.bulk_status', 'vehicle', ids.join(','), { status });
     }
@@ -31,7 +32,8 @@ if (Astro.request.method === 'POST') {
   return Astro.redirect(`/admin/vehicles${Astro.url.search}${Astro.url.search ? '&' : '?'}ok=bulk`, 303);
 }
 const sp = Astro.url.searchParams;
-const status = ['active', 'draft', 'sold', 'archived'].includes(sp.get('status') ?? '') ? sp.get('status')! : '';
+const statusParam = sp.get('status');
+const status = isVehicleStatus(statusParam) ? statusParam : '';
 const q = (sp.get('q') ?? '').trim().slice(0, 60);
 const dealerId = Number(sp.get('dealer_id')) || 0;
 const featuredOnly = sp.get('featured') === '1';

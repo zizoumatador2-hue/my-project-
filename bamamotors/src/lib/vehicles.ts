@@ -150,7 +150,3 @@ export async function priceStatsByModel(db: D1Database, where = '', params: (str
     [...params, limit],
   );
 }
-
-export function mediaUrl(key: string | null | undefined): string | null {
-  return key ? `/media/${key}` : null;
-}

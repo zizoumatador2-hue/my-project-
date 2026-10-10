@@ -1,10 +1,17 @@
 ---
 import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import NotificationsPanel from '../../components/NotificationsPanel.astro';
 import { all, first } from '../../lib/db';
 import { formatDateTime, formatPrice } from '../../lib/format';
 import { LEAD_TYPES, type LeadType } from '../../lib/constants';
+import { markNotificationsRead } from '../../lib/email';
 
 const db = Astro.locals.runtime.env.DB;
+const admin = Astro.locals.user!;
+if (Astro.request.method === 'POST') {
+  await markNotificationsRead(db, admin.id);
+  return Astro.redirect('/admin', 303);
+}
 const since = new Date(Date.now() - 30 * 86400000).toISOString();
 const c = await first<Record<string, number>>(db, `SELECT
   (SELECT COUNT(*) FROM users) AS users, (SELECT COUNT(*) FROM dealers WHERE status = 'active') AS dealers,
@@ -34,4 +41,5 @@ const stats: [string, string | number, string][] = [
       {leads.length ? <ul style="padding-left:1.1em">{leads.map((l) => <li><a href={`/admin/leads/${l.id}`}>{l.name}</a> · {LEAD_TYPES[l.type]} → {l.dealer ?? 'BamaMotors'} <span class="small muted">· {l.status} · {formatDateTime(l.created_at)}</span></li>)}</ul> : <p class="muted">No leads yet.</p>}
     </section>
   </div>
+  <div style="margin-top:20px"><NotificationsPanel userId={admin.id} /></div>
 </DashboardLayout>

@@ -27,7 +27,10 @@ export function initSaveButtons(): void {
       body.set('vehicle_id', b.dataset.save!);
       body.set('action', pressed ? 'remove' : 'add');
       const res = await fetch('/api/saved', { method: 'POST', body, headers: { Accept: 'application/json' } }).catch(() => null);
-      if (!res || !res.ok) b.setAttribute('aria-pressed', String(pressed));
+      if (!res || !res.ok) {
+        b.setAttribute('aria-pressed', String(pressed));
+        toast("Couldn't update saved vehicles. Please try again.");
+      }
       else toast(pressed ? 'Removed from saved vehicles' : 'Saved — find it in My Account');
     }),
   );

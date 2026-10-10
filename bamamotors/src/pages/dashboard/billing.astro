@@ -4,7 +4,7 @@ import { all, first } from '../../lib/db';
 import { PLANS, planOf, type PlanId } from '../../lib/plans';
 import { formatPrice, formatDate } from '../../lib/format';
 import { stripeEnabled } from '../../lib/stripe';
-import { createSubscriptionCheckout, createPortalSession, requestPlan } from '../../lib/billing';
+import { createSubscriptionCheckout, createPortalSession, requestPlan, CHECKOUT_ERROR } from '../../lib/billing';
 import { activeVehicleCount } from '../../lib/dealers';
 
 const env = Astro.locals.runtime.env;
@@ -30,7 +30,8 @@ if (Astro.request.method === 'POST') {
     }
     err = 'That action is not available.';
   } catch (e) {
-    err = (e as Error).message;
+    console.error('billing action failed', e);
+    err = CHECKOUT_ERROR;
   }
 }
 const current = planOf(dealer.plan);

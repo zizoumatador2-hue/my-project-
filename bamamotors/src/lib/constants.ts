@@ -21,7 +21,21 @@ export const CONDITIONS = [
 export const COLORS = [
   'Black', 'White', 'Silver', 'Gray', 'Red', 'Blue', 'Green', 'Brown', 'Beige', 'Gold', 'Orange', 'Yellow', 'Purple', 'Other',
 ] as const;
-export const TITLE_STATUSES = ['clean', 'rebuilt', 'salvage', 'lemon', 'unknown'] as const;
+export const TITLE_STATUSES = [
+  { value: 'clean', label: 'Clean' },
+  { value: 'rebuilt', label: 'Rebuilt' },
+  { value: 'salvage', label: 'Salvage' },
+  { value: 'lemon', label: 'Lemon / buyback' },
+  { value: 'unknown', label: 'Not disclosed' },
+] as const;
+export const VEHICLE_STATUSES = [
+  { value: 'active', label: 'Active (visible to shoppers)' },
+  { value: 'draft', label: 'Draft (hidden)' },
+  { value: 'sold', label: 'Sold' },
+  { value: 'archived', label: 'Archived' },
+] as const;
+export type VehicleStatus = (typeof VEHICLE_STATUSES)[number]['value'];
+export const isVehicleStatus = (v: string | null | undefined): v is VehicleStatus => VEHICLE_STATUSES.some((s) => s.value === v);
 
 export const PRICE_BUCKETS = [
   { slug: 'under-5000', max: 5000, label: 'Under $5,000' },
@@ -41,7 +55,6 @@ export const LEAD_TYPES = {
 export type LeadType = keyof typeof LEAD_TYPES;
 
 export const LEAD_STATUSES = ['new', 'contacted', 'qualified', 'converted', 'closed'] as const;
-export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
 export const SORTS = [
   { value: 'recommended', label: 'Recommended' },

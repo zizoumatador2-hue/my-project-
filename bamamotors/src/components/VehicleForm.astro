@@ -1,6 +1,6 @@
 ---
 import { all } from '../lib/db';
-import { BODY_TYPES, FUEL_TYPES, TRANSMISSIONS, DRIVETRAINS, COLORS, CONDITIONS } from '../lib/constants';
+import { BODY_TYPES, FUEL_TYPES, TRANSMISSIONS, DRIVETRAINS, COLORS, CONDITIONS, TITLE_STATUSES, VEHICLE_STATUSES } from '../lib/constants';
 import type { FieldErrors } from '../lib/validation';
 
 interface Props { values: Record<string, string>; errors: FieldErrors; submitLabel: string; dealers?: { id: number; name: string }[]; }
@@ -57,7 +57,7 @@ const inv = (k: string) => (errors[k] ? 'true' : undefined);
   </fieldset>
   <fieldset><legend>Vehicle history (as disclosed by the dealer)</legend>
     <div class="form-grid">
-      <div class="field"><label for="v-title">Title status</label><select class="select" id="v-title" name="title_status">{[['clean', 'Clean'], ['rebuilt', 'Rebuilt'], ['salvage', 'Salvage'], ['lemon', 'Lemon / buyback'], ['unknown', 'Not disclosed']].map(([v, l]) => <option value={v} selected={v === (val('title_status') || 'unknown')}>{l}</option>)}</select></div>
+      <div class="field"><label for="v-title">Title status</label><select class="select" id="v-title" name="title_status">{TITLE_STATUSES.map((t) => <option value={t.value} selected={t.value === (val('title_status') || 'unknown')}>{t.label}</option>)}</select></div>
       <div class="field"><label for="v-owners">Previous owners</label><input class="input" id="v-owners" name="owners" inputmode="numeric" value={val('owners')} /></div>
       <div class="field"><label for="v-acc">Accident-free</label><select class="select" id="v-acc" name="accident_free">{[['', 'Not disclosed'], ['1', 'Yes'], ['0', 'No']].map(([v, l]) => <option value={v} selected={v === val('accident_free')}>{l}</option>)}</select></div>
       <div class="field"><label for="v-svc">Service records</label><select class="select" id="v-svc" name="service_records">{[['', 'Not disclosed'], ['1', 'Available'], ['0', 'Not available']].map(([v, l]) => <option value={v} selected={v === val('service_records')}>{l}</option>)}</select></div>
@@ -66,7 +66,7 @@ const inv = (k: string) => (errors[k] ? 'true' : undefined);
   </fieldset>
   <fieldset><legend>Listing status</legend>
     <div class="field" style="max-width:320px"><label for="v-status">Status</label>
-      <select class="select" id="v-status" name="status">{[['active', 'Active (visible to shoppers)'], ['draft', 'Draft (hidden)'], ['sold', 'Sold'], ['archived', 'Archived']].map(([v, l]) => <option value={v} selected={v === (val('status') || 'active')}>{l}</option>)}</select></div>
+      <select class="select" id="v-status" name="status">{VEHICLE_STATUSES.map((st) => <option value={st.value} selected={st.value === (val('status') || 'active')}>{st.label}</option>)}</select></div>
   </fieldset>
   <div class="row"><button class="btn btn-primary btn-lg" type="submit">{submitLabel}</button><slot name="actions" /></div>
 </form>

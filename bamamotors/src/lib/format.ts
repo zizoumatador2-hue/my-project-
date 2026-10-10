@@ -3,7 +3,6 @@ const num = new Intl.NumberFormat('en-US');
 
 export const formatPrice = (cents: number): string => usd.format(Math.round(cents / 100));
 export const formatNumber = (n: number): string => num.format(n);
-export const formatMileage = (miles: number): string => `${num.format(miles)} mi`;
 
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return '';

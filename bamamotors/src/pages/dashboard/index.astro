@@ -1,7 +1,9 @@
 ---
 import DashboardLayout from '../../layouts/DashboardLayout.astro';
 import EmptyState from '../../components/EmptyState.astro';
-import { all, first, run, nowIso } from '../../lib/db';
+import NotificationsPanel from '../../components/NotificationsPanel.astro';
+import { all, first } from '../../lib/db';
+import { markNotificationsRead } from '../../lib/email';
 import { planOf } from '../../lib/plans';
 import { activeVehicleCount } from '../../lib/dealers';
 import { LEAD_TYPES, type LeadType } from '../../lib/constants';
@@ -12,13 +14,13 @@ const db = env.DB;
 const dealer = Astro.locals.dealer!;
 const user = Astro.locals.user!;
 if (Astro.request.method === 'POST') {
-  await run(db, 'UPDATE notifications SET read_at = ? WHERE user_id = ? AND read_at IS NULL', [nowIso(), user.id]);
+  await markNotificationsRead(db, user.id);
   return Astro.redirect('/dashboard', 303);
 }
 const plan = planOf(dealer.plan);
 const since = new Date(Date.now() - 30 * 86400000).toISOString();
 const sinceDay = since.slice(0, 10);
-const [used, stats, perDay, top, recent, notes] = await Promise.all([
+const [used, stats, perDay, top, recent] = await Promise.all([
   activeVehicleCount(db, dealer.id),
   first<{ active: number; views: number; leads: number; newLeads: number; saves: number; sold: number }>(db,
     `SELECT (SELECT COUNT(*) FROM vehicles WHERE dealer_id = ?1 AND status = 'active') AS active,
@@ -35,13 +37,10 @@ const [used, stats, perDay, top, recent, notes] = await Promise.all([
       WHERE v.dealer_id = ? AND v.status = 'active' ORDER BY v.views DESC, leads DESC LIMIT 5`, [dealer.id]),
   all<{ id: number; type: LeadType; name: string; vehicle_label: string | null; status: string; created_at: string }>(db,
     'SELECT id, type, name, vehicle_label, status, created_at FROM leads WHERE dealer_id = ? ORDER BY created_at DESC LIMIT 6', [dealer.id]),
-  all<{ id: number; title: string; body: string | null; link: string | null; created_at: string; read_at: string | null }>(db,
-    'SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC LIMIT 8', [user.id]),
 ]);
 const days = Array.from({ length: 30 }, (_, i) => new Date(Date.now() - (29 - i) * 86400000).toISOString().slice(0, 10));
 const map = Object.fromEntries(perDay.map((d) => [d.day, d.n]));
 const max = Math.max(1, ...perDay.map((d) => d.n));
-const unread = notes.filter((n) => !n.read_at).length;
 ---
 <DashboardLayout title="Overview" area="dealer">
   <div class="spread"><h1 style="margin:0">{dealer.name}</h1><div class="row"><a class="btn btn-primary" href="/dashboard/vehicles/new">+ Add vehicle</a><a class="btn btn-outline" href={`/dealers/${dealer.slug}`}>View public profile</a></div></div>
@@ -83,14 +82,6 @@ const unread = notes.filter((n) => !n.read_at).length;
         </ul>
       ) : <EmptyState title="No leads yet" icon="inbox"><p>Leads appear here as soon as shoppers contact you.</p></EmptyState>}
     </section>
-    <section class="panel" aria-labelledby="notes-title">
-      <div class="spread"><h2 id="notes-title" style="font-size:1.1rem;margin:0">Notifications</h2>
-        {unread > 0 && <form method="post"><button class="btn btn-ghost btn-sm" type="submit">Mark all read</button></form>}</div>
-      {notes.length ? (
-        <ul style="list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px">
-          {notes.map((n) => <li class="msg" style={n.read_at ? 'opacity:.7' : ''}>{n.link ? <a href={n.link}><strong>{n.title}</strong></a> : <strong>{n.title}</strong>}{n.body && <><br /><span class="small">{n.body}</span></>}<br /><span class="small muted">{formatDateTime(n.created_at)}</span></li>)}
-        </ul>
-      ) : <p class="muted">You're all caught up.</p>}
-    </section>
+    <NotificationsPanel userId={user.id} />
   </div>
 </DashboardLayout>

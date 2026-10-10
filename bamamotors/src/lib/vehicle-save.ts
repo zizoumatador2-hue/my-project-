@@ -4,7 +4,6 @@ import { vehicleSlugBase, uniqueSlug } from './slug';
 import { recordSlugChange } from './redirects';
 import { planOf } from './plans';
 import { activeVehicleCount } from './dealers';
-import { BODY_TYPES, FUEL_TYPES, TRANSMISSIONS, DRIVETRAINS, COLORS } from './constants';
 import { deleteImages } from './uploads';
 
 export type SaveResult = { ok: true; id: number } | { ok: false; errors: FieldErrors };
@@ -22,12 +21,6 @@ export async function saveVehicle(
   if (!parsed.success) return { ok: false, errors: zodErrors(parsed.error) };
   const v = parsed.data;
   const errors: FieldErrors = {};
-  if (!BODY_TYPES.some((b) => b.value === v.body_type)) errors.body_type = 'Choose a body type';
-  if (!(FUEL_TYPES as readonly string[]).includes(v.fuel_type)) errors.fuel_type = 'Choose a fuel type';
-  if (!(TRANSMISSIONS as readonly string[]).includes(v.transmission)) errors.transmission = 'Choose a transmission';
-  if (!(DRIVETRAINS as readonly string[]).includes(v.drivetrain)) errors.drivetrain = 'Choose a drivetrain';
-  if (v.exterior_color && !(COLORS as readonly string[]).includes(v.exterior_color)) errors.exterior_color = 'Choose a color';
-  if (v.interior_color && !(COLORS as readonly string[]).includes(v.interior_color)) errors.interior_color = 'Choose a color';
   const mm = await first<{ make: string; model: string }>(db, 'SELECT mk.name AS make, md.name AS model FROM models md JOIN makes mk ON mk.id = md.make_id WHERE md.id = ? AND mk.id = ?', [v.model_id, v.make_id]);
   if (!mm) errors.model_id = 'Choose a model that matches the make';
   const dealer = await first<{ id: number; plan: string; city_id: number | null; city_name: string; zip: string; lat: number | null; lng: number | null }>(

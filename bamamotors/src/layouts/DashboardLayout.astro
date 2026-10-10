@@ -23,10 +23,10 @@ if (area === 'dealer') {
     { href: '/dashboard/billing', label: 'Plan & billing', icon: 'dollar' },
   ];
 } else if (area === 'admin') {
-  const n = await first<{ dealers: number; reviews: number; subs: number; msgs: number }>(db,
-    "SELECT (SELECT COUNT(*) FROM dealers WHERE status = 'pending') AS dealers, (SELECT COUNT(*) FROM reviews WHERE status = 'pending') AS reviews, (SELECT COUNT(*) FROM subscriptions WHERE status = 'requested') AS subs, (SELECT COUNT(*) FROM contact_messages WHERE status = 'new') AS msgs");
+  const n = await first<{ dealers: number; reviews: number; subs: number; msgs: number; notes: number }>(db,
+    "SELECT (SELECT COUNT(*) FROM dealers WHERE status = 'pending') AS dealers, (SELECT COUNT(*) FROM reviews WHERE status = 'pending') AS reviews, (SELECT COUNT(*) FROM subscriptions WHERE status = 'requested') AS subs, (SELECT COUNT(*) FROM contact_messages WHERE status = 'new') AS msgs, (SELECT COUNT(*) FROM notifications WHERE user_id = ? AND read_at IS NULL) AS notes", [Astro.locals.user!.id]);
   items = [
-    { href: '/admin', label: 'Overview', icon: 'home' },
+    { href: '/admin', label: 'Overview', icon: 'home', count: n?.notes },
     { href: '/admin/dealers', label: 'Dealers', icon: 'store', count: n?.dealers },
     { href: '/admin/vehicles', label: 'Vehicles', icon: 'car' },
     { href: '/admin/leads', label: 'Leads', icon: 'inbox' },

@@ -4,6 +4,9 @@ import { stripeEnabled, stripeRequest } from './stripe';
 import { notify, notifyAdmins } from './email';
 import { activeFeaturedCount } from './dealers';
 
+/** Shown to dealers when a Stripe call fails; the provider's own error text stays in the server log. */
+export const CHECKOUT_ERROR = "We couldn't open secure checkout. Please try again, or contact us if it keeps happening.";
+
 /** Applies a plan to a dealer and records the subscription (single source of truth for plan changes). */
 export async function applyPlan(
   db: D1Database,

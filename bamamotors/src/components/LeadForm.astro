@@ -1,5 +1,6 @@
 ---
 import { LEAD_TYPES, type LeadType } from '../lib/constants';
+import { emailEnabled } from '../lib/email';
 
 interface Props {
   vehicleId?: number;
@@ -63,7 +64,7 @@ const minDate = new Date().toISOString().slice(0, 10);
     <button class="btn btn-primary btn-block btn-lg" type="submit" style="margin-top:14px" data-lead-submit>Send request</button>
   </form>
   <div data-lead-success hidden class="alert alert-ok" role="status" tabindex="-1">
-    <strong>Request sent!</strong> The {dealerId || vehicleId ? 'dealership' : 'BamaMotors team'} will contact you soon. A copy was emailed to you.
+    <strong>Request sent!</strong> The {dealerId || vehicleId ? 'dealership' : 'BamaMotors team'} will contact you soon.{emailEnabled(env) && ' A copy was emailed to you.'}
   </div>
 </section>
 {env.TURNSTILE_SITE_KEY && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}

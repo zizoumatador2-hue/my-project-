@@ -1,8 +1,7 @@
 import manifest from '../data/images.json';
 
 /**
- * Licensed photos: Pexels (scripts/fetch-pexels.mjs) or Wikimedia Commons CC0/PD/CC BY(-SA)
- * (scripts/fetch-commons.mjs), or original illustrations made for the site (scripts/generate-fal.mjs),
+ * Licensed photos from Wikimedia Commons, CC0/PD/CC BY(-SA) (scripts/fetch-commons.mjs), or original illustrations made for the site (scripts/generate-fal.mjs),
  * written to public/images and src/data/images.json. Third-party photos are always credited.
  * Every helper returns null when an image hasn't been fetched yet, so pages degrade gracefully.
  */
@@ -14,7 +13,7 @@ export interface SiteImage {
   alt: string;
   author: string;
   sourceUrl: string;
-  source: 'Pexels' | 'Wikimedia Commons' | 'fal.ai';
+  source: 'Wikimedia Commons' | 'fal.ai';
   license?: string;
   licenseUrl?: string;
   prompt?: string;

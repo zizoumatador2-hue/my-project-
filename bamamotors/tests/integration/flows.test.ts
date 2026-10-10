@@ -127,6 +127,14 @@ describe('BamaMotors end-to-end flows', () => {
     expect(up.status).toBe(403);
   });
 
+  it('shows admin notifications on the overview and marks them read', async () => {
+    const before = await admin.html('/admin');
+    expect(before.text).toContain('New dealer awaiting approval');
+    expect(before.text).toContain('Mark all read');
+    expect((await admin.post('/admin', { action: 'mark_notifications_read' })).status).toBe(303);
+    expect((await admin.html('/admin')).text).not.toContain('Mark all read');
+  });
+
   it('lets the admin approve the dealer, making listings public', async () => {
     const list = await admin.html(`/admin/dealers?q=${encodeURIComponent(`Magic City Motors ${tag}`)}`);
     dealerId = Number(list.text.match(/href="\/admin\/dealers\/(\d+)"/)![1]);
@@ -301,8 +309,12 @@ describe('BamaMotors end-to-end flows', () => {
   it('supports password reset without account enumeration', async () => {
     const a = await anon.post('/forgot-password', { email: `sam-${tag}@example.com` });
     const b = await anon.post('/forgot-password', { email: `nobody-${tag}@example.com` });
-    expect(await a.text()).toContain('If an account exists');
-    expect(await b.text()).toContain('If an account exists');
+    const [aText, bText] = [await a.text(), await b.text()];
+    expect(aText).toContain('If an account exists');
+    expect(bText).toContain('If an account exists');
+    // The test server has no RESEND_API_KEY, so the page must not claim an email was sent.
+    expect(aText).toContain("Automatic email isn't set up yet");
+    expect(aText).not.toContain("we've sent a reset link");
     const outbox = await admin.html('/admin/messages');
     const token = outbox.text.match(/reset-password\?token=([A-Za-z0-9_-]+)/)![1];
     const reset = await anon.post(`/reset-password?token=${token}`, { password: 'brand-new-password-9', confirm: 'brand-new-password-9' });

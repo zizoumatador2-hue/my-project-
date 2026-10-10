@@ -1,6 +1,13 @@
 import { z } from 'zod';
+import { BODY_TYPES, COLORS, CONDITIONS, DRIVETRAINS, FUEL_TYPES, TITLE_STATUSES, TRANSMISSIONS, VEHICLE_STATUSES } from './constants';
 
 const trimmed = (max: number) => z.string().trim().max(max);
+const values = (list: readonly (string | { value: string })[]) => list.map((x) => (typeof x === 'string' ? x : x.value));
+/** A value from one of the fixed lists in constants.ts (the same lists the forms and search filters use). */
+const oneOf = (list: readonly (string | { value: string })[], message: string) =>
+  z.string().trim().refine((v) => values(list).includes(v), message);
+const optionalOneOf = (list: readonly (string | { value: string })[], message: string) =>
+  z.string().trim().optional().default('').refine((v) => v === '' || values(list).includes(v), message);
 export const emailSchema = z.string().trim().toLowerCase().email('Enter a valid email address').max(160);
 export const phoneSchema = z
   .string()
@@ -67,23 +74,23 @@ export const vehicleSchema = z.object({
   stock_number: trimmed(40).optional().default(''),
   price: z.preprocess((v) => Number(String(v ?? '').replace(/[,$\s]/g, '')), z.number({ invalid_type_error: 'Enter a price' }).int().min(1, 'Enter a price').max(2_000_000)),
   mileage: z.preprocess((v) => Number(String(v ?? '').replace(/[,\s]/g, '')), z.number({ invalid_type_error: 'Enter the mileage' }).int().min(0).max(2_000_000)),
-  body_type: trimmed(30).min(1, 'Choose a body type'),
-  fuel_type: trimmed(30).min(1),
-  transmission: trimmed(30).min(1),
-  drivetrain: trimmed(10).min(1),
-  exterior_color: trimmed(30).optional().default(''),
-  interior_color: trimmed(30).optional().default(''),
-  condition: z.enum(['used', 'certified', 'new']),
+  body_type: oneOf(BODY_TYPES, 'Choose a body type'),
+  fuel_type: oneOf(FUEL_TYPES, 'Choose a fuel type'),
+  transmission: oneOf(TRANSMISSIONS, 'Choose a transmission'),
+  drivetrain: oneOf(DRIVETRAINS, 'Choose a drivetrain'),
+  exterior_color: optionalOneOf(COLORS, 'Choose a color'),
+  interior_color: optionalOneOf(COLORS, 'Choose a color'),
+  condition: oneOf(CONDITIONS, 'Choose a condition'),
   engine: trimmed(80).optional().default(''),
   mpg_city: optInt(1, 200),
   mpg_highway: optInt(1, 200),
   description: trimmed(8000).optional().default(''),
   owners: optInt(0, 50),
   accident_free: optTri,
-  title_status: z.enum(['clean', 'rebuilt', 'salvage', 'lemon', 'unknown']).optional().default('unknown'),
+  title_status: z.string().trim().optional().default('unknown').refine((v) => values(TITLE_STATUSES).includes(v), 'Choose a title status'),
   service_records: optTri,
   history_report_url: urlSchema.optional().default(''),
-  status: z.enum(['draft', 'active', 'sold', 'archived']).default('active'),
+  status: z.string().trim().optional().default('active').refine((v) => values(VEHICLE_STATUSES).includes(v), 'Choose a status'),
   features: trimmed(3000).optional().default(''),
 });
 

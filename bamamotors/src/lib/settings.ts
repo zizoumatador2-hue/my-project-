@@ -48,8 +48,4 @@ export async function saveSettings(db: D1Database, values: Record<string, string
   cache = null;
 }
 
-export async function clearSettingsCache(): Promise<void> {
-  cache = null;
-}
-
 export { run };

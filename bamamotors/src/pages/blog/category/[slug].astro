@@ -21,7 +21,6 @@ const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Buying Guides', href: 
 const site = Astro.locals.runtime.env.SITE_URL;
 const cover = posts[0] ? postImage(posts[0].slug) : null;
 const path = `/blog/category/${cat.slug}${page > 1 ? `?page=${page}` : ''}`;
-// Built from the real category description and the real guide count.
 const description = `${cat.description ?? `${cat.name} guides from BamaMotors.`} ${total} ${total === 1 ? 'guide' : 'guides'} for Alabama car buyers${page > 1 ? `, page ${page}` : ''}.`;
 ---
 <BaseLayout ogImage={cover?.src} title={`${cat.name}: Alabama Car Guides${page > 1 ? ` – Page ${page}` : ''}`} description={description} canonical={path}

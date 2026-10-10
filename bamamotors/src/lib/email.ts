@@ -1,4 +1,7 @@
-import { insert, run } from './db';
+import { insert, nowIso, run } from './db';
+
+/** Whether transactional email is actually delivered (otherwise it is only logged to email_outbox). */
+export const emailEnabled = (env: Env): boolean => Boolean(env.RESEND_API_KEY);
 
 /**
  * Sends a plain-text transactional email.
@@ -7,7 +10,7 @@ import { insert, run } from './db';
  */
 export async function sendEmail(env: Env, to: string, subject: string, body: string): Promise<boolean> {
   const id = await insert(env.DB, 'INSERT INTO email_outbox (to_email, subject, body) VALUES (?,?,?)', [to, subject, body]);
-  if (!env.RESEND_API_KEY) {
+  if (!emailEnabled(env)) {
     await run(env.DB, "UPDATE email_outbox SET status = 'logged' WHERE id = ?", [id]);
     return false;
   }
@@ -24,6 +27,10 @@ export async function sendEmail(env: Env, to: string, subject: string, body: str
     await run(env.DB, "UPDATE email_outbox SET status = 'failed', error = ? WHERE id = ?", [String(e).slice(0, 500), id]);
     return false;
   }
+}
+
+export async function markNotificationsRead(db: D1Database, userId: number): Promise<void> {
+  await run(db, 'UPDATE notifications SET read_at = ? WHERE user_id = ? AND read_at IS NULL', [nowIso(), userId]);
 }
 
 export async function notify(db: D1Database, userId: number, title: string, body: string, link: string): Promise<void> {

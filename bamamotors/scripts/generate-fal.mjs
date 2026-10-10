@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Generates illustrative photos with FLUX1.1 [pro] ultra on fal.ai for slots that have a "fal" prompt in
-// content/pexels.json (hero, body types, generic guide covers). Real places (city pages) keep real photos.
+// content/image-requests.json (hero, body types, generic guide covers). Real places (city pages) keep real photos.
 //   FAL_KEY=... node scripts/generate-fal.mjs [--force]
 // Writes public/images/<key>-{640,1024,1600}.webp and src/data/images.json. Slots already generated are kept.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
@@ -14,7 +14,7 @@ if (!KEY) { console.log('FAL_KEY not set — skipping fal.ai generation.'); proc
 const force = process.argv.includes('--force');
 const MODEL = 'fal-ai/flux-pro/v1.1-ultra';
 const STYLE = 'Photorealistic editorial photograph, natural light, shot on a full-frame camera, sharp focus, true-to-life colors. Generic unbranded vehicles seen from the side or from a distance. Clean scene without any writing, signage, logos or license plates.';
-const requests = JSON.parse(readFileSync(join(root, 'content/pexels.json'), 'utf8'));
+const requests = JSON.parse(readFileSync(join(root, 'content/image-requests.json'), 'utf8'));
 const manifestPath = join(root, 'src/data/images.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 const outDir = join(root, 'public/images');
@@ -38,7 +38,7 @@ async function generate(prompt) {
 let added = 0, failed = 0;
 for (const [key, req] of Object.entries(requests)) {
   if (key.startsWith('_') || !req.fal) continue;
-  // Regenerate only when the slot isn't a fal.ai image yet or its prompt was edited in content/pexels.json.
+  // Regenerate only when the slot isn't a fal.ai image yet or its prompt was edited in content/image-requests.json.
   if (manifest[key]?.source === 'fal.ai' && manifest[key].prompt === req.fal && !force) continue;
   try {
     const buf = await generate(req.fal);

@@ -6,10 +6,11 @@ import { all, first, nowIso } from '../../../lib/db';
 import { formatPrice, formatNumber } from '../../../lib/format';
 import { planOf } from '../../../lib/plans';
 import { activeVehicleCount } from '../../../lib/dealers';
-import { featureVehicle, unfeatureVehicle, planFeaturedAvailable, createFeaturedCheckout } from '../../../lib/billing';
+import { featureVehicle, unfeatureVehicle, planFeaturedAvailable, createFeaturedCheckout, CHECKOUT_ERROR } from '../../../lib/billing';
 import { stripeEnabled } from '../../../lib/stripe';
 import { deleteVehicle } from '../../../lib/vehicle-save';
 import { notifyAdmins } from '../../../lib/email';
+import { VEHICLE_STATUSES, isVehicleStatus } from '../../../lib/constants';
 
 const env = Astro.locals.runtime.env;
 const db = env.DB;
@@ -27,7 +28,7 @@ if (Astro.request.method === 'POST') {
   const target = vid ? await first<{ id: number; status: string }>(db, 'SELECT id, status FROM vehicles WHERE id = ? AND dealer_id = ?', [vid, dealer.id]) : null;
   if (action === 'bulk_status') {
     const status = String(fd.get('status'));
-    if (['active', 'sold', 'archived', 'draft'].includes(status) && own.length) {
+    if (isVehicleStatus(status) && own.length) {
       if (status === 'active' || status === 'draft') {
         const used = await activeVehicleCount(db, dealer.id);
         const adding = own.filter((o) => o.status !== 'active' && o.status !== 'draft').length;
@@ -53,7 +54,7 @@ if (Astro.request.method === 'POST') {
     if (target.status !== 'active') err = 'Only active vehicles can be featured.';
     else if (stripeEnabled(env)) {
       try { return Astro.redirect(await createFeaturedCheckout(env, dealer, target.id, Number(s.featured_price_cents || 2900), Number(s.featured_days || 30)), 303); }
-      catch (e) { err = (e as Error).message; }
+      catch (e) { console.error('featured checkout failed', e); err = CHECKOUT_ERROR; }
     } else {
       await notifyAdmins(db, 'Featured listing requested', `${dealer.name} requested featuring vehicle #${target.id}`, `/admin/featured?vehicle=${target.id}`);
       return Astro.redirect('/dashboard/vehicles?ok=requested', 303);
@@ -62,7 +63,8 @@ if (Astro.request.method === 'POST') {
   if (!err && !['bulk_status', 'bulk_delete', 'feature', 'unfeature', 'buy_featured'].includes(action)) err = 'Unknown action.';
   if (!err && !own.length && action.startsWith('bulk')) err = 'Select at least one vehicle.';
 }
-const status = ['active', 'draft', 'sold', 'archived'].includes(Astro.url.searchParams.get('status') ?? '') ? Astro.url.searchParams.get('status')! : '';
+const statusParam = Astro.url.searchParams.get('status');
+const status = isVehicleStatus(statusParam) ? statusParam : '';
 const q = (Astro.url.searchParams.get('q') ?? '').trim().slice(0, 60);
 const page = Math.max(1, Number(Astro.url.searchParams.get('page')) || 1);
 const PER = 25;
@@ -100,7 +102,7 @@ const featuredPrice = formatPrice(Number(s.featured_price_cents || 2900));
     <form method="post" id="bulk">
       <div class="toolbar">
         <div class="field" style="max-width:220px"><label for="bstatus">Bulk: set status</label>
-          <select class="select" id="bstatus" name="status">{['sold', 'archived', 'active', 'draft'].map((x) => <option value={x}>{x}</option>)}</select></div>
+          <select class="select" id="bstatus" name="status">{VEHICLE_STATUSES.map((st) => <option value={st.value}>{st.label}</option>)}</select></div>
         <button class="btn btn-outline" type="submit" name="action" value="bulk_status">Apply to selected</button>
         <button class="btn btn-danger" type="submit" name="action" value="bulk_delete" data-confirm-click="Delete the selected vehicles permanently?">Delete selected</button>
       </div>

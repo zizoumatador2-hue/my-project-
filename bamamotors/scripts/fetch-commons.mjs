@@ -3,8 +3,8 @@
 // (CC0 / public domain / CC BY / CC BY-SA). No API key needed. Each photo is credited on the
 // site with its author, source page and licence, as those licences require.
 //   node scripts/fetch-commons.mjs [--force]
-// Reads content/pexels.json (optional per-key "commons" query), writes public/images/<key>-{640,1024,1600}.webp
-// and src/data/images.json. Keys that already have a photo (from Pexels or a previous run) are kept.
+// Reads content/image-requests.json (per-key "commons" query, else "query"), writes public/images/<key>-{640,1024,1600}.webp
+// and src/data/images.json. Keys that already have a photo are kept.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,7 +12,7 @@ import sharp from 'sharp';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const force = process.argv.includes('--force');
-const requests = JSON.parse(readFileSync(join(root, 'content/pexels.json'), 'utf8'));
+const requests = JSON.parse(readFileSync(join(root, 'content/image-requests.json'), 'utf8'));
 const manifestPath = join(root, 'src/data/images.json');
 const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
 const outDir = join(root, 'public/images');

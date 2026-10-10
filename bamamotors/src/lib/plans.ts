@@ -16,7 +16,7 @@ export const PLANS: Record<PlanId, Plan> = {
     priceCents: 0,
     vehicleLimit: 10,
     featuredSlots: 0,
-    perks: ['Up to 10 active vehicles', 'Basic dealer profile page', 'Unlimited leads by email', 'Lead management dashboard'],
+    perks: ['Up to 10 active vehicles', 'Basic dealer profile page', 'Unlimited leads', 'Lead management dashboard'],
   },
   basic: {
     id: 'basic',

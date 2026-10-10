@@ -5,9 +5,9 @@ const all = Object.entries(allImages()).sort(([a], [b]) => a.localeCompare(b));
 const list = all.filter(([, img]) => img.source !== 'fal.ai');
 const own = all.length - list.length;
 ---
-<ContentLayout title="Photo Credits" h1="Photo credits" path="/photo-credits" noindex description="Credits and licenses for the photos used on BamaMotors.com, from Pexels and Wikimedia Commons.">
+<ContentLayout title="Photo Credits" h1="Photo credits" path="/photo-credits" noindex description="Credits and licenses for the photos used on BamaMotors.com, from Wikimedia Commons, and how the site's illustrations were made.">
   <div class="prose">
-    <p>Photos used on BamaMotors.com come from <a href="https://www.pexels.com/license/" rel="noopener" target="_blank">Pexels</a> and from <a href="https://commons.wikimedia.org/" rel="noopener" target="_blank">Wikimedia Commons</a> under free licenses (public domain, CC0, CC BY or CC BY-SA). We thank the photographers. Photos may be cropped and resized. Vehicle listing photos are supplied by the dealers that list them.</p>
+    <p>Photos of Alabama places on BamaMotors.com come from <a href="https://commons.wikimedia.org/" rel="noopener" target="_blank">Wikimedia Commons</a> under free licenses (public domain, CC0, CC BY or CC BY-SA). We thank the photographers. Photos may be cropped and resized. Vehicle listing photos are supplied by the dealers that list them.</p>
     {own > 0 && <p>{own} illustrations on the site, including the homepage banner and several guide covers, were created for BamaMotors with the FLUX image model on fal.ai. They show typical scenes, not specific dealers, people or vehicles for sale.</p>}
     {list.length === 0 ? <p>No stock photos are in use yet.</p> : (
       <ul>

@@ -37,6 +37,15 @@ const browseChips = [
   { href: '/used-cars/under-10000', label: 'Cars under $10,000', n: 0 },
   { href: '/used-cars/under-5000', label: 'Cars under $5,000', n: 0 },
 ].filter((c) => indexable.has(c.href));
+const quickLinks = [
+  { href: '/used-cars/under-10000', label: 'Cars under $10k' },
+  { href: '/used-cars/trucks', label: 'Used trucks' },
+  { href: '/used-cars/suvs', label: 'Family SUVs' },
+  { href: '/used-cars/birmingham-al', label: 'Birmingham' },
+  { href: '/used-cars/huntsville-al', label: 'Huntsville' },
+  { href: '/used-cars/mobile-al', label: 'Mobile' },
+  { href: '/dealers', label: 'Dealers near me' },
+].filter((l) => !l.href.startsWith('/used-cars/') || indexable.has(l.href));
 const h1 = 'Used Cars for Sale in Alabama, from Local Dealers You Can Visit';
 const stats = [
   ...(counts && counts.vehicles > 0 ? [{ n: counts.vehicles, l: 'Used cars for sale now' }] : []),
@@ -67,13 +76,7 @@ const faq = [
       <p class="lead">Search {counts && counts.vehicles > 0 ? `${formatNumber(counts.vehicles)} used cars, trucks and SUVs` : 'used cars, trucks and SUVs'} from Alabama dealerships, from Huntsville to Mobile. Compare prices, then contact the dealer directly.</p>
       <SearchForm variant="hero" />
       <ul class="quick-chips" aria-label="Popular searches">
-        <li><a href="/used-cars/under-10000">Cars under $10k</a></li>
-        <li><a href="/used-cars/trucks">Used trucks</a></li>
-        <li><a href="/used-cars/suvs">Family SUVs</a></li>
-        <li><a href="/used-cars/birmingham-al">Birmingham</a></li>
-        <li><a href="/used-cars/huntsville-al">Huntsville</a></li>
-        <li><a href="/used-cars/mobile-al">Mobile</a></li>
-        <li><a href="/dealers">Dealers near me</a></li>
+        {quickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
       <ul class="trust">
         <li>Free for shoppers</li><li>Local Alabama dealers only</li><li>Contact dealers directly</li><li>Search by ZIP & radius</li>

@@ -1,5 +1,5 @@
 {
-  "_comment": "Photo requests. scripts/fetch-pexels.mjs uses 'query' (needs PEXELS_API_KEY); scripts/fetch-commons.mjs fills remaining slots from Wikimedia Commons using 'commons' (or 'query'). 'require' = words that must appear in the photo's title/description (keeps city photos honest). Missing cities fall back to city-default. scripts/generate-fal.mjs generates the slots that have a 'fal' prompt (needs FAL_KEY) and replaces stock photos there; 'alt' is used as their alt text.",
+  "_comment": "Image slots. scripts/fetch-commons.mjs fills empty slots from Wikimedia Commons using 'commons' (or 'query'). 'require' = words that must appear in the photo's title/description (keeps city photos honest). Missing cities fall back to city-default. scripts/generate-fal.mjs generates the slots that have a 'fal' prompt (needs FAL_KEY) and replaces stock photos there; 'alt' is used as their alt text.",
   "_reject": [
     "Abandoned Nissan dealership with heavy overgrowth within Fukushima evacuation zone.jpg",
     "State of Alabama, Administrative Building, at Intersection of S Decatur St and Washington Ave, Montgomery 20160713 1.jpg",

@@ -127,6 +127,16 @@ describe('validation', () => {
     expect(ok.success && ok.data.vin).toBe('1HGCM82633A004352');
     expect(vehicleSchema.safeParse({ ...base, vin: 'IOQ123' }).success).toBe(false);
   });
+  it('accepts only the fixed vehicle option lists', () => {
+    const base = { year: '2020', make_id: '1', model_id: '1', price: '9000', mileage: '1', body_type: 'SUV', fuel_type: 'Hybrid', transmission: 'CVT', drivetrain: 'AWD', condition: 'certified', status: 'draft' };
+    const ok = vehicleSchema.safeParse(base);
+    expect(ok.success && ok.data.title_status).toBe('unknown');
+    for (const [field, bad] of [['body_type', 'Spaceship'], ['fuel_type', 'Rocket'], ['transmission', 'Auto'], ['drivetrain', '6WD'], ['condition', 'mint'], ['status', 'deleted'], ['title_status', 'stolen'], ['exterior_color', 'Plaid']]) {
+      const res = vehicleSchema.safeParse({ ...base, [field]: bad });
+      expect(res.success, `${field}=${bad}`).toBe(false);
+      expect(!res.success && res.error.issues[0].path[0]).toBe(field);
+    }
+  });
 });
 
 describe('formatting & plans', () => {

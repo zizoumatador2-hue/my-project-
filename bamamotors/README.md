@@ -77,7 +77,7 @@ Run `serve:fresh` before each suite: the sign-up rate limiter (6 per IP per hour
 | `EMAIL_FROM` | vars | From address for transactional email |
 | `SESSION_SECRET` | secret | Salt for hashed IPs (rate limiting / spam) |
 | `BOOTSTRAP_ADMIN_EMAIL` | secret | The first sign-up with this email becomes admin |
-| `RESEND_API_KEY` | secret | Email delivery via Resend. Without it, emails are logged in Admin → Messages |
+| `RESEND_API_KEY` | secret | Email delivery via Resend. Without it **no email is sent**: messages are only logged in Admin → Messages, and the site says so where it matters (password reset, lead confirmations) |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | secret | Enables online billing |
 | `STRIPE_PRICE_BASIC`, `STRIPE_PRICE_PRO` | secret | Stripe Price IDs for the $49 / $99 monthly plans |
 | `STRIPE_PRICE_FEATURED` | secret | Optional Price ID for featured listings (otherwise priced from admin settings) |
@@ -160,14 +160,24 @@ is faked.
   `dateModified` dates honest.
 - Check Search Console and Core Web Vitals monthly, and run a full SEO audit (`npm run test:api` includes a crawler) quarterly.
 
+## Site images
+
+Site photos (hero, city, body-type and guide covers) are built at deploy time, not at runtime. `content/image-requests.json` lists the slots:
+
+- `scripts/fetch-commons.mjs` fills a slot with a freely licensed Wikimedia Commons photo, and `/photo-credits` credits it.
+- `scripts/generate-fal.mjs` generates an illustration for slots that have a `fal` prompt. It needs the `FAL_KEY` GitHub secret.
+
+The results are written to `public/images/` and `src/data/images.json`, and the deploy workflow commits them back. Dealer listing photos are separate: dealers upload them, and they are stored in R2 and served from `/media/*`.
+
 ## Project layout
 
 ```
-content/        seed content: cities, makes/models, categories, articles (Markdown)
+content/        seed content: cities, makes/models, categories, articles (Markdown), image slots
+docs/           SEO audit (docs/seo) and engineering audit (docs/engineering)
 migrations/     D1 schema + generated seed migrations
-public/         fonts, favicon, logo/OG images, _headers
-scripts/        dev server, seed builder, brand asset renderer
-src/lib/        data access, search engine, auth, security, billing, SEO, markdown
+public/         fonts, favicon, logo/OG images, generated site images, _headers
+scripts/        dev server, seed builder, site image pipeline, brand asset renderer
+src/lib/        data access, search engine, auth, security, billing, email, SEO, markdown
 src/pages/      public site, /dashboard (dealer), /admin, /account, /api
 tests/          unit, integration (HTTP + SEO crawl), e2e (Playwright)
 ```

@@ -9,7 +9,7 @@ import { getVehicleBySlug, getVehicleImages, getVehicleFeatures, getSimilarVehic
 import { formatPrice, formatNumber, formatDate, vehicleTitle, monthlyPayment } from '../../lib/format';
 import { breadcrumbLd, absolute } from '../../lib/seo';
 import { findRedirect } from '../../lib/redirects';
-import { CONDITIONS } from '../../lib/constants';
+import { CONDITIONS, TITLE_STATUSES } from '../../lib/constants';
 
 const env = Astro.locals.runtime.env;
 const user = Astro.locals.user;
@@ -36,7 +36,6 @@ const crumbs = [
   { name: `${v.year} ${v.make_name} ${v.model_name}`, href: `/vehicles/${v.slug}` },
 ];
 const yesNo = (x: number | null) => (x === 1 ? 'Yes' : x === 0 ? 'No' : 'Not disclosed');
-const titleLabel: Record<string, string> = { clean: 'Clean', rebuilt: 'Rebuilt', salvage: 'Salvage', lemon: 'Lemon / buyback', unknown: 'Not disclosed' };
 const specs: [string, string | null][] = [
   ['Condition', cond], ['Year', String(v.year)], ['Make', v.make_name], ['Model', v.model_name], ['Trim', v.trim],
   ['Mileage', `${formatNumber(v.mileage)} miles`], ['Body type', v.body_type], ['Fuel type', v.fuel_type],
@@ -157,7 +156,7 @@ const productLd = {
         <section class="section-tight" aria-labelledby="history-title">
           <h2 id="history-title">Vehicle history</h2>
           <dl class="specs">
-            <div><dt>Title status</dt><dd>{titleLabel[v.title_status ?? 'unknown']}</dd></div>
+            <div><dt>Title status</dt><dd>{TITLE_STATUSES.find((t) => t.value === v.title_status)?.label ?? 'Not disclosed'}</dd></div>
             <div><dt>Previous owners</dt><dd>{v.owners ?? 'Not disclosed'}</dd></div>
             <div><dt>Accident-free</dt><dd>{yesNo(v.accident_free)}</dd></div>
             <div><dt>Service records</dt><dd>{yesNo(v.service_records)}</dd></div>

@@ -29,10 +29,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const path = url.pathname;
   const isProd = env.ENVIRONMENT === 'production';
 
-  // Canonical host: in production every other hostname (www., workers.dev) 301s to SITE_URL's host.
+  // Canonical origin: in production, plain HTTP and every other hostname (www., workers.dev) 301 to SITE_URL.
   if (isProd && (request.method === 'GET' || request.method === 'HEAD') && env.SITE_URL) {
     const canonical = new URL(env.SITE_URL);
-    if (url.host !== canonical.host) {
+    if (url.host !== canonical.host || url.protocol !== canonical.protocol) {
       return Response.redirect(`${canonical.origin}${path}${url.search}`, 301);
     }
   }
