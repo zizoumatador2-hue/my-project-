@@ -1,6 +1,7 @@
 import { first, insert, run, nowIso, audit } from './db';
 import { vehicleSchema, zodErrors, type FieldErrors } from './validation';
 import { vehicleSlugBase, uniqueSlug } from './slug';
+import { recordSlugChange } from './redirects';
 import { planOf } from './plans';
 import { activeVehicleCount } from './dealers';
 import { BODY_TYPES, FUEL_TYPES, TRANSMISSIONS, DRIVETRAINS, COLORS } from './constants';
@@ -68,6 +69,7 @@ export async function saveVehicle(
   if (existing) {
     const keys = Object.keys(cols);
     await run(db, `UPDATE vehicles SET ${keys.map((k) => `${k} = ?`).join(', ')}, updated_at = ? WHERE id = ?`, [...(Object.values(cols) as (string | number | null)[]), nowIso(), existing.id]);
+    if (slug !== existing.slug) await recordSlugChange(db, 'vehicle', existing.slug, existing.id);
     id = existing.id;
   } else {
     const keys = [...Object.keys(cols), 'dealer_id', 'source'];

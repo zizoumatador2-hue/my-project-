@@ -10,7 +10,7 @@ interface Props {
   title: string;
   description?: string;
   keywords?: string;
-  canonical?: string; // path; defaults to the current path without query
+  canonical?: string | null; // path; defaults to the current path without query; null on error pages
   noindex?: boolean;
   jsonLd?: unknown[];
   ogImage?: string;
@@ -33,9 +33,12 @@ const {
 } = Astro.props;
 // Hard guarantee: meta descriptions never exceed 160 characters.
 const description = truncate((rawDescription ?? '').replace(/\s+/g, ' ').trim(), 160);
-const fullTitle = title.includes('BamaMotors') ? title : `${title} | BamaMotors`;
-const canonicalUrl = absolute(site, canonical ?? Astro.url.pathname);
+// The brand suffix is added only when the full title still fits in a search result (~60 characters).
+const fullTitle = title.includes('BamaMotors') || title.length + 13 > 60 ? title : `${title} | BamaMotors`;
+const canonicalUrl = canonical === null ? null : absolute(site, canonical ?? Astro.url.pathname);
 const image = ogImage ? (ogImage.startsWith('http') ? ogImage : absolute(site, ogImage)) : absolute(site, '/og-default.png');
+// Known sizes: site photos are generated at 1600x900; the default card is 1200x630. Listing photos vary, so no size is claimed.
+const imageSize = !ogImage ? [1200, 630] : /\/images\/[^/]+-1600\.webp$/.test(ogImage) ? [1600, 900] : null;
 const adsClient = s.adsense_client && /^ca-pub-\d{10,20}$/.test(s.adsense_client) ? s.adsense_client : '';
 const showAds = Boolean(adsClient) && ads && !noindex && !bare;
 const ga = s.ga4_id && /^G-[A-Z0-9]{4,12}$/.test(s.ga4_id) ? s.ga4_id : '';
@@ -49,7 +52,7 @@ const ga = s.ga4_id && /^G-[A-Z0-9]{4,12}$/.test(s.ga4_id) ? s.ga4_id : '';
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
-    <link rel="canonical" href={canonicalUrl} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     {prev && <link rel="prev" href={absolute(site, prev)} />}
     {next && <link rel="next" href={absolute(site, next)} />}
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
@@ -63,8 +66,10 @@ const ga = s.ga4_id && /^G-[A-Z0-9]{4,12}$/.test(s.ga4_id) ? s.ga4_id : '';
     <meta property="og:type" content={ogType === 'product' ? 'product' : ogType} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta property="og:image" content={image} />
+    {imageSize && <meta property="og:image:width" content={String(imageSize[0])} />}
+    {imageSize && <meta property="og:image:height" content={String(imageSize[1])} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />

@@ -24,7 +24,7 @@ const faq = [
   { q: 'Can I import my inventory automatically?', a: 'Today vehicles are added from your dashboard. Our platform is designed to accept licensed inventory feeds. Contact us if you want to connect your DMS or feed provider.' },
 ];
 ---
-<BaseLayout title="List Your Dealership: Reach Alabama Car Buyers" description="Alabama car dealers: list your used car inventory on BamaMotors, get local leads by email, and grow with Basic and Pro plans. Start free with up to 10 vehicles."
+<BaseLayout title="List Your Dealership: Reach Alabama Car Buyers" ogImage={heroImg?.src} description="Alabama car dealers: list your used car inventory on BamaMotors, get local leads by email, and grow with Basic and Pro plans. Start free with up to 10 vehicles."
   keywords="car dealer advertising Alabama, list used cars Alabama, auto dealer leads Alabama, dealer listings Alabama" canonical="/for-dealers" jsonLd={[breadcrumbLd(env.SITE_URL, crumbs), faqLd(faq)]}>
   <section class="hero">
     {heroImg && <div class="hero-photo" aria-hidden="true"><Photo img={heroImg} sizes="100vw" eager alt="" /></div>}

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 Astro.response.status = 404;
 ---
-<BaseLayout title="Page not found" description="The page you were looking for could not be found." noindex>
+<BaseLayout title="Page not found" description="The page you were looking for could not be found." noindex canonical={null}>
   <div class="wrap center" style="padding:64px 16px;max-width:640px">
     <p class="badge">404</p>
     <h1>We couldn't find that page</h1>

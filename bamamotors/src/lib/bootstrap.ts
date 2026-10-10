@@ -2,6 +2,8 @@ import referenceSql from '../../migrations/0002_reference_data.sql?raw';
 import contentSql from '../../migrations/0003_editorial_content.sql?raw';
 import moreGuidesSql from '../../migrations/0004_more_guides.sql?raw';
 import copyRefreshSql from '../../migrations/0005_copy_refresh.sql?raw';
+import copyRefresh2Sql from '../../migrations/0006_copy_refresh.sql?raw';
+import slugRedirectsSql from '../../migrations/0007_slug_redirects.sql?raw';
 
 /**
  * Applies the seed migrations (reference data, editorial content, copy refreshes) the first time a
@@ -14,6 +16,8 @@ const SEEDS: [string, string][] = [
   ['0003_editorial_content.sql', contentSql],
   ['0004_more_guides.sql', moreGuidesSql],
   ['0005_copy_refresh.sql', copyRefreshSql],
+  ['0006_copy_refresh.sql', copyRefresh2Sql],
+  ['0007_slug_redirects.sql', slugRedirectsSql],
 ];
 
 let done = false;

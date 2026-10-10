@@ -10,6 +10,7 @@ import { getFeaturedDealers } from '../lib/dealers';
 import { all, first } from '../lib/db';
 import { organizationLd, websiteLd, faqLd } from '../lib/seo';
 import { BODY_TYPES } from '../lib/constants';
+import { indexableLandingPaths } from '../lib/sitemap';
 import { formatNumber } from '../lib/format';
 import Photo from '../components/Photo.astro';
 import { image, cityImage, postImage } from '../lib/images';
@@ -28,6 +29,14 @@ const [featured, dealers, makes, cities, bodies, posts, counts] = await Promise.
 const bodyCount = Object.fromEntries(bodies.map((b) => [b.body_type, b.n]));
 const site = env.SITE_URL;
 const heroImg = image('hero');
+// Link only to landing pages that are indexable now (live inventory), never to empty make/body pages.
+const indexable = await indexableLandingPaths(db);
+const makeTiles = makes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
+const browseChips = [
+  ...BODY_TYPES.slice(0, 7).map((b) => ({ href: `/used-cars/${b.slug}`, label: `Used ${b.plural}`, n: bodyCount[b.value] })),
+  { href: '/used-cars/under-10000', label: 'Cars under $10,000', n: 0 },
+  { href: '/used-cars/under-5000', label: 'Cars under $5,000', n: 0 },
+].filter((c) => indexable.has(c.href));
 const h1 = 'Used Cars for Sale in Alabama, from Local Dealers You Can Visit';
 const stats = [
   ...(counts && counts.vehicles > 0 ? [{ n: counts.vehicles, l: 'Used cars for sale now' }] : []),
@@ -46,7 +55,7 @@ const faq = [
   { q: 'How do dealers list vehicles on BamaMotors?', a: 'Dealers create an account, complete their profile and add inventory from the dealer dashboard. The Free plan includes up to 10 active listings.' },
 ];
 ---
-<BaseLayout title="BamaMotors: Used Cars from Local Alabama Dealers"
+<BaseLayout title="BamaMotors: Used Cars from Local Alabama Dealers" ogImage={heroImg?.src}
   description="Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code: Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers."
   keywords="used cars Alabama, used cars for sale Alabama, used cars near me Alabama, cars for sale Alabama, car dealerships Alabama, used car dealers Alabama, cheap used cars Alabama, used trucks Alabama, used SUVs Alabama"
   canonical="/" jsonLd={[organizationLd(site, Astro.locals.settings), websiteLd(site), faqLd(faq)]}>
@@ -87,20 +96,26 @@ const faq = [
     </section>
   )}
 
+  {(makeTiles.length > 0 || browseChips.length > 0) && (
   <section class="section band" aria-labelledby="makes-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="makes-title">Shop popular makes</h2><a href="/used-cars">All makes →</a></div>
-      <div class="grid grid-4">
-        {makes.map((m) => <a class="tile spotlight" href={`/used-cars/${m.slug}`}><strong>Used {m.name}</strong><span class="small muted">{m.n > 0 ? `${m.n} for sale` : 'See listings'}</span></a>)}
-      </div>
-      <h3 style="margin-top:28px">Shop by body type</h3>
-      <ul class="chips">
-        {BODY_TYPES.slice(0, 7).map((b) => <li><a class="chip" href={`/used-cars/${b.slug}`}>Used {b.plural}{bodyCount[b.value] ? <span class="count">({bodyCount[b.value]})</span> : null}</a></li>)}
-        <li><a class="chip" href="/used-cars/under-10000">Cars under $10,000</a></li>
-        <li><a class="chip" href="/used-cars/under-5000">Cars under $5,000</a></li>
-      </ul>
+      <div class="section-head"><h2 id="makes-title">{makeTiles.length > 0 ? 'Shop popular makes' : 'Shop by body type and budget'}</h2><a href="/used-cars">All used cars →</a></div>
+      {makeTiles.length > 0 && (
+        <div class="grid grid-4">
+          {makeTiles.map((m) => <a class="tile spotlight" href={`/used-cars/${m.slug}`}><strong>Used {m.name}</strong><span class="small muted">{m.n} for sale</span></a>)}
+        </div>
+      )}
+      {browseChips.length > 0 && (
+        <>
+          {makeTiles.length > 0 && <h3 style="margin-top:28px">Shop by body type</h3>}
+          <ul class="chips">
+            {browseChips.map((c) => <li><a class="chip" href={c.href}>{c.label}{c.n ? <span class="count">({c.n})</span> : null}</a></li>)}
+          </ul>
+        </>
+      )}
     </div>
   </section>
+  )}
 
   <section class="section" aria-labelledby="cities-title">
     <div class="wrap">

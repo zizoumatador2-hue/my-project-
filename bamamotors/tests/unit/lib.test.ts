@@ -152,3 +152,14 @@ describe('seed bootstrap', () => {
     expect(splitStatements(sql)).toEqual(["INSERT INTO a VALUES ('x; y', 'it''s');", 'INSERT INTO b VALUES (1);']);
   });
 });
+
+describe('resolveLandingLinks', () => {
+  it('keeps links to indexable combinations and sends empty ones to the nearest indexable parent', async () => {
+    const { resolveLandingLinks } = await import('../../src/lib/sitemap');
+    const indexable = new Set(['/used-cars/huntsville-al', '/used-cars/birmingham-al/suvs']);
+    const html = '<a href="/used-cars/birmingham-al/suvs">a</a> <a href="/used-cars/huntsville-al/trucks">b</a> <a href="/used-cars/ford/f-150">c</a> <a href="/used-cars/ford">d</a>';
+    expect(resolveLandingLinks(html, indexable)).toBe(
+      '<a href="/used-cars/birmingham-al/suvs">a</a> <a href="/used-cars/huntsville-al">b</a> <a href="/used-cars">c</a> <a href="/used-cars/ford">d</a>',
+    );
+  });
+});

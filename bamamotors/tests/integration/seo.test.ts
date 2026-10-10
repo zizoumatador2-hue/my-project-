@@ -4,7 +4,8 @@ import { BASE } from './http';
 /**
  * Crawls public pages from the homepage and audits on-page SEO + accessibility rules:
  * status codes, one <h1>, no skipped heading levels, unique titles, meta description ≤ 160,
- * absolute canonical, valid JSON-LD, labelled <aside>, alt text on images, no broken internal links.
+ * absolute canonical, valid JSON-LD, labelled <aside>, alt text on images, no broken internal links,
+ * title length, self-referencing canonicals, social image, and no links into empty (noindex) landing combinations.
  */
 const SKIP = /^\/(api|media|admin|dashboard|account|logout|login|signup|forgot-password|reset-password)(\/|$|\?)/;
 
@@ -81,6 +82,23 @@ describe('SEO & accessibility audit (crawl)', () => {
       }
       for (const m of p.html.matchAll(/<img\s[^>]*>/g)) if (attr(m[0], 'alt') === null) problems.push(`${p.path}: <img> without alt`);
       if (!/<html lang="en-US"/.test(p.html)) problems.push(`${p.path}: missing lang`);
+      if (!p.robots.includes('noindex')) {
+        // Indexable pages: search-result-friendly title, a real description, self canonical, social image.
+        if (p.title.length > 65) problems.push(`${p.path}: title ${p.title.length} chars (max 65)`);
+        if (p.description.length < 50) problems.push(`${p.path}: meta description only ${p.description.length} chars`);
+        const canonicalPath = p.canonical ? new URL(p.canonical).pathname + new URL(p.canonical).search : '';
+        const selfPath = p.path.replace(/\?(?!page=\d+$).*$/, '');
+        if (canonicalPath !== selfPath) problems.push(`${p.path}: canonical points to ${canonicalPath}`);
+        if (!/<meta property="og:image" content="https?:\/\//.test(p.html)) problems.push(`${p.path}: missing absolute og:image`);
+      }
+      if (/"image":\[\]/.test(p.html)) problems.push(`${p.path}: JSON-LD has an empty image list`);
+    }
+    // Crawl budget: no page should link into empty two-level landing combinations (city×body, make×model).
+    for (const p of pages.values()) {
+      for (const m of p.html.matchAll(/<a\s[^>]*href="(\/used-cars\/[a-z0-9-]+\/[a-z0-9-]+)"/g)) {
+        const target = pages.get(m[1]);
+        if (target?.robots.includes('noindex')) problems.push(`${p.path}: links to noindex landing page ${m[1]}`);
+      }
     }
     expect(problems, problems.join('\n')).toEqual([]);
   }, 240_000);
@@ -112,5 +130,40 @@ describe('SEO & accessibility audit (crawl)', () => {
     expect(home.headers.get('x-frame-options')).toBe('DENY');
     const dash = await fetch(`${BASE}/login`);
     expect(dash.headers.get('x-robots-tag')).toContain('noindex');
+  });
+
+  it('error pages are 404, noindex and have no canonical; out-of-range pagination is a 404', async () => {
+    for (const path of ['/vehicles/not-a-real-vehicle', '/blog/not-a-real-post', '/blog?page=999', '/blog/category/financing?page=99', '/used-cars/birmingham-al?page=999', '/dealers?page=999']) {
+      const r = await fetch(BASE + path, { redirect: 'manual' });
+      expect(r.status, path).toBe(404);
+      const html = await r.text();
+      expect(html, path).toMatch(/<meta name="robots" content="noindex/);
+      expect(html, path).not.toMatch(/rel="canonical"/);
+    }
+  });
+
+  it('normalizes URLs with one 301 hop (case, trailing slash) and keeps tracking parameters out of canonicals', async () => {
+    const upper = await fetch(`${BASE}/Used-Cars/Birmingham-AL`, { redirect: 'manual' });
+    expect(upper.status).toBe(301);
+    expect(new URL(upper.headers.get('location')!, BASE).pathname).toBe('/used-cars/birmingham-al');
+    const slash = await fetch(`${BASE}/used-cars/`, { redirect: 'manual' });
+    expect(slash.status).toBe(301);
+    expect(new URL(slash.headers.get('location')!, BASE).pathname).toBe('/used-cars');
+    const tracked = await (await fetch(`${BASE}/used-cars/birmingham-al?utm_source=newsletter`)).text();
+    expect(tracked.match(/<link rel="canonical" href="([^"]+)"/)?.[1]).toMatch(/\/used-cars\/birmingham-al$/);
+  });
+
+  it('keeps private and machine routes out of the index', async () => {
+    const robots = await (await fetch(`${BASE}/robots.txt`)).text();
+    // Production lists each private prefix; every other environment disallows everything.
+    if (!/^Disallow: \/$/m.test(robots)) for (const p of ['/admin', '/dashboard', '/account', '/api/', '/login', '/signup']) expect(robots, p).toContain(`Disallow: ${p}`);
+    for (const p of ['/admin', '/dashboard', '/account']) {
+      const r = await fetch(BASE + p, { redirect: 'manual' });
+      expect([302, 403], p).toContain(r.status);
+    }
+    const api = await fetch(`${BASE}/api/models?make=toyota`);
+    expect(api.headers.get('x-robots-tag')).toContain('noindex');
+    const index = await (await fetch(`${BASE}/sitemap.xml`)).text();
+    expect(index).not.toMatch(/<lastmod>/); // child sitemaps carry real dates; the index must not invent one
   });
 });

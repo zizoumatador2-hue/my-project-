@@ -37,6 +37,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
   }
 
+  // Public slugs are lowercase: send mixed-case page URLs to the lowercase URL instead of a 404.
+  // /media keys (R2) and built assets are case-sensitive, so they are left alone.
+  if ((request.method === 'GET' || request.method === 'HEAD') && /[A-Z]/.test(path) && !/^\/(media|_astro|fonts|images)\//.test(path) && !/\.[a-z0-9]+$/i.test(path)) {
+    return context.redirect(path.toLowerCase().replace(/(.)\/+$/, '$1') + url.search, 301);
+  }
+
   // Collapse trailing slashes (except root) to one URL per page.
   if (path.length > 1 && path.endsWith('/') && request.method === 'GET') {
     return context.redirect(path.replace(/\/+$/, '') + url.search, 301);

@@ -1,5 +1,6 @@
 ---
 title: "Buying a Used Car from a Private Seller in Alabama: Title, Bill of Sale and Taxes"
+seo_title: "Buying a Used Car From a Private Seller in Alabama"
 category: alabama-car-buying
 batch: 2
 excerpt: Private-party sales can save money but put the paperwork on you. Learn how to handle the title, bill of sale, payment and registration safely in Alabama.

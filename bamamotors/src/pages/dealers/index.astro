@@ -47,6 +47,7 @@ const dealers = await all<DC>(
   [...distParams, ...params],
 );
 const pages = Math.max(1, Math.ceil(total / PER));
+if (page > pages) return Astro.rewrite('/404');
 const cities = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM cities ORDER BY sort_order, name');
 const filtered = Boolean(q || citySlug || zip);
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Dealerships', href: '/dealers' }];

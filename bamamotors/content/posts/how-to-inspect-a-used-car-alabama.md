@@ -1,5 +1,6 @@
 ---
 title: "Used Car Inspection Checklist for Alabama Buyers (Including Flood Damage)"
+seo_title: "Used Car Inspection Checklist for Alabama Buyers"
 category: car-buying-guides
 excerpt: Alabama has no statewide vehicle inspection, so your own inspection matters. Use this checklist: exterior, interior, under the hood, test drive and flood-damage signs.
 meta_description: A used car inspection checklist for Alabama: exterior, interior, engine, test drive and how to spot flood damage after Gulf Coast storms.

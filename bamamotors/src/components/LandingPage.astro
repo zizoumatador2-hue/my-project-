@@ -6,8 +6,8 @@ import Results from './Results.astro';
 import PriceTable from './PriceTable.astro';
 import Faq from './Faq.astro';
 import DealerCard from './DealerCard.astro';
-import type { Landing } from '../lib/landing';
-import { parseFilters, runSearch } from '../lib/search';
+import type { Landing, LandingSearch } from '../lib/landing';
+import { indexableLandingPaths, resolveLandingLinks } from '../lib/sitemap';
 import { priceStatsByBody, priceStatsByModel } from '../lib/vehicles';
 import { renderMarkdown } from '../lib/markdown';
 import { breadcrumbLd, faqLd, itemListLd } from '../lib/seo';
@@ -18,14 +18,14 @@ import { DEALER_CARD_SQL, type DealerCard as DC } from '../lib/dealers';
 import Photo from './Photo.astro';
 import { cityImage, bodyImage } from '../lib/images';
 
-interface Props { landing: Landing; }
-const { landing: L } = Astro.props;
+interface Props { landing: Landing; search: LandingSearch; }
+const { landing: L, search } = Astro.props;
 const env = Astro.locals.runtime.env;
 const site = env.SITE_URL;
 
-const qs = parseFilters(Astro.url.searchParams);
-const filters = { ...qs, ...L.filters, sort: qs.sort, page: qs.page };
-const { total, items, origin, pages } = await runSearch(env.DB, filters);
+const { qs, filters, total, items, origin, pages } = search;
+// Only link to landing pages that are indexable now, so crawlers aren't sent to empty combinations.
+const indexable = await indexableLandingPaths(env.DB);
 
 const byModel = L.kind === 'body' || L.kind === 'city-body' || L.kind === 'make' || L.kind === 'price';
 const stats = byModel ? await priceStatsByModel(env.DB, L.statsWhere.sql, L.statsWhere.params) : await priceStatsByBody(env.DB, L.statsWhere.sql, L.statsWhere.params);
@@ -50,6 +50,13 @@ const dealers = L.kind === 'city' && L.city
 const guides = await all<{ slug: string; title: string }>(env.DB, "SELECT slug, title FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC LIMIT 4");
 
 const cover = L.city ? cityImage(L.city.slug) : L.body ? bodyImage(L.body.slug) : null;
+const modelLinks = models.filter((m) => indexable.has(`/used-cars/${L.make?.slug}/${m.slug}`));
+const cityBodyLinks = L.city ? BODY_TYPES.slice(0, 6).filter((b) => b.slug !== L.body?.slug && indexable.has(`/used-cars/${L.city!.slug}/${b.slug}`)) : [];
+const cityLinks = cities.filter((c) => c.slug !== L.city?.slug).map((c) => ({ ...c, href: L.body ? `/used-cars/${c.slug}/${L.body.slug}` : `/used-cars/${c.slug}` })).filter((c) => indexable.has(c.href));
+const makeLinks = popularMakes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
+const priceLinks = PRICE_BUCKETS.filter((p) => indexable.has(`/used-cars/${p.slug}`));
+// FAQ markup only where the questions are written for this page (city guides); generic template FAQs stay visible but unmarked.
+const faqSchema = L.kind === 'city' ? faqLd(L.faq) : null;
 const noindex = (total === 0 && !L.hasEditorial) || qs.sort !== 'recommended';
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
@@ -63,7 +70,8 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
   ads={total > 0 || L.hasEditorial}
   prev={filters.page > 1 ? (filters.page === 2 ? L.path : `${L.path}?page=${filters.page - 1}`) : null}
   next={filters.page < pages ? `${L.path}?page=${filters.page + 1}` : null}
-  jsonLd={[breadcrumbLd(site, L.crumbs), faqLd(L.faq), itemListLd(site, L.h1, items.map((v) => ({ slug: v.slug, title: `${v.year} ${v.make_name} ${v.model_name}` })))]}
+  ogImage={cover?.src}
+  jsonLd={[breadcrumbLd(site, L.crumbs), faqSchema, itemListLd(site, L.h1, items.map((v) => ({ slug: v.slug, title: `${v.year} ${v.make_name} ${v.model_name}` })))]}
 >
   <div class="wrap">
     <Breadcrumbs crumbs={L.crumbs} />
@@ -90,10 +98,10 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
           </section>
         )}
 
-        {models.length > 0 && (
+        {modelLinks.length > 0 && (
           <section class="section-tight" aria-labelledby="models-title">
             <h2 id="models-title">Popular used {L.make!.name} models</h2>
-            <ul class="chips">{models.map((m) => <li><a class="chip" href={`/used-cars/${L.make!.slug}/${m.slug}`}>{L.make!.name} {m.name} {m.n > 0 && <span class="count">({m.n})</span>}</a></li>)}</ul>
+            <ul class="chips">{modelLinks.map((m) => <li><a class="chip" href={`/used-cars/${L.make!.slug}/${m.slug}`}>{L.make!.name} {m.name} {m.n > 0 && <span class="count">({m.n})</span>}</a></li>)}</ul>
           </section>
         )}
 
@@ -106,28 +114,37 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
 
         {body && (
           <section class="section-tight">
-            <article class="prose" set:html={body.html} />
+            <article class="prose" set:html={resolveLandingLinks(body.html, indexable)} />
           </section>
         )}
 
         <section class="section-tight" aria-labelledby="related-title">
           <h2 id="related-title">Related searches</h2>
-          {L.city && (
+          {cityBodyLinks.length > 0 && (
             <>
-              <h3>{L.city.name} by body type</h3>
-              <ul class="chips">{BODY_TYPES.slice(0, 6).filter((b) => b.slug !== L.body?.slug).map((b) => <li><a class="chip" href={`/used-cars/${L.city!.slug}/${b.slug}`}>Used {b.plural} in {L.city!.name}</a></li>)}</ul>
+              <h3>{L.city!.name} by body type</h3>
+              <ul class="chips">{cityBodyLinks.map((b) => <li><a class="chip" href={`/used-cars/${L.city!.slug}/${b.slug}`}>Used {b.plural} in {L.city!.name}</a></li>)}</ul>
             </>
           )}
-          <h3 style="margin-top:14px">Used cars in other Alabama cities</h3>
-          <ul class="chips">{cities.filter((c) => c.slug !== L.city?.slug).map((c) => <li><a class="chip" href={L.body ? `/used-cars/${c.slug}/${L.body.slug}` : `/used-cars/${c.slug}`}>{L.body ? `${L.body.plural} in ` : ''}{c.name}</a></li>)}</ul>
-          {!L.make && (
+          {cityLinks.length > 0 && (
+            <>
+              <h3 style="margin-top:14px">Used cars in other Alabama cities</h3>
+              <ul class="chips">{cityLinks.map((c) => <li><a class="chip" href={c.href}>{L.body ? `${L.body.plural} in ` : ''}{c.name}</a></li>)}</ul>
+            </>
+          )}
+          {!L.make && makeLinks.length > 0 && (
             <>
               <h3 style="margin-top:14px">Popular makes</h3>
-              <ul class="chips">{popularMakes.map((m) => <li><a class="chip" href={`/used-cars/${m.slug}`}>Used {m.name}</a></li>)}</ul>
+              <ul class="chips">{makeLinks.map((m) => <li><a class="chip" href={`/used-cars/${m.slug}`}>Used {m.name}</a></li>)}</ul>
             </>
           )}
-          <h3 style="margin-top:14px">Shop by budget</h3>
-          <ul class="chips">{PRICE_BUCKETS.map((p) => <li><a class="chip" href={`/used-cars/${p.slug}`}>Cars {p.label.toLowerCase()}</a></li>)}</ul>
+          {priceLinks.length > 0 && (
+            <>
+              <h3 style="margin-top:14px">Shop by budget</h3>
+              <ul class="chips">{priceLinks.map((p) => <li><a class="chip" href={`/used-cars/${p.slug}`}>Cars {p.label.toLowerCase()}</a></li>)}</ul>
+            </>
+          )}
+          <p class="small muted" style="margin-top:14px">Or <a href="/used-cars">search all used cars in Alabama</a> by make, price, mileage or ZIP code.</p>
         </section>
 
         <div class="section-tight"><Faq faq={L.faq} title={`${subject.charAt(0).toUpperCase()}${subject.slice(1)} in ${place}: FAQ`} /></div>

@@ -7,13 +7,18 @@ import Faq from '../../components/Faq.astro';
 import Icon from '../../components/Icon.astro';
 import { getVehicleBySlug, getVehicleImages, getVehicleFeatures, getSimilarVehicles } from '../../lib/vehicles';
 import { formatPrice, formatNumber, formatDate, vehicleTitle, monthlyPayment } from '../../lib/format';
-import { breadcrumbLd, faqLd, absolute } from '../../lib/seo';
+import { breadcrumbLd, absolute } from '../../lib/seo';
+import { findRedirect } from '../../lib/redirects';
 import { CONDITIONS } from '../../lib/constants';
 
 const env = Astro.locals.runtime.env;
 const user = Astro.locals.user;
 const v = await getVehicleBySlug(env.DB, String(Astro.params.slug));
 const isOwner = !!v && (user?.role === 'admin' || (user?.role === 'dealer' && Astro.locals.dealer?.id === v.dealer_id));
+if (!v) {
+  const moved = await findRedirect(env.DB, 'vehicle', String(Astro.params.slug));
+  if (moved) return Astro.redirect(`/vehicles/${moved}`, 301);
+}
 if (!v || ((v.status === 'draft' || v.status === 'archived' || v.dealer_status !== 'active') && !isOwner)) {
   return Astro.rewrite('/404');
 }
@@ -53,7 +58,7 @@ const productLd = {
   '@type': ['Product', 'Car'],
   name: title,
   url: absolute(site, `/vehicles/${v.slug}`),
-  image: images.slice(0, 8).map((i) => absolute(site, `/media/${i.key_large}`)),
+  ...(images.length ? { image: images.slice(0, 8).map((i) => absolute(site, `/media/${i.key_large}`)) } : {}),
   description: v.description?.slice(0, 500) || `${title} for sale in ${v.city_name}, Alabama.`,
   brand: { '@type': 'Brand', name: v.make_name },
   manufacturer: { '@type': 'Organization', name: v.make_name },
@@ -75,8 +80,8 @@ const productLd = {
     availability: sold ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
     itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
     url: absolute(site, `/vehicles/${v.slug}`),
-    seller: { '@type': 'AutoDealer', name: v.dealer_name, url: absolute(site, `/dealers/${v.dealer_slug}`), telephone: v.dealer_phone,
-      address: { '@type': 'PostalAddress', streetAddress: v.dealer_address, addressLocality: v.dealer_city, addressRegion: 'AL', postalCode: v.dealer_zip, addressCountry: 'US' } },
+    seller: { '@type': 'AutoDealer', name: v.dealer_name, url: absolute(site, `/dealers/${v.dealer_slug}`), ...(v.dealer_phone ? { telephone: v.dealer_phone } : {}),
+      address: { '@type': 'PostalAddress', ...(v.dealer_address ? { streetAddress: v.dealer_address } : {}), addressLocality: v.dealer_city, addressRegion: 'AL', ...(v.dealer_zip ? { postalCode: v.dealer_zip } : {}), addressCountry: 'US' } },
   },
 };
 ---
@@ -84,7 +89,7 @@ const productLd = {
   keywords={`${v.year} ${v.make_name} ${v.model_name} for sale, used ${v.make_name} ${v.model_name} ${v.city_name} AL, used ${v.make_name} Alabama`}
   canonical={`/vehicles/${v.slug}`} noindex={sold || v.status !== 'active'} ogType="product"
   ogImage={images[0] ? `/media/${images[0].key_large}` : undefined}
-  jsonLd={[breadcrumbLd(site, crumbs), productLd, faqLd(faq)]} bodyClass={sold ? '' : 'has-sticky-cta'}>
+  jsonLd={[breadcrumbLd(site, crumbs), productLd]} bodyClass={sold ? '' : 'has-sticky-cta'}>
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />
     {isOwner && v.status !== 'active' && <div class="alert alert-warn" style="margin-top:12px">Preview: this listing is <strong>{v.status}</strong> and is not visible to shoppers.</div>}

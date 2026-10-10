@@ -6,6 +6,8 @@ import Faq from '../../components/Faq.astro';
 import PostCard from '../../components/PostCard.astro';
 import { getPost, relatedPosts } from '../../lib/blog';
 import { renderMarkdown, readingMinutes, parseFaq } from '../../lib/markdown';
+import { indexableLandingPaths, resolveLandingLinks } from '../../lib/sitemap';
+import { findRedirect } from '../../lib/redirects';
 import { breadcrumbLd, faqLd, absolute } from '../../lib/seo';
 import { formatDate } from '../../lib/format';
 import Photo from '../../components/Photo.astro';
@@ -15,9 +17,15 @@ const env = Astro.locals.runtime.env;
 const site = env.SITE_URL;
 const post = await getPost(env.DB, String(Astro.params.slug));
 const preview = Astro.locals.user?.role === 'admin';
+if (!post) {
+  const moved = await findRedirect(env.DB, 'post', String(Astro.params.slug));
+  if (moved) return Astro.redirect(`/blog/${moved}`, 301);
+}
 if (!post || (post.status !== 'published' && !preview)) return Astro.rewrite('/404');
 const cover = postImage(post.slug);
-const { html, toc } = renderMarkdown(post.body, new URL(site).host);
+const rendered = renderMarkdown(post.body, new URL(site).host);
+const html = resolveLandingLinks(rendered.html, await indexableLandingPaths(env.DB));
+const { toc } = rendered;
 const faq = parseFaq(post.faq_json);
 let howto: { name: string; steps: { name: string; text: string }[] } | null;
 try { howto = post.howto_json ? JSON.parse(post.howto_json) : null; } catch { howto = null; }
@@ -69,7 +77,7 @@ const initials = (post.author_name ?? 'BM').split(/\s+/).slice(0, 2).map((w) => 
           <div class="byline">
             {post.author_name && <span>By {post.author_slug ? <a href={`/authors/${post.author_slug}`} rel="author">{post.author_name}</a> : post.author_name}</span>}
             <span>Published <time datetime={published}>{formatDate(published)}</time></span>
-            <span>Updated <time datetime={post.updated_at}>{formatDate(post.updated_at)}</time></span>
+            {post.updated_at.slice(0, 10) !== (published ?? '').slice(0, 10) && <span>Updated <time datetime={post.updated_at}>{formatDate(post.updated_at)}</time></span>}
             <span>{readingMinutes(post.body)} min read</span>
           </div>
         </header>

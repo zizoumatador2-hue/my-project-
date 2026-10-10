@@ -88,6 +88,28 @@ describe('BamaMotors end-to-end flows', () => {
     expect(vehicleSlug).toMatch(/^2021-toyota-camry-se-birmingham-al/);
   });
 
+  it('301-redirects the old vehicle URL when an edit changes its slug', async () => {
+    const { camry } = await makeIds();
+    const makesHtml = (await dealer.html('/dashboard/vehicles/new')).text;
+    const toyotaId = makesHtml.match(/<option value="(\d+)"[^>]*>Toyota<\/option>/)![1];
+    const fields = {
+      action: 'save', year: '2021', make_id: toyotaId, model_id: String(camry.id), condition: 'used', price: '21,995', mileage: '38500',
+      vin: '4T1G11AK5MU000001', body_type: 'Sedan', fuel_type: 'Gasoline', transmission: 'Automatic', drivetrain: 'FWD',
+      exterior_color: 'Blue', interior_color: 'Black', description: 'One-owner Camry with service records.', features: 'Backup camera\nApple CarPlay',
+      title_status: 'clean', owners: '1', accident_free: '1', service_records: '1', status: 'active',
+    };
+    expect((await dealer.post(`/dashboard/vehicles/${vehicleId}`, { ...fields, trim: 'XSE' })).status).toBe(303);
+    const renamed = (await dealer.html(`/dashboard/vehicles/${vehicleId}`)).text.match(/href="\/vehicles\/([a-z0-9-]+)"/)![1];
+    expect(renamed).toMatch(/^2021-toyota-camry-xse-birmingham-al/);
+    const old = await fetch(`${BASE}/vehicles/${vehicleSlug}`, { redirect: 'manual' });
+    expect(old.status).toBe(301);
+    expect(new URL(old.headers.get('location')!, BASE).pathname).toBe(`/vehicles/${renamed}`);
+    // Restore the original trim (and slug) for the rest of the suite.
+    expect((await dealer.post(`/dashboard/vehicles/${vehicleId}`, { ...fields, trim: 'SE' })).status).toBe(303);
+    // The dealer is still pending here, so only the owner can view the listing.
+    expect((await dealer.req(`/vehicles/${vehicleSlug}`)).status).toBe(200);
+  });
+
   it('validates vehicle input server-side', async () => {
     const res = await dealer.post('/dashboard/vehicles/new', { action: 'save', year: '2021', make_id: '', model_id: '', price: 'abc', mileage: '', body_type: '', fuel_type: 'Gasoline', transmission: 'Automatic', drivetrain: 'FWD', condition: 'used', status: 'active' });
     expect(res.status).toBe(200);
@@ -250,7 +272,7 @@ describe('BamaMotors end-to-end flows', () => {
     const post = await admin.post('/admin/posts/new', {
       action: 'save', title: `Test Article ${tag} About Alabama Cars`, excerpt: 'A short excerpt that is long enough to pass validation.',
       body: '## Heading\n\nSome body text that is long enough to pass the validation rule for posts.\n\n<script>alert(1)</script>', category_id: '0', status: 'published',
-      faq: 'Q: Is this a test?\nA: Yes it is.', meta_description: 'Test meta description.',
+      faq: 'Q: Is this a test?\nA: Yes it is.', meta_description: 'Test meta description for an Alabama car buying article used by the integration suite.',
     });
     expect(post.status).toBe(303);
     const slug = `test-article-${tag}-about-alabama-cars`;

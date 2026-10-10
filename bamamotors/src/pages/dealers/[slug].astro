@@ -22,6 +22,7 @@ if (!d || (d.status !== 'active' && !isOwner)) return Astro.rewrite('/404');
 const page = Math.max(1, Math.min(200, Number(Astro.url.searchParams.get('page')) || 1));
 const filters: SearchFilters = { dealerId: d.id, sort: 'recommended', page };
 const { items, total, pages } = await runSearch(env.DB, filters);
+if (page > pages) return Astro.rewrite('/404');
 const reviews = await all<{ id: number; rating: number; title: string; body: string; created_at: string; name: string }>(
   env.DB,
   "SELECT r.id, r.rating, r.title, r.body, r.created_at, u.name FROM reviews r JOIN users u ON u.id = r.user_id WHERE r.dealer_id = ? AND r.status = 'approved' ORDER BY r.created_at DESC LIMIT 20",

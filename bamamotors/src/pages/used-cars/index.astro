@@ -6,6 +6,7 @@ import { parseFilters, runSearch, countActiveFilters, filtersToQuery } from '../
 import { breadcrumbLd, itemListLd } from '../../lib/seo';
 import { all } from '../../lib/db';
 import { BODY_TYPES } from '../../lib/constants';
+import { indexableLandingPaths } from '../../lib/sitemap';
 
 const env = Astro.locals.runtime.env;
 const filters = parseFilters(Astro.url.searchParams);
@@ -16,6 +17,9 @@ const filtered = countActiveFilters(filters) > 0 || filters.sort !== 'recommende
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Used Cars', href: '/used-cars' }];
 const cities = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM cities WHERE is_featured = 1 ORDER BY sort_order');
 const makes = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM makes WHERE is_popular = 1 ORDER BY name');
+const indexable = await indexableLandingPaths(env.DB);
+const bodyLinks = BODY_TYPES.slice(0, 6).filter((b) => indexable.has(`/used-cars/${b.slug}`));
+const makeLinks = makes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const site = env.SITE_URL;
 ---
@@ -39,10 +43,18 @@ const site = env.SITE_URL;
       <h2 id="browse-title">Browse used cars in Alabama</h2>
       <h3>By city</h3>
       <ul class="chips">{cities.map((c) => <li><a class="chip" href={`/used-cars/${c.slug}`}>{c.name}</a></li>)}</ul>
-      <h3 style="margin-top:16px">By body type</h3>
-      <ul class="chips">{BODY_TYPES.slice(0, 6).map((b) => <li><a class="chip" href={`/used-cars/${b.slug}`}>Used {b.plural}</a></li>)}</ul>
-      <h3 style="margin-top:16px">By make</h3>
-      <ul class="chips">{makes.map((m) => <li><a class="chip" href={`/used-cars/${m.slug}`}>Used {m.name}</a></li>)}</ul>
+      {bodyLinks.length > 0 && (
+        <>
+          <h3 style="margin-top:16px">By body type</h3>
+          <ul class="chips">{bodyLinks.map((b) => <li><a class="chip" href={`/used-cars/${b.slug}`}>Used {b.plural}</a></li>)}</ul>
+        </>
+      )}
+      {makeLinks.length > 0 && (
+        <>
+          <h3 style="margin-top:16px">By make</h3>
+          <ul class="chips">{makeLinks.map((m) => <li><a class="chip" href={`/used-cars/${m.slug}`}>Used {m.name}</a></li>)}</ul>
+        </>
+      )}
     </section>
   </div>
 </BaseLayout>

@@ -1,4 +1,5 @@
 ---
+import { postImage } from '../../../lib/images';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import PostCard from '../../../components/PostCard.astro';
@@ -14,15 +15,22 @@ if (!cat) return Astro.rewrite('/404');
 const PER = 12;
 const page = Math.max(1, Math.min(100, Number(Astro.url.searchParams.get('page')) || 1));
 const [posts, total] = await Promise.all([listPosts(db, { categoryId: cat.id, limit: PER, offset: (page - 1) * PER }), countPosts(db, cat.id)]);
+const pages = Math.max(1, Math.ceil(total / PER));
+if (page > pages) return Astro.rewrite('/404');
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Buying Guides', href: '/blog' }, { name: cat.name, href: `/blog/category/${cat.slug}` }];
+const site = Astro.locals.runtime.env.SITE_URL;
+const cover = posts[0] ? postImage(posts[0].slug) : null;
+const path = `/blog/category/${cat.slug}${page > 1 ? `?page=${page}` : ''}`;
+// Built from the real category description and the real guide count.
+const description = `${cat.description ?? `${cat.name} guides from BamaMotors.`} ${total} ${total === 1 ? 'guide' : 'guides'} for Alabama car buyers${page > 1 ? `, page ${page}` : ''}.`;
 ---
-<BaseLayout title={`${cat.name} – Alabama Car Guides`} description={cat.description ?? `${cat.name} articles from BamaMotors.`} canonical={`/blog/category/${cat.slug}${page > 1 ? `?page=${page}` : ''}`}
-  noindex={total === 0} jsonLd={[breadcrumbLd(Astro.locals.runtime.env.SITE_URL, crumbs)]}>
+<BaseLayout ogImage={cover?.src} title={`${cat.name}: Alabama Car Guides${page > 1 ? ` – Page ${page}` : ''}`} description={description} canonical={path}
+  noindex={total === 0} jsonLd={[breadcrumbLd(site, crumbs), { '@context': 'https://schema.org', '@type': 'CollectionPage', name: cat.name, description, url: `${site}${path}`, isPartOf: { '@id': `${site}/#website` } }]}>
   <div class="wrap" style="padding-bottom:56px">
     <Breadcrumbs crumbs={crumbs} />
     <h1 style="margin-top:12px">{cat.name}</h1>
     {cat.description && <p class="muted">{cat.description}</p>}
     {posts.length ? <div class="grid grid-3">{posts.map((p) => <PostCard p={p} />)}</div> : <EmptyState title="No articles in this category yet" icon="file"><p><a href="/blog">Browse all guides</a></p></EmptyState>}
-    <Pagination page={page} pages={Math.max(1, Math.ceil(total / PER))} href={(p) => `/blog/category/${cat.slug}${p > 1 ? `?page=${p}` : ''}`} />
+    <Pagination page={page} pages={pages} href={(p) => `/blog/category/${cat.slug}${p > 1 ? `?page=${p}` : ''}`} />
   </div>
 </BaseLayout>

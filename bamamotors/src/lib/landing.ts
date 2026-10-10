@@ -1,7 +1,7 @@
 import { first } from './db';
 import { BODY_TYPES, PRICE_BUCKETS } from './constants';
 import { parseFaq, type Faq } from './markdown';
-import type { SearchFilters } from './search';
+import { parseFilters, runSearch, type SearchFilters } from './search';
 import type { Crumb } from './seo';
 
 export interface Landing {
@@ -103,7 +103,8 @@ export async function resolveLanding(db: D1Database, slug: string, sub?: string)
         intro: make.intro ?? `Browse used ${make.name} vehicles for sale from Alabama dealerships. Compare models, trims, prices and mileage and contact dealers directly.`,
         content: null, faq: genericFaq(`used ${make.name} vehicles`, `Choose a ${make.name} model to narrow the results.`),
         filters: { make: make.slug }, crumbs: [...base, { name: make.name, href: `/used-cars/${make.slug}` }],
-        hasEditorial: Boolean(make.intro), statsWhere: { sql: ' AND mk.slug = ?', params: [make.slug] }, make,
+        // A short make intro is not enough content to stand alone: make pages are indexed only with live inventory.
+        hasEditorial: false, statsWhere: { sql: ' AND mk.slug = ?', params: [make.slug] }, make,
       };
     }
     return null;
@@ -146,3 +147,12 @@ export async function resolveLanding(db: D1Database, slug: string, sub?: string)
   }
   return null;
 }
+
+/** Runs the listing query for a landing page (shared by the route, which 404s past the last page, and the component). */
+export async function searchLanding(db: D1Database, L: Landing, params: URLSearchParams) {
+  const qs = parseFilters(params);
+  const filters = { ...qs, ...L.filters, sort: qs.sort, page: qs.page };
+  return { qs, filters, ...(await runSearch(db, filters)) };
+}
+export type LandingSearch = Awaited<ReturnType<typeof searchLanding>>;
+

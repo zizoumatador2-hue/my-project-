@@ -139,6 +139,7 @@ jobs:
           if [ "${{ steps.url.outputs.environment }}" = "production" ]; then
             echo "workers.dev → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://${{ steps.url.outputs.fallback }}/")"
             echo "www → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://www.${{ steps.url.outputs.host }}/" || echo 'not ready yet')"
+            echo "http → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "http://${{ steps.url.outputs.host }}/" || echo 'unreachable')"
           fi
           echo "migrations step: ${{ steps.migrate.outcome }}"
           echo "Live at $H" >> "$GITHUB_STEP_SUMMARY"

@@ -1,5 +1,6 @@
 ---
 title: "Used Cars Near Me in Alabama: How to Find the Best Local Deals"
+seo_title: "Used Cars Near Me in Alabama: Find the Best Local Deals"
 category: car-buying-guides
 batch: 2
 excerpt: Searching "used cars near me"? Alabama shoppers can find nearby dealers, compare local prices fast and avoid wasted trips to the lot.

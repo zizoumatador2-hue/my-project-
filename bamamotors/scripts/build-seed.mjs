@@ -75,6 +75,7 @@ function parsePost(file) {
   }
   for (const k of ['title', 'category', 'excerpt', 'meta_description']) if (!meta[k]) throw new Error(`${file}: missing ${k}`);
   if (meta.meta_description.length > 160) throw new Error(`${file}: meta_description is ${meta.meta_description.length} chars (max 160)`);
+  if (meta.seo_title && meta.seo_title.length > 60) throw new Error(`${file}: seo_title is ${meta.seo_title.length} chars (max 60)`);
   const faq = meta.faq ? JSON.parse(meta.faq) : [];
   const howto = meta.howto ? JSON.parse(meta.howto) : null;
   return { slug: file.replace(/\.md$/, ''), ...meta, faq, howto, body: m[2].trim() };
@@ -89,7 +90,7 @@ for (const p of posts) {
   content.push(
     `INSERT INTO blog_posts (slug, title, excerpt, body, category_id, author_id, status, meta_title, meta_description, keywords, faq_json, howto_json, published_at, updated_at)
 SELECT ${q(p.slug)}, ${q(p.title)}, ${q(p.excerpt)}, ${q(p.body)}, (SELECT id FROM categories WHERE slug = ${q(p.category)}),
-       (SELECT id FROM users WHERE author_slug = 'bamamotors-editorial-team'), 'published', NULL, ${q(p.meta_description)}, ${q(p.keywords ?? null)},
+       (SELECT id FROM users WHERE author_slug = 'bamamotors-editorial-team'), 'published', ${q(p.seo_title ?? null)}, ${q(p.meta_description)}, ${q(p.keywords ?? null)},
        ${q(p.faq.length ? JSON.stringify(p.faq) : null)}, ${q(p.howto ? JSON.stringify(p.howto) : null)},
        strftime('%Y-%m-%dT%H:%M:%fZ','now'), strftime('%Y-%m-%dT%H:%M:%fZ','now');`,
   );
@@ -104,9 +105,11 @@ for (const c of cities) {
 for (const mk of makes) refresh.push(`UPDATE makes SET intro = ${q(mk.intro ?? null)} WHERE slug = ${q(slugify(mk.name))};`);
 for (const p of allPosts) {
   refresh.push(
-    `UPDATE blog_posts SET title = ${q(p.title)}, excerpt = ${q(p.excerpt)}, body = ${q(p.body)}, meta_description = ${q(p.meta_description)}, keywords = ${q(p.keywords ?? null)}, faq_json = ${q(p.faq.length ? JSON.stringify(p.faq) : null)}, howto_json = ${q(p.howto ? JSON.stringify(p.howto) : null)} WHERE slug = ${q(p.slug)};`,
+    `UPDATE blog_posts SET title = ${q(p.title)}, meta_title = ${q(p.seo_title ?? null)}, excerpt = ${q(p.excerpt)}, body = ${q(p.body)}, meta_description = ${q(p.meta_description)}, keywords = ${q(p.keywords ?? null)}, faq_json = ${q(p.faq.length ? JSON.stringify(p.faq) : null)}, howto_json = ${q(p.howto ? JSON.stringify(p.howto) : null)} WHERE slug = ${q(p.slug)};`,
   );
 }
-writeFileSync(join(root, 'migrations/0005_copy_refresh.sql'), `${refresh.join('\n')}\n`);
+// Applied migrations never re-run, so each round of copy edits gets a new file. Bump this when /content changes again.
+const REFRESH_MIGRATION = '0006_copy_refresh.sql';
+writeFileSync(join(root, 'migrations', REFRESH_MIGRATION), `${refresh.join('\n')}\n`);
 
 console.log(`cities=${cities.length} makes=${makes.length} zips=${zips.length} posts=${allPosts.length}`);

@@ -1,5 +1,6 @@
 ---
 title: "Alabama Car Care: Protecting Your Car from Heat, Humidity and Storms"
+seo_title: "Alabama Car Care: Heat, Humidity and Storm Protection"
 category: maintenance
 excerpt: Long, hot summers, high humidity and severe storms are hard on vehicles. This maintenance routine is built for Alabama drivers.
 meta_description: Alabama car maintenance tips for heat, humidity and storm season: battery, A/C, tires, cooling system, paint protection and hurricane preparation.

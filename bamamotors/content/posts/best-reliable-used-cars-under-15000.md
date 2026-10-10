@@ -1,5 +1,6 @@
 ---
 title: "Reliable Used Cars Under $15,000: How to Choose One in Alabama"
+seo_title: "Reliable Used Cars Under $15,000 in Alabama"
 category: vehicle-reviews
 batch: 2
 excerpt: A practical guide to finding a dependable used car under $15,000: which vehicle types hold up best, what to prioritize, and how to research a specific model.

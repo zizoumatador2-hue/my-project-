@@ -1,5 +1,6 @@
 ---
 title: "Cars Under $10,000 in Alabama: What to Expect and How to Buy Smart"
+seo_title: "Cars Under $10,000 in Alabama: What to Expect"
 category: used-car-prices
 excerpt: Shopping for a cheap used car in Alabama? See what a budget under $10,000 or $5,000 typically buys, which red flags to avoid, and how to stretch your money.
 meta_description: Cars under $10,000 in Alabama: what to expect under $10k and $5k, red flags, inspection tips and how to find cheap used cars for sale near you.
