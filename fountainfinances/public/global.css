@@ -416,3 +416,26 @@ details.toc-mobile summary{cursor:pointer;font-weight:650;min-height:48px;displa
   .progress,.card,.stat,.cta-band,.calc-card,.section-head,.section-head h2::after,.product,.hub-block,.ph-media,.hero-cine::after,.kenburns,.grain,.marquee .marquee-track{animation:none!important}
   .section-head h2::after{transform:scaleX(1)}
 }
+
+/* ===== Homepage cinematic scenes (CSS only; see docs/cinematic) ===== */
+/* Scene 1: the hero photograph opens like a curtain */
+.hero-media{animation:ff-curtain 1.2s cubic-bezier(.7,0,.2,1) both}
+@keyframes ff-curtain{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+/* Scene 1 exit: as the hero scrolls away, the copy recedes (scroll-driven, desktop and tablet only) */
+@supports (animation-timeline: view()) {
+  @media (min-width:760px){
+    .hero-cine .hero-copy{animation:ff-hero-exit linear both;animation-timeline:view();animation-range:exit 0% exit 70%}
+  }
+}
+@keyframes ff-hero-exit{to{opacity:.2;transform:translate3d(0,-48px,0)}}
+
+/* Scene 4: heading stays in place on the left while the three cards scroll on the right */
+@media (min-width:960px){
+  .story .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:start}
+  .story .section-head{position:sticky;top:112px;margin-bottom:0}
+  .story .grid-3{grid-template-columns:1fr;gap:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-media,.hero-cine .hero-copy{animation:none!important}
+}
+.hero-cine .hero-title{margin:0 0 .45em}
