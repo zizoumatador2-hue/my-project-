@@ -1,0 +1,2059 @@
+{
+ "base": "https://markettriggers.com",
+ "startedAt": "2026-10-10T23:44:43.604Z",
+ "pages": [
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/",
+   "status": 200,
+   "loadMs": 1394,
+   "title": "What Moves the Stock Market? Market Triggers Explained",
+   "h1": [
+    "What Moves the Stock Market? Understanding the Triggers Behind Every Move"
+   ],
+   "desc": "What moves the stock market? See how inflation, jobs reports, Fed decisions, earnings, and sector shifts drive U.S. stocks, with a 6-step framework you can reuse.",
+   "canonical": "https://markettriggers.com/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Organization",
+    "WebSite",
+    "Article",
+    "HowTo",
+    "FAQPage"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 1,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/about/",
+   "status": 200,
+   "loadMs": 277,
+   "title": "About MarketTriggers.com",
+   "h1": [
+    "About MarketTriggers.com"
+   ],
+   "desc": "MarketTriggers.com is an independent U.S. financial education publication explaining why markets move. Learn about our mission and editorial standards.",
+   "canonical": "https://markettriggers.com/about/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/articles/",
+   "status": 200,
+   "loadMs": 322,
+   "title": "All Articles: Market Triggers Explained | MarketTriggers",
+   "h1": [
+    "All Articles"
+   ],
+   "desc": "Every MarketTriggers.com explainer in one place: economic indicators, Fed policy, earnings, sector impact, and investor education for U.S. markets.",
+   "canonical": "https://markettriggers.com/articles/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "status": 200,
+   "loadMs": 331,
+   "title": "How Does Inflation Affect Stocks? What Investors Should Know",
+   "h1": [
+    "How Does Inflation Affect Stocks? What Investors Should Know"
+   ],
+   "desc": "Inflation hits stocks through interest rates, profit margins, and valuations. Here's how each channel works, which sectors tend to hold up, and what to watch.",
+   "canonical": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "status": 200,
+   "loadMs": 369,
+   "title": "What Happens to Stocks When the Fed Cuts Rates? | MarketTriggers",
+   "h1": [
+    "What Happens to Stocks When the Fed Cuts Rates?"
+   ],
+   "desc": "Fed rate cuts can lift stocks or arrive during a selloff. What decides the outcome is why the Fed is cutting, how much was priced in, and what it signals next.",
+   "canonical": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "status": 200,
+   "loadMs": 332,
+   "title": "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons",
+   "h1": [
+    "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons"
+   ],
+   "desc": "A company beats estimates and its stock drops anyway. The usual culprits: weak guidance, a low-quality beat, or sky-high expectations. How to spot each.",
+   "canonical": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/contact/",
+   "status": 200,
+   "loadMs": 306,
+   "title": "Contact Us | MarketTriggers",
+   "h1": [
+    "Contact Us"
+   ],
+   "desc": "Contact the MarketTriggers.com editorial team with questions, corrections, topic suggestions, or partnership inquiries.",
+   "canonical": "https://markettriggers.com/contact/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/economic-indicators/",
+   "status": 200,
+   "loadMs": 264,
+   "title": "U.S. Economic Indicators That Move Markets | MarketTriggers",
+   "h1": [
+    "U.S. Economic Indicators"
+   ],
+   "desc": "How CPI, PCE, the jobs report, GDP, retail sales, PMIs, and consumer sentiment move U.S. stocks, bonds, and the dollar, and what to watch in each release.",
+   "canonical": "https://markettriggers.com/economic-indicators/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/editorial-policy/",
+   "status": 200,
+   "loadMs": 251,
+   "title": "Editorial Policy and Standards | MarketTriggers",
+   "h1": [
+    "Editorial Policy"
+   ],
+   "desc": "How MarketTriggers.com researches, writes, fact-checks, corrects, and updates its financial education content, and how tools are used in that process.",
+   "canonical": "https://markettriggers.com/editorial-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/faq/",
+   "status": 200,
+   "loadMs": 246,
+   "title": "Frequently Asked Questions About Market Triggers | MarketTriggers",
+   "h1": [
+    "Frequently Asked Questions"
+   ],
+   "desc": "Answers to common questions about MarketTriggers.com and about how inflation, interest rates, earnings, and other triggers move U.S. markets.",
+   "canonical": "https://markettriggers.com/faq/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/investor-education/",
+   "status": 200,
+   "loadMs": 412,
+   "title": "Investor Education: How Financial Markets Work | MarketTriggers",
+   "h1": [
+    "Investor Education"
+   ],
+   "desc": "Plain-English guides to how markets work: bull and bear markets, volatility, the VIX, stocks vs. bonds, interest rates, inflation, and managing risk.",
+   "canonical": "https://markettriggers.com/investor-education/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/market-events/",
+   "status": 200,
+   "loadMs": 342,
+   "title": "Market Events: Fed Meetings and Key Data Releases",
+   "h1": [
+    "Market Events"
+   ],
+   "desc": "A guide to the scheduled events that move U.S. markets: FOMC meetings, CPI and jobs report days, earnings season, options expiration, and index rebalancing.",
+   "canonical": "https://markettriggers.com/market-events/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/market-sectors/",
+   "status": 200,
+   "loadMs": 307,
+   "title": "Market Sectors: How Each Part of the Market Reacts",
+   "h1": [
+    "Market Sectors"
+   ],
+   "desc": "Why technology, financials, energy, health care, real estate, consumer, and industrial stocks react differently to the same inflation, rate, and growth news.",
+   "canonical": "https://markettriggers.com/market-sectors/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/privacy-policy/",
+   "status": 200,
+   "loadMs": 295,
+   "title": "Privacy Policy | MarketTriggers",
+   "h1": [
+    "Privacy Policy"
+   ],
+   "desc": "How MarketTriggers.com collects, uses, and protects information, including cookies, analytics, and advertising partners such as Google AdSense.",
+   "canonical": "https://markettriggers.com/privacy-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/stock-market-triggers/",
+   "status": 200,
+   "loadMs": 294,
+   "title": "Stock Market Triggers: Earnings and Corporate News",
+   "h1": [
+    "Stock Market Triggers"
+   ],
+   "desc": "How earnings reports, guidance, analyst ratings, buybacks, dividends, IPOs, mergers, and SEC filings move individual stocks and sometimes the whole market.",
+   "canonical": "https://markettriggers.com/stock-market-triggers/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "mobile",
+   "url": "https://markettriggers.com/terms/",
+   "status": 200,
+   "loadMs": 332,
+   "title": "Terms and Conditions | MarketTriggers",
+   "h1": [
+    "Terms and Conditions"
+   ],
+   "desc": "The terms that govern your use of MarketTriggers.com, including our educational-only disclaimer, intellectual property, and limitation of liability.",
+   "canonical": "https://markettriggers.com/terms/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 390,
+   "clientW": 390,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/",
+   "status": 200,
+   "loadMs": 505,
+   "title": "What Moves the Stock Market? Market Triggers Explained",
+   "h1": [
+    "What Moves the Stock Market? Understanding the Triggers Behind Every Move"
+   ],
+   "desc": "What moves the stock market? See how inflation, jobs reports, Fed decisions, earnings, and sector shifts drive U.S. stocks, with a 6-step framework you can reuse.",
+   "canonical": "https://markettriggers.com/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Organization",
+    "WebSite",
+    "Article",
+    "HowTo",
+    "FAQPage"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 1,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/about/",
+   "status": 200,
+   "loadMs": 182,
+   "title": "About MarketTriggers.com",
+   "h1": [
+    "About MarketTriggers.com"
+   ],
+   "desc": "MarketTriggers.com is an independent U.S. financial education publication explaining why markets move. Learn about our mission and editorial standards.",
+   "canonical": "https://markettriggers.com/about/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/articles/",
+   "status": 200,
+   "loadMs": 186,
+   "title": "All Articles: Market Triggers Explained | MarketTriggers",
+   "h1": [
+    "All Articles"
+   ],
+   "desc": "Every MarketTriggers.com explainer in one place: economic indicators, Fed policy, earnings, sector impact, and investor education for U.S. markets.",
+   "canonical": "https://markettriggers.com/articles/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "status": 200,
+   "loadMs": 222,
+   "title": "How Does Inflation Affect Stocks? What Investors Should Know",
+   "h1": [
+    "How Does Inflation Affect Stocks? What Investors Should Know"
+   ],
+   "desc": "Inflation hits stocks through interest rates, profit margins, and valuations. Here's how each channel works, which sectors tend to hold up, and what to watch.",
+   "canonical": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "status": 200,
+   "loadMs": 229,
+   "title": "What Happens to Stocks When the Fed Cuts Rates? | MarketTriggers",
+   "h1": [
+    "What Happens to Stocks When the Fed Cuts Rates?"
+   ],
+   "desc": "Fed rate cuts can lift stocks or arrive during a selloff. What decides the outcome is why the Fed is cutting, how much was priced in, and what it signals next.",
+   "canonical": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "status": 200,
+   "loadMs": 226,
+   "title": "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons",
+   "h1": [
+    "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons"
+   ],
+   "desc": "A company beats estimates and its stock drops anyway. The usual culprits: weak guidance, a low-quality beat, or sky-high expectations. How to spot each.",
+   "canonical": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/contact/",
+   "status": 200,
+   "loadMs": 207,
+   "title": "Contact Us | MarketTriggers",
+   "h1": [
+    "Contact Us"
+   ],
+   "desc": "Contact the MarketTriggers.com editorial team with questions, corrections, topic suggestions, or partnership inquiries.",
+   "canonical": "https://markettriggers.com/contact/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/economic-indicators/",
+   "status": 200,
+   "loadMs": 222,
+   "title": "U.S. Economic Indicators That Move Markets | MarketTriggers",
+   "h1": [
+    "U.S. Economic Indicators"
+   ],
+   "desc": "How CPI, PCE, the jobs report, GDP, retail sales, PMIs, and consumer sentiment move U.S. stocks, bonds, and the dollar, and what to watch in each release.",
+   "canonical": "https://markettriggers.com/economic-indicators/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/editorial-policy/",
+   "status": 200,
+   "loadMs": 207,
+   "title": "Editorial Policy and Standards | MarketTriggers",
+   "h1": [
+    "Editorial Policy"
+   ],
+   "desc": "How MarketTriggers.com researches, writes, fact-checks, corrects, and updates its financial education content, and how tools are used in that process.",
+   "canonical": "https://markettriggers.com/editorial-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/faq/",
+   "status": 200,
+   "loadMs": 204,
+   "title": "Frequently Asked Questions About Market Triggers | MarketTriggers",
+   "h1": [
+    "Frequently Asked Questions"
+   ],
+   "desc": "Answers to common questions about MarketTriggers.com and about how inflation, interest rates, earnings, and other triggers move U.S. markets.",
+   "canonical": "https://markettriggers.com/faq/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/investor-education/",
+   "status": 200,
+   "loadMs": 224,
+   "title": "Investor Education: How Financial Markets Work | MarketTriggers",
+   "h1": [
+    "Investor Education"
+   ],
+   "desc": "Plain-English guides to how markets work: bull and bear markets, volatility, the VIX, stocks vs. bonds, interest rates, inflation, and managing risk.",
+   "canonical": "https://markettriggers.com/investor-education/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/market-events/",
+   "status": 200,
+   "loadMs": 221,
+   "title": "Market Events: Fed Meetings and Key Data Releases",
+   "h1": [
+    "Market Events"
+   ],
+   "desc": "A guide to the scheduled events that move U.S. markets: FOMC meetings, CPI and jobs report days, earnings season, options expiration, and index rebalancing.",
+   "canonical": "https://markettriggers.com/market-events/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/market-sectors/",
+   "status": 200,
+   "loadMs": 209,
+   "title": "Market Sectors: How Each Part of the Market Reacts",
+   "h1": [
+    "Market Sectors"
+   ],
+   "desc": "Why technology, financials, energy, health care, real estate, consumer, and industrial stocks react differently to the same inflation, rate, and growth news.",
+   "canonical": "https://markettriggers.com/market-sectors/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/privacy-policy/",
+   "status": 200,
+   "loadMs": 184,
+   "title": "Privacy Policy | MarketTriggers",
+   "h1": [
+    "Privacy Policy"
+   ],
+   "desc": "How MarketTriggers.com collects, uses, and protects information, including cookies, analytics, and advertising partners such as Google AdSense.",
+   "canonical": "https://markettriggers.com/privacy-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/stock-market-triggers/",
+   "status": 200,
+   "loadMs": 218,
+   "title": "Stock Market Triggers: Earnings and Corporate News",
+   "h1": [
+    "Stock Market Triggers"
+   ],
+   "desc": "How earnings reports, guidance, analyst ratings, buybacks, dividends, IPOs, mergers, and SEC filings move individual stocks and sometimes the whole market.",
+   "canonical": "https://markettriggers.com/stock-market-triggers/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "tablet",
+   "url": "https://markettriggers.com/terms/",
+   "status": 200,
+   "loadMs": 230,
+   "title": "Terms and Conditions | MarketTriggers",
+   "h1": [
+    "Terms and Conditions"
+   ],
+   "desc": "The terms that govern your use of MarketTriggers.com, including our educational-only disclaimer, intellectual property, and limitation of liability.",
+   "canonical": "https://markettriggers.com/terms/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 820,
+   "clientW": 820,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/",
+   "status": 200,
+   "loadMs": 527,
+   "title": "What Moves the Stock Market? Market Triggers Explained",
+   "h1": [
+    "What Moves the Stock Market? Understanding the Triggers Behind Every Move"
+   ],
+   "desc": "What moves the stock market? See how inflation, jobs reports, Fed decisions, earnings, and sector shifts drive U.S. stocks, with a 6-step framework you can reuse.",
+   "canonical": "https://markettriggers.com/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Organization",
+    "WebSite",
+    "Article",
+    "HowTo",
+    "FAQPage"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 1,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/about/",
+   "status": 200,
+   "loadMs": 203,
+   "title": "About MarketTriggers.com",
+   "h1": [
+    "About MarketTriggers.com"
+   ],
+   "desc": "MarketTriggers.com is an independent U.S. financial education publication explaining why markets move. Learn about our mission and editorial standards.",
+   "canonical": "https://markettriggers.com/about/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/articles/",
+   "status": 200,
+   "loadMs": 197,
+   "title": "All Articles: Market Triggers Explained | MarketTriggers",
+   "h1": [
+    "All Articles"
+   ],
+   "desc": "Every MarketTriggers.com explainer in one place: economic indicators, Fed policy, earnings, sector impact, and investor education for U.S. markets.",
+   "canonical": "https://markettriggers.com/articles/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "status": 200,
+   "loadMs": 250,
+   "title": "How Does Inflation Affect Stocks? What Investors Should Know",
+   "h1": [
+    "How Does Inflation Affect Stocks? What Investors Should Know"
+   ],
+   "desc": "Inflation hits stocks through interest rates, profit margins, and valuations. Here's how each channel works, which sectors tend to hold up, and what to watch.",
+   "canonical": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 5,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "status": 200,
+   "loadMs": 216,
+   "title": "What Happens to Stocks When the Fed Cuts Rates? | MarketTriggers",
+   "h1": [
+    "What Happens to Stocks When the Fed Cuts Rates?"
+   ],
+   "desc": "Fed rate cuts can lift stocks or arrive during a selloff. What decides the outcome is why the Fed is cutting, how much was priced in, and what it signals next.",
+   "canonical": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 6,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "status": 200,
+   "loadMs": 245,
+   "title": "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons",
+   "h1": [
+    "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons"
+   ],
+   "desc": "A company beats estimates and its stock drops anyway. The usual culprits: weak guidance, a low-quality beat, or sky-high expectations. How to spot each.",
+   "canonical": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 4,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/contact/",
+   "status": 200,
+   "loadMs": 235,
+   "title": "Contact Us | MarketTriggers",
+   "h1": [
+    "Contact Us"
+   ],
+   "desc": "Contact the MarketTriggers.com editorial team with questions, corrections, topic suggestions, or partnership inquiries.",
+   "canonical": "https://markettriggers.com/contact/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/economic-indicators/",
+   "status": 200,
+   "loadMs": 243,
+   "title": "U.S. Economic Indicators That Move Markets | MarketTriggers",
+   "h1": [
+    "U.S. Economic Indicators"
+   ],
+   "desc": "How CPI, PCE, the jobs report, GDP, retail sales, PMIs, and consumer sentiment move U.S. stocks, bonds, and the dollar, and what to watch in each release.",
+   "canonical": "https://markettriggers.com/economic-indicators/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/editorial-policy/",
+   "status": 200,
+   "loadMs": 230,
+   "title": "Editorial Policy and Standards | MarketTriggers",
+   "h1": [
+    "Editorial Policy"
+   ],
+   "desc": "How MarketTriggers.com researches, writes, fact-checks, corrects, and updates its financial education content, and how tools are used in that process.",
+   "canonical": "https://markettriggers.com/editorial-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/faq/",
+   "status": 200,
+   "loadMs": 202,
+   "title": "Frequently Asked Questions About Market Triggers | MarketTriggers",
+   "h1": [
+    "Frequently Asked Questions"
+   ],
+   "desc": "Answers to common questions about MarketTriggers.com and about how inflation, interest rates, earnings, and other triggers move U.S. markets.",
+   "canonical": "https://markettriggers.com/faq/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/investor-education/",
+   "status": 200,
+   "loadMs": 230,
+   "title": "Investor Education: How Financial Markets Work | MarketTriggers",
+   "h1": [
+    "Investor Education"
+   ],
+   "desc": "Plain-English guides to how markets work: bull and bear markets, volatility, the VIX, stocks vs. bonds, interest rates, inflation, and managing risk.",
+   "canonical": "https://markettriggers.com/investor-education/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/market-events/",
+   "status": 200,
+   "loadMs": 265,
+   "title": "Market Events: Fed Meetings and Key Data Releases",
+   "h1": [
+    "Market Events"
+   ],
+   "desc": "A guide to the scheduled events that move U.S. markets: FOMC meetings, CPI and jobs report days, earnings season, options expiration, and index rebalancing.",
+   "canonical": "https://markettriggers.com/market-events/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/market-sectors/",
+   "status": 200,
+   "loadMs": 208,
+   "title": "Market Sectors: How Each Part of the Market Reacts",
+   "h1": [
+    "Market Sectors"
+   ],
+   "desc": "Why technology, financials, energy, health care, real estate, consumer, and industrial stocks react differently to the same inflation, rate, and growth news.",
+   "canonical": "https://markettriggers.com/market-sectors/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/privacy-policy/",
+   "status": 200,
+   "loadMs": 195,
+   "title": "Privacy Policy | MarketTriggers",
+   "h1": [
+    "Privacy Policy"
+   ],
+   "desc": "How MarketTriggers.com collects, uses, and protects information, including cookies, analytics, and advertising partners such as Google AdSense.",
+   "canonical": "https://markettriggers.com/privacy-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/stock-market-triggers/",
+   "status": 200,
+   "loadMs": 223,
+   "title": "Stock Market Triggers: Earnings and Corporate News",
+   "h1": [
+    "Stock Market Triggers"
+   ],
+   "desc": "How earnings reports, guidance, analyst ratings, buybacks, dividends, IPOs, mergers, and SEC filings move individual stocks and sometimes the whole market.",
+   "canonical": "https://markettriggers.com/stock-market-triggers/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "desktop",
+   "url": "https://markettriggers.com/terms/",
+   "status": 200,
+   "loadMs": 201,
+   "title": "Terms and Conditions | MarketTriggers",
+   "h1": [
+    "Terms and Conditions"
+   ],
+   "desc": "The terms that govern your use of MarketTriggers.com, including our educational-only disclaimer, intellectual property, and limitation of liability.",
+   "canonical": "https://markettriggers.com/terms/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1366,
+   "clientW": 1366,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/",
+   "status": 200,
+   "loadMs": 557,
+   "title": "What Moves the Stock Market? Market Triggers Explained",
+   "h1": [
+    "What Moves the Stock Market? Understanding the Triggers Behind Every Move"
+   ],
+   "desc": "What moves the stock market? See how inflation, jobs reports, Fed decisions, earnings, and sector shifts drive U.S. stocks, with a 6-step framework you can reuse.",
+   "canonical": "https://markettriggers.com/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Organization",
+    "WebSite",
+    "Article",
+    "HowTo",
+    "FAQPage"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 1,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/about/",
+   "status": 200,
+   "loadMs": 187,
+   "title": "About MarketTriggers.com",
+   "h1": [
+    "About MarketTriggers.com"
+   ],
+   "desc": "MarketTriggers.com is an independent U.S. financial education publication explaining why markets move. Learn about our mission and editorial standards.",
+   "canonical": "https://markettriggers.com/about/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/articles/",
+   "status": 200,
+   "loadMs": 192,
+   "title": "All Articles: Market Triggers Explained | MarketTriggers",
+   "h1": [
+    "All Articles"
+   ],
+   "desc": "Every MarketTriggers.com explainer in one place: economic indicators, Fed policy, earnings, sector impact, and investor education for U.S. markets.",
+   "canonical": "https://markettriggers.com/articles/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "status": 200,
+   "loadMs": 246,
+   "title": "How Does Inflation Affect Stocks? What Investors Should Know",
+   "h1": [
+    "How Does Inflation Affect Stocks? What Investors Should Know"
+   ],
+   "desc": "Inflation hits stocks through interest rates, profit margins, and valuations. Here's how each channel works, which sectors tend to hold up, and what to watch.",
+   "canonical": "https://markettriggers.com/articles/how-does-inflation-affect-stocks/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 5,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "status": 200,
+   "loadMs": 249,
+   "title": "What Happens to Stocks When the Fed Cuts Rates? | MarketTriggers",
+   "h1": [
+    "What Happens to Stocks When the Fed Cuts Rates?"
+   ],
+   "desc": "Fed rate cuts can lift stocks or arrive during a selloff. What decides the outcome is why the Fed is cutting, how much was priced in, and what it signals next.",
+   "canonical": "https://markettriggers.com/articles/what-happens-to-stocks-when-the-fed-cuts-rates/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 6,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "status": 200,
+   "loadMs": 230,
+   "title": "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons",
+   "h1": [
+    "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons"
+   ],
+   "desc": "A company beats estimates and its stock drops anyway. The usual culprits: weak guidance, a low-quality beat, or sky-high expectations. How to spot each.",
+   "canonical": "https://markettriggers.com/articles/why-do-stocks-fall-after-earnings/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "Article",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 4,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/contact/",
+   "status": 200,
+   "loadMs": 189,
+   "title": "Contact Us | MarketTriggers",
+   "h1": [
+    "Contact Us"
+   ],
+   "desc": "Contact the MarketTriggers.com editorial team with questions, corrections, topic suggestions, or partnership inquiries.",
+   "canonical": "https://markettriggers.com/contact/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/economic-indicators/",
+   "status": 200,
+   "loadMs": 248,
+   "title": "U.S. Economic Indicators That Move Markets | MarketTriggers",
+   "h1": [
+    "U.S. Economic Indicators"
+   ],
+   "desc": "How CPI, PCE, the jobs report, GDP, retail sales, PMIs, and consumer sentiment move U.S. stocks, bonds, and the dollar, and what to watch in each release.",
+   "canonical": "https://markettriggers.com/economic-indicators/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/editorial-policy/",
+   "status": 200,
+   "loadMs": 180,
+   "title": "Editorial Policy and Standards | MarketTriggers",
+   "h1": [
+    "Editorial Policy"
+   ],
+   "desc": "How MarketTriggers.com researches, writes, fact-checks, corrects, and updates its financial education content, and how tools are used in that process.",
+   "canonical": "https://markettriggers.com/editorial-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/faq/",
+   "status": 200,
+   "loadMs": 189,
+   "title": "Frequently Asked Questions About Market Triggers | MarketTriggers",
+   "h1": [
+    "Frequently Asked Questions"
+   ],
+   "desc": "Answers to common questions about MarketTriggers.com and about how inflation, interest rates, earnings, and other triggers move U.S. markets.",
+   "canonical": "https://markettriggers.com/faq/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/investor-education/",
+   "status": 200,
+   "loadMs": 212,
+   "title": "Investor Education: How Financial Markets Work | MarketTriggers",
+   "h1": [
+    "Investor Education"
+   ],
+   "desc": "Plain-English guides to how markets work: bull and bear markets, volatility, the VIX, stocks vs. bonds, interest rates, inflation, and managing risk.",
+   "canonical": "https://markettriggers.com/investor-education/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/market-events/",
+   "status": 200,
+   "loadMs": 209,
+   "title": "Market Events: Fed Meetings and Key Data Releases",
+   "h1": [
+    "Market Events"
+   ],
+   "desc": "A guide to the scheduled events that move U.S. markets: FOMC meetings, CPI and jobs report days, earnings season, options expiration, and index rebalancing.",
+   "canonical": "https://markettriggers.com/market-events/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/market-sectors/",
+   "status": 200,
+   "loadMs": 214,
+   "title": "Market Sectors: How Each Part of the Market Reacts",
+   "h1": [
+    "Market Sectors"
+   ],
+   "desc": "Why technology, financials, energy, health care, real estate, consumer, and industrial stocks react differently to the same inflation, rate, and growth news.",
+   "canonical": "https://markettriggers.com/market-sectors/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/privacy-policy/",
+   "status": 200,
+   "loadMs": 198,
+   "title": "Privacy Policy | MarketTriggers",
+   "h1": [
+    "Privacy Policy"
+   ],
+   "desc": "How MarketTriggers.com collects, uses, and protects information, including cookies, analytics, and advertising partners such as Google AdSense.",
+   "canonical": "https://markettriggers.com/privacy-policy/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/stock-market-triggers/",
+   "status": 200,
+   "loadMs": 215,
+   "title": "Stock Market Triggers: Earnings and Corporate News",
+   "h1": [
+    "Stock Market Triggers"
+   ],
+   "desc": "How earnings reports, guidance, analyst ratings, buybacks, dividends, IPOs, mergers, and SEC filings move individual stocks and sometimes the whole market.",
+   "canonical": "https://markettriggers.com/stock-market-triggers/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "CollectionPage",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  },
+  {
+   "vp": "wide",
+   "url": "https://markettriggers.com/terms/",
+   "status": 200,
+   "loadMs": 202,
+   "title": "Terms and Conditions | MarketTriggers",
+   "h1": [
+    "Terms and Conditions"
+   ],
+   "desc": "The terms that govern your use of MarketTriggers.com, including our educational-only disclaimer, intellectual property, and limitation of liability.",
+   "canonical": "https://markettriggers.com/terms/",
+   "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+   "lang": "en-US",
+   "ld": [
+    "BreadcrumbList"
+   ],
+   "hScroll": false,
+   "scrollW": 1920,
+   "clientW": 1920,
+   "wide": [],
+   "brokenImgs": [],
+   "noAlt": 0,
+   "smallTargets": 0,
+   "hiddenReveal": 0,
+   "cls": 0,
+   "errs": [],
+   "failed": []
+  }
+ ],
+ "checks": [
+  {
+   "name": "sitemap has pages",
+   "ok": true,
+   "detail": "16 urls"
+  },
+  {
+   "name": "endpoint /robots.txt",
+   "ok": true,
+   "detail": "status 200"
+  },
+  {
+   "name": "endpoint /ads.txt",
+   "ok": true,
+   "detail": "status 200"
+  },
+  {
+   "name": "endpoint /rss.xml",
+   "ok": true,
+   "detail": "status 200"
+  },
+  {
+   "name": "endpoint /sitemap-index.xml",
+   "ok": true,
+   "detail": "status 200"
+  },
+  {
+   "name": "unknown URL returns 404",
+   "ok": true,
+   "detail": "status 404"
+  },
+  {
+   "name": "no-trailing-slash redirects",
+   "ok": true,
+   "detail": "status 307"
+  },
+  {
+   "name": "www responds",
+   "ok": true,
+   "detail": "status 200"
+  },
+  {
+   "name": "internal links checked",
+   "ok": true,
+   "detail": "17 unique"
+  },
+  {
+   "name": "cookie bar visible on first visit",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "cookie bar hides after choice",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "consent stored",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "cookie bar stays hidden after reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mobile menu button visible",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mobile menu opens",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mobile menu link navigates",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "trigger explorer: every tab shows exactly its panel",
+   "ok": true,
+   "detail": "6 tabs"
+  },
+  {
+   "name": "trigger explorer: arrow keys move",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "quiz: score appears after all answers",
+   "ok": true,
+   "detail": "You scored 1 out of 5. Scroll back to the sections you missed for a quick refresher."
+  },
+  {
+   "name": "quiz: answered buttons disabled",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "FAQ expands",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "article: TOC present",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "article: TOC link scrolls to section below header",
+   "ok": true,
+   "detail": "#channel-1-inflation-pushes-interest-rates-up"
+  },
+  {
+   "name": "article: related articles shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "article: reading time shown",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "back-to-top visible after scrolling",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "back-to-top returns to top",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "card text can be selected without navigating",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "404 page renders with link home",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "no JS errors during flows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "reduced motion: title readable, no hidden reveal",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "desktop: nav links visible, menu button hidden",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "accept-all stored",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "issues": [],
+ "finishedAt": "2026-10-10T23:48:01.824Z",
+ "summary": {
+  "pagesTested": 16,
+  "viewports": 4,
+  "pageLoads": 64,
+  "checks": 33,
+  "checksFailed": 0,
+  "issues": 0
+ }
+}
