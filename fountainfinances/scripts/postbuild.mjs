@@ -3,7 +3,8 @@
 import { writeFileSync, existsSync, readFileSync, mkdirSync } from 'node:fs';
 import sharp from 'sharp';
 
-writeFileSync('dist/_routes.json', JSON.stringify({ version: 1, include: ['/api/*'], exclude: [] }, null, 2));
+// /admin runs server-side (Access-protected); everything else stays static.
+writeFileSync('dist/_routes.json', JSON.stringify({ version: 1, include: ['/api/*', '/admin', '/admin/*'], exclude: [] }, null, 2));
 
 // ads.txt authorizes Google to sell ads on this domain (required by AdSense).
 const adsense = (process.env.PUBLIC_ADSENSE_CLIENT || '').trim();

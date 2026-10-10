@@ -9,6 +9,14 @@ export interface Env {
   EMAIL_FROM?: string;
   CONTACT_TO_EMAIL?: string;
   TURNSTILE_SECRET_KEY?: string;
+  /** Cloudflare Access team domain, e.g. yourteam.cloudflareaccess.com (admin area). */
+  ACCESS_TEAM_DOMAIN?: string;
+  /** Cloudflare Access application audience tag (admin area). */
+  ACCESS_AUD?: string;
+  /** Optional comma-separated allowlist of admin emails, checked after Access. */
+  ADMIN_EMAILS?: string;
+  /** Optional static JWKS JSON for Access verification (tests or locked-down setups). */
+  ACCESS_JWKS_JSON?: string;
 }
 
 const SECURITY_HEADERS = {
