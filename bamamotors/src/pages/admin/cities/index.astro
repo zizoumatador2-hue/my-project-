@@ -1,0 +1,14 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import { all } from '../../../lib/db';
+const cities = await all<{ id: number; slug: string; name: string; county: string | null; is_featured: number; sort_order: number; has_body: number; vehicles: number }>(Astro.locals.runtime.env.DB,
+  "SELECT c.id, c.slug, c.name, c.county, c.is_featured, c.sort_order, (c.body IS NOT NULL AND length(c.body) > 200) AS has_body, (SELECT COUNT(*) FROM vehicles v WHERE v.city_id = c.id AND v.status = 'active') AS vehicles FROM cities c ORDER BY c.sort_order, c.name");
+---
+<DashboardLayout title="Cities" area="admin">
+  <div class="spread"><h1 style="margin:0">Cities (location landing pages)</h1><a class="btn btn-primary" href="/admin/cities/new">+ Add city</a></div>
+  <p class="muted">Each city page needs a unique intro, local buying guide and FAQ to avoid thin or duplicate content.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>City</th><th>County</th><th>Featured</th><th>Unique guide</th><th>Vehicles in city</th></tr></thead>
+    <tbody>{cities.map((c) => <tr><td><a href={`/admin/cities/${c.id}`}><strong>{c.name}</strong></a><br /><a class="small" href={`/used-cars/${c.slug}`}>/used-cars/{c.slug}</a></td><td>{c.county}</td><td>{c.is_featured ? 'Yes' : 'No'}</td><td>{c.has_body ? '✓' : <span class="badge badge-warn">Missing</span>}</td><td>{c.vehicles}</td></tr>)}</tbody>
+  </table></div>
+</DashboardLayout>

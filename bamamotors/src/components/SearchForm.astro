@@ -1,0 +1,114 @@
+---
+import { all } from '../lib/db';
+import { BODY_TYPES, FUEL_TYPES, TRANSMISSIONS, DRIVETRAINS, CONDITIONS, COLORS, RADII } from '../lib/constants';
+import type { SearchFilters } from '../lib/search';
+import Icon from './Icon.astro';
+
+interface Props { variant: 'hero' | 'sidebar'; filters?: Partial<SearchFilters>; action?: string; }
+const { variant, filters = {}, action = '/used-cars' } = Astro.props;
+const db = Astro.locals.runtime.env.DB;
+const makes = await all<{ slug: string; name: string }>(db, 'SELECT slug, name FROM makes ORDER BY name');
+const models = filters.make
+  ? await all<{ slug: string; name: string }>(db, 'SELECT md.slug, md.name FROM models md JOIN makes mk ON mk.id = md.make_id WHERE mk.slug = ? ORDER BY md.name', [filters.make])
+  : [];
+const cities = await all<{ slug: string; name: string }>(db, 'SELECT slug, name FROM cities ORDER BY name');
+const year = new Date().getFullYear() + 1;
+const years = Array.from({ length: 30 }, (_, i) => year - i);
+const prices = [5000, 7500, 10000, 12500, 15000, 20000, 25000, 30000, 40000, 50000, 75000];
+const mileages = [25000, 50000, 75000, 100000, 125000, 150000];
+const id = (n: string) => `${variant}-${n}`;
+---
+<form method="get" action={action} class={variant === 'hero' ? 'search-panel star-border' : 'filters'} role="search" aria-label="Search used cars"
+  id={variant === 'sidebar' ? 'filters' : undefined} data-collapsed={variant === 'sidebar' ? 'true' : undefined} data-search-form>
+  {variant === 'hero' ? (
+    <>
+      <div class="search-grid">
+        <div class="field"><label for={id('make')}>Make</label>
+          <select class="select" id={id('make')} name="make" data-make>
+            <option value="">Any make</option>
+            {makes.map((m) => <option value={m.slug} selected={filters.make === m.slug}>{m.name}</option>)}
+          </select></div>
+        <div class="field"><label for={id('model')}>Model</label>
+          <select class="select" id={id('model')} name="model" data-model>
+            <option value="">Any model</option>
+            {models.map((m) => <option value={m.slug} selected={filters.model === m.slug}>{m.name}</option>)}
+          </select></div>
+        <div class="field"><label for={id('min_price')}>Min price</label>
+          <select class="select" id={id('min_price')} name="min_price"><option value="">No min</option>{prices.map((p) => <option value={p}>${p.toLocaleString()}</option>)}</select></div>
+        <div class="field"><label for={id('max_price')}>Max price</label>
+          <select class="select" id={id('max_price')} name="max_price"><option value="">No max</option>{prices.map((p) => <option value={p}>${p.toLocaleString()}</option>)}</select></div>
+        <div class="field"><label for={id('min_year')}>Year from</label>
+          <select class="select" id={id('min_year')} name="min_year"><option value="">Any year</option>{years.map((y) => <option value={y}>{y}</option>)}</select></div>
+        <div class="field"><label for={id('max_mileage')}>Max mileage</label>
+          <select class="select" id={id('max_mileage')} name="max_mileage"><option value="">Any mileage</option>{mileages.map((m) => <option value={m}>Under {m.toLocaleString()} mi</option>)}</select></div>
+        <div class="field"><label for={id('city')}>City</label>
+          <select class="select" id={id('city')} name="city"><option value="">All of Alabama</option>{cities.map((c) => <option value={c.slug}>{c.name}</option>)}</select></div>
+        <div class="field"><label for={id('zip')}>ZIP code</label>
+          <input class="input" id={id('zip')} name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="e.g. 35203" autocomplete="postal-code" data-zip /></div>
+        <div class="field"><label for={id('radius')}>Radius</label>
+          <select class="select" id={id('radius')} name="radius">{RADII.map((r) => <option value={r} selected={r === 50}>{r} miles</option>)}</select></div>
+        <div class="field"><label for={id('body')}>Body type</label>
+          <select class="select" id={id('body')} name="body"><option value="">Any body type</option>{BODY_TYPES.map((b) => <option value={b.value}>{b.value}</option>)}</select></div>
+      </div>
+      <div class="search-actions">
+        <button class="btn btn-primary btn-lg btn-shine" type="submit"><Icon name="search" /> Find Your Car</button>
+        <button class="btn btn-outline" type="button" data-near-me><Icon name="pin" /> Use my location</button>
+        <span class="small muted" data-near-status aria-live="polite"></span>
+      </div>
+    </>
+  ) : (
+    <>
+      <div class="spread" style="margin-bottom:8px"><strong>Filter results</strong><a class="small" href={action}>Clear all</a></div>
+      {filters.q && <input type="hidden" name="q" value={filters.q} />}
+      <div class="field"><label for={id('make')}>Make</label>
+        <select class="select" id={id('make')} name="make" data-make>
+          <option value="">Any make</option>
+          {makes.map((m) => <option value={m.slug} selected={filters.make === m.slug}>{m.name}</option>)}
+        </select></div>
+      <div class="field"><label for={id('model')}>Model</label>
+        <select class="select" id={id('model')} name="model" data-model>
+          <option value="">Any model</option>
+          {models.map((m) => <option value={m.slug} selected={filters.model === m.slug}>{m.name}</option>)}
+        </select></div>
+      <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:8px">
+        <div class="field"><label for={id('min_price')}>Min price ($)</label><input class="input" id={id('min_price')} name="min_price" inputmode="numeric" value={filters.minPrice ?? ''} /></div>
+        <div class="field"><label for={id('max_price')}>Max price ($)</label><input class="input" id={id('max_price')} name="max_price" inputmode="numeric" value={filters.maxPrice ?? ''} /></div>
+        <div class="field"><label for={id('min_year')}>Year from</label>
+          <select class="select" id={id('min_year')} name="min_year"><option value="">Any</option>{years.map((y) => <option value={y} selected={filters.minYear === y}>{y}</option>)}</select></div>
+        <div class="field"><label for={id('max_year')}>Year to</label>
+          <select class="select" id={id('max_year')} name="max_year"><option value="">Any</option>{years.map((y) => <option value={y} selected={filters.maxYear === y}>{y}</option>)}</select></div>
+      </div>
+      <div class="field"><label for={id('max_mileage')}>Max mileage</label>
+        <select class="select" id={id('max_mileage')} name="max_mileage"><option value="">Any mileage</option>{mileages.map((m) => <option value={m} selected={filters.maxMileage === m}>Under {m.toLocaleString()} mi</option>)}</select></div>
+      <div class="field"><label for={id('body')}>Body type</label>
+        <select class="select" id={id('body')} name="body"><option value="">Any</option>{BODY_TYPES.map((b) => <option value={b.value} selected={filters.body === b.value}>{b.value}</option>)}</select></div>
+      <div class="field"><label for={id('condition')}>Condition</label>
+        <select class="select" id={id('condition')} name="condition"><option value="">Any</option>{CONDITIONS.map((c) => <option value={c.value} selected={filters.condition === c.value}>{c.label}</option>)}</select></div>
+      <div class="field"><label for={id('fuel')}>Fuel type</label>
+        <select class="select" id={id('fuel')} name="fuel"><option value="">Any</option>{FUEL_TYPES.map((f) => <option selected={filters.fuel === f}>{f}</option>)}</select></div>
+      <div class="field"><label for={id('transmission')}>Transmission</label>
+        <select class="select" id={id('transmission')} name="transmission"><option value="">Any</option>{TRANSMISSIONS.map((f) => <option selected={filters.transmission === f}>{f}</option>)}</select></div>
+      <div class="field"><label for={id('drivetrain')}>Drivetrain</label>
+        <select class="select" id={id('drivetrain')} name="drivetrain"><option value="">Any</option>{DRIVETRAINS.map((f) => <option selected={filters.drivetrain === f}>{f}</option>)}</select></div>
+      <div class="field"><label for={id('ext_color')}>Exterior color</label>
+        <select class="select" id={id('ext_color')} name="ext_color"><option value="">Any</option>{COLORS.map((f) => <option selected={filters.extColor === f}>{f}</option>)}</select></div>
+      <div class="field"><label for={id('int_color')}>Interior color</label>
+        <select class="select" id={id('int_color')} name="int_color"><option value="">Any</option>{COLORS.map((f) => <option selected={filters.intColor === f}>{f}</option>)}</select></div>
+      <div class="field"><label for={id('city')}>City</label>
+        <select class="select" id={id('city')} name="city"><option value="">All of Alabama</option>{cities.map((c) => <option value={c.slug} selected={filters.city === c.slug}>{c.name}</option>)}</select></div>
+      <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:8px">
+        <div class="field"><label for={id('zip')}>ZIP code</label><input class="input" id={id('zip')} name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" value={filters.zip ?? ''} data-zip /></div>
+        <div class="field"><label for={id('radius')}>Radius</label>
+          <select class="select" id={id('radius')} name="radius">{RADII.map((r) => <option value={r} selected={(filters.radius ?? 50) === r}>{r} mi</option>)}</select></div>
+      </div>
+      <button class="btn btn-ghost btn-sm" type="button" data-near-me><Icon name="pin" size={16} /> Use my location</button>
+      <span class="small muted" data-near-status aria-live="polite"></span>
+      <input type="hidden" name="sort" value={filters.sort && filters.sort !== 'recommended' ? filters.sort : ''} data-sort-hidden />
+      <button class="btn btn-primary btn-block" type="submit" style="margin-top:12px">Show results</button>
+    </>
+  )}
+</form>
+<script>
+  import { initSearchForms } from '../scripts/search-form';
+  initSearchForms();
+</script>

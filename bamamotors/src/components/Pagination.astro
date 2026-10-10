@@ -1,0 +1,20 @@
+---
+interface Props { page: number; pages: number; href: (p: number) => string; }
+const { page, pages, href } = Astro.props;
+const nums: (number | '…')[] = [];
+for (let p = 1; p <= pages; p++) {
+  if (p === 1 || p === pages || Math.abs(p - page) <= 1) nums.push(p);
+  else if (nums[nums.length - 1] !== '…') nums.push('…');
+}
+---
+{pages > 1 && (
+  <nav aria-label="Pagination">
+    <ul class="pagination">
+      {page > 1 && <li><a href={href(page - 1)} rel="prev">‹ Prev</a></li>}
+      {nums.map((n) => (
+        <li>{n === '…' ? <span aria-hidden="true">…</span> : n === page ? <span aria-current="page">{n}</span> : <a href={href(n)}>{n}</a>}</li>
+      ))}
+      {page < pages && <li><a href={href(page + 1)} rel="next">Next ›</a></li>}
+    </ul>
+  </nav>
+)}

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Flash from '../components/Flash.astro';
+import DealerSignupForm from '../components/DealerSignupForm.astro';
+import { signupSchema, dealerSignupSchema, formToObject, zodErrors, type FieldErrors } from '../lib/validation';
+import { createUser, createDealer, emailTaken } from '../lib/accounts';
+import { createSession, safeNext, homeFor } from '../lib/auth';
+import { clientIp, rateLimit, verifyTurnstile } from '../lib/security';
+
+const env = Astro.locals.runtime.env;
+const isDealer = Astro.url.searchParams.get('type') === 'dealer';
+const next = safeNext(Astro.url.searchParams.get('next'), '');
+if (Astro.locals.user) return Astro.redirect(homeFor(Astro.locals.user));
+let errors: FieldErrors = {};
+let values: Record<string, string> = {};
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  values = formToObject(fd);
+  const ip = clientIp(Astro.request);
+  if (String(fd.get('website') ?? '')) errors._ = 'Unable to create account.';
+  else if (!(await rateLimit(env.DB, `signup:${ip}`, 6, 3600))) errors._ = 'Too many sign-ups from your network. Please try again later.';
+  else if (!(await verifyTurnstile(env, fd.get('cf-turnstile-response') as string | null, ip))) errors._ = 'Please complete the verification challenge.';
+  else {
+    const parsed = (isDealer ? dealerSignupSchema : signupSchema).safeParse(values);
+    if (!parsed.success) errors = zodErrors(parsed.error);
+    else if (fd.get('terms') !== 'on') errors.terms = 'Please accept the Terms of Use and Privacy Policy.';
+    else if (await emailTaken(env.DB, parsed.data.email)) errors.email = 'An account with this email already exists. Try signing in.';
+    else {
+      const userId = await createUser(env, parsed.data, isDealer ? 'dealer' : 'consumer');
+      if (isDealer) await createDealer(env, userId, parsed.data as typeof parsed.data & { dealer_name: string; dealer_phone: string; address: string; city: string; zip: string }, Astro.locals.settings);
+      await createSession(env.DB, Astro.cookies, userId, Astro.url.protocol === 'https:');
+      return Astro.redirect(isDealer ? '/dashboard?ok=welcome' : next || '/account?ok=welcome', 303);
+    }
+  }
+}
+---
+<BaseLayout title={isDealer ? 'Create a dealer account' : 'Create your free account'} description="Create a free BamaMotors account to save vehicles and track your dealer inquiries." noindex>
+  <div class="wrap" style={`max-width:${isDealer ? 760 : 480}px;padding:40px 16px 64px`}>
+    <h1>{isDealer ? 'List your dealership on BamaMotors' : 'Create your free account'}</h1>
+    <p class="muted">{isDealer ? 'Start free with up to 10 vehicles. Our team reviews every new dealership before listings go live.' : 'Save vehicles, track your dealer inquiries and get back to your search on any device.'}</p>
+    <Flash err={errors._ ?? null} />
+    {isDealer ? <DealerSignupForm errors={errors} values={values} action="/signup?type=dealer" /> : (
+      <form method="post" class="card card-pad stack" novalidate>
+        <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="field"><label for="name">Full name</label><input class="input" id="name" name="name" autocomplete="name" required value={values.name ?? ''} aria-invalid={errors.name ? 'true' : undefined} />{errors.name && <span class="field-error">{errors.name}</span>}</div>
+        <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required value={values.email ?? ''} aria-invalid={errors.email ? 'true' : undefined} />{errors.email && <span class="field-error">{errors.email}</span>}</div>
+        <div class="field"><label for="phone">Phone <span class="muted">(optional)</span></label><input class="input" id="phone" name="phone" type="tel" autocomplete="tel" value={values.phone ?? ''} />{errors.phone && <span class="field-error">{errors.phone}</span>}</div>
+        <div class="field"><label for="password">Password</label><input class="input" id="password" name="password" type="password" autocomplete="new-password" minlength="10" required aria-describedby="pw-hint" aria-invalid={errors.password ? 'true' : undefined} /><span class="hint" id="pw-hint">At least 10 characters.</span>{errors.password && <span class="field-error">{errors.password}</span>}</div>
+        <label class="check"><input type="checkbox" name="terms" required /> <span>I agree to the <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</span></label>
+        {errors.terms && <span class="field-error">{errors.terms}</span>}
+        {env.TURNSTILE_SITE_KEY && <div class="cf-turnstile" data-sitekey={env.TURNSTILE_SITE_KEY}></div>}
+        <button class="btn btn-primary btn-block btn-lg" type="submit">Create account</button>
+      </form>
+    )}
+    <p class="center" style="margin-top:20px">Already have an account? <a href="/login">Sign in</a>{!isDealer && <> · <a href="/signup?type=dealer">Are you a dealer?</a></>}</p>
+  </div>
+  {env.TURNSTILE_SITE_KEY && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+</BaseLayout>

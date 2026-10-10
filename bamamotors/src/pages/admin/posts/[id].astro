@@ -1,0 +1,41 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import PostForm from '../../../components/PostForm.astro';
+import { savePost } from '../../../lib/post-save';
+import { first, run, audit } from '../../../lib/db';
+import { parseFaq, faqToText } from '../../../lib/markdown';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+
+const db = Astro.locals.runtime.env.DB;
+const id = Number(Astro.params.id);
+const post = await first<Record<string, string | number | null>>(db, 'SELECT * FROM blog_posts WHERE id = ?', [id]);
+if (!post) return Astro.rewrite('/404');
+let howtoText = '';
+try { howtoText = post.howto_json ? (JSON.parse(String(post.howto_json)).steps as { name: string; text: string }[]).map((s) => `${s.name} | ${s.text}`).join('\n') : ''; } catch { /* ignore */ }
+let values: Record<string, string> = {
+  title: String(post.title), slug: String(post.slug), excerpt: String(post.excerpt), body: String(post.body), category_id: String(post.category_id ?? 0),
+  status: String(post.status), meta_title: String(post.meta_title ?? ''), meta_description: String(post.meta_description ?? ''), keywords: String(post.keywords ?? ''),
+  faq: faqToText(parseFaq(post.faq_json as string | null)), howto: howtoText,
+};
+let errors: FieldErrors = {};
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  if (fd.get('action') === 'delete') {
+    await run(db, 'DELETE FROM blog_posts WHERE id = ?', [id]);
+    await audit(db, Astro.locals.user!.id, 'post.delete', 'post', id);
+    return Astro.redirect('/admin/posts?ok=deleted', 303);
+  }
+  values = formToObject(fd);
+  const res = await savePost(db, values, Astro.locals.user!.id, id);
+  if (res.ok) return Astro.redirect(`/admin/posts/${id}?ok=saved`, 303);
+  errors = res.errors;
+}
+---
+<DashboardLayout title="Edit post" area="admin">
+  <div class="spread"><h1 style="margin:0">Edit post</h1><a class="btn btn-outline" href={`/blog/${post.slug}`} target="_blank" rel="noopener">Preview</a></div>
+  <div style="margin-top:16px"><PostForm values={values} errors={errors} isNew={false} /></div>
+  <form method="post" class="panel" style="margin-top:20px" data-confirm="Delete this post?"><input type="hidden" name="action" value="delete" /><button class="btn btn-danger" type="submit">Delete post</button></form>
+</DashboardLayout>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((f) => f.addEventListener('submit', (e) => { if (!confirm(f.dataset.confirm!)) e.preventDefault(); }));
+</script>

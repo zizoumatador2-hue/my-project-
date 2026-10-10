@@ -1,0 +1,25 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import DealerProfileForm from '../../components/DealerProfileForm.astro';
+import { getDealerFullById } from '../../lib/dealers';
+import { saveDealerProfile } from '../../lib/dealer-profile';
+import { formToObject, type FieldErrors } from '../../lib/validation';
+import { emailEnabled } from '../../lib/email';
+
+const env = Astro.locals.runtime.env;
+const dealer = Astro.locals.dealer!;
+let errors: FieldErrors = {};
+let values: Record<string, string> | undefined;
+if (Astro.request.method === 'POST') {
+  values = formToObject(await Astro.request.formData());
+  const res = await saveDealerProfile(env.DB, dealer.id, values, Astro.locals.user!.id);
+  if (!res) return Astro.redirect('/dashboard/profile?ok=saved', 303);
+  errors = res;
+}
+const d = (await getDealerFullById(env.DB, dealer.id))!;
+---
+<DashboardLayout title="Dealer profile" area="dealer" err={Object.keys(errors).length ? 'Please fix the highlighted fields.' : null}>
+  <div class="spread"><h1 style="margin:0">Dealer profile</h1><a class="btn btn-outline" href={`/dealers/${d.slug}`}>View public page</a></div>
+  <p class="muted">This information appears on your public dealer page and in search results. New leads appear under Leads{emailEnabled(env) ? ' and are emailed to your lead email' : ''}.</p>
+  <DealerProfileForm d={d} values={values} errors={errors} />
+</DashboardLayout>

@@ -1,0 +1,15 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import { all } from '../../../lib/db';
+import { formatDate } from '../../../lib/format';
+const posts = await all<{ id: number; slug: string; title: string; status: string; category: string | null; updated_at: string; published_at: string | null }>(Astro.locals.runtime.env.DB,
+  'SELECT p.id, p.slug, p.title, p.status, c.name AS category, p.updated_at, p.published_at FROM blog_posts p LEFT JOIN categories c ON c.id = p.category_id ORDER BY p.updated_at DESC');
+---
+<DashboardLayout title="Blog posts" area="admin">
+  <div class="spread"><h1 style="margin:0">Blog posts</h1><a class="btn btn-primary" href="/admin/posts/new">+ New post</a></div>
+  <p class="muted">Freshness plan: review evergreen guides every 6–12 months, price and financing content every 1–3 months, and publish 1–2 new guides per week.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Published</th><th>Updated</th></tr></thead>
+    <tbody>{posts.map((p) => <tr><td><a href={`/admin/posts/${p.id}`}><strong>{p.title}</strong></a><br /><a class="small" href={`/blog/${p.slug}`}>/blog/{p.slug}</a></td><td>{p.category ?? '—'}</td><td><span class={`badge ${p.status === 'published' ? 'badge-ok' : ''}`}>{p.status}</span></td><td class="small">{p.published_at ? formatDate(p.published_at) : '—'}</td><td class="small">{formatDate(p.updated_at)}</td></tr>)}</tbody>
+  </table></div>
+</DashboardLayout>

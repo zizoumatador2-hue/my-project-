@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import DealerCard from '../../components/DealerCard.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import Pagination from '../../components/Pagination.astro';
+import Faq from '../../components/Faq.astro';
+import Icon from '../../components/Icon.astro';
+import { all, first } from '../../lib/db';
+import { DEALER_CARD_SQL, type DealerCard as DC } from '../../lib/dealers';
+import { breadcrumbLd, faqLd } from '../../lib/seo';
+
+const env = Astro.locals.runtime.env;
+const sp = Astro.url.searchParams;
+const q = (sp.get('q') ?? '').replace(/[^\p{L}\p{N}\s&'.-]/gu, '').trim().slice(0, 60);
+const citySlug = /^[a-z0-9-]{1,60}$/.test(sp.get('city') ?? '') ? sp.get('city')! : '';
+const zip = /^\d{5}$/.test(sp.get('zip') ?? '') ? sp.get('zip')! : '';
+const page = Math.max(1, Math.min(200, Number(sp.get('page')) || 1));
+const PER = 24;
+
+let origin: { lat: number; lng: number; label: string } | null = null;
+if (zip) {
+  const z = await first<{ lat: number; lng: number; city: string }>(env.DB, 'SELECT lat, lng, city FROM zip_codes WHERE zip = ?', [zip]);
+  if (z) origin = { lat: z.lat, lng: z.lng, label: `${z.city} ${zip}` };
+} else if (citySlug) {
+  const c = await first<{ lat: number; lng: number; name: string }>(env.DB, 'SELECT lat, lng, name FROM cities WHERE slug = ?', [citySlug]);
+  if (c) origin = { lat: c.lat, lng: c.lng, label: c.name };
+}
+const where: string[] = ["d.status = 'active'"];
+const params: (string | number)[] = [];
+if (q) { where.push("d.name LIKE ? ESCAPE '\\'"); params.push(`%${q.replace(/[\\%_]/g, (c) => `\\${c}`)}%`); }
+let distSel = 'NULL';
+const distParams: number[] = [];
+if (origin) {
+  const kx = 69 * Math.cos((origin.lat * Math.PI) / 180);
+  distSel = '(((d.lat - ?) * 69.0) * ((d.lat - ?) * 69.0) + ((d.lng - ?) * ?) * ((d.lng - ?) * ?))';
+  distParams.push(origin.lat, origin.lat, origin.lng, kx, origin.lng, kx);
+  where.push(`d.lat IS NOT NULL AND ${distSel} <= 10000`); // 100 miles
+  params.push(...distParams);
+}
+const whereSql = where.join(' AND ');
+const total = (await first<{ n: number }>(env.DB, `SELECT COUNT(*) AS n FROM dealers d WHERE ${whereSql}`, params))?.n ?? 0;
+const dealers = await all<DC>(
+  env.DB,
+  `SELECT * FROM (${DEALER_CARD_SQL.replace('SELECT d.id,', `SELECT ${distSel} AS dist2, d.id,`)} WHERE ${whereSql})
+    ORDER BY ${origin ? 'dist2 ASC' : "(plan = 'pro') DESC, vehicle_count DESC, name"} LIMIT ${PER} OFFSET ${(page - 1) * PER}`,
+  [...distParams, ...params],
+);
+const pages = Math.max(1, Math.ceil(total / PER));
+if (page > pages) return Astro.rewrite('/404');
+const cities = await all<{ slug: string; name: string }>(env.DB, 'SELECT slug, name FROM cities ORDER BY sort_order, name');
+const filtered = Boolean(q || citySlug || zip);
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Dealerships', href: '/dealers' }];
+const faq = [
+  { q: 'How do I find car dealerships near me in Alabama?', a: 'Enter your ZIP code or tap “Use my location” and BamaMotors lists Alabama dealerships closest to you first, with their inventory count, reviews and contact details.' },
+  { q: 'Are the dealers on BamaMotors verified?', a: 'Every dealership account is reviewed by our team before its listings go live. Always confirm details such as licensing and pricing directly with the dealer.' },
+  { q: 'Can I contact a dealer without calling?', a: 'Yes. Each dealer profile and vehicle listing has a contact form that sends your message straight to the dealership by email.' },
+  { q: 'I own a dealership. How do I get listed?', a: 'Create a dealer account on the For Dealers page. The Free plan lets you list up to 10 vehicles and receive unlimited leads.' },
+];
+const site = env.SITE_URL;
+---
+<BaseLayout title={`Car Dealerships in Alabama Near You${page > 1 ? ` – Page ${page}` : ''}`}
+  description="Find car dealerships and used car dealers in Alabama. See inventory, hours, reviews and contact info. Search by city or ZIP to find auto dealers near you."
+  keywords="car dealerships Alabama, used car dealers Alabama, car dealerships near me Alabama, auto dealers near me, used car dealership Alabama"
+  canonical={page > 1 && !filtered ? `/dealers?page=${page}` : '/dealers'} noindex={filtered} ads={total > 0}
+  jsonLd={[breadcrumbLd(site, crumbs), faqLd(faq)]}>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 style="margin-top:12px">Car Dealerships in Alabama</h1>
+    <p class="muted" style="max-width:780px">Browse used car dealers and auto dealerships across Alabama. See each dealer's current inventory, hours and customer reviews, then contact them directly, or search by ZIP code to find car dealerships near you.</p>
+    <form method="get" action="/dealers" class="panel toolbar" role="search" aria-label="Search dealers" data-search-form>
+      <div class="field"><label for="dq">Dealer name</label><input class="input" id="dq" name="q" value={q} placeholder="e.g. Auto Group" /></div>
+      <div class="field"><label for="dcity">City</label>
+        <select class="select" id="dcity" name="city"><option value="">All cities</option>{cities.map((c) => <option value={c.slug} selected={c.slug === citySlug}>{c.name}</option>)}</select></div>
+      <div class="field"><label for="dzip">ZIP code</label><input class="input" id="dzip" name="zip" value={zip} inputmode="numeric" maxlength="5" pattern="[0-9]{5}" data-zip /></div>
+      <button class="btn btn-primary" type="submit"><Icon name="search" size={18} /> Search</button>
+      <button class="btn btn-outline" type="button" data-near-me><Icon name="pin" size={18} /> Near me</button>
+      <span class="small muted" data-near-status aria-live="polite"></span>
+    </form>
+    <p aria-live="polite"><strong>{total}</strong> {total === 1 ? 'dealership' : 'dealerships'}{origin ? ` within 100 miles of ${origin.label}` : ' in Alabama'}</p>
+    {dealers.length > 0 ? (
+      <div class="grid grid-3">{dealers.map((d) => <DealerCard d={d} />)}</div>
+    ) : (
+      <EmptyState title="No dealerships found" icon="store"><p>Try a different city or ZIP code. Are you a dealer? <a href="/for-dealers">List your dealership</a>.</p></EmptyState>
+    )}
+    <Pagination page={page} pages={pages} href={(p) => `/dealers?${new URLSearchParams({ ...(q && { q }), ...(citySlug && { city: citySlug }), ...(zip && { zip }), page: String(p) })}`} />
+    <section class="section">
+      <div class="panel" style="display:grid;gap:12px">
+        <h2>Own a dealership in Alabama?</h2>
+        <p style="margin:0">Reach local car shoppers searching for used cars in your city. List up to 10 vehicles free and receive leads directly by email.</p>
+        <p style="margin:0"><a class="btn btn-primary" href="/for-dealers">List Your Dealership</a></p>
+      </div>
+    </section>
+    <div class="section-tight" style="padding-bottom:48px"><Faq faq={faq} title="Alabama car dealerships: FAQ" /></div>
+  </div>
+</BaseLayout>
+<script>
+  import { initSearchForms } from '../../scripts/search-form';
+  initSearchForms();
+</script>

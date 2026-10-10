@@ -1,0 +1,10 @@
+---
+import LandingPage from '../../../components/LandingPage.astro';
+import { resolveLanding, searchLanding } from '../../../lib/landing';
+const landing = await resolveLanding(Astro.locals.runtime.env.DB, String(Astro.params.slug ?? '').toLowerCase(), String(Astro.params.sub ?? '').toLowerCase());
+if (!landing) return Astro.rewrite('/404');
+const search = await searchLanding(Astro.locals.runtime.env.DB, landing, Astro.url.searchParams);
+// A page number past the last page is a missing page, not an empty result list.
+if (search.filters.page > search.pages) return Astro.rewrite('/404');
+---
+<LandingPage landing={landing} search={search} />

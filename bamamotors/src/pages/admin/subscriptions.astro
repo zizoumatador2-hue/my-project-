@@ -1,0 +1,67 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, first, insert, run, audit } from '../../lib/db';
+import { applyPlan } from '../../lib/billing';
+import { PLANS, type PlanId } from '../../lib/plans';
+import { formatDate, formatPrice } from '../../lib/format';
+import { stripeEnabled } from '../../lib/stripe';
+
+const env = Astro.locals.runtime.env;
+const db = env.DB;
+const admin = Astro.locals.user!;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  const subId = Number(fd.get('sub_id'));
+  const sub = subId ? await first<{ id: number; dealer_id: number; plan: PlanId }>(db, 'SELECT id, dealer_id, plan FROM subscriptions WHERE id = ?', [subId]) : null;
+  if (action === 'approve' && sub) {
+    await applyPlan(db, sub.dealer_id, sub.plan, { provider: 'manual', actorId: admin.id });
+    if (fd.get('record_payment') === 'on' && PLANS[sub.plan].priceCents > 0) {
+      await insert(db, "INSERT INTO payments (dealer_id, kind, amount_cents, status, provider, description) VALUES (?, 'subscription', ?, 'succeeded', 'manual', ?)", [sub.dealer_id, PLANS[sub.plan].priceCents, `${PLANS[sub.plan].name} plan (invoice)`]);
+    }
+  } else if (action === 'decline' && sub) {
+    await run(db, "UPDATE subscriptions SET status = 'canceled' WHERE id = ?", [sub.id]);
+    await audit(db, admin.id, 'subscription.decline', 'subscription', sub.id);
+  } else if (action === 'payment') {
+    const dealerId = Number(fd.get('dealer_id'));
+    const amount = Math.round(Number(fd.get('amount')) * 100);
+    if (dealerId && amount > 0) await insert(db, "INSERT INTO payments (dealer_id, kind, amount_cents, status, provider, description) VALUES (?, ?, ?, 'succeeded', 'manual', ?)", [dealerId, fd.get('kind') === 'featured' ? 'featured' : 'subscription', amount, String(fd.get('description') ?? '').slice(0, 200) || 'Manual payment']);
+  }
+  return Astro.redirect('/admin/subscriptions?ok=billing', 303);
+}
+const requested = await all<{ id: number; dealer_id: number; dealer: string; plan: PlanId; created_at: string; current: string }>(db,
+  "SELECT s.id, s.dealer_id, d.name AS dealer, s.plan, s.created_at, d.plan AS current FROM subscriptions s JOIN dealers d ON d.id = s.dealer_id WHERE s.status = 'requested' ORDER BY s.created_at");
+const active = await all<{ id: number; dealer_id: number; dealer: string; plan: string; status: string; provider: string; current_period_end: string | null }>(db,
+  "SELECT s.id, s.dealer_id, d.name AS dealer, s.plan, s.status, s.provider, s.current_period_end FROM subscriptions s JOIN dealers d ON d.id = s.dealer_id WHERE s.status IN ('active','past_due') ORDER BY d.name");
+const payments = await all<{ id: number; dealer: string; kind: string; amount_cents: number; status: string; provider: string; created_at: string }>(db,
+  'SELECT p.id, d.name AS dealer, p.kind, p.amount_cents, p.status, p.provider, p.created_at FROM payments p JOIN dealers d ON d.id = p.dealer_id ORDER BY p.created_at DESC LIMIT 50');
+const dealers = await all<{ id: number; name: string }>(db, 'SELECT id, name FROM dealers ORDER BY name');
+const mrr = active.reduce((a, s) => a + (PLANS[s.plan as PlanId]?.priceCents ?? 0), 0);
+---
+<DashboardLayout title="Subscriptions" area="admin">
+  <h1>Subscriptions & payments</h1>
+  <p class="muted">Online billing: <strong>{stripeEnabled(env) ? 'Stripe connected' : 'not configured (manual invoicing)'}</strong> · Monthly recurring revenue: <strong>{formatPrice(mrr)}</strong></p>
+  <section class="panel" style="margin-bottom:20px"><h2 style="font-size:1.1rem">Plan requests</h2>
+    {requested.length ? <div class="table-wrap"><table><thead><tr><th>Dealer</th><th>Current</th><th>Requested</th><th>Date</th><th></th></tr></thead><tbody>
+      {requested.map((r) => <tr><td><a href={`/admin/dealers/${r.dealer_id}`}>{r.dealer}</a></td><td>{r.current}</td><td><strong>{r.plan}</strong></td><td class="small">{formatDate(r.created_at)}</td>
+        <td style="white-space:nowrap"><form method="post" class="inline-form"><input type="hidden" name="sub_id" value={r.id} /><label class="check small" style="display:inline-flex"><input type="checkbox" name="record_payment" /> record payment</label> <button class="btn btn-primary btn-sm" name="action" value="approve">Approve</button> <button class="btn btn-ghost btn-sm" name="action" value="decline">Decline</button></form></td></tr>)}
+    </tbody></table></div> : <p class="muted">No pending requests.</p>}
+  </section>
+  <section class="panel" style="margin-bottom:20px"><h2 style="font-size:1.1rem">Active subscriptions</h2>
+    {active.length ? <div class="table-wrap"><table><thead><tr><th>Dealer</th><th>Plan</th><th>Status</th><th>Provider</th><th>Period end</th></tr></thead><tbody>
+      {active.map((s) => <tr><td><a href={`/admin/dealers/${s.dealer_id}`}>{s.dealer}</a></td><td>{s.plan}</td><td>{s.status}</td><td>{s.provider}</td><td class="small">{s.current_period_end ? formatDate(s.current_period_end) : '—'}</td></tr>)}
+    </tbody></table></div> : <p class="muted">No paid subscriptions yet.</p>}
+  </section>
+  <section class="panel"><h2 style="font-size:1.1rem">Payments</h2>
+    <form method="post" class="toolbar"><input type="hidden" name="action" value="payment" />
+      <div class="field"><label for="pd">Dealer</label><select class="select" id="pd" name="dealer_id">{dealers.map((d) => <option value={d.id}>{d.name}</option>)}</select></div>
+      <div class="field"><label for="pk">Kind</label><select class="select" id="pk" name="kind"><option value="subscription">subscription</option><option value="featured">featured</option></select></div>
+      <div class="field"><label for="pa">Amount ($)</label><input class="input" id="pa" name="amount" inputmode="decimal" required /></div>
+      <div class="field"><label for="pdesc">Description</label><input class="input" id="pdesc" name="description" /></div>
+      <button class="btn btn-outline" type="submit">Record manual payment</button>
+    </form>
+    <div class="table-wrap"><table><thead><tr><th>Date</th><th>Dealer</th><th>Kind</th><th>Amount</th><th>Status</th><th>Provider</th></tr></thead><tbody>
+      {payments.map((p) => <tr><td class="small">{formatDate(p.created_at)}</td><td>{p.dealer}</td><td>{p.kind}</td><td>{formatPrice(p.amount_cents)}</td><td>{p.status}</td><td>{p.provider}</td></tr>)}
+    </tbody></table></div>
+  </section>
+</DashboardLayout>

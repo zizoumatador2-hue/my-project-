@@ -1,0 +1,13 @@
+---
+import VehicleCard from './VehicleCard.astro';
+import type { VehicleCard as VC } from '../lib/search';
+interface Props { items: VC[]; eagerCount?: number; headingLevel?: 'h2' | 'h3'; }
+const { items, eagerCount = 0, headingLevel = 'h3' } = Astro.props;
+---
+<div class="grid grid-3">
+  {items.map((v, i) => <VehicleCard v={v} eager={i < eagerCount} headingLevel={headingLevel} />)}
+</div>
+<script>
+  import { initSaveButtons } from '../scripts/save';
+  initSaveButtons();
+</script>

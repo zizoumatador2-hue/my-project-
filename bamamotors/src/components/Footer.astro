@@ -1,0 +1,70 @@
+---
+import Logo from './Logo.astro';
+import { indexableLandingPaths } from '../lib/sitemap';
+const s = Astro.locals.settings ?? {};
+const year = new Date().getFullYear();
+const env = Astro.locals.runtime.env;
+const indexable = await indexableLandingPaths(env.DB, env.ENVIRONMENT === 'production' ? 60_000 : 0);
+const categoryLinks = [
+  { href: '/used-cars/trucks', label: 'Used trucks' },
+  { href: '/used-cars/suvs', label: 'Used SUVs' },
+  { href: '/used-cars/under-10000', label: 'Cars under $10,000' },
+].filter((l) => indexable.has(l.href));
+const cities = [
+  ['birmingham-al', 'Birmingham'], ['huntsville-al', 'Huntsville'], ['mobile-al', 'Mobile'], ['montgomery-al', 'Montgomery'],
+  ['tuscaloosa-al', 'Tuscaloosa'], ['hoover-al', 'Hoover'], ['auburn-al', 'Auburn'], ['dothan-al', 'Dothan'],
+];
+const social = [
+  ['social_facebook', 'Facebook'], ['social_instagram', 'Instagram'], ['social_x', 'X'], ['social_youtube', 'YouTube'],
+].filter(([k]) => s[k]);
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <Logo />
+        <p style="margin-top:12px">BamaMotors is a local Alabama car marketplace. Search used cars for sale from Alabama dealerships and contact them directly, free for shoppers.</p>
+        {social.length > 0 && (
+          <ul class="row" style="display:flex">
+            {social.map(([k, label]) => <li><a href={s[k]} rel="noopener me" target="_blank">{label}</a></li>)}
+          </ul>
+        )}
+      </div>
+      <nav aria-label="Used cars by city">
+        <h2>Used Cars by City</h2>
+        <ul>{cities.map(([slug, name]) => <li><a href={`/used-cars/${slug}`}>Used cars in {name}</a></li>)}</ul>
+      </nav>
+      <nav aria-label="Shop">
+        <h2>Shop</h2>
+        <ul>
+          <li><a href="/used-cars">All used cars for sale</a></li>
+          {categoryLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          <li><a href="/dealers">Car dealerships in Alabama</a></li>
+          <li><a href="/financing">Car financing</a></li>
+          <li><a href="/blog">Car buying guides</a></li>
+          <li><a href="/blog/used-cars-near-me-alabama">Used cars near me</a></li>
+          <li><a href="/blog/how-to-buy-a-used-car-in-alabama">How to buy a used car in Alabama</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Company">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about">About BamaMotors</a></li>
+          <li><a href="/how-it-works">How it works</a></li>
+          <li><a href="/for-dealers">For dealers</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact us</a></li>
+          <li><a href="/editorial-policy">Editorial policy</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Use</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
+          <li><a href="/photo-credits">Photo credits</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} BamaMotors. All rights reserved.{s.contact_email && <> · <a href={`mailto:${s.contact_email}`}>{s.contact_email}</a></>}</p>
+      <p>Listings, prices and vehicle details are provided by the listing dealer. Always verify with the dealer before purchase.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,35 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, run, audit } from '../../lib/db';
+import { formatDateTime } from '../../lib/format';
+
+const db = Astro.locals.runtime.env.DB;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const id = Number(fd.get('id'));
+  const action = String(fd.get('action'));
+  if (action === 'approved' || action === 'rejected') await run(db, 'UPDATE reviews SET status = ? WHERE id = ?', [action, id]);
+  else if (action === 'delete') await run(db, 'DELETE FROM reviews WHERE id = ?', [id]);
+  await audit(db, Astro.locals.user!.id, `review.${action}`, 'review', id);
+  return Astro.redirect(`/admin/reviews${Astro.url.search}`, 303);
+}
+const status = ['pending', 'approved', 'rejected'].includes(Astro.url.searchParams.get('status') ?? '') ? Astro.url.searchParams.get('status')! : 'pending';
+const reviews = await all<{ id: number; rating: number; title: string; body: string; status: string; created_at: string; dealer: string; slug: string; user: string; email: string }>(db,
+  `SELECT r.id, r.rating, r.title, r.body, r.status, r.created_at, d.name AS dealer, d.slug, u.name AS user, u.email FROM reviews r JOIN dealers d ON d.id = r.dealer_id JOIN users u ON u.id = r.user_id
+   WHERE r.status = ? ORDER BY r.created_at DESC LIMIT 100`, [status]);
+---
+<DashboardLayout title="Reviews" area="admin">
+  <h1>Review moderation</h1>
+  <ul class="chips" style="margin-bottom:16px">{['pending', 'approved', 'rejected'].map((s) => <li><a class="chip" href={`/admin/reviews?status=${s}`} aria-current={s === status ? 'page' : undefined}>{s}</a></li>)}</ul>
+  {reviews.length === 0 && <p class="muted">No {status} reviews.</p>}
+  <div class="stack">{reviews.map((r) => (
+    <article class="panel">
+      <div class="spread"><strong>{'★'.repeat(r.rating)} {r.title}</strong><span class="small muted">{r.user} ({r.email}) → <a href={`/dealers/${r.slug}`}>{r.dealer}</a> · {formatDateTime(r.created_at)}</span></div>
+      <p style="margin:8px 0">{r.body}</p>
+      <form method="post" class="row"><input type="hidden" name="id" value={r.id} />
+        {r.status !== 'approved' && <button class="btn btn-primary btn-sm" name="action" value="approved">Approve</button>}
+        {r.status !== 'rejected' && <button class="btn btn-outline btn-sm" name="action" value="rejected">Reject</button>}
+        <button class="btn btn-danger btn-sm" name="action" value="delete">Delete</button></form>
+    </article>
+  ))}</div>
+</DashboardLayout>

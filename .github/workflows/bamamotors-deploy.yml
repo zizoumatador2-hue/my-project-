@@ -1,0 +1,142 @@
+name: BamaMotors Deploy
+on:
+  push:
+    branches: [ccr-949c33b0-3w3w8k, claude/trusttransfer-marketplace-7xcesu, main]
+    paths: ['bamamotors/**', '.github/workflows/bamamotors-deploy.yml']
+  workflow_dispatch:
+concurrency: bamamotors-deploy
+permissions:
+  contents: write
+defaults:
+  run:
+    working-directory: bamamotors
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}
+      WRANGLER_SEND_METRICS: 'false'
+      # Custom domain to attach (defaults to bamamotors.com; override with the BAMAMOTORS_DOMAIN repo variable).
+      # If the zone is not on the account the site stays on workers.dev with indexing blocked.
+      CUSTOM_DOMAIN: ${{ vars.BAMAMOTORS_DOMAIN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: bamamotors/package-lock.json }
+      - name: Normalize credentials
+        run: |
+          TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          if [ -z "$TOKEN" ]; then echo "::error::CLOUDFLARE_API_TOKEN secret is missing"; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          ACC="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          if [ -z "$ACC" ]; then ACC=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty'); fi
+          if [ -z "$ACC" ]; then echo "::error::Could not determine the Cloudflare account id"; exit 1; fi
+          echo "CLOUDFLARE_ACCOUNT_ID=$ACC" >> "$GITHUB_ENV"
+      - run: npm ci
+      - name: Site photos (Wikimedia Commons, plus fal.ai illustrations when FAL_KEY is set)
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY || secrets.FAL_API_KEY || secrets.FAL_AI_KEY }}
+          # Booleans only, never values.
+          HAS: "FAL_KEY=${{ secrets.FAL_KEY != '' }} FAL_API_KEY=${{ secrets.FAL_API_KEY != '' }} FAL_AI_KEY=${{ secrets.FAL_AI_KEY != '' }}"
+        run: |
+          echo "fal key lookup: $HAS"
+          export FAL_KEY="$(printf '%s' "$FAL_KEY" | tr -d '[:space:]')"
+          node scripts/fetch-commons.mjs
+          node scripts/generate-fal.mjs
+          if [ -n "$(git status --porcelain public/images src/data/images.json)" ]; then
+            git config user.name "bamamotors-bot"; git config user.email "bamamotors-bot@users.noreply.github.com"
+            git add public/images src/data/images.json
+            git commit -m "BamaMotors: add licensed photos [skip ci]"
+            git push || echo "::warning::Could not push photos back to the branch (they are still used in this deploy)"
+          fi
+      - run: npm run lint
+      - run: npm test
+      - name: Attach custom domain (falls back to workers.dev if the zone is not on this account)
+        id: url
+        run: |
+          API=https://api.cloudflare.com/client/v4
+          AUTH="Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          DOMAIN="${CUSTOM_DOMAIN:-bamamotors.com}"
+          SUB=$(curl -fsS -H "$AUTH" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain // empty' || true)
+          FALLBACK="bamamotors.$SUB.workers.dev"
+          echo "fallback=$FALLBACK" >> "$GITHUB_OUTPUT"
+          echo "zones visible to the token: $(curl -sS -H "$AUTH" "$API/zones?per_page=50" | jq -r '[.result[]?.name] | join(", ")')"
+          ZONE=$(curl -sS -H "$AUTH" "$API/zones?name=$DOMAIN" | jq -c '.result[0] // empty')
+          HOST="$FALLBACK"; ENVIRONMENT=preview
+          if [ -z "$ZONE" ]; then
+            echo "::warning::Zone $DOMAIN is not on this Cloudflare account (or the token cannot read zones). Add the domain to Cloudflare first; staying on $FALLBACK."
+          else
+            ZONE_ID=$(echo "$ZONE" | jq -r .id); ZSTATUS=$(echo "$ZONE" | jq -r .status)
+            echo "zone $DOMAIN found (status: $ZSTATUS)"
+            OK=1
+            for h in "$DOMAIN" "www.$DOMAIN"; do
+              R=$(curl -sS -X PUT -H "$AUTH" -H "Content-Type: application/json" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" \
+                -d "{\"hostname\":\"$h\",\"service\":\"bamamotors\",\"environment\":\"production\",\"zone_id\":\"$ZONE_ID\"}")
+              if [ "$(echo "$R" | jq -r .success)" = "true" ]; then echo "attached $h"; else
+                echo "::warning::Could not attach $h: $(echo "$R" | jq -c '.errors')"; [ "$h" = "$DOMAIN" ] && OK=0; fi
+            done
+            if [ "$OK" = 1 ]; then HOST="$DOMAIN"; ENVIRONMENT=production; fi
+          fi
+          # Extra domains point at the same Worker; the app 301-redirects them to SITE_URL.
+          for EXTRA in bamamoutours.com; do
+            EZ=$(curl -sS -H "$AUTH" "$API/zones?name=$EXTRA" | jq -r '.result[0].id // empty')
+            if [ -z "$EZ" ]; then echo "::warning::$EXTRA is not on this Cloudflare account yet; add it to Cloudflare to redirect it."; continue; fi
+            for h in "$EXTRA" "www.$EXTRA"; do
+              R=$(curl -sS -X PUT -H "$AUTH" -H "Content-Type: application/json" "$API/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" \
+                -d "{\"hostname\":\"$h\",\"service\":\"bamamotors\",\"environment\":\"production\",\"zone_id\":\"$EZ\"}")
+              if [ "$(echo "$R" | jq -r .success)" = "true" ]; then echo "attached $h"; else echo "::warning::Could not attach $h: $(echo "$R" | jq -c '.errors')"; fi
+            done
+          done
+          echo "host=$HOST" >> "$GITHUB_OUTPUT"
+          echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
+          echo "Deploying as $HOST ($ENVIRONMENT)"
+      - name: Build
+        run: SITE_URL="https://${{ steps.url.outputs.host }}" npm run build
+      - name: Apply D1 migrations
+        id: migrate
+        continue-on-error: true
+        run: npx wrangler d1 migrations apply bamamotors-db --remote
+      - name: Deploy worker
+        run: npx wrangler deploy --var SITE_URL:https://${{ steps.url.outputs.host }} --var ENVIRONMENT:${{ steps.url.outputs.environment }}
+      - name: Provision secrets (generate missing ones once; never printed)
+        env:
+          SESSION_SECRET: ${{ secrets.BAMAMOTORS_SESSION_SECRET }}
+          BOOTSTRAP_ADMIN_EMAIL: ${{ secrets.BAMAMOTORS_ADMIN_EMAIL || secrets.BOOTSTRAP_ADMIN_EMAIL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.BAMAMOTORS_STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.BAMAMOTORS_STRIPE_WEBHOOK_SECRET }}
+          STRIPE_PRICE_BASIC: ${{ secrets.BAMAMOTORS_STRIPE_PRICE_BASIC }}
+          STRIPE_PRICE_PRO: ${{ secrets.BAMAMOTORS_STRIPE_PRICE_PRO }}
+        run: |
+          EXISTING=$(npx wrangler secret list --format json 2>/dev/null | jq -r '.[].name' || true)
+          node -e 'const k=["SESSION_SECRET","BOOTSTRAP_ADMIN_EMAIL","RESEND_API_KEY","STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","STRIPE_PRICE_BASIC","STRIPE_PRICE_PRO"];const o={};for(const x of k)if(process.env[x])o[x]=process.env[x];require("fs").writeFileSync("/tmp/s.json",JSON.stringify(o))'
+          if ! echo "$EXISTING" | grep -qx SESSION_SECRET && [ -z "$SESSION_SECRET" ]; then
+            jq --arg v "$(openssl rand -base64 48)" '. + {SESSION_SECRET: $v}' /tmp/s.json > /tmp/s2.json && mv /tmp/s2.json /tmp/s.json; echo "generated SESSION_SECRET"
+          fi
+          echo "syncing $(jq 'length' /tmp/s.json) secrets"
+          if [ "$(jq 'length' /tmp/s.json)" != "0" ]; then npx wrangler secret bulk /tmp/s.json; fi
+          rm -f /tmp/s.json
+      - name: Smoke test
+        run: |
+          H="https://${{ steps.url.outputs.host }}"
+          sleep 20  # let the new version finish rolling out so we test it, not the previous one
+          ok=0
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$H/") || true
+            if [ "$code" = "200" ]; then ok=1; break; fi
+            echo "waiting for $H (got $code)"; sleep 10
+          done
+          [ "$ok" = 1 ] || { echo "::error::$H did not come up"; exit 1; }
+          for p in /used-cars /used-cars/birmingham-al /blog /robots.txt /sitemap.xml; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$H$p"); echo "$p → $code"; [ "$code" = "200" ] || exit 1
+          done
+          if [ "${{ steps.url.outputs.environment }}" = "production" ]; then
+            echo "workers.dev → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://${{ steps.url.outputs.fallback }}/")"
+            echo "www → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://www.${{ steps.url.outputs.host }}/" || echo 'not ready yet')"
+            echo "http → $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "http://${{ steps.url.outputs.host }}/" || echo 'unreachable')"
+          fi
+          echo "migrations step: ${{ steps.migrate.outcome }}"
+          echo "Live at $H" >> "$GITHUB_STEP_SUMMARY"
