@@ -1,5 +1,5 @@
 ---
-title: "How Much Tea Per Cup? Ratios, Teaspoons & Chart"
+title: "How Much Tea Per Cup? Ratios, Teaspoons and Chart"
 description: "How much tea per cup? Get tea-to-water ratios, teaspoons of loose tea per cup, and a simple measuring chart for every tea type."
 hub: brewing
 keyword: "how much tea per cup"

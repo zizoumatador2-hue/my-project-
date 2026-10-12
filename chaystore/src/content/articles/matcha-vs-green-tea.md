@@ -1,5 +1,5 @@
 ---
-title: "Matcha vs Green Tea: Differences, Caffeine & Which to Pick"
+title: "Matcha vs Green Tea: Taste, Caffeine & Which to Pick"
 description: "Matcha vs green tea: how they are grown and made, taste, caffeine, cost and how to choose between powdered matcha and steeped green tea."
 hub: green-tea-matcha
 keyword: "matcha vs green tea"
