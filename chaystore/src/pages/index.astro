@@ -43,7 +43,7 @@ const stats = [
   { value: Object.keys(HUBS).length, label: 'topic hubs' },
   { value: totalWords, label: 'words of guidance', suffix: '+' },
 ];
-const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Winter pour"}, {"id": 1362537, "text": "Glass teapot"}, {"id": 32695045, "text": "Iced matcha"}, {"id": 7138780, "text": "Jasmine"}, {"id": 19880782, "text": "Tea for two"}, {"id": 33789289, "text": "Spiced tea"}, {"id": 8634757, "text": "Matcha latte"}, {"id": 17125143, "text": "Chamomile"}, {"id": 6871921, "text": "Tea terraces"}].map((g, i) => ({ image: `/images/gallery-${i + 1}-800.webp`, text: g.text }));
+const gallery = ["Steam", "Winter pour", "Glass teapot", "Iced matcha", "Tea for two", "Spiced tea", "Chamomile", "Matcha whisk", "Tea terraces", "Black tea and mint"].map((text, i) => ({ image: `/images/gallery-${i + 1}-800.webp`, text }));
 ---
 <BaseLayout
   title="Tea Guide: Types of Tea, Brewing & Buying | ChayStore"
@@ -112,7 +112,7 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
 
   <section class="dark-gallery" aria-label="Tea in pictures">
     <TeaGallery client:visible items={gallery} />
-    <p class="gallery-note">Drag or scroll to explore. Photos from <a href="https://www.pexels.com" rel="noopener">Pexels</a> · <a href="/credits/">credits</a></p>
+    <p class="gallery-note">Drag or scroll to explore. Scene images, not photos of specific products or places · <a href="/credits/">credits</a></p>
   </section>
 
   <section class="cinema-story" aria-labelledby="cinema-story-title" data-cinema-stage>
@@ -130,8 +130,8 @@ const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Win
         <a class="btn primary" href="/guides/how-to-brew-loose-leaf-tea/">Start with the loose-leaf brewing guide</a>
       </div>
       <figure class="cinema-frame reveal" data-cinema-frame>
-        <img src="/images/gallery-2-1600.webp" alt="Tea being poured into a clear glass cup in warm natural light" width="1600" height="1067" loading="lazy" decoding="async" />
-        <figcaption>Simple technique, repeatable results. Photo from Pexels.</figcaption>
+        <img src="/images/gallery-2-1600.webp" alt="Hot tea being poured from a white kettle into a clear glass cup on a winter windowsill" width="1600" height="1067" loading="lazy" decoding="async" />
+        <figcaption>Simple technique, repeatable results. Scene image, not a photo of a specific product.</figcaption>
       </figure>
     </div>
   </section>
