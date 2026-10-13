@@ -69,7 +69,8 @@
       "category": "stock-market-triggers",
       "series": "market-trigger-breakdown",
       "image": "boardroom-earnings",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-10-13"
     },
     {
       "n": 6,
