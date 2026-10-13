@@ -2,6 +2,7 @@
 title: "Why Do Stocks Fall After Beating Earnings? 7 Real Reasons"
 description: "A company beats estimates and its stock drops anyway. The usual culprits: weak guidance, a low-quality beat, or sky-high expectations. How to spot each."
 publishDate: 2026-10-09
+modifiedDate: 2026-10-13
 category: stock-market-triggers
 series: market-trigger-breakdown
 primaryKeyword: "why do stocks fall after earnings"
@@ -105,7 +106,9 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [What is earnings guidance and why does it move stocks?](/articles/what-is-earnings-guidance/)
 - [Stock market triggers: earnings and corporate news](/stock-market-triggers/)
+- [How to read an earnings report in 10 minutes](/articles/how-to-read-an-earnings-report/)
 - [How inflation affects stocks](/articles/how-does-inflation-affect-stocks/)
 - [What happens to stocks when the Fed cuts rates](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 
