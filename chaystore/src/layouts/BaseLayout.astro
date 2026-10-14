@@ -34,6 +34,7 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <meta name="author" content={SITE.author} />
   <link rel="canonical" href={canonical} />
   <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+  <meta name="google-adsense-account" content={ADSENSE_CLIENT} />
   <meta name="theme-color" content="#0d1a12" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="alternate" type="application/rss+xml" title={`${SITE.name} RSS`} href="/rss.xml" />
