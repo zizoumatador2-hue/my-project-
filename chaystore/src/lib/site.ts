@@ -25,5 +25,7 @@ export const HUB_IDS = Object.keys(HUBS) as [HubId, ...HubId[]];
 
 // Flip to true once an ad network approves the site (reserves space to avoid layout shift).
 export const ADS_ENABLED = false;
+// Google AdSense publisher ID. The loader script is included site-wide so AdSense can verify the site.
+export const ADSENSE_CLIENT = 'ca-pub-8532224804732263';
 // Set to true only after you are enrolled in Amazon Associates (shows the required statement).
 export const AMAZON_ASSOCIATE = false;
