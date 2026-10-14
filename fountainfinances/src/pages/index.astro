@@ -1,0 +1,247 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
+import Photo from '@/components/Photo.astro';
+import { ogImage } from '@/lib/og';
+import PhotoCredit from '@/components/PhotoCredit.astro';
+import GradientText from '@/components/reactbits/GradientText.astro';
+import CountUp from '@/components/reactbits/CountUp';
+import CalcCard from '@/components/CalcCard.astro';
+import GuideCard from '@/components/GuideCard.astro';
+import Faq from '@/components/Faq.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import { Content as Pillar, getHeadings } from '@/pillar/personal-finance-guide.md';
+import { HUBS } from '@/data/taxonomy';
+import { CALCULATORS } from '@/data/calculators';
+import { SITE } from '@/data/site';
+import { article, faqPage } from '@/lib/schema';
+
+const guides = (await getCollection('guides', (g) => !g.data.draft)).sort(
+  (a, b) => b.data.updated.getTime() - a.data.updated.getTime() || b.data.published.getTime() - a.data.published.getTime(),
+);
+const latest = guides.slice(0, 6);
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const comparisons = await getCollection('comparisons');
+const featuredCalcs = CALCULATORS.filter((c) => c.featured);
+const otherCalcs = CALCULATORS.filter((c) => !c.featured);
+const pillarHeadings = getHeadings().filter((h) => h.depth === 2);
+const author = { id: 'editorial-team', name: 'Fountain Finances Editorial Team', type: 'Organization' as const };
+
+const hubOrder = ['credit', 'banking', 'loans', 'personal-finance', 'mortgage', 'insurance'];
+const hubBlocks = hubOrder.map((slug) => {
+  const hub = HUBS.find((h) => h.slug === slug)!;
+  return { hub, topics: topics.filter((t) => t.data.hub === slug) };
+});
+
+const faqs = [
+  { q: 'What is Fountain Finances?', a: 'Fountain Finances is an independent personal finance website for Americans. We publish plain-English guides, free financial calculators and transparent product comparisons to help you make confident money decisions. We are not a bank, lender or financial adviser.' },
+  { q: 'What are the basics of personal finance?', a: 'Spend less than you earn with a budget, keep an emergency fund, use debt carefully and pay it down, save and invest for long-term goals, and protect yourself with the right insurance. Our [personal finance guide](#personal-finance-guide) covers each step.' },
+  { q: 'How do I start managing my money as a beginner?', a: 'Start with a monthly budget built from your take-home pay and real statements, automate a transfer to savings on payday, set up autopay for every bill and build a starter emergency fund. The [budget calculator](/calculators/budget/) is a quick first step.' },
+  { q: 'How much should I have in an emergency fund?', a: 'Most people should aim for three to six months of essential expenses, and more if your income is irregular or you are the only earner. See our [emergency fund guide](/guides/emergency-fund-guide/).' },
+  { q: 'What is a good credit score?', a: 'On the 300–850 FICO scale, about 670 and above is generally considered good, 740 and above very good and 800 and above exceptional. Paying on time and keeping card balances low matter most. Read [how credit scores work](/guides/how-credit-scores-work/).' },
+  { q: 'Are your financial calculators free?', a: 'Yes. Every calculator is free, requires no sign-up and runs in your browser: the numbers you enter are not sent to us. Each page explains the formula used.' },
+  { q: 'How do you choose the products you compare?', a: 'Products must be widely available to U.S. consumers and publish their terms online; deposit accounts must be FDIC or NCUA insured. We list options alphabetically, show verified figures with the date they were checked and explain our criteria. See our [editorial standards](/editorial-standards/).' },
+  { q: 'How does Fountain Finances make money?', a: 'We may earn commissions from clearly labeled affiliate links and from advertising. Compensation never affects which products we include or what we say about them. Read our [affiliate disclosure](/affiliate-disclosure/).' },
+  { q: 'Is the information on Fountain Finances financial advice?', a: 'No. Our content is general education and does not consider your personal circumstances. For decisions that depend on your full situation, consider a qualified professional, and always confirm terms with the provider.' },
+];
+
+const pageTitle = 'Personal Finance Tips, Tools & Guides | Fountain Finances';
+const description = 'Personal finance made simple: plain-English guides, free budget, loan and mortgage calculators, and transparent comparisons for smarter money decisions.';
+const schema = [
+  { '@type': 'WebPage', '@id': `${SITE.url}/#webpage`, url: `${SITE.url}/`, name: pageTitle, description, isPartOf: { '@id': `${SITE.url}/#website` }, about: { '@id': `${SITE.url}/#organization` }, inLanguage: 'en-US' },
+  article({
+    url: '/',
+    title: 'The Complete Guide to Personal Finance',
+    description: 'A step-by-step personal finance guide for Americans: budgeting, emergency funds, banking, credit, debt, borrowing, homebuying, growing wealth and insurance.',
+    published: new Date('2026-09-01'),
+    updated: new Date('2026-09-28'),
+    author,
+    keywords: ['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money'],
+    section: 'Personal Finance',
+    image: ogImage('home'),
+  }),
+  faqPage(faqs),
+];
+---
+<BaseLayout title={pageTitle} description={description} keywords={['personal finance', 'personal finance tips', 'personal finance for beginners', 'personal finance guide', 'how to manage money', 'free financial calculators']} path="/" schema={schema} image={ogImage('home')}>
+  <section class="hero hero-cine" aria-labelledby="hero-h" data-glow>
+    <div class="hero-media" aria-hidden="true">
+      <Photo name="home" class="kenburns" eager decorative />
+      <div class="hero-aurora"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="hero-shade"></div>
+      <div class="hero-glow"></div>
+      <div class="grain"></div>
+    </div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow eyebrow-light"><span class="shiny-text">Independent personal finance for Americans</span></span>
+        <h1 id="hero-h" class="hero-title"><span class="w" style="--d:0.00s">Make</span> <span class="w" style="--d:0.12s">Smarter</span> <span class="w" style="--d:0.24s">Money</span> <span class="w" style="--d:0.36s">Decisions</span></h1>
+        <p class="hero-lede anim" style="--a:.55s">Compare financial products, understand your options, and use practical tools to take control of your finances.</p>
+        <div class="hero-cta anim" style="--a:.75s">
+          <a class="btn btn-primary btn-glow" href="/calculators/" data-track="cta_click" data-placement="hero">Explore Financial Tools</a>
+          <a class="btn btn-glass" href="/best/" data-track="cta_click" data-placement="hero">Compare Financial Products</a>
+        </div>
+        <ul class="hero-points anim" style="--a:.95s">
+          <li><Icon name="check" size={18} />Free calculators, no sign-up</li>
+          <li><Icon name="check" size={18} />Sourced from CFPB, FDIC, Federal Reserve &amp; IRS</li>
+          <li><Icon name="check" size={18} />Affiliate links always labeled</li>
+        </ul>
+      </div>
+      <nav class="quickstart glass anim anim-right" aria-label="Quick start" style="--a:.6s">
+        <p class="qs-title">Quick start: pick a goal</p>
+        <ul>
+          <li><a href="/calculators/budget/"><Icon name="wallet" size={20} /><span><strong>Build a monthly budget</strong><small>See where your money goes in 2 minutes</small></span></a></li>
+          <li><a href="/calculators/emergency-fund/"><Icon name="umbrella" size={20} /><span><strong>Set an emergency fund goal</strong><small>How much cash cushion you need</small></span></a></li>
+          <li><a href="/calculators/credit-card-payoff/"><Icon name="card" size={20} /><span><strong>Pay off credit card debt</strong><small>Find your debt-free date</small></span></a></li>
+          <li><a href="/best/high-yield-savings-accounts/"><Icon name="piggy" size={20} /><span><strong>Earn more on savings</strong><small>Compare high-yield accounts</small></span></a></li>
+          <li><a href="/calculators/home-affordability/"><Icon name="home" size={20} /><span><strong>See how much house you can afford</strong><small>Turn income into a price range</small></span></a></li>
+        </ul>
+      </nav>
+    </div>
+    <PhotoCredit name="home" class="hero-credit" />
+  </section>
+
+  <section class="stats-band" aria-label="Fountain Finances at a glance">
+    <div class="wrap stats">
+      <div class="stat"><strong><CountUp to={CALCULATORS.length} duration={1.6} /></strong><span>free calculators</span></div>
+      <div class="stat"><strong><CountUp to={guides.length} duration={1.8} /></strong><span>in-depth guides</span></div>
+      <div class="stat"><strong><CountUp to={comparisons.length} duration={1.4} /></strong><span>product comparisons</span></div>
+      <div class="stat"><strong>$0</strong><span>cost to you, no sign-up</span></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <ul class="marquee-track"><li>{CALCULATORS.length} free calculators</li><li>Sources: CFPB, FDIC, Federal Reserve, IRS</li><li>No sign-up required</li><li>Affiliate links always labeled</li><li>Plain-English guides</li><li>Budgeting</li><li>Credit scores</li><li>High-yield savings</li><li>Mortgages</li><li>Personal loans</li><li>Insurance</li><li>{CALCULATORS.length} free calculators</li><li>Sources: CFPB, FDIC, Federal Reserve, IRS</li><li>No sign-up required</li><li>Affiliate links always labeled</li><li>Plain-English guides</li><li>Budgeting</li><li>Credit scores</li><li>High-yield savings</li><li>Mortgages</li><li>Personal loans</li><li>Insurance</li></ul>
+  </div>
+
+  <section class="section story" aria-labelledby="what-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="what-h"><GradientText>Compare. Learn. Plan.</GradientText></h2>
+          <p>Fountain Finances helps everyday Americans understand money decisions (from a first budget to a first home) with clear explanations and tools that do the math.</p>
+        </div>
+      </div>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="ico"><Icon name="book" /></div>
+          <h3><a href="/guides/">Read financial guides</a></h3>
+          <p>In-depth, sourced guides on budgeting, credit, banking, loans, mortgages and insurance, written in plain English.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><Icon name="calc" /></div>
+          <h3><a href="/calculators/">Explore calculators</a></h3>
+          <p>Thirteen free calculators for budgets, loans, mortgages, credit card payoff, savings growth and more.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><Icon name="scale" /></div>
+          <h3><a href="/best/">Find the right financial option</a></h3>
+          <p>Side-by-side comparisons of savings accounts, CDs, checking, credit cards and personal loans with a published methodology.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft" aria-labelledby="tools-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2 id="tools-h">Popular financial tools</h2><p>Run the numbers before you decide. Every calculator runs in your browser.</p></div>
+        <a class="more" href="/calculators/">All calculators →</a>
+      </div>
+      <div class="grid grid-3">{featuredCalcs.map((c) => <CalcCard calc={c} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="topics-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2 id="topics-h">Explore by topic</h2><p>Credit, banking, loans, personal finance, mortgages and insurance: each with guides, calculators and comparisons.</p></div>
+      </div>
+      <div class="grid grid-3">
+        {hubBlocks.map(({ hub, topics: ts }) => (
+          <section class="hub-block" aria-labelledby={`hb-${hub.slug}`}>
+            <h3 id={`hb-${hub.slug}`}><span class="ico-inline"><Icon name={hub.icon} /></span><a href={`/${hub.slug}/`}>{hub.title}</a></h3>
+            <p>{hub.lede}</p>
+            <ul class="linklist">{ts.map((t) => <li><a href={`/${t.id}/`}>{t.data.title}</a></li>)}</ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft" aria-labelledby="latest-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2 id="latest-h">Latest financial guides</h2><p>Recently published and updated guides from our editorial team.</p></div>
+        <a class="more" href="/guides/">All guides →</a>
+      </div>
+      <div class="grid grid-3">{latest.map((g) => <GuideCard slug={g.id} title={g.data.title} description={g.data.description} updated={g.data.updated} kicker={HUBS.find((h) => h.slug === g.data.hub)?.shortTitle} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cmp-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2 id="cmp-h">Popular comparisons</h2><p>Options listed alphabetically with pros, cons and requirements, never ranked by who pays us.</p></div>
+        <a class="more" href="/best/">All comparisons →</a>
+      </div>
+      <div class="grid grid-3">
+        {comparisons.map((c) => (
+          <article class="card">
+            <div class="kicker">{HUBS.find((h) => h.slug === c.data.hub)?.shortTitle}</div>
+            <h3><a href={`/best/${c.id}/`}>{c.data.title}</a></h3>
+            <p>{c.data.intro}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft" aria-labelledby="calcs-h">
+    <div class="wrap">
+      <div class="section-head"><div><h2 id="calcs-h">More financial calculators</h2><p>Free tools for savings goals, borrowing and homeownership.</p></div></div>
+      <ul class="pill-list">{otherCalcs.map((c) => <li><a href={`/calculators/${c.slug}/`}>{c.name}</a></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="trust-h">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2 id="trust-h">Why you can trust our information</h2><p>Money decisions deserve accurate, independent information. Here is how we earn your trust.</p></div>
+        <a class="more" href="/editorial-standards/">Our editorial standards →</a>
+      </div>
+      <div class="trust">
+        <div><strong>Primary sources</strong><p>Guides are built from CFPB, Federal Reserve, FDIC, IRS and Department of Education sources, and we cite them.</p></div>
+        <div><strong>Verified figures only</strong><p>We show a rate or fee only after confirming it with the provider, and we display the date we checked.</p></div>
+        <div><strong>Independent comparisons</strong><p>Products are listed alphabetically with pros and cons. Payment never buys inclusion or placement.</p></div>
+        <div><strong>Open corrections</strong><p>Every guide shows when it was updated, and we correct errors promptly under a published policy.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft pillar" id="personal-finance-guide" aria-labelledby="pf-h">
+    <div class="wrap">
+      <div class="prose" style="margin:0 auto">
+        <span class="eyebrow">The Fountain Finances pillar guide</span>
+        <h2 id="pf-h" style="margin-top:0;font-size:clamp(1.8rem,1.4rem + 1.6vw,2.5rem)">The Complete Guide to <GradientText>Personal Finance</GradientText></h2>
+        <p class="lede" style="font-size:1.15rem;color:var(--ink-2)">Personal finance for beginners and beyond: a ten-step roadmap to budgeting, saving, banking, credit, debt, borrowing, homebuying, growing wealth and protecting what you build.</p>
+        <p class="meta-line" style="margin:0 0 20px">By <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a> · Updated <time datetime="2026-09-28">September 28, 2026</time></p>
+        <nav class="toc" aria-label="Personal finance guide contents" style="margin:0 0 28px">
+          <h3 style="font-family:var(--sans);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px">In this guide</h3>
+          <ol class="pillar-toc">{pillarHeadings.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+        <div class="pillar-body"><Pillar /></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-top:56px">
+    <div class="prose" style="margin:0 auto"><Faq faqs={faqs} heading="Personal finance questions, answered" id="home-faq" /></div>
+  </div>
+
+  <div class="wrap" style="padding-top:48px;padding-bottom:64px"><NewsletterForm placement="home" /></div>
+</BaseLayout>

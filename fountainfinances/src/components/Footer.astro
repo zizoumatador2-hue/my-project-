@@ -1,0 +1,64 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '@/data/site';
+import { HUBS } from '@/data/taxonomy';
+const year = new Date().getFullYear();
+const hasAnalytics = Boolean(import.meta.env.PUBLIC_GA_ID);
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a class="brand" href="/"><Logo /><span>Fountain Finances<small>{SITE.tagline}</small></span></a>
+        <p>Independent guides, free calculators and transparent comparisons that help Americans make confident money decisions.</p>
+        <p>Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a> · <a href="/contact/">Contact form</a></p>
+        {SITE.social.length > 0 && (
+          <ul class="pill-list" aria-label="Fountain Finances on social media">
+            {SITE.social.map((s) => <li><a href={s.url} rel="me noopener" target="_blank">{s.name}</a></li>)}
+          </ul>
+        )}
+      </div>
+      <nav class="ft-col" aria-label="Topics">
+        <h2>Topics</h2>
+        <ul>{HUBS.map((h) => <li><a href={`/${h.slug}/`}>{h.shortTitle}</a></li>)}</ul>
+      </nav>
+      <nav class="ft-col" aria-label="Tools">
+        <h2>Tools</h2>
+        <ul>
+          <li><a href="/calculators/budget/">Budget calculator</a></li>
+          <li><a href="/calculators/mortgage/">Mortgage calculator</a></li>
+          <li><a href="/calculators/loan/">Loan calculator</a></li>
+          <li><a href="/calculators/compound-interest/">Compound interest</a></li>
+          <li><a href="/calculators/">All calculators</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-col" aria-label="Company">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/editorial-standards/">Editorial standards</a></li>
+          <li><a href="/authors/editorial-team/">Our editorial team</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/newsletter/">Newsletter</a></li>
+        </ul>
+      </nav>
+      <nav class="ft-col" aria-label="Legal">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of use</a></li>
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+          <li><a href="/affiliate-disclosure/">Affiliate disclosure</a></li>
+          <li><a href="/corrections/">Corrections policy</a></li>
+          <li><a href="/accessibility/">Accessibility</a></li>
+          <li><a href="/site-map/">Site map</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="ft-legal">
+      <p><strong>Important:</strong> Fountain Finances publishes educational information and comparisons. We are not a bank, lender, broker, insurer or registered investment adviser, and nothing on this site is individualized financial, investment, tax, legal or credit advice. Rates, fees and terms change often: always confirm details directly with the provider before you apply. <a href="/disclaimer/">Read the full disclaimer</a>.</p>
+      <p>© {year} Fountain Finances, published by {SITE.founder}. All rights reserved.{hasAnalytics && <> · <button type="button" class="linklike" data-consent-open>Cookie settings</button></>}</p>
+    </div>
+  </div>
+</footer>

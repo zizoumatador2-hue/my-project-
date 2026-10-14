@@ -1,0 +1,170 @@
+// Downloads one Pexels photo per content slot (src/data/images.json) and writes
+// optimized WebP files to public/images/photos/ plus metadata to src/data/photos.json.
+//
+//   PEXELS_API_KEY=… node scripts/fetch-pexels.mjs           → official Pexels API
+//   node scripts/fetch-pexels.mjs                             → keyless fallback: public search pages, then a
+//                                                               local index of Pexels photo metadata (scripts/pexels-index.py)
+//   node scripts/fetch-pexels.mjs --force                     → refetch every slot
+//
+// Slots that already have a photo are kept, so the selection stays stable between runs.
+// Pexels license: free to use, no attribution required — we credit photographers anyway.
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import sharp from 'sharp';
+
+const KEY = (process.env.PEXELS_API_KEY || '').trim();
+const FORCE = process.argv.includes('--force');
+const OUT = 'public/images/photos';
+const META = 'src/data/photos.json';
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36';
+const SIZES = [1600, 800];
+
+const slots = JSON.parse(readFileSync('src/data/images.json', 'utf8'));
+const photos = existsSync(META) ? JSON.parse(readFileSync(META, 'utf8')) : {};
+// Photos reviewed and rejected as off-topic are never picked again.
+const REJECTED = 'src/data/photos-rejected.json';
+const used = new Set([...Object.values(photos).map((p) => p.id), ...(existsSync(REJECTED) ? JSON.parse(readFileSync(REJECTED, 'utf8')) : [])]);
+mkdirSync(OUT, { recursive: true });
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function searchApi(query) {
+  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&orientation=landscape&size=large&per_page=15&locale=en-US`;
+  const res = await fetch(url, { headers: { Authorization: KEY } });
+  if (!res.ok) throw new Error(`Pexels API ${res.status}`);
+  const data = await res.json();
+  return data.photos.map((p) => ({
+    id: p.id,
+    alt: p.alt || query,
+    photographer: p.photographer,
+    photographerUrl: p.photographer_url,
+    pageUrl: p.url,
+    color: p.avg_color,
+    src: `https://images.pexels.com/photos/${p.id}/pexels-photo-${p.id}.jpeg?auto=compress&cs=tinysrgb&w=1920`,
+    landscape: p.width > p.height,
+  }));
+}
+
+async function searchPage(query) {
+  const res = await fetch(`https://www.pexels.com/search/${encodeURIComponent(query)}/?orientation=landscape`, {
+    headers: { 'user-agent': UA, accept: 'text/html', 'accept-language': 'en-US,en;q=0.9' },
+  });
+  if (!res.ok) throw new Error(`Pexels search page ${res.status}`);
+  const html = await res.text();
+  const next = html.match(/<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/);
+  if (!next) throw new Error('Pexels search page without data');
+  const found = [];
+  const visit = (o) => {
+    if (!o || typeof o !== 'object') return;
+    if (o.type === 'photo' && o.attributes?.id) {
+      const a = o.attributes;
+      found.push({
+        id: a.id,
+        alt: a.alt || a.title || query,
+        photographer: [a.user?.first_name, a.user?.last_name].filter(Boolean).join(' ') || a.user?.username || 'Pexels',
+        photographerUrl: a.user?.username ? `https://www.pexels.com/@${a.user.username}/` : 'https://www.pexels.com/',
+        pageUrl: `https://www.pexels.com/photo/${a.slug ? a.slug + '-' : ''}${a.id}/`,
+        color: a.colors?.[0] || null,
+        src: `https://images.pexels.com/photos/${a.id}/pexels-photo-${a.id}.jpeg?auto=compress&cs=tinysrgb&w=1920`,
+        landscape: (a.width || 2) > (a.height || 1),
+      });
+      return;
+    }
+    for (const v of Object.values(o)) visit(v);
+  };
+  visit(JSON.parse(next[1]));
+  return found;
+}
+
+// Keyless fallback: a local index of Pexels photo descriptions built by scripts/pexels-index.py.
+const INDEX = '.cache/pexels-index.jsonl';
+let index = null;
+// Off-topic or branded subjects that don't belong on a personal finance site.
+const EXCLUDE = /\b(bitcoin|crypto\w*|ethereum|blockchain|nft|beer|wine|alcohol|cigar\w*|casino|gambl\w*|nat ?west|new york times|nytimes|wall street journal|visa|mastercard|paypal|apple|iphone|samsung|logo)\b/i;
+const STOP = new Set(['and', 'with', 'on', 'of', 'the', 'a', 'in', 'at', 'for', 'from', 'to']);
+const words = (t) => t.toLowerCase().match(/[a-z]+/g) || [];
+const stem = (w) => w.replace(/(ies|es|s|ing|ed)$/, '');
+function searchIndex(query) {
+  if (!index) {
+    if (!existsSync(INDEX)) throw new Error('no photo index (run scripts/pexels-index.py)');
+    index = readFileSync(INDEX, 'utf8').trim().split('\n').map((l) => JSON.parse(l)).map((r) => ({ ...r, stems: new Set(words(r.alt).map(stem)) }));
+    console.log(`  using local index of ${index.length} Pexels photos`);
+  }
+  const q = [...new Set(words(query).filter((w) => !STOP.has(w)).map(stem))];
+  const need = Math.min(q.length, 2);
+  return index
+    .filter((r) => (!r.w || !r.h || r.w > r.h * 1.2) && !EXCLUDE.test(r.alt))
+    .map((r) => ({ r, score: q.filter((w) => r.stems.has(w)).length }))
+    .filter((x) => x.score >= need)
+    .sort((a, b) => b.score - a.score || Math.abs(a.r.alt.length - 45) - Math.abs(b.r.alt.length - 45))
+    .slice(0, 12)
+    .map(({ r }) => ({
+      id: r.id,
+      alt: r.alt.charAt(0).toUpperCase() + r.alt.slice(1),
+      photographer: r.by || 'Pexels',
+      photographerUrl: 'https://www.pexels.com/',
+      pageUrl: `https://www.pexels.com/photo/${r.id}/`,
+      color: null,
+      src: `https://images.pexels.com/photos/${r.id}/pexels-photo-${r.id}.jpeg?auto=compress&cs=tinysrgb&w=1920`,
+      landscape: true,
+    }));
+}
+let pageBlocked = false;
+async function searchKeyless(query) {
+  if (!pageBlocked) {
+    try {
+      return await searchPage(query);
+    } catch (e) {
+      pageBlocked = true;
+      console.log(`  search pages unavailable (${e.message}); using the public dataset index`);
+    }
+  }
+  return searchIndex(query);
+}
+
+const search = KEY ? searchApi : searchKeyless;
+console.log(`Fetching Pexels photos via ${KEY ? 'the API' : 'keyless sources'} for ${Object.keys(slots).length} slots`);
+
+let fetched = 0;
+let failed = 0;
+for (const [slot, query] of Object.entries(slots)) {
+  if (!FORCE && photos[slot] && existsSync(`${OUT}/${slot}-800.webp`)) continue;
+  try {
+    const results = (await search(query)).filter((p) => p.landscape && !used.has(p.id) && !EXCLUDE.test(p.alt));
+    let pick = null;
+    let buf = null;
+    for (const cand of results.slice(0, 8)) {
+      const res = await fetch(cand.src, { headers: { 'user-agent': UA } });
+      if (!res.ok) continue;
+      const b = Buffer.from(await res.arrayBuffer());
+      const meta = await sharp(b).metadata();
+      if (!meta.width || meta.width < 1200 || meta.width <= meta.height * 1.15) continue; // landscape, large enough
+      pick = cand;
+      buf = b;
+      break;
+    }
+    if (!pick) throw new Error(`no usable landscape photo among ${results.length} results`);
+    let width = 0;
+    let height = 0;
+    for (const w of SIZES) {
+      const info = await sharp(buf).resize({ width: w, height: Math.round((w * 9) / 16), fit: 'cover', position: 'attention' }).webp({ quality: w > 1000 ? 68 : 72 }).toFile(`${OUT}/${slot}-${w}.webp`);
+      if (w === SIZES[0]) ({ width, height } = info);
+    }
+    const { dominant } = await sharp(buf).stats();
+    const hex = '#' + [dominant.r, dominant.g, dominant.b].map((n) => n.toString(16).padStart(2, '0')).join('');
+    photos[slot] = { id: pick.id, query, alt: pick.alt, photographer: pick.photographer, photographerUrl: pick.photographerUrl, pageUrl: pick.pageUrl, color: pick.color || hex, width, height };
+    used.add(pick.id);
+    fetched++;
+    console.log(`  ✓ ${slot} ← ${pick.id} (${pick.photographer})`);
+  } catch (e) {
+    failed++;
+    console.log(`  ✗ ${slot}: ${e.message}`);
+  }
+  await sleep(KEY ? 250 : 400);
+}
+
+// Keep entries for slots outside images.json too (e.g. original images), listed after the Pexels slots.
+const order = [...Object.keys(slots), ...Object.keys(photos).filter((k) => !(k in slots))];
+const sorted = Object.fromEntries(order.filter((k) => photos[k]).map((k) => [k, photos[k]]));
+// Only rewrite the metadata when photos changed, so no-op runs don't create commits.
+if (fetched) writeFileSync(META, JSON.stringify(sorted, null, 2) + '\n');
+console.log(`Done: ${fetched} new, ${failed} failed, ${Object.keys(sorted).length}/${Object.keys(slots).length} slots have photos`);

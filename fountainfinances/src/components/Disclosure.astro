@@ -1,0 +1,9 @@
+---
+interface Props { kind?: 'editorial' | 'comparison' | 'calculator' }
+const { kind = 'editorial' } = Astro.props;
+---
+<p class="disclosure">
+  {kind === 'comparison' && <><strong>Advertiser disclosure:</strong> Fountain Finances may earn a commission when you apply through links marked “Affiliate link.” That never changes which products we include or how we describe them. Products without an affiliate relationship are listed on equal terms. <a href="/affiliate-disclosure/">How we make money</a>.</>}
+  {kind === 'editorial' && <><strong>Editorial note:</strong> This guide is for general education, not individualized financial advice. We independently research every topic and cite our sources. <a href="/editorial-standards/">Our editorial standards</a> · <a href="/affiliate-disclosure/">How we make money</a>.</>}
+  {kind === 'calculator' && <><strong>Estimates only:</strong> Results are based on the numbers you enter and simplified assumptions. They are not a loan offer, rate quote or financial advice. Actual terms depend on the lender and your situation.</>}
+</p>

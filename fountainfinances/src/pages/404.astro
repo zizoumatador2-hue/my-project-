@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { HUBS } from '@/data/taxonomy';
+---
+<BaseLayout title="Page Not Found" description="The page you were looking for could not be found. Search Fountain Finances or browse our guides, calculators and product comparisons." noindex>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>We couldn’t find that page</h1>
+      <p class="lede">It may have moved or the address may be mistyped. Try a search or pick a topic below.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:32px;padding-bottom:64px;max-width:860px">
+    <form class="search-box" action="/search/" method="get" role="search">
+      <label class="sr-only" for="q404">Search the site</label>
+      <input class="input" id="q404" name="q" type="search" placeholder="Search guides and calculators" />
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <h2 style="margin-top:32px">Popular sections</h2>
+    <ul class="pill-list">
+      {HUBS.map((h) => <li><a href={`/${h.slug}/`}>{h.shortTitle}</a></li>)}
+      <li><a href="/calculators/">Calculators</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/best/">Comparisons</a></li>
+    </ul>
+  </div>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+---
+<PageLayout title="Unsubscribe From the Newsletter" description="Unsubscribe from the Fountain Finances newsletter. Enter your email address and we will stop sending newsletters to it right away." lede="Enter your email address to stop receiving the newsletter." showUpdated={false} noindex>
+  <form class="calc-form" id="unsub-form" action="/api/unsubscribe" method="post" novalidate style="max-width:520px">
+    <div class="field">
+      <label for="u-email">Email address</label>
+      <input class="input" id="u-email" name="email" type="email" autocomplete="email" required maxlength="254" />
+    </div>
+    <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
+    <button class="btn btn-primary" type="submit">Unsubscribe</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+  <p style="margin-top:20px">Every newsletter also contains a one-click unsubscribe link.</p>
+</PageLayout>
+<script>
+  import { enhanceForm } from '@/lib/forms';
+  enhanceForm(document.getElementById('unsub-form') as HTMLFormElement, {
+    validate: (d) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(d.get('email') || '').trim()) ? null : 'Please enter a valid email address.'),
+    success: 'Done. If that address was subscribed, it will not receive any more newsletters.',
+  });
+</script>

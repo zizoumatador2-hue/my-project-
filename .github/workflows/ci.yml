@@ -1,8 +1,10 @@
 name: CI
 on:
   pull_request:
+    paths-ignore: ['fountainfinances/**', '.github/workflows/fountainfinances.yml']
   push:
     branches: [main]
+    paths-ignore: ['fountainfinances/**', '.github/workflows/fountainfinances.yml']
 jobs:
   test:
     runs-on: ubuntu-latest

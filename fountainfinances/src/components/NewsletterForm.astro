@@ -1,0 +1,41 @@
+---
+interface Props { placement?: string }
+const { placement = 'inline' } = Astro.props;
+const id = `nl-${placement}`;
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+---
+<section class="newsletter" aria-labelledby={`${id}-h`}>
+  <h2 id={`${id}-h`}>Make Your Money Work Smarter</h2>
+  <p>One practical email every two weeks: new guides, calculator walk-throughs and plain-English explanations of changes that affect your money. No spam, and you can unsubscribe with one click.</p>
+  <form class="nl-form" action="/api/subscribe" method="post" novalidate data-placement={placement}>
+    <div class="nl-row">
+      <div>
+        <label class="sr-only" for={`${id}-email`}>Email address</label>
+        <input class="input" id={`${id}-email`} name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required maxlength="254" />
+      </div>
+      <button class="btn btn-primary" type="submit">Subscribe</button>
+    </div>
+    <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
+    <label class="check" style="margin-top:12px">
+      <input type="checkbox" name="consent" value="yes" required />
+      <span>I agree to receive the Fountain Finances newsletter and accept the <a href="/privacy/">Privacy Policy</a>. We will email you once to confirm.</span>
+    </label>
+    {turnstileKey && <div data-turnstile={turnstileKey} style="margin-top:12px"></div>}
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+<script>
+  import { enhanceForm } from '@/lib/forms';
+  document.querySelectorAll<HTMLFormElement>('form.nl-form').forEach((f) =>
+    enhanceForm(f, {
+      validate(data) {
+        const email = String(data.get('email') || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return 'Please enter a valid email address.';
+        if (!data.get('consent')) return 'Please confirm you would like to receive the newsletter.';
+        return null;
+      },
+      success: 'Almost done. Check your inbox and click the link to confirm your subscription.',
+      event: 'newsletter_signup',
+    }),
+  );
+</script>

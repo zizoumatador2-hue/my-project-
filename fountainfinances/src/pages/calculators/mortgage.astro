@@ -1,0 +1,111 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'What is included in a monthly mortgage payment?',
+    a: 'Most payments include principal and interest plus an escrow amount for property taxes and homeowners insurance, often called PITI. If you put less than 20% down on a conventional loan you will usually pay private mortgage insurance (PMI) too, and some properties add HOA dues.',
+  },
+  {
+    q: 'When does PMI go away?',
+    a: 'For most conventional loans, federal law lets you ask the lender to cancel PMI once your balance reaches 80% of the home’s original value, and requires automatic cancellation at 78% if you are current on payments. FHA loans use a different mortgage insurance premium with its own rules.',
+  },
+  {
+    q: 'How accurate is this mortgage calculator?',
+    a: 'The principal and interest figure uses the same amortization formula lenders use. Taxes, insurance and PMI are estimates: your actual property tax bill, insurance quote and PMI rate may differ, so update those fields when you have real numbers from a Loan Estimate.',
+  },
+  {
+    q: 'Should I choose a 15-year or 30-year mortgage?',
+    a: 'A 15-year loan usually has a lower rate and far less total interest, but a much higher monthly payment. A 30-year loan keeps payments manageable and lets you prepay when you can. Compare both here by changing the loan term.',
+  },
+];
+---
+<CalculatorLayout slug="mortgage" faqs={faqs}>
+  <form slot="form" class="calc-form" id="mortgage-form" novalidate>
+    <fieldset>
+      <legend>Home and loan</legend>
+      <Field id="price" label="Home price" value={400000} prefix="$" min={1000} />
+      <Field id="down" label="Down payment" value={60000} prefix="$" min={0} hint="15% of the price in this example." />
+      <div class="row2">
+        <Field id="rate" label="Interest rate" value={6.5} suffix="%" max={25} />
+        <Field id="years" label="Loan term" value={30} suffix="years" min={1} max={40} />
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Taxes, insurance and fees</legend>
+      <div class="row2">
+        <Field id="tax" label="Property tax (per year)" value={4400} prefix="$" hint="Check the county assessor or listing." />
+        <Field id="ins" label="Home insurance (per year)" value={1900} prefix="$" />
+      </div>
+      <div class="row2">
+        <Field id="pmi" label="PMI rate (if under 20% down)" value={0.6} suffix="%" max={5} hint="Annual rate on the loan balance." />
+        <Field id="hoa" label="HOA dues (per month)" value={0} prefix="$" />
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="total">—</p>
+    <p class="big-sub">estimated total monthly payment</p>
+    <div class="stack" aria-hidden="true" data-out="stack"></div>
+    <ul class="stat-list">
+      <li><span>Principal &amp; interest</span><span data-out="pi">—</span></li>
+      <li><span>Property taxes</span><span data-out="tax">—</span></li>
+      <li><span>Homeowners insurance</span><span data-out="ins">—</span></li>
+      <li><span>PMI</span><span data-out="pmi">—</span></li>
+      <li><span>HOA dues</span><span data-out="hoa">—</span></li>
+    </ul>
+    <ul class="stat-list">
+      <li><span>Loan amount</span><span data-out="loan">—</span></li>
+      <li><span>Down payment</span><span data-out="downpct">—</span></li>
+      <li><span>Total interest over the loan</span><span data-out="interest">—</span></li>
+    </ul>
+  </div>
+
+  <h2>How to use the mortgage calculator</h2>
+  <p>Start with the home price and your planned down payment, then add the interest rate and loan term. The calculator estimates <strong>principal and interest</strong> and layers on <strong>property taxes</strong>, <strong>homeowners insurance</strong>, <strong>private mortgage insurance</strong> (only when your down payment is under 20%) and any <strong>HOA dues</strong> to give you a realistic total monthly housing cost.</p>
+  <p>Property taxes vary widely by county, and insurance premiums depend on location, the home’s age and coverage. For the most accurate result, replace the example figures with numbers from the property listing, the local tax assessor and an insurance quote.</p>
+
+  <h2>What drives your mortgage payment</h2>
+  <ul>
+    <li><strong>Loan amount.</strong> Every $10,000 you borrow at 6.5% over 30 years adds about $63 to the monthly principal and interest.</li>
+    <li><strong>Interest rate.</strong> On a $340,000 loan, a one-point higher rate (6.5% vs. 7.5%) adds roughly $228 a month.</li>
+    <li><strong>Term.</strong> Shorter terms raise the payment but dramatically cut total interest.</li>
+    <li><strong>Down payment.</strong> Reaching 20% down on a conventional loan removes PMI entirely.</li>
+  </ul>
+
+  <h2>The formula behind the estimate</h2>
+  <p>Principal and interest use the standard amortization formula <strong>M = P × r ÷ (1 − (1 + r)<sup>−n</sup>)</strong>, with <em>r</em> equal to the annual rate ÷ 12 and <em>n</em> equal to years × 12. Taxes and insurance are your annual amounts divided by 12. PMI is estimated as the annual PMI rate × the loan balance ÷ 12.</p>
+
+  <h2>Next steps</h2>
+  <p>Not sure what price range fits your income? Use the <a href="/calculators/home-affordability/">home affordability calculator</a>, then read <a href="/guides/how-mortgage-payments-work/">how mortgage payments work</a> for a plain-English tour of escrow, amortization and closing costs. First-time buyers should also see our <a href="/guides/first-time-home-buyer-guide/">first-time home buyer guide</a>.</p>
+</CalculatorLayout>
+
+<script>
+  import { mortgagePayment } from '@/lib/finance';
+  import { bindCalculator, usd, pct } from '@/lib/calc-ui';
+  const form = document.getElementById('mortgage-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  const colors = ['var(--brand)', '#5fa8a0', 'var(--gold)', '#e0b35a', '#8aa4b8'];
+  bindCalculator(form, 'mortgage', (v) => {
+    const m = mortgagePayment({ homePrice: v.price, downPayment: v.down, ratePct: v.rate, years: v.years, propertyTaxAnnual: v.tax, insuranceAnnual: v.ins, pmiRatePct: v.pmi, hoaMonthly: v.hoa });
+    out('total').textContent = usd(m.total);
+    out('pi').textContent = usd(m.principalAndInterest, true);
+    out('tax').textContent = usd(m.tax, true);
+    out('ins').textContent = usd(m.insurance, true);
+    out('pmi').textContent = m.pmi > 0 ? usd(m.pmi, true) : 'Not required';
+    out('hoa').textContent = usd(m.hoa, true);
+    out('loan').textContent = usd(m.loan);
+    out('downpct').textContent = v.price > 0 ? `${usd(v.down)} (${pct((v.down / v.price) * 100)})` : '—';
+    out('interest').textContent = usd(m.totalInterest);
+    const parts = [m.principalAndInterest, m.tax, m.insurance, m.pmi, m.hoa];
+    const stack = out('stack');
+    stack.replaceChildren(...parts.map((p, i) => {
+      const s = document.createElement('span');
+      s.style.width = `${m.total > 0 ? (p / m.total) * 100 : 0}%`;
+      s.style.background = colors[i];
+      return s;
+    }));
+  });
+</script>

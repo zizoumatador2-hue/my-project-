@@ -1,0 +1,106 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'What is the 28/36 rule?',
+    a: 'It is a traditional lending guideline: housing costs (principal, interest, taxes and insurance) should stay at or below 28% of gross monthly income, and all monthly debt payments including housing at or below 36%. Many loan programs allow higher ratios, but staying near these levels leaves room for saving and surprises.',
+  },
+  {
+    q: 'Does this calculator use gross or take-home income?',
+    a: 'Gross income (your pay before taxes), because that is how lenders calculate debt-to-income ratios. Your comfort level should also reflect your take-home pay, so compare the resulting payment against your actual budget.',
+  },
+  {
+    q: 'What counts as monthly debt?',
+    a: 'Include minimum credit card payments, car loans, student loans, personal loans, child support and alimony. Do not include utilities, groceries or your current rent, since rent will be replaced by the new housing payment.',
+  },
+  {
+    q: 'Can I get approved for more than this calculator shows?',
+    a: 'Possibly. Some programs allow debt-to-income ratios above 43%, especially with strong credit or large cash reserves. Being approved for a larger loan does not mean the payment will be comfortable, so treat this estimate as a sensible ceiling rather than a floor.',
+  },
+];
+---
+<CalculatorLayout slug="home-affordability" faqs={faqs}>
+  <form slot="form" class="calc-form" id="afford-form" novalidate>
+    <fieldset>
+      <legend>Income and debts</legend>
+      <Field id="income" label="Gross annual household income" value={110000} prefix="$" min={1} />
+      <Field id="debts" label="Monthly debt payments" value={650} prefix="$" hint="Car, student loan, card minimums and other loan payments." />
+    </fieldset>
+    <fieldset>
+      <legend>Loan assumptions</legend>
+      <Field id="down" label="Down payment available" value={50000} prefix="$" />
+      <div class="row2">
+        <Field id="rate" label="Interest rate" value={6.5} suffix="%" max={25} />
+        <Field id="years" label="Loan term" value={30} suffix="years" min={1} max={40} />
+      </div>
+      <div class="row2">
+        <Field id="taxrate" label="Property tax rate" value={1.1} suffix="%" max={10} hint="Annual tax as a share of home value." />
+        <Field id="ins" label="Home insurance (per year)" value={1800} prefix="$" />
+      </div>
+      <Field id="hoa" label="HOA dues (per month)" value={0} prefix="$" />
+      <div class="field">
+        <span class="label" id="ratio-label">Debt-to-income guideline</span>
+        <div class="seg" role="radiogroup" aria-labelledby="ratio-label">
+          <label><input type="radio" name="profile" value="0" checked /><span>Conservative (28/36)</span></label>
+          <label><input type="radio" name="profile" value="1" /><span>Stretch (31/43)</span></label>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="price">—</p>
+    <p class="big-sub">estimated affordable home price</p>
+    <ul class="stat-list">
+      <li><span>Maximum housing payment</span><span data-out="payment">—</span></li>
+      <li><span>Loan amount</span><span data-out="loan">—</span></li>
+      <li><span>Principal &amp; interest</span><span data-out="pi">—</span></li>
+      <li><span>Property tax (monthly)</span><span data-out="tax">—</span></li>
+      <li><span>Down payment share</span><span data-out="downpct">—</span></li>
+    </ul>
+    <p class="calc-note" data-out="limit"></p>
+  </div>
+
+  <h2>How much house can you afford?</h2>
+  <p>This calculator works backward from your income. It applies lender-style <strong>debt-to-income (DTI) limits</strong> to find the largest total housing payment you can carry, subtracts property taxes, insurance and HOA dues, and converts what remains into a loan amount at the interest rate you enter. Add your down payment and you have an estimated price range.</p>
+  <p>Choose the <strong>conservative</strong> setting (28% housing / 36% total debt) if you want room in your budget for retirement saving, childcare or an irregular income. The <strong>stretch</strong> setting (31% / 43%) reflects ratios some loan programs accept, but a larger payment leaves less margin for error.</p>
+
+  <h2>Why affordability is more than approval</h2>
+  <p>Lenders look at ratios; your budget has to handle everything else. Before you settle on a price, plan for:</p>
+  <ul>
+    <li><strong>Closing costs</strong>, often a few percent of the loan amount, due at signing.</li>
+    <li><strong>Maintenance and repairs</strong>: a common planning figure is 1% to 2% of the home’s value per year.</li>
+    <li><strong>Utilities</strong>, which are usually higher in a house than an apartment.</li>
+    <li><strong>An emergency fund</strong> that stays intact after your down payment. See the <a href="/calculators/emergency-fund/">emergency fund calculator</a>.</li>
+  </ul>
+
+  <h2>Keep going</h2>
+  <p>Take the price from this tool into the <a href="/calculators/mortgage/">mortgage calculator</a> to see the full monthly payment, and read <a href="/guides/how-much-house-can-i-afford/">how much house can I afford?</a> for a deeper look at ratios, down payments and loan programs.</p>
+</CalculatorLayout>
+
+<script>
+  import { affordability } from '@/lib/finance';
+  import { bindCalculator, usd, pct } from '@/lib/calc-ui';
+  const form = document.getElementById('afford-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'home-affordability', (v) => {
+    const stretch = v.profile === 1;
+    const r = affordability({
+      annualIncome: v.income, monthlyDebts: v.debts, downPayment: v.down, ratePct: v.rate, years: v.years,
+      propertyTaxRatePct: v.taxrate, insuranceAnnual: v.ins, hoaMonthly: v.hoa,
+      frontEndPct: stretch ? 31 : 28, backEndPct: stretch ? 43 : 36,
+    });
+    out('price').textContent = usd(r.homePrice);
+    out('payment').textContent = usd(r.maxHousingPayment);
+    out('loan').textContent = usd(r.loan);
+    out('pi').textContent = usd(r.principalAndInterest);
+    out('tax').textContent = usd(r.tax);
+    out('downpct').textContent = r.homePrice > 0 ? pct((Math.min(v.down, r.homePrice) / r.homePrice) * 100) : '—';
+    out('limit').textContent =
+      r.maxHousingPayment <= 0
+        ? 'Your current debt payments already use the full debt-to-income allowance. Paying down debt will raise your budget.'
+        : `Limited by the ${r.limitedBy}. ${r.limitedBy === 'total debt ratio' ? 'Reducing monthly debt payments would raise this figure.' : 'Higher income or a lower rate would raise this figure.'}`;
+  });
+</script>

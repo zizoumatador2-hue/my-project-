@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import GuideCard from '@/components/GuideCard.astro';
+import { SITE } from '@/data/site';
+import { abs, ORG_ID } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const authors = await getCollection('authors');
+  return authors.map((a) => ({ params: { id: a.id }, props: { author: a.data } }));
+}
+const { author } = Astro.props;
+const guides = (await getCollection('guides', (g) => !g.data.draft && (g.data.author.id === author.id || g.data.reviewer?.id === author.id)))
+  .sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime());
+const path = `/authors/${author.id}/`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'About', href: '/about/' }, { name: author.name, href: path }];
+const node = author.type === 'Person'
+  ? { '@type': 'ProfilePage', mainEntity: { '@type': 'Person', name: author.name, jobTitle: author.role, description: author.bio, knowsAbout: author.expertise, worksFor: { '@id': ORG_ID }, url: abs(path), ...(author.sameAs.length ? { sameAs: author.sameAs } : {}) } }
+  : { '@type': 'AboutPage', url: abs(path), name: author.name, about: { '@id': ORG_ID }, description: author.bio };
+---
+<BaseLayout title={`${author.name}: Who Writes Our Guides`} description={`Meet the ${author.name} at Fountain Finances: how we research, write and fact-check guides, and every guide we have published.`} path={path} crumbs={crumbs} schema={[node]}>
+  <div class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>{author.name}</h1>
+      <p class="lede">{author.role}</p>
+    </div>
+  </div>
+  <div class="wrap article-grid">
+    <div class="prose">
+      <p>{author.bio}</p>
+      <h2>Areas we cover</h2>
+      <ul>{author.expertise.map((e) => <li>{e}</li>)}</ul>
+      {author.credentials.length > 0 && (<><h2>Credentials</h2><ul>{author.credentials.map((c) => <li>{c}</li>)}</ul></>)}
+      <h2>How we work</h2>
+      <p>Every guide starts from primary sources: federal agencies such as the CFPB, FDIC, Federal Reserve, IRS and U.S. Department of Education, and the official disclosures of banks, card issuers and lenders. Drafts are checked against those sources before publication, and each guide lists what we relied on. When rules or products change, we update the guide and its “last updated” date. Read the full process in our <a href="/editorial-standards/">editorial standards</a>.</p>
+      <h2>Contact the editors</h2>
+      <p>Questions, feedback or a correction? Email <a href={`mailto:${author.email ?? SITE.email}`}>{author.email ?? SITE.email}</a> or use our <a href="/contact/">contact form</a>.</p>
+    </div>
+  </div>
+  <section class="section section-soft" aria-labelledby="pub-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="pub-h">Published guides ({guides.length})</h2></div>
+      <div class="grid grid-3">{guides.map((g) => <GuideCard slug={g.id} title={g.data.title} description={g.data.description} updated={g.data.updated} />)}</div>
+    </div>
+  </section>
+</BaseLayout>
