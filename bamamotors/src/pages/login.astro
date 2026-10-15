@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Flash from '../components/Flash.astro';
+import { first } from '../lib/db';
+import { verifyPassword } from '../lib/crypto';
+import { createSession, safeNext, homeFor, type SessionUser } from '../lib/auth';
+import { clientIp, rateLimit } from '../lib/security';
+import { emailSchema } from '../lib/validation';
+
+const env = Astro.locals.runtime.env;
+const next = safeNext(Astro.url.searchParams.get('next'), '');
+if (Astro.locals.user) return Astro.redirect(next || homeFor(Astro.locals.user));
+let error = '';
+let email = '';
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  email = String(fd.get('email') ?? '').trim().toLowerCase();
+  const password = String(fd.get('password') ?? '');
+  const ip = clientIp(Astro.request);
+  if (!(await rateLimit(env.DB, `login:${ip}`, 10, 900)) || !(await rateLimit(env.DB, `login-email:${email}`, 8, 900))) {
+    error = 'Too many sign-in attempts. Please wait 15 minutes and try again.';
+  } else if (!emailSchema.safeParse(email).success || !password) {
+    error = 'Enter your email and password.';
+  } else {
+    const u = await first<SessionUser & { password_hash: string }>(env.DB, 'SELECT id, email, name, phone, role, status, password_hash FROM users WHERE email = ?', [email]);
+    const ok = u ? await verifyPassword(password, u.password_hash) : await verifyPassword(password, 'pbkdf2$100000$AAAAAAAAAAAAAAAAAAAAAA==$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=');
+    if (!u || !ok) error = 'That email and password combination is not correct.';
+    else if (u.status !== 'active') error = 'This account is suspended. Contact support for help.';
+    else {
+      await createSession(env.DB, Astro.cookies, u.id, Astro.url.protocol === 'https:');
+      return Astro.redirect(next || homeFor(u), 303);
+    }
+  }
+}
+const reason = Astro.url.searchParams.get('reason');
+---
+<BaseLayout title="Sign in" description="Sign in to your BamaMotors account." noindex>
+  <div class="wrap" style="max-width:460px;padding:40px 16px 64px">
+    <h1>Sign in</h1>
+    {reason === 'save' && <div class="alert alert-info">Sign in or create a free account to save vehicles.</div>}
+    <Flash err={error || null} />
+    <form method="post" class="card card-pad stack" novalidate>
+      <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required value={email} /></div>
+      <div class="field"><label for="password">Password</label><input class="input" id="password" name="password" type="password" autocomplete="current-password" required /></div>
+      <button class="btn btn-primary btn-block btn-lg" type="submit">Sign in</button>
+      <p class="small center" style="margin:0"><a href="/forgot-password">Forgot your password?</a></p>
+    </form>
+    <p class="center" style="margin-top:20px">New to BamaMotors? <a href={`/signup${next ? `?next=${encodeURIComponent(next)}` : ''}`}>Create a free account</a> · <a href="/for-dealers">Dealer sign-up</a></p>
+  </div>
+</BaseLayout>

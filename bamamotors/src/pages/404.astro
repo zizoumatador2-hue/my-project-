@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+Astro.response.status = 404;
+---
+<BaseLayout title="Page not found" description="The page you were looking for could not be found." noindex canonical={null}>
+  <div class="wrap center" style="padding:64px 16px;max-width:640px">
+    <p class="badge">404</p>
+    <h1>We couldn't find that page</h1>
+    <p class="muted">The vehicle may have been sold or the link may be out of date. Try searching used cars across Alabama instead.</p>
+    <div class="row" style="justify-content:center">
+      <a class="btn btn-primary" href="/used-cars">Search used cars</a>
+      <a class="btn btn-outline" href="/dealers">Browse dealers</a>
+      <a class="btn btn-ghost" href="/">Home</a>
+    </div>
+  </div>
+</BaseLayout>

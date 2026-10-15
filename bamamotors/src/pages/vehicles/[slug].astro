@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import VehicleGrid from '../../components/VehicleGrid.astro';
+import Faq from '../../components/Faq.astro';
+import Icon from '../../components/Icon.astro';
+import { getVehicleBySlug, getVehicleImages, getVehicleFeatures, getSimilarVehicles } from '../../lib/vehicles';
+import { formatPrice, formatNumber, formatDate, vehicleTitle, monthlyPayment } from '../../lib/format';
+import { breadcrumbLd, absolute } from '../../lib/seo';
+import { findRedirect } from '../../lib/redirects';
+import { CONDITIONS, TITLE_STATUSES } from '../../lib/constants';
+
+const env = Astro.locals.runtime.env;
+const user = Astro.locals.user;
+const v = await getVehicleBySlug(env.DB, String(Astro.params.slug));
+const isOwner = !!v && (user?.role === 'admin' || (user?.role === 'dealer' && Astro.locals.dealer?.id === v.dealer_id));
+if (!v) {
+  const moved = await findRedirect(env.DB, 'vehicle', String(Astro.params.slug));
+  if (moved) return Astro.redirect(`/vehicles/${moved}`, 301);
+}
+if (!v || ((v.status === 'draft' || v.status === 'archived' || v.dealer_status !== 'active') && !isOwner)) {
+  return Astro.rewrite('/404');
+}
+const [images, features, similar] = await Promise.all([getVehicleImages(env.DB, v.id), getVehicleFeatures(env.DB, v.id), getSimilarVehicles(env.DB, v)]);
+const site = env.SITE_URL;
+const title = vehicleTitle(v);
+const price = formatPrice(v.price_cents);
+const sold = v.status === 'sold';
+const cond = CONDITIONS.find((c) => c.value === v.condition)?.label ?? 'Used';
+const estPayment = Math.round(monthlyPayment((v.price_cents / 100) * 0.9, 8.5, 60));
+const crumbs = [
+  { name: 'Home', href: '/' }, { name: 'Used Cars', href: '/used-cars' },
+  { name: v.make_name, href: `/used-cars/${v.make_slug}` },
+  { name: v.model_name, href: `/used-cars/${v.make_slug}/${v.model_slug}` },
+  { name: `${v.year} ${v.make_name} ${v.model_name}`, href: `/vehicles/${v.slug}` },
+];
+const yesNo = (x: number | null) => (x === 1 ? 'Yes' : x === 0 ? 'No' : 'Not disclosed');
+const specs: [string, string | null][] = [
+  ['Condition', cond], ['Year', String(v.year)], ['Make', v.make_name], ['Model', v.model_name], ['Trim', v.trim],
+  ['Mileage', `${formatNumber(v.mileage)} miles`], ['Body type', v.body_type], ['Fuel type', v.fuel_type],
+  ['Transmission', v.transmission], ['Drivetrain', v.drivetrain], ['Engine', v.engine],
+  ['Exterior color', v.exterior_color], ['Interior color', v.interior_color],
+  ['MPG (city / hwy)', v.mpg_city && v.mpg_highway ? `${v.mpg_city} / ${v.mpg_highway}` : null],
+  ['VIN', v.vin], ['Stock #', v.stock_number], ['Location', `${v.city_name}, AL ${v.zip}`],
+];
+const faq = [
+  { q: `Is this ${title} still available?`, a: sold ? `No. This ${title} has been sold. Browse similar vehicles below or search more ${v.make_name} ${v.model_name} listings in Alabama.` : `It was listed as available when this page was last updated on ${formatDate(v.updated_at)}. Use Contact Dealer to confirm availability with ${v.dealer_name}.` },
+  { q: `How much is this ${v.year} ${v.make_name} ${v.model_name}?`, a: `The dealer's asking price is ${price}. Sales tax, title, registration and dealer fees are extra. Request an itemized out-the-door price from ${v.dealer_name}.` },
+  { q: 'Can I finance this vehicle?', a: `Yes, you can send a financing inquiry to ${v.dealer_name} using the Financing tab. The estimated payment shown on this page is only an example and is not a loan offer.` },
+  { q: 'Where is this vehicle located?', a: `This vehicle is at ${v.dealer_name} in ${v.dealer_city}, AL. Schedule a test drive to see it in person.` },
+];
+const description = `${sold ? 'SOLD: ' : ''}${title} for sale in ${v.city_name}, AL: ${price}, ${formatNumber(v.mileage)} miles, ${v.transmission.toLowerCase()}, ${v.drivetrain}. Offered by ${v.dealer_name}. See photos, specs and history.`.slice(0, 160);
+const descParas = (v.description ?? '').split(/\n{2,}/).filter(Boolean);
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': ['Product', 'Car'],
+  name: title,
+  url: absolute(site, `/vehicles/${v.slug}`),
+  ...(images.length ? { image: images.slice(0, 8).map((i) => absolute(site, `/media/${i.key_large}`)) } : {}),
+  description: v.description?.slice(0, 500) || `${title} for sale in ${v.city_name}, Alabama.`,
+  brand: { '@type': 'Brand', name: v.make_name },
+  manufacturer: { '@type': 'Organization', name: v.make_name },
+  model: v.model_name,
+  vehicleModelDate: String(v.year),
+  ...(v.vin ? { vehicleIdentificationNumber: v.vin, sku: v.vin } : {}),
+  mileageFromOdometer: { '@type': 'QuantitativeValue', value: v.mileage, unitCode: 'SMI' },
+  bodyType: v.body_type,
+  fuelType: v.fuel_type,
+  vehicleTransmission: v.transmission,
+  driveWheelConfiguration: v.drivetrain,
+  ...(v.exterior_color ? { color: v.exterior_color } : {}),
+  ...(v.interior_color ? { vehicleInteriorColor: v.interior_color } : {}),
+  itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
+  offers: {
+    '@type': 'Offer',
+    price: Math.round(v.price_cents / 100),
+    priceCurrency: 'USD',
+    availability: sold ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
+    itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
+    url: absolute(site, `/vehicles/${v.slug}`),
+    seller: { '@type': 'AutoDealer', name: v.dealer_name, url: absolute(site, `/dealers/${v.dealer_slug}`), ...(v.dealer_phone ? { telephone: v.dealer_phone } : {}),
+      address: { '@type': 'PostalAddress', ...(v.dealer_address ? { streetAddress: v.dealer_address } : {}), addressLocality: v.dealer_city, addressRegion: 'AL', ...(v.dealer_zip ? { postalCode: v.dealer_zip } : {}), addressCountry: 'US' } },
+  },
+};
+---
+<BaseLayout title={`${sold ? 'Sold: ' : ''}${title} for Sale in ${v.city_name}, AL – ${price}`} description={description}
+  keywords={`${v.year} ${v.make_name} ${v.model_name} for sale, used ${v.make_name} ${v.model_name} ${v.city_name} AL, used ${v.make_name} Alabama`}
+  canonical={`/vehicles/${v.slug}`} noindex={sold || v.status !== 'active'} ogType="product"
+  ogImage={images[0] ? `/media/${images[0].key_large}` : undefined}
+  jsonLd={[breadcrumbLd(site, crumbs), productLd]} bodyClass={sold ? '' : 'has-sticky-cta'}>
+  <div class="wrap">
+    <Breadcrumbs crumbs={crumbs} />
+    {isOwner && v.status !== 'active' && <div class="alert alert-warn" style="margin-top:12px">Preview: this listing is <strong>{v.status}</strong> and is not visible to shoppers.</div>}
+    {sold && <div class="alert alert-info" style="margin-top:12px">This vehicle has been sold. <a href={`/used-cars/${v.make_slug}/${v.model_slug}`}>See other {v.make_name} {v.model_name} listings</a>.</div>}
+    <div class="vd-layout">
+      <div>
+        <section aria-label="Photos">
+          <div class="gallery-main" data-gallery-main>
+            {images.length > 0 ? (
+              <img src={`/media/${images[0].key_large}`} alt={`${title} – photo 1 of ${images.length}`} width={images[0].width ?? 1600} height={images[0].height ?? 1200} fetchpriority="high" decoding="async" data-gallery-img />
+            ) : (
+              <div class="placeholder" style="display:grid;place-items:center;height:100%;color:#94a3b8"><Icon name="car" size={96} /><span>Photos coming soon</span></div>
+            )}
+            {images.length > 1 && (
+              <>
+                <button class="gallery-nav prev" type="button" aria-label="Previous photo" data-gallery-prev>‹</button>
+                <button class="gallery-nav next" type="button" aria-label="Next photo" data-gallery-next>›</button>
+                <span class="gallery-count" data-gallery-count>1 / {images.length}</span>
+              </>
+            )}
+          </div>
+          {images.length > 1 && (
+            <div class="gallery-thumbs" role="list">
+              {images.map((img, i) => (
+                <button type="button" role="listitem" aria-label={`Show photo ${i + 1}`} aria-current={i === 0 ? 'true' : 'false'} data-thumb={i}
+                  data-large={`/media/${img.key_large}`}>
+                  <img src={`/media/${img.key_small}`} alt="" width="88" height="66" loading="lazy" decoding="async" />
+                </button>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <header style="margin-top:16px">
+          <div class="row" style="gap:8px;margin-bottom:6px">
+            <span class="badge">{cond}</span>
+            {v.featured_until && v.featured_until > new Date().toISOString() && <span class="badge badge-featured">★ Featured</span>}
+            {v.accident_free === 1 && <span class="badge badge-ok">No accidents reported</span>}
+            {sold && <span class="badge badge-err">Sold</span>}
+          </div>
+          <h1 style="margin-bottom:4px">{v.year} {v.make_name} {v.model_name}{v.trim ? ` ${v.trim}` : ''}</h1>
+          <p class="muted" style="margin:0"><Icon name="pin" size={16} /> {v.city_name}, AL · {formatNumber(v.mileage)} miles · {v.drivetrain} · {v.transmission}</p>
+          <p class="price-big mobile-only" style="margin:10px 0 0">{price} <span class="small muted" style="font-size:.9rem;font-weight:600">· est. ${formatNumber(estPayment)}/mo</span></p>
+        </header>
+
+        <section class="section-tight" aria-labelledby="specs-title">
+          <h2 id="specs-title">Vehicle specifications</h2>
+          <dl class="specs">{specs.filter(([, val]) => val).map(([k, val]) => <div><dt>{k}</dt><dd>{val}</dd></div>)}</dl>
+        </section>
+
+        {v.description && (
+          <section class="section-tight" aria-labelledby="desc-title">
+            <h2 id="desc-title">Dealer description</h2>
+            <div class="prose">{descParas.map((p) => <p>{p}</p>)}</div>
+          </section>
+        )}
+
+        {features.length > 0 && (
+          <section class="section-tight" aria-labelledby="features-title">
+            <h2 id="features-title">Features & options</h2>
+            <ul class="feature-list">{features.map((f) => <li>{f}</li>)}</ul>
+          </section>
+        )}
+
+        <section class="section-tight" aria-labelledby="history-title">
+          <h2 id="history-title">Vehicle history</h2>
+          <dl class="specs">
+            <div><dt>Title status</dt><dd>{TITLE_STATUSES.find((t) => t.value === v.title_status)?.label ?? 'Not disclosed'}</dd></div>
+            <div><dt>Previous owners</dt><dd>{v.owners ?? 'Not disclosed'}</dd></div>
+            <div><dt>Accident-free</dt><dd>{yesNo(v.accident_free)}</dd></div>
+            <div><dt>Service records</dt><dd>{yesNo(v.service_records)}</dd></div>
+          </dl>
+          {v.history_report_url && <p style="margin-top:10px"><a href={v.history_report_url} rel="nofollow noopener" target="_blank">View the vehicle history report provided by the dealer</a></p>}
+          <p class="small muted" style="margin-top:10px">History details are disclosed by the dealer. Verify the title with <a href="https://vehiclehistory.bja.ojp.gov/" rel="noopener" target="_blank">NMVTIS</a>{v.vin && <>, check open recalls on <a href={`https://www.nhtsa.gov/recalls?vin=${v.vin}`} rel="noopener nofollow" target="_blank">NHTSA</a></>} and get an independent inspection before you buy.</p>
+        </section>
+
+        <section class="section-tight" id="financing" aria-labelledby="fin-title">
+          <h2 id="fin-title">Estimate your payment</h2>
+          <div class="panel" data-calc data-price={Math.round(v.price_cents / 100)}>
+            <div class="form-grid">
+              <div class="field"><label for="calc-down">Down payment ($)</label><input class="input" id="calc-down" inputmode="numeric" value={Math.round(v.price_cents / 1000)} data-calc-down /></div>
+              <div class="field"><label for="calc-apr">APR (%)</label><input class="input" id="calc-apr" inputmode="decimal" value="8.5" data-calc-apr /></div>
+              <div class="field"><label for="calc-term">Term</label>
+                <select class="select" id="calc-term" data-calc-term>{[36, 48, 60, 72].map((t) => <option value={t} selected={t === 60}>{t} months</option>)}</select></div>
+            </div>
+            <p style="margin:14px 0 4px">Estimated payment: <strong style="font-size:1.4rem;color:var(--brand)" data-calc-out>${formatNumber(estPayment)}/mo</strong></p>
+            <p class="small muted">Estimate only, excluding tax, title and fees. Not a loan offer. Your rate depends on credit and lender approval.</p>
+            {!sold && <a class="btn btn-dark" href="#lead-form" data-open-lead="financing">Ask {v.dealer_name} about financing</a>}
+          </div>
+        </section>
+
+        <div class="section-tight"><Faq faq={faq} title={`Questions about this ${v.year} ${v.make_name} ${v.model_name}`} /></div>
+      </div>
+
+      <aside class="vd-aside" aria-label="Price and dealer contact">
+        <div class="card card-pad" style="margin-bottom:16px">
+          <div class="price-big">{price}</div>
+          <p class="small muted" style="margin:4px 0 12px">Est. ${formatNumber(estPayment)}/mo · <a href="#financing">calculate</a></p>
+          {!sold && (
+            <div class="grid" style="gap:8px">
+              <a class="btn btn-primary" href="#lead-form" data-open-lead="contact"><Icon name="mail" size={18} /> Contact Dealer</a>
+              <a class="btn btn-outline" href="#lead-form" data-open-lead="price"><Icon name="tag" size={18} /> Request Price</a>
+              <a class="btn btn-outline" href="#lead-form" data-open-lead="test_drive"><Icon name="calendar" size={18} /> Schedule Test Drive</a>
+              <a class="btn btn-outline" href="#lead-form" data-open-lead="financing"><Icon name="dollar" size={18} /> Get Financing</a>
+            </div>
+          )}
+          <button class="btn btn-ghost btn-block" type="button" data-save={v.id} aria-pressed="false" style="margin-top:8px"><Icon name="heart" size={18} /> Save vehicle</button>
+        </div>
+        <div class="card card-pad" style="margin-bottom:16px">
+          <h2 style="font-size:1.05rem;margin-bottom:6px">Sold by</h2>
+          <a href={`/dealers/${v.dealer_slug}`} style="font-weight:800;font-size:1.1rem">{v.dealer_name}</a>
+          <address style="font-style:normal;margin-top:6px" class="small">{v.dealer_address}<br />{v.dealer_city}, AL {v.dealer_zip}</address>
+          <p style="margin:8px 0 0"><a href={`tel:${v.dealer_phone.replace(/[^\d+]/g, '')}`} class="btn btn-ghost btn-sm"><Icon name="phone" size={16} /> {v.dealer_phone}</a></p>
+          <p class="small" style="margin:6px 0 0"><a href={`/dealers/${v.dealer_slug}#inventory`}>See all inventory from this dealer →</a></p>
+        </div>
+        {!sold && <LeadForm vehicleId={v.id} types={['contact', 'price', 'test_drive', 'financing', 'info']} heading="Message the dealer" subject={`${v.year} ${v.make_name} ${v.model_name}${v.trim ? ` ${v.trim}` : ''}`} />}
+      </aside>
+    </div>
+
+    {similar.length > 0 && (
+      <section class="section-tight" aria-labelledby="similar-title" style="padding-bottom:48px">
+        <div class="section-head"><h2 id="similar-title">Similar vehicles for sale</h2><a href={`/used-cars/${v.make_slug}/${v.model_slug}`}>More {v.make_name} {v.model_name} →</a></div>
+        <VehicleGrid items={similar} />
+      </section>
+    )}
+    <p class="small muted" style="padding-bottom:24px">Listed <time datetime={v.created_at}>{formatDate(v.created_at)}</time> · Updated <time datetime={v.updated_at}>{formatDate(v.updated_at)}</time>. Information is provided by the dealer; verify all details before purchase.</p>
+  </div>
+  {!sold && (
+    <div class="sticky-cta">
+      <a class="btn btn-outline" href={`tel:${v.dealer_phone.replace(/[^\d+]/g, '')}`}><Icon name="phone" size={18} /> Call</a>
+      <a class="btn btn-primary" href="#lead-form" data-open-lead="contact">Contact Dealer</a>
+    </div>
+  )}
+  <script define:vars={{ vehicleId: v.id, track: v.status === 'active' }}>
+    if (track) addEventListener('load', () => setTimeout(() => navigator.sendBeacon(`/api/vehicles/${vehicleId}/view`), 1200));
+  </script>
+</BaseLayout>
+<script>
+  import { initSaveButtons } from '../../scripts/save';
+  initSaveButtons();
+  // Gallery
+  const main = document.querySelector<HTMLImageElement>('[data-gallery-img]');
+  const thumbs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
+  const count = document.querySelector('[data-gallery-count]');
+  let idx = 0;
+  const show = (i: number) => {
+    if (!main || !thumbs.length) return;
+    idx = (i + thumbs.length) % thumbs.length;
+    main.src = thumbs[idx].dataset.large!;
+    main.alt = main.alt.replace(/photo \d+/, `photo ${idx + 1}`);
+    thumbs.forEach((t, j) => t.setAttribute('aria-current', String(j === idx)));
+    if (count) count.textContent = `${idx + 1} / ${thumbs.length}`;
+  };
+  thumbs.forEach((t) => t.addEventListener('click', () => show(Number(t.dataset.thumb))));
+  document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(idx - 1));
+  document.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(idx + 1));
+  let x0 = 0;
+  document.querySelector('[data-gallery-main]')?.addEventListener('touchstart', (e) => { x0 = (e as TouchEvent).touches[0].clientX; }, { passive: true });
+  document.querySelector('[data-gallery-main]')?.addEventListener('touchend', (e) => {
+    const dx = (e as TouchEvent).changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+  });
+  // Payment calculator
+  const calc = document.querySelector<HTMLElement>('[data-calc]');
+  if (calc) {
+    const price = Number(calc.dataset.price);
+    const down = calc.querySelector<HTMLInputElement>('[data-calc-down]')!;
+    const apr = calc.querySelector<HTMLInputElement>('[data-calc-apr]')!;
+    const term = calc.querySelector<HTMLSelectElement>('[data-calc-term]')!;
+    const out = calc.querySelector('[data-calc-out]')!;
+    const update = () => {
+      const p = Math.max(0, price - (Number(down.value.replace(/[^\d.]/g, '')) || 0));
+      const r = (Number(apr.value) || 0) / 1200;
+      const n = Number(term.value);
+      const m = r === 0 ? p / n : (p * r) / (1 - Math.pow(1 + r, -n));
+      out.textContent = `$${Math.round(m).toLocaleString('en-US')}/mo`;
+    };
+    [down, apr, term].forEach((el) => el.addEventListener('input', update));
+  }
+</script>

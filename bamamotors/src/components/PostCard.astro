@@ -1,0 +1,17 @@
+---
+import type { PostCard } from '../lib/blog';
+import { formatDate } from '../lib/format';
+import { postImage } from '../lib/images';
+import Photo from './Photo.astro';
+interface Props { p: PostCard; }
+const { p } = Astro.props;
+---
+<article class="img-card spotlight" style="position:relative">
+  <Photo img={postImage(p.slug)} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" alt="" />
+  <div class="body">
+    {p.category_name && <span class="badge" style="align-self:flex-start">{p.category_name}</span>}
+    <h2 style="font-size:1.1rem;margin:4px 0"><a href={`/blog/${p.slug}`} style="color:var(--ink);text-decoration:none" class="stretched">{p.title}</a></h2>
+    <p class="small muted" style="margin:0 0 6px">{p.excerpt}</p>
+    <p class="small muted" style="margin:auto 0 0">Updated <time datetime={p.updated_at}>{formatDate(p.updated_at)}</time></p>
+  </div>
+</article>

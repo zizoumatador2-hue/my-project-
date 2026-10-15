@@ -1,0 +1,30 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { organizationLd } from '../lib/seo';
+const site = Astro.locals.runtime.env.SITE_URL;
+---
+<ContentLayout title="About BamaMotors: Alabama's Local Car Marketplace" h1="About BamaMotors" path="/about"
+  description="BamaMotors is a local automotive marketplace helping people in Alabama find used cars and connect with local dealerships. Learn who we are and how we work."
+  jsonLd={[{ ...organizationLd(site, Astro.locals.settings), '@type': 'Organization' }, { '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About BamaMotors', url: `${site}/about` }]}>
+  <div class="prose">
+    <p class="snippet"><strong>BamaMotors</strong> is a local automotive marketplace helping people in Alabama find used cars and connect with local dealerships. Shoppers search inventory for free; dealers list vehicles and receive leads directly.</p>
+    <h2>Why we built BamaMotors</h2>
+    <p>Buying a car in <a href="https://en.wikipedia.org/wiki/Alabama" rel="noopener" target="_blank">Alabama</a> often means scrolling through national sites full of vehicles hundreds of miles away. We think local shoppers deserve a faster way to see what's actually for sale nearby (in Birmingham, Huntsville, Mobile, Montgomery and every town in between) and local dealers deserve a marketplace built for their community.</p>
+    <h2>What we do</h2>
+    <ul>
+      <li><strong>For shoppers:</strong> a fast search across Alabama dealer inventory, with filters for price, mileage, body type, city and ZIP-code radius, plus honest buying guides.</li>
+      <li><strong>For dealers:</strong> simple inventory tools, a public dealership profile, lead management and analytics.</li>
+    </ul>
+    <h2>What we don't do</h2>
+    <ul>
+      <li>We don't sell cars or lend money. You buy directly from the dealer.</li>
+      <li>We don't sell your personal information. Your inquiry goes to the dealer you contact.</li>
+      <li>We don't scrape listings or photos from other websites. Every vehicle is listed by a dealer or through a licensed feed.</li>
+      <li>We don't publish fake reviews. Dealer reviews come from signed-in shoppers and are moderated.</li>
+    </ul>
+    <h2>Our editorial standards</h2>
+    <p>Our <a href="/blog">car buying guides</a> are written by the <a href="/authors/bamamotors-editorial-team">BamaMotors Editorial Team</a>. We cite official sources such as the Alabama Department of Revenue, the FTC and NHTSA, show when each guide was last updated, and never accept payment from dealers for editorial coverage.</p>
+    <h2>Get in touch</h2>
+    <p>Questions, feedback or partnership ideas? <a href="/contact">Contact us</a>. Dealers can <a href="/for-dealers">list their dealership here</a>.</p>
+  </div>
+</ContentLayout>

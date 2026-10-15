@@ -1,0 +1,64 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import Pagination from '../../../components/Pagination.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import { all, first, nowIso } from '../../../lib/db';
+import { LEAD_TYPES, LEAD_STATUSES, type LeadType } from '../../../lib/constants';
+import { formatDateTime } from '../../../lib/format';
+
+const db = Astro.locals.runtime.env.DB;
+const sp = Astro.url.searchParams;
+if (sp.get('id')) return Astro.redirect(`/admin/leads/${Number(sp.get('id'))}`);
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const ids = fd.getAll('ids').map(Number).filter((n) => n > 0).slice(0, 500);
+  const status = String(fd.get('status'));
+  if (ids.length && (LEAD_STATUSES as readonly string[]).includes(status)) {
+    await db.prepare(`UPDATE leads SET status = ?, updated_at = ? WHERE id IN (${ids.map(() => '?').join(',')})`).bind(status, nowIso(), ...ids).run();
+  }
+  return Astro.redirect(`/admin/leads${Astro.url.search}${Astro.url.search ? '&' : '?'}ok=bulk`, 303);
+}
+const status = (LEAD_STATUSES as readonly string[]).includes(sp.get('status') ?? '') ? sp.get('status')! : '';
+const type = (sp.get('type') ?? '') in LEAD_TYPES ? sp.get('type')! : '';
+const site = sp.get('site') === '1';
+const q = (sp.get('q') ?? '').trim().slice(0, 60);
+const page = Math.max(1, Number(sp.get('page')) || 1);
+const PER = 40;
+const where = ['1=1'];
+const params: (string | number)[] = [];
+if (status) { where.push('l.status = ?'); params.push(status); }
+if (type) { where.push('l.type = ?'); params.push(type); }
+if (site) where.push('l.dealer_id IS NULL');
+if (q) { where.push("(l.name LIKE ? OR l.email LIKE ? OR COALESCE(l.vehicle_label,'') LIKE ? OR COALESCE(d.name,'') LIKE ?)"); params.push(...Array(4).fill(`%${q}%`)); }
+const from = `FROM leads l LEFT JOIN dealers d ON d.id = l.dealer_id WHERE ${where.join(' AND ')}`;
+const total = (await first<{ n: number }>(db, `SELECT COUNT(*) AS n ${from}`, params))?.n ?? 0;
+const rows = await all<{ id: number; type: LeadType; name: string; email: string; vehicle_label: string | null; dealer: string | null; status: string; created_at: string }>(db,
+  `SELECT l.id, l.type, l.name, l.email, l.vehicle_label, d.name AS dealer, l.status, l.created_at ${from} ORDER BY l.created_at DESC LIMIT ${PER} OFFSET ${(page - 1) * PER}`, params);
+const qs = (p: number) => `/admin/leads?${new URLSearchParams({ ...(q && { q }), ...(status && { status }), ...(type && { type }), ...(site && { site: '1' }), page: String(p) })}`;
+---
+<DashboardLayout title="Leads" area="admin">
+  <h1>All leads</h1>
+  <form method="get" class="toolbar">
+    <div class="field"><label for="q">Search</label><input class="input" id="q" name="q" value={q} placeholder="Name, email, vehicle, dealer" /></div>
+    <div class="field"><label for="st">Status</label><select class="select" id="st" name="status"><option value="">All</option>{LEAD_STATUSES.map((s) => <option selected={s === status}>{s}</option>)}</select></div>
+    <div class="field"><label for="ty">Type</label><select class="select" id="ty" name="type"><option value="">All</option>{Object.entries(LEAD_TYPES).map(([k, l]) => <option value={k} selected={k === type}>{l}</option>)}</select></div>
+    <label class="check" style="align-self:center"><input type="checkbox" name="site" value="1" checked={site} /> Site-level only</label>
+    <button class="btn btn-outline" type="submit">Filter</button>
+  </form>
+  <p class="muted">{total} leads</p>
+  {rows.length === 0 ? <EmptyState title="No leads found" icon="inbox" /> : (
+    <form method="post">
+      <div class="toolbar"><div class="field" style="max-width:200px"><label for="bs">Mark selected as</label><select class="select" id="bs" name="status">{LEAD_STATUSES.map((s) => <option>{s}</option>)}</select></div><button class="btn btn-dark" type="submit">Apply</button></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th><span class="sr-only">Select</span></th><th>Shopper</th><th>Type</th><th>Vehicle</th><th>Dealer</th><th>Status</th><th>Received</th></tr></thead>
+        <tbody>{rows.map((l) => (
+          <tr><td><input type="checkbox" name="ids" value={l.id} aria-label={`Select lead ${l.id}`} /></td>
+            <td><a href={`/admin/leads/${l.id}`}><strong>{l.name}</strong></a><br /><span class="small muted">{l.email}</span></td>
+            <td>{LEAD_TYPES[l.type]}</td><td class="small">{l.vehicle_label ?? '—'}</td><td>{l.dealer ?? <span class="badge badge-warn">BamaMotors</span>}</td>
+            <td><span class="badge">{l.status}</span></td><td class="small">{formatDateTime(l.created_at)}</td></tr>
+        ))}</tbody>
+      </table></div>
+    </form>
+  )}
+  <Pagination page={page} pages={Math.max(1, Math.ceil(total / PER))} href={qs} />
+</DashboardLayout>

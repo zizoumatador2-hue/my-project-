@@ -1,0 +1,47 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, insert, run } from '../../lib/db';
+import { slugify, uniqueSlug } from '../../lib/slug';
+
+const db = Astro.locals.runtime.env.DB;
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  const name = String(fd.get('name') ?? '').trim().slice(0, 80);
+  const description = String(fd.get('description') ?? '').trim().slice(0, 300);
+  const sort = Number(fd.get('sort_order')) || 100;
+  if (action === 'create') {
+    if (name.length < 2) err = 'Enter a category name.';
+    else { await insert(db, 'INSERT INTO categories (slug, name, description, sort_order) VALUES (?,?,?,?)', [await uniqueSlug(db, 'categories', slugify(name)), name, description || null, sort]); return Astro.redirect('/admin/categories?ok=created', 303); }
+  } else if (action === 'update') {
+    if (name.length < 2) err = 'Enter a category name.';
+    else { await run(db, 'UPDATE categories SET name = ?, description = ?, sort_order = ? WHERE id = ?', [name, description || null, sort, Number(fd.get('id'))]); return Astro.redirect('/admin/categories?ok=saved', 303); }
+  } else if (action === 'delete') {
+    await run(db, 'DELETE FROM categories WHERE id = ?', [Number(fd.get('id'))]);
+    return Astro.redirect('/admin/categories?ok=deleted', 303);
+  }
+}
+const cats = await all<{ id: number; slug: string; name: string; description: string | null; sort_order: number; n: number }>(db,
+  'SELECT c.*, (SELECT COUNT(*) FROM blog_posts p WHERE p.category_id = c.id) AS n FROM categories c ORDER BY sort_order, name');
+---
+<DashboardLayout title="Categories" area="admin" err={err}>
+  <h1>Blog categories</h1>
+  <div class="stack">
+    {cats.map((c) => (
+      <form method="post" class="panel toolbar"><input type="hidden" name="id" value={c.id} />
+        <div class="field"><label for={`n-${c.id}`}>Name</label><input class="input" id={`n-${c.id}`} name="name" value={c.name} /></div>
+        <div class="field" style="flex:2 1 300px"><label for={`d-${c.id}`}>Description</label><input class="input" id={`d-${c.id}`} name="description" value={c.description ?? ''} /></div>
+        <div class="field" style="max-width:100px"><label for={`s-${c.id}`}>Order</label><input class="input" id={`s-${c.id}`} name="sort_order" value={c.sort_order} inputmode="numeric" /></div>
+        <span class="small muted" style="align-self:center">/blog/category/{c.slug} · {c.n} posts</span>
+        <button class="btn btn-outline btn-sm" name="action" value="update">Save</button>
+        <button class="btn btn-danger btn-sm" name="action" value="delete">Delete</button>
+      </form>
+    ))}
+    <form method="post" class="panel toolbar"><input type="hidden" name="action" value="create" />
+      <div class="field"><label for="nn">New category</label><input class="input" id="nn" name="name" required /></div>
+      <div class="field" style="flex:2 1 300px"><label for="nd">Description</label><input class="input" id="nd" name="description" /></div>
+      <button class="btn btn-primary" type="submit">Add category</button>
+    </form>
+  </div>
+</DashboardLayout>

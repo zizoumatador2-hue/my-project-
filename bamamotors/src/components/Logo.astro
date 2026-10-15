@@ -1,0 +1,14 @@
+---
+interface Props { href?: string; }
+const { href = '/' } = Astro.props;
+---
+<a class="logo" href={href} aria-label="BamaMotors home">
+  <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+    <rect width="40" height="40" rx="10" fill="#0f2a4a" />
+    <path d="M7 26.5c2.6-6.4 7.8-10 14.4-10 4.6 0 8.3 1.6 11.6 4.8" fill="none" stroke="#d9481f" stroke-width="3.2" stroke-linecap="round" />
+    <path d="M9 30h22" stroke="#fff" stroke-width="2.6" stroke-linecap="round" />
+    <circle cx="13" cy="30" r="2.6" fill="#f4b942" />
+    <circle cx="27" cy="30" r="2.6" fill="#f4b942" />
+  </svg>
+  <span>Bama<b>Motors</b></span>
+</a>

@@ -1,3 +1,5 @@
+> **This repository also contains [BamaMotors](bamamotors/README.md)** — an Alabama used-car marketplace (Astro 5 + Cloudflare) in `bamamotors/`, independent of the TrustTransfer app below.
+
 # TrustTransfer — سوق الحسابات الموثّق
 
 A trust-first marketplace for buying and selling social-media accounts (Instagram, TikTok, Snapchat, X, Facebook,

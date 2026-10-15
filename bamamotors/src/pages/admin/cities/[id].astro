@@ -1,0 +1,49 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import { first, insert, run, audit } from '../../../lib/db';
+import { slugify, uniqueSlug } from '../../../lib/slug';
+import { parseFaq, faqToText, faqFromText } from '../../../lib/markdown';
+
+const db = Astro.locals.runtime.env.DB;
+const isNew = Astro.params.id === 'new';
+const city = isNew ? null : await first<Record<string, string | number | null>>(db, 'SELECT * FROM cities WHERE id = ?', [Number(Astro.params.id)]);
+if (!isNew && !city) return Astro.rewrite('/404');
+let err: string | null = null;
+let v: Record<string, string> = city ? {
+  name: String(city.name), county: String(city.county ?? ''), lat: String(city.lat), lng: String(city.lng), is_featured: city.is_featured ? 'on' : '',
+  sort_order: String(city.sort_order), intro: String(city.intro ?? ''), body: String(city.body ?? ''), faq: faqToText(parseFaq(city.faq_json as string | null)),
+} : { name: '', county: '', lat: '', lng: '', is_featured: '', sort_order: '100', intro: '', body: '', faq: '' };
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  v = Object.fromEntries([...fd.entries()].map(([k, x]) => [k, String(x)]));
+  const lat = Number(v.lat), lng = Number(v.lng);
+  if ((v.name ?? '').trim().length < 2) err = 'Enter the city name.';
+  else if (!(lat > 30 && lat < 35.1 && lng > -88.6 && lng < -84.8)) err = 'Enter Alabama coordinates (lat 30–35, lng −88.5 to −84.9).';
+  else {
+    const faq = faqFromText(v.faq ?? '');
+    const vals = [v.name.trim(), v.county?.trim() || null, lat, lng, v.is_featured === 'on' ? 1 : 0, Number(v.sort_order) || 100, v.intro?.trim() || null, v.body?.trim() || null, faq.length ? JSON.stringify(faq) : null];
+    let id: number;
+    if (isNew) id = await insert(db, 'INSERT INTO cities (slug, name, county, lat, lng, is_featured, sort_order, intro, body, faq_json) VALUES (?,?,?,?,?,?,?,?,?,?)', [await uniqueSlug(db, 'cities', `${slugify(v.name)}-al`), ...vals]);
+    else { id = Number(city!.id); await run(db, "UPDATE cities SET name=?, county=?, lat=?, lng=?, is_featured=?, sort_order=?, intro=?, body=?, faq_json=?, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id = ?", [...vals, id]); }
+    await audit(db, Astro.locals.user!.id, isNew ? 'city.create' : 'city.update', 'city', id);
+    return Astro.redirect(`/admin/cities/${id}?ok=saved`, 303);
+  }
+}
+---
+<DashboardLayout title={isNew ? 'Add city' : `Edit ${v.name}`} area="admin" err={err}>
+  <div class="spread"><h1 style="margin:0">{isNew ? 'Add city' : v.name}</h1>{city && <a class="btn btn-outline" href={`/used-cars/${city.slug}`}>View page</a>}</div>
+  <form method="post" class="panel" style="margin-top:16px">
+    <div class="form-grid">
+      <div class="field"><label for="c-name">City name</label><input class="input" id="c-name" name="name" value={v.name} required /></div>
+      <div class="field"><label for="c-county">County</label><input class="input" id="c-county" name="county" value={v.county} /></div>
+      <div class="field"><label for="c-lat">Latitude</label><input class="input" id="c-lat" name="lat" value={v.lat} inputmode="decimal" required /></div>
+      <div class="field"><label for="c-lng">Longitude</label><input class="input" id="c-lng" name="lng" value={v.lng} inputmode="decimal" required /></div>
+      <div class="field"><label for="c-sort">Sort order</label><input class="input" id="c-sort" name="sort_order" value={v.sort_order} inputmode="numeric" /></div>
+      <label class="check" style="align-self:end"><input type="checkbox" name="is_featured" checked={v.is_featured === 'on'} /> Featured on homepage & footer</label>
+      <div class="field full"><label for="c-intro">Intro (shown under the H1)</label><textarea class="textarea" id="c-intro" name="intro" rows="3">{v.intro}</textarea></div>
+      <div class="field full"><label for="c-body">Local buying guide (Markdown, unique per city)</label><textarea class="textarea" id="c-body" name="body" rows="16" style="font-family:ui-monospace,monospace;font-size:14px">{v.body}</textarea></div>
+      <div class="field full"><label for="c-faq">FAQ</label><textarea class="textarea" id="c-faq" name="faq" rows="8" placeholder={'Q: Question?\nA: Answer.'}>{v.faq}</textarea></div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save city</button>
+  </form>
+</DashboardLayout>

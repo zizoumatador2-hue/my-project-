@@ -1,0 +1,18 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+const s = Astro.locals.settings;
+---
+<ContentLayout title="Disclaimer" h1="Disclaimer" path="/disclaimer" updated="2026-10-06" description="Important information about BamaMotors listings, prices, payment estimates, guides and advertising. Always verify vehicle details with the dealer.">
+  <div class="prose">
+    <h2>Listings are provided by dealers</h2>
+    <p>Vehicle listings, prices, photos, mileage, history and availability are supplied by the dealerships that list them. BamaMotors does not inspect vehicles and does not guarantee the accuracy of any listing. Always confirm details with the dealer, review the vehicle history and title, and get an independent inspection before you buy.</p>
+    <h2>Prices and payment estimates</h2>
+    <p>Prices shown are dealer asking prices and exclude sales tax, title, registration and dealer fees unless the dealer states otherwise. Monthly payment figures are estimates for illustration only. They are not offers of credit. Your actual rate and payment depend on your credit and the lender's approval.</p>
+    <h2>Guides are general information</h2>
+    <p>Our car buying, financing and Alabama title and registration guides are general educational content, not legal, tax, insurance or financial advice. Rules and fees change. Confirm requirements with the <a href="https://www.revenue.alabama.gov/motor-vehicle/" rel="noopener" target="_blank">Alabama Department of Revenue</a>, your county license office, or a qualified professional.</p>
+    <h2>Advertising and links</h2>
+    <p>BamaMotors is supported by dealer subscriptions, featured listings and advertising, which may include Google AdSense. Ads are labeled and kept separate from editorial content. Links to third-party websites are provided for convenience; we are not responsible for their content.</p>
+    <h2>Contact</h2>
+    <p>Questions about this disclaimer? <a href="/contact">Contact us</a>{s.contact_email && <> or email <a href={`mailto:${s.contact_email}`}>{s.contact_email}</a></>}.</p>
+  </div>
+</ContentLayout>

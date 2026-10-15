@@ -1,0 +1,42 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import VehicleForm from '../../../components/VehicleForm.astro';
+import ImageManager from '../../../components/ImageManager.astro';
+import { getVehicleById, getVehicleImages, getVehicleFeatures } from '../../../lib/vehicles';
+import { saveVehicle, deleteVehicle, imageAction } from '../../../lib/vehicle-save';
+import { vehicleToForm } from '../../../lib/vehicle-form';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+import { vehicleTitle } from '../../../lib/format';
+import { all, run } from '../../../lib/db';
+
+const env = Astro.locals.runtime.env;
+const admin = Astro.locals.user!;
+const v = await getVehicleById(env.DB, Number(Astro.params.id));
+if (!v) return Astro.rewrite('/404');
+const dealers = await all<{ id: number; name: string }>(env.DB, 'SELECT id, name FROM dealers ORDER BY name');
+let values = vehicleToForm(v, await getVehicleFeatures(env.DB, v.id));
+let errors: FieldErrors = {};
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  if (action === 'delete') { await deleteVehicle(env.DB, env.MEDIA, v.id, admin.id); return Astro.redirect('/admin/vehicles?ok=deleted', 303); }
+  if (action.startsWith('img_')) { await imageAction(env.DB, env.MEDIA, v.id, action, Number(fd.get('image_id'))); return Astro.redirect(`/admin/vehicles/${v.id}#photos`, 303); }
+  values = formToObject(fd);
+  const newDealer = Number(values.dealer_id);
+  if (newDealer && newDealer !== v.dealer_id && dealers.some((d) => d.id === newDealer)) await run(env.DB, 'UPDATE vehicles SET dealer_id = ? WHERE id = ?', [newDealer, v.id]);
+  const res = await saveVehicle(env.DB, values, { dealerId: newDealer || v.dealer_id, vehicleId: v.id, actorId: admin.id, enforceLimit: false, source: 'admin' });
+  if (res.ok) return Astro.redirect(`/admin/vehicles/${v.id}?ok=saved`, 303);
+  errors = res.errors;
+}
+const images = await getVehicleImages(env.DB, v.id);
+---
+<DashboardLayout title={`Edit ${vehicleTitle(v)}`} area="admin">
+  <div class="spread"><h1 style="margin:0">{vehicleTitle(v)}</h1><div class="row"><a class="btn btn-outline" href={`/vehicles/${v.slug}`}>View listing</a><a class="btn btn-ghost" href="/admin/vehicles">← Vehicles</a></div></div>
+  <p class="muted">Source: {v.source} · Dealer: <a href={`/admin/dealers/${v.dealer_id}`}>{v.dealer_name}</a></p>
+  <ImageManager vehicleId={v.id} images={images} />
+  <VehicleForm values={values} errors={errors} submitLabel="Save changes" dealers={dealers} />
+  <form method="post" class="panel" style="margin-top:24px" data-confirm="Delete this vehicle permanently?"><input type="hidden" name="action" value="delete" /><button class="btn btn-danger" type="submit">Delete vehicle</button></form>
+</DashboardLayout>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((f) => f.addEventListener('submit', (e) => { if (!confirm(f.dataset.confirm!)) e.preventDefault(); }));
+</script>

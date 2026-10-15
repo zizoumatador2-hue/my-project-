@@ -1,0 +1,33 @@
+name = "bamamotors"
+main = "dist/_worker.js/index.js"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+[observability]
+enabled = true
+
+# Created with: npx wrangler d1 create bamamotors-db
+[[d1_databases]]
+binding = "DB"
+database_name = "bamamotors-db"
+database_id = "289868be-3c91-49c6-ad4e-04657c2de5b7"
+migrations_dir = "migrations"
+
+# Created with: npx wrangler r2 bucket create bamamotors-media
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "bamamotors-media"
+
+[vars]
+SITE_URL = "https://bamamotors.com"
+ENVIRONMENT = "production"
+EMAIL_FROM = "BamaMotors <no-reply@bamamotors.com>"
+PUBLIC_CACHE_TTL = "120"
+# Secrets — set with `npx wrangler secret put NAME`, never commit them:
+#   SESSION_SECRET, BOOTSTRAP_ADMIN_EMAIL, RESEND_API_KEY,
+#   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_BASIC, STRIPE_PRICE_PRO, STRIPE_PRICE_FEATURED,
+#   TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY

@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchForm from '../components/SearchForm.astro';
+import VehicleGrid from '../components/VehicleGrid.astro';
+import DealerCard from '../components/DealerCard.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { getFeaturedVehicles } from '../lib/vehicles';
+import { getFeaturedDealers } from '../lib/dealers';
+import { all, first } from '../lib/db';
+import { organizationLd, websiteLd, faqLd } from '../lib/seo';
+import { BODY_TYPES } from '../lib/constants';
+import { indexableLandingPaths } from '../lib/sitemap';
+import { formatNumber } from '../lib/format';
+import Photo from '../components/Photo.astro';
+import { image, cityImage, postImage } from '../lib/images';
+
+const env = Astro.locals.runtime.env;
+const db = env.DB;
+const [featured, dealers, makes, cities, bodies, posts, counts] = await Promise.all([
+  getFeaturedVehicles(db, 8),
+  getFeaturedDealers(db, 6),
+  all<{ slug: string; name: string; n: number }>(db, `SELECT mk.slug, mk.name, (SELECT COUNT(*) FROM vehicles v WHERE v.make_id = mk.id AND v.status = 'active') AS n FROM makes mk WHERE mk.is_popular = 1 ORDER BY n DESC, mk.name LIMIT 10`),
+  all<{ slug: string; name: string; county: string | null }>(db, 'SELECT slug, name, county FROM cities WHERE is_featured = 1 ORDER BY sort_order'),
+  all<{ body_type: string; n: number }>(db, "SELECT v.body_type, COUNT(*) AS n FROM vehicles v JOIN dealers d ON d.id = v.dealer_id WHERE v.status = 'active' AND d.status = 'active' GROUP BY v.body_type"),
+  all<{ slug: string; title: string; excerpt: string; category: string | null }>(db, "SELECT p.slug, p.title, p.excerpt, c.name AS category FROM blog_posts p LEFT JOIN categories c ON c.id = p.category_id WHERE p.status = 'published' ORDER BY p.published_at DESC, p.id DESC LIMIT 6"),
+  first<{ vehicles: number; dealers: number; zips: number; guides: number }>(db, "SELECT (SELECT COUNT(*) FROM vehicles v JOIN dealers d ON d.id = v.dealer_id WHERE v.status = 'active' AND d.status = 'active') AS vehicles, (SELECT COUNT(*) FROM dealers WHERE status = 'active') AS dealers, (SELECT COUNT(*) FROM zip_codes) AS zips, (SELECT COUNT(*) FROM blog_posts WHERE status = 'published') AS guides"),
+]);
+const bodyCount = Object.fromEntries(bodies.map((b) => [b.body_type, b.n]));
+const site = env.SITE_URL;
+const heroImg = image('hero');
+// Link only to landing pages that are indexable now (live inventory), never to empty make/body pages.
+const indexable = await indexableLandingPaths(db, env.ENVIRONMENT === 'production' ? 60_000 : 0);
+const makeTiles = makes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
+const browseChips = [
+  ...BODY_TYPES.slice(0, 7).map((b) => ({ href: `/used-cars/${b.slug}`, label: `Used ${b.plural}`, n: bodyCount[b.value] })),
+  { href: '/used-cars/under-10000', label: 'Cars under $10,000', n: 0 },
+  { href: '/used-cars/under-5000', label: 'Cars under $5,000', n: 0 },
+].filter((c) => indexable.has(c.href));
+const quickLinks = [
+  { href: '/used-cars/under-10000', label: 'Cars under $10k' },
+  { href: '/used-cars/trucks', label: 'Used trucks' },
+  { href: '/used-cars/suvs', label: 'Family SUVs' },
+  { href: '/used-cars/birmingham-al', label: 'Birmingham' },
+  { href: '/used-cars/huntsville-al', label: 'Huntsville' },
+  { href: '/used-cars/mobile-al', label: 'Mobile' },
+  { href: '/dealers', label: 'Dealers near me' },
+].filter((l) => !l.href.startsWith('/used-cars/') || indexable.has(l.href));
+const h1 = 'Used Cars for Sale in Alabama, from Local Dealers You Can Visit';
+const stats = [
+  ...(counts && counts.vehicles > 0 ? [{ n: counts.vehicles, l: 'Used cars for sale now' }] : []),
+  ...(counts && counts.dealers > 0 ? [{ n: counts.dealers, l: 'Local Alabama dealers' }] : []),
+  { n: cities.length, l: 'Alabama city guides' },
+  { n: counts?.zips ?? 0, l: 'ZIP codes you can search' },
+  { n: counts?.guides ?? 0, l: 'Free car-buying guides' },
+  { n: 0, l: 'Cost to shoppers', prefix: '$' },
+].slice(0, 4);
+const faq = [
+  { q: 'Is BamaMotors free for car shoppers?', a: 'Yes. Searching used cars, saving vehicles and contacting dealers on BamaMotors is completely free for shoppers. Dealers pay for optional subscription plans and featured listings.' },
+  { q: 'Does BamaMotors sell cars?', a: 'No. BamaMotors is a marketplace that connects Alabama car shoppers with local dealerships. You buy directly from the dealer that listed the vehicle.' },
+  { q: 'How do I find used cars near me in Alabama?', a: 'Enter your ZIP code in the search box and choose a radius, or tap “Use my location.” Results can be sorted by distance, price, mileage or model year.' },
+  { q: 'Which Alabama cities does BamaMotors cover?', a: 'We cover the whole state, with dedicated pages for Birmingham, Huntsville, Mobile, Montgomery, Tuscaloosa, Hoover, Auburn, Dothan, Decatur, Madison, Florence and Gadsden.' },
+  { q: 'Can I get financing through BamaMotors?', a: 'You can send a financing inquiry to the dealer on any listing, or submit a general financing inquiry on our financing page. BamaMotors is not a lender; financing is provided by dealers and their lending partners.' },
+  { q: 'How do dealers list vehicles on BamaMotors?', a: 'Dealers create an account, complete their profile and add inventory from the dealer dashboard. The Free plan includes up to 10 active listings.' },
+];
+---
+<BaseLayout title="BamaMotors: Used Cars from Local Alabama Dealers" ogImage={heroImg?.src}
+  description="Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code: Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers."
+  keywords="used cars Alabama, used cars for sale Alabama, used cars near me Alabama, cars for sale Alabama, car dealerships Alabama, used car dealers Alabama, cheap used cars Alabama, used trucks Alabama, used SUVs Alabama"
+  canonical="/" jsonLd={[organizationLd(site, Astro.locals.settings), websiteLd(site), faqLd(faq)]}>
+  <section class="hero">
+    {heroImg && <div class="hero-photo" aria-hidden="true"><Photo img={heroImg} sizes="100vw" eager alt="" /></div>}
+    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="wrap">
+      <h1 class="blur-text" aria-label={h1}>{h1.split(' ').map((w, i) => <><span class="bt-w" style={`--i:${i}`} aria-hidden="true">{w}</span>{' '}</>)}</h1>
+      <p class="lead">Search {counts && counts.vehicles > 0 ? `${formatNumber(counts.vehicles)} used cars, trucks and SUVs` : 'used cars, trucks and SUVs'} from Alabama dealerships, from Huntsville to Mobile. Compare prices, then contact the dealer directly.</p>
+      <SearchForm variant="hero" />
+      <ul class="quick-chips" aria-label="Popular searches">
+        {quickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <ul class="trust">
+        <li>Free for shoppers</li><li>Local Alabama dealers only</li><li>Contact dealers directly</li><li>Search by ZIP & radius</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight band" aria-label="BamaMotors at a glance">
+    <div class="wrap stats-band reveal-stagger">
+      {stats.map((st) => <div class="stat spotlight"><div class="n" data-count={st.n} data-prefix={st.prefix}>{st.prefix ?? ''}{formatNumber(st.n)}</div><div class="l">{st.l}</div></div>)}
+    </div>
+  </section>
+
+  {featured.length > 0 && (
+    <section class="section" aria-labelledby="featured-title">
+      <div class="wrap reveal">
+        <div class="section-head"><h2 id="featured-title">Featured used cars in Alabama</h2><a href="/used-cars">View all used cars →</a></div>
+        <VehicleGrid items={featured} />
+      </div>
+    </section>
+  )}
+
+  {(makeTiles.length > 0 || browseChips.length > 0) && (
+  <section class="section band" aria-labelledby="makes-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="makes-title">{makeTiles.length > 0 ? 'Shop popular makes' : 'Shop by body type and budget'}</h2><a href="/used-cars">All used cars →</a></div>
+      {makeTiles.length > 0 && (
+        <div class="grid grid-4">
+          {makeTiles.map((m) => <a class="tile spotlight" href={`/used-cars/${m.slug}`}><strong>Used {m.name}</strong><span class="small muted">{m.n} for sale</span></a>)}
+        </div>
+      )}
+      {browseChips.length > 0 && (
+        <>
+          {makeTiles.length > 0 && <h3 style="margin-top:28px">Shop by body type</h3>}
+          <ul class="chips">
+            {browseChips.map((c) => <li><a class="chip" href={c.href}>{c.label}{c.n ? <span class="count">({c.n})</span> : null}</a></li>)}
+          </ul>
+        </>
+      )}
+    </div>
+  </section>
+  )}
+
+  <section class="section" aria-labelledby="cities-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="cities-title">Used cars in popular Alabama cities</h2></div>
+      <div class="grid grid-4 reveal-stagger">
+        {cities.map((c) => (
+          <a class="img-card spotlight" href={`/used-cars/${c.slug}`}>
+            <Photo img={cityImage(c.slug)} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" alt={image(`city-${c.slug}`) ? `${c.name}, Alabama` : undefined} />
+            <span class="body"><strong>Used cars in {c.name}, AL</strong><span class="small muted">{c.county}</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {dealers.length > 0 && (
+    <section class="section band" aria-labelledby="dealers-title">
+      <div class="wrap">
+        <div class="section-head"><h2 id="dealers-title">Featured Alabama dealerships</h2><a href="/dealers">All car dealerships →</a></div>
+        <div class="grid grid-3">{dealers.map((d) => <DealerCard d={d} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title">How BamaMotors works</h2>
+      <ol class="steps reveal-stagger">
+        <li><h3>Search local inventory</h3><p class="muted" style="margin:0">Filter used cars by make, price, mileage, city or ZIP code radius across Alabama.</p></li>
+        <li><h3>Compare & save</h3><p class="muted" style="margin:0">See photos, specs, vehicle history and dealer details. Save favorites to your free account.</p></li>
+        <li><h3>Contact the dealer</h3><p class="muted" style="margin:0">Request a price, schedule a test drive or ask about financing. Your request goes straight to the dealership.</p></li>
+        <li><h3>Buy with confidence</h3><p class="muted" style="margin:0">Use our Alabama guides for inspections, out-the-door pricing, title and registration.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section band-dark" aria-labelledby="fin-title">
+    <div class="wrap grid grid-2" style="align-items:center">
+      <div>
+        <h2 id="fin-title">Financing your next car in Alabama</h2>
+        <p>Estimate your monthly payment, learn how auto loans work, and send a financing inquiry to a local dealer, all before you visit the lot.</p>
+      </div>
+      <div class="row" style="justify-content:flex-start">
+        <a class="btn btn-primary btn-lg" href="/financing"><Icon name="dollar" /> Explore Financing</a>
+        <a class="btn btn-outline btn-lg" href="/blog/how-to-finance-a-used-car-in-alabama">Read the guide</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="seo-title">
+    <div class="wrap">
+      <article class="prose" style="max-width:none">
+        <h2 id="seo-title">Your local marketplace for used cars in Alabama</h2>
+        <div class="grid grid-2" style="gap:32px">
+          <div>
+            <p>BamaMotors was built for Alabama drivers. Instead of sorting through national listings from dealers hundreds of miles away, you can search <strong>used cars for sale in Alabama</strong> from dealerships you can actually visit. In <a href="/used-cars/birmingham-al">Birmingham</a>, <a href="/used-cars/huntsville-al">Huntsville</a>, <a href="/used-cars/mobile-al">Mobile</a>, <a href="/used-cars/montgomery-al">Montgomery</a>, <a href="/used-cars/tuscaloosa-al">Tuscaloosa</a> and towns across the state.</p>
+            <h3>Trucks, SUVs and affordable cars</h3>
+            <p>Alabama loves its pickups, and our <a href="/used-cars/trucks">used trucks</a> and <a href="/used-cars/suvs">used SUVs</a> pages make it easy to compare them. Shopping on a budget? Browse <a href="/used-cars/under-10000">cars under $10,000</a> from local dealers.</p>
+          </div>
+          <div>
+            <h3>Know before you buy</h3>
+            <p>Alabama doesn't require a state safety inspection, so we publish practical guides on <a href="/blog/how-to-inspect-a-used-car-alabama">inspecting a used car</a>, <a href="/blog/how-to-buy-a-used-car-in-alabama">title and registration</a> and <a href="/blog/how-to-finance-a-used-car-in-alabama">financing</a>. Every listing shows the dealer's disclosed vehicle history and a link to check recalls with <a href="https://www.nhtsa.gov/recalls" rel="noopener" target="_blank">NHTSA</a>.</p>
+            <h3>Straight to the dealer</h3>
+            <p>When you send a request, it goes directly to the dealership that owns the vehicle. No call centers, no reselling your information.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="dealer-cta-title">
+    <div class="wrap grid grid-2" style="align-items:center">
+      <div>
+        <h2 id="dealer-cta-title">Are you an Alabama car dealer?</h2>
+        <p class="muted">Reach local shoppers searching for used cars in your city. Start free with up to 10 listings, get leads by email, and upgrade when you're ready.</p>
+      </div>
+      <div class="row"><a class="btn btn-primary btn-lg" href="/for-dealers"><Icon name="store" /> List Your Dealership</a><a class="btn btn-ghost" href="/for-dealers#pricing">See pricing</a></div>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="section" aria-labelledby="guides-title">
+      <div class="wrap">
+        <div class="section-head"><h2 id="guides-title">Alabama car buying guides</h2><a href="/blog">All guides →</a></div>
+        <div class="grid grid-3 reveal-stagger">
+          {posts.map((p) => (
+            <a class="img-card spotlight" href={`/blog/${p.slug}`}>
+              <Photo img={postImage(p.slug)} sizes="(min-width: 1024px) 33vw, 100vw" alt="" />
+              <span class="body"><span class="badge" style="align-self:flex-start">{p.category}</span><strong>{p.title}</strong><span class="small muted">{p.excerpt}</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap" style="max-width:900px"><Faq faq={faq} /></div>
+  </section>
+</BaseLayout>

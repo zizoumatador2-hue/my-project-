@@ -1,0 +1,37 @@
+name: BamaMotors CI
+on:
+  pull_request:
+    paths: ['bamamotors/**', '.github/workflows/bamamotors-ci.yml']
+  push:
+    branches: [main]
+    paths: ['bamamotors/**', '.github/workflows/bamamotors-ci.yml']
+defaults:
+  run:
+    working-directory: bamamotors
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: bamamotors/package-lock.json }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - name: Start worker (local D1/R2)
+        run: DEV_LOG=/tmp/wrangler.log ./scripts/dev-server.sh --fresh
+      - run: npm run test:api
+      - name: Reset local data (sign-up rate limits) before browser tests
+        run: DEV_LOG=/tmp/wrangler.log ./scripts/dev-server.sh --fresh
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+        env: { SHOTS_DIR: /tmp/shots, CHROMIUM_PATH: '' }
+      - if: failure()
+        run: tail -100 /tmp/wrangler.log
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: bamamotors-screenshots, path: /tmp/shots, if-no-files-found: ignore }

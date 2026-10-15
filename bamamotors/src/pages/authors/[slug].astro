@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PostCard from '../../components/PostCard.astro';
+import { first } from '../../lib/db';
+import { listPosts } from '../../lib/blog';
+import { breadcrumbLd, absolute } from '../../lib/seo';
+
+const env = Astro.locals.runtime.env;
+const a = await first<{ id: number; name: string; author_slug: string; author_title: string | null; author_bio: string | null }>(env.DB, 'SELECT id, name, author_slug, author_title, author_bio FROM users WHERE author_slug = ?', [String(Astro.params.slug)]);
+if (!a) return Astro.rewrite('/404');
+const posts = await listPosts(env.DB, { authorId: a.id, limit: 50, offset: 0 });
+const site = env.SITE_URL;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Car Buying Guides', href: '/blog' }, { name: a.name, href: `/authors/${a.author_slug}` }];
+const isOrg = a.author_slug === 'bamamotors-editorial-team';
+const ld = { '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: { '@type': isOrg ? 'Organization' : 'Person', name: a.name, description: a.author_bio ?? undefined, url: absolute(site, `/authors/${a.author_slug}`), ...(isOrg ? {} : { jobTitle: a.author_title ?? undefined, worksFor: { '@type': 'Organization', name: 'BamaMotors' } }) } };
+---
+<BaseLayout title={`${a.name} – Author`} description={(a.author_bio ?? `Articles by ${a.name} on BamaMotors.`).slice(0, 158)} canonical={`/authors/${a.author_slug}`} jsonLd={[breadcrumbLd(site, crumbs), ld]}>
+  <div class="wrap" style="padding-bottom:56px">
+    <Breadcrumbs crumbs={crumbs} />
+    <header class="author-box" style="margin-top:14px">
+      <span class="avatar" aria-hidden="true">{a.name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('')}</span>
+      <div><h1 style="font-size:1.6rem;margin-bottom:4px">{a.name}</h1>{a.author_title && <p class="muted" style="margin:0">{a.author_title}</p>}{a.author_bio && <p style="margin:8px 0 0">{a.author_bio}</p>}</div>
+    </header>
+    <h2 style="margin-top:28px">Articles</h2>
+    <div class="grid grid-3">{posts.map((p) => <PostCard p={p} />)}</div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,15 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import PostForm from '../../../components/PostForm.astro';
+import { savePost } from '../../../lib/post-save';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+let values: Record<string, string> = { status: 'draft' };
+let errors: FieldErrors = {};
+if (Astro.request.method === 'POST') {
+  values = formToObject(await Astro.request.formData());
+  const res = await savePost(Astro.locals.runtime.env.DB, values, Astro.locals.user!.id);
+  if (res.ok) return Astro.redirect(`/admin/posts/${res.id}?ok=created`, 303);
+  errors = res.errors;
+}
+---
+<DashboardLayout title="New post" area="admin"><h1>New post</h1><PostForm values={values} errors={errors} isNew /></DashboardLayout>

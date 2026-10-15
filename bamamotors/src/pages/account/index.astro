@@ -1,0 +1,35 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import VehicleGrid from '../../components/VehicleGrid.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import { all } from '../../lib/db';
+import { CARD_COLUMNS, type VehicleCard } from '../../lib/search';
+import { LEAD_TYPES, type LeadType } from '../../lib/constants';
+import { formatDateTime } from '../../lib/format';
+
+const db = Astro.locals.runtime.env.DB;
+const user = Astro.locals.user!;
+const saved = await all<VehicleCard>(db, `SELECT ${CARD_COLUMNS} FROM saved_vehicles sv JOIN vehicles v ON v.id = sv.vehicle_id
+  JOIN makes mk ON mk.id = v.make_id JOIN models md ON md.id = v.model_id JOIN dealers d ON d.id = v.dealer_id
+  WHERE sv.user_id = ? AND v.status IN ('active','sold') ORDER BY sv.created_at DESC LIMIT 60`, [user.id]);
+const inquiries = await all<{ id: number; type: LeadType; vehicle_label: string | null; dealer_name: string | null; dealer_slug: string | null; status: string; created_at: string }>(db,
+  `SELECT l.id, l.type, l.vehicle_label, d.name AS dealer_name, d.slug AS dealer_slug, l.status, l.created_at FROM leads l LEFT JOIN dealers d ON d.id = l.dealer_id
+   WHERE l.user_id = ? OR l.email = ? ORDER BY l.created_at DESC LIMIT 50`, [user.id, user.email]);
+---
+<DashboardLayout title="My account" area="account">
+  <h1>Hi, {user.name.split(' ')[0]}</h1>
+  {user.role !== 'consumer' && <div class="alert alert-info">Looking for your {user.role} tools? <a href={user.role === 'admin' ? '/admin' : '/dashboard'}>Open the {user.role === 'admin' ? 'admin console' : 'dealer dashboard'}</a>.</div>}
+  <section class="section-tight" aria-labelledby="saved-title">
+    <h2 id="saved-title">Saved vehicles ({saved.length})</h2>
+    {saved.length ? <VehicleGrid items={saved} /> : (
+      <EmptyState title="No saved vehicles yet" icon="heart"><p>Tap the heart on any listing to save it here.</p><p><a class="btn btn-primary" href="/used-cars">Find Your Car</a></p></EmptyState>
+    )}
+  </section>
+  <section class="section-tight" aria-labelledby="inq-title">
+    <h2 id="inq-title">My dealer inquiries</h2>
+    {inquiries.length ? (
+      <div class="table-wrap"><table><thead><tr><th>Request</th><th>Vehicle</th><th>Dealer</th><th>Sent</th></tr></thead>
+        <tbody>{inquiries.map((l) => <tr><td>{LEAD_TYPES[l.type]}</td><td class="small">{l.vehicle_label ?? '—'}</td><td>{l.dealer_slug ? <a href={`/dealers/${l.dealer_slug}`}>{l.dealer_name}</a> : 'BamaMotors team'}</td><td class="small">{formatDateTime(l.created_at)}</td></tr>)}</tbody></table></div>
+    ) : <p class="muted">You haven't contacted any dealers yet.</p>}
+  </section>
+</DashboardLayout>

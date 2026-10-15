@@ -1,0 +1,7 @@
+---
+interface Props { data: unknown; }
+const { data } = Astro.props;
+// Escape "<" so JSON content can never close the script element.
+const json = data ? JSON.stringify(data).replace(/</g, '\\u003c') : '';
+---
+{json && <script type="application/ld+json" set:html={json} />}

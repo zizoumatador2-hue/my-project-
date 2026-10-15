@@ -1,0 +1,23 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+const site = Astro.locals.runtime.env.SITE_URL;
+const steps = [
+  { name: 'Search used cars near you', text: 'Search Alabama dealer inventory by make, model, price, mileage, body type, city or ZIP-code radius.' },
+  { name: 'Compare vehicles', text: 'Review photos, specifications, the dealer-disclosed vehicle history and live price ranges for your area.' },
+  { name: 'Contact the dealer', text: 'Use Contact Dealer, Request Price, Schedule Test Drive or Financing. Your request goes straight to the dealership.' },
+  { name: 'Inspect and buy', text: 'Test drive, get an independent inspection and an itemized out-the-door price, then complete the purchase with the dealer.' },
+];
+const howto = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to find and buy a used car on BamaMotors', step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.name, text: s.text, url: `${site}/how-it-works#step-${i + 1}` })) };
+---
+<ContentLayout title="How BamaMotors Works – Find a Used Car in Alabama" h1="How BamaMotors works" path="/how-it-works"
+  description="How to find and buy a used car in Alabama with BamaMotors: search local dealer inventory, compare vehicles, contact the dealer, then inspect and buy." jsonLd={[howto]}>
+  <p class="snippet" style="max-width:72ch">BamaMotors works in four steps: search used cars from Alabama dealers, compare listings, contact the dealer directly with one click, and then inspect and buy from the dealership. It's free for shoppers.</p>
+  <ol class="steps" style="margin-top:20px">
+    {steps.map((s, i) => <li id={`step-${i + 1}`}><h2 style="font-size:1.1rem">{s.name}</h2><p class="muted" style="margin:0">{s.text}</p></li>)}
+  </ol>
+  <div class="prose section-tight">
+    <h2>For dealers</h2>
+    <p>Dealers create a free account, add inventory from the dealer dashboard and receive leads by email and in the dashboard. Paid plans add more listings and featured placement. <a href="/for-dealers">Learn more</a>.</p>
+    <p><a class="btn btn-primary" href="/used-cars">Find Your Car</a></p>
+  </div>
+</ContentLayout>
