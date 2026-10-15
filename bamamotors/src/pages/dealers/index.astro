@@ -62,7 +62,7 @@ const site = env.SITE_URL;
 <BaseLayout title={`Car Dealerships in Alabama Near You${page > 1 ? ` – Page ${page}` : ''}`}
   description="Find car dealerships and used car dealers in Alabama. See inventory, hours, reviews and contact info. Search by city or ZIP to find auto dealers near you."
   keywords="car dealerships Alabama, used car dealers Alabama, car dealerships near me Alabama, auto dealers near me, used car dealership Alabama"
-  canonical={page > 1 && !filtered ? `/dealers?page=${page}` : '/dealers'} noindex={filtered} ads={total > 0}
+  canonical={page > 1 && !filtered ? `/dealers?page=${page}` : '/dealers'} noindex={filtered}
   jsonLd={[breadcrumbLd(site, crumbs), faqLd(faq)]}>
   <div class="wrap">
     <Breadcrumbs crumbs={crumbs} />

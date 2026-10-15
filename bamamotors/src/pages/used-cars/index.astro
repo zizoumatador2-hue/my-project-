@@ -29,7 +29,7 @@ const site = env.SITE_URL;
   keywords="used cars for sale Alabama, used cars Alabama, cars for sale Alabama, used cars near me Alabama, affordable used cars Alabama"
   canonical={filters.page > 1 && !filtered ? `/used-cars?page=${filters.page}` : '/used-cars'}
   noindex={filtered}
-  ads={total > 0}
+ 
   prev={!filtered && filters.page > 1 ? (filters.page === 2 ? '/used-cars' : `/used-cars?page=${filters.page - 1}`) : null}
   next={!filtered && filters.page < pages ? `/used-cars?page=${filters.page + 1}` : null}
   jsonLd={[breadcrumbLd(site, crumbs), itemListLd(site, 'Used cars for sale in Alabama', items.map((v) => ({ slug: v.slug, title: `${v.year} ${v.make_name} ${v.model_name}` })))]}

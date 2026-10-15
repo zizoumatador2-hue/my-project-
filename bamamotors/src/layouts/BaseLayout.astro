@@ -21,7 +21,6 @@ interface Props {
   bare?: boolean; // no header/footer (dashboards supply their own chrome)
   prev?: string | null;
   next?: string | null;
-  ads?: boolean; // allow AdSense on this page (never on private/thin pages)
 }
 
 const env = Astro.locals.runtime.env;
@@ -29,7 +28,7 @@ const s = Astro.locals.settings ?? {};
 const site = env.SITE_URL || Astro.site?.toString() || 'https://bamamotors.com';
 const {
   title, description: rawDescription = s.default_meta_description, keywords = s.default_meta_keywords, canonical, noindex = false,
-  jsonLd = [], ogImage, ogType = 'website', published, modified, bodyClass, bare = false, prev, next, ads = true,
+  jsonLd = [], ogImage, ogType = 'website', published, modified, bodyClass, bare = false, prev, next,
 } = Astro.props;
 // Hard guarantee: meta descriptions never exceed 160 characters.
 const description = truncate((rawDescription ?? '').replace(/\s+/g, ' ').trim(), 160);
@@ -40,7 +39,9 @@ const image = ogImage ? (ogImage.startsWith('http') ? ogImage : absolute(site, o
 // Known sizes: site photos are generated at 1600x900; the default card is 1200x630. Listing photos vary, so no size is claimed.
 const imageSize = !ogImage ? [1200, 630] : /\/images\/[^/]+-1600\.webp$/.test(ogImage) ? [1600, 900] : null;
 const adsClient = s.adsense_client && /^ca-pub-\d{10,20}$/.test(s.adsense_client) ? s.adsense_client : '';
-const showAds = Boolean(adsClient) && ads && !noindex && !bare;
+// The AdSense loader is needed on every public page for site verification. It shows nothing by itself;
+// ad units are only placed where a page opts in with `ads`. Private and dashboard pages never load it.
+const loadAdsense = Boolean(adsClient) && !noindex && !bare;
 const ga = s.ga4_id && /^G-[A-Z0-9]{4,12}$/.test(s.ga4_id) ? s.ga4_id : '';
 ---
 <!doctype html>
@@ -78,7 +79,7 @@ const ga = s.ga4_id && /^G-[A-Z0-9]{4,12}$/.test(s.ga4_id) ? s.ga4_id : '';
     {modified && <meta property="article:modified_time" content={modified} />}
     {s.google_site_verification && <meta name="google-site-verification" content={s.google_site_verification} />}
     {adsClient && <meta name="google-adsense-account" content={adsClient} />}
-    {showAds && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsClient}`} crossorigin="anonymous"></script>}
+    {loadAdsense && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsClient}`} crossorigin="anonymous"></script>}
     {s.bing_site_verification && <meta name="msvalidate.01" content={s.bing_site_verification} />}
     {jsonLd.filter(Boolean).map((d) => <JsonLd data={d} />)}
     {ga && (
