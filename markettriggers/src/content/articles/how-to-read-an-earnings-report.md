@@ -2,7 +2,7 @@
 title: "How to Read an Earnings Report in 10 Minutes"
 description: "How to read an earnings report fast: check revenue and EPS against estimates, guidance, margins, cash flow and the call, in a 10-minute order of operations."
 publishDate: 2026-10-11
-modifiedDate: 2026-10-13
+modifiedDate: 2026-10-15
 category: stock-market-triggers
 series: investor-guide
 primaryKeyword: "how to read an earnings report"
@@ -86,7 +86,7 @@ SEC rules help you here. A company that publishes a non-GAAP measure must also p
 - **Size of the gap.** If adjusted EPS is far above GAAP EPS, the adjustments are doing a lot of work.
 - **Repeat offenders.** A "one-time" restructuring charge that shows up every quarter for three years isn't one-time. Stock-based compensation is a real cost to shareholders even though no cash leaves the building, because it dilutes ownership.
 
-A future article in this series covers GAAP vs. adjusted earnings in depth. For now, the rule of thumb: the adjusted number tells you how management wants to be measured, the GAAP number tells you what actually happened, and the reconciliation tells you why they differ.
+We cover [GAAP vs. adjusted earnings](/articles/gaap-vs-adjusted-earnings/) in depth in a separate guide. For now, the rule of thumb: the adjusted number tells you how management wants to be measured, the GAAP number tells you what actually happened, and the reconciliation tells you why they differ.
 
 ## Minute 7–8: Margins and cash flow
 
@@ -163,6 +163,7 @@ This article is educational and is not personalized investment advice.
 ## Related reading
 
 - [What is earnings guidance and why does it move stocks?](/articles/what-is-earnings-guidance/)
+- [GAAP vs. adjusted earnings: what investors should know](/articles/gaap-vs-adjusted-earnings/)
 - [Why stocks fall after beating earnings](/articles/why-do-stocks-fall-after-earnings/)
 - [How inflation affects stocks](/articles/how-does-inflation-affect-stocks/)
 - [What happens to stocks when the Fed cuts rates](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
