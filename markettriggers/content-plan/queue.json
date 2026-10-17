@@ -103,7 +103,8 @@
       "category": "economic-indicators",
       "series": "economic-event-explained",
       "image": "grocery-prices",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-10-17"
     },
     {
       "n": 8,
