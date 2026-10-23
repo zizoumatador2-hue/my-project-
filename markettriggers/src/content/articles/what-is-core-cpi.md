@@ -2,6 +2,7 @@
 title: "What Is Core CPI and Why Does the Fed Watch It?"
 description: "What is core CPI? It's the Consumer Price Index minus food and energy. Here's how it differs from headline CPI, why the Fed watches it and how it moves markets."
 publishDate: 2026-10-21
+modifiedDate: 2026-10-23
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "what is core cpi"
@@ -150,6 +151,7 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [CPI vs. PCE: which inflation number moves markets?](/articles/cpi-vs-pce/)
 - [How does inflation affect stocks? What investors should know](/articles/how-does-inflation-affect-stocks/)
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
