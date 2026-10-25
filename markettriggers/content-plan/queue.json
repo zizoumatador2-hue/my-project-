@@ -154,7 +154,8 @@
       "category": "investor-education",
       "series": "investor-guide",
       "image": "notebook-chart",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-10-25"
     },
     {
       "n": 11,
