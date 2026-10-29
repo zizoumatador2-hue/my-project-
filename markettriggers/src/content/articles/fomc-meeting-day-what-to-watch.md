@@ -2,6 +2,7 @@
 title: "FOMC Meeting Explained: What to Watch, Hour by Hour"
 description: "FOMC meeting explained: when the Fed's statement, projections and press conference land, what each one reveals, and how markets react on Fed day."
 publishDate: 2026-10-23
+modifiedDate: 2026-10-29
 category: market-events
 series: economic-event-explained
 primaryKeyword: "fomc meeting explained"
@@ -155,6 +156,7 @@ This article is general education, not personalized investment advice.
 ## Related reading
 
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
+- [How the jobs report moves the stock market](/articles/how-the-jobs-report-moves-the-stock-market/)
 - [What is core CPI and why does the Fed watch it?](/articles/what-is-core-cpi/)
 - [CPI vs. PCE: which inflation number moves markets?](/articles/cpi-vs-pce/)
 - [How does inflation affect stocks?](/articles/how-does-inflation-affect-stocks/)
