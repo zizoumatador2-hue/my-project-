@@ -2,6 +2,7 @@
 title: "How the Jobs Report Moves the Stock Market"
 description: "How does the jobs report affect the stock market? What payrolls, unemployment and wages signal about the Fed, and why good news can send stocks lower."
 publishDate: 2026-10-29
+modifiedDate: 2026-10-31
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "how does the jobs report affect the stock market"
@@ -141,6 +142,7 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [What are initial jobless claims and why do they matter?](/articles/initial-jobless-claims-explained/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)

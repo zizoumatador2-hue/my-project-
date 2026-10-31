@@ -188,7 +188,8 @@
       "category": "economic-indicators",
       "series": "economic-event-explained",
       "image": "home-investor",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-10-31"
     },
     {
       "n": 13,
