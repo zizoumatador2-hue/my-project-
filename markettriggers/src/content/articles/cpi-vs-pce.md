@@ -2,7 +2,7 @@
 title: "CPI vs. PCE: Which Inflation Number Moves Markets?"
 description: "CPI vs PCE: why the Fed targets PCE, why CPI usually moves stocks and bonds more, and how weights, scope and formula make the two inflation gauges differ."
 publishDate: 2026-10-17
-modifiedDate: 2026-10-21
+modifiedDate: 2026-11-01
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "cpi vs pce"
@@ -152,6 +152,7 @@ This article is educational and is not personalized investment advice.
 - [How does inflation affect stocks? What investors should know](/articles/how-does-inflation-affect-stocks/)
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 - [Why stocks fall after beating earnings](/articles/why-do-stocks-fall-after-earnings/)
+- [The producer price index (PPI) explained](/articles/producer-price-index-explained/)
 - [U.S. economic indicators explained](/economic-indicators/)
 
 ## Sources
