@@ -2,6 +2,7 @@
 title: "The Producer Price Index (PPI) Explained"
 description: "The producer price index explained: what PPI measures, how it differs from CPI, what the latest report showed and why the market watches wholesale inflation."
 publishDate: 2026-11-01
+modifiedDate: 2026-11-03
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "producer price index explained"
@@ -151,6 +152,7 @@ This article is educational and is not personalized investment advice.
 - [How does inflation affect stocks? What investors should know](/articles/how-does-inflation-affect-stocks/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
+- [The ISM Manufacturing PMI explained](/articles/ism-manufacturing-pmi-explained/)
 - [U.S. economic indicators explained](/economic-indicators/)
 
 ## Sources

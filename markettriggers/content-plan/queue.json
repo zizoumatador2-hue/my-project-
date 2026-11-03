@@ -222,7 +222,8 @@
       "category": "economic-indicators",
       "series": "economic-event-explained",
       "image": "notebook-chart",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-03"
     },
     {
       "n": 15,
