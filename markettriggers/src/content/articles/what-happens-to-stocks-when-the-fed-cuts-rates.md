@@ -2,7 +2,7 @@
 title: "What Happens to Stocks When the Fed Cuts Rates?"
 description: "Fed rate cuts can lift stocks or arrive during a selloff. What decides the outcome is why the Fed is cutting, how much was priced in, and what it signals next."
 publishDate: 2026-10-09
-modifiedDate: 2026-10-29
+modifiedDate: 2026-11-05
 category: market-events
 series: economic-event-explained
 primaryKeyword: "what happens to stocks when the fed cuts rates"
@@ -116,6 +116,7 @@ This article is general education, not personalized financial advice.
 
 ## Related reading
 
+- [Stock market correction vs. bear market: what's the difference?](/articles/stock-market-correction-vs-bear-market/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [How the jobs report moves the stock market](/articles/how-the-jobs-report-moves-the-stock-market/)

@@ -239,7 +239,8 @@
       "category": "investor-education",
       "series": "investor-guide",
       "image": "storm-skyline",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-05"
     },
     {
       "n": 16,
