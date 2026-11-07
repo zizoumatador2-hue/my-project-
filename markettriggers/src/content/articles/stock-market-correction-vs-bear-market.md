@@ -2,6 +2,7 @@
 title: "Stock Market Correction vs. Bear Market: What's the Difference?"
 description: "Correction vs bear market: how the 10% and 20% lines work, what history shows about depth and length, and why the S&P 500 stopped just short of 20% in 2025."
 publishDate: 2026-11-05
+modifiedDate: 2026-11-07
 category: investor-education
 series: investor-guide
 primaryKeyword: "correction vs bear market"
@@ -152,6 +153,7 @@ This article is educational and is not personalized investment advice.
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 - [Why do stocks fall after beating earnings?](/articles/why-do-stocks-fall-after-earnings/)
 - [How the jobs report moves the stock market](/articles/how-the-jobs-report-moves-the-stock-market/)
+- [What is the VIX? The market's fear gauge explained](/articles/what-is-the-vix/)
 - [Investor education: core market concepts](/investor-education/)
 
 ## Sources
