@@ -2,7 +2,7 @@
 title: "What Are Initial Jobless Claims and Why Do They Matter?"
 description: "Initial jobless claims count new unemployment filings each week. Learn how to read the report, how it differs from continuing claims and why markets care."
 publishDate: 2026-10-31
-modifiedDate: 2026-11-03
+modifiedDate: 2026-11-09
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "initial jobless claims"
@@ -130,6 +130,7 @@ This article is educational and is not personalized investment advice.
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 - [The ISM Manufacturing PMI explained](/articles/ism-manufacturing-pmi-explained/)
+- [Retail sales report: why Wall Street cares](/articles/retail-sales-report-explained/)
 - [U.S. economic indicators explained](/economic-indicators/)
 
 ## Sources
