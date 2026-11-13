@@ -307,7 +307,8 @@
       "category": "economic-indicators",
       "series": "economic-event-explained",
       "image": "skyline-sunrise",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-13"
     },
     {
       "n": 20,
