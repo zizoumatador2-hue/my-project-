@@ -6,7 +6,7 @@ keywords: ["what is APY", "annual percentage yield", "APY vs APR", "APY vs inter
 hub: banking
 topics: ["savings-accounts", "high-yield-savings", "cds"]
 published: 2026-09-11
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "APY (annual percentage yield) is the total interest you earn on a deposit in one year, including the effect of compounding, expressed as a percentage. Because it reflects compounding, APY lets you compare savings accounts, money market accounts and CDs on equal terms: a higher APY means more earnings."
 takeaways:
@@ -124,12 +124,12 @@ If the rate on a variable account falls halfway through, your actual earnings wi
 
 ## How interest is actually credited
 
-Most banks calculate interest **daily** on your balance and **credit** it to your account **monthly**. Once it is credited, it starts earning interest too, that is the compounding the APY reflects. Your monthly statement shows the interest paid, and many banks also show an **annual percentage yield earned (APYE)** for the statement period. If your balance changed during the month, or the bank adjusted its rate, the APYE will differ from the advertised APY.
+Most banks calculate interest **daily** on your balance and **credit** it to your account **monthly**. Once it is credited, it starts earning interest too: that is the compounding the APY reflects. Your monthly statement shows the interest paid, and many banks also show an **annual percentage yield earned (APYE)** for the statement period. If your balance changed during the month, or the bank adjusted its rate, the APYE will differ from the advertised APY.
 
 Two practical points follow:
 
 - **Money deposited mid-month still earns interest** for the days it is in the account.
-- **Withdrawing before interest is credited** may mean you earn interest only for the days the money was there; it is not forfeited under standard savings terms, but check your account agreement.
+- **Partial withdrawals** still earn interest for the days the money was in the account. If you **close the account before interest is credited**, some banks do not pay the accrued interest; Regulation DD requires the bank to disclose this in the account terms, so check them before closing.
 
 ## Common APY misconceptions
 
@@ -137,7 +137,7 @@ Two practical points follow:
 
 **“APY is guaranteed for a year.”** Only on fixed-rate products like CDs. On savings and money market accounts, the bank can change the rate at any time, often with little notice.
 
-**“APY and APR mean the same thing.”** They measure opposite sides of the ledger (one what you earn, the other what you pay) and APR does not include compounding.
+**“APY and APR mean the same thing.”** They measure opposite sides of the ledger (one what you earn, the other what you pay), and APR does not include compounding.
 
 **“Compounding frequency matters most.”** The difference between daily and monthly compounding at the same rate is a few cents or dollars. The rate itself matters far more.
 

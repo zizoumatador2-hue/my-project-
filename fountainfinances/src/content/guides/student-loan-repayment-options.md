@@ -6,7 +6,7 @@ keywords: ["student loan repayment", "student loan options", "how student loans 
 hub: loans
 topics: ["student-loans"]
 published: 2026-09-22
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "Federal student loans can be repaid on a fixed standard plan or an income-driven plan that ties payments to your income, and some borrowers qualify for forgiveness programs such as Public Service Loan Forgiveness. Federal repayment rules changed under 2025 legislation, so confirm which plans apply to your loans at StudentAid.gov. Private loans follow the terms in your loan agreement."
 takeaways:
@@ -82,7 +82,11 @@ A standard plan spreads your balance into fixed monthly payments over a set term
 
 Income-driven plans calculate your payment from your income and family size rather than your balance. They can make payments affordable when your income is low relative to your debt, and any remaining balance may be forgiven after a long repayment period.
 
-The 2025 legislation created a new income-based plan (the **Repayment Assistance Plan (RAP)**) for newer borrowers and set timelines for phasing out several older income-driven plans. Some existing borrowers can stay in or move between certain plans for a transition period. Because details depend on your loan dates and current plan, use the official plan pages at [StudentAid.gov](https://studentaid.gov/manage-loans/repayment/plans).
+The 2025 legislation created a new income-based plan, the **Repayment Assistance Plan (RAP)**, and set timelines for phasing out several older income-driven plans. The key dates, per the Department of Education:
+
+- **July 1, 2026:** RAP opened to Direct Loan borrowers (Parent PLUS loans are excluded).
+- **Loans first disbursed on or after July 1, 2026:** the only repayment choices are RAP and a tiered standard plan.
+- **Loans made before July 1, 2026:** borrowers in a plan that is being phased out have until July 1, 2028 to move to RAP, the tiered standard plan or Income-Based Repayment (IBR). Because details depend on your loan dates and current plan, use the official plan pages at [StudentAid.gov](https://studentaid.gov/manage-loans/repayment/plans).
 
 **Trade-off:** lower payments often mean more interest over time, and in some cases forgiven amounts may have tax consequences. Recertify your income on time each year.
 
@@ -112,7 +116,7 @@ Call your lender early if you are struggling: options are more limited than for 
 **Refinancing** replaces one or more student loans with a new private loan, ideally at a lower rate.
 
 - **Private loans:** refinancing can make sense if you qualify for a lower rate.
-- **Federal loans:** refinancing into a private loan **permanently forfeits** federal benefits. Income-driven repayment, deferment and forbearance options, and forgiveness programs. Only consider it if you are confident you will not need those protections.
+- **Federal loans:** refinancing into a private loan **permanently forfeits** federal benefits: income-driven repayment, deferment and forbearance options, and forgiveness programs. Only consider it if you are confident you will not need those protections.
 
 Federal loans can also be combined through a **Direct Consolidation Loan**, which simplifies payments but uses a weighted average interest rate (rounded up slightly) rather than lowering it.
 

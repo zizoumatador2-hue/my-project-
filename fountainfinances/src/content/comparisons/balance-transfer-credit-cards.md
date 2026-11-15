@@ -46,14 +46,14 @@ calculators: ["credit-card-payoff", "debt-consolidation"]
 
 If the fee is much smaller than the interest you’d save and the payment fits your budget, a transfer can make sense.
 
-## Worked example: $6,000 at 22.9% APR
+## Worked example: matching the offer to your payment
 
-Suppose you owe $6,000 on a card charging 22.9% APR and can pay about $345 a month. The fees and the 18-month intro period below are hypothetical; check each card’s pricing table for its actual terms.
+The [balance transfer guide](/guides/what-is-a-balance-transfer/) shows when a transfer beats keeping the balance. Choosing between offers is a different question: a longer intro period can be worth a higher fee if it is the only way to clear the balance in time. Here is a $6,000 balance on three hypothetical offers, for someone who can pay $300 a month:
 
-| Option | Upfront cost | Monthly payment | Months to pay off | Interest | Total cost of borrowing |
-|---|---|---|---|---|---|
-| Keep the balance where it is | $0 | $343.33 | 22 | About $1,369 | About $1,369 |
-| Transfer with a 3% fee, 0% for 18 months | $180 | $343.33 ($6,180 ÷ 18) | 18 | $0 | $180 |
-| Transfer with a 5% fee, 0% for 18 months | $300 | $350.00 ($6,300 ÷ 18) | 18 | $0 | $300 |
+| Offer | Fee | Balance after transfer | Payment needed to clear it in time | Left over at $300/month when the intro period ends |
+|---|---|---|---|---|
+| 0% for 15 months | 3% ($180) | $6,180 | $412 ($6,180 ÷ 15) | $1,680 |
+| 0% for 18 months | 3% ($180) | $6,180 | $343.33 ($6,180 ÷ 18) | $780 |
+| 0% for 21 months | 5% ($300) | $6,300 | $300 ($6,300 ÷ 21) | $0 |
 
-In this case either transfer saves more than $1,000, as long as the balance is fully paid before the intro period ends and no new purchases are added. If you could only pay $200 a month, about $2,400 would still be owed after 18 months and start accruing the card’s regular APR, so the savings would shrink. The interest figure for keeping the balance comes from the same monthly-interest method our payoff calculator uses. Read the full walkthrough in [what is a balance transfer?](/guides/what-is-a-balance-transfer/).
+At $300 a month, only the 21-month offer clears the balance before the regular APR applies, even though its fee is $120 higher. Anyone who can pay $412 a month would do better with either 3% offer. Actual intro periods, fees and transfer windows vary, so check each card's pricing table.

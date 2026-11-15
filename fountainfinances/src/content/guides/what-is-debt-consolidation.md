@@ -83,7 +83,7 @@ Arranged through a nonprofit credit counseling agency. The agency may negotiate 
 Borrowing against your home’s equity to pay off unsecured debt.
 
 - **Pros:** typically lower rates than unsecured credit.
-- **Cons:** your home becomes collateral, if you cannot repay, you could face foreclosure. Closing costs may apply.
+- **Cons:** your home becomes collateral; if you cannot repay, you could face foreclosure. Closing costs may apply.
 - **Best for:** homeowners with substantial equity, stable income and a firm plan to avoid new debt. See [HELOC vs. home equity loan](/guides/heloc-vs-home-equity-loan/).
 
 ### 5. 401(k) loan

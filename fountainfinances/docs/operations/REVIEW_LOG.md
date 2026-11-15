@@ -153,3 +153,38 @@ None. how-credit-scores-work (cohort 2) and how-to-improve-credit-score overlap 
 - `npm run qa`: passed (123 pages, 191 unique external links)
 - `npm test`: 29/29 passed
 - `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)
+
+---
+
+## 2026-11-15 catch-up (cohort 4)
+
+### Pages reviewed (12)
+
+| # | Page | Result |
+|---|---|---|
+| 49 | /best/personal-loans/ | Improved: the body was a five-step checklist. Added a worked comparison of two hypothetical 36-month offers for $10,000 in hand (11.99% with no fee vs 9.99% with a 5% fee deducted: $10,526.32 borrowed, $339.61 vs $332.10 a month, about $270 more in total, APR about 13.55%). Removed an em dash in the Best Egg note in `products.json`. Updated date changed. |
+| 50 | /guides/roth-ira-vs-traditional-ira/ | Reviewed; no change needed. 2026 limits ($7,500 / $8,600), Roth phase-outs ($153k to $168k; $242k to $252k) and traditional deduction phase-outs ($81k to $91k; $129k to $149k) confirmed by web search against IRS IR-2025-111. The $708,456 example and $155,860 tax figure recomputed. |
+| 51 | /guides/sinking-funds/ | Minor: home maintenance planning figure aligned with the rest of the site (1% to 2%), missing comma fixed. Table totals $350. Date unchanged. |
+| 52 | /calculators/student-loan/ | Reviewed; no change needed. Payment, extra-payment savings and the 2025 law notice checked. |
+| 53 | /guides/student-loan-repayment-options/ | Updated for the current year: replaced "RAP for newer borrowers" (inaccurate; RAP is open to existing Direct Loan borrowers too) with the key dates confirmed by web search (RAP opened July 1, 2026, Parent PLUS excluded; loans first disbursed on or after July 1, 2026 limited to RAP or the tiered standard plan; borrowers in phased-out plans have until July 1, 2028). Fixed a sentence fragment. $32,000 at 6% example recomputed ($355; $10,632 interest; $100 extra saves about $3,107 and 33 months). Updated date changed. |
+| 54 | /guides/term-vs-whole-life-insurance/ | Reviewed; no change needed. Coverage estimate arithmetic checks out ($1,425,000, about $1.4 million). |
+| 55 | /guides/types-of-insurance/ | Minor: punctuation fixes and a link from the life insurance section to the term vs whole life guide, which holds the worked coverage estimate. Date unchanged. |
+| 56 | /guides/what-is-a-balance-transfer/ | Reviewed; no change needed. $6,000 at 24% example recomputed (20 months, about $1,304 vs a $180 fee; $6,180 / 18 = $343). Because this guide already holds the "transfer vs stay" example, the cohort 0 example on /best/balance-transfer-credit-cards/ was reworked to compare offers against a fixed $300 payment instead, so the two pages no longer repeat each other. |
+| 57 | /guides/what-is-a-high-yield-savings-account/ | Style: three punctuation fixes. $5,000 + $300/month for 5 years ($25,937 at 4.00% vs $23,349 at 0.50%) recomputed. Date unchanged. |
+| 58 | /guides/what-is-apr/ | Accuracy fix: the page said a 4.00% APY earns more than 4.00% compounded annually; the two are identical. Replaced with a correct example (4.00% compounded daily = about 4.08% APY, $408 vs $400 on $10,000). Clarified that Offer A's 6% fee is deducted from the proceeds, with the totals ($9,400 received and about $11,616 repaid vs $10,000 and about $11,701). The 14.3% APR recomputed. Updated date changed. |
+| 59 | /guides/what-is-apy/ | Accuracy fix: the page said interest accrued before crediting is "not forfeited under standard savings terms". Regulation DD lets banks withhold accrued, uncredited interest when an account is closed, as long as they disclose it (confirmed by web search). Reworded. Also two punctuation fixes. APY table and the $15,000 example ($60 / $120 vs $600 / $1,224) recomputed. Updated date changed. |
+| 60 | /guides/what-is-debt-consolidation/ | Style: comma splice fixed. Example recomputed with the site's own function (46 months and about $6,006 interest vs $12,187.50 loan, $330 payment, $4,140 cost, about $1,866 saved). Date unchanged. |
+
+### Consolidation candidates
+None recorded. The closest overlap, the balance transfer guide and the balance transfer comparison page, was resolved by giving the comparison page a different example (see #56). No page was a weaker duplicate of another.
+
+### Tests run (in fountainfinances/)
+- `npm run check`: 0 errors, 0 warnings
+- `npm run build`: ok
+- `npm run qa`: passed (123 pages, 191 unique external links)
+- `npm test`: 29/29 passed
+- `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)
+
+### Catch-up left unverified
+- Outbound links still cannot be fetched from the sandbox (proxy 403). The new FTC URL and all existing sources depend on the deploy workflow's external link check.
+- G.19 figure: the November 2026 release shows 22.36% in its latest column, but the period that column covers could not be read reliably, so the guide says "about 22%" without naming a quarter.

@@ -6,7 +6,7 @@ keywords: ["what is APR", "APR vs interest rate", "annual percentage rate", "APR
 hub: loans
 topics: ["personal-loans", "credit-cards", "mortgage-rates"]
 published: 2026-09-10
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "APR (annual percentage rate) is the yearly cost of borrowing, expressed as a percentage. For installment loans and mortgages, APR includes the interest rate plus certain fees, which makes it the best number for comparing offers. For credit cards, the APR is essentially the interest rate charged on balances you carry."
 takeaways:
@@ -56,10 +56,10 @@ Because APR includes those costs, it is usually **equal to or higher than** the 
 | Loan amount | $10,000 | $10,000 |
 | Term | 3 years | 3 years |
 | Interest rate | 10.0% | 10.5% |
-| Origination fee | 6% ($600) | None |
+| Origination fee | 6% ($600), deducted from the proceeds | None |
 | APR | about 14.3% | 10.5% |
 
-Offer A advertises a lower interest rate, but its fee makes it more expensive. The APR reveals the true comparison.
+Offer A advertises a lower interest rate, but you receive only $9,400 and still repay about $11,616 over 3 years, while Offer B delivers the full $10,000 for about $11,701. Per dollar you actually get, Offer A costs more, and the APR reveals that.
 
 ## How APR works on different products
 
@@ -93,7 +93,7 @@ A mortgage’s APR includes the interest rate plus costs like discount points, o
 - **APR** is used for **borrowing** and does not include the effect of compounding within the year.
 - **APY** (annual percentage yield) is used for **savings** and does include compounding.
 
-A savings account advertising a 4.00% APY earns slightly more than one paying 4.00% interest compounded annually. For a detailed explanation, see [what is APY?](/guides/what-is-apy/)
+For example, a 4.00% interest rate compounded daily works out to an APY of about 4.08%: $10,000 left for a year earns about $408 rather than $400. For a detailed explanation, see [what is APY?](/guides/what-is-apy/)
 
 ## Fixed vs. variable APR
 

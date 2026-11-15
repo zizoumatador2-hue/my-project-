@@ -84,12 +84,12 @@ Renters insurance covers personal property, liability and additional living expe
 
 ## Life insurance
 
-**Who needs it:** anyone whose death would create financial hardship for others. Parents, spouses who rely on your income, co-signers on debts.
+**Who needs it:** anyone whose death would create financial hardship for others: parents, spouses who rely on your income, co-signers on debts.
 
 - **Term life** covers a set period (for example, 20 or 30 years) at a relatively low cost. It suits most families’ income-replacement needs.
 - **Permanent life** (whole or universal) lasts for life and builds cash value, at a much higher premium.
 
-Estimate your needs by adding income replacement for the years your dependents would need it, debts, future goals such as education and final expenses, then subtracting existing savings and coverage. See [life insurance](/life-insurance/).
+Estimate your needs by adding income replacement for the years your dependents would need it, debts, future goals such as education and final expenses, then subtracting existing savings and coverage. Our [term vs. whole life insurance guide](/guides/term-vs-whole-life-insurance/) works through a coverage estimate, and the [life insurance](/life-insurance/) section has more.
 
 ## Disability insurance
 
@@ -118,7 +118,7 @@ Be cautious with narrow policies that duplicate coverage you already have, such 
 
 ## How to compare insurance
 
-1. **Decide on coverage first** (limits and deductibles) then compare prices.
+1. **Decide on coverage first** (limits and deductibles), then compare prices.
 2. **Get at least three quotes** with identical coverage.
 3. **Check the insurer’s financial strength** and complaint record. Your state insurance department and the [NAIC](https://content.naic.org/state-insurance-departments) provide information.
 4. **Ask about discounts:** bundling, safety features, good driving, paying in full, claims-free history.

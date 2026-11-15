@@ -86,7 +86,7 @@ Look through the last 12 months of bank and credit card statements and you'll li
 - **Car costs:** registration, inspection, tires, brakes, routine maintenance.
 - **Holidays and gifts:** birthdays, weddings, end-of-year holidays.
 - **Travel:** a planned vacation or a trip home.
-- **Home maintenance:** a common rule of thumb is to budget about 1% of a home's value per year for upkeep.
+- **Home maintenance:** a common rule of thumb is to budget about 1% to 2% of a home's value per year for upkeep.
 - **Medical:** deductibles, dental work, glasses and contacts.
 - **Annual subscriptions and memberships:** warehouse clubs, software, professional dues.
 - **Kids and school:** back-to-school supplies, sports fees, camps.
@@ -111,7 +111,7 @@ The calculation is simple:
 
 If an expense is due soon and you're starting late, the monthly amount will be higher the first time around. Once the cycle resets, it drops to the steady annual rate.
 
-For costs that recur but vary (like car repairs) use your average over the past two or three years. If you have no history, a modest starting amount (say $50 a month) is better than nothing.
+For costs that recur but vary (like car repairs), use your average over the past two or three years. If you have no history, a modest starting amount (say $50 a month) is better than nothing.
 
 ## How to set up sinking funds
 
