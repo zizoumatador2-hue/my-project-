@@ -36,7 +36,7 @@ const SHOTS = {
     alt: 'Overwater bungalows above a calm turquoise lagoon at dusk',
   },
   'vacation-types/romantic-getaways': {
-    prompt: `${COUPLE}, sharing a candlelit dinner on a wooden terrace overlooking the ocean at twilight, string lights, wine glasses, intimate atmosphere`,
+    prompt: `${COUPLE}, sharing a candlelit dinner on a wooden terrace overlooking the ocean at twilight, string lights, relaxed atmosphere`,
     alt: 'A candlelit dinner for two on an ocean-view terrace at twilight',
   },
   'vacation-types/couples-vacations': {

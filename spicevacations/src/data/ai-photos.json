@@ -56,7 +56,7 @@
     "ai": true,
     "model": "fal-ai/flux/schnell",
     "seed": 668402174,
-    "prompt": "a couple seen from behind or in silhouette, faces not visible, sharing a candlelit dinner on a wooden terrace overlooking the ocean at twilight, string lights, wine glasses, intimate atmosphere",
+    "prompt": "a couple seen from behind or in silhouette, faces not visible, sharing a candlelit dinner on a wooden terrace overlooking the ocean at twilight, string lights, relaxed atmosphere",
     "megapixels": 2
   },
   "vacation-types/couples-vacations": {

@@ -41,7 +41,7 @@ Miami is a romantic getaway with a pulse. Mornings start with a barefoot walk on
 ## Neighborhoods for couples
 
 - **South Beach** is iconic and lively, with Art Deco hotels and nightlife.
-- **Mid-Beach** feels more grown-up, with design-forward resorts such as [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/).
+- **Mid-Beach** feels more refined, with design-forward resorts such as [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/).
 - **Coconut Grove** is leafy and relaxed, with waterfront parks and the Italian Renaissance-style Vizcaya Museum & Gardens nearby.
 - **Key Biscayne** is a short drive over the causeway, with calmer beaches in Bill Baggs Cape Florida State Park.
 

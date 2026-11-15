@@ -1,14 +1,14 @@
 ---
 name: Orlando
 metaTitle: "Orlando for Couples: Beyond the Theme Parks | SpiceVacations"
-metaDescription: "Orlando for couples: grown-up theme park days, EPCOT's festivals, Winter Park charm, crystal-clear springs and luxury resorts. When to go and how to plan."
+metaDescription: "Orlando for couples: refined theme park days, EPCOT's festivals, Winter Park charm, crystal-clear springs and luxury resorts. When to go and how to plan."
 scene: lake
 palette: teal
 imageAlt: Illustrated Central Florida lake at sunrise with trees along the shore
 region: usa
 country: United States
 state: FL
-tagline: Theme park magic for grown-ups, plus springs, lakes and charming Winter Park.
+tagline: Theme park magic for adults, plus springs, lakes and charming Winter Park.
 summary: Orlando is famous for theme parks, but couples can pair park days with spa resorts, EPCOT's food festivals, boat rides in Winter Park and swims in Central Florida's crystal-clear springs.
 bestMonths: [1, 2, 3, 4, 5, 10, 11]
 bestTimeNote: January to May and October to November. Avoid school holidays for smaller crowds.

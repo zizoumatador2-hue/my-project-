@@ -164,7 +164,7 @@ Start with how much time you have and where you're flying from. For four nights 
 
 ## Caribbean beach etiquette
 
-Many Caribbean beaches are public by law, even in front of resorts, so expect to share the sand with locals and other visitors. Ask before photographing people, don't remove shells or coral, and take your trash with you. Nude or topless sunbathing is not permitted on most Caribbean beaches outside designated areas. Beach vendors are part of island life; a friendly "no, thank you" is always fine if you're not interested.
+Many Caribbean beaches are public by law, even in front of resorts, so expect to share the sand with locals and other visitors. Ask before photographing people, don't remove shells or coral, and take your trash with you. Check each beach's rules on dress and sunbathing, and use designated areas. Beach vendors are part of island life; a friendly "no, thank you" is always fine if you're not interested.
 
 ## Packing for the Caribbean
 

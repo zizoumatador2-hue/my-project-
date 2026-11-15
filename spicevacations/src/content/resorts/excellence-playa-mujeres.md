@@ -12,7 +12,7 @@ vacationTypes: [adults-only-resorts, all-inclusive-resorts, honeymoon-vacations,
 idealFor: [couples, honeymooners]
 budgetStyle: splurge
 adultsOnly: true
-summary: A polished adults-only, all-inclusive resort in the quieter Playa Mujeres area north of Cancun, known for its many restaurants, swim-up suites and relaxed, grown-up atmosphere.
+summary: A polished adults-only, all-inclusive resort in the quieter Playa Mujeres area north of Cancun, known for its many restaurants, swim-up suites and relaxed, refined atmosphere.
 features: [Adults-only, All-inclusive, Swim-up suites, Multiple à la carte restaurants, Full-service spa, Beachfront]
 goodToKnow:
   - Playa Mujeres is north of Cancun's Hotel Zone; transfers from Cancun Airport typically take longer than to Hotel Zone resorts.

@@ -45,7 +45,7 @@ We've organized this guide by the kind of romance you're after: sunsets and isla
 | Amelia Island | Historic charm | Jacksonville (JAX) | 2–3 nights |
 | St. Augustine | History, walkability | Jacksonville (JAX) | 2 nights |
 | 30A & Destin | Emerald water, beach towns | Northwest Florida Beaches (ECP) | 3–4 nights |
-| Winter Park & Orlando | Grown-up parks, springs | Orlando (MCO) | 2–3 nights |
+| Winter Park & Orlando | Theme parks, springs | Orlando (MCO) | 2–3 nights |
 
 ## Best for sunsets and island life
 
@@ -91,7 +91,7 @@ Palm Beach is Florida's most polished getaway. Stroll the boutiques of Worth Ave
 
 ### 9. Miami Beach
 
-Miami offers a completely different kind of romance: Art Deco hotels, rooftop cocktails, Cuban coffee and live salsa. Start the day with a sunrise walk on the beach, spend the afternoon in Wynwood's galleries and end with dinner in the Design District or Coconut Grove. Mid-Beach properties like [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/) feel more grown-up than the heart of South Beach. See our full [Miami romantic getaways](/guides/miami-romantic-getaways/) guide.
+Miami offers a completely different kind of romance: Art Deco hotels, rooftop cocktails, Cuban coffee and live salsa. Start the day with a sunrise walk on the beach, spend the afternoon in Wynwood's galleries and end with dinner in the Design District or Coconut Grove. Mid-Beach properties like [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/) feel more refined than the heart of South Beach. See our full [Miami romantic getaways](/guides/miami-romantic-getaways/) guide.
 
 ## Best for history and charm
 
@@ -105,7 +105,7 @@ Founded in 1565, St. Augustine is the oldest continuously inhabited European-fou
 
 ## Best for something different
 
-### 12. Winter Park and Orlando for grown-ups
+### 12. Winter Park and Orlando for adults
 
 Orlando can be surprisingly romantic without kids. Spend a day on the rides you actually want, enjoy an EPCOT festival, then retreat to Winter Park's brick streets and take the scenic boat tour through its chain of lakes. The [Four Seasons Resort Orlando](/resorts/four-seasons-orlando/) has an adults-only pool and rooftop dining with fireworks views. For more, see our [Orlando](/destinations/orlando/) destination page.
 

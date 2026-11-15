@@ -17,7 +17,7 @@ For a complete itinerary, read [the best romantic getaways in Florida](/guides/b
 
 ### Miami: beach days and Latin nights
 
-[Miami](/destinations/miami/) combines sunrise beach walks, Art Deco architecture, Cuban coffee in Little Havana and some of the country's best restaurants. Stay in Mid-Beach for a more grown-up feel; [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/) turns a weekend into an occasion. Our [Miami romantic getaways](/guides/miami-romantic-getaways/) guide has a three-day plan.
+[Miami](/destinations/miami/) combines sunrise beach walks, Art Deco architecture, Cuban coffee in Little Havana and some of the country's best restaurants. Stay in Mid-Beach for a more refined feel; [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/) turns a weekend into an occasion. Our [Miami romantic getaways](/guides/miami-romantic-getaways/) guide has a three-day plan.
 
 ### Hawaii: the no-passport honeymoon
 
@@ -37,7 +37,7 @@ Hawaii works best with at least a week. Pick one island for trips under ten days
 
 [New York](/destinations/new-york/) is a romantic destination and a launchpad. In the city, walk the Brooklyn Bridge at sunrise, see a Broadway show and find a rooftop at sunset. Within a few hours you can be in the Hudson Valley, the Catskills, the Hamptons or Newport. [Mohonk Mountain House](/resorts/mohonk-mountain-house/), a Victorian castle on a mountain lake, is a New York classic. See the [best weekend getaways from New York](/guides/best-weekend-getaways-from-new-york/).
 
-### Orlando: theme parks for grown-ups
+### Orlando: theme parks for adults
 
 [Orlando](/destinations/orlando/) isn't only for families. Couples can enjoy thrill rides, nighttime spectaculars and EPCOT's food festivals, then escape to Winter Park or Central Florida's crystal-clear springs. The [Four Seasons Resort Orlando](/resorts/four-seasons-orlando/) has an adults-only pool and rooftop dining with fireworks views.
 

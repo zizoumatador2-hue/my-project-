@@ -1,5 +1,5 @@
 ---
-title: "Best Adults-Only Resorts: 16 Grown-Up Escapes for Couples"
+title: "Best Adults-Only Resorts: 16 Quiet Escapes for Couples"
 metaTitle: "Best Adults-Only Resorts: 16 Escapes for Couples"
 metaDescription: "The best adults-only resorts in Mexico, the Caribbean, Hawaii, Florida and California, from lively all-inclusives to serene hideaways, and how to choose one."
 scene: pool

@@ -1,11 +1,11 @@
 ---
 name: Adults-Only Resorts
 metaTitle: Adults-Only Resorts for Couples | SpiceVacations
-metaDescription: Discover adults-only resorts in Mexico, the Caribbean, Hawaii and the USA. Learn how age policies work and find quiet, romantic resorts made for grown-ups.
+metaDescription: Discover adults-only resorts in Mexico, the Caribbean, Hawaii and the USA. Learn how age policies work and find quiet, romantic resorts made for adults.
 scene: pool
 palette: gold
 imageAlt: Illustrated resort infinity pool with palm trees and the ocean beyond
-tagline: Quiet pools, grown-up dining and room to actually relax.
+tagline: Quiet pools, upscale dining and room to actually relax.
 summary: Adults-only resorts set a minimum guest age so pools, restaurants and beaches stay calm. Explore the best adults-only resorts for couples and learn what to check before you book.
 icon: wine
 order: 4

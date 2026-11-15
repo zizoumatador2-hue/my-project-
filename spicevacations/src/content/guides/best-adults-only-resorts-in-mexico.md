@@ -26,7 +26,7 @@ faqs:
     a: Most adults-only resorts in Cancun, the Riviera Maya and Los Cabos are all-inclusive, but inclusions vary. Check what's included, such as premium drinks, specialty restaurants and transfers.
 ---
 
-Mexico is the adults-only resort capital of the Americas. Along the Caribbean coast from Playa Mujeres to Tulum, and at the tip of Baja in Los Cabos, you'll find a remarkable range of resorts designed for grown-ups: quiet pools, swim-up suites, spas, romantic dinners and no kids' clubs.
+Mexico is the adults-only resort capital of the Americas. Along the Caribbean coast from Playa Mujeres to Tulum, and at the tip of Baja in Los Cabos, you'll find a remarkable range of resorts designed for adults: quiet pools, swim-up suites, spas, romantic dinners and no kids' clubs.
 
 This guide highlights the best adults-only resorts in Mexico for couples, organized by what each does best. For a broader overview, see [Mexico vacations for couples](/guides/mexico-vacations-for-couples/), and for all-destination planning, our complete [romantic getaways](/) guide.
 

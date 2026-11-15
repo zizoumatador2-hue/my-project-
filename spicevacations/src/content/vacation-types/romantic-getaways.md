@@ -24,7 +24,7 @@ A romantic getaway is less about where you go and more about how the trip feels.
 ## Styles of romantic getaways
 
 - **Beach escapes.** Florida, Hawaii, Mexico and the Caribbean deliver warm water, long sunsets and slow days. See our guide to the [best beach vacations](/guides/best-beach-vacations/).
-- **Adults-only resorts.** Quiet pools, grown-up dining and no kids' clubs. Start with our [best adults-only resorts](/guides/best-adults-only-resorts/).
+- **Adults-only resorts.** Quiet pools, upscale dining and no kids' clubs. Start with our [best adults-only resorts](/guides/best-adults-only-resorts/).
 - **Weekend getaways.** Two nights, minimal planning, maximum reset. Browse [weekend getaways for couples](/guides/weekend-getaways-for-couples/).
 - **City romance.** Rooftop bars, great restaurants and shows in places like New York, Miami and Las Vegas.
 - **Wine country and mountains.** Slow mornings, tastings and scenic drives in California and the Northeast.

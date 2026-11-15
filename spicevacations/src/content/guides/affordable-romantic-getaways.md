@@ -63,7 +63,7 @@ Many state parks across the country rent cabins or have lodges. They're often am
 
 Search within two hours of where you live. A historic inn in a small town can feel like a world away, and saving on travel lets you splurge on a nicer room.
 
-### 8. Orlando for grown-ups, off-peak
+### 8. Orlando for adults, off-peak
 
 Orlando has a huge supply of hotels, which keeps many prices competitive outside school holidays. Pair a park day with free or low-cost experiences like Winter Park's shops and lakes, and springs in state parks.
 

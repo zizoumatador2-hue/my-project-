@@ -19,7 +19,7 @@ goodToKnow:
 updated: 2026-10-05
 ---
 
-The Four Seasons Resort Orlando sits within the Walt Disney World Resort area and offers a grown-up way to do Orlando. Spend the day at the parks, then retreat to the adults-only pool or the spa.
+The Four Seasons Resort Orlando sits within the Walt Disney World Resort area and offers a refined way to do Orlando. Spend the day at the parks, then retreat to the adults-only pool or the spa.
 
 ## Why couples love it
 

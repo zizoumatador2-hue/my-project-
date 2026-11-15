@@ -24,7 +24,7 @@ Excellence Punta Cana brings the Excellence Collection's adults-only formula to 
 
 ## Why couples love it
 
-Swim-up suites, plentiful dining and a calm, grown-up atmosphere make it a strong value choice for an adults-only week.
+Swim-up suites, plentiful dining and a calm, refined atmosphere make it a strong value choice for an adults-only week.
 
 ## Who it suits
 

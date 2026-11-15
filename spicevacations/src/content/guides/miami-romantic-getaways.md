@@ -39,7 +39,7 @@ This guide covers where to stay, what to do and a three-day plan for Miami roman
 
 ### Mid-Beach
 
-Mid-Beach feels more grown-up than central South Beach, with oceanfront hotels and an upscale atmosphere. [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/) turns a weekend into an occasion, with theatrical red-and-gold interiors, an oceanfront pool, a lavish spa and evening entertainment.
+Mid-Beach feels more refined than central South Beach, with oceanfront hotels and an upscale atmosphere. [Faena Hotel Miami Beach](/resorts/faena-hotel-miami-beach/) turns a weekend into an occasion, with theatrical red-and-gold interiors, an oceanfront pool, a lavish spa and evening entertainment.
 
 **Best for:** couples who want luxury and calm, with South Beach a short ride away.
 
