@@ -2,7 +2,7 @@
 title: "The ISM Manufacturing PMI Explained"
 description: "The ISM Manufacturing PMI explained: how the index is built, why 50 and 47.5 matter, what October 2026 showed and how investors read new orders and prices."
 publishDate: 2026-11-03
-modifiedDate: 2026-11-09
+modifiedDate: 2026-11-13
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "ism manufacturing pmi"
@@ -145,6 +145,7 @@ This article is educational and is not personalized investment advice.
 - [How the jobs report moves the stock market](/articles/how-the-jobs-report-moves-the-stock-market/)
 - [What are initial jobless claims and why do they matter?](/articles/initial-jobless-claims-explained/)
 - [Retail sales report: why Wall Street cares](/articles/retail-sales-report-explained/)
+- [What is GDP and why does it matter to investors?](/articles/what-is-gdp-and-why-it-matters/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [U.S. economic indicators explained](/economic-indicators/)

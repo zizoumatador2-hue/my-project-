@@ -2,7 +2,7 @@
 title: "Retail Sales Report: Why Wall Street Cares"
 description: "The retail sales report explained: what the Census Bureau measures, why traders watch the control group, and how the latest numbers can move stocks and yields."
 publishDate: 2026-11-09
-modifiedDate: 2026-11-11
+modifiedDate: 2026-11-13
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "retail sales report explained"
@@ -149,6 +149,7 @@ This article is educational and is not personalized investment advice.
 - [How to read an earnings report in 10 minutes](/articles/how-to-read-an-earnings-report/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [Consumer confidence vs. consumer sentiment: what's the difference?](/articles/consumer-confidence-vs-consumer-sentiment/)
+- [What is GDP and why does it matter to investors?](/articles/what-is-gdp-and-why-it-matters/)
 - [U.S. economic indicators explained](/economic-indicators/)
 
 ## Sources
