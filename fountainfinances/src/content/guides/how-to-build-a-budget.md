@@ -122,7 +122,7 @@ Split take-home pay into three buckets:
 - **30% wants:** dining out, entertainment, travel, upgrades.
 - **20% savings and debt payoff:** emergency fund, retirement, extra payments on debt.
 
-*Best for:* beginners and people who want a simple framework without tracking every purchase.
+*Best for:* beginners and people who want a simple framework without tracking every purchase. Our [50/30/20 rule guide](/guides/50-30-20-rule/) covers what counts as a need or a want and when to change the split.
 
 ### Zero-based budgeting
 

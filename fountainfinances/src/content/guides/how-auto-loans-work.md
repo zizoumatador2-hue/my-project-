@@ -6,7 +6,7 @@ keywords: ["how auto loans work", "auto loan rates", "best auto loans", "car loa
 hub: loans
 topics: ["auto-loans"]
 published: 2026-09-21
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "An auto loan is a secured installment loan: the car is collateral, and you repay the amount financed (price plus taxes and fees, minus your down payment and trade-in) in fixed monthly payments. Your APR depends on your credit, the loan term, the car’s age and the lender. Getting preapproved before visiting a dealer is the best way to compare offers."
 takeaways:
@@ -27,6 +27,9 @@ sources:
   - title: "Auto loans"
     publisher: "Consumer Financial Protection Bureau"
     url: "https://www.consumerfinance.gov/consumer-tools/auto-loans/"
+  - title: "Financing or Leasing a Car"
+    publisher: "Federal Trade Commission"
+    url: "https://consumer.ftc.gov/financing-or-leasing-car"
   - title: "Consumer Credit - G.19"
     publisher: "Board of Governors of the Federal Reserve System"
     url: "https://www.federalreserve.gov/releases/g19/current/default.htm"
@@ -114,7 +117,7 @@ In the finance office, you may be offered:
 - **Paint and fabric protection**
 - **Credit insurance**
 
-These are optional. They can add significantly to the amount financed, and you pay interest on them. You can decline them, negotiate their price, or buy some (like GAP coverage) elsewhere, often for less. The FTC advises consumers to review every line of the contract.
+These are optional. They can add significantly to the amount financed, and you pay interest on them. You can decline them, negotiate their price, or buy some (like GAP coverage) elsewhere, often for less. The FTC advises checking that the contract you sign lists only the add-ons you agreed to, at the prices you were quoted.
 
 ## Leasing vs. buying
 

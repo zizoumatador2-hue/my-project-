@@ -120,7 +120,7 @@ Every purchase, payment, credit and fee. Review this monthly for errors or fraud
 
 ### 6. Interest charge calculation
 
-Lists each balance type, its APR and the interest charged. Check whether interest was charged at all, if you pay in full each month, it should be zero.
+Lists each balance type, its APR and the interest charged. Check whether interest was charged at all: if you pay in full each month, it should be zero.
 
 ### 7. Year-to-date totals
 
@@ -130,7 +130,7 @@ Total fees and interest charged this year. A quick way to see what carrying a ba
 
 Minimum payments are often calculated as a small percentage of the balance plus interest and fees, or a flat amount if higher. Because so much of each minimum goes to interest, the balance falls slowly.
 
-On a $5,000 balance at 22% APR, a payment that covers just the monthly interest (about $92) would never reduce the balance. A $150 payment would take a little over four years. A $250 payment would take about two years.
+On a $5,000 balance at 22% APR, a payment that covers just the monthly interest (about $92) would never reduce the balance. A $150 payment would take about 52 months and cost roughly $2,800 in interest. A $250 payment would take about 26 months and cost roughly $1,290.
 
 ## Tips to minimize credit card interest
 

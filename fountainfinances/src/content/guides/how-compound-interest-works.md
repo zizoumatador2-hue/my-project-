@@ -52,8 +52,8 @@ Here is $1,000 at 5% per year, compounded annually:
 | 1 | $1,000.00 | $50.00 | $1,050.00 |
 | 2 | $1,050.00 | $52.50 | $1,102.50 |
 | 3 | $1,102.50 | $55.13 | $1,157.63 |
-| 10 | — | — | $1,628.89 |
-| 30 | — | — | $4,321.94 |
+| 10 | $1,551.33 | $77.57 | $1,628.89 |
+| 30 | $4,116.14 | $205.81 | $4,321.94 |
 
 With simple interest, you would have $1,500 after 10 years and $2,500 after 30. Compounding adds $128.89 over the first decade, and more than $1,800 over thirty years. The effect is small at first and enormous later.
 

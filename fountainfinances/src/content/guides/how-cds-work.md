@@ -110,7 +110,7 @@ A **CD ladder** spreads your savings across several CDs with staggered maturitie
 | 4 | $2,000 | 4 years |
 | 5 | $2,000 | 5 years |
 
-Each year, one CD matures. You can use the money or reinvest it in a new 5-year CD. After four years, you have a CD maturing every year while most of your money earns longer-term rates. Ladders balance access with yield and reduce the risk of locking everything in right before rates rise.
+Each year, one CD matures. You can use the money or reinvest it in a new 5-year CD. After four years, you have a CD maturing every year while most of your money earns longer-term rates. Ladders balance access with yield and reduce the risk of locking everything in right before rates rise. Our [CD ladder guide](/guides/cd-ladder/) works through a $10,000 ladder with interest figures for each rung.
 
 ## Are CDs safe?
 

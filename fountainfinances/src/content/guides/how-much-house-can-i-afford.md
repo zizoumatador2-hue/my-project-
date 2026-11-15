@@ -6,7 +6,7 @@ keywords: ["how much house can I afford", "mortgage affordability calculator", "
 hub: mortgage
 topics: ["first-time-home-buyers", "mortgage-basics"]
 published: 2026-09-13
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "A traditional guideline says total housing costs should stay at or below 28% of your gross monthly income and all debt payments at or below 36%. On $100,000 of income with $500 of monthly debts, that means a housing payment of about $2,333. Your price range then depends on your down payment, interest rate, taxes and insurance."
 takeaways:
@@ -18,7 +18,7 @@ faqs:
   - q: "How much house can I afford on $75,000 a year?"
     a: "Using the 28% guideline, about $1,750 a month for principal, interest, taxes and insurance. With a 6.5% rate, 1.1% property tax, $1,800 insurance, 10% down and no other debts, that supports a price of roughly $240,000. Use our affordability calculator for your exact figures."
   - q: "What debt-to-income ratio do mortgage lenders want?"
-    a: "Requirements vary by loan program and lender. Many conventional loans prefer a total DTI of 36% or lower, while some programs allow 43% or higher with compensating factors such as strong credit or cash reserves."
+    a: "Requirements vary by loan program and lender. For conventional loans sold to Fannie Mae, the maximum total DTI is 36% for manually underwritten loans (up to 45% with the required credit score and reserves) and 50% for loans approved through its automated underwriting system. Our [debt-to-income guide](/guides/debt-to-income-ratio/) covers the details."
   - q: "Should I buy at the top of my approved budget?"
     a: "Usually not. Lenders do not account for childcare, retirement saving, travel or future goals. Many buyers choose a payment well below the maximum to keep room in their budget."
   - q: "How much should I have saved besides the down payment?"
@@ -81,6 +81,8 @@ With a $2,333 total housing budget, 10% down, 1.1% property tax and $1,800 insur
 | 7.5% | about $303,000 |
 
 *Illustrative; excludes PMI and HOA dues.*
+
+Mortgage insurance counts toward the 28% limit, so it lowers the price too. At 6.5%, adding PMI at an assumed 0.6% of the loan per year (about $139 a month on the resulting loan of about $278,500) brings the price this budget supports down from about $331,000 to about $309,000. PMI pricing varies with your credit score and down payment, so ask lenders for a quote.
 
 A two-point change in rates moves the affordable price by roughly $60,000. That is why buyers should re-run their numbers whenever rates change, and why improving your credit score before applying can pay off.
 

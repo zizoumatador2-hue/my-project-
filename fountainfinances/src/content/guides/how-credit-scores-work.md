@@ -75,7 +75,7 @@ Lenders set their own cutoffs, so these are general guides. A mortgage lender an
 
 FICO publishes the general importance of five categories for the general population. Individual weights vary depending on the rest of your credit profile, but the broad picture is consistent.
 
-### 1. Payment history — about 35%
+### 1. Payment history (about 35%)
 
 The single most important factor is whether you pay on time. Your report shows each account’s payment record, including late payments (typically reported once a payment is 30 days past due), collections, charge-offs, foreclosures and bankruptcies.
 
@@ -85,7 +85,7 @@ The single most important factor is whether you pay on time. Your report shows e
 
 **Action:** Set up automatic payments for at least the minimum due on every account.
 
-### 2. Amounts owed — about 30%
+### 2. Amounts owed (about 30%)
 
 This factor looks at how much you owe, especially relative to your available credit on revolving accounts like credit cards. That ratio is called **credit utilization**.
 
@@ -97,13 +97,13 @@ Lower is better. Many experts suggest keeping utilization under 30%, and people 
 
 **Action:** Pay balances down before the statement closing date, or make multiple payments during the month, so a lower balance is reported.
 
-### 3. Length of credit history — about 15%
+### 3. Length of credit history (about 15%)
 
 Scoring models consider how long your accounts have been open: the age of your oldest account, your newest account and the average age of all accounts, plus how long it has been since you used certain accounts.
 
 **Action:** Keep your oldest no-annual-fee card open and use it occasionally so the issuer does not close it for inactivity.
 
-### 4. New credit — about 10%
+### 4. New credit (about 10%)
 
 Opening several accounts in a short period can signal risk. Each application for credit typically generates a **hard inquiry**, which may lower your score by a few points for a short time. Hard inquiries remain on your report for two years, but FICO scores only consider inquiries from the last 12 months.
 
@@ -111,9 +111,9 @@ Rate shopping is treated differently. When you shop for a mortgage, auto loan or
 
 **Action:** Apply for new credit only when you need it, and do your rate shopping within a few weeks.
 
-### 5. Credit mix — about 10%
+### 5. Credit mix (about 10%)
 
-Having experience with different types of credit (revolving accounts (credit cards) and installment loans (auto, student, mortgage, personal)) can help slightly. This is the least important factor, and it is never a good reason to take on debt you do not need.
+Having experience with different types of credit, such as revolving accounts (credit cards) and installment loans (auto, student, mortgage, personal), can help slightly. This is the least important factor, and it is never a good reason to take on debt you do not need.
 
 ## What is not in your credit score
 
@@ -166,7 +166,7 @@ You have many scores across models and bureaus.
 
 | Action | Typical impact timeline |
 |---|---|
-| Paying down card balances | As soon as lower balances are reported — often within one or two billing cycles |
+| Paying down card balances | As soon as lower balances are reported, often within one or two billing cycles |
 | Correcting a report error | After the bureau completes its investigation, generally within about 30 days |
 | Recovering from a late payment | Gradual, over months to years of on-time payments |
 | Building a history from scratch | At least six months to generate a FICO score; years to build a strong one |

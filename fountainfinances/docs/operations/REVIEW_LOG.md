@@ -88,3 +88,37 @@ None in this cohort.
 - `npm run qa`: passed (123 pages, 190 unique external links)
 - `npm test`: 29/29 passed
 - `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)
+
+---
+
+## 2026-11-15 catch-up (cohort 2)
+
+### Pages reviewed (12)
+
+| # | Page | Result |
+|---|---|---|
+| 25 | /calculators/home-affordability/ | Accuracy fix: the estimate leaves out mortgage insurance, but nothing said so, and with the default inputs (13% down) the price was overstated. The result note now warns when the down payment is under 20%, and the "more than approval" list explains the omission. Confirmed in the browser (note shows at $50,000 down, hidden at $200,000). Solver math checked ($377,583 default). |
+| 26 | /calculators/home-equity/ | Reviewed; no change needed. $190,000 equity (42%) and $122,500 borrowable at 85% CLTV recomputed; negative equity and over-limit warnings behave correctly. |
+| 27 | /guides/how-auto-loans-work/ | Source fix: the unsourced "FTC advises..." line now states the FTC's actual guidance (the signed contract should list only the add-ons you agreed to, at the quoted prices) and cites the FTC "Financing or Leasing a Car" page (URL confirmed by web search). Term table recomputed ($677 / $561 / $484 / $429). Updated date changed. |
+| 28 | /guides/how-cds-work/ | Minor: linked the CD ladder section to the full ladder guide. Penalty example ($10,000 x 4.5% x 90/365 = about $111) checked. Date unchanged. |
+| 29 | /guides/how-compound-interest-works/ | Style: replaced em-dash placeholders in the year table with the real year 10 and 30 values ($1,551.33 + $77.57; $4,116.14 + $205.81). Every figure recomputed (Saver A $197,395 vs Saver B $200,903; rate, frequency and Rule of 72 tables). Date unchanged. |
+| 30 | /guides/how-credit-card-interest-works/ | Minor: added months and total interest to the minimum-payment example ($5,000 at 22%: $150 = 52 months, about $2,800; $250 = 26 months, about $1,290) and fixed a comma splice. Average daily balance example ($46.03) checked. Date unchanged. |
+| 31 | /guides/how-credit-scores-work/ | Style: removed 6 em dashes and untangled nested parentheses in the credit mix section. FICO ranges and factor weights match myFICO. Date unchanged. |
+| 32 | /guides/how-mortgage-payments-work/ | Style: quick answer parentheses and an em-dash table cell. Example recomputed ($2,149 P&I, $2,844 total, payment 1/180/360 split, $433,651 total interest, extra-payment savings of about $62,000 and $142,000). Date unchanged. |
+| 33 | /guides/how-much-house-can-i-afford/ | Improved: added the effect of PMI on the rate table example (at 6.5% the supported price falls from about $331,000 to about $309,000 with PMI at an assumed 0.6%). Corrected the DTI FAQ to Fannie Mae's actual limits (36% manual, up to 45% with credit score and reserves, 50% through DU), matching the cohort 1 DTI guide fix. Updated date changed. |
+| 34 | /guides/how-to-avoid-overdraft-fees/ | Reviewed; no change needed. Regulation E opt-in scope (ATM and one-time debit only) is stated correctly. |
+| 35 | /guides/how-to-build-a-budget/ | Minor: linked the 50/30/20 section to the dedicated guide. Example budget sums to $5,200. Date unchanged. |
+| 36 | /guides/how-to-build-credit/ | Style: an em dash in a heading and a missing comma in the quick answer. FICO minimum-history and CROA advance-fee statements are correct. Date unchanged. |
+
+### Consolidation candidates
+None. The 50/30/20 overview inside the budget guide and the CD ladder section inside the CD guide are short summaries that now link to the dedicated guides.
+
+### Sources
+- Added: FTC "Financing or Leasing a Car" (https://consumer.ftc.gov/financing-or-leasing-car), confirmed by web search. Not fetched directly (sandbox proxy); the deploy workflow's external link check covers it.
+
+### Tests run (in fountainfinances/)
+- `npm run check`: 0 errors, 0 warnings
+- `npm run build`: ok
+- `npm run qa`: passed (123 pages, 191 unique external links)
+- `npm test`: 29/29 passed
+- `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)

@@ -8,7 +8,7 @@ topics: ["mortgage-basics", "mortgage-rates", "refinancing"]
 published: 2026-09-12
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "A monthly mortgage payment usually has four parts (principal, interest, property taxes and homeowners insurance (PITI)) plus mortgage insurance if your down payment was small. Early payments go mostly to interest; over time more goes to principal. Taxes and insurance are collected into an escrow account and paid by your servicer."
+quickAnswer: "A monthly mortgage payment usually has four parts, known as PITI (principal, interest, property taxes and homeowners insurance), plus mortgage insurance if your down payment was small. Early payments go mostly to interest; over time more goes to principal. Taxes and insurance are collected into an escrow account and paid by your servicer."
 takeaways:
   - "Principal and interest stay the same on a fixed-rate loan, but the split between them changes every month."
   - "Escrow payments can rise or fall when property taxes or insurance premiums change."
@@ -122,7 +122,7 @@ Extra principal payments reduce the balance immediately, which lowers every futu
 
 | Extra per month | Payoff time | Interest saved |
 |---|---|---|
-| $0 | 30 years | — |
+| $0 | 30 years | Not applicable |
 | $100 | about 26 years 5 months | about $62,000 |
 | $300 | about 21 years 7 months | about $142,000 |
 

@@ -70,6 +70,7 @@ const faqs = [
   <h2>Why affordability is more than approval</h2>
   <p>Lenders look at ratios; your budget has to handle everything else. Before you settle on a price, plan for:</p>
   <ul>
+    <li><strong>Mortgage insurance</strong>: with less than 20% down, PMI (conventional) or FHA mortgage insurance adds to the monthly payment. This calculator leaves it out, so the price it shows is higher than you would qualify for with mortgage insurance included.</li>
     <li><strong>Closing costs</strong>, often a few percent of the loan amount, due at signing.</li>
     <li><strong>Maintenance and repairs</strong>: a common planning figure is 1% to 2% of the home’s value per year.</li>
     <li><strong>Utilities</strong>, which are usually higher in a house than an apartment.</li>
@@ -101,6 +102,10 @@ const faqs = [
     out('limit').textContent =
       r.maxHousingPayment <= 0
         ? 'Your current debt payments already use the full debt-to-income allowance. Paying down debt will raise your budget.'
-        : `Limited by the ${r.limitedBy}. ${r.limitedBy === 'total debt ratio' ? 'Reducing monthly debt payments would raise this figure.' : 'Higher income or a lower rate would raise this figure.'}`;
+        : `Limited by the ${r.limitedBy}. ${r.limitedBy === 'total debt ratio' ? 'Reducing monthly debt payments would raise this figure.' : 'Higher income or a lower rate would raise this figure.'}${
+            r.loan > 0 && v.down < r.homePrice * 0.2
+              ? ' With less than 20% down, a conventional loan usually requires private mortgage insurance (PMI), which this estimate does not include and which would lower the price.'
+              : ''
+          }`;
   });
 </script>

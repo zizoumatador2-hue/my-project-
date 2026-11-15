@@ -8,7 +8,7 @@ topics: ["credit-building", "credit-cards", "credit-scores"]
 published: 2026-09-20
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "To build credit from scratch, open one starter account that reports to the credit bureaus (such as a secured credit card or a credit-builder loan) use it lightly, pay on time every month and keep balances low. Becoming an authorized user on a well-managed card can also help. A FICO score typically requires at least six months of history."
+quickAnswer: "To build credit from scratch, open one starter account that reports to the credit bureaus (such as a secured credit card or a credit-builder loan), use it lightly, pay on time every month and keep balances low. Becoming an authorized user on a well-managed card can also help. A FICO score typically requires at least six months of history."
 takeaways:
   - "Start with one account that reports to all three credit bureaus."
   - "On-time payments and low utilization are the two habits that matter most."
@@ -99,7 +99,7 @@ Compare widely available starter cards on our [credit cards for beginners](/best
 
 ## Step 3: Use credit the right way
 
-### Pay on time — always
+### Pay on time, always
 
 Payment history is the largest factor in FICO scores. Set up **autopay for the full statement balance** so you never miss a due date and never pay interest.
 
