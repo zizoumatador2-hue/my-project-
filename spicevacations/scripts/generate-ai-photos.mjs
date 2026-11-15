@@ -44,7 +44,7 @@ const SHOTS = {
     alt: 'Two people kayaking across clear turquoise water near a tropical coast',
   },
   'vacation-types/honeymoon-vacations': {
-    prompt: 'luxury honeymoon suite with an open terrace and private plunge pool facing a turquoise sea, rose petals on white linen, sheer curtains moving in the breeze, morning light',
+    prompt: 'luxury honeymoon suite with an open terrace and private plunge pool facing a turquoise sea, teak sun loungers on the deck, sheer curtains moving in the breeze, no bed in frame, morning light',
     alt: 'A honeymoon suite terrace with a private plunge pool facing the sea',
   },
   'vacation-types/adults-only-resorts': {

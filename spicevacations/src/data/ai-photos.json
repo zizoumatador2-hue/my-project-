@@ -80,23 +80,23 @@
     "megapixels": 2
   },
   "vacation-types/honeymoon-vacations": {
-    "id": "ai-vacation-types--honeymoon-vacations",
-    "base": "/ai/vacation-types--honeymoon-vacations",
+    "id": "ai-vacation-types--luxury-vacations",
+    "base": "/ai/vacation-types--luxury-vacations",
     "widths": [
       640,
       960,
       1536
     ],
-    "alt": "A honeymoon suite terrace with a private plunge pool facing the sea",
-    "avg": "#90aaae",
+    "alt": "A clifftop villa terrace with a private pool overlooking the coast at sunset",
+    "avg": "#8a806a",
     "photographer": "SpiceVacations",
     "photographerUrl": "/editorial-policy/",
     "url": "/editorial-policy/",
     "source": "AI",
     "ai": true,
     "model": "fal-ai/flux/schnell",
-    "seed": 1424746766,
-    "prompt": "luxury honeymoon suite with an open terrace and private plunge pool facing a turquoise sea, rose petals on white linen, sheer curtains moving in the breeze, morning light",
+    "seed": 109281767,
+    "prompt": "elegant clifftop villa terrace at sunset overlooking a dramatic coastline, private infinity pool, outdoor lounge furniture, champagne on a table, refined luxury atmosphere",
     "megapixels": 2
   },
   "vacation-types/adults-only-resorts": {
