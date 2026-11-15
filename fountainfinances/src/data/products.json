@@ -70,7 +70,7 @@
     ],
     "cons": [
       "Branch access is limited to certain markets",
-      "Rate can differ from the bank’s other savings products — confirm which account you open"
+      "Rate can differ from the bank’s other savings products; confirm which account you open"
     ],
     "considerations": "Capital One offers more than one savings product. Make sure you are opening the one with the rate you expect.",
     "requirements": "See Capital One’s current account disclosures"
@@ -122,7 +122,7 @@
       "The highest advertised savings rate typically requires direct deposit or other qualifying activity",
       "Primarily app-based service"
     ],
-    "considerations": "Read SoFi’s current rate conditions carefully — the APY you earn can depend on whether you meet its qualifying-deposit rules.",
+    "considerations": "Read SoFi’s current rate conditions carefully. The APY you earn can depend on whether you meet its qualifying-deposit rules.",
     "requirements": "Qualifying activity may be required for the top rate"
   },
   {

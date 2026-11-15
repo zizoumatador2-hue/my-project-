@@ -59,7 +59,7 @@ An emergency fund is the unglamorous foundation of every sound financial plan. I
 
 This guide explains exactly how much you need, how to calculate your personal number, where to keep the money and how to build the fund step by step. To get your target in two minutes, use our [emergency fund calculator](/calculators/emergency-fund/).
 
-## What an emergency fund is — and isn’t
+## What an emergency fund is, and what it isn’t
 
 An **emergency fund** is cash reserved for expenses that are **unexpected, necessary and urgent**:
 
@@ -139,7 +139,7 @@ You should be able to reach the money within a day or two. Savings accounts and 
 
 A **[high-yield savings account](/guides/what-is-a-high-yield-savings-account/)** usually pays far more than a traditional savings account at a big branch bank, with the same insurance protection. On a $15,000 fund, the difference between a very low rate and a competitive one can be hundreds of dollars a year.
 
-### Separate — but not too separate
+### Separate, but not too separate
 
 Keep your emergency fund in a different account from everyday checking so you are not tempted to dip into it. Some people even use a different bank to add a little friction. Just make sure transfers are simple enough that you can access the money quickly in a real emergency.
 
@@ -185,7 +185,7 @@ Before you withdraw, ask three questions:
 2. **Is it necessary?** Is it essential for health, safety, housing or keeping your income?
 3. **Is it urgent?** Does it need to be handled now?
 
-If the answer to all three is yes, use the fund, that is exactly what it is for. Do not feel guilty. Using it to avoid high-interest debt is the fund doing its job.
+If the answer to all three is yes, use the fund. That is exactly what it is for. Do not feel guilty. Using it to avoid high-interest debt is the fund doing its job.
 
 ## Refilling the fund
 

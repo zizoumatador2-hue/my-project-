@@ -6,7 +6,7 @@ keywords: ["first time home buyer guide", "first time home buyer", "how to buy y
 hub: mortgage
 topics: ["first-time-home-buyers", "mortgage-basics", "mortgage-rates"]
 published: 2026-09-14
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "To buy your first home: check your credit, set a budget, save for a down payment plus closing costs, explore first-time buyer programs, get preapproved, find an agent and a home, make an offer, compare Loan Estimates, complete the inspection and appraisal, and review your Closing Disclosure before signing."
 takeaways:
@@ -105,6 +105,19 @@ You will need cash for more than the down payment:
 | Inspection and appraisal | Several hundred dollars each |
 | Moving and setup | Varies |
 | Emergency reserve after closing | Several months of expenses |
+
+### Worked example: cash needed for a $300,000 home
+
+Down payment depends on the loan, while closing costs are a separate bill. This example assumes closing costs of 3% of the loan amount, a round figure for illustration only; your Loan Estimate shows the real number.
+
+| | 3% down (conventional) | 3.5% down (FHA) | 20% down (conventional) |
+|---|---|---|---|
+| Down payment | $9,000 | $10,500 | $60,000 |
+| Loan amount | $291,000 | $289,500 | $240,000 |
+| Closing costs at 3% of the loan | $8,730 | $8,685 | $7,200 |
+| **Cash to close (before credits)** | **$17,730** | **$19,185** | **$67,200** |
+
+The low-down-payment options cut the upfront cash by about $48,000 to $49,500, but they come with mortgage insurance: private mortgage insurance (PMI) on the conventional loan, and an upfront plus annual mortgage insurance premium on the FHA loan. Seller credits or assistance programs can reduce cash to close. Add inspection, moving costs and a post-closing reserve on top. Our guide to [mortgage closing costs](/guides/mortgage-closing-costs/) explains each fee.
 
 Keep these savings in an insured account such as a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/). Lenders will want to see where your down payment came from, so avoid unexplained large deposits in the months before applying.
 

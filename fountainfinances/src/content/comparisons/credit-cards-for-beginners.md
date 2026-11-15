@@ -6,7 +6,7 @@ keywords: ["credit cards for beginners", "best credit cards", "secured credit ca
 hub: credit
 category: starter-cards
 published: 2026-09-20
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 intro: "Four widely available secured and starter cards from major issuers, compared on how they help you build credit, and what to watch for."
 criteria:
@@ -44,5 +44,9 @@ calculators: ["credit-card-payoff"]
 - **Keep utilization low**: on a small limit, even modest spending can look high.
 - **Don’t carry a balance.** Starter cards often have high APRs, and you don’t need to pay interest to build credit.
 - **Check your reports** after a few months to make sure the account is reported correctly.
+
+### Example: utilization on a small limit
+
+Say you open a secured card with a $300 refundable deposit and a $300 credit line. If your statement closes with a $150 balance, the card reports 50% utilization ($150 ÷ $300), even if you pay it in full on the due date. Keeping the reported balance under $90 holds utilization below 30%, and under $30 keeps it below 10%. One way to do that is to pay most of the balance a few days before the statement closing date. See [credit utilization ratio](/guides/credit-utilization-ratio/) for how this affects scores.
 
 Read [how to build credit](/guides/how-to-build-credit/) for the full plan, and [how credit card interest works](/guides/how-credit-card-interest-works/) to avoid interest entirely.

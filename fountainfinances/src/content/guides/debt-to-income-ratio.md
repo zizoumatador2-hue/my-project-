@@ -6,7 +6,7 @@ keywords: ["debt to income ratio", "how to calculate debt to income ratio", "dti
 hub: loans
 topics: ["mortgage-basics", "first-time-home-buyers", "personal-loans", "debt-management"]
 published: 2026-10-08
-updated: 2026-10-08
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "Your debt-to-income ratio (DTI) is your total monthly debt payments divided by your gross monthly income. If you pay $2,000 a month toward debts and earn $6,000 before taxes, your DTI is 33%. Mortgage lenders often prefer a back-end DTI of 36% or less, many approve up to about 43% to 50% depending on the loan program and the rest of your profile."
 takeaways:
@@ -103,7 +103,7 @@ Limits vary by lender and by the strength of your whole application. As a genera
 
 | Loan type | Typical back-end DTI range |
 |---|---|
-| Conventional mortgage | Often up to 45%, and up to 50% with automated underwriting approval and strong compensating factors |
+| Conventional mortgage (Fannie Mae) | Up to 50% when approved through Fannie Mae's automated underwriting system (Desktop Underwriter); 36% for manually underwritten loans, or up to 45% with the required credit score and cash reserves |
 | FHA mortgage | Commonly 43%, higher with compensating factors |
 | VA mortgage | 41% is a guideline; residual income also matters |
 | Personal loans and auto loans | Varies widely; many lenders prefer under 36% to 40% |

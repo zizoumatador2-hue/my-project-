@@ -6,7 +6,7 @@ keywords: ["best high yield savings accounts", "high yield savings account rates
 hub: banking
 category: savings
 published: 2026-09-20
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 intro: "Six widely available, FDIC-insured high-yield savings options compared side by side, with the criteria that matter beyond the headline rate."
 criteria:
@@ -46,6 +46,18 @@ Most high-yield savings accounts look similar at first glance. The differences t
 - **Need ATM access to savings?** Few online savings accounts offer it; look for an optional ATM card.
 - **Saving for several goals?** Buckets or vaults inside one account keep goals organized.
 - **Qualifying activity required?** Some accounts pay their top rate only with direct deposit or other conditions: read the rules.
+
+## What the rate difference is worth
+
+APY already includes compounding, so one year of interest on a balance you leave alone is simply balance × APY. With hypothetical rates on a $10,000 balance:
+
+| APY | Interest after one year |
+|---|---|
+| 0.40% | $40 |
+| 3.50% | $350 |
+| 4.00% | $400 |
+
+The gap between a low-rate account and a competitive one is far larger than the gap between two competitive accounts. A 0.50 percentage point difference between two high-yield accounts is $50 a year on $10,000, so access, fees and rate consistency can matter more than chasing the top advertised APY. Rates are variable, so actual earnings change when the bank changes its rate. The FDIC publishes the [national average savings rate](https://www.fdic.gov/national-rates-and-rate-caps) as a benchmark.
 
 ## Before you open an account
 

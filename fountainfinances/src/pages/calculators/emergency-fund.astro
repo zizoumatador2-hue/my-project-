@@ -104,8 +104,13 @@ const faqs = [
     const m = monthsToGoalWithInterest(target, v.saved, v.monthly, v.apy);
     out('target').textContent = usd(target);
     out('essentials').textContent = usd(essentials);
-    out('gap').textContent = gap > 0 ? usd(gap) : 'Goal reached';
-    out('time').textContent = m === 0 ? 'Already there' : Number.isFinite(m) ? months(m) : 'Add a monthly deposit';
+    out('gap').textContent = essentials <= 0 ? '—' : gap > 0 ? usd(gap) : 'Goal reached';
+    out('time').textContent =
+      essentials <= 0 ? 'Enter your expenses'
+      : m === 0 ? 'Already there'
+      : Number.isFinite(m) ? months(m)
+      : v.monthly > 0 ? 'More than 100 years'
+      : 'Add a monthly deposit';
     out('coverage').textContent = essentials > 0 ? `${(v.saved / essentials).toFixed(1)} months` : '—';
     bars(out('bars'), [{ label: 'Progress toward goal', value: Math.min(v.saved, target), max: target, display: target > 0 ? `${Math.min(100, (v.saved / target) * 100).toFixed(0)}%` : '—' }]);
   });

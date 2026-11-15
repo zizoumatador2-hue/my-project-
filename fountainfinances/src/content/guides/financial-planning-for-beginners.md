@@ -75,9 +75,9 @@ Vague goals (“save more”) are hard to act on. Specific goals have a **purpos
 | Medium term (2–10 years) | Home down payment | $40,000 | 5 years |
 | Long term (10+ years) | Retirement | Varies | Age 65 |
 
-Divide each goal’s cost by the months remaining to find a monthly savings target. For long-term goals, the [investment growth calculator](/calculators/investment/) estimates what regular contributions could grow to.
+Divide each goal’s cost by the months remaining to find a monthly savings target. Using the table above: $2,000 ÷ 6 months = about $334 a month for the starter fund, and $40,000 ÷ 60 months = about $667 a month for the down payment. If those two targets add up to more than you can save, stretch a date or start one goal after the other. For long-term goals, the [investment growth calculator](/calculators/investment/) estimates what regular contributions could grow to.
 
-## Step 2: Know your starting point — net worth
+## Step 2: Know your starting point (net worth)
 
 List everything you own (**assets**) and everything you owe (**liabilities**):
 

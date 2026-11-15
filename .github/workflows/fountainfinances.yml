@@ -13,7 +13,7 @@ jobs:
   photos:
     # Manual runs refresh the Pexels photo set and commit it, so builds never depend on Pexels.
     if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -47,7 +47,7 @@ jobs:
   test:
     needs: photos
     if: ${{ !failure() && !cancelled() }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -73,7 +73,7 @@ jobs:
   deploy:
     needs: test
     if: ${{ !failure() && !cancelled() && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')) }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     concurrency: fountainfinances-production
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || vars.CLOUDFLARE_API_TOKEN }}
@@ -183,7 +183,7 @@ jobs:
     # Manual runs end with a report on the live site: DNS, indexing signals, forms and Lighthouse scores.
     needs: deploy
     if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4

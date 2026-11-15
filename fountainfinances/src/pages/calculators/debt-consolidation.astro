@@ -92,6 +92,8 @@ const faqs = [
   const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
   bindCalculator(form, 'debt-consolidation', (v) => {
     const debts = [0, 1, 2, 3].map((i) => ({ balance: v[`b${i}`], aprPct: v[`a${i}`], payment: v[`p${i}`] })).filter((d) => d.balance > 0);
+    out('savings').style.color = '';
+    out('savings-label').textContent = 'estimated interest and fees saved';
     if (!debts.length) {
       out('savings').textContent = '—';
       out('note').textContent = 'Enter at least one debt balance to compare.';
