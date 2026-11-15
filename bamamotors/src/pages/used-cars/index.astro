@@ -23,7 +23,7 @@ const makeLinks = makes.filter((m) => indexable.has(`/used-cars/${m.slug}`));
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const site = env.SITE_URL;
 ---
-<BaseLayout
+<BaseLayout adsense={false}
   title={`Used Cars for Sale in Alabama${pageSuffix}`}
   description="Search used cars for sale in Alabama from local dealers. Filter by make, model, price, mileage, body type, city or ZIP radius and contact dealers directly."
   keywords="used cars for sale Alabama, used cars Alabama, cars for sale Alabama, used cars near me Alabama, affordable used cars Alabama"

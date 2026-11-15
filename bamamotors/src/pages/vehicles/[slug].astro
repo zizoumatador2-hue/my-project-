@@ -84,7 +84,7 @@ const productLd = {
   },
 };
 ---
-<BaseLayout title={`${sold ? 'Sold: ' : ''}${title} for Sale in ${v.city_name}, AL – ${price}`} description={description}
+<BaseLayout adsense={false} title={`${sold ? 'Sold: ' : ''}${title} for Sale in ${v.city_name}, AL – ${price}`} description={description}
   keywords={`${v.year} ${v.make_name} ${v.model_name} for sale, used ${v.make_name} ${v.model_name} ${v.city_name} AL, used ${v.make_name} Alabama`}
   canonical={`/vehicles/${v.slug}`} noindex={sold || v.status !== 'active'} ogType="product"
   ogImage={images[0] ? `/media/${images[0].key_large}` : undefined}

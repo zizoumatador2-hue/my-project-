@@ -62,7 +62,7 @@ const ld = {
 const descParas = (d.description ?? '').split(/\n{2,}/).filter(Boolean);
 const reviewErr = Astro.url.searchParams.get('review_err');
 ---
-<BaseLayout title={`${d.name} – Used Car Dealer in ${d.city_name}, AL`}
+<BaseLayout adsense={false} title={`${d.name} – Used Car Dealer in ${d.city_name}, AL`}
   description={truncate(`${d.name} is a car dealership in ${d.city_name}, Alabama with ${total} vehicles for sale on BamaMotors. See inventory, hours, reviews and contact the dealer.`, 160)}
   keywords={`${d.name}, used car dealer ${d.city_name} AL, car dealership ${d.city_name}, used cars ${d.city_name}`}
   canonical={page > 1 ? `/dealers/${d.slug}?page=${page}` : `/dealers/${d.slug}`} noindex={d.status !== 'active'}

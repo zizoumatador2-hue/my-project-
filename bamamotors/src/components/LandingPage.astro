@@ -62,6 +62,7 @@ const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
 ---
 <BaseLayout
+  adsense={false}
   title={`${L.title}${pageSuffix}`}
   description={L.description}
   keywords={L.keywords}

@@ -19,6 +19,7 @@ interface Props {
   modified?: string | null;
   bodyClass?: string;
   bare?: boolean; // no header/footer (dashboards supply their own chrome)
+  adsense?: boolean; // load the AdSense loader on this page (off for pages that show user-uploaded listings)
   prev?: string | null;
   next?: string | null;
 }
@@ -28,7 +29,7 @@ const s = Astro.locals.settings ?? {};
 const site = env.SITE_URL || Astro.site?.toString() || 'https://bamamotors.com';
 const {
   title, description: rawDescription = s.default_meta_description, keywords = s.default_meta_keywords, canonical, noindex = false,
-  jsonLd = [], ogImage, ogType = 'website', published, modified, bodyClass, bare = false, prev, next,
+  jsonLd = [], ogImage, ogType = 'website', published, modified, bodyClass, bare = false, adsense = true, prev, next,
 } = Astro.props;
 // Hard guarantee: meta descriptions never exceed 160 characters.
 const description = truncate((rawDescription ?? '').replace(/\s+/g, ' ').trim(), 160);
@@ -39,9 +40,9 @@ const image = ogImage ? (ogImage.startsWith('http') ? ogImage : absolute(site, o
 // Known sizes: site photos are generated at 1600x900; the default card is 1200x630. Listing photos vary, so no size is claimed.
 const imageSize = !ogImage ? [1200, 630] : /\/images\/[^/]+-1600\.webp$/.test(ogImage) ? [1600, 900] : null;
 const adsClient = s.adsense_client && /^ca-pub-\d{10,20}$/.test(s.adsense_client) ? s.adsense_client : '';
-// The AdSense loader is needed on every public page for site verification. It shows nothing by itself;
-// ad units are only placed where a page opts in with `ads`. Private and dashboard pages never load it.
-const loadAdsense = Boolean(adsClient) && !noindex && !bare;
+// The AdSense loader enables auto ads on any page it is on, so listing pages built from dealer photos and text
+// opt out with adsense={false}. Editorial and static pages keep it for verification.
+const loadAdsense = Boolean(adsClient) && adsense && !noindex && !bare;
 const ga = s.ga4_id && /^G-[A-Z0-9]{4,12}$/.test(s.ga4_id) ? s.ga4_id : '';
 ---
 <!doctype html>
