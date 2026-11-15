@@ -6,7 +6,7 @@ keywords: ["how to pay off credit card debt", "credit card debt payoff", "credit
 hub: credit
 topics: ["credit-cards", "debt-management", "balance-transfers"]
 published: 2026-09-08
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 quickAnswer: "To pay off credit card debt, stop adding new charges, list every balance with its APR, pay the minimum on all cards and put every extra dollar toward one card at a time: the highest APR (avalanche) or smallest balance (snowball). Lowering your rate with a balance transfer or consolidation loan can speed things up."
 takeaways:
@@ -60,7 +60,7 @@ calculators: ["credit-card-payoff", "debt-consolidation"]
 comparisons: ["balance-transfer-credit-cards", "personal-loans"]
 ---
 
-Credit card debt is expensive because card APRs are typically much higher than the rates on car loans, mortgages or student loans, and interest compounds on any unpaid balance. The Federal Reserve’s consumer credit data shows that the average interest rate on credit card accounts assessed interest is far above other common borrowing costs. The good news: credit card debt responds very well to a focused plan.
+Credit card debt is expensive because card APRs are typically much higher than the rates on car loans, mortgages or student loans, and interest compounds on any unpaid balance. In the Federal Reserve’s November 2026 consumer credit (G.19) release, the average interest rate on credit card accounts that were charged interest was about 22%. The good news: credit card debt responds very well to a focused plan.
 
 This guide lays out eight steps, compares the two most popular payoff methods and explains when a balance transfer or consolidation loan can help. Plug your own balance into the [credit card payoff calculator](/calculators/credit-card-payoff/) as you read.
 

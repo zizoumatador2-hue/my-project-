@@ -38,7 +38,7 @@ calculators: ["loan", "credit-card-payoff", "debt-consolidation"]
 comparisons: ["personal-loans", "balance-transfer-credit-cards"]
 ---
 
-When you need to pay for something you cannot cover with savings (a medical bill, a home repair, consolidating existing balances) two of the most common options are a **personal loan** and a **credit card**. They work very differently, and choosing the wrong one can cost you hundreds or thousands of dollars in interest.
+When you need to pay for something you cannot cover with savings (a medical bill, a home repair, consolidating existing balances), two of the most common options are a **personal loan** and a **credit card**. They work very differently, and choosing the wrong one can cost you hundreds or thousands of dollars in interest.
 
 This guide compares them side by side, walks through real cost examples and gives you a simple way to decide. Use the [loan calculator](/calculators/loan/) and the [credit card payoff calculator](/calculators/credit-card-payoff/) to test your numbers.
 
@@ -56,7 +56,7 @@ This guide compares them side by side, walks through real cost examples and give
 | Rate | Usually fixed | Usually variable |
 | Typical cost for good credit | Often lower than card APRs | Often higher, unless a 0% intro offer applies |
 | Payment | Fixed monthly amount | Minimum payment varies with balance |
-| Payoff date | Set at the start | None — depends on what you pay |
+| Payoff date | Set at the start | None; depends on what you pay |
 | Fees | Possible origination fee | Possible annual, balance transfer, late fees |
 | Access to funds | One lump sum | Borrow as needed up to your limit |
 | Best for | Large one-time costs repaid over years | Everyday purchases paid in full; short-term financing at 0% |

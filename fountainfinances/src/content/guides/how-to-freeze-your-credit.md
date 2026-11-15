@@ -124,7 +124,7 @@ If you don't know which bureau a lender uses, lift all three for a short window.
 | **Cost** | Free by law | Free by law | Varies; may be bundled with paid products |
 | **How long** | Until you lift it | 1 year (initial); 7 years (extended, for identity theft victims) | While you keep the service |
 | **Where to request** | Each bureau separately | One bureau, which notifies the other two | Each bureau's own product |
-| **Protection level** | Strongest | Lighter — lenders can still pull your report | Similar to a freeze, governed by the bureau's terms |
+| **Protection level** | Strongest | Lighter; lenders can still pull your report | Similar to a freeze, governed by the bureau's terms |
 
 A **fraud alert** is a good step if you think your information was exposed but you want to keep applying for credit without lifting freezes. Many people use both.
 

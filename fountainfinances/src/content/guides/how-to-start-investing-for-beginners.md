@@ -6,9 +6,9 @@ keywords: ["how to start investing for beginners", "investing for beginners", "h
 hub: personal-finance
 topics: ["financial-planning", "money-management", "saving-money"]
 published: 2026-10-09
-updated: 2026-10-09
+updated: 2026-11-15
 author: editorial-team
-quickAnswer: "To start investing, first keep three to six months of expenses in cash, then take any free employer 401(k) match. Next, open an IRA or a taxable brokerage account and put your money into a few broad, low-cost index funds or a target-date fund. Invest a fixed amount on a regular schedule and leave it alone for years. Investing carries risk, and prices can fall, so only invest money you won't need within about five years."
+quickAnswer: "To start investing, first set aside a cash cushion, take any free employer 401(k) match and pay off high-interest debt. Next, open an IRA or a taxable brokerage account and put your money into a few broad, low-cost index funds or a target-date fund. Invest a fixed amount on a regular schedule and leave it alone for years. Investing carries risk, and prices can fall, so only invest money you won't need within about five years."
 takeaways:
   - "Build an emergency fund before you invest, so you don't have to sell during a downturn."
   - "Capture the full employer 401(k) match first, because it is an immediate return on your money."
@@ -45,7 +45,7 @@ Many people wait to invest until they feel ready, which can mean waiting for yea
 
 ## Step 1: Build a cash cushion first
 
-Before you buy anything, keep a basic emergency fund in a savings account. Three to six months of essential expenses is a common target, and a [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) keeps that money easy to reach.
+Before you buy anything, keep a basic emergency fund in a savings account. Three to six months of essential expenses is a common long-term target. Many people start with a smaller starter fund of about one month of expenses, capture the employer match in Step 2, and build the rest of the cushion alongside it. A [high-yield savings account](/guides/what-is-a-high-yield-savings-account/) keeps that money easy to reach.
 
 The reason is timing. If your car breaks down in the middle of a market drop, a cushion lets you pay the bill without selling your investments at a loss. Our [emergency fund guide](/guides/emergency-fund-guide/) explains how to size it.
 
@@ -98,12 +98,15 @@ Try your own numbers with our [investment calculator](/calculators/investment/).
 
 ## A simple starter plan
 
-1. Save a cash cushion of three to six months of essential expenses.
+1. Save a starter cash cushion of about one month of essential expenses.
 2. Contribute enough to your 401(k) to get the full employer match.
 3. Pay off credit card debt with high interest.
-4. Open an IRA and contribute monthly.
-5. Put the money into one broad index fund or one target-date fund.
-6. Review once a year, rebalance if needed and avoid reacting to news.
+4. Grow the cushion to three to six months of essential expenses.
+5. Open an IRA and contribute monthly.
+6. Put the money into one broad index fund or one target-date fund.
+7. Review once a year, rebalance if needed and avoid reacting to news.
+
+This is the same order our [budget guide](/guides/how-to-build-a-budget/) and [50/30/20 guide](/guides/50-30-20-rule/) use.
 
 Your plan will change as your income, goals and tax situation change. Our [budget calculator](/calculators/budget/) can help you find the monthly amount to invest, and the [how to build a budget](/guides/how-to-build-a-budget/) guide walks through the steps.
 

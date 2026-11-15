@@ -8,7 +8,7 @@ topics: ["credit-reports", "credit-scores"]
 published: 2026-09-27
 updated: 2026-09-28
 author: editorial-team
-quickAnswer: "A credit report has four main sections: personal information, accounts (tradelines), inquiries and negative items such as collections or public records. Review each for errors. If you find one, dispute it with the credit bureau and the company that reported it: for free. Bureaus generally must investigate within 30 days."
+quickAnswer: "A credit report has four main sections: personal information, accounts (tradelines), inquiries and negative items such as collections or public records. Review each for errors. If you find one, dispute it with the credit bureau and the company that reported it, for free. Bureaus generally must investigate within 30 days."
 takeaways:
   - "Get free reports from Equifax, Experian and TransUnion at AnnualCreditReport.com."
   - "Check every account’s status, balance, limit and payment history for accuracy."
@@ -110,7 +110,7 @@ This is the heart of the report. Each credit account shows:
 
 **Check for:** hard inquiries from lenders you never applied to, which can signal fraud.
 
-## Section 4: Negative items — collections and public records
+## Section 4: Negative items (collections and public records)
 
 This section may show:
 
@@ -141,7 +141,7 @@ The FTC provides [dispute instructions and sample letters](https://consumer.ftc.
 - Ask the bureau to add a brief **statement of dispute** to your file.
 - Submit a complaint to the [Consumer Financial Protection Bureau](https://www.consumerfinance.gov/complaint/).
 
-## Signs of identity theft — and what to do
+## Signs of identity theft and what to do
 
 Red flags include accounts or inquiries you don’t recognize, addresses you have never lived at and collection notices for unfamiliar debts.
 

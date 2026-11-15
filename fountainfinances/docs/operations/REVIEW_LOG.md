@@ -122,3 +122,34 @@ None. The 50/30/20 overview inside the budget guide and the CD ladder section in
 - `npm run qa`: passed (123 pages, 191 unique external links)
 - `npm test`: 29/29 passed
 - `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)
+
+---
+
+## 2026-11-15 catch-up (cohort 3)
+
+### Pages reviewed (12)
+
+| # | Page | Result |
+|---|---|---|
+| 37 | /guides/how-to-freeze-your-credit/ | Style: removed an em dash in the comparison table. Free-freeze law (2018), 1 business day / 1 hour / 3 business day timelines, fraud alert durations and under-16 freezes are correct. Date unchanged. |
+| 38 | /guides/how-to-improve-credit-score/ | Style: removed an em dash in a heading. Utilization table, 30-day dispute window and CROA advance-fee rule are correct. Date unchanged. |
+| 39 | /guides/how-to-pay-off-credit-card-debt/ | Accuracy: replaced the unquantified "far above other borrowing costs" line with the figure from the Fed's November 2026 G.19 release (about 22% on accounts assessed interest, confirmed by web search). Minimum-payment table recomputed ($6,500 at 22.9%: 93 / 37 / 20 months, about $7,419 / $2,566 / $1,356 interest); the $10,000 FAQ (52 and 26 months) checked. Updated date changed. |
+| 40 | /guides/how-to-read-a-credit-report/ | Style: two em dashes in headings and an awkward colon in the quick answer. Reporting periods (7 years, 10 for Chapter 7) and dispute rules are correct. Date unchanged. |
+| 41 | /guides/how-to-remove-pmi/ | Reviewed; no change needed. Worked example recomputed ($1,991 payment; 80% after 95 payments, 78% after 109, 62 with $200 extra). HPA milestones and FHA MIP rules (ML 2013-04) are correct. |
+| 42 | /guides/how-to-save-money-every-month/ | Style: removed an em dash in a heading. $175/month at 4% for 5 years = about $11,600 checked. Date unchanged. |
+| 43 | /guides/how-to-start-investing-for-beginners/ | Improved: the page told readers to save a full three to six months of expenses before taking an employer match, which contradicted the order used in the budget, 50/30/20 and emergency fund guides. The quick answer, Step 1 and starter plan now use the site's order (starter fund, match, high-interest debt, full fund, IRA). 2026 IRA limits ($7,500; $8,600 at 50+) confirmed by web search against IRS IR-2025-111. $200/month at 7% for 30 years = about $244,000 checked. Updated date changed. |
+| 44 | /calculators/investment/ | Reviewed; no change needed. Negative returns, contribution increases, inflation adjustment and the 3.4% real-return example checked. |
+| 45 | /calculators/loan/ | Reviewed; no change needed. Term table ($495 / $391 / $330; $2,807 / $3,784 / $4,793) and the "9% vs 19% is more than $3,000" claim ($3,611) recomputed. |
+| 46 | /calculators/mortgage/ | Reviewed; no change needed. $63 per $10,000 and $228 for a one-point rate rise recomputed; down payment above price handled. |
+| 47 | /guides/mortgage-closing-costs/ | Reviewed; no change needed. Cost table, Fannie Mae seller-concession tiers (3% / 6% / 9%) and FHA 6% cap are correct. |
+| 48 | /guides/personal-loan-vs-credit-card/ | Style: an em dash in the table and a missing comma. Cost example recomputed ($332 payment, $2,257 with fee; card 46 months, about $5,055; $10,400 / 18 = $578). Date unchanged. |
+
+### Consolidation candidates
+None. how-credit-scores-work (cohort 2) and how-to-improve-credit-score overlap in topic but serve different intents (how scores are built vs an action plan) and link to each other.
+
+### Tests run (in fountainfinances/)
+- `npm run check`: 0 errors, 0 warnings
+- `npm run build`: ok
+- `npm run qa`: passed (123 pages, 191 unique external links)
+- `npm test`: 29/29 passed
+- `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)

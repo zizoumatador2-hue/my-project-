@@ -122,7 +122,7 @@ To report a lower balance:
 
 Scoring models look at utilization on each card as well as overall. A single maxed-out card can hurt even if your total utilization is moderate. Spread balances out or pay down the card closest to its limit first.
 
-## Step 7: Consider a credit limit increase — carefully
+## Step 7: Consider a credit limit increase, carefully
 
 A higher limit lowers your utilization ratio, as long as your spending does not rise with it. Many issuers let you request an increase online. Ask whether the request will cause a hard inquiry. Do not request an increase if a higher limit would tempt you to spend more.
 

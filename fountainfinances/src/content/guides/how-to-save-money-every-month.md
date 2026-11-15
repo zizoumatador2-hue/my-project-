@@ -87,7 +87,7 @@ If rates have fallen well below yours, or you now have 20% equity and pay PMI, a
 
 Rates vary widely between insurers for the same driver. Get several quotes with identical coverage, and ask about safe-driver, low-mileage and multi-policy discounts.
 
-### 11. Raise your deductible — carefully
+### 11. Raise your deductible, carefully
 
 A higher deductible lowers your premium. Only do this if your emergency fund could cover the deductible.
 
