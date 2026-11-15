@@ -2,6 +2,7 @@
 title: "What Is GDP and Why Does It Matter to Investors?"
 description: "What is GDP and why does it matter? How the BEA builds the GDP report, why the advance estimate gets revised, and how growth surprises move stocks and yields."
 publishDate: 2026-11-13
+modifiedDate: 2026-11-15
 category: economic-indicators
 series: economic-event-explained
 primaryKeyword: "what is gdp and why does it matter"
@@ -145,6 +146,7 @@ This article is educational and is not personalized investment advice.
 - [How the jobs report moves the stock market](/articles/how-the-jobs-report-moves-the-stock-market/)
 - [CPI vs. PCE: which inflation number moves markets?](/articles/cpi-vs-pce/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
+- [Yield curve inversion: what it means for stocks](/articles/yield-curve-inversion-explained/)
 - [Stock market correction vs. bear market](/articles/stock-market-correction-vs-bear-market/)
 - [U.S. economic indicators explained](/economic-indicators/)
 

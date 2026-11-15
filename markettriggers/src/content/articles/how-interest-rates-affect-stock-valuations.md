@@ -2,6 +2,7 @@
 title: "How Interest Rates Affect Stock Valuations"
 description: "How do interest rates affect stocks? Higher rates raise the discount rate, shrink P/E ratios and hit long-duration growth stocks hardest. Here is the math."
 publishDate: 2026-10-25
+modifiedDate: 2026-11-15
 category: investor-education
 series: investor-guide
 primaryKeyword: "how do interest rates affect stocks"
@@ -147,6 +148,7 @@ This article is general education, not personalized investment advice.
 - [How does inflation affect stocks?](/articles/how-does-inflation-affect-stocks/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [What is core CPI and why does the Fed watch it?](/articles/what-is-core-cpi/)
+- [Yield curve inversion: what it means for stocks](/articles/yield-curve-inversion-explained/)
 - [Investor education: core concepts explained](/investor-education/)
 
 ## Sources
