@@ -6,7 +6,7 @@ keywords: ["best CD rates", "CD account rates", "certificate of deposit rates", 
 hub: banking
 category: cd
 published: 2026-09-20
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 intro: "Six FDIC-insured banks offering certificates of deposit, compared by term choices, CD types and the fine print that affects what you earn."
 criteria:
@@ -44,5 +44,18 @@ calculators: ["cd", "compound-interest"]
 2. **Read the early withdrawal penalty**: longer terms usually carry larger penalties.
 3. **Check the maturity rules**: grace period length and automatic renewal.
 4. **Decide how interest is paid**: added to the CD or sent to another account.
+
+## What an early withdrawal can cost
+
+Penalties are usually stated as a number of days or months of interest, and they apply whether or not you have earned that much yet. Take a hypothetical $10,000 12-month CD at 4.00% APY with a penalty of 90 days of simple interest:
+
+| | Amount |
+|---|---|
+| Interest earned if you withdraw after 2 months | About $65.58 |
+| Penalty (90 days of interest: $10,000 × 4% × 90 ÷ 365) | About $98.63 |
+| Amount you get back | About $9,966.95 |
+| Interest earned if you hold to maturity | $400.00 |
+
+Because the penalty is larger than the interest earned so far, the difference comes out of your deposit. Many deposit agreements state that the remainder of a penalty is taken from principal, and federal rules require a penalty of at least seven days of simple interest on money withdrawn within the first six days. Penalty formulas vary widely by bank and term, so compare them alongside the APY.
 
 A CD makes the most sense for money you won’t need until a known date. For your emergency fund, a [high-yield savings account](/best/high-yield-savings-accounts/) is usually a better fit. Estimate earnings with the [CD calculator](/calculators/cd/) and read [how CDs work](/guides/how-cds-work/).

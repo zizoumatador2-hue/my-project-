@@ -52,3 +52,39 @@ Deferred. Within this cohort the candidate intents (for example a "how much cash
 - `npm run qa`: passed (123 pages, 190 unique external links)
 - `npm test`: 29/29 passed
 - `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (the desktop variant of the mobile-menu test, skipped by design)
+
+---
+
+## 2026-11-15 catch-up (cohort 0)
+
+One-time catch-up review of the cohorts not covered by this week's cohort 1 run, prompted by the same AdSense "Low value content" rejection.
+
+### Pages reviewed (12)
+
+| # | Page | Result |
+|---|---|---|
+| 1 | /guides/50-30-20-rule/ | Style only: fixed a broken sentence in the "what counts as a need" test. Example checked ($2,800 of needs = 56%; wants cut to $1,200 = 24%; totals $5,000). Date unchanged. |
+| 2 | /calculators/auto-loan/ | Reviewed; no change needed. Amount financed, tax on price minus trade-in and term table checked. |
+| 3 | /best/balance-transfer-credit-cards/ | Improved: the body was only a three-step checklist. Added a worked $6,000 at 22.9% example (keep the balance: 22 months, about $1,369 interest at $343.33/month; transfer at a hypothetical 3% or 5% fee over 18 months: $180 or $300) with the caveat on balances left after the promo. Removed an em dash in the BankAmericard note in `products.json`. Updated date changed. |
+| 4 | /calculators/budget/ | Reviewed; no change needed. Negative remainder, zero income and tips behave correctly. |
+| 5 | /calculators/cd/ | Reviewed; no change needed. Maturity = deposit x (1 + APY)^(months/12) is correct for an APY input. |
+| 6 | /best/cd-accounts/ | Improved: added an early withdrawal example ($10,000, 12 months, 4.00% APY, 90-day penalty: about $65.58 earned after 2 months vs a $98.63 penalty, so about $9,966.95 returned) and the Regulation D minimum of seven days' simple interest within the first six days. Updated date changed. |
+| 7 | /guides/cd-ladder/ | Reviewed; no change needed. All five rung values, the $1,223.55 total and the $12,166.53 single-CD figure recomputed. |
+| 8 | /best/checking-accounts/ | Reviewed; no change to the page. Removed an em dash in the Chase product note in `products.json`. |
+| 9 | /guides/checking-vs-savings-account/ | Style only: removed an em dash in the comparison table. The 2020 removal of the six-withdrawal limit and the $250,000 coverage wording are correct. Date unchanged. |
+| 10 | /calculators/compound-interest/ | Reviewed; no change needed. The page example ($5,000 at 4% monthly for 15 years = about $9,100; with $300/month about $83,000, about $24,000 interest) recomputed. |
+| 11 | /calculators/credit-card-payoff/ | Calculator bug fixed: the payoff loop stops at 1,200 months, so a payment slightly above the monthly interest at a low APR (for example $6,500 at 1% APR paying $6) showed "100 yrs" and an interest total while a balance was still owed. It now shows "More than 100 years" with a warning. Confirmed in the browser. Page example ($124 first-month interest) checked. |
+| 12 | /guides/credit-card-rewards-explained/ | Minor: added the arithmetic behind "rewards lose to interest" ($400 rewards on $20,000 vs about $660 interest on a $3,000 balance at 22%). Rewards table recomputed ($400 / $360 / $470 - $95). Date unchanged. |
+
+### Sources
+- Confirmed by web search: Regulation D minimum early withdrawal penalty (seven days' simple interest within six days of funding) and that penalties can be taken from principal (bank deposit agreements). No new outbound URLs were added.
+
+### Consolidation candidates
+None in this cohort.
+
+### Tests run (in fountainfinances/)
+- `npm run check`: 0 errors, 0 warnings
+- `npm run build`: ok
+- `npm run qa`: passed (123 pages, 190 unique external links)
+- `npm test`: 29/29 passed
+- `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)

@@ -42,7 +42,7 @@ Rewards credit cards pay you back for spending you would do anyway. Used well, t
 
 ## Rule number one: pay in full
 
-A card that earns 2% back but charges a 22% APR on a carried balance is a very bad deal if you don’t pay in full. Rewards only make sense when you pay your **full statement balance every month**. If you carry a balance, focus on a low APR or a [balance transfer](/guides/what-is-a-balance-transfer/) instead.
+A card that earns 2% back but charges a 22% APR on a carried balance is a very bad deal if you don’t pay in full. Spend $20,000 a year and you earn $400 in rewards; carry an average balance of $3,000 at 22% and you pay roughly $660 a year in interest ($3,000 × 22%), more than the rewards are worth. Rewards only make sense when you pay your **full statement balance every month**. If you carry a balance, focus on a low APR or a [balance transfer](/guides/what-is-a-balance-transfer/) instead.
 
 ## The three types of rewards
 

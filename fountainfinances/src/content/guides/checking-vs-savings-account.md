@@ -47,7 +47,7 @@ Checking and savings accounts are the two basic building blocks of personal bank
 | Main purpose | Everyday spending and bills | Holding money you are not spending |
 | Access | Debit card, checks, bill pay, transfers, ATMs | Transfers; some offer ATM cards |
 | Withdrawals | Unlimited | May be limited by the bank |
-| Interest | Often none or very low | Yes — high-yield accounts pay much more |
+| Interest | Often none or very low | Yes; high-yield accounts pay much more |
 | Fees to watch | Monthly maintenance, overdraft, ATM | Monthly maintenance, excessive withdrawal |
 | Insurance | FDIC/NCUA | FDIC/NCUA |
 

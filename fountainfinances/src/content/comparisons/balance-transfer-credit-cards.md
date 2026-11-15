@@ -6,7 +6,7 @@ keywords: ["best balance transfer cards", "balance transfer credit cards", "0 pe
 hub: credit
 category: balance-transfer
 published: 2026-09-20
-updated: 2026-09-28
+updated: 2026-11-15
 author: editorial-team
 intro: "Four widely available cards built around introductory balance transfer offers, compared on the fine print that decides whether a transfer saves you money."
 criteria:
@@ -44,4 +44,16 @@ calculators: ["credit-card-payoff", "debt-consolidation"]
 2. **Estimate the interest you’d pay** by keeping the balance where it is: try the [credit card payoff calculator](/calculators/credit-card-payoff/).
 3. **Divide the balance plus fee by the intro months** to get your required payment.
 
-If the fee is much smaller than the interest you’d save and the payment fits your budget, a transfer can make sense. Read the full walkthrough in [what is a balance transfer?](/guides/what-is-a-balance-transfer/).
+If the fee is much smaller than the interest you’d save and the payment fits your budget, a transfer can make sense.
+
+## Worked example: $6,000 at 22.9% APR
+
+Suppose you owe $6,000 on a card charging 22.9% APR and can pay about $345 a month. The fees and the 18-month intro period below are hypothetical; check each card’s pricing table for its actual terms.
+
+| Option | Upfront cost | Monthly payment | Months to pay off | Interest | Total cost of borrowing |
+|---|---|---|---|---|---|
+| Keep the balance where it is | $0 | $343.33 | 22 | About $1,369 | About $1,369 |
+| Transfer with a 3% fee, 0% for 18 months | $180 | $343.33 ($6,180 ÷ 18) | 18 | $0 | $180 |
+| Transfer with a 5% fee, 0% for 18 months | $300 | $350.00 ($6,300 ÷ 18) | 18 | $0 | $300 |
+
+In this case either transfer saves more than $1,000, as long as the balance is fully paid before the intro period ends and no new purchases are added. If you could only pay $200 a month, about $2,400 would still be owed after 18 months and start accruing the card’s regular APR, so the savings would shrink. The interest figure for keeping the balance comes from the same monthly-interest method our payoff calculator uses. Read the full walkthrough in [what is a balance transfer?](/guides/what-is-a-balance-transfer/).

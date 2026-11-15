@@ -83,6 +83,13 @@ const faqs = [
       warn.textContent = `At ${usd(v.payment)} a month, interest (${usd(r.minimumToProgress, true)}/month) outpaces your payment. Pay more than ${usd(Math.ceil(r.minimumToProgress + 1))} to start reducing the balance.`;
       out('interest').textContent = '—';
       out('paid').textContent = '—';
+    } else if (r.months >= 1200) {
+      // The payoff loop stops at 100 years; a payment just above the monthly interest can take longer than that.
+      out('months').textContent = 'More than 100 years';
+      warn.hidden = false;
+      warn.textContent = `At ${usd(v.payment)} a month, very little of each payment is left for the balance after interest (${usd(r.minimumToProgress, true)}/month). Raise the payment to see a realistic payoff date.`;
+      out('interest').textContent = '—';
+      out('paid').textContent = '—';
     } else {
       warn.hidden = true;
       out('months').textContent = months(r.months);
