@@ -1,1 +1,5 @@
-# MIHWAR smoke test - This file was committed by MIHWAR only after an explicit owner approval bound to its SHA-256 fingerprint.
+# اختبار مسار الموافقة لمحور MIHWAR
+
+تم إنشاء هذا الملف لاختبار مسار الموافقة في محور بتاريخ 2026-11-16. نجحت المراحل التالية:
+- تقديم طلب استبدال (Draft PR) بعد موافقة R2.
+- الدمج بعد موافقة R3.
