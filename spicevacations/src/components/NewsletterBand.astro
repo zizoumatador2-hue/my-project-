@@ -1,0 +1,19 @@
+---
+import NewsletterForm from './NewsletterForm.astro';
+interface Props {
+  title?: string;
+  text?: string;
+}
+const { title = 'Get romantic getaway ideas in your inbox', text = 'Hand-picked escapes, seasonal timing tips and new guides, once a month.' } = Astro.props;
+---
+
+<section class="section" aria-labelledby="newsletter-title">
+  <div class="container">
+    <div class="cta-band" data-reveal>
+      <p class="eyebrow" style="color:var(--gold)">Newsletter</p>
+      <h2 id="newsletter-title">{title}</h2>
+      <p class="lead" style="color:#dbe3f0">{text}</p>
+      <NewsletterForm id="band" />
+    </div>
+  </div>
+</section>

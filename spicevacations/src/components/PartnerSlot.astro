@@ -1,0 +1,33 @@
+---
+/**
+ * Monetization slot. Renders a clearly labeled module for a product type. With an
+ * active partner it shows a tracked CTA; otherwise it links to our planning tool,
+ * so there is never a dead button.
+ */
+import { getAffiliateUrl, PRODUCT_LABEL, type AffiliateTarget } from '../lib/affiliate';
+interface Props {
+  target: AffiliateTarget;
+  heading: string;
+  text: string;
+  placement: string;
+}
+const { target, heading, text, placement } = Astro.props;
+const link = getAffiliateUrl(target);
+---
+
+<div class="partner-slot" data-slot={target.productType}>
+  <p class="partner-slot__label">{link.sponsored ? `Partner · ${PRODUCT_LABEL[target.productType]}` : PRODUCT_LABEL[target.productType]}</p>
+  <h3 style="font-size:var(--step-1);margin-top:6px">{heading}</h3>
+  <p class="muted small">{text}</p>
+  {
+    link.sponsored ? (
+      <a class="link-arrow" href={link.href} rel="sponsored nofollow noopener" target="_blank" data-affiliate={link.id} data-partner={link.partnerName} data-placement={placement}>
+        Compare on {link.partnerName}
+      </a>
+    ) : (
+      <a class="link-arrow" href={link.href}>
+        Plan this part of your trip
+      </a>
+    )
+  }
+</div>

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import TypeTile from '../../components/TypeTile.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import { getVacationTypes, url } from '../../lib/content';
+import { breadcrumbList, itemList, webPage } from '../../lib/schema';
+
+const types = await getVacationTypes();
+const path = '/vacation-types/';
+const metaTitle = 'Vacation Types for Couples | SpiceVacations';
+const description = 'Browse vacations by style: romantic getaways, couples trips, honeymoons, adults-only and all-inclusive resorts, luxury, beach, weekend and cruise vacations.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Vacation types', href: path }];
+const schema = [webPage({ path, title: metaTitle, description, type: 'CollectionPage' }), breadcrumbList(crumbs), itemList('Vacation types', types.map((t) => ({ name: t.data.name, href: url.vacationType(t.id) })))];
+---
+
+<Base title={metaTitle} description={description} schema={schema}>
+  <PageHero title="Find Your Kind of Escape" lead="Start with the feeling you're after. Each collection brings together destinations, resorts and guides for that style of trip." crumbs={crumbs} />
+  <section class="section">
+    <div class="container">
+      <h2 class="sr-only">All vacation types</h2>
+      <div class="grid grid-3" data-stagger>
+        {types.map((t) => <TypeTile t={t} />)}
+      </div>
+    </div>
+  </section>
+  <NewsletterBand />
+</Base>

@@ -1,3 +1,5 @@
+> **Also in this repo:** [`spicevacations/`](spicevacations/README.md) — SpiceVacations.com, an Astro + Cloudflare travel affiliate site for couples (deployed by `.github/workflows/spicevacations.yml`).
+
 # TrustTransfer — سوق الحسابات الموثّق
 
 A trust-first marketplace for buying and selling social-media accounts (Instagram, TikTok, Snapchat, X, Facebook,

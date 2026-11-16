@@ -1,0 +1,38 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+---
+
+<Page title="Terms of service" metaTitle="Terms of Service | SpiceVacations" description="The terms for using SpiceVacations.com, including our role as an independent travel publisher, affiliate links, content accuracy and limitations of liability." updated="September 25, 2026">
+  <p>By using SpiceVacations.com (the "Site"), you agree to these terms. If you don't agree, please don't use the Site.</p>
+  <h2>1. What we are</h2>
+  <p>
+    The Site is an independent travel publication. We are not a hotel, airline, cruise line, tour operator or travel agency, and we do not sell travel
+    or process bookings or payments. Any booking you make is a contract between you and the provider or booking site.
+  </p>
+  <h2>2. Information on the Site</h2>
+  <p>
+    We work hard to keep information accurate and up to date, but travel details change. Prices, availability, policies (such as minimum ages or
+    inclusions), schedules and entry requirements are set by providers and authorities and may change without notice. Always confirm important details
+    with the provider and official sources before you travel.
+  </p>
+  <h2>3. Affiliate links</h2>
+  <p>Some links are affiliate links and we may earn a commission. See our <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
+  <h2>4. Third-party sites</h2>
+  <p>We link to third-party websites for your convenience. We don't control them and are not responsible for their content, prices, services or policies.</p>
+  <h2>5. Plan My Vacation</h2>
+  <p>Recommendations are suggestions based on the information you provide and the content on our Site. They are not professional travel, legal, medical or financial advice.</p>
+  <h2>6. Acceptable use</h2>
+  <p>Don't misuse the Site, attempt to disrupt it, scrape it at scale, submit spam through its forms or use it for unlawful purposes.</p>
+  <h2>7. Intellectual property</h2>
+  <p>The Site's text, illustrations, logo and design are owned by SpiceVacations.com or its licensors. You may share links and short quotes with attribution.</p>
+  <h2>8. Disclaimer and limitation of liability</h2>
+  <p>
+    The Site is provided "as is." To the fullest extent permitted by law, we disclaim all warranties and are not liable for indirect, incidental or
+    consequential damages arising from your use of the Site or any travel booked with third parties.
+  </p>
+  <h2>9. Changes</h2>
+  <p>We may update these terms. Continued use of the Site after changes means you accept the updated terms.</p>
+  <h2>10. Contact</h2>
+  <p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</Page>

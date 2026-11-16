@@ -1,0 +1,26 @@
+---
+interface Props {
+  faqs: { q: string; a: string }[];
+  title?: string;
+  id?: string;
+}
+const { faqs, title = 'Frequently asked questions', id = 'faq' } = Astro.props;
+---
+
+{
+  faqs.length > 0 && (
+    <section aria-labelledby={id} class="mt-4">
+      <h2 id={id}>{title}</h2>
+      <div class="accordion">
+        {faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}</summary>
+            <div class="answer">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
