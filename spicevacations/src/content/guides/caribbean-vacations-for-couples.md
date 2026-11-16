@@ -13,7 +13,7 @@ resorts: [jade-mountain, sugar-beach-viceroy, hammock-cove, couples-negril, sand
 related: [best-beach-vacations-in-the-caribbean, best-all-inclusive-resorts-for-couples, honeymoon-destinations]
 snippet: "The best Caribbean vacations for couples depend on your style: St. Lucia for dramatic scenery and romance, Jamaica for couples-only all-inclusives, Turks and Caicos for pure beach time, the Bahamas for short flights, Aruba for reliable sunshine, Antigua for beaches and boutique luxury, the Dominican Republic for value and Puerto Rico for no-passport travel."
 published: 2026-09-14
-updated: 2026-09-22
+updated: 2026-11-16
 featured: true
 faqs:
   - q: What is the most romantic Caribbean island?
@@ -53,7 +53,7 @@ St. Lucia's twin Pitons rise straight from the sea near Soufrière, creating one
 
 ### Jamaica: couples-only all-inclusives
 
-Jamaica pioneered couples-only resorts and remains a top choice for all-inclusive romance. Negril's Seven Mile Beach and West End cliffs are made for sunsets, Montego Bay offers short transfers, and Ocho Rios has waterfalls and rivers. [Couples Negril](/resorts/couples-negril/) sits on calm Bloody Bay.
+Jamaica pioneered couples-only resorts and remains a top choice for all-inclusive romance. Negril's Seven Mile Beach and West End cliffs are made for sunsets, Montego Bay offers short transfers, and Ocho Rios has waterfalls and rivers. [Couples Negril](/resorts/couples-negril/) sits on calm Bloody Bay. Western Jamaica is still recovering from Hurricane Melissa, which struck in late October 2025; most Negril resorts have reopened, but confirm that your resort and excursions are operating before you book. See our [Jamaica](/destinations/jamaica/) page for details.
 
 **Choose it for:** easy all-inclusive romance, music, food and warmth.
 

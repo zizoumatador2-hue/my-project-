@@ -26,19 +26,25 @@ highlights:
   - title: Port Antonio
     text: A quieter, greener corner with the Blue Lagoon.
 order: 11
-updated: 2026-09-20
+updated: 2026-11-16
 faqs:
+  - q: Is Jamaica open to visitors after Hurricane Melissa?
+    a: Yes. Hurricane Melissa struck western Jamaica as a Category 5 storm in late October 2025, but most Negril hotels and many other resorts reopened between December 2025 and early 2026. A few properties closed for longer rebuilds, so confirm that your resort is operating before you book.
   - q: Where should couples stay in Jamaica?
     a: Negril is best for sunsets and a relaxed beach vibe, Montego Bay for easy airport transfers, and Ocho Rios for waterfalls and river adventures. All three have couples-only all-inclusive resorts.
 ---
 
 Jamaica is where the couples-only all-inclusive concept took off, and it is still one of the easiest places to book a romantic beach week with everything handled.
 
+## After Hurricane Melissa
+
+Hurricane Melissa made landfall in southwestern Jamaica as a Category 5 storm in late October 2025, causing serious damage across the west of the island. Tourism has been recovering since: most Negril hotels reopened between December 2025 and early 2026, and the Couples resorts in Negril reopened on December 1, 2025. Some properties took longer, including Sandals Montego Bay, which has been closed for a major renovation and is scheduled to reopen on December 18, 2026. Before booking, confirm that your resort, excursions and airport transfers are operating, and check the U.S. State Department's current travel advisory.
+
 ## Where to go
 
 **Negril** stretches along Seven Mile Beach on the island's western tip. Couples resorts such as [Couples Negril](/resorts/couples-negril/) and [Couples Swept Away](/resorts/couples-swept-away/) line the sand, and the West End cliffs are the place to watch the sun set.
 
-**Montego Bay** is home to Sangster International Airport, which means short transfers. [Sandals Montego Bay](/resorts/sandals-montego-bay/) is minutes from the terminal.
+**Montego Bay** is home to Sangster International Airport, which means short transfers. [Sandals Montego Bay](/resorts/sandals-montego-bay/) is minutes from the terminal and is scheduled to reopen after its post-hurricane renovation on December 18, 2026.
 
 **Ocho Rios** is the adventure hub, with Dunn's River Falls and river tubing nearby.
 

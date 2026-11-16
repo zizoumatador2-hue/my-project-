@@ -15,12 +15,15 @@ adultsOnly: true
 summary: A couples-only Sandals resort on a long beach close to Montego Bay's Sangster International Airport, which makes arrival day easy. Overwater features add a romantic touch.
 features: [Couples-only, All-inclusive, Minutes from MBJ airport, Long beach, Overwater features, Multiple restaurants]
 goodToKnow:
+  - The resort has been closed since Hurricane Melissa (October 2025) for a major renovation and is scheduled to reopen on December 18, 2026; confirm the date and current amenities with Sandals before booking.
   - The resort is near the airport; some guests notice aircraft noise at times.
   - Sandals has offered exchange privileges with nearby sister resorts; check current rules.
-updated: 2026-10-05
+updated: 2026-11-16
 ---
 
 Sandals Montego Bay is one of the brand's longest-running resorts and is close to Sangster International Airport, so you can be on the beach soon after landing.
+
+**Status update:** Sandals Montego Bay closed after Hurricane Melissa struck Jamaica in October 2025 and is being renovated as part of Sandals' "Sandals 2.0" program. Sandals lists a scheduled reopening date of December 18, 2026. Details below describe the resort's long-standing strengths; restaurants and room categories may change with the renovation, so check current information before booking.
 
 ## Why couples love it
 
