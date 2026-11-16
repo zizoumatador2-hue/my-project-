@@ -1,0 +1,1 @@
+# MIHWAR smoke test - This file was committed by MIHWAR only after an explicit owner approval bound to its SHA-256 fingerprint.
