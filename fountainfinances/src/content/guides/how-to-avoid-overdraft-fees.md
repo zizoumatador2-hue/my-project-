@@ -6,7 +6,7 @@ keywords: ["how to avoid overdraft fees", "overdraft fee", "overdraft protection
 hub: banking
 topics: ["banking-fees", "checking-accounts", "online-banks"]
 published: 2026-10-05
-updated: 2026-10-05
+updated: 2026-11-17
 author: editorial-team
 quickAnswer: "To avoid overdraft fees, opt out of overdraft coverage for debit card and ATM transactions, turn on low-balance alerts, link a savings account for overdraft transfers, keep a small buffer in checking and consider a bank that doesn't charge overdraft fees at all. If you are charged, ask the bank to waive it: first-time requests are often granted."
 takeaways:
@@ -36,6 +36,9 @@ sources:
   - title: "Electronic Fund Transfers (Regulation E), 12 CFR 1005.17: requirements for overdraft services"
     publisher: "Consumer Financial Protection Bureau"
     url: "https://www.consumerfinance.gov/rules-policy/regulations/1005/17/"
+  - title: "S.J.Res.18: disapproving the CFPB rule \"Overdraft Lending: Very Large Financial Institutions\" (Public Law 119-10)"
+    publisher: "Congress.gov"
+    url: "https://www.congress.gov/bill/119th-congress/senate-joint-resolution/18"
 related: ["checking-vs-savings-account", "what-is-a-high-yield-savings-account", "how-to-build-a-budget", "sinking-funds"]
 calculators: ["budget", "emergency-fund"]
 comparisons: ["checking-accounts", "high-yield-savings-accounts"]
@@ -53,6 +56,10 @@ An **overdraft** happens when you spend more than the available balance in your 
 Fees vary widely. At many banks a single overdraft fee has long been in the range of $30 to $35 per item, and several items in one day could mean several fees. Many banks have since lowered fees, added grace periods or eliminated overdraft and NSF fees entirely, so always check your own bank's current fee schedule.
 
 Some banks also charge an **extended overdraft fee** if your balance stays negative for several days.
+
+**Example:** your available balance is $40 and you have opted in to debit overdraft coverage. You buy $45 of gas, then a $5 coffee and a $12 lunch. All three purchases overdraw the account, so at a bank charging $35 per item you would pay $105 in fees on $62 of purchases. Without the opt-in, the gas purchase is declined at no charge, and the coffee and lunch go through, leaving $23.
+
+**No federal fee cap is in effect.** The CFPB finalized a rule in December 2024 that would have required banks with more than $10 billion in assets to cap overdraft fees at $5, set a higher fee justified by their costs, or treat overdrafts as loans under Truth in Lending rules, but Congress repealed it in May 2025 (Public Law 119-10) before it took effect. Fees are set by each bank's own fee schedule.
 
 ## Your rights under federal rules
 

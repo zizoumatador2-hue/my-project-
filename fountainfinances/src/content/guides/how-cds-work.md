@@ -6,7 +6,7 @@ keywords: ["how does a CD work", "certificate of deposit rates", "CD rates", "CD
 hub: banking
 topics: ["cds", "savings-accounts"]
 published: 2026-09-16
-updated: 2026-09-28
+updated: 2026-11-17
 author: editorial-team
 quickAnswer: "A CD (certificate of deposit) is a bank or credit union deposit that pays a fixed rate for a fixed term, such as 6 months or 5 years. You agree not to withdraw the money until the CD matures; withdrawing early usually costs a penalty. CDs are federally insured up to $250,000 per depositor, per institution, per ownership category."
 takeaways:
@@ -67,7 +67,7 @@ The FDIC publishes [national average rates](https://www.fdic.gov/national-rates-
 
 The trade-off for a guaranteed rate is limited access. If you withdraw before maturity, most banks charge a penalty, typically a set number of days’ or months’ worth of interest, and often more for longer terms.
 
-**Example:** A $10,000 CD at a 4.50% APY with a 90-day interest penalty. The penalty would be roughly $111. If you withdraw after only a month, the penalty can exceed the interest you have earned, reducing your principal.
+**Example:** A $10,000 CD at a 4.50% APY with a 90-day interest penalty. The penalty is roughly $111 ($10,000 x 4.50% x 90/365). If you close the CD after one month, you have earned only about $37 in interest, so the penalty takes that $37 plus about $74 of your original deposit, and you walk away with about $9,926. At about three months, the interest earned (about $111) roughly equals the penalty, and after that you keep some interest.
 
 Always read the penalty terms before opening a CD, and only deposit money you are confident you will not need.
 
@@ -110,7 +110,7 @@ A **CD ladder** spreads your savings across several CDs with staggered maturitie
 | 4 | $2,000 | 4 years |
 | 5 | $2,000 | 5 years |
 
-Each year, one CD matures. You can use the money or reinvest it in a new 5-year CD. After four years, you have a CD maturing every year while most of your money earns longer-term rates. Ladders balance access with yield and reduce the risk of locking everything in right before rates rise. Our [CD ladder guide](/guides/cd-ladder/) works through a $10,000 ladder with interest figures for each rung.
+Each year, one CD matures. You can use the money or reinvest it in a new 5-year CD. From the end of year one, a CD matures every year, and once the first four rungs have been reinvested, all five CDs earn 5-year rates while one still comes due each year. Ladders balance access with yield and reduce the risk of locking everything in right before rates rise. Our [CD ladder guide](/guides/cd-ladder/) works through a $10,000 ladder with interest figures for each rung.
 
 ## Are CDs safe?
 

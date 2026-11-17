@@ -87,6 +87,19 @@ test('affordability respects the lower of the two debt ratios', () => {
   near(housing, 2_600, 0.5);
 });
 
+test('affordability returns no price when debts use the whole allowance', () => {
+  // 36% of $5,000 is $1,800, fully used by debts; a down payment alone cannot buy a home
+  const r = affordability({ annualIncome: 60_000, monthlyDebts: 1_800, downPayment: 50_000, ratePct: 6.5, years: 30, propertyTaxRatePct: 1.1, insuranceAnnual: 1_800, hoaMonthly: 0 });
+  assert.equal(r.maxHousingPayment, 0);
+  assert.equal(r.loan, 0);
+  assert.equal(r.homePrice, 0);
+  // Large down payment, no loan needed: price capped by cash, tax fits the budget
+  const c = affordability({ annualIncome: 120_000, monthlyDebts: 0, downPayment: 200_000, ratePct: 6.5, years: 30, propertyTaxRatePct: 1.1, insuranceAnnual: 1_800, hoaMonthly: 2_500 });
+  assert.equal(c.loan, 0);
+  assert.ok(c.homePrice > 0 && c.homePrice <= 200_000);
+  assert.ok(c.tax + 150 + 2_500 <= c.maxHousingPayment + 0.01);
+});
+
 test('consolidation comparison accounts for origination fee', () => {
   const r = consolidationCompare([{ balance: 5_000, aprPct: 24, payment: 200 }, { balance: 3_000, aprPct: 20, payment: 120 }], 12, 36, 5);
   near(r.totalBalance, 8_000);

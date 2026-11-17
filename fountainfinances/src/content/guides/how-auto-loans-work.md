@@ -6,7 +6,7 @@ keywords: ["how auto loans work", "auto loan rates", "best auto loans", "car loa
 hub: loans
 topics: ["auto-loans"]
 published: 2026-09-21
-updated: 2026-11-15
+updated: 2026-11-17
 author: editorial-team
 quickAnswer: "An auto loan is a secured installment loan: the car is collateral, and you repay the amount financed (price plus taxes and fees, minus your down payment and trade-in) in fixed monthly payments. Your APR depends on your credit, the loan term, the car’s age and the lender. Getting preapproved before visiting a dealer is the best way to compare offers."
 takeaways:
@@ -33,6 +33,9 @@ sources:
   - title: "Consumer Credit - G.19"
     publisher: "Board of Governors of the Federal Reserve System"
     url: "https://www.federalreserve.gov/releases/g19/current/default.htm"
+  - title: "Treasury, IRS provide guidance on the new deduction for car loan interest under the One, Big, Beautiful Bill"
+    publisher: "Internal Revenue Service"
+    url: "https://www.irs.gov/newsroom/treasury-irs-provide-guidance-on-the-new-deduction-for-car-loan-interest-under-the-one-big-beautiful-bill"
 related: ["what-is-apr", "personal-loan-vs-credit-card", "how-to-improve-credit-score"]
 calculators: ["auto-loan", "loan"]
 ---
@@ -122,6 +125,12 @@ These are optional. They can add significantly to the amount financed, and you p
 ## Leasing vs. buying
 
 A **lease** usually has lower monthly payments, but you do not own the car at the end, and there are mileage limits and wear-and-tear charges. **Buying** costs more monthly but builds ownership, and once the loan is paid off you have no payment. If you plan to keep a car for many years, buying typically costs less over time.
+
+## The car loan interest deduction (tax years 2025 to 2028)
+
+A 2025 federal law lets some buyers deduct up to **$10,000 a year** of interest on a car loan, whether or not they itemize. According to the IRS, the loan must have originated after December 31, 2024, be secured by the vehicle and be used to buy a **new** vehicle for **personal use** whose **final assembly took place in the United States**. Used cars and leases do not qualify. The deduction phases out for modified adjusted gross income above $100,000 ($200,000 for joint filers), and you report the vehicle's VIN on your return.
+
+**Example:** on the $28,000, 60-month loan at 7.5% above, interest in the first 12 months is about $1,937. If the loan and car qualify and the buyer is in the 22% bracket, deducting it lowers federal tax by about $426 ($1,937 x 0.22). The deduction reduces the cost of interest; it does not make a higher rate or a longer term cheaper than a lower one.
 
 ## Refinancing an auto loan
 

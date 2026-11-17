@@ -232,12 +232,21 @@ export function affordability(i: AffordabilityInput) {
   const taxPerDollar = i.propertyTaxRatePct / 100 / 12;
   const fixed = i.insuranceAnnual / 12 + i.hoaMonthly;
   // housing = factor * (price - down) + taxPerDollar * price + fixed
-  const price = Math.max(0, (maxHousing - fixed + factor * i.downPayment) / (factor + taxPerDollar));
-  const loan = Math.max(0, price - i.downPayment);
+  const solved = Math.max(0, (maxHousing - fixed + factor * i.downPayment) / (factor + taxPerDollar));
+  const loan = Math.max(0, solved - i.downPayment);
+  // With no loan, only taxes, insurance and HOA dues count, so the down payment
+  // caps the price and the budget left after fixed costs must cover the tax.
+  const cashBudget = maxHousing - fixed;
+  const price =
+    loan > 0
+      ? solved
+      : cashBudget <= 0
+        ? 0
+        : Math.min(i.downPayment, taxPerDollar > 0 ? cashBudget / taxPerDollar : i.downPayment);
   const pi = loan * factor;
   return {
     maxHousingPayment: maxHousing,
-    homePrice: loan > 0 ? price : Math.min(price, i.downPayment),
+    homePrice: price,
     loan,
     principalAndInterest: pi,
     tax: price * taxPerDollar,

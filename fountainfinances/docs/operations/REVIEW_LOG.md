@@ -188,3 +188,42 @@ None recorded. The closest overlap, the balance transfer guide and the balance t
 ### Catch-up left unverified
 - Outbound links still cannot be fetched from the sandbox (proxy 403). The new FTC URL and all existing sources depend on the deploy workflow's external link check.
 - G.19 figure: the November 2026 release shows 22.36% in its latest column, but the period that column covers could not be read reliably, so the guide says "about 22%" without naming a quarter.
+
+---
+
+## 2026-11-17 (ISO week 2026-W47, cohort 2)
+
+Step 0: Checked out `ccr-4c37af84-sa32vb` from origin (the sandbox started on a detached HEAD from another branch). All five 2026-11-15 cohorts are already in `origin/ccr-4c37af84-sa32vb` (commits 2548920 to ce0480a), so nothing needed reapplying. `ci.yml`, `fountainfinances.yml` and `live-check.yml` already use `ubuntu-24.04`.
+
+Cohort: 60 pages (41 guides, 6 comparisons, 13 calculators), unchanged since the last split. 47 mod 5 = 2, positions 25-36. This cohort was last reviewed two days ago, so this pass re-ran the arithmetic and looked for what that pass missed: current-year legal changes, calculator edge cases and missing worked examples.
+
+### Pages reviewed (12)
+
+| # | Page | Result |
+|---|---|---|
+| 25 | /calculators/home-affordability/ | Calculator bug fixed: when no loan was needed the solver still used the loan formula, so with debts that use the whole DTI allowance and $50,000 down it showed a $22,941 home price next to a $0 housing budget. With no loan, the price is now capped by the down payment and by what the budget left after insurance and HOA dues can pay in property tax ($0 in that case). Added a unit test for both no-loan cases. Confirmed in the browser: default $377,583 unchanged; $60,000 income / $1,800 debts / $50,000 down now shows $0; $200,000 down with $2,500 HOA shows $163,636 (was $195,300, which exceeded the budget). |
+| 26 | /calculators/home-equity/ | Reviewed; no change needed. Example ($190,000 equity, $122,500 at 85% CLTV) and over-limit warning rechecked. |
+| 27 | /guides/how-auto-loans-work/ | Updated for the current year: added the car loan interest deduction for tax years 2025 to 2028 (up to $10,000 a year, new US-assembled personal-use vehicles, loans originated after December 31, 2024, phase-out above $100,000 / $200,000 MAGI, VIN on the return), confirmed by web search against the IRS newsroom release, which is now cited. Worked example on the page's own $28,000 / 60-month / 7.5% loan: first-year interest about $1,937, about $426 less federal tax at 22%. Term table recomputed. Updated date changed. |
+| 28 | /guides/how-cds-work/ | Improved: the early-withdrawal example now shows the arithmetic (penalty $110.96; after one month about $37 earned, so about $74 of principal lost and about $9,926 returned; break-even near three months). Corrected the ladder sentence that implied rungs only start maturing yearly after four years. Updated date changed. |
+| 29 | /guides/how-compound-interest-works/ | Reviewed; no change needed. Every table, Saver A/B ($197,393 vs $200,903) and the 24% doubling claim recomputed. |
+| 30 | /guides/how-credit-card-interest-works/ | Reviewed; no change needed. $46.03 interest example, 21-day, 45-day and 60-day rules checked. |
+| 31 | /guides/how-credit-scores-work/ | Reviewed; no change needed. Not added: FHFA's 2025 decision to allow VantageScore 4.0 for Fannie Mae and Freddie Mac loans, deferred until it can be sourced to an FHFA page. |
+| 32 | /guides/how-mortgage-payments-work/ | Reviewed; no change needed. PITI table ($2,844) recomputed. |
+| 33 | /guides/how-much-house-can-i-afford/ | Reviewed; no change needed. $331,000 at 6.5% recomputed ($330,494). |
+| 34 | /guides/how-to-avoid-overdraft-fees/ | Updated for the current year: readers may have heard of the CFPB's $5 overdraft cap; the page now says it was repealed by Congress in May 2025 (S.J.Res. 18, Public Law 119-10) before taking effect, cited to Congress.gov (confirmed by web search). Added a worked example ($40 balance, three purchases, $105 in fees with opt-in vs one declined purchase without). Updated date changed. |
+| 35 | /guides/how-to-build-a-budget/ | Improved: added a sinking fund example ($180 + $1,200 + $500 = $1,880 a year, about $157 a month) linked to the sinking funds guide; cut the generic "why a budget matters" list to one paragraph and dropped a filler tip. Net shorter. Updated date changed. |
+| 36 | /guides/how-to-build-credit/ | Reviewed; no change needed. |
+
+### New content
+Deferred. The one new intent found (the car loan interest deduction) fits inside the auto loan guide rather than a separate page.
+
+### Sources and links
+- Added: IRS newsroom, car loan interest deduction guidance; Congress.gov S.J.Res. 18. Both URLs came from web search results, not fetched directly (sandbox proxy). The deploy workflow's external link check covers them.
+
+### Tests run (in fountainfinances/)
+- `npm ci`: ok
+- `npm run check`: 0 errors, 0 warnings
+- `npm run build`: ok
+- `npm run qa`: passed (123 pages, 193 unique external links)
+- `npm test`: 30/30 passed (one new affordability test)
+- `CHROMIUM_PATH=/opt/pw-browsers/chromium npx playwright test`: 17 passed, 1 skipped (by design)
