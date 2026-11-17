@@ -1,0 +1,30 @@
+---
+// Responsive Pexels photo for a content slot (see src/data/images.json and scripts/fetch-pexels.mjs).
+// Renders nothing when the slot has no photo yet, so layouts fall back to their gradient background.
+import photos from '@/data/photos.json';
+
+interface Props {
+  name: string;
+  class?: string;
+  eager?: boolean;
+  sizes?: string;
+  decorative?: boolean;
+}
+const { name, class: cls, eager = false, sizes = '100vw', decorative = false } = Astro.props;
+const p = (photos as Record<string, { id: number; alt: string; width: number; height: number; color: string }>)[name];
+---
+{p && (
+  <img
+    class={cls || undefined}
+    src={`/images/photos/${name}-1600.webp?v=${p.id}`}
+    srcset={`/images/photos/${name}-800.webp?v=${p.id} 800w, /images/photos/${name}-1600.webp?v=${p.id} 1600w`}
+    sizes={sizes}
+    width={p.width}
+    height={p.height}
+    alt={decorative ? '' : p.alt}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+    style={`background:${p.color}`}
+  />
+)}

@@ -2,6 +2,7 @@ name: Deploy
 on:
   push:
     branches: [main]
+    paths-ignore: ['fountainfinances/**', '.github/workflows/fountainfinances.yml']
   workflow_dispatch:
 concurrency: deploy-production
 jobs:

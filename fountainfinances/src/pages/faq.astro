@@ -1,0 +1,61 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Faq from '@/components/Faq.astro';
+import { faqPage } from '@/lib/schema';
+
+const groups: { heading: string; id: string; faqs: { q: string; a: string }[] }[] = [
+  {
+    heading: 'About Fountain Finances',
+    id: 'about',
+    faqs: [
+      { q: 'What is Fountain Finances?', a: 'Fountain Finances is an independent personal finance website for U.S. consumers. We publish educational guides, free financial calculators and transparent product comparisons. Learn more [about us](/about/).' },
+      { q: 'Is Fountain Finances a bank or lender?', a: 'No. We are not a bank, lender, card issuer, broker, insurer or investment adviser. We do not hold money, make loans or process applications. When you click through to a provider, your application is handled entirely by that company.' },
+      { q: 'Is the information on this site financial advice?', a: 'No. Our content is general education. It does not consider your personal circumstances and is not individualized financial, investment, tax, legal or credit advice. See our [disclaimer](/disclaimer/).' },
+      { q: 'Is Fountain Finances free to use?', a: 'Yes. All guides, calculators and comparisons are free, and you do not need an account to use any of them.' },
+    ],
+  },
+  {
+    heading: 'Our content and comparisons',
+    id: 'content',
+    faqs: [
+      { q: 'How do you choose which products to compare?', a: 'Products must be widely available to U.S. consumers, publish their terms online and, for deposit accounts, be FDIC or NCUA insured. We list them alphabetically and explain the criteria we used. Full details are in our [editorial standards](/editorial-standards/).' },
+      { q: 'Why don’t you show a rate for some products?', a: 'Rates and fees change frequently. We only display a specific figure after an editor has confirmed it on the provider’s own website, and we show the date it was checked. Otherwise we link you to the provider’s current terms so you never rely on an outdated number.' },
+      { q: 'Do you get paid by the companies you mention?', a: 'We may earn a commission from links labeled “Affiliate link.” That never affects which products we include or how we describe them. Read our [affiliate disclosure](/affiliate-disclosure/).' },
+      { q: 'How often is content updated?', a: 'Comparisons are reviewed at least monthly, guides that cite rules or limits at least annually, and evergreen guides every 6–12 months. Every guide shows its last updated date.' },
+      { q: 'I found a mistake. How do I report it?', a: 'Please [contact us](/contact/) with the page address and what looks wrong. We review every report and correct errors promptly under our [corrections policy](/corrections/).' },
+    ],
+  },
+  {
+    heading: 'Calculators',
+    id: 'calculators',
+    faqs: [
+      { q: 'Do you store the numbers I enter in your calculators?', a: 'No. Every calculation runs in your browser. The values are kept only in the page address so you can bookmark or share a result; they are not sent to our servers.' },
+      { q: 'How accurate are the calculators?', a: 'They use standard financial formulas such as loan amortization and compound growth. Results are estimates based on your inputs and do not include every fee, tax or rate change, and they are not an offer of credit.' },
+      { q: 'Can I use the calculators on my phone?', a: 'Yes. Every calculator is designed to work on phones, tablets and desktops.' },
+    ],
+  },
+  {
+    heading: 'Newsletter and privacy',
+    id: 'privacy',
+    faqs: [
+      { q: 'How often will I receive the newsletter?', a: 'About once every two weeks. We send a confirmation email first, and nothing else until you confirm.' },
+      { q: 'How do I unsubscribe?', a: 'Every email includes a one-click unsubscribe link. You can also unsubscribe any time on our [unsubscribe page](/newsletter/unsubscribe/).' },
+      { q: 'Do you sell my personal information?', a: 'No. We do not sell or rent personal information. See our [Privacy Policy](/privacy/) for what we collect and why.' },
+    ],
+  },
+];
+const all = groups.flatMap((g) => g.faqs);
+---
+<PageLayout
+  photo="faq"
+  title="Frequently Asked Questions"
+  heading="Frequently Asked Questions"
+  description="Answers to common questions about Fountain Finances: who we are, how we compare products, how our calculators work, the newsletter and your privacy."
+  lede="Quick answers about who we are, how we work and how to use the site."
+  schema={[faqPage(all)]}
+  keywords={['Fountain Finances FAQ', 'personal finance questions']}
+>
+  <nav aria-label="FAQ sections"><ul class="pill-list">{groups.map((g) => <li><a href={`#${g.id}-h`}>{g.heading}</a></li>)}</ul></nav>
+  {groups.map((g) => <Faq faqs={g.faqs} heading={g.heading} id={g.id} />)}
+  <p style="margin-top:28px">Still have a question? <a href="/contact/">Contact us</a>.</p>
+</PageLayout>

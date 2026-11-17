@@ -1,0 +1,76 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+import { abs, ORG_ID } from '@/lib/schema';
+import { HUBS } from '@/data/taxonomy';
+import { CALCULATORS } from '@/data/calculators';
+import { getCollection } from 'astro:content';
+const guideCount = (await getCollection('guides', (g) => !g.data.draft)).length;
+const topicCount = (await getCollection('topics')).length;
+const comparisonCount = (await getCollection('comparisons')).length;
+---
+<PageLayout
+  photo="about"
+  title="About Fountain Finances: Independent Personal Finance Help"
+  heading="About Fountain Finances"
+  description="Fountain Finances is an independent U.S. personal finance resource offering plain-English guides, free calculators and transparent product comparisons."
+  lede="We help Americans make smarter money decisions with clear explanations, honest comparisons and tools that do the math for you."
+  schema={[{ '@type': 'AboutPage', url: abs('/about/'), name: 'About Fountain Finances', about: { '@id': ORG_ID } }]}
+>
+  <h2>What Fountain Finances is</h2>
+  <p><strong>Fountain Finances</strong> is an independent financial education and comparison website for consumers in the United States. We publish in-depth guides on budgeting, saving, credit, banking, loans, mortgages and insurance; build free calculators that show the real cost of financial decisions; and compare widely available financial products using criteria we publish openly.</p>
+  <p>Our name reflects what we believe good financial decisions create: a steady source of stability that keeps growing over time. The fountain in our logo rises from a solid base, the same way lasting financial health grows from the basics done well.</p>
+
+  <h2>What we are not</h2>
+  <p>Fountain Finances is <strong>not</strong> a bank, lender, credit card issuer, broker, insurance company or registered investment adviser. We do not hold customer money, make loans, process applications or make credit decisions. Nothing on this site is individualized financial, investment, tax, legal or credit advice. When a decision depends on your full circumstances, we encourage you to speak with a qualified professional, and to confirm every rate, fee and term directly with the provider.</p>
+
+  <h2>Who we serve</h2>
+  <p>We write for everyday Americans: people building their first budget, paying down credit cards, choosing a savings account, shopping for a car loan or buying a first home. We assume no prior knowledge, define every term we use and focus on the decisions that have the largest effect on your finances.</p>
+
+  <h2>What you can do here</h2>
+  <ul>
+    <li><strong>Learn</strong>: read <a href="/guides/">guides</a> that explain how financial products and decisions actually work, with sources you can check.</li>
+    <li><strong>Calculate</strong>: use <a href="/calculators/">free calculators</a> for budgets, loans, mortgages, credit card payoff, savings growth and more. Everything runs in your browser; we never see the numbers you enter.</li>
+    <li><strong>Compare</strong>: review <a href="/best/">side-by-side comparisons</a> that list products alphabetically with their trade-offs rather than declaring a single winner.</li>
+    <li><strong>Plan</strong>: follow our <a href="/#personal-finance-guide">complete personal finance guide</a> from first budget to long-term goals.</li>
+  </ul>
+
+  <h2>Our principles</h2>
+  <ul>
+    <li><strong>Accuracy first.</strong> We build our content from primary sources such as the Consumer Financial Protection Bureau, the Federal Reserve, the FDIC, the IRS and official provider disclosures, and we cite them.</li>
+    <li><strong>Independence.</strong> Business relationships never determine what we write, which products we include or how we describe them.</li>
+    <li><strong>Transparency.</strong> We label affiliate links, explain how we make money and publish our methodology.</li>
+    <li><strong>No hype.</strong> We do not promise quick riches, guaranteed approvals or unrealistic savings.</li>
+    <li><strong>Correct openly.</strong> When we get something wrong, we fix it and note the change. See our <a href="/corrections/">corrections policy</a>.</li>
+  </ul>
+
+  <h2>How we make money</h2>
+  <p>Fountain Finances is free to use. We may earn revenue from clearly labeled affiliate links, display advertising and sponsorships. Those relationships do not affect our editorial content or comparison criteria. Our <a href="/affiliate-disclosure/">affiliate disclosure</a> explains the details.</p>
+
+  <h2>Who runs Fountain Finances</h2>
+  <p>Fountain Finances was founded in {SITE.foundingYear} by <strong>{SITE.founder}</strong>, who owns and publishes the site and is responsible for its content, policies and partnerships. You can reach him directly at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+  <h2>Our editorial team</h2>
+  <p>Guides are researched and written by the <a href="/authors/editorial-team/">Fountain Finances Editorial Team</a> and reviewed against their sources before publication. Our full research, fact-checking and update process is described in our <a href="/editorial-standards/">editorial standards and methodology</a>.</p>
+
+  <h2>The site at a glance</h2>
+  <ul>
+    <li><strong>{guideCount} in-depth guides</strong> across {HUBS.length} sections: {HUBS.map((h, i) => <>{i > 0 && ', '}<a href={`/${h.slug}/`}>{h.shortTitle}</a></>)}.</li>
+    <li><strong>{topicCount} topic pages</strong> that collect the guides, calculators and comparisons for each subject.</li>
+    <li><strong>{CALCULATORS.length} free calculators</strong>: see <a href="/calculators/">all calculators</a>.</li>
+    <li><strong>{comparisonCount} product comparisons</strong> with a published methodology: see <a href="/best/">all comparisons</a>.</li>
+    <li>Policies: <a href="/privacy/">Privacy Policy</a>, <a href="/terms/">Terms of Use</a>, <a href="/disclaimer/">Disclaimer</a>, <a href="/affiliate-disclosure/">Advertiser &amp; affiliate disclosure</a>, <a href="/corrections/">Corrections</a> and <a href="/accessibility/">Accessibility</a>.</li>
+    <li>Every page on the site is listed on our <a href="/site-map/">site map</a>.</li>
+  </ul>
+
+  <h2>Contact information</h2>
+  <dl class="contact-card">
+    <dt>Email</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+    <dt>Contact form</dt><dd><a href="/contact/">fountainfinances.com/contact</a></dd>
+    <dt>Website</dt><dd><a href="/">{SITE.domain}</a></dd>
+    <dt>Audience</dt><dd>Consumers in the United States</dd>
+    <dt>Founder &amp; publisher</dt><dd>{SITE.founder}</dd>
+    <dt>Founded</dt><dd>{SITE.foundingYear}</dd>
+  </dl>
+  <p>We read every message and aim to reply within two business days, whether you have questions, feedback, corrections, privacy requests or partnership inquiries.</p>
+</PageLayout>

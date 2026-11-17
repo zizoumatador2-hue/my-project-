@@ -1,0 +1,38 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+---
+<PageLayout
+  photo="editorial"
+  title="Corrections Policy"
+  description="How Fountain Finances handles errors: how to report a mistake, how quickly we review it, and how corrections and updates are disclosed on the page."
+  lede="When we get something wrong, we fix it quickly and say so."
+>
+  <h2>Our commitment</h2>
+  <p>Accuracy matters more in personal finance than almost anywhere else. We investigate every reported error and correct confirmed mistakes as quickly as possible.</p>
+
+  <h2>How to report an error</h2>
+  <p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use our <a href="/contact/">contact form</a> and choose “Report an error or correction.” Please include:</p>
+  <ul>
+    <li>The page address (URL).</li>
+    <li>The statement or number you believe is wrong.</li>
+    <li>A source supporting the correction, if you have one.</li>
+  </ul>
+
+  <h2>What happens next</h2>
+  <ol>
+    <li>An editor acknowledges your report, typically within two business days.</li>
+    <li>We verify the claim against primary sources.</li>
+    <li>If an error is confirmed, we correct the page promptly. Urgent errors that could cause financial harm are fixed first.</li>
+  </ol>
+
+  <h2>How corrections are shown</h2>
+  <ul>
+    <li><strong>Corrections</strong> of factual errors that could affect a reader’s understanding or decision are noted at the end of the article with the date and a short description of what changed.</li>
+    <li><strong>Updates</strong> that add new information or reflect changes in products or law update the “Updated” date shown at the top of the page.</li>
+    <li><strong>Minor fixes</strong> such as typos or formatting are made without a note.</li>
+  </ul>
+
+  <h2>Calculator issues</h2>
+  <p>If a calculator produces an unexpected result, tell us the inputs you used (you can copy the page address, which contains them). We test every formula before each release and fix confirmed issues as a priority.</p>
+</PageLayout>

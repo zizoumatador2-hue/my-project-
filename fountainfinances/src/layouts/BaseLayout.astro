@@ -1,0 +1,138 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import critical from '@/styles/critical.css?raw';
+import { SITE } from '@/data/site';
+import { graph, organization, website, breadcrumb, type Crumb } from '@/lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string[];
+  path?: string;
+  ogType?: 'website' | 'article';
+  image?: string;
+  schema?: Record<string, unknown>[];
+  crumbs?: Crumb[];
+  noindex?: boolean;
+  published?: Date;
+  modified?: Date;
+  section?: string;
+}
+
+const {
+  title,
+  description,
+  keywords = [],
+  path = Astro.url.pathname,
+  ogType = 'website',
+  image = SITE.ogImage,
+  schema = [],
+  crumbs,
+  noindex = false,
+  published,
+  modified,
+  section,
+} = Astro.props;
+
+const brandSuffix = ' | Fountain Finances';
+const fullTitle = title.includes('Fountain Finances') || title.length + brandSuffix.length > 65 ? title : `${title}${brandSuffix}`;
+const canonical = new URL(path, SITE.url).toString();
+const imageUrl = new URL(image, SITE.url).toString();
+
+const nodes = [organization(), website(), ...(crumbs && crumbs.length > 1 ? [breadcrumb(crumbs)] : []), ...schema];
+const jsonLd = graph(nodes);
+
+const GA_ID = import.meta.env.PUBLIC_GA_ID as string | undefined;
+const GSC = import.meta.env.PUBLIC_GSC_VERIFICATION as string | undefined;
+const BING = import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined;
+/** Google AdSense publisher id (ca-pub-…). When set, Auto ads load and dist/ads.txt is written. */
+const ADSENSE = (import.meta.env.PUBLIC_ADSENSE_CLIENT as string | undefined)?.trim();
+const CSS_VERSION = '7';
+---
+<!doctype html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+    <meta name="theme-color" content="#0a6a6b" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-var.woff2" as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={critical}></style>
+    <!-- Render-blocking on purpose: deferring it caused layout shifts (CLS) on calculators and lists. -->
+    <link rel="stylesheet" href={`/global.css?v=${CSS_VERSION}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="Fountain Finances guides" href="/rss.xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={image === SITE.ogImage ? "Fountain Finances: Smarter money decisions, made simple" : title} />
+    {ogType === 'article' && published && <meta property="article:published_time" content={published.toISOString()} />}
+    {ogType === 'article' && modified && <meta property="article:modified_time" content={modified.toISOString()} />}
+    {ogType === 'article' && section && <meta property="article:section" content={section} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    {GSC && <meta name="google-site-verification" content={GSC} />}
+    {BING && <meta name="msvalidate.01" content={BING} />}
+    {ADSENSE && <meta name="google-adsense-account" content={ADSENSE} />}
+    {ADSENSE && !noindex && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}`} crossorigin="anonymous"></script>}
+
+    <script is:inline type="application/ld+json" set:html={jsonLd}></script>
+
+    {GA_ID ? (
+      <script is:inline define:vars={{ GA_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+        gtag('js', new Date());
+        gtag('config', GA_ID, { anonymize_ip: true });
+        window.__ffGA = GA_ID;
+        window.ffTrack = function (name, params) { try { gtag('event', name, params || {}); } catch (e) {} };
+      </script>
+    ) : (
+      <script is:inline>window.ffTrack = function () {};</script>
+    )}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to main content</a>
+    <div class="progress" aria-hidden="true"></div>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    {GA_ID && (
+      <>
+        <div class="consent" id="consent" role="region" aria-label="Cookie preferences" hidden>
+          <p>We use optional analytics cookies to understand which guides and calculators are useful. They are off unless you allow them. <a href="/privacy/#cookies">Learn more</a>.</p>
+          <div class="row">
+            <button type="button" class="btn btn-primary" data-consent="granted">Allow analytics</button>
+            <button type="button" class="btn btn-ghost" data-consent="denied">Decline</button>
+          </div>
+        </div>
+        <script src="/js/consent.js" defer></script>
+      </>
+    )}
+    <script src="/js/track.js" defer></script>
+  </body>
+</html>

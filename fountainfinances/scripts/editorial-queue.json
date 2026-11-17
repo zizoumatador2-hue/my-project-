@@ -1,0 +1,314 @@
+{
+  "cadence_days": 2,
+  "last_note": "Queue is consumed top to bottom. Remove an item once its article is published.",
+  "queue": [
+    {
+      "title": "401(k) vs IRA: Which Should You Open First?",
+      "slug": "401k-vs-ira-which-first",
+      "hub": "personal-finance",
+      "keyword": "401k vs ira",
+      "note": "Retirement decision with search demand"
+    },
+    {
+      "title": "How Much Emergency Fund Do You Need by Age?",
+      "slug": "emergency-fund-by-age",
+      "hub": "personal-finance",
+      "keyword": "how much emergency fund do i need",
+      "note": "Long-tail, links to existing guide"
+    },
+    {
+      "title": "Student Loan Payoff Order: Which Loan First?",
+      "slug": "student-loan-payoff-order",
+      "hub": "loans",
+      "keyword": "which student loan to pay off first",
+      "note": "Long-tail with clear answer"
+    },
+    {
+      "title": "Car Insurance Cost by State: What Drives Your Premium",
+      "slug": "car-insurance-cost-by-state",
+      "hub": "insurance",
+      "keyword": "average car insurance cost by state",
+      "note": "High-intent insurance query"
+    },
+    {
+      "title": "What Is a Good Credit Score for a Car Loan?",
+      "slug": "good-credit-score-for-car-loan",
+      "hub": "loans",
+      "keyword": "what credit score do i need for a car loan",
+      "note": "Ties credit and loans hubs"
+    },
+    {
+      "title": "How to Read a Mortgage Loan Estimate Line by Line",
+      "slug": "how-to-read-loan-estimate",
+      "hub": "mortgage",
+      "keyword": "how to read a loan estimate",
+      "note": "Overlaps closing costs guide, new angle"
+    },
+    {
+      "title": "Best Time to Refinance a Mortgage: Break-Even Explained",
+      "slug": "when-to-refinance-mortgage",
+      "hub": "mortgage",
+      "keyword": "when should i refinance my mortgage",
+      "note": "Matches existing refinancing topic"
+    },
+    {
+      "title": "Credit Card Balance Transfer Fees: What They Cost",
+      "slug": "balance-transfer-fee-cost",
+      "hub": "credit",
+      "keyword": "balance transfer fee calculator",
+      "note": "Ties to balance transfer guide"
+    },
+    {
+      "title": "How Long Do Hard Inquiries Stay on Your Report?",
+      "slug": "how-long-hard-inquiries-stay",
+      "hub": "credit",
+      "keyword": "how long do hard inquiries stay on credit report",
+      "note": "Long-tail question"
+    },
+    {
+      "title": "Sinking Funds vs Emergency Fund: Key Differences",
+      "slug": "sinking-funds-vs-emergency-fund",
+      "hub": "personal-finance",
+      "keyword": "sinking fund vs emergency fund",
+      "note": "Links to sinking funds guide"
+    },
+    {
+      "title": "How to Save for a Down Payment in 2 Years",
+      "slug": "save-down-payment-two-years",
+      "hub": "mortgage",
+      "keyword": "how to save for a down payment",
+      "note": "High-intent first-time buyer query"
+    },
+    {
+      "title": "Pay Yourself First: A Practical Savings Method",
+      "slug": "pay-yourself-first-method",
+      "hub": "personal-finance",
+      "keyword": "pay yourself first",
+      "note": "Common phrase, needs examples"
+    },
+    {
+      "title": "Roth 401(k) vs Roth IRA: Differences Explained",
+      "slug": "roth-401k-vs-roth-ira",
+      "hub": "personal-finance",
+      "keyword": "roth 401k vs roth ira",
+      "note": "Extends Roth guide"
+    },
+    {
+      "title": "Is a Credit Card Cash Advance Worth It?",
+      "slug": "credit-card-cash-advance-cost",
+      "hub": "credit",
+      "keyword": "credit card cash advance fees",
+      "note": "Warning content, strong intent"
+    },
+    {
+      "title": "What Is an Annuity? Types, Costs and Who Needs One",
+      "slug": "what-is-an-annuity",
+      "hub": "insurance",
+      "keyword": "what is an annuity",
+      "note": "Insurance-adjacent, needs careful disclosure"
+    },
+    {
+      "title": "How to Get a Free Credit Report Weekly",
+      "slug": "free-credit-report-weekly",
+      "hub": "credit",
+      "keyword": "free credit report",
+      "note": "Links to AnnualCreditReport.com official site"
+    },
+    {
+      "title": "Credit Card Minimum Payment Trap: Real Cost",
+      "slug": "credit-card-minimum-payment-trap",
+      "hub": "credit",
+      "keyword": "credit card minimum payment calculator",
+      "note": "Pairs with payoff calculator"
+    },
+    {
+      "title": "What Is Net Worth and How to Calculate It",
+      "slug": "what-is-net-worth",
+      "hub": "personal-finance",
+      "keyword": "how to calculate net worth",
+      "note": "Evergreen definition query"
+    },
+    {
+      "title": "HSA vs FSA: Which Health Account Fits You?",
+      "slug": "hsa-vs-fsa",
+      "hub": "insurance",
+      "keyword": "hsa vs fsa",
+      "note": "Tax-advantaged health accounts"
+    },
+    {
+      "title": "How to Pay Off Debt on a Low Income",
+      "slug": "pay-off-debt-low-income",
+      "hub": "loans",
+      "keyword": "how to pay off debt on a low income",
+      "note": "Empathetic audience, strong intent"
+    },
+    {
+      "title": "Opening a Savings Account for Kids: Options",
+      "slug": "savings-account-for-kids",
+      "hub": "banking",
+      "keyword": "savings account for kids",
+      "note": "Family finance query"
+    },
+    {
+      "title": "Credit Union vs Bank: Which Is Better?",
+      "slug": "credit-union-vs-bank",
+      "hub": "banking",
+      "keyword": "credit union vs bank",
+      "note": "Comparison intent"
+    },
+    {
+      "title": "Zero-Based Budget: Step by Step",
+      "slug": "zero-based-budget-guide",
+      "hub": "personal-finance",
+      "keyword": "zero based budget",
+      "note": "Budget hub expansion"
+    },
+    {
+      "title": "What Is a Prenuptial Agreement's Financial Impact?",
+      "slug": "prenup-financial-impact",
+      "hub": "personal-finance",
+      "keyword": "prenuptial agreement money",
+      "note": "Caution: general information only"
+    },
+    {
+      "title": "Renters Insurance Cost and Coverage Explained",
+      "slug": "renters-insurance-cost",
+      "hub": "insurance",
+      "keyword": "how much is renters insurance",
+      "note": "Links to renters topic"
+    },
+    {
+      "title": "How to Choose a Health Insurance Plan",
+      "slug": "choose-health-insurance-plan",
+      "hub": "insurance",
+      "keyword": "how to choose health insurance",
+      "note": "High volume, needs careful sourcing"
+    },
+    {
+      "title": "What Is a Credit Limit Increase and How to Ask",
+      "slug": "credit-limit-increase-how-to-ask",
+      "hub": "credit",
+      "keyword": "how to ask for a credit limit increase",
+      "note": "Links to utilization guide"
+    },
+    {
+      "title": "Mortgage Points Explained: Are They Worth Buying?",
+      "slug": "mortgage-points-explained",
+      "hub": "mortgage",
+      "keyword": "mortgage points worth it",
+      "note": "Long-tail with calculator"
+    },
+    {
+      "title": "How to Build an Emergency Fund on a Tight Budget",
+      "slug": "emergency-fund-tight-budget",
+      "hub": "personal-finance",
+      "keyword": "how to build an emergency fund",
+      "note": "Links to emergency fund guide"
+    },
+    {
+      "title": "Are Certificates of Deposit Safe? FDIC Limits Explained",
+      "slug": "are-cds-safe-fdic",
+      "hub": "banking",
+      "keyword": "are cds safe",
+      "note": "Safety question with official source"
+    },
+    {
+      "title": "What Is a Money Market Account?",
+      "slug": "what-is-money-market-account",
+      "hub": "banking",
+      "keyword": "what is a money market account",
+      "note": "Savings product definition"
+    },
+    {
+      "title": "Private Student Loans vs Federal Loans",
+      "slug": "private-vs-federal-student-loans",
+      "hub": "loans",
+      "keyword": "private vs federal student loans",
+      "note": "Comparison intent"
+    },
+    {
+      "title": "How to Get a Personal Loan With Bad Credit",
+      "slug": "personal-loan-bad-credit",
+      "hub": "loans",
+      "keyword": "personal loan with bad credit",
+      "note": "High intent, cautionary"
+    },
+    {
+      "title": "Whole Life vs Universal Life Insurance",
+      "slug": "whole-life-vs-universal-life",
+      "hub": "insurance",
+      "keyword": "whole life vs universal life",
+      "note": "Extends term vs whole life"
+    },
+    {
+      "title": "Debt Snowball Calculator Walkthrough",
+      "slug": "debt-snowball-walkthrough",
+      "hub": "loans",
+      "keyword": "debt snowball method",
+      "note": "Links to debt payoff guide"
+    },
+    {
+      "title": "Self-Employed Budgeting With Irregular Income",
+      "slug": "budgeting-irregular-income",
+      "hub": "personal-finance",
+      "keyword": "budget with irregular income",
+      "note": "Underserved audience"
+    },
+    {
+      "title": "What Is an Escrow Account on a Mortgage?",
+      "slug": "what-is-escrow-account",
+      "hub": "mortgage",
+      "keyword": "what is escrow on a mortgage",
+      "note": "Definition query"
+    },
+    {
+      "title": "Financial Goals Worksheet: How to Set Them",
+      "slug": "financial-goals-worksheet",
+      "hub": "personal-finance",
+      "keyword": "how to set financial goals",
+      "note": "Evergreen planning content"
+    },
+    {
+      "title": "Home Warranty vs Home Insurance",
+      "slug": "home-warranty-vs-home-insurance",
+      "hub": "insurance",
+      "keyword": "home warranty vs home insurance",
+      "note": "Commonly confused products"
+    },
+    {
+      "title": "How to Dispute a Credit Report Error",
+      "slug": "dispute-credit-report-error",
+      "hub": "credit",
+      "keyword": "how to dispute credit report errors",
+      "note": "Links to FTC and CFPB official guidance"
+    },
+    {
+      "title": "Lowest Cost Ways to Send Money Abroad",
+      "slug": "send-money-abroad-cheap",
+      "hub": "banking",
+      "keyword": "cheapest way to send money abroad",
+      "note": "Fee comparison intent"
+    },
+    {
+      "title": "Estate Planning Basics: Wills and Beneficiaries",
+      "slug": "estate-planning-basics",
+      "hub": "personal-finance",
+      "keyword": "estate planning basics",
+      "note": "Beneficiary designations matter"
+    },
+    {
+      "title": "How Inflation Affects Your Savings",
+      "slug": "how-inflation-affects-savings",
+      "hub": "banking",
+      "keyword": "how does inflation affect savings",
+      "note": "Ties to APY guide"
+    },
+    {
+      "title": "Annual Review Checklist for Your Finances",
+      "slug": "annual-finance-review-checklist",
+      "hub": "personal-finance",
+      "keyword": "financial checklist",
+      "note": "Evergreen, good for email list"
+    }
+  ]
+}

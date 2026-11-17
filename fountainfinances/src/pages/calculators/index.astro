@@ -1,0 +1,60 @@
+---
+import PageHead from '@/components/PageHead.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CalcCard from '@/components/CalcCard.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+import { CALCULATORS } from '@/data/calculators';
+import { HUBS } from '@/data/taxonomy';
+import { collectionPage, itemList } from '@/lib/schema';
+
+const path = '/calculators/';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Calculators', href: path }];
+const title = 'Free Financial Calculators for Budgets, Loans & Savings';
+const description = 'Free personal finance calculators: budget, mortgage, loan, credit card payoff, compound interest, emergency fund, auto loan, CD and more. No sign-up.';
+const groups = HUBS.map((h) => ({ hub: h, calcs: CALCULATORS.filter((c) => c.hub === h.slug) })).filter((g) => g.calcs.length);
+---
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={['free financial calculators', 'personal finance calculators', 'money calculators', 'financial planning calculator']}
+  crumbs={crumbs}
+  schema={[collectionPage({ url: path, name: title, description }), itemList('Financial calculators', CALCULATORS.map((c) => ({ name: c.name, url: `/calculators/${c.slug}/` })))]}
+>
+  <PageHead photo="calculators">
+      <Breadcrumbs items={crumbs} />
+      <h1>Free Financial Calculators</h1>
+      <p class="lede">Run the numbers before you decide. Every calculator is free, works on your phone and runs entirely in your browser: nothing you type is sent to us.</p>
+  </PageHead>
+  <div class="wrap" style="padding:36px 16px 8px">
+    {groups.map((g) => (
+      <section class="section" style="padding:0 0 40px" aria-labelledby={`g-${g.hub.slug}`}>
+        <div class="section-head">
+          <h2 id={`g-${g.hub.slug}`}>{g.hub.shortTitle} calculators</h2>
+          <a class="more" href={`/${g.hub.slug}/`}>{g.hub.title} guides →</a>
+        </div>
+        <div class="grid grid-3">
+          {g.calcs.map((c) => <CalcCard calc={c} />)}
+        </div>
+      </section>
+    ))}
+  </div>
+  <div class="wrap prose" style="padding-bottom:40px">
+    <h2>How to get the most from these calculators</h2>
+    <p>Each tool uses standard financial formulas: the same amortization math lenders use for loan payments and the same compounding math banks use for savings. The results are only as good as the inputs, so use real numbers from your statements, loan estimates and account disclosures whenever you can.</p>
+    <p>Results are estimates. They do not include every fee, tax or change in rates over time, and they are not an offer of credit. Every calculator page explains its formula and assumptions so you can see exactly how the answer was produced.</p>
+
+    <h2>Which calculator should I start with?</h2>
+    <ul>
+      <li><strong>Getting organized:</strong> start with the <a href="/calculators/budget/">budget calculator</a>, then set a target with the <a href="/calculators/emergency-fund/">emergency fund calculator</a>. The <a href="/guides/50-30-20-rule/">50/30/20 rule</a> is a simple way to split your income.</li>
+      <li><strong>Paying off debt:</strong> the <a href="/calculators/credit-card-payoff/">credit card payoff calculator</a> shows your debt-free date and total interest; the <a href="/calculators/debt-consolidation/">debt consolidation calculator</a> tests whether a new loan would actually save money.</li>
+      <li><strong>Borrowing:</strong> compare monthly payments and total interest with the <a href="/calculators/loan/">personal loan</a>, <a href="/calculators/auto-loan/">auto loan</a> and <a href="/calculators/student-loan/">student loan</a> calculators.</li>
+      <li><strong>Buying a home:</strong> use the <a href="/calculators/home-affordability/">home affordability calculator</a> to find a price range, then the <a href="/calculators/mortgage/">mortgage calculator</a> for the full monthly payment including taxes, insurance and PMI.</li>
+      <li><strong>Growing savings:</strong> the <a href="/calculators/compound-interest/">compound interest</a>, <a href="/calculators/cd/">CD</a> and <a href="/calculators/investment/">investment</a> calculators show how time and rate affect growth.</li>
+    </ul>
+
+    <h2>Your privacy</h2>
+    <p>Every calculation runs in your browser. The numbers you enter are not sent to us or stored, and you don’t need to create an account. You can bookmark a page and come back to it at any time.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:56px"><NewsletterForm placement="calculators" /></div>
+</BaseLayout>

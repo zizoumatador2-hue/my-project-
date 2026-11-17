@@ -1,0 +1,17 @@
+# Fountain Finances — https://fountainfinances.com
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /admin
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin
+
+Sitemap: https://fountainfinances.com/sitemap-index.xml
