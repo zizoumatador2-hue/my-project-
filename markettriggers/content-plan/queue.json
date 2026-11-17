@@ -341,7 +341,8 @@
       "category": "economic-indicators",
       "series": "investor-guide",
       "image": "washington-columns",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-17"
     },
     {
       "n": 22,

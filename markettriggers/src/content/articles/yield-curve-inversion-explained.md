@@ -2,6 +2,7 @@
 title: "Yield Curve Inversion: What It Means for Stocks"
 description: "Yield curve inversion explained: why short Treasury yields can rise above long ones, how the 2s10s spread signals recession risk, and what it means for stocks."
 publishDate: 2026-11-15
+modifiedDate: 2026-11-17
 category: economic-indicators
 series: investor-guide
 primaryKeyword: "yield curve inversion explained"
@@ -148,6 +149,7 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [What is the 10-year Treasury yield and why does it matter?](/articles/what-is-the-10-year-treasury-yield/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
