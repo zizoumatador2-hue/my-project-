@@ -34,7 +34,7 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <meta name="author" content={SITE.author} />
   <link rel="canonical" href={canonical} />
   <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
-  <meta name="google-adsense-account" content={ADSENSE_CLIENT} />
+  <!-- Google AdSense site verification for publisher ca-pub-8532224804732263. -->\n  <meta name="google-adsense-account" content={ADSENSE_CLIENT} />
   <meta name="theme-color" content="#0d1a12" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="alternate" type="application/rss+xml" title={`${SITE.name} RSS`} href="/rss.xml" />
@@ -55,7 +55,7 @@ const fullTitle = path === '/' || withSite.length > 60 ? title : withSite;
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
-  <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
+  <!-- Load the official AdSense library once, site-wide. -->\n  <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
