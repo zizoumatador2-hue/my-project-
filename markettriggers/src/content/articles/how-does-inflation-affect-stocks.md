@@ -2,7 +2,7 @@
 title: "How Does Inflation Affect Stocks? What Investors Should Know"
 description: "Inflation hits stocks through interest rates, profit margins, and valuations. Here's how each channel works, which sectors tend to hold up, and what to watch."
 publishDate: 2026-10-09
-modifiedDate: 2026-11-05
+modifiedDate: 2026-11-19
 category: economic-indicators
 series: investor-guide
 primaryKeyword: "how does inflation affect stocks"
@@ -118,6 +118,7 @@ This article is educational and isn't personalized financial advice. For decisio
 
 ## Related reading
 
+- [Stocks vs. bonds: why they sometimes fall together](/articles/stocks-and-bonds-falling-together/)
 - [Stock market correction vs. bear market: what's the difference?](/articles/stock-market-correction-vs-bear-market/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
 - [What happens to stocks when the Fed cuts rates](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
