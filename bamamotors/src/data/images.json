@@ -496,5 +496,65 @@
     "sourceUrl": "https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra",
     "source": "fal.ai",
     "prompt": "A couple sitting at a kitchen table with a laptop seen from behind and a calculator, planning a car budget together, warm morning light"
+  },
+  "home-dealer-visit": {
+    "src": "/images/home-dealer-visit-1600.webp",
+    "srcset": "/images/home-dealer-visit-640.webp 640w, /images/home-dealer-visit-1024.webp 1024w, /images/home-dealer-visit-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "BYD showroom at The Westlight building in Berlin",
+    "author": "Matti Blume",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:BYD,_Westlight,_Berlin_(P1031497).jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+  },
+  "home-private-seller": {
+    "src": "/images/home-private-seller-1600.webp",
+    "srcset": "/images/home-private-seller-640.webp 640w, /images/home-private-seller-1024.webp 1024w, /images/home-private-seller-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Bentley 6½ 8-Litre Tourer from the auctioneer's catalogue: \"Lot No: 239 1929 Bentley 6½/8-Litre Tourer Chassis no. FA2510 Engine no. FA2514 ",
+    "author": "Thesupermat",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bonhams_-_The_Paris_Sale_2012_-_Bentley_6%C2%BD_8-Litre_Tourer_-_1929_-_009.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "home-vin-check": {
+    "src": "/images/home-vin-check-1600.webp",
+    "srcset": "/images/home-vin-check-640.webp 640w, /images/home-vin-check-1024.webp 1024w, /images/home-vin-check-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Alcedo atthis (Common Kingfisher) hunting in water. Natural reserves and contiguous areas of the Po River belt, Provincia di Vercelli, Piemo",
+    "author": "Luca Casale",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-_Riserve_naturali_e_aree_contigue_della_fascia_fluviale_del_Po.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "home-paperwork": {
+    "src": "/images/home-paperwork-1600.webp",
+    "srcset": "/images/home-paperwork-640.webp 640w, /images/home-paperwork-1024.webp 1024w, /images/home-paperwork-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "New Orleans: At the Carrollton Streetcar barn before the Phunny Phorty Phellows Carnival streetcar party starts rolling to mark the start of",
+    "author": "Infrogmation of New Orleans",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:PPP_2012_Paperwork.JPG",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "home-out-of-state": {
+    "src": "/images/home-out-of-state-1600.webp",
+    "srcset": "/images/home-out-of-state-640.webp 640w, /images/home-out-of-state-1024.webp 1024w, /images/home-out-of-state-1600.webp 1600w",
+    "width": 1600,
+    "height": 900,
+    "alt": "Zeebrugge, Belgium: Belgian tugboat Smit Tiger manoeuvring car carrier HONOR out of the port of Zeebrugge (Belgium)",
+    "author": "CEphoto, Uwe Aranas",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zeebrugge_Belgium_Tugboat-Smit-Tiger-and_-car-carrier-Honor-01.jpg",
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
   }
 }
