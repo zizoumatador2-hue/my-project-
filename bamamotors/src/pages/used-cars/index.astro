@@ -28,7 +28,7 @@ const site = env.SITE_URL;
   description="Search used cars for sale in Alabama from local dealers. Filter by make, model, price, mileage, body type, city or ZIP radius and contact dealers directly."
   keywords="used cars for sale Alabama, used cars Alabama, cars for sale Alabama, used cars near me Alabama, affordable used cars Alabama"
   canonical={filters.page > 1 && !filtered ? `/used-cars?page=${filters.page}` : '/used-cars'}
-  noindex={filtered}
+  noindex={filtered || total === 0}
  
   prev={!filtered && filters.page > 1 ? (filters.page === 2 ? '/used-cars' : `/used-cars?page=${filters.page - 1}`) : null}
   next={!filtered && filters.page < pages ? `/used-cars?page=${filters.page + 1}` : null}

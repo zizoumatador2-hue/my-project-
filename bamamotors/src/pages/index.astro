@@ -46,7 +46,11 @@ const quickLinks = [
   { href: '/used-cars/mobile-al', label: 'Mobile' },
   { href: '/dealers', label: 'Dealers near me' },
 ].filter((l) => !l.href.startsWith('/used-cars/') || indexable.has(l.href));
-const h1 = 'Used Cars for Sale in Alabama, from Local Dealers You Can Visit';
+const hasInventory = Boolean(counts && counts.vehicles > 0);
+const h1 = hasInventory ? 'Used Cars for Sale in Alabama, from Local Dealers You Can Visit' : "Alabama's Local Used Car Marketplace, Launching Soon";
+const metaDescription = hasInventory
+  ? 'Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code: Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers.'
+  : 'BamaMotors is a new Alabama used car marketplace. Dealers can list inventory free during launch. Shoppers: read our free car-buying guides for Birmingham, Huntsville, Mobile and more.';
 const stats = [
   ...(counts && counts.vehicles > 0 ? [{ n: counts.vehicles, l: 'Used cars for sale now' }] : []),
   ...(counts && counts.dealers > 0 ? [{ n: counts.dealers, l: 'Local Alabama dealers' }] : []),
@@ -65,7 +69,7 @@ const faq = [
 ];
 ---
 <BaseLayout title="BamaMotors: Used Cars from Local Alabama Dealers" ogImage={heroImg?.src}
-  description="Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code: Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers."
+  description={metaDescription}
   keywords="used cars Alabama, used cars for sale Alabama, used cars near me Alabama, cars for sale Alabama, car dealerships Alabama, used car dealers Alabama, cheap used cars Alabama, used trucks Alabama, used SUVs Alabama"
   canonical="/" jsonLd={[organizationLd(site, Astro.locals.settings), websiteLd(site), faqLd(faq)]}>
   <section class="hero">
@@ -79,7 +83,7 @@ const faq = [
         {quickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
       <ul class="trust">
-        <li>Free for shoppers</li><li>Local Alabama dealers only</li><li>Contact dealers directly</li><li>Search by ZIP & radius</li>
+        <li>Free for shoppers</li><li>Local Alabama dealers only</li><li>{hasInventory ? 'Contact dealers directly' : 'Dealers onboarding now'}</li><li>Search by ZIP & radius</li>
       </ul>
     </div>
   </section>
@@ -148,7 +152,7 @@ const faq = [
       <h2 id="how-title">How BamaMotors works</h2>
       <ol class="steps reveal-stagger">
         <li><h3>Search local inventory</h3><p class="muted" style="margin:0">Filter used cars by make, price, mileage, city or ZIP code radius across Alabama.</p></li>
-        <li><h3>Compare & save</h3><p class="muted" style="margin:0">See photos, specs, vehicle history and dealer details. Save favorites to your free account.</p></li>
+        <li><h3>{hasInventory ? 'Compare & save' : 'Read the guides'}</h3><p class="muted" style="margin:0">{hasInventory ? 'See photos, specs, vehicle history and dealer details. Save favorites to your free account.' : 'Learn what to check on a used car, how title and tag work, and how to finance, before inventory arrives.'}</p></li>
         <li><h3>Contact the dealer</h3><p class="muted" style="margin:0">Request a price, schedule a test drive or ask about financing. Your request goes straight to the dealership.</p></li>
         <li><h3>Buy with confidence</h3><p class="muted" style="margin:0">Use our Alabama guides for inspections, out-the-door pricing, title and registration.</p></li>
       </ol>

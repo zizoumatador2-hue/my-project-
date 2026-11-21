@@ -27,6 +27,9 @@ const { qs, filters, total, items, origin, pages } = search;
 // Only link to landing pages that are indexable now, so crawlers aren't sent to empty combinations.
 const indexable = await indexableLandingPaths(env.DB, env.ENVIRONMENT === 'production' ? 60_000 : 0);
 
+const emptyCity = total === 0 && L.kind === 'city' && L.city;
+const pageTitle = emptyCity ? `Buying a Used Car in ${L.city!.name}, AL: Local Guide` : L.title;
+const pageH1 = emptyCity ? `Buying a Used Car in ${L.city!.name}, AL` : L.h1;
 const byModel = L.kind === 'body' || L.kind === 'city-body' || L.kind === 'make' || L.kind === 'price';
 const stats = byModel ? await priceStatsByModel(env.DB, L.statsWhere.sql, L.statsWhere.params) : await priceStatsByBody(env.DB, L.statsWhere.sql, L.statsWhere.params);
 const overall = stats.reduce((acc, s) => ({ n: acc.n + s.count, min: Math.min(acc.min, s.min_cents), max: Math.max(acc.max, s.max_cents) }), { n: 0, min: Infinity, max: 0 });
@@ -57,13 +60,14 @@ const makeLinks = popularMakes.filter((m) => indexable.has(`/used-cars/${m.slug}
 const priceLinks = PRICE_BUCKETS.filter((p) => indexable.has(`/used-cars/${p.slug}`));
 // FAQ markup only where the questions are written for this page (city guides); generic template FAQs stay visible but unmarked.
 const faqSchema = L.kind === 'city' ? faqLd(L.faq) : null;
-const noindex = (total === 0 && !L.hasEditorial) || qs.sort !== 'recommended';
+// Empty combinations (including city guides with no inventory) stay out of the index until listings exist.
+const noindex = total === 0 || qs.sort !== 'recommended';
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
 ---
 <BaseLayout
   adsense={false}
-  title={`${L.title}${pageSuffix}`}
+  title={`${pageTitle}${pageSuffix}`}
   description={L.description}
   keywords={L.keywords}
   canonical={canonical}
@@ -76,7 +80,7 @@ const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
   <div class="wrap">
     <Breadcrumbs crumbs={L.crumbs} />
     <header style="margin-top:12px;max-width:860px">
-      <h1>{L.h1}</h1>
+      <h1>{pageH1}</h1>
       <p class="muted" style="font-size:1.05rem">{L.intro}</p>
     </header>
     {cover && filters.page === 1 && (
