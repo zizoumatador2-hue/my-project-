@@ -1,0 +1,75 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { first, run, nowIso, audit } from '../../lib/db';
+import { hashPassword, verifyPassword } from '../../lib/crypto';
+import { destroySession } from '../../lib/auth';
+import { passwordSchema, phoneSchema } from '../../lib/validation';
+
+const env = Astro.locals.runtime.env;
+const user = Astro.locals.user!;
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  const row = await first<{ password_hash: string }>(env.DB, 'SELECT password_hash FROM users WHERE id = ?', [user.id]);
+  if (action === 'profile') {
+    const name = String(fd.get('name') ?? '').trim().slice(0, 120);
+    const phone = String(fd.get('phone') ?? '').trim();
+    if (name.length < 2) err = 'Enter your name.';
+    else if (!phoneSchema.safeParse(phone).success) err = 'Enter a 10-digit phone number.';
+    else { await run(env.DB, 'UPDATE users SET name = ?, phone = ?, updated_at = ? WHERE id = ?', [name, phone || null, nowIso(), user.id]); return Astro.redirect('/account/settings?ok=saved', 303); }
+  } else if (action === 'password') {
+    const cur = String(fd.get('current') ?? '');
+    const next = String(fd.get('password') ?? '');
+    const p = passwordSchema.safeParse(next);
+    if (!row || !(await verifyPassword(cur, row.password_hash))) err = 'Your current password is incorrect.';
+    else if (!p.success) err = p.error.issues[0].message;
+    else {
+      await run(env.DB, 'UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?', [await hashPassword(next), nowIso(), user.id]);
+      await run(env.DB, 'DELETE FROM sessions WHERE user_id = ? AND id NOT IN (SELECT id FROM sessions WHERE user_id = ? ORDER BY created_at DESC LIMIT 1)', [user.id, user.id]);
+      return Astro.redirect('/account/settings?ok=password', 303);
+    }
+  } else if (action === 'delete') {
+    if (user.role !== 'consumer') err = 'Dealer and admin accounts must be closed by contacting support.';
+    else if (!row || !(await verifyPassword(String(fd.get('current') ?? ''), row.password_hash))) err = 'Your password is incorrect.';
+    else {
+      await audit(env.DB, null, 'user.delete', 'user', user.id);
+      await run(env.DB, 'DELETE FROM users WHERE id = ?', [user.id]);
+      await destroySession(env.DB, Astro.cookies);
+      return Astro.redirect('/?deleted=1', 303);
+    }
+  }
+}
+---
+<DashboardLayout title="Account settings" area="account" err={err}>
+  <h1>Account settings</h1>
+  <div class="grid grid-2" style="align-items:start">
+    <form method="post" class="panel stack">
+      <input type="hidden" name="action" value="profile" />
+      <h2 style="font-size:1.1rem">Profile</h2>
+      <div class="field"><label for="s-email">Email</label><input class="input" id="s-email" value={user.email} disabled /></div>
+      <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" name="name" value={user.name} required autocomplete="name" /></div>
+      <div class="field"><label for="s-phone">Phone</label><input class="input" id="s-phone" name="phone" value={user.phone ?? ''} type="tel" autocomplete="tel" /></div>
+      <button class="btn btn-primary" type="submit">Save profile</button>
+    </form>
+    <form method="post" class="panel stack">
+      <input type="hidden" name="action" value="password" />
+      <h2 style="font-size:1.1rem">Change password</h2>
+      <div class="field"><label for="s-cur">Current password</label><input class="input" id="s-cur" name="current" type="password" required autocomplete="current-password" /></div>
+      <div class="field"><label for="s-new">New password</label><input class="input" id="s-new" name="password" type="password" minlength="10" required autocomplete="new-password" /></div>
+      <button class="btn btn-dark" type="submit">Update password</button>
+    </form>
+  </div>
+  {user.role === 'consumer' && (
+    <form method="post" class="panel stack" style="margin-top:20px" data-confirm="Permanently delete your account and saved vehicles?">
+      <input type="hidden" name="action" value="delete" />
+      <h2 style="font-size:1.1rem">Delete account</h2>
+      <p class="small muted" style="margin:0">Deletes your account and saved vehicles. Inquiries you already sent remain with the dealers you contacted.</p>
+      <div class="field" style="max-width:320px"><label for="s-del">Confirm with your password</label><input class="input" id="s-del" name="current" type="password" required autocomplete="current-password" /></div>
+      <button class="btn btn-danger" type="submit">Delete my account</button>
+    </form>
+  )}
+</DashboardLayout>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((f) => f.addEventListener('submit', (e) => { if (!confirm(f.dataset.confirm!)) e.preventDefault(); }));
+</script>

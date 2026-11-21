@@ -1,0 +1,61 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, first, insert, run } from '../../lib/db';
+import { slugify } from '../../lib/slug';
+import { BODY_TYPES } from '../../lib/constants';
+
+const db = Astro.locals.runtime.env.DB;
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  const name = String(fd.get('name') ?? '').trim().slice(0, 60);
+  if (action === 'make') {
+    const slug = slugify(name);
+    if (!slug) err = 'Enter a make name.';
+    else if (await first(db, 'SELECT id FROM makes WHERE slug = ?', [slug])) err = 'That make already exists.';
+    else { await insert(db, 'INSERT INTO makes (slug, name, is_popular) VALUES (?,?,?)', [slug, name, fd.get('popular') === 'on' ? 1 : 0]); return Astro.redirect('/admin/makes?ok=created', 303); }
+  } else if (action === 'model') {
+    const makeId = Number(fd.get('make_id'));
+    const slug = slugify(name);
+    const body = String(fd.get('body_type') ?? '');
+    if (!slug || !makeId) err = 'Choose a make and enter a model name.';
+    else if (await first(db, 'SELECT id FROM models WHERE make_id = ? AND slug = ?', [makeId, slug])) err = 'That model already exists.';
+    else { await insert(db, 'INSERT INTO models (make_id, slug, name, body_type) VALUES (?,?,?,?)', [makeId, slug, name, BODY_TYPES.some((b) => b.value === body) ? body : null]); return Astro.redirect(`/admin/makes?make=${makeId}&ok=created`, 303); }
+  } else if (action === 'intro') {
+    await run(db, 'UPDATE makes SET intro = ?, is_popular = ? WHERE id = ?', [String(fd.get('intro') ?? '').trim().slice(0, 1500) || null, fd.get('popular') === 'on' ? 1 : 0, Number(fd.get('make_id'))]);
+    return Astro.redirect(`/admin/makes?make=${Number(fd.get('make_id'))}&ok=saved`, 303);
+  }
+}
+const makes = await all<{ id: number; name: string; slug: string; is_popular: number; intro: string | null; models: number }>(db, 'SELECT mk.*, (SELECT COUNT(*) FROM models md WHERE md.make_id = mk.id) AS models FROM makes mk ORDER BY name');
+const selected = makes.find((m) => m.id === Number(Astro.url.searchParams.get('make'))) ?? null;
+const models = selected ? await all<{ id: number; name: string; slug: string; body_type: string | null; n: number }>(db, "SELECT md.*, (SELECT COUNT(*) FROM vehicles v WHERE v.model_id = md.id) AS n FROM models md WHERE make_id = ? ORDER BY name", [selected.id]) : [];
+---
+<DashboardLayout title="Makes & models" area="admin" err={err}>
+  <h1>Makes & models</h1>
+  <div class="grid grid-2" style="align-items:start">
+    <section class="panel">
+      <h2 style="font-size:1.1rem">Makes</h2>
+      <ul class="chips">{makes.map((m) => <li><a class="chip" href={`/admin/makes?make=${m.id}`} aria-current={selected?.id === m.id ? 'page' : undefined}>{m.name} <span class="count">({m.models})</span></a></li>)}</ul>
+      <form method="post" class="toolbar" style="margin-top:16px"><input type="hidden" name="action" value="make" />
+        <div class="field"><label for="mk">New make</label><input class="input" id="mk" name="name" required /></div>
+        <label class="check" style="align-self:center"><input type="checkbox" name="popular" /> Popular</label>
+        <button class="btn btn-primary" type="submit">Add make</button></form>
+    </section>
+    {selected ? (
+      <section class="panel">
+        <h2 style="font-size:1.1rem">{selected.name} <a class="small" href={`/used-cars/${selected.slug}`}>view page</a></h2>
+        <form method="post" class="stack"><input type="hidden" name="action" value="intro" /><input type="hidden" name="make_id" value={selected.id} />
+          <div class="field"><label for="intro">Brand page intro (unique copy makes the page indexable)</label><textarea class="textarea" id="intro" name="intro" rows="4">{selected.intro ?? ''}</textarea></div>
+          <label class="check"><input type="checkbox" name="popular" checked={selected.is_popular === 1} /> Show in popular makes</label>
+          <button class="btn btn-outline btn-sm" type="submit">Save</button></form>
+        <div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>Model</th><th>Body</th><th>Listings</th></tr></thead>
+          <tbody>{models.map((m) => <tr><td>{m.name}</td><td>{m.body_type ?? '—'}</td><td>{m.n}</td></tr>)}</tbody></table></div>
+        <form method="post" class="toolbar"><input type="hidden" name="action" value="model" /><input type="hidden" name="make_id" value={selected.id} />
+          <div class="field"><label for="md">New model</label><input class="input" id="md" name="name" required /></div>
+          <div class="field"><label for="bt">Body type</label><select class="select" id="bt" name="body_type"><option value="">—</option>{BODY_TYPES.map((b) => <option>{b.value}</option>)}</select></div>
+          <button class="btn btn-primary" type="submit">Add model</button></form>
+      </section>
+    ) : <section class="panel"><p class="muted">Select a make to manage its models and brand-page intro.</p></section>}
+  </div>
+</DashboardLayout>

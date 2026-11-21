@@ -1,0 +1,696 @@
+---
+import Photo from './Photo.astro';
+import { image } from '../lib/images';
+
+const shotPrivate = image('home-private-seller');
+const shotDealer = image('home-dealer-visit');
+const shotVin = image('home-vin-check');
+const shotPaper = image('home-paperwork');
+const shotOutOfState = image('home-out-of-state');
+---
+<section class="section home-guide" aria-labelledby="guide-title">
+  <div class="wrap guide-prose">
+    <header class="guide-intro">
+      <p class="eyebrow">Independent Alabama buying guide</p>
+      <h2 id="guide-title">How to buy a used car in Alabama: the complete guide</h2>
+      <p>
+        Buying a used car is one of the largest purchases most people make, and it is easy to make an expensive mistake when you are
+        rushed, unfamiliar with the paperwork or negotiating across a desk. This guide is written for Alabama drivers. It explains
+        how to plan the purchase, how to compare a dealer and a private seller, how to inspect and check a vehicle's history, and
+        how titles, registration, sales tax and liens work in Alabama.
+      </p>
+      <p>
+        BamaMotors is an independent resource. We do not sell cars, we do not own inventory, and we do not take deposits or arrange
+        loans. Dealers list their own vehicles on BamaMotors, and every sale happens between you and the seller. Use this guide to
+        prepare, then compare listings from local dealers and contact them directly.
+      </p>
+    </header>
+
+    <div class="guide-grid-top">
+      <h3 class="guide-kicker">Start here</h3>
+      <ol class="guide-steps">
+        <li><strong>Set a total budget.</strong> Include the price, taxes, title and registration fees, insurance, and a reserve for repairs in the first few months.</li>
+        <li><strong>Choose the seller type.</strong> A franchised dealer, an independent dealer or a private seller each change your protections, paperwork and price.</li>
+        <li><strong>Shortlist three to five vehicles.</strong> Compare model years, mileage, maintenance records and the title status before you visit.</li>
+        <li><strong>Inspect and check history.</strong> Run a vehicle history report, verify the VIN and get an independent pre-purchase inspection.</li>
+        <li><strong>Test drive, then negotiate.</strong> Use the inspection findings to ask for a fair out-the-door price.</li>
+        <li><strong>Complete the paperwork.</strong> Confirm the title, lien status and bill of sale, then register the vehicle with your county probate office.</li>
+      </ol>
+    </div>
+
+    <h3 class="guide-h3">How to buy a used car in Alabama</h3>
+    <p>
+      The best used car buying guide for Alabama starts with your own situation. Alabama is a large state with a wide mix of
+      drivers. Commuters in Birmingham, Huntsville and Montgomery often need a reliable compact or midsize sedan with good fuel
+      economy, while families in rural counties may need a pickup or a three-row SUV. Gulf Coast residents in Mobile face salt air,
+      humidity and the occasional hurricane, which all affect what a used car has been through. Decide what you actually need
+      before you start comparing listings.
+    </p>
+    <p>
+      Next, set a real budget. Many buyers focus on the monthly payment and forget the total cost. A used car purchase in Alabama
+      usually includes the vehicle price, state and local sales tax, title and registration fees, a documentation fee at many
+      dealerships, insurance and some money for maintenance. If you finance, add the interest. A useful rule is to keep the total
+      cost within a range you could still afford if the car needed a $1,000 repair in its first year.
+    </p>
+    <p>
+      Check the market before you visit. Look at similar vehicles with the same year, trim, mileage and condition in your area.
+      Compare asking prices across several dealers and at least a few private sellers. Pricing guides are a starting point, but
+      local listings tell you what people in your county are actually asking. Note the days-on-lot and any price drops, since
+      those can be useful negotiation points.
+    </p>
+    <p>
+      When you find a candidate, ask for the vehicle identification number (VIN) and the history report before you drive out. A
+      seller who refuses to share the VIN or the report is a warning sign. Compare the report with the car in front of you:
+      mileage, title brand, number of owners and any reported accidents should match what you are told.
+    </p>
+    <p>
+      Always see the vehicle in person, in daylight, on a dry day if possible. Rain and darkness hide paint defects, body damage
+      and fluid leaks. Bring a flashlight, a tire gauge, a magnet for checking body filler, and a notepad. Take photos of the
+      odometer, the VIN plate and any damage you find. If something bothers you, write it down and ask about it.
+    </p>
+
+    {shotDealer && (
+      <figure class="guide-figure">
+        <Photo img={shotDealer} sizes="(min-width: 900px) 760px, 100vw" alt={shotDealer.alt} />
+        <figcaption>Compare several vehicles on the same day, before you commit to one.</figcaption>
+      </figure>
+    )}
+
+    <h3 class="guide-h3">Buying a used car from a private seller in Alabama</h3>
+    <p>
+      A private party car purchase can offer a lower price and a direct conversation with the person who drove the car every day.
+      It also removes the dealer's documentation fee and sales commission, and sometimes gives you more room to negotiate. The
+      trade-off is that you have fewer protections. A private seller is not usually required to provide a warranty, and you do not
+      have a dealership's reputation to rely on. The buyer carries more of the responsibility for checking the vehicle and the
+      paperwork.
+    </p>
+    <p>
+      Start by asking the seller a set of simple questions before you visit. Why are you selling? How long have you owned the car?
+      Who has driven it? Is the title in your name? Is there a loan or lien on the vehicle? Has it been in an accident? Do you have
+      service records? Where has the car been kept, and does it have any open recalls? Honest sellers answer these questions
+      directly. Evasive answers are a reason to walk away.
+    </p>
+    <p>
+      The most important document in a private sale is the Alabama certificate of title. Ask to see the title in person, and
+      confirm that the name on the title matches the seller's identification. Check the VIN on the title against the VIN on the
+      dashboard and the driver's door frame. Look for any lienholder listed on the front. If there is a lien, the seller needs a
+      lien release from the lender before the sale can be completed. A title with signs of alteration, erasures or a different
+      name is a serious concern.
+    </p>
+    <p>
+      Use a written bill of sale. It should include the date, the buyer and seller names and addresses, the VIN, year, make, model,
+      odometer reading, sale price and an "as is" statement if that is the agreement. Both parties should sign and keep copies. A
+      bill of sale does not replace the title transfer, but it documents the terms and the price, which matters for sales tax and
+      for any later dispute.
+    </p>
+    <p>
+      Never pay with a wire transfer, gift cards or a payment method you cannot reverse. Meet in a safe, public place, preferably at
+      a bank or the seller's bank branch where you can verify funds. Do not hand over money before you have the signed title in hand.
+      If the seller asks you to leave the title blank or to sign something you have not read, stop the sale.
+    </p>
+
+    <h3 class="guide-h3">Buying a used car from a dealer in Alabama</h3>
+    <p>
+      Buying from a dealer generally gives you more paperwork support, more inventory to compare and, in some cases, a limited
+      warranty or a certified program. Dealers in Alabama range from franchised stores that sell specific brands to independent
+      lots that sell many makes. Each type has different strengths, and neither is automatically better. Judge the individual
+      dealership by its inventory, its written disclosures, its willingness to let you get an inspection and its reviews from
+      customers.
+    </p>
+    <p>
+      Ask the dealer for an itemized out-the-door price before you agree to anything. This should show the vehicle price, sales
+      tax, title and registration fees and any dealer fees. Ask what the documentation fee covers. Some dealers add optional
+      products such as paint protection, extended warranties, gap insurance or add-on packages. You are not required to buy these
+      products, and you can often decline them or negotiate them down. Read every line before you sign.
+    </p>
+    <p>
+      Review the buyer's guide posted on the vehicle. It states whether the car is sold with a warranty or "as is." Get the
+      warranty terms in writing, including what is covered, for how long, and whether you have to use the dealer's service
+      department. If the car is described as certified pre-owned, ask what inspection was performed and what the manufacturer
+      warranty covers.
+    </p>
+    <p>
+      Documents to review before buying a used car from a dealer include the title or the paperwork showing the title is being
+      processed, the odometer disclosure, the purchase agreement, any finance contract and the warranty or service contract. Ask
+      when the title will be sent to your county probate office and how you will get temporary registration in the meantime. Keep
+      copies of everything you sign.
+    </p>
+    <p>
+      Many buyers want to test drive the car, ask about the history and then take it to an independent mechanic. A dealer who agrees
+      to this shows confidence in the vehicle. A dealer who discourages an inspection is telling you something important.
+    </p>
+
+    {shotPrivate && (
+      <figure class="guide-figure">
+        <Photo img={shotPrivate} sizes="(min-width: 900px) 760px, 100vw" alt={shotPrivate.alt} />
+        <figcaption>A private sale works best with a title in hand, a written bill of sale and a safe place to meet.</figcaption>
+      </figure>
+    )}
+
+    <h3 class="guide-h3">Buying a car out of state and registering it in Alabama</h3>
+    <p>
+      Many Alabama buyers look beyond their county or even their state, especially for specific trucks, low-mileage sedans or
+      vehicles that are harder to find locally. Buying a car out of state is legal and common, but it requires extra steps. The
+      biggest risks are a title that does not match the seller, a car that has not been inspected by anyone you trust and a long
+      distance that makes it hard to walk away if something is wrong.
+    </p>
+    <p>
+      Before you travel, confirm the title is clean, in the seller's name and free of liens. Ask the seller to send photos of the
+      title and the odometer. Get the VIN and run a history report. If the car is far away, pay for an independent inspection near
+      the seller so you can see the condition before you commit. Arrange for the car to be driven or transported back to Alabama,
+      and check the cost of a carrier against the savings.
+    </p>
+    <p>
+      When you bring the car into Alabama, you will need to title and register it in your county. The out-of-state title, the bill
+      of sale or purchase documents, proof of insurance and identification are the usual starting point. Ask your county probate
+      office for the current requirements, since rules and forms can change. Plan to register the vehicle promptly after you move
+      or buy it. Alabama has deadlines for new residents and new owners, and driving on an expired or missing registration can create
+      problems that are easy to avoid.
+    </p>
+    <p>
+      Sales tax is part of the calculation. Alabama applies state and local tax to most vehicle purchases, and you should confirm the
+      current rate and how it applies to your specific transaction before you buy. Ask the county office what documents they will
+      need to calculate it. A bill of sale with a clearly stated price makes the process faster.
+    </p>
+
+    {shotOutOfState && (
+      <figure class="guide-figure">
+        <Photo img={shotOutOfState} sizes="(min-width: 900px) 760px, 100vw" alt={shotOutOfState.alt} />
+        <figcaption>Out-of-state purchases need an independent inspection near the seller and a plan for getting the car home.</figcaption>
+      </figure>
+    )}
+
+    <h3 class="guide-h3">First time used car buyer guide</h3>
+    <p>
+      If this is your first used car, it is normal to feel uncertain. The good news is that most costly mistakes are predictable,
+      and you can avoid them with a simple process. This first time used car buyer guide focuses on the decisions that matter most
+      for a new buyer.
+    </p>
+    <p>
+      Choose a reliable vehicle over a flashy one. A well-maintained compact or midsize car from a major manufacturer is usually
+      cheaper to insure, repair and fuel than a luxury model of the same age. Look for a car with a documented service history, a
+      reasonable number of owners and no major accidents. Avoid buying the first car that looks good. Plan to see at least three
+      vehicles before you choose.
+    </p>
+    <p>
+      Learn how to read a listing. Pay attention to the year, trim, mileage, title status and the photos. Be careful with listings
+      that show only a few small photos, do not show the VIN, or describe a car in vague terms. Ask questions in writing so you have
+      a record of the answers.
+    </p>
+    <p>
+      Consider a budget for the first year. Many first-time buyers forget about insurance premiums, which can change significantly
+      depending on the vehicle and the driver's age and record. Tires, brakes, batteries and fluid changes are normal costs for any
+      car. Keep an emergency fund so a repair does not become a crisis.
+    </p>
+    <p>
+      Bring a friend or family member who knows cars if you can. A second person helps you stay calm and notice details you might
+      miss. Do not let anyone pressure you into signing on the same day. Dealers and private sellers both understand that you can
+      come back after you have thought about it, and a serious seller will respect that.
+    </p>
+
+    <h3 class="guide-h3">Questions to ask before buying a used car</h3>
+    <p>
+      Good questions protect you more than any negotiating trick. Ask them of every seller, whether a dealer or a private party.
+    </p>
+    <ul class="guide-list">
+      <li>How many owners has the car had, and how long did each one keep it?</li>
+      <li>Do you have maintenance records, receipts or an oil change history?</li>
+      <li>Has the car ever been in an accident, even a minor one? Was it repaired professionally?</li>
+      <li>Has any part been replaced recently, such as the engine, transmission, timing belt or brakes?</li>
+      <li>Are there any warning lights, leaks, odd noises or problems with the air conditioning?</li>
+      <li>Are there open recalls, and has the manufacturer's recall work been completed?</li>
+      <li>Is the title clean, and is there a lien? Who is listed as the owner?</li>
+      <li>Why are you selling the vehicle, and are you the only person who has driven it?</li>
+      <li>Can I take the car for a test drive on a route that includes highway speeds and hills?</li>
+      <li>Will you allow an independent inspection at a shop I choose?</li>
+    </ul>
+    <p>
+      Questions to ask before a test drive should focus on the car's current condition: whether the engine starts cold, whether the
+      check engine light is on, whether the tires are matched and whether the seller knows of any problems. Ask the seller to show
+      you where the spare tire and jack are, how the tire pressure is set and whether the key fobs all work.
+    </p>
+
+    <h3 class="guide-h3">Used car maintenance history and records</h3>
+    <p>
+      A used car with good records is worth more than one that looks cleaner. Service records show that someone cared for the car,
+      and they tell you when major items were last replaced. Look for regular oil changes, timing belt replacement on engines that
+      require it, transmission fluid service where applicable, brake work and cooling system maintenance. Gaps in the record are not
+      always a problem, but they should be explained.
+    </p>
+    <p>
+      If the seller has no records, ask the dealer or the seller to explain how the vehicle was maintained. A mechanic can often
+      estimate the condition of brakes, tires and suspension from the car itself. An inspection can also reveal whether recent work
+      was done properly. Missing maintenance records on a car with high mileage should lower the price you are willing to pay.
+    </p>
+
+    <h3 class="guide-h3">Inspections and vehicle history</h3>
+    <p>
+      Inspection is the part of the process that most protects your money. A used car inspection checklist helps you look at the
+      same areas every time, so you do not forget a step when you are excited about a vehicle. Start with the exterior, then move to
+      the interior, the engine, the underside and the test drive.
+    </p>
+    <h4 class="guide-h4">Used car inspection checklist</h4>
+    <ul class="guide-list">
+      <li><strong>Exterior:</strong> Look for mismatched paint, uneven gaps between panels, overspray on trim, rust bubbles on the wheel arches and doors, cracked or fogged lights and glass with chips or cracks.</li>
+      <li><strong>Tires:</strong> Check tread depth with a coin or gauge, look for uneven wear, which may suggest alignment or suspension problems, and confirm all tires are the same brand and size.</li>
+      <li><strong>Interior:</strong> Test every switch, the air conditioning and heat, the radio, power windows, locks, seat adjustments and the sunroof. Look for wear that does not match the odometer.</li>
+      <li><strong>Engine bay:</strong> Look for fluid leaks, cracked hoses, corrosion on the battery terminals and signs of a recent steam clean that might hide a leak.</li>
+      <li><strong>Underneath:</strong> Check for fresh oil or fluid stains, rust on the frame and exhaust damage. A flashlight helps.</li>
+      <li><strong>Cold start:</strong> Ask that the engine be cold when you arrive. Listen for knocking, rough idling and smoke from the exhaust.</li>
+      <li><strong>Test drive:</strong> Drive on both city streets and highways. Note any pulling to one side, vibration, grinding brakes, slipping gears or warning lights.</li>
+    </ul>
+    <p>
+      For a pre purchase car inspection in Alabama, hire an independent mechanic who is not connected to the seller or the dealer.
+      Ask for a written report that lists the condition of the brakes, tires, suspension, engine, transmission, cooling system,
+      electrical system and frame. Expect to pay for the inspection yourself, and consider it the cheapest insurance you can buy on
+      a used car. A good inspection can also be a negotiating tool: repair costs that the mechanic identifies are a fair reason to
+      ask for a lower price or for the seller to fix the problem first.
+    </p>
+    <p>
+      Alabama does not require a state safety inspection for most passenger vehicles, so an independent inspection is especially
+      important. Some metro counties have emissions testing for certain vehicles, so ask your county office or the dealer about the
+      requirements where you will register the car.
+    </p>
+
+    {shotVin && (
+      <figure class="guide-figure">
+        <Photo img={shotVin} sizes="(min-width: 900px) 760px, 100vw" alt={shotVin.alt} />
+        <figcaption>Matching the VIN on the car, the title and the history report is one of the fastest checks you can make.</figcaption>
+      </figure>
+    )}
+
+    <h3 class="guide-h3">How to read a vehicle history report</h3>
+    <p>
+      A vehicle history report summarizes information from sources such as state titling records, insurance claims, salvage auctions,
+      service networks and reported accidents. It is not perfect, because some repairs are never reported. But it can reveal
+      problems you would otherwise miss, and it is a standard step for any serious buyer.
+    </p>
+    <p>
+      Start with the title history. Look for brands such as salvage, rebuilt, flood, lemon law buyback or junk. Check the number of
+      owners, the states where the car has been titled and whether the title was transferred often in a short time. Frequent
+      transfers and out-of-state titles can be a warning sign. Next, check the odometer history. A reading that goes backward, or a
+      mileage gap, can indicate tampering or a missing record.
+    </p>
+    <p>
+      Look at accident history and damage reports. A minor reported accident is not automatically a deal-breaker, but a major
+      structural claim should make you ask for a detailed explanation and a body inspection. Service records in the report show
+      oil changes, tire rotations and major repairs at participating shops. Consistent service is a positive sign, and a long gap in
+      maintenance deserves a question.
+    </p>
+    <p>
+      Use the NHTSA recall lookup to check open safety recalls by VIN. Recalls are free to repair at a dealership for that
+      manufacturer, even on used vehicles, and an open recall is something you should understand before you buy. BamaMotors shows
+      recall and title information links on vehicle pages where the dealer has provided the VIN.
+    </p>
+
+    <h3 class="guide-h3">How to check a used car VIN</h3>
+    <p>
+      The vehicle identification number is 17 characters and identifies the car's make, model year, plant and serial number. You can
+      usually find it on the dashboard near the windshield, on the driver's door jamb sticker, on the title and on the registration.
+      All of these should match. If they do not, stop the process and ask the seller to explain.
+    </p>
+    <p>
+      Matching VIN numbers before buying also includes components such as the engine, transmission and some body panels, which often
+      carry stamped numbers. If the seller has replaced major parts, the numbers may not match the original factory build. This is
+      not always a problem, but it should be known before you pay. Use the VIN to confirm the trim level and factory equipment, since
+      listings sometimes describe a car inaccurately.
+    </p>
+    <p>
+      A VIN check for used car buyers should include a history report, a recall check and, when possible, a look at the vehicle's
+      original specification. Never trust a VIN that has been scratched, painted over or does not match the paperwork.
+    </p>
+
+    <h3 class="guide-h3">How to spot flood damage in a used car</h3>
+    <p>
+      Flood-damaged vehicles are a serious risk in Alabama, because hurricanes, tropical storms and heavy rains can cause sudden
+      flooding, especially along the Gulf Coast. Water can ruin electrical systems, engines, transmissions, airbags and interior
+      materials long before the damage is visible. A flood car is often cleaned, dried and sold again, so you need to look closely.
+    </p>
+    <ul class="guide-list">
+      <li>A musty or mildew smell that air fresheners cannot hide.</li>
+      <li>Damp carpet, loose carpet padding, or carpet that does not sit flat or has new glue in the seams.</li>
+      <li>Silt, sand or mud in the seat tracks, under the dashboard, in the glove box or in the spare tire well.</li>
+      <li>Rust on screws under the dashboard, on seat mounting bolts or on the interior metal of the door panels.</li>
+      <li>Foggy headlights or moisture inside the lights, and corrosion on the battery terminals.</li>
+      <li>Electrical problems such as windows, radio or dashboard lights that behave unpredictably.</li>
+      <li>A title brand or history entry showing a flood or salvage record.</li>
+    </ul>
+    <p>
+      If you find any of these signs, walk away unless a qualified inspector confirms the car is safe. A cheap price is not worth an
+      electrical system that fails at night or a hidden problem that appears months later.
+    </p>
+
+    <h3 class="guide-h3">How to check a used car for accident damage</h3>
+    <p>
+      Accident damage is often easier to spot than flood damage, but repairs can hide it. Start with the body panels. Look down each
+      side of the car from the front and rear, and check whether the gaps between the hood, fenders, doors and trunk lid are even.
+      Mismatched paint, orange peel texture, overspray on rubber trim and different shades of paint from panel to panel can indicate
+      repainting. Run your hand along the panel seams and look for ridges or bumps that suggest body filler.
+    </p>
+    <p>
+      Check the underside for bent structural parts, fresh welds and mismatched bolts. Look at the radiator support, the frame rails
+      and the wheel wells. Inspect the airbag labels and seat belts. If an airbag has deployed and was not properly replaced, that is a
+      major safety concern. A professional body inspection can confirm whether repairs were done correctly and whether the frame is
+      straight.
+    </p>
+    <p>
+      Inspecting body panels before buying is much easier with a magnet and a small inspection light. Wrap a magnet in a cloth and
+      test it on the panels. If it does not stick, the metal may be covered with plastic or filler. Use this result as a question,
+      not a conclusion, and ask the seller what happened.
+    </p>
+
+    {shotPaper && (
+      <figure class="guide-figure">
+        <Photo img={shotPaper} sizes="(min-width: 900px) 760px, 100vw" alt={shotPaper.alt} />
+        <figcaption>Title, bill of sale, lien release and registration are the paperwork that turns a purchase into your car.</figcaption>
+      </figure>
+    )}
+
+    <h3 class="guide-h3">Alabama vehicle title transfer guide</h3>
+    <p>
+      The Alabama vehicle title transfer is what makes you the legal owner. When you buy a used car in Alabama, the seller signs the
+      title over to you, and you take it to your county probate office to have a new title issued in your name and to register the
+      vehicle. Title and registration are handled at the county level, so the exact steps and forms can vary slightly by county.
+    </p>
+    <p>
+      Documents needed for an Alabama title transfer usually include the signed original title, a bill of sale, proof of insurance,
+      a valid driver's license or other identification and the application form. If the title has a lienholder, the lender's release
+      or a lien release letter is required. Check the required fees with your county office before you go, because fees can change.
+    </p>
+    <p>
+      Do not accept a title with the seller's signature but without a buyer's name, odometer reading and sale date. Make sure the
+      seller does not leave the buyer section blank. Avoid "title jumping," where the title is signed over to someone else without being
+      properly transferred. A title transfer should always show the seller as the last owner of record.
+    </p>
+
+    <h3 class="guide-h3">Alabama vehicle bill of sale guide</h3>
+    <p>
+      An Alabama vehicle bill of sale should include the date of sale, the buyer's and seller's full names and addresses, the vehicle
+      year, make, model, body type and VIN, the odometer reading, the sale price, the payment method and both signatures. For a
+      private sale, include whether the vehicle is sold as is. A written bill of sale protects both parties and helps the county
+      calculate tax and fees.
+    </p>
+    <p>
+      Many buyers ask what to include in a vehicle bill of sale. The short answer is every fact that identifies the vehicle and the
+      transaction, and nothing that is untrue. Do not write a lower price to reduce taxes. That is illegal, and it can cause serious
+      problems if the vehicle is later reported or the sale is questioned. Keep at least one copy for your records and give one to
+      the seller.
+    </p>
+
+    <h3 class="guide-h3">How to register a used car in Alabama</h3>
+    <p>
+      Registering a used car in Alabama typically means taking your title, bill of sale, proof of insurance and identification to your
+      county probate office. You will pay the registration and title fees, any applicable sales tax, and receive your plate and
+      registration. If you bought from a dealer, the dealer often handles much of this for you, but you should still verify each
+      document and fee.
+    </p>
+    <p>
+      An Alabama vehicle registration checklist should include the title, a completed application, proof of insurance, a bill of sale,
+      identification, any lien release, and payment. Ask whether your county accepts online or mailed applications, and whether a
+      temporary tag is available while your title is processed. If you are registering a car you bought privately, bring the seller's
+      signed title and a bill of sale that matches it.
+    </p>
+
+    <h3 class="guide-h3">Alabama car sales tax and fees</h3>
+    <p>
+      Alabama car sales tax is one of the most important costs to plan for. Most vehicle purchases are subject to a state automotive
+      sales tax, and local tax may also apply depending on where you register the vehicle. Because the rate and application can change,
+      confirm the current figures with your county office or dealer before you agree on a price. Ask whether the tax is calculated on
+      the purchase price, the trade-in credit or the full value of the vehicle.
+    </p>
+    <p>
+      Estimating total car purchase costs in Alabama means adding the purchase price, sales tax, title fee, registration fee, any
+      documentation or processing fee, any inspection costs, and the first insurance premium. A used car that costs $12,000 can easily
+      cost several hundred dollars more once taxes and fees are included. Use that total when comparing offers from different sellers.
+    </p>
+
+    <h3 class="guide-h3">Buying a car with a lien in Alabama</h3>
+    <p>
+      A lien means that a lender has a financial interest in the vehicle, usually because the owner still has a loan. A lien is not
+      automatically a reason to avoid a car, but it changes the process. Before you buy a car with a lien, make sure the seller can
+      pay off the loan and provide a lien release. The lender must release its interest in the title before ownership can be
+      transferred to you.
+    </p>
+    <p>
+      Checking a lien before buying a used car can be done by reviewing the title, asking the seller for a payoff statement and
+      contacting the lienholder directly. Ask for the lienholder's name, the account number and the payoff amount. Make sure the
+      payoff is paid through the lender, and that the lender sends the release to the county. A private purchase with an outstanding
+      loan should be completed at the lender's office or with a secure escrow arrangement. Never hand over money without a clear
+      lien release plan.
+    </p>
+
+    <h3 class="guide-h3">Buying a rebuilt title car in Alabama</h3>
+    <p>
+      A rebuilt title means that a vehicle was previously declared a total loss, then repaired and inspected for road use. Rebuilt
+      vs clean title cars can differ significantly in value and in the quality of repairs. Some rebuilt vehicles are sound. Others
+      were repaired poorly or hide serious damage. The title brand alone does not tell you how well the car was rebuilt.
+    </p>
+    <p>
+      Questions to ask before buying a rebuilt vehicle include what caused the total loss, what was repaired, whether the airbags and
+      frame were replaced, who did the work, whether receipts are available and whether the car has passed the required inspection
+      after rebuilding. A rebuilt Alabama title buyer guide should always recommend an independent inspection and a close look at the
+      repair documentation. Insurance can also be harder to obtain and more expensive for rebuilt cars, so ask your insurer before
+      you buy.
+    </p>
+
+    <h3 class="guide-h3">Buying a used car in Birmingham, Alabama</h3>
+    <p>
+      Birmingham is the largest metro area in Alabama, and its used car market reflects that size. Commuters travel long distances on
+      highways such as I-20, I-59 and I-65, which makes fuel economy, highway comfort and reliability important. Many Birmingham buyers
+      look for compact SUVs, midsize sedans and pickups. The city also has a wide range of dealers, from large franchised stores to
+      independent lots, and a strong private sale market.
+    </p>
+    <p>
+      For a Birmingham used car buying guide, focus on three things. First, plan a pre purchase inspection with a shop that works on
+      the make you are considering. Second, check the title and history carefully, since cars move between counties and states often.
+      Third, compare the out-the-door price from several dealers and private sellers before you commit. A Birmingham private seller
+      car buying tip is to meet at a bank or a safe public location and to bring someone with you when you hand over payment.
+    </p>
+
+    <h3 class="guide-h3">Buying a used car in Huntsville, Alabama</h3>
+    <p>
+      Huntsville has a large population of engineers, researchers and families, and many residents want a dependable car for daily
+      commuting along the Interstate and the Parkway. The area also has a large number of private sales. A Huntsville used car buying
+      checklist should include a clear review of the title, a careful test drive on the highway and a pre purchase inspection with an
+      independent mechanic.
+    </p>
+    <p>
+      If you buy a car from a private seller in Huntsville, verify the title in person and confirm the seller's identity. Ask for a
+      bill of sale and keep copies. Pay attention to the car's history in the Tennessee Valley, since the region has had heavy rain
+      and occasional flooding events. Check the undercarriage and the interior for signs of water.
+    </p>
+
+    <h3 class="guide-h3">Buying a used car in Mobile, Alabama</h3>
+    <p>
+      Mobile sits on the Gulf Coast, where salt air, humidity and summer heat put extra stress on vehicles. Checking coastal used cars
+      for corrosion should be a standard part of any inspection. Look under the car for rust on the frame, brake lines, exhaust and
+      suspension parts. Check the battery area, door hinges and seat mounting points for corrosion. Ask whether the car was garaged or
+      parked outdoors, and whether it has ever been in a flood.
+    </p>
+    <p>
+      A pre purchase inspection in Mobile should include an assessment of the air conditioning system, since AC failure is common in
+      hot climates. Test it on the highway and at idle. Ask about hurricane history, and remember that a vehicle from the Gulf Coast
+      may have been moved inland after a storm. Use the VIN and history report to confirm that the car has a clean record.
+    </p>
+
+    <h3 class="guide-h3">Buying a used car in Montgomery, Alabama</h3>
+    <p>
+      Montgomery is the state capital and a major employer, with many government and medical workers who need reliable daily
+      transportation. Montgomery used car buying tips focus on value and documentation. Compare offers carefully, since prices vary
+      between dealers and private sellers. Ask for an itemized out-the-door price and read every fee.
+    </p>
+    <p>
+      When comparing used car offers in Montgomery, build a simple table. List the price, the sales tax estimate, the fees, the
+      mileage, the title status, the inspection result and the warranty. This shows you the real total cost, not just the sticker
+      price. A pre purchase inspection in Montgomery is inexpensive compared with the cost of an unexpected repair.
+    </p>
+
+    <h3 class="guide-h3">How much mileage is too much for a used car</h3>
+    <p>
+      There is no single mileage number that makes a car a bad purchase. A well-maintained vehicle with high highway mileage can be a
+      better choice than a neglected car with low miles. The age of the car, the type of driving it has done and the maintenance
+      history matter as much as the odometer. Many buyers consider a car in the range of 100,000 miles a normal used car, but the
+      condition and records decide whether it is a good buy.
+    </p>
+    <p>
+      High mileage used car buying guides often recommend comparing mileage with age. A car that has been driven 20,000 miles per year
+      has a different wear profile than one driven 8,000 miles per year. Ask whether major items such as the timing belt, transmission
+      service and suspension parts have been replaced. A higher-mileage car that has had these services can be a good value.
+    </p>
+
+    <h3 class="guide-h3">Used car dealer vs private seller</h3>
+    <p>
+      The choice between a dealer and a private seller depends on your priorities. A private sale can offer a lower price and fewer
+      fees. A dealer can offer more paperwork support, more choice, financing options, trade-in and sometimes a warranty. Neither
+      option is automatically safer. Your protection comes from the inspection, the history report and the paperwork, whichever seller
+      you use.
+    </p>
+    <p>
+      When comparing dealer and private seller prices, remember to include fees, taxes and the cost of any warranty. A lower private
+      price may require you to pay for an inspection, a title service or a repair that a dealer would have included. Make the
+      comparison on the same basis.
+    </p>
+
+    <h3 class="guide-h3">Certified pre owned vs used cars</h3>
+    <p>
+      Certified pre-owned vehicles are used cars that a manufacturer or dealer has inspected against a published checklist, often
+      with an extended warranty and other benefits. CPO vs used car differences are real: CPO cars usually cost more, but they may
+      come with better protection. Ask what the inspection covered, how many points were checked, what repairs were made and what the
+      warranty includes.
+    </p>
+    <p>
+      Is certified pre owned worth it? For some buyers it is, especially when they want a newer car with a longer warranty and less
+      uncertainty. For others, a non-certified car with a strong independent inspection and clean history is the better value. Read the
+      CPO warranty carefully: check the length of coverage, the mileage limit, the deductible and the list of covered components. Ask
+      whether repairs must be done at the selling dealership.
+    </p>
+
+    {shotDealer && (
+      <figure class="guide-figure guide-figure-small">
+        <Photo img={shotDealer} sizes="(min-width: 900px) 560px, 100vw" alt={shotDealer.alt} />
+      </figure>
+    )}
+
+    <h3 class="guide-h3">How to negotiate a used car price</h3>
+    <p>
+      Good negotiation is based on facts, not pressure. Start with a clear target price based on your market research and the
+      inspection results. If the mechanic found that the brakes need replacing and the tires are worn, those repair costs are a
+      legitimate reason to lower your offer. Put your offer in writing if possible, and be ready to walk away.
+    </p>
+    <p>
+      A used car negotiation checklist should include the total out-the-door price, the sales tax estimate, the documentation fee,
+      any add-on products, the trade-in value if applicable and the cost of required repairs. Ask for an out-the-door price rather
+      than a monthly payment, since monthly payments can hide a longer loan and higher total cost. Negotiating after a pre purchase
+      inspection gives you objective evidence and makes the conversation easier for both sides.
+    </p>
+    <p>
+      Be prepared to say no. Many good used cars are sold each week, and another vehicle will appear. A seller who respects your
+      research is more likely to meet you in the middle.
+    </p>
+
+    <h3 class="guide-h3">Used Toyota Camry vs Honda Accord</h3>
+    <p>
+      The Toyota Camry and Honda Accord are two of the most popular midsize sedans in America, and they are often compared on the used
+      market. Both have strong reputations for comfort, fuel economy and long service life when they are maintained properly. The better
+      choice depends on the specific model year, the engine and trim, the maintenance history and your driving needs.
+    </p>
+    <p>
+      When you compare a used Camry vs Accord, check the model year carefully. Each generation has different features, safety
+      equipment and known service items. Look for a car with complete maintenance records, verified mileage and no open recalls.
+      Compare total ownership costs, including insurance, fuel, tires and typical repairs for each model. A pre purchase inspection can
+      reveal differences in condition that matter more than the badge on the trunk.
+    </p>
+
+    <h3 class="guide-h3">Used Toyota RAV4 vs Honda CR-V</h3>
+    <p>
+      The RAV4 and CR-V are among the most popular compact SUVs, and many Alabama families consider them for daily driving and weekend
+      trips. Both offer practical cargo space, good visibility and available all-wheel drive. The used RAV4 vs CR-V comparison comes down
+      to the year, the trim, the drivetrain and the way the vehicle was maintained.
+    </p>
+    <p>
+      Compare cargo space in person, since the difference can matter for strollers, sports gear and luggage. Test the seats, the
+      visibility and the road noise on a highway. For a used compact SUV buying guide, check the age of the tires, the condition of the
+      brakes and any evidence of towing or off-road use. Ask about the cost of ownership, including insurance and fuel for the exact
+      model you are considering.
+    </p>
+
+    <h3 class="guide-h3">Alabama car buying checklist</h3>
+    <p>
+      Use this checklist on every visit, whether you are meeting a dealer or a private seller. Print it or save it on your phone, and
+      check off each item before you sign anything. Missing one step is not always a disaster, but missing several usually means you
+      should slow down or walk away.
+    </p>
+    <ul class="guide-list">
+      <li>Total out-the-door budget written down, including sales tax, title and registration fees, and insurance.</li>
+      <li>VIN matched on the dashboard, the driver's door jamb, the title and the registration.</li>
+      <li>Vehicle history report reviewed, with title brands, odometer history and accident records checked.</li>
+      <li>Open recalls checked with the NHTSA lookup and the repair status confirmed.</li>
+      <li>Title in the seller's name, with no unexplained alterations and any lien identified.</li>
+      <li>Independent pre-purchase inspection completed at a shop you chose, with a written report.</li>
+      <li>Cold start, test drive on city streets and highways, and all electronics tested.</li>
+      <li>Repair estimates from the inspection used to set or confirm your offer.</li>
+      <li>Itemized purchase agreement or bill of sale reviewed line by line before signing.</li>
+      <li>Warranty terms, service contract and add-on products understood, and optional products declined where you do not want them.</li>
+      <li>Payment method chosen so that it can be traced, with no gift cards and no wire transfers to strangers.</li>
+      <li>Title, lien release and registration paperwork received, with copies kept for your records.</li>
+    </ul>
+
+    <h3 class="guide-h3">Common mistakes first time used car buyers make</h3>
+    <p>
+      Most buyer regrets come from a short list of avoidable mistakes. The first is focusing only on the monthly payment. A longer loan
+      can make a car look affordable while raising the total cost by thousands of dollars. The second is skipping the inspection because
+      the car looks clean or the seller seems honest. A clean exterior can hide a failing transmission, a cracked engine block or a frame
+      that was repaired after a serious accident.
+    </p>
+    <p>
+      The third mistake is trusting verbal promises. If a seller says the brakes were just replaced or the car has never had an accident,
+      ask for the receipt or the report. If the promise is not written down, it is not part of your agreement. The fourth is buying the
+      first car that fits the budget instead of comparing at least three options. The fifth is ignoring the title. A title problem can
+      take months to fix, and in some cases the car cannot be registered at all.
+    </p>
+    <p>
+      Finally, many new buyers sign quickly because they feel pressure. Take the paperwork home if the seller allows it, and read it
+      without a salesperson in the room. A good seller will give you that time. If you feel rushed, that is information too.
+    </p>
+
+    <h3 class="guide-h3">What to bring when you look at a used car in Alabama</h3>
+    <p>
+      Preparation makes the visit faster and gives you more control. Bring a valid driver's license, since most sellers and dealers
+      need to verify who you are before a test drive. Bring proof of insurance, because you cannot legally drive an uninsured car home,
+      and your insurer can often quote a specific vehicle by VIN before you buy. A printed copy of your budget and the checklist above
+      keeps you focused on the numbers.
+    </p>
+    <p>
+      For the physical inspection, bring a flashlight, a small magnet, a tire tread gauge, paper towels for checking fluids, a notepad
+      and a phone to take photos. If you plan to finance, bring your pay stubs, proof of residence and the information your lender
+      requests. Leave your checkbook or payment card in the car if you do not plan to buy that day, and never leave a deposit before
+      the inspection is complete.
+    </p>
+
+    <h3 class="guide-h3">How to use this guide with real listings</h3>
+    <p>
+      Treat this guide as a working document. Before you open a listing, write down the model years, mileage range and price you can
+      afford, plus the paperwork you will need. When you find a vehicle that fits, check its photos against your list, confirm the VIN
+      and compare the dealer's stated history with the independent report. Each step narrows the field, and the cars that survive every
+      step are usually the ones worth a test drive.
+    </p>
+    <p>
+      Comparing several listings side by side also helps. Keep a short record for each car: price, out-the-door estimate, mileage,
+      title status, inspection findings and any questions the seller has not answered. The best choice is often the one with the
+      cleanest paperwork and the most honest answers, not the lowest advertised price.
+    </p>
+
+    <div class="guide-cta">
+      <h3>Ready to compare Alabama used cars?</h3>
+      <p>
+        Use this guide to prepare your questions and inspection, then search listings from local dealers. Every listing shows the
+        vehicle details the dealer has provided, and you can contact the dealer directly with any questions.
+      </p>
+      <div class="row" style="justify-content:flex-start">
+        <a class="btn btn-primary" href="/used-cars">Search used cars</a>
+        <a class="btn btn-outline" href="/financing">Financing estimator</a>
+        <a class="btn btn-outline" href="/blog">Read all guides</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-guide { background: var(--surface, transparent); }
+  .guide-prose { max-width: 820px; }
+  .guide-prose p, .guide-prose li { line-height: 1.75; }
+  .guide-intro .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; color: var(--muted, #555); margin: 0 0 .5rem; }
+  .guide-h3 { margin-top: 2.25rem; font-size: 1.45rem; }
+  .guide-h4 { margin-top: 1.5rem; font-size: 1.15rem; }
+  .guide-kicker { font-size: 1.1rem; margin: 1.5rem 0 .5rem; }
+  .guide-steps { padding-left: 1.25rem; }
+  .guide-steps li { margin-bottom: .5rem; }
+  .guide-list { padding-left: 1.25rem; }
+  .guide-list li { margin-bottom: .4rem; }
+  .guide-figure { margin: 1.75rem 0; }
+  .guide-figure img { width: 100%; height: auto; border-radius: 12px; display: block; }
+  .guide-figure figcaption { font-size: .9rem; color: var(--muted, #555); margin-top: .5rem; }
+  .guide-figure-small { max-width: 560px; }
+  .guide-cta { margin-top: 2.5rem; padding: 1.5rem; border-radius: 14px; border: 1px solid var(--line, #ddd); }
+  @media (max-width: 600px) { .guide-h3 { font-size: 1.25rem; } }
+</style>

@@ -1,0 +1,19 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import LeadDetail from '../../../components/LeadDetail.astro';
+import { getLead, handleLeadPost } from '../../../lib/lead-actions';
+
+const env = Astro.locals.runtime.env;
+const dealer = Astro.locals.dealer!;
+const lead = await getLead(env.DB, Number(Astro.params.id));
+if (!lead || lead.dealer_id !== dealer.id) return Astro.rewrite('/404');
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  err = await handleLeadPost(env, lead, await Astro.request.formData(), Astro.locals.user!, dealer.name);
+  if (!err) return Astro.redirect(`/dashboard/leads/${lead.id}?ok=updated`, 303);
+}
+---
+<DashboardLayout title={`Lead from ${lead.name}`} area="dealer" err={err}>
+  <p><a href="/dashboard/leads">← All leads</a></p>
+  <LeadDetail lead={lead} canReply />
+</DashboardLayout>

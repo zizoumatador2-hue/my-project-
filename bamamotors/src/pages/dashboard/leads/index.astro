@@ -1,0 +1,70 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import Pagination from '../../../components/Pagination.astro';
+import { all, first, nowIso } from '../../../lib/db';
+import { LEAD_TYPES, LEAD_STATUSES, type LeadType } from '../../../lib/constants';
+import { formatDateTime } from '../../../lib/format';
+
+const db = Astro.locals.runtime.env.DB;
+const dealer = Astro.locals.dealer!;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const ids = fd.getAll('ids').map(Number).filter((n) => n > 0).slice(0, 200);
+  const status = String(fd.get('status'));
+  if (ids.length && (LEAD_STATUSES as readonly string[]).includes(status)) {
+    await db.prepare(`UPDATE leads SET status = ?, updated_at = ? WHERE dealer_id = ? AND id IN (${ids.map(() => '?').join(',')})`).bind(status, nowIso(), dealer.id, ...ids).run();
+    return Astro.redirect('/dashboard/leads?ok=bulk', 303);
+  }
+}
+const sp = Astro.url.searchParams;
+const status = (LEAD_STATUSES as readonly string[]).includes(sp.get('status') ?? '') ? sp.get('status')! : '';
+const type = (sp.get('type') ?? '') in LEAD_TYPES ? sp.get('type')! : '';
+const page = Math.max(1, Number(sp.get('page')) || 1);
+const PER = 30;
+const where = ['dealer_id = ?'];
+const params: (string | number)[] = [dealer.id];
+if (status) { where.push('status = ?'); params.push(status); }
+if (type) { where.push('type = ?'); params.push(type); }
+const total = (await first<{ n: number }>(db, `SELECT COUNT(*) AS n FROM leads WHERE ${where.join(' AND ')}`, params))?.n ?? 0;
+const leads = await all<{ id: number; type: LeadType; name: string; email: string; phone: string | null; vehicle_label: string | null; status: string; created_at: string }>(db,
+  `SELECT id, type, name, email, phone, vehicle_label, status, created_at FROM leads WHERE ${where.join(' AND ')} ORDER BY created_at DESC LIMIT ${PER} OFFSET ${(page - 1) * PER}`, params);
+const counts = await all<{ status: string; n: number }>(db, 'SELECT status, COUNT(*) AS n FROM leads WHERE dealer_id = ? GROUP BY status', [dealer.id]);
+const countOf = (s: string) => counts.find((c) => c.status === s)?.n ?? 0;
+---
+<DashboardLayout title="Leads" area="dealer">
+  <h1>Leads</h1>
+  <ul class="chips" style="margin-bottom:16px">
+    <li><a class="chip" href="/dashboard/leads" aria-current={!status ? 'page' : undefined}>All <span class="count">({counts.reduce((a, c) => a + c.n, 0)})</span></a></li>
+    {LEAD_STATUSES.map((s) => <li><a class="chip" href={`/dashboard/leads?status=${s}`} aria-current={status === s ? 'page' : undefined}>{s} <span class="count">({countOf(s)})</span></a></li>)}
+  </ul>
+  <form method="get" class="toolbar">
+    <input type="hidden" name="status" value={status} />
+    <div class="field" style="max-width:260px"><label for="lt">Type</label><select class="select" id="lt" name="type"><option value="">All types</option>{Object.entries(LEAD_TYPES).map(([k, l]) => <option value={k} selected={k === type}>{l}</option>)}</select></div>
+    <button class="btn btn-outline" type="submit">Filter</button>
+  </form>
+  {leads.length === 0 ? (
+    <EmptyState title="No leads here yet" icon="inbox"><p>When shoppers contact you about a vehicle, their requests show up here and in your email.</p></EmptyState>
+  ) : (
+    <form method="post">
+      <div class="toolbar">
+        <div class="field" style="max-width:220px"><label for="ls">Mark selected as</label><select class="select" id="ls" name="status">{LEAD_STATUSES.map((s) => <option>{s}</option>)}</select></div>
+        <button class="btn btn-outline" type="submit">Apply</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th><span class="sr-only">Select</span></th><th>Shopper</th><th>Request</th><th>Vehicle</th><th>Status</th><th>Received</th></tr></thead>
+        <tbody>{leads.map((l) => (
+          <tr>
+            <td><input type="checkbox" name="ids" value={l.id} aria-label={`Select lead from ${l.name}`} /></td>
+            <td><a href={`/dashboard/leads/${l.id}`}><strong>{l.name}</strong></a><br /><span class="small muted">{l.email}{l.phone ? ` · ${l.phone}` : ''}</span></td>
+            <td>{LEAD_TYPES[l.type]}</td>
+            <td class="small">{l.vehicle_label ?? '—'}</td>
+            <td><span class={`badge ${l.status === 'new' ? 'badge-warn' : l.status === 'converted' ? 'badge-ok' : ''}`}>{l.status}</span></td>
+            <td class="small">{formatDateTime(l.created_at)}</td>
+          </tr>
+        ))}</tbody>
+      </table></div>
+    </form>
+  )}
+  <Pagination page={page} pages={Math.max(1, Math.ceil(total / PER))} href={(p) => `/dashboard/leads?${new URLSearchParams({ ...(status && { status }), ...(type && { type }), page: String(p) })}`} />
+</DashboardLayout>

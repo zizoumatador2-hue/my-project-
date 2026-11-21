@@ -1,0 +1,45 @@
+---
+import type { FieldErrors } from '../lib/validation';
+interface Props { errors?: FieldErrors; values?: Record<string, string>; action: string; }
+const { errors = {}, values = {}, action } = Astro.props;
+const env = Astro.locals.runtime.env;
+const f = (name: string, label: string, opts: { type?: string; auto?: string; hint?: string; full?: boolean; inputmode?: string; max?: number } = {}) => ({ name, label, ...opts });
+const groups = [
+  { legend: 'Dealership', fields: [
+    f('dealer_name', 'Dealership name', { auto: 'organization', full: true }),
+    f('dealer_phone', 'Dealership phone', { type: 'tel', auto: 'tel' }),
+    f('address', 'Street address', { auto: 'street-address' }),
+    f('city', 'City', { auto: 'address-level2' }),
+    f('zip', 'ZIP code', { auto: 'postal-code', inputmode: 'numeric', max: 5 }),
+  ] },
+  { legend: 'Your login', fields: [
+    f('name', 'Your name', { auto: 'name' }),
+    f('email', 'Email (leads are sent here)', { type: 'email', auto: 'email' }),
+    f('phone', 'Your mobile (optional)', { type: 'tel', auto: 'tel' }),
+    f('password', 'Password', { type: 'password', auto: 'new-password', hint: 'At least 10 characters.' }),
+  ] },
+];
+---
+<form method="post" action={action} class="card card-pad" novalidate>
+  <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+  {groups.map((g) => (
+    <fieldset>
+      <legend>{g.legend}</legend>
+      <div class="form-grid">
+        {g.fields.map((x) => (
+          <div class={`field${x.full ? ' full' : ''}`}>
+            <label for={`ds-${x.name}`}>{x.label}</label>
+            <input class="input" id={`ds-${x.name}`} name={x.name} type={(x.type ?? 'text') as 'text'} autocomplete={x.auto} inputmode={x.inputmode as 'numeric' | undefined} maxlength={x.max}
+              required={x.name !== 'phone'} value={x.type === 'password' ? '' : values[x.name] ?? ''} aria-invalid={errors[x.name] ? 'true' : undefined} />
+            {x.hint && <span class="hint">{x.hint}</span>}
+            {errors[x.name] && <span class="field-error">{errors[x.name]}</span>}
+          </div>
+        ))}
+      </div>
+    </fieldset>
+  ))}
+  <label class="check"><input type="checkbox" name="terms" required /> <span>I am authorized to list vehicles for this dealership and agree to the <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</span></label>
+  {errors.terms && <p class="field-error">{errors.terms}</p>}
+  {env.TURNSTILE_SITE_KEY && <div class="cf-turnstile" data-sitekey={env.TURNSTILE_SITE_KEY} style="margin-top:12px"></div>}
+  <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:16px">Create dealer account</button>
+</form>

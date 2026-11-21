@@ -1,0 +1,57 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import VehicleForm from '../../../components/VehicleForm.astro';
+import ImageManager from '../../../components/ImageManager.astro';
+import { getVehicleById, getVehicleImages, getVehicleFeatures } from '../../../lib/vehicles';
+import { saveVehicle, deleteVehicle, imageAction } from '../../../lib/vehicle-save';
+import { vehicleToForm } from '../../../lib/vehicle-form';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+import { vehicleTitle, formatNumber } from '../../../lib/format';
+import { first } from '../../../lib/db';
+
+const env = Astro.locals.runtime.env;
+const dealer = Astro.locals.dealer!;
+const id = Number(Astro.params.id);
+const v = Number.isInteger(id) ? await getVehicleById(env.DB, id) : null;
+if (!v || v.dealer_id !== dealer.id) return Astro.rewrite('/404');
+let values = vehicleToForm(v, await getVehicleFeatures(env.DB, v.id));
+let errors: FieldErrors = {};
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action') ?? '');
+  if (action === 'delete') {
+    await deleteVehicle(env.DB, env.MEDIA, v.id, Astro.locals.user!.id);
+    return Astro.redirect('/dashboard/vehicles?ok=deleted', 303);
+  }
+  if (action.startsWith('img_')) {
+    await imageAction(env.DB, env.MEDIA, v.id, action, Number(fd.get('image_id')));
+    return Astro.redirect(`/dashboard/vehicles/${v.id}#photos`, 303);
+  }
+  values = formToObject(fd);
+  const res = await saveVehicle(env.DB, values, { dealerId: dealer.id, vehicleId: v.id, actorId: Astro.locals.user!.id, enforceLimit: true, source: 'dealer' });
+  if (res.ok) return Astro.redirect(`/dashboard/vehicles/${v.id}?ok=saved`, 303);
+  errors = res.errors;
+}
+const images = await getVehicleImages(env.DB, v.id);
+const leadCount = (await first<{ n: number }>(env.DB, 'SELECT COUNT(*) AS n FROM leads WHERE vehicle_id = ?', [v.id]))?.n ?? 0;
+---
+<DashboardLayout title={`Edit ${vehicleTitle(v)}`} area="dealer">
+  <div class="spread">
+    <div><h1 style="margin:0">{vehicleTitle(v)}</h1><p class="muted" style="margin:4px 0 0">Status: <strong>{v.status}</strong> · {formatNumber(v.views)} views · {leadCount} leads</p></div>
+    <div class="row"><a class="btn btn-outline" href={`/vehicles/${v.slug}`} target="_blank" rel="noopener">View listing</a><a class="btn btn-ghost" href="/dashboard/vehicles">← Inventory</a></div>
+  </div>
+  {dealer.status !== 'active' && <div class="alert alert-warn" style="margin-top:12px">Your dealership is pending approval, so this listing isn't public yet.</div>}
+  <div style="margin-top:16px"><ImageManager vehicleId={v.id} images={images} /></div>
+  <VehicleForm values={values} errors={errors} submitLabel="Save changes" />
+  <form method="post" class="panel" style="margin-top:24px" data-confirm="Permanently delete this vehicle and its photos?">
+    <input type="hidden" name="action" value="delete" />
+    <h2 style="font-size:1.05rem">Delete vehicle</h2>
+    <p class="small muted">Prefer marking vehicles <strong>Sold</strong> to keep your history. Deleting removes the listing and photos permanently.</p>
+    <button class="btn btn-danger" type="submit">Delete vehicle</button>
+  </form>
+</DashboardLayout>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((f) =>
+    f.addEventListener('submit', (e) => { if (!confirm(f.dataset.confirm!)) e.preventDefault(); }),
+  );
+</script>

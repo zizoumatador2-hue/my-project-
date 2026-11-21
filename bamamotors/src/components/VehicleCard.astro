@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import type { VehicleCard } from '../lib/search';
+import { formatPrice, formatNumber, monthlyPayment } from '../lib/format';
+
+interface Props { v: VehicleCard; eager?: boolean; headingLevel?: 'h2' | 'h3'; }
+const { v, eager = false, headingLevel = 'h3' } = Astro.props;
+const title = `${v.year} ${v.make_name} ${v.model_name}`;
+const featured = v.featured_until && v.featured_until > new Date().toISOString();
+const est = Math.round(monthlyPayment((v.price_cents / 100) * 0.9, 8.5, 60));
+const H = headingLevel;
+const miles = v.dist2 != null ? Math.round(Math.sqrt(v.dist2)) : null;
+---
+<article class="vcard spotlight">
+  <div class="vcard-media">
+    {v.image_key ? (
+      <img src={`/media/${v.image_key}`} alt={`${title}${v.trim ? ` ${v.trim}` : ''} for sale in ${v.city_name}, AL`} width="640" height="480"
+        loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'} />
+    ) : (
+      <div class="placeholder"><Icon name="car" size={56} /><span class="sr-only">Photo coming soon</span></div>
+    )}
+    {featured && <span class="badge badge-featured">★ Featured</span>}
+    {!featured && v.condition === 'certified' && <span class="badge badge-dark">Certified</span>}
+  </div>
+  <button class="save-btn" type="button" data-save={v.id} aria-pressed="false" aria-label={`Save ${title}`}>
+    <Icon name="heart" size={20} />
+  </button>
+  <div class="vcard-body">
+    <H class="vcard-title"><a href={`/vehicles/${v.slug}`}>{title}</a></H>
+    {v.trim && <p class="vcard-trim">{v.trim}</p>}
+    <div class="vcard-price">{formatPrice(v.price_cents)}</div>
+    <div class="vcard-meta">
+      <span>{formatNumber(v.mileage)} mi</span>
+      <span>{v.body_type}</span>
+      <span>{v.drivetrain}</span>
+    </div>
+    <div class="vcard-meta"><span><Icon name="pin" size={14} /> {v.city_name}, AL{miles !== null ? ` · ${miles} mi away` : ''}</span></div>
+    <div class="vcard-dealer">{v.dealer_name}</div>
+    <a class="vcard-cta" href={`/vehicles/${v.slug}#financing`}>Est. ${formatNumber(est)}/mo · Check financing</a>
+  </div>
+</article>

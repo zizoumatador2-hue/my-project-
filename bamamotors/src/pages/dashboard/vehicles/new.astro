@@ -1,0 +1,27 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import VehicleForm from '../../../components/VehicleForm.astro';
+import { saveVehicle } from '../../../lib/vehicle-save';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+import { planOf } from '../../../lib/plans';
+import { activeVehicleCount } from '../../../lib/dealers';
+
+const env = Astro.locals.runtime.env;
+const dealer = Astro.locals.dealer!;
+let values: Record<string, string> = { condition: 'used', status: 'active', year: String(new Date().getFullYear() - 3) };
+let errors: FieldErrors = {};
+if (Astro.request.method === 'POST') {
+  values = formToObject(await Astro.request.formData());
+  const res = await saveVehicle(env.DB, values, { dealerId: dealer.id, actorId: Astro.locals.user!.id, enforceLimit: true, source: 'dealer' });
+  if (res.ok) return Astro.redirect(`/dashboard/vehicles/${res.id}?ok=created#photos`, 303);
+  errors = res.errors;
+}
+const used = await activeVehicleCount(env.DB, dealer.id);
+const plan = planOf(dealer.plan);
+---
+<DashboardLayout title="Add vehicle" area="dealer">
+  <h1>Add a vehicle</h1>
+  <p class="muted">You're using {used} of {plan.vehicleLimit} listings on the {plan.name} plan. After saving, you'll add photos.</p>
+  {used >= plan.vehicleLimit && <div class="alert alert-warn">You've reached your plan limit. <a href="/dashboard/billing">Upgrade your plan</a> or mark vehicles sold to add more.</div>}
+  <VehicleForm values={values} errors={errors} submitLabel="Save & add photos" />
+</DashboardLayout>

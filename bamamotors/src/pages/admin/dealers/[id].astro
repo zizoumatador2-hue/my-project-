@@ -1,0 +1,67 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import DealerProfileForm from '../../../components/DealerProfileForm.astro';
+import { getDealerFullById } from '../../../lib/dealers';
+import { saveDealerProfile } from '../../../lib/dealer-profile';
+import { applyPlan } from '../../../lib/billing';
+import { run, audit, first, all } from '../../../lib/db';
+import { deleteImages } from '../../../lib/uploads';
+import { formToObject, type FieldErrors } from '../../../lib/validation';
+import type { PlanId } from '../../../lib/plans';
+
+const env = Astro.locals.runtime.env;
+const admin = Astro.locals.user!;
+const id = Number(Astro.params.id);
+let d = await getDealerFullById(env.DB, id);
+if (!d) return Astro.rewrite('/404');
+let errors: FieldErrors = {};
+let values: Record<string, string> | undefined;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  if (action === 'profile') {
+    values = formToObject(fd);
+    const res = await saveDealerProfile(env.DB, id, values, admin.id);
+    if (!res) return Astro.redirect(`/admin/dealers/${id}?ok=saved`, 303);
+    errors = res;
+  } else if (action === 'admin') {
+    const status = String(fd.get('status'));
+    const plan = String(fd.get('plan')) as PlanId;
+    const featured = fd.get('is_featured') === 'on' ? 1 : 0;
+    if (['pending', 'active', 'suspended'].includes(status)) await run(env.DB, 'UPDATE dealers SET status = ?, is_featured = ? WHERE id = ?', [status, featured, id]);
+    if (['free', 'basic', 'pro'].includes(plan) && plan !== d.plan) await applyPlan(env.DB, id, plan, { provider: 'manual', actorId: admin.id });
+    await audit(env.DB, admin.id, 'dealer.admin_update', 'dealer', id, { status, plan, featured });
+    return Astro.redirect(`/admin/dealers/${id}?ok=saved`, 303);
+  } else if (action === 'delete') {
+    const owner = await first<{ owner_user_id: number }>(env.DB, 'SELECT owner_user_id FROM dealers WHERE id = ?', [id]);
+    await audit(env.DB, admin.id, 'dealer.delete', 'dealer', id, { name: d.name });
+    const keys = await all<{ a: string; b: string }>(env.DB, 'SELECT vi.key_large AS a, vi.key_small AS b FROM vehicle_images vi JOIN vehicles v ON v.id = vi.vehicle_id WHERE v.dealer_id = ?', [id]);
+    await deleteImages(env.MEDIA, [...keys.flatMap((k) => [k.a, k.b]), d.logo_key]);
+    // Deleting the owner account cascades to the dealer, vehicles, image rows and leads.
+    if (owner) await run(env.DB, 'DELETE FROM users WHERE id = ?', [owner.owner_user_id]);
+    return Astro.redirect('/admin/dealers?ok=deleted', 303);
+  }
+  d = await getDealerFullById(env.DB, id);
+}
+const owner = await first<{ name: string; email: string }>(env.DB, 'SELECT name, email FROM users WHERE id = ?', [d!.owner_user_id]);
+---
+<DashboardLayout title={d!.name} area="admin" err={Object.keys(errors).length ? 'Please fix the highlighted fields.' : null}>
+  <div class="spread"><h1 style="margin:0">{d!.name}</h1><div class="row"><a class="btn btn-outline" href={`/dealers/${d!.slug}`}>Public page</a><a class="btn btn-primary" href={`/admin/vehicles/new?dealer_id=${d!.id}`}>+ Add vehicle for dealer</a><a class="btn btn-ghost" href={`/admin/vehicles?dealer_id=${d!.id}`}>Inventory</a></div></div>
+  <p class="muted">Owner: {owner?.name} ({owner?.email})</p>
+  <form method="post" class="panel toolbar" style="margin-bottom:20px">
+    <input type="hidden" name="action" value="admin" />
+    <div class="field"><label for="a-status">Status</label><select class="select" id="a-status" name="status">{['pending', 'active', 'suspended'].map((s) => <option selected={s === d!.status}>{s}</option>)}</select></div>
+    <div class="field"><label for="a-plan">Plan (manual)</label><select class="select" id="a-plan" name="plan">{['free', 'basic', 'pro'].map((s) => <option selected={s === d!.plan}>{s}</option>)}</select></div>
+    <label class="check" style="align-self:center"><input type="checkbox" name="is_featured" checked={d!.is_featured === 1} /> Featured dealer (homepage)</label>
+    <button class="btn btn-dark" type="submit">Save admin settings</button>
+  </form>
+  <DealerProfileForm d={d!} values={values} errors={errors} />
+  <form method="post" class="panel" style="margin-top:24px" data-confirm="Delete this dealer, its owner account, all vehicles and leads? This cannot be undone.">
+    <input type="hidden" name="action" value="delete" />
+    <h2 style="font-size:1.05rem">Danger zone</h2>
+    <button class="btn btn-danger" type="submit">Delete dealer and owner account</button>
+  </form>
+</DashboardLayout>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((f) => f.addEventListener('submit', (e) => { if (!confirm(f.dataset.confirm!)) e.preventDefault(); }));
+</script>

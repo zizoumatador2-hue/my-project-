@@ -1,0 +1,5 @@
+---
+interface Props { msg?: string; }
+const { msg } = Astro.props;
+---
+{msg && <span class="field-error">{msg}</span>}

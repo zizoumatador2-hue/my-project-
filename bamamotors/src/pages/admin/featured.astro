@@ -1,0 +1,52 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, first, run, nowIso, audit } from '../../lib/db';
+import { featureVehicle } from '../../lib/billing';
+import { formatDate } from '../../lib/format';
+
+const db = Astro.locals.runtime.env.DB;
+const admin = Astro.locals.user!;
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  if (action === 'add') {
+    const vid = Number(fd.get('vehicle_id'));
+    const days = Math.min(365, Math.max(1, Number(fd.get('days')) || 30));
+    const v = await first<{ id: number; dealer_id: number; status: string }>(db, 'SELECT id, dealer_id, status FROM vehicles WHERE id = ?', [vid]);
+    if (!v) err = 'Vehicle not found.';
+    else if (v.status !== 'active') err = 'Only active vehicles can be featured.';
+    else { await featureVehicle(db, v.id, v.dealer_id, days, 'admin'); await audit(db, admin.id, 'featured.add', 'vehicle', v.id, { days }); return Astro.redirect('/admin/featured?ok=featured', 303); }
+  } else if (action === 'cancel') {
+    const id = Number(fd.get('id'));
+    const f = await first<{ vehicle_id: number }>(db, 'SELECT vehicle_id FROM featured_listings WHERE id = ?', [id]);
+    if (f) {
+      await run(db, "UPDATE featured_listings SET status = 'canceled' WHERE id = ?", [id]);
+      const still = await first<{ ends_at: string }>(db, "SELECT MAX(ends_at) AS ends_at FROM featured_listings WHERE vehicle_id = ? AND status = 'active' AND ends_at > ?", [f.vehicle_id, nowIso()]);
+      await run(db, 'UPDATE vehicles SET featured_until = ? WHERE id = ?', [still?.ends_at ?? null, f.vehicle_id]);
+      return Astro.redirect('/admin/featured?ok=featured', 303);
+    }
+  }
+}
+const rows = await all<{ id: number; vehicle_id: number; title: string; dealer: string; starts_at: string; ends_at: string; source: string; status: string }>(db,
+  `SELECT f.id, f.vehicle_id, v.year || ' ' || mk.name || ' ' || md.name AS title, d.name AS dealer, f.starts_at, f.ends_at, f.source, f.status
+     FROM featured_listings f JOIN vehicles v ON v.id = f.vehicle_id JOIN makes mk ON mk.id = v.make_id JOIN models md ON md.id = v.model_id JOIN dealers d ON d.id = f.dealer_id
+    WHERE f.status = 'active' AND f.ends_at > ? ORDER BY f.ends_at`, [nowIso()]);
+const prefill = Astro.url.searchParams.get('vehicle') ?? '';
+---
+<DashboardLayout title="Featured listings" area="admin" err={err}>
+  <h1>Featured listings</h1>
+  <form method="post" class="panel toolbar">
+    <input type="hidden" name="action" value="add" />
+    <div class="field"><label for="fv">Vehicle ID</label><input class="input" id="fv" name="vehicle_id" inputmode="numeric" value={prefill} required /></div>
+    <div class="field"><label for="fd">Days</label><input class="input" id="fd" name="days" inputmode="numeric" value="30" /></div>
+    <button class="btn btn-primary" type="submit">Feature vehicle</button>
+  </form>
+  <div class="table-wrap" style="margin-top:16px"><table>
+    <thead><tr><th>Vehicle</th><th>Dealer</th><th>Source</th><th>Start</th><th>Ends</th><th></th></tr></thead>
+    <tbody>{rows.length ? rows.map((r) => (
+      <tr><td><a href={`/admin/vehicles/${r.vehicle_id}`}>#{r.vehicle_id} {r.title}</a></td><td>{r.dealer}</td><td>{r.source}</td><td class="small">{formatDate(r.starts_at)}</td><td class="small">{formatDate(r.ends_at)}</td>
+        <td><form method="post"><input type="hidden" name="action" value="cancel" /><input type="hidden" name="id" value={r.id} /><button class="btn btn-danger btn-sm">Cancel</button></form></td></tr>
+    )) : <tr><td colspan="6" class="muted">No active featured listings.</td></tr>}</tbody>
+  </table></div>
+</DashboardLayout>

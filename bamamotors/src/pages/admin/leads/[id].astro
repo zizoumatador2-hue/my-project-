@@ -1,0 +1,25 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import LeadDetail from '../../../components/LeadDetail.astro';
+import { getLead, handleLeadPost } from '../../../lib/lead-actions';
+
+const env = Astro.locals.runtime.env;
+const lead = await getLead(env.DB, Number(Astro.params.id));
+if (!lead) return Astro.rewrite('/404');
+let err: string | null = null;
+if (Astro.request.method === 'POST') {
+  err = await handleLeadPost(env, lead, await Astro.request.formData(), Astro.locals.user!, 'The BamaMotors team');
+  if (!err) return Astro.redirect(`/admin/leads/${lead.id}?ok=updated`, 303);
+}
+---
+<DashboardLayout title={`Lead #${lead.id}`} area="admin" err={err}>
+  <p><a href="/admin/leads">← All leads</a></p>
+  <LeadDetail lead={lead} canReply={lead.dealer_id === null} />
+  {lead.dealer_id !== null && <p class="small muted" style="margin-top:12px">This lead belongs to {lead.dealer_name}; the dealer replies from their dashboard. Admins can update status and add notes.</p>}
+  {lead.dealer_id !== null && (
+    <form method="post" class="panel" style="margin-top:12px">
+      <div class="field"><label for="n-body">Internal note</label><textarea class="textarea" id="n-body" name="body" rows="3" required></textarea></div>
+      <button class="btn btn-outline" type="submit" name="action" value="note" style="margin-top:8px">Save note</button>
+    </form>
+  )}
+</DashboardLayout>

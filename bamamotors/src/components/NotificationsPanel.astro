@@ -1,0 +1,18 @@
+---
+import { all } from '../lib/db';
+import { formatDateTime } from '../lib/format';
+
+interface Props { userId: number; }
+const notes = await all<{ id: number; title: string; body: string | null; link: string | null; created_at: string; read_at: string | null }>(
+  Astro.locals.runtime.env.DB, 'SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC LIMIT 8', [Astro.props.userId]);
+const unread = notes.filter((n) => !n.read_at).length;
+---
+<section class="panel" aria-labelledby="notes-title">
+  <div class="spread"><h2 id="notes-title" style="font-size:1.1rem;margin:0">Notifications</h2>
+    {unread > 0 && <form method="post"><input type="hidden" name="action" value="mark_notifications_read" /><button class="btn btn-ghost btn-sm" type="submit">Mark all read</button></form>}</div>
+  {notes.length ? (
+    <ul style="list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px">
+      {notes.map((n) => <li class="msg" style={n.read_at ? 'opacity:.7' : ''}>{n.link ? <a href={n.link}><strong>{n.title}</strong></a> : <strong>{n.title}</strong>}{n.body && <><br /><span class="small">{n.body}</span></>}<br /><span class="small muted">{formatDateTime(n.created_at)}</span></li>)}
+    </ul>
+  ) : <p class="muted">You're all caught up.</p>}
+</section>

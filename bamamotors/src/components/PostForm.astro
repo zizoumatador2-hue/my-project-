@@ -1,0 +1,33 @@
+---
+import { all } from '../lib/db';
+import type { FieldErrors } from '../lib/validation';
+import FieldError from './FieldError.astro';
+interface Props { values: Record<string, string>; errors: FieldErrors; isNew: boolean; }
+const { values, errors, isNew } = Astro.props;
+const cats = await all<{ id: number; name: string }>(Astro.locals.runtime.env.DB, 'SELECT id, name FROM categories ORDER BY sort_order, name');
+const v = (k: string) => values[k] ?? '';
+---
+<form method="post" class="panel" novalidate>
+  <input type="hidden" name="action" value="save" />
+  {Object.keys(errors).length > 0 && <div class="alert alert-err">Please fix the highlighted fields.</div>}
+  <div class="form-grid">
+    <div class="field full"><label for="p-title">Title (H1)</label><input class="input" id="p-title" name="title" value={v('title')} required /><FieldError msg={errors.title} /></div>
+    <div class="field"><label for="p-slug">URL slug</label><input class="input" id="p-slug" name="slug" value={v('slug')} placeholder="auto from title" /></div>
+    <div class="field"><label for="p-cat">Category</label><select class="select" id="p-cat" name="category_id"><option value="0">—</option>{cats.map((c) => <option value={c.id} selected={String(c.id) === v('category_id')}>{c.name}</option>)}</select></div>
+    <div class="field"><label for="p-status">Status</label><select class="select" id="p-status" name="status">{['draft', 'published'].map((s) => <option selected={s === (v('status') || 'draft')}>{s}</option>)}</select></div>
+    <div class="field full"><label for="p-excerpt">Excerpt</label><textarea class="textarea" id="p-excerpt" name="excerpt" rows="2" style="min-height:70px">{v('excerpt')}</textarea><FieldError msg={errors.excerpt} /></div>
+    <div class="field full"><label for="p-body">Body (Markdown)</label><textarea class="textarea" id="p-body" name="body" rows="22" style="font-family:ui-monospace,monospace;font-size:14px">{v('body')}</textarea><FieldError msg={errors.body} />
+      <span class="hint">Start with a 40–60 word “Quick answer” paragraph. Use ## for sections, ### for subsections, tables for comparisons, and link to related BamaMotors pages and official sources. Raw HTML is not rendered.</span></div>
+  </div>
+  <fieldset style="margin-top:16px"><legend>SEO</legend>
+    <div class="form-grid">
+      <div class="field"><label for="p-mt">Meta title (≤ 70)</label><input class="input" id="p-mt" name="meta_title" value={v('meta_title')} maxlength="70" /><FieldError msg={errors.meta_title} /></div>
+      <div class="field"><label for="p-kw">Keywords</label><input class="input" id="p-kw" name="keywords" value={v('keywords')} /></div>
+      <div class="field full"><label for="p-md">Meta description (≤ 160)</label><textarea class="textarea" id="p-md" name="meta_description" rows="2" maxlength="160" style="min-height:70px">{v('meta_description')}</textarea><FieldError msg={errors.meta_description} /></div>
+      <div class="field full"><label for="p-faq">FAQ (FAQPage schema)</label><textarea class="textarea" id="p-faq" name="faq" rows="6" placeholder={'Q: Question?\nA: Answer.'}>{v('faq')}</textarea></div>
+      <div class="field full"><label for="p-howto">HowTo steps (optional)</label><textarea class="textarea" id="p-howto" name="howto" rows="5" placeholder="Step name | Step description (one per line)">{v('howto')}</textarea></div>
+    </div>
+  </fieldset>
+  {!isNew && <label class="check" style="margin:8px 0 16px"><input type="checkbox" name="substantial" /> This is a substantial update (show a new “Updated” date)</label>}
+  <div class="row"><button class="btn btn-primary" type="submit">Save post</button><slot /></div>
+</form>

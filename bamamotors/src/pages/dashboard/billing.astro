@@ -1,0 +1,83 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { all, first } from '../../lib/db';
+import { PLANS, planOf, type PlanId } from '../../lib/plans';
+import { formatPrice, formatDate } from '../../lib/format';
+import { stripeEnabled } from '../../lib/stripe';
+import { createSubscriptionCheckout, createPortalSession, requestPlan, CHECKOUT_ERROR } from '../../lib/billing';
+import { activeVehicleCount } from '../../lib/dealers';
+
+const env = Astro.locals.runtime.env;
+const db = env.DB;
+const dealer = Astro.locals.dealer!;
+let err: string | null = null;
+const sub = await first<{ id: number; plan: string; status: string; provider: string; provider_customer_id: string | null; current_period_end: string | null; cancel_at_period_end: number }>(db,
+  "SELECT * FROM subscriptions WHERE dealer_id = ? AND status IN ('active','past_due','requested') ORDER BY id DESC LIMIT 1", [dealer.id]);
+if (Astro.request.method === 'POST') {
+  const fd = await Astro.request.formData();
+  const action = String(fd.get('action'));
+  const plan = String(fd.get('plan')) as PlanId;
+  try {
+    if (action === 'upgrade' && (plan === 'basic' || plan === 'pro')) {
+      if (stripeEnabled(env) && (plan === 'pro' ? env.STRIPE_PRICE_PRO : env.STRIPE_PRICE_BASIC)) return Astro.redirect(await createSubscriptionCheckout(env, dealer, plan), 303);
+      await requestPlan(db, dealer.id, plan);
+      return Astro.redirect('/dashboard/billing?ok=requested', 303);
+    }
+    if (action === 'portal' && sub?.provider_customer_id && stripeEnabled(env)) return Astro.redirect(await createPortalSession(env, sub.provider_customer_id), 303);
+    if (action === 'downgrade_request') {
+      await requestPlan(db, dealer.id, 'free');
+      return Astro.redirect('/dashboard/billing?ok=requested', 303);
+    }
+    err = 'That action is not available.';
+  } catch (e) {
+    console.error('billing action failed', e);
+    err = CHECKOUT_ERROR;
+  }
+}
+const current = planOf(dealer.plan);
+const used = await activeVehicleCount(db, dealer.id);
+const payments = await all<{ id: number; kind: string; amount_cents: number; status: string; description: string | null; created_at: string }>(db,
+  'SELECT id, kind, amount_cents, status, description, created_at FROM payments WHERE dealer_id = ? ORDER BY created_at DESC LIMIT 20', [dealer.id]);
+const online = stripeEnabled(env);
+---
+<DashboardLayout title="Plan & billing" area="dealer" err={err}>
+  <h1>Plan & billing</h1>
+  <div class="grid grid-3">
+    <div class="stat"><div class="n">{current.name}</div><div class="l">Current plan</div></div>
+    <div class="stat"><div class="n">{used}/{current.vehicleLimit}</div><div class="l">Listings used</div></div>
+    <div class="stat"><div class="n">{current.featuredSlots}</div><div class="l">Included featured slots</div></div>
+  </div>
+  {sub?.status === 'requested' && <div class="alert alert-info" style="margin-top:16px">Your request to switch to the <strong>{PLANS[sub.plan as PlanId].name}</strong> plan was received. Our team will contact you to complete billing.</div>}
+  {sub?.status === 'past_due' && <div class="alert alert-err" style="margin-top:16px">Your last payment failed. Update your payment method to keep your plan.</div>}
+  {sub?.status === 'active' && sub.current_period_end && <p class="muted" style="margin-top:12px">{sub.cancel_at_period_end ? 'Cancels' : 'Renews'} on {formatDate(sub.current_period_end)} · billed via {sub.provider === 'stripe' ? 'Stripe' : 'invoice'}</p>}
+  {!online && <p class="small muted" style="margin-top:12px">Online card payments are not enabled yet. Choosing a plan sends a request and our team invoices you directly.</p>}
+
+  <div class="grid grid-3" style="margin-top:20px">
+    {Object.values(PLANS).map((p) => (
+      <div class={`plan${p.id === dealer.plan ? ' popular' : ''}`}>
+        <h2 style="margin:0;font-size:1.2rem">{p.name}{p.id === dealer.plan && <span class="badge badge-ok" style="margin-left:8px">Current</span>}</h2>
+        <div class="price">{p.priceCents ? formatPrice(p.priceCents) : '$0'}<span class="small muted">/month</span></div>
+        <ul>{p.perks.map((x) => <li>{x}</li>)}</ul>
+        {p.id !== dealer.plan && p.id !== 'free' && (
+          <form method="post"><input type="hidden" name="action" value="upgrade" /><input type="hidden" name="plan" value={p.id} />
+            <button class="btn btn-primary btn-block" type="submit">{online ? `Upgrade to ${p.name}` : `Request ${p.name}`}</button></form>
+        )}
+        {p.id === 'free' && dealer.plan !== 'free' && (
+          sub?.provider === 'stripe' && online
+            ? <form method="post"><input type="hidden" name="action" value="portal" /><button class="btn btn-outline btn-block" type="submit">Manage or cancel</button></form>
+            : <form method="post"><input type="hidden" name="action" value="downgrade_request" /><button class="btn btn-outline btn-block" type="submit">Request downgrade</button></form>
+        )}
+      </div>
+    ))}
+  </div>
+  {sub?.provider === 'stripe' && online && (
+    <form method="post" style="margin-top:16px"><input type="hidden" name="action" value="portal" /><button class="btn btn-outline" type="submit">Manage payment method & invoices</button></form>
+  )}
+  <section class="panel" style="margin-top:24px">
+    <h2 style="font-size:1.1rem">Payment history</h2>
+    {payments.length ? (
+      <div class="table-wrap"><table><thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>{payments.map((p) => <tr><td>{formatDate(p.created_at)}</td><td>{p.description ?? p.kind}</td><td>{formatPrice(p.amount_cents)}</td><td>{p.status}</td></tr>)}</tbody></table></div>
+    ) : <p class="muted">No payments yet.</p>}
+  </section>
+</DashboardLayout>

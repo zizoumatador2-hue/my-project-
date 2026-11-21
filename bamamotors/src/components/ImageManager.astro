@@ -1,0 +1,43 @@
+---
+import type { VehicleImage } from '../lib/vehicles';
+interface Props { vehicleId: number; images: VehicleImage[]; }
+const { vehicleId, images } = Astro.props;
+const uploadErr = Astro.url.searchParams.get('upload_err');
+---
+<section class="panel" id="photos" aria-labelledby="photos-title" style="margin-bottom:20px">
+  <div class="spread"><h2 id="photos-title" style="font-size:1.2rem;margin:0">Photos ({images.length}/30)</h2><span class="small muted">First photo is the cover image.</span></div>
+  {uploadErr && <div class="alert alert-err" role="alert" style="margin-top:12px">{uploadErr.slice(0, 200)}</div>}
+  {images.length > 0 ? (
+    <div class="img-grid" style="margin:14px 0">
+      {images.map((img, i) => (
+        <figure>
+          <img src={`/media/${img.key_small}`} alt={`Photo ${i + 1}`} width="320" height="240" loading="lazy" />
+          <figcaption>
+            {i === 0 ? <span class="badge badge-dark">Cover</span> : (
+              <form method="post" class="inline-form"><input type="hidden" name="action" value="img_cover" /><input type="hidden" name="image_id" value={img.id} /><button class="btn btn-ghost btn-sm" type="submit">Make cover</button></form>
+            )}
+            {i > 0 && <form method="post" class="inline-form"><input type="hidden" name="action" value="img_left" /><input type="hidden" name="image_id" value={img.id} /><button class="btn btn-ghost btn-sm" type="submit" aria-label={`Move photo ${i + 1} earlier`}>←</button></form>}
+            {i < images.length - 1 && <form method="post" class="inline-form"><input type="hidden" name="action" value="img_right" /><input type="hidden" name="image_id" value={img.id} /><button class="btn btn-ghost btn-sm" type="submit" aria-label={`Move photo ${i + 1} later`}>→</button></form>}
+            <form method="post" class="inline-form" data-confirm="Delete this photo?"><input type="hidden" name="action" value="img_delete" /><input type="hidden" name="image_id" value={img.id} /><button class="btn btn-danger btn-sm" type="submit">Delete</button></form>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  ) : <p class="muted">No photos yet. Listings with photos get far more attention from shoppers.</p>}
+  <div class="dropzone" data-dropzone data-vehicle={vehicleId}>
+    <p style="margin:0 0 8px"><strong>Add photos:</strong> drag & drop or choose files (JPEG, PNG or WebP, up to 8 MB each). Photos are resized and optimized in your browser before upload.</p>
+    <form method="post" action={`/api/vehicles/${vehicleId}/images`} enctype="multipart/form-data" data-upload-form>
+      <input type="file" name="large" accept="image/jpeg,image/png,image/webp" multiple data-files aria-label="Choose photos" />
+      <noscript><button class="btn btn-outline btn-sm" type="submit">Upload</button></noscript>
+    </form>
+    <div data-upload-status aria-live="polite" style="margin-top:10px"></div>
+    <div class="progress" hidden data-upload-progress style="margin-top:8px"><span></span></div>
+  </div>
+</section>
+<script>
+  import { initUploader } from '../scripts/uploader';
+  initUploader();
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((f) =>
+    f.addEventListener('submit', (e) => { if (!confirm(f.dataset.confirm!)) e.preventDefault(); }),
+  );
+</script>

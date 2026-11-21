@@ -1,0 +1,87 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import NotificationsPanel from '../../components/NotificationsPanel.astro';
+import { all, first } from '../../lib/db';
+import { markNotificationsRead } from '../../lib/email';
+import { planOf } from '../../lib/plans';
+import { activeVehicleCount } from '../../lib/dealers';
+import { LEAD_TYPES, type LeadType } from '../../lib/constants';
+import { formatDateTime, formatNumber } from '../../lib/format';
+
+const env = Astro.locals.runtime.env;
+const db = env.DB;
+const dealer = Astro.locals.dealer!;
+const user = Astro.locals.user!;
+if (Astro.request.method === 'POST') {
+  await markNotificationsRead(db, user.id);
+  return Astro.redirect('/dashboard', 303);
+}
+const plan = planOf(dealer.plan);
+const since = new Date(Date.now() - 30 * 86400000).toISOString();
+const sinceDay = since.slice(0, 10);
+const [used, stats, perDay, top, recent] = await Promise.all([
+  activeVehicleCount(db, dealer.id),
+  first<{ active: number; views: number; leads: number; newLeads: number; saves: number; sold: number }>(db,
+    `SELECT (SELECT COUNT(*) FROM vehicles WHERE dealer_id = ?1 AND status = 'active') AS active,
+            (SELECT COALESCE(SUM(s.views),0) FROM vehicle_view_stats s JOIN vehicles v ON v.id = s.vehicle_id WHERE v.dealer_id = ?1 AND s.day >= ?2) AS views,
+            (SELECT COUNT(*) FROM leads WHERE dealer_id = ?1 AND created_at >= ?3) AS leads,
+            (SELECT COUNT(*) FROM leads WHERE dealer_id = ?1 AND status = 'new') AS newLeads,
+            (SELECT COUNT(*) FROM saved_vehicles sv JOIN vehicles v ON v.id = sv.vehicle_id WHERE v.dealer_id = ?1) AS saves,
+            (SELECT COUNT(*) FROM vehicles WHERE dealer_id = ?1 AND status = 'sold') AS sold`, [dealer.id, sinceDay, since]),
+  all<{ day: string; n: number }>(db, "SELECT substr(created_at,1,10) AS day, COUNT(*) AS n FROM leads WHERE dealer_id = ? AND created_at >= ? GROUP BY day", [dealer.id, since]),
+  all<{ id: number; slug: string; title: string; views: number; leads: number }>(db,
+    `SELECT v.id, v.slug, v.year || ' ' || mk.name || ' ' || md.name AS title, v.views,
+            (SELECT COUNT(*) FROM leads l WHERE l.vehicle_id = v.id) AS leads
+       FROM vehicles v JOIN makes mk ON mk.id = v.make_id JOIN models md ON md.id = v.model_id
+      WHERE v.dealer_id = ? AND v.status = 'active' ORDER BY v.views DESC, leads DESC LIMIT 5`, [dealer.id]),
+  all<{ id: number; type: LeadType; name: string; vehicle_label: string | null; status: string; created_at: string }>(db,
+    'SELECT id, type, name, vehicle_label, status, created_at FROM leads WHERE dealer_id = ? ORDER BY created_at DESC LIMIT 6', [dealer.id]),
+]);
+const days = Array.from({ length: 30 }, (_, i) => new Date(Date.now() - (29 - i) * 86400000).toISOString().slice(0, 10));
+const map = Object.fromEntries(perDay.map((d) => [d.day, d.n]));
+const max = Math.max(1, ...perDay.map((d) => d.n));
+---
+<DashboardLayout title="Overview" area="dealer">
+  <div class="spread"><h1 style="margin:0">{dealer.name}</h1><div class="row"><a class="btn btn-primary" href="/dashboard/vehicles/new">+ Add vehicle</a><a class="btn btn-outline" href={`/dealers/${dealer.slug}`}>View public profile</a></div></div>
+  {dealer.status === 'pending' && <div class="alert alert-warn" style="margin-top:16px">Your dealership is <strong>pending review</strong>. You can add inventory now; listings become visible to shoppers once our team approves your account.</div>}
+  {dealer.status === 'suspended' && <div class="alert alert-err" style="margin-top:16px">Your dealership is suspended and your listings are hidden. <a href="/contact">Contact support</a>.</div>}
+
+  <div class="grid grid-4" style="margin-top:20px">
+    <div class="stat"><div class="n">{stats?.active ?? 0}</div><div class="l">Active vehicles</div></div>
+    <div class="stat"><div class="n">{formatNumber(stats?.views ?? 0)}</div><div class="l">Listing views (30 days)</div></div>
+    <div class="stat"><div class="n">{stats?.leads ?? 0}</div><div class="l">Leads (30 days)</div></div>
+    <div class="stat"><div class="n">{stats?.newLeads ?? 0}</div><div class="l">New leads to answer</div></div>
+    <div class="stat"><div class="n">{stats?.saves ?? 0}</div><div class="l">Times saved by shoppers</div></div>
+    <div class="stat"><div class="n">{stats?.sold ?? 0}</div><div class="l">Marked sold</div></div>
+    <div class="stat"><div class="n">{used}/{plan.vehicleLimit}</div><div class="l">{plan.name} plan listings used</div></div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:20px">
+    <section class="panel" aria-labelledby="chart-title">
+      <h2 id="chart-title" style="font-size:1.1rem">Leads per day (last 30 days)</h2>
+      <div class="bars" role="img" aria-label={`Leads per day over the last 30 days, ${stats?.leads ?? 0} total`}>
+        {days.map((d) => <span style={`height:${((map[d] ?? 0) / max) * 100}%`} title={`${d}: ${map[d] ?? 0}`}></span>)}
+      </div>
+    </section>
+    <section class="panel" aria-labelledby="top-title">
+      <h2 id="top-title" style="font-size:1.1rem">Top vehicles</h2>
+      {top.length ? (
+        <div class="table-wrap"><table><thead><tr><th>Vehicle</th><th>Views</th><th>Leads</th></tr></thead>
+          <tbody>{top.map((t) => <tr><td><a href={`/dashboard/vehicles/${t.id}`}>{t.title}</a></td><td>{t.views}</td><td>{t.leads}</td></tr>)}</tbody></table></div>
+      ) : <p class="muted">Add vehicles to start seeing performance data.</p>}
+    </section>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:20px">
+    <section class="panel" aria-labelledby="recent-title">
+      <div class="spread"><h2 id="recent-title" style="font-size:1.1rem;margin:0">Recent leads</h2><a href="/dashboard/leads">All leads →</a></div>
+      {recent.length ? (
+        <ul style="list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px">
+          {recent.map((l) => <li class="msg"><a href={`/dashboard/leads/${l.id}`}><strong>{l.name}</strong></a> · {LEAD_TYPES[l.type]} <span class={`badge ${l.status === 'new' ? 'badge-warn' : ''}`}>{l.status}</span><br /><span class="small muted">{l.vehicle_label ?? 'Dealer inquiry'} · {formatDateTime(l.created_at)}</span></li>)}
+        </ul>
+      ) : <EmptyState title="No leads yet" icon="inbox"><p>Leads appear here as soon as shoppers contact you.</p></EmptyState>}
+    </section>
+    <NotificationsPanel userId={user.id} />
+  </div>
+</DashboardLayout>

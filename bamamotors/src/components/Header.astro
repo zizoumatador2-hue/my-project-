@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+const user = Astro.locals.user;
+const path = Astro.url.pathname;
+const links = [
+  { href: '/used-cars', label: 'Used Cars' },
+  { href: '/dealers', label: 'Dealers' },
+  { href: '/financing', label: 'Financing' },
+  { href: '/blog', label: 'Car Buying Guides' },
+  { href: '/for-dealers', label: 'For Dealers' },
+];
+const current = (href: string) => (path === href || path.startsWith(`${href}/`) ? 'page' : undefined);
+const home = user ? (user.role === 'admin' ? '/admin' : user.role === 'dealer' ? '/dashboard' : '/account') : null;
+const announcement = Astro.locals.settings?.announcement;
+---
+{announcement && <div class="announcement">{announcement}</div>}
+<header class="site-header">
+  <div class="wrap">
+    <Logo />
+    <nav class="nav" aria-label="Main">
+      {links.map((l) => <a href={l.href} aria-current={current(l.href)}>{l.label}</a>)}
+    </nav>
+    <div class="header-actions">
+      {user ? (
+        <>
+          <a class="btn btn-outline btn-sm" href={home!}>{user.role === 'consumer' ? 'My Account' : 'Dashboard'}</a>
+          <form method="post" action="/logout" class="inline-form"><button class="btn btn-ghost btn-sm" type="submit">Sign out</button></form>
+        </>
+      ) : (
+        <>
+          <a class="btn btn-ghost btn-sm" href="/login">Sign in</a>
+          <a class="btn btn-primary btn-sm" href="/for-dealers">List Your Dealership</a>
+        </>
+      )}
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" data-menu-toggle>
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
+    {links.map((l) => <a href={l.href} aria-current={current(l.href)}>{l.label}</a>)}
+    {user ? <a href={home!}>{user.role === 'consumer' ? 'My Account' : 'Dashboard'}</a> : <a href="/login">Sign in</a>}
+    {!user && <a href="/for-dealers">List Your Dealership</a>}
+  </nav>
+</header>
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.getElementById('mobile-nav');
+  btn?.addEventListener('click', () => {
+    const open = nav!.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>

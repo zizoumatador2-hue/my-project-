@@ -1,0 +1,9 @@
+---
+import type { SiteImage } from '../lib/images';
+interface Props { img: SiteImage | null; sizes?: string; eager?: boolean; class?: string; alt?: string; }
+const { img, sizes = '(min-width: 1024px) 33vw, 100vw', eager = false, class: cls, alt } = Astro.props;
+---
+{img && (
+  <img class={cls} src={img.src} srcset={img.srcset} sizes={sizes} width={img.width} height={img.height}
+    alt={alt ?? img.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'} />
+)}
