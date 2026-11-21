@@ -15,9 +15,7 @@ import HeroLead from '../components/react/HeroLead';
 import Stats from '../components/react/Stats';
 import HubGrid from '../components/react/HubGrid';
 import TeaGallery from '../components/react/TeaGallery';
-import TeaMarquee from '../components/react/TeaMarquee';
-import Moments from '../components/react/Moments';
-import falManifest from '../../data/fal-images.json';
+import RitualAtlas from '../components/react/RitualAtlas';
 import ImageSlot from '../components/ImageSlot.astro';
 import { allWords } from '../lib/content';
 
@@ -43,15 +41,23 @@ const stats = [
   { value: Object.keys(HUBS).length, label: 'topic hubs' },
   { value: totalWords, label: 'words of guidance', suffix: '+' },
 ];
-const gallery = ["Steam", "Winter pour", "Glass teapot", "Iced matcha", "Tea for two", "Spiced tea", "Chamomile", "Matcha whisk", "Tea terraces", "Black tea and mint"].map((text, i) => ({ image: `/images/gallery-${i + 1}-800.webp`, text }));
+const gallery = [{"id": 9464939, "text": "Steam"}, {"id": 15906020, "text": "Winter pour"}, {"id": 1362537, "text": "Glass teapot"}, {"id": 32695045, "text": "Iced matcha"}, {"id": 7138780, "text": "Jasmine"}, {"id": 19880782, "text": "Tea for two"}, {"id": 33789289, "text": "Spiced tea"}, {"id": 8634757, "text": "Matcha latte"}, {"id": 17125143, "text": "Chamomile"}, {"id": 6871921, "text": "Tea terraces"}].map((g, i) => ({ image: `/images/gallery-${i + 1}-800.webp`, text: g.text }));
+const rituals = [
+  { title: 'Loose-leaf, made simple', kicker: 'Daily ritual', description: 'Ratios, temperature and timing for a balanced cup.', image: '/images/gallery-3-800.webp', image2x: '/images/gallery-3-1600.webp', alt: 'Loose-leaf tea opening in a clear glass teapot', href: '/guides/how-to-brew-loose-leaf-tea/' },
+  { title: 'Matcha without the guesswork', kicker: 'Japanese tea', description: 'A smooth bowl or latte, with less bitterness.', image: '/images/gallery-8-800.webp', image2x: '/images/gallery-8-1600.webp', alt: 'Bright green matcha latte in a handmade cup', href: '/guides/how-to-make-matcha-latte/' },
+  { title: 'Iced tea that stays vivid', kicker: 'Cold & bright', description: 'Hot-brew and cold-brew methods for clear flavor.', image: '/images/gallery-4-800.webp', image2x: '/images/gallery-4-1600.webp', alt: 'Iced green tea served in a tall glass', href: '/guides/how-to-make-iced-tea/' },
+  { title: 'Build a real masala chai', kicker: 'Spice & warmth', description: 'Tea, milk and whole spices in practical proportions.', image: '/images/gallery-7-800.webp', image2x: '/images/gallery-7-1600.webp', alt: 'Spiced masala chai with cinnamon and star anise', href: '/guides/how-to-make-chai-at-home/' },
+  { title: 'A calmer evening cup', kicker: 'Caffeine-free', description: 'Compare herbal options without exaggerated claims.', image: '/images/gallery-9-800.webp', image2x: '/images/gallery-9-1600.webp', alt: 'Chamomile flowers beside a warm herbal infusion', href: '/guides/best-tea-for-sleep/' },
+  { title: 'Follow tea back to the leaf', kicker: 'Origins', description: 'Understand types, processing, flavor and quality.', image: '/images/gallery-10-800.webp', image2x: '/images/gallery-10-1600.webp', alt: 'Green tea terraces winding across a hillside', href: '/#tea-guide' },
+];
 ---
 <BaseLayout
-  title="Tea Guide: Types of Tea, Brewing & Buying | ChayStore"
-  description="The complete guide to tea: every type explained, how to brew each one, what gear you need, and how to choose and store tea at home."
+  title="Tea Guide: Brewing, Types & Best Tea Picks | ChayStore"
+  description="Learn how to brew loose-leaf tea, compare matcha, chai, green and black tea, and choose kettles, infusers and tea for every home routine."
   path="/"
   schema={schema}
   progress
-  keywords="tea guide, types of tea, how to brew tea, loose leaf tea, chai, matcha, green tea, black tea, herbal tea"
+  keywords="tea guide, how to brew loose leaf tea, best tea, best tea for sleep, electric tea kettle, matcha, chai, green tea, black tea, herbal tea"
 >
   <section class="hero" aria-labelledby="hero-title">
     <AuroraBg client:idle />
@@ -79,7 +85,7 @@ const gallery = ["Steam", "Winter pour", "Glass teapot", "Iced matcha", "Tea for
     <div class="wrap">
       <div class="section-head reveal">
         <h2 id="hubs-h">Explore tea by topic</h2>
-        <p>Six topic hubs. Start with whichever part of tea you want to learn first. Pick the part of tea you want to master first.</p>
+        <p>Six hubs, each one a deep dive. Pick the part of tea you want to master first.</p>
       </div>
       <HubGrid client:visible hubs={hubData} />
     </div>
@@ -96,23 +102,21 @@ const gallery = ["Steam", "Winter pour", "Glass teapot", "Iced matcha", "Tea for
     </div>
   </section>
 
-  <div class="marquee-band" aria-hidden="true"><TeaMarquee client:visible /></div>
-
-  {falManifest.images.length > 0 && (
-    <section class="section" aria-labelledby="moments-h">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <h2 id="moments-h">Tea, the way it fits into a day</h2>
-          <p>Mornings, porches, rainy afternoons and quiet evenings. Scene images, not photos of specific products or places.</p>
-        </div>
-        <Moments client:visible items={falManifest.images} />
-      </div>
-    </section>
-  )}
-
   <section class="dark-gallery" aria-label="Tea in pictures">
     <TeaGallery client:visible items={gallery} />
-    <p class="gallery-note">Drag or scroll to explore. Scene images, not photos of specific products or places · <a href="/credits/">credits</a></p>
+    <p class="gallery-note">Drag or scroll to explore. Photos from <a href="https://www.pexels.com" rel="noopener">Pexels</a> · <a href="/credits/">credits</a></p>
+  </section>
+
+  <section class="ritual-atlas" aria-labelledby="ritual-title">
+    <div class="wrap">
+      <div class="ritual-heading reveal">
+        <p class="eyebrow">A visual field guide</p>
+        <h2 id="ritual-title">Six ways into the world of tea.</h2>
+        <p>Choose the cup that matches your moment. Each path opens a practical, independently written guide—not a product pitch.</p>
+      </div>
+      <RitualAtlas client:visible items={rituals} />
+      <p class="ritual-credit">Photography from <a href="https://www.pexels.com" rel="noopener">Pexels</a>. Full attribution is listed in our <a href="/credits/">photo credits</a>.</p>
+    </div>
   </section>
 
   <section class="cinema-story" aria-labelledby="cinema-story-title" data-cinema-stage>
@@ -130,8 +134,8 @@ const gallery = ["Steam", "Winter pour", "Glass teapot", "Iced matcha", "Tea for
         <a class="btn primary" href="/guides/how-to-brew-loose-leaf-tea/">Start with the loose-leaf brewing guide</a>
       </div>
       <figure class="cinema-frame reveal" data-cinema-frame>
-        <img src="/images/gallery-2-1600.webp" alt="Hot tea being poured from a white kettle into a clear glass cup on a winter windowsill" width="1600" height="1067" loading="lazy" decoding="async" />
-        <figcaption>Simple technique, repeatable results. Scene image, not a photo of a specific product.</figcaption>
+        <img src="/images/gallery-2-1600.webp" alt="Tea being poured into a clear glass cup in warm natural light" width="1600" height="1067" loading="lazy" decoding="async" />
+        <figcaption>Simple technique, repeatable results. Photo from Pexels.</figcaption>
       </figure>
     </div>
   </section>

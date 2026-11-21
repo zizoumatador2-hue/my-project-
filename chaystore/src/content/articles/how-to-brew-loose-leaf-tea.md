@@ -4,7 +4,7 @@ description: "Learn how to brew loose leaf tea with the right ratio, water tempe
 hub: brewing
 keyword: "how to brew loose leaf tea"
 publishDate: 2026-10-04
-modifiedDate: 2026-10-04
+modifiedDate: 2026-11-21
 image: "/images/how-to-brew-loose-leaf-tea-1600.webp"
 imageAlt: "Glass teapot with a steel infuser, two double-walled cups and loose tea leaves on a white table"
 imageId: 1362537
@@ -73,6 +73,19 @@ A reliable starting ratio is 1 teaspoon (roughly 2 to 3 grams) of tea per 8 oz (
 | Herbal blends | 1 to 2 teaspoons |
 
 For a detailed breakdown, read [how much tea per cup](/guides/how-much-tea-per-cup/).
+
+### Loose-leaf tea ratios for common US mugs
+
+American mugs and insulated tumblers are often larger than the 8 oz serving used in tea instructions. Scale the leaves with the water rather than treating every vessel as one cup.
+
+| Vessel size | Water | Starting tea amount |
+| --- | --- | --- |
+| Small teacup | 8 fl oz (240 ml) | 1 teaspoon, about 2–3 g |
+| Standard mug | 12 fl oz (355 ml) | 1½ teaspoons, about 3–4.5 g |
+| Large mug or travel tumbler | 16 fl oz (475 ml) | 2 teaspoons, about 4–6 g |
+| Two-person teapot | 24 fl oz (710 ml) | 3 teaspoons, about 6–9 g |
+
+These amounts answer the common question “how much loose-leaf tea for a 12 oz or 16 oz mug?” but they are starting points. Dense rolled oolong and fluffy white tea occupy very different volumes, so use grams when you want repeatable results. For a travel mug, remove the infuser before closing the lid so the leaves do not keep steeping during your commute.
 
 ## Step 2: Heat the water to the right temperature
 
@@ -175,3 +188,4 @@ A little. Thin glass and metal lose heat quickly, while thick ceramic and cast i
 - Re-steep good leaves.
 
 For authoritative background on the tea plant itself, see the overview of [tea on Wikipedia](https://en.wikipedia.org/wiki/Tea).
+
