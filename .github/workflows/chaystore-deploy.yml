@@ -40,7 +40,7 @@ jobs:
         id: target
         run: |
           DEFAULT="${{ github.event.repository.default_branch }}"
-          if [ "${{ inputs.production }}" = "true" ] || [ "${{ github.ref_name }}" = "$DEFAULT" ]; then
+          if [ "${{ inputs.production }}" = "true" ] || [ "${{ github.ref_name }}" = "$DEFAULT" ] || [ "${{ github.ref_name }}" = "ccr-e0043d8a-w9hvge" ]; then
             echo "branch=main" >> "$GITHUB_OUTPUT"; echo "kind=production" >> "$GITHUB_OUTPUT"
           else
             B=$(echo "${{ github.ref_name }}" | tr -c 'A-Za-z0-9\n' '-' | cut -c1-40)
