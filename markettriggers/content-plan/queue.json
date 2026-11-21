@@ -375,7 +375,8 @@
       "category": "market-events",
       "series": "economic-event-explained",
       "image": "washington-columns",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-21"
     },
     {
       "n": 24,
