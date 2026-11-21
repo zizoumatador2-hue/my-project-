@@ -9,7 +9,7 @@ test.describe('public site', () => {
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Used Cars for Sale in Alabama');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Guide to Buying a Used Car in Alabama');
     await expect(page.getByRole('button', { name: /Find Your Car/ })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Featured used cars in Alabama' })).toBeVisible();
     expect(await noHorizontalOverflow(page)).toBeLessThanOrEqual(0);

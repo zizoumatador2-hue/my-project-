@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generates illustrative photos with FLUX1.1 [pro] ultra on fal.ai for slots that have a "fal" prompt in
+// Generates illustrative photos with FLUX.1 [schnell] on fal.ai (lowest-cost FLUX endpoint) for slots that have a "fal" prompt in
 // content/image-requests.json (hero, body types, generic guide covers). Real places (city pages) keep real photos.
 //   FAL_KEY=... node scripts/generate-fal.mjs [--force]
 // Writes public/images/<key>-{640,1024,1600}.webp and src/data/images.json. Slots already generated are kept.
@@ -12,7 +12,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const KEY = process.env.FAL_KEY;
 if (!KEY) { console.log('FAL_KEY not set — skipping fal.ai generation.'); process.exit(0); }
 const force = process.argv.includes('--force');
-const MODEL = 'fal-ai/flux-pro/v1.1-ultra';
+const MODEL = 'fal-ai/flux/schnell';
 const STYLE = 'Photorealistic editorial photograph, natural light, shot on a full-frame camera, sharp focus, true-to-life colors. Generic unbranded vehicles seen from the side or from a distance. Clean scene without any writing, signage, logos or license plates.';
 const requests = JSON.parse(readFileSync(join(root, 'content/image-requests.json'), 'utf8'));
 const manifestPath = join(root, 'src/data/images.json');
@@ -25,7 +25,7 @@ async function generate(prompt) {
   const res = await fetch(`https://fal.run/${MODEL}`, {
     method: 'POST',
     headers: { Authorization: `Key ${KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: `${prompt}. ${STYLE}`, aspect_ratio: '16:9', num_images: 1, output_format: 'jpeg', raw: true, safety_tolerance: '2' }),
+    body: JSON.stringify({ prompt: `${prompt}. ${STYLE}`, image_size: { width: 1024, height: 576 }, num_inference_steps: 4, num_images: 1, output_format: 'jpeg', enable_safety_checker: true }),
   });
   if (!res.ok) throw new Error(`fal.ai ${res.status}: ${(await res.text()).slice(0, 200)}`);
   const url = (await res.json()).images?.[0]?.url;
@@ -38,8 +38,8 @@ async function generate(prompt) {
 let added = 0, failed = 0;
 for (const [key, req] of Object.entries(requests)) {
   if (key.startsWith('_') || !req.fal) continue;
-  // Regenerate only when the slot isn't a fal.ai image yet or its prompt was edited in content/image-requests.json.
-  if (manifest[key]?.source === 'fal.ai' && manifest[key].prompt === req.fal && !force) continue;
+  // Regenerate when the slot isn't a fal.ai image yet, its prompt was edited, or it was made with another model.
+  if (manifest[key]?.source === 'fal.ai' && manifest[key].prompt === req.fal && manifest[key].model === MODEL && !force) continue;
   try {
     const buf = await generate(req.fal);
     let w0 = 0, h0 = 0;
@@ -53,8 +53,9 @@ for (const [key, req] of Object.entries(requests)) {
       width: w0, height: h0,
       alt: req.alt ?? req.query,
       author: 'BamaMotors',
-      sourceUrl: 'https://fal.ai/models/fal-ai/flux-pro/v1.1-ultra',
+      sourceUrl: `https://fal.ai/models/${MODEL}`,
       source: 'fal.ai',
+      model: MODEL,
       prompt: req.fal,
     };
     added++;

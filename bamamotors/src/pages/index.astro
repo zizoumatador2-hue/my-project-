@@ -47,10 +47,10 @@ const quickLinks = [
   { href: '/dealers', label: 'Dealers near me' },
 ].filter((l) => !l.href.startsWith('/used-cars/') || indexable.has(l.href));
 const hasInventory = Boolean(counts && counts.vehicles > 0);
-const h1 = hasInventory ? 'Used Cars for Sale in Alabama, from Local Dealers You Can Visit' : "Alabama's Local Used Car Marketplace, Launching Soon";
+const h1 = 'An Independent Guide to Buying a Used Car in Alabama';
 const metaDescription = hasInventory
-  ? 'Find used cars for sale near you in Alabama. Compare local dealer prices by ZIP code: Birmingham, Huntsville, Mobile, Montgomery and more. Free for shoppers.'
-  : 'BamaMotors is a new Alabama used car marketplace. Dealers can list inventory free during launch. Shoppers: read our free car-buying guides for Birmingham, Huntsville, Mobile and more.';
+  ? 'An independent, free guide to buying a used car in Alabama: inspection, title and tag, financing and test drives. Then compare listings from local dealers. BamaMotors does not sell cars.'
+  : 'An independent, free guide to buying a used car in Alabama: inspection, title and tag, financing and test drives. BamaMotors does not sell cars; it connects shoppers with local dealers.';
 const stats = [
   ...(counts && counts.vehicles > 0 ? [{ n: counts.vehicles, l: 'Used cars for sale now' }] : []),
   ...(counts && counts.dealers > 0 ? [{ n: counts.dealers, l: 'Local Alabama dealers' }] : []),
@@ -68,7 +68,7 @@ const faq = [
   { q: 'How do dealers list vehicles on BamaMotors?', a: 'Dealers create an account, complete their profile and add inventory from the dealer dashboard. The Free plan includes up to 10 active listings.' },
 ];
 ---
-<BaseLayout title="BamaMotors: Used Cars from Local Alabama Dealers" ogImage={heroImg?.src}
+<BaseLayout title="BamaMotors: Alabama Used-Car Buying Guide" ogImage={heroImg?.src}
   description={metaDescription}
   keywords="used cars Alabama, used cars for sale Alabama, used cars near me Alabama, cars for sale Alabama, car dealerships Alabama, used car dealers Alabama, cheap used cars Alabama, used trucks Alabama, used SUVs Alabama"
   canonical="/" jsonLd={[organizationLd(site, Astro.locals.settings), websiteLd(site), faqLd(faq)]}>
@@ -77,7 +77,7 @@ const faq = [
     <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap">
       <h1 class="blur-text" aria-label={h1}>{h1.split(' ').map((w, i) => <><span class="bt-w" style={`--i:${i}`} aria-hidden="true">{w}</span>{' '}</>)}</h1>
-      <p class="lead">Search {counts && counts.vehicles > 0 ? `${formatNumber(counts.vehicles)} used cars, trucks and SUVs` : 'used cars, trucks and SUVs'} from Alabama dealerships, from Huntsville to Mobile. Compare prices, then contact the dealer directly.</p>
+      <p class="lead">BamaMotors is an independent guide for Alabama car shoppers. Learn what to check before you buy, how title and tag work and how to finance. BamaMotors does not sell cars: when you're ready, search listings from local dealers and contact them directly.</p>
       <SearchForm variant="hero" />
       <ul class="quick-chips" aria-label="Popular searches">
         {quickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}

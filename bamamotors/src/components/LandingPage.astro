@@ -61,7 +61,7 @@ const priceLinks = PRICE_BUCKETS.filter((p) => indexable.has(`/used-cars/${p.slu
 // FAQ markup only where the questions are written for this page (city guides); generic template FAQs stay visible but unmarked.
 const faqSchema = L.kind === 'city' ? faqLd(L.faq) : null;
 // Empty combinations (including city guides with no inventory) stay out of the index until listings exist.
-const noindex = total === 0 || qs.sort !== 'recommended';
+const noindex = (total === 0 && !L.hasEditorial) || qs.sort !== 'recommended';
 const pageSuffix = filters.page > 1 ? ` – Page ${filters.page}` : '';
 const canonical = filters.page > 1 ? `${L.path}?page=${filters.page}` : L.path;
 ---
