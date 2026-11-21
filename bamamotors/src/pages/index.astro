@@ -13,6 +13,7 @@ import { BODY_TYPES } from '../lib/constants';
 import { indexableLandingPaths } from '../lib/sitemap';
 import { formatNumber } from '../lib/format';
 import Photo from '../components/Photo.astro';
+import HomeGuide from '../components/HomeGuide.astro';
 import { image, cityImage, postImage } from '../lib/images';
 
 const env = Astro.locals.runtime.env;
@@ -158,6 +159,8 @@ const faq = [
       </ol>
     </div>
   </section>
+
+  <HomeGuide />
 
   <section class="section band-dark" aria-labelledby="fin-title">
     <div class="wrap grid grid-2" style="align-items:center">

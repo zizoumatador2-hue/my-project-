@@ -295,5 +295,35 @@
     "commons": "car keys",
     "fal": "A couple sitting at a kitchen table with a laptop seen from behind and a calculator, planning a car budget together, warm morning light",
     "alt": "Couple planning a car budget at the kitchen table"
+  },
+  "home-dealer-visit": {
+    "query": "car dealership visit",
+    "commons": "car dealership showroom",
+    "fal": "A buyer and a dealership salesperson walking side by side between rows of used sedans and SUVs on a sunny open lot, the cars seen from the side and softly out of focus, pine trees in the background",
+    "alt": "Buyer and salesperson walking between used cars on a sunny lot"
+  },
+  "home-private-seller": {
+    "query": "private car sale handshake",
+    "commons": "car for sale",
+    "fal": "Two adults shaking hands beside a silver used sedan parked in a quiet suburban driveway, the car seen in side profile, warm afternoon light",
+    "alt": "Buyer and private seller shaking hands beside a used sedan"
+  },
+  "home-vin-check": {
+    "query": "car dashboard vin",
+    "commons": "car dashboard",
+    "fal": "Close-up of a dashboard and windshield corner of a used car, a clipboard with a printed vehicle report resting on the seat, soft natural light, shallow depth of field",
+    "alt": "Vehicle report and dashboard of a used car"
+  },
+  "home-paperwork": {
+    "query": "car title paperwork",
+    "commons": "car paperwork documents",
+    "fal": "Overhead close-up of a folded vehicle title document, a pen and a bill of sale form on a wooden desk, warm natural light, no readable text",
+    "alt": "Vehicle title and bill of sale on a wooden desk"
+  },
+  "home-out-of-state": {
+    "query": "car trailer road trip",
+    "commons": "car transport trailer",
+    "fal": "Side profile of a used pickup truck towing a small utility trailer along a two-lane highway through green Southern hills, sunny day",
+    "alt": "Pickup truck towing a trailer along a country highway"
   }
 }
