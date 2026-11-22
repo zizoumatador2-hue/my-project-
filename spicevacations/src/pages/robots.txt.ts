@@ -10,6 +10,7 @@ export const GET: APIRoute = ({ site }) => {
     'Disallow: /go-map.json',
     'Disallow: /admin/',
     '',
+    `Sitemap: ${origin}/sitemap.xml`,
     `Sitemap: ${origin}/sitemap-index.xml`,
     '',
   ].join('\n');

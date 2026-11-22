@@ -4,7 +4,11 @@
 backend:
   name: github
   repo: zizoumatador2-hue/my-project-
-  branch: main
+  # The production branch: the SpiceVacations workflow deploys every push to it. `main` has no site files.
+  branch: claude/spicevacations-astro-seo-5avt34
+  # GitHub OAuth is handled by the site's own Worker (/api/auth, /api/callback).
+  base_url: https://spicevacations.com
+  auth_endpoint: api/auth
 publish_mode: editorial_workflow
 media_folder: spicevacations/public/uploads
 public_folder: /uploads
@@ -786,6 +790,42 @@ collections:
       - label: Body
         name: body
         widget: markdown
+  - name: operations
+    label: Weekly review & search status
+    files:
+      - label: Weekly review queue
+        name: review_queue
+        file: spicevacations/src/data/review-queue.json
+        fields:
+          - label: Tasks
+            name: tasks
+            widget: list
+            summary: '{{fields.status}} · P{{fields.priority}} · {{fields.url}}'
+            fields:
+              - { label: Week (ISO, e.g. 2026-W48), name: week, widget: string }
+              - { label: Priority (1 = highest), name: priority, widget: number, value_type: int, min: 1, max: 5, default: 3 }
+              - { label: Page URL, name: url, widget: string }
+              - { label: Source evidence, name: evidence, widget: text, hint: 'e.g. Search Console US, last 28 days: 11 impressions, 0 clicks for "vacations for couples"' }
+              - { label: Selection reason, name: reason, widget: text }
+              - { label: Last review date, name: lastReviewed, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false }
+              - { label: Proposed change, name: proposed, widget: text }
+              - { label: Status, name: status, widget: select, options: [proposed, drafted, approved, published, no change needed, rejected], default: proposed }
+      - label: Google & Bing status
+        name: webmaster_status
+        file: spicevacations/src/data/webmaster-status.json
+        fields:
+          - label: Services
+            name: services
+            widget: list
+            summary: '{{fields.service}}: {{fields.status}}'
+            fields:
+              - { label: Service, name: service, widget: select, options: [Google Search Console, Bing Webmaster Tools] }
+              - { label: Status, name: status, widget: select, options: [unconnected, awaiting verification, submitted, processed, processing error] }
+              - { label: Property, name: property, widget: string, required: false }
+              - { label: Sitemap URL, name: sitemap, widget: string, required: false }
+              - { label: Last checked, name: checked, widget: datetime, required: false }
+              - { label: Evidence (what the dashboard showed), name: evidence, widget: text, required: false }
+              - { label: Official report link, name: link, widget: string, required: false }
   - name: settings
     label: Settings
     files:

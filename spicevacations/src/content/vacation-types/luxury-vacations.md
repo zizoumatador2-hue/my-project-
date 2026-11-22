@@ -1,7 +1,7 @@
 ---
 name: Luxury Vacations
-metaTitle: "Luxury Travel Ideas for Couples: Resorts & Places"
-metaDescription: Luxury vacations for couples, from Hawaii's grand resorts to Caribbean hideaways and Big Sur cliffs. See where a splurge is worth it and how to plan well.
+metaTitle: "Luxury Vacations: What to Look For & How to Get Value"
+metaDescription: "What separates a luxury vacation from a nice hotel stay, and practical ways to get more value from high-end resorts in Hawaii, the Caribbean and the U.S."
 scene: cliffs
 palette: dusk
 imageAlt: Illustrated dramatic coastal cliffs above a calm sea at dusk
@@ -29,3 +29,14 @@ Browse our [luxury vacations](/guides/luxury-vacations/) guide and [luxury resor
 ## How to get more from a luxury trip
 
 Book shoulder season, when the same suite can cost noticeably less and the resort feels calmer. Ask whether the rate includes breakfast, airport transfers or resort credits, and compare the total price after taxes and fees. Tell the hotel if you are celebrating a honeymoon or anniversary; many properties note it. Finally, spend the money where you will feel it: a room with a view at a great resort usually beats a basic room at an even fancier one.
+
+## What luxury means on a vacation
+
+The difference between a good hotel and a luxury stay is usually privacy, space and service rather than décor. Look for features you will actually use: a private plunge pool or large terrace, an excellent on-site restaurant, attentive staff and smooth arrival logistics.
+
+## Getting more value from a luxury trip
+
+- **Travel in shoulder season.** Late April–May and September–early December often bring lower rates at the same resorts; check hurricane season for the Caribbean.
+- **Stay fewer nights, better.** Three nights at an exceptional resort can feel more special than six somewhere average.
+- **Ask what is included.** Breakfast, resort credits, transfers and spa access vary widely and change the real nightly cost.
+- **Compare total prices,** including taxes and resort fees, whether you book directly or through a travel advisor.

@@ -1,7 +1,7 @@
 ---
 name: Couples Vacations
-metaTitle: "Couples Trip Ideas: Resorts & Destinations for Two"
-metaDescription: Couples vacations for every travel style, from all-inclusive beach resorts to road trips and city breaks. Find the right trip for two with honest advice.
+metaTitle: "Vacations for Couples: How to Pick, Plan and Book"
+metaDescription: "Vacations for couples by travel style, trip length and season, from all-inclusive beach resorts to city breaks, with a planning checklist for two."
 scene: tropical
 palette: coral
 imageAlt: Illustrated tropical cove with palm trees and a small island at sunset
@@ -27,3 +27,24 @@ The right couples vacation is the one that makes both of you exhale. Some couple
 4. **Budget-smart trips** that still feel special. See [best couples vacations under $2,000](/guides/best-couples-vacations-under-2000/).
 
 For a deeper comparison of destinations, start with [best couples vacations](/guides/best-couples-vacations/) or the [best vacation spots for couples](/guides/best-vacation-spots-for-couples/).
+
+## How long should a couples vacation be?
+
+Match the trip length to the travel time. A useful rule: if getting there takes more than half a day each way, plan at least five nights so the trip is not mostly airports.
+
+| Travel time from home | Good trip length | Examples |
+| --- | --- | --- |
+| Under 4 hours by car | 2–3 nights | Wine country, a beach town, a mountain cabin |
+| 2–4 hour flight | 3–5 nights | Florida, Las Vegas, Mexico's Caribbean coast, the Bahamas |
+| 5+ hour flight | 6–10 nights | Hawaii, St. Lucia, Antigua |
+
+## Planning a trip you will both enjoy
+
+- **Agree on the budget first.** Decide on one total that includes flights, lodging, food, transfers and activities, then work backward.
+- **Pick one anchor experience each.** A snorkel trip for one of you, a long dinner reservation for the other. Everything else can stay loose.
+- **Leave unscheduled time.** Two free afternoons on a five-night trip is a good balance.
+- **Check the season before you book.** Atlantic hurricane season runs June 1 to November 30, which matters for the Caribbean, the Bahamas and Florida. Las Vegas and Sedona are hottest from June through August.
+
+## What to reserve ahead
+
+Book flights and lodging first; for popular resorts and holiday weeks, two to four months ahead is a safe window. Then reserve anything with limited capacity: specialty restaurants at all-inclusive resorts, sunset sails, spa appointments and popular shows. Rental cars on islands like Maui can sell out in peak season, so reserve one as soon as your flights are set.

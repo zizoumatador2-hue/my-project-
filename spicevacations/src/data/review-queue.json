@@ -1,0 +1,94 @@
+{
+  "tasks": [
+    {
+      "week": "2026-W47",
+      "priority": 1,
+      "url": "https://spicevacations.com/vacation-types/couples-vacations/",
+      "evidence": "GSC (all countries, 28 days to 2026-11-15): \"vacations for couples\" 11 impressions, 0 clicks; \"couples vacation package\" 4 impressions. Hub page was 336 words.",
+      "reason": "Query with impressions but no clicks maps to a thin hub page.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 1,
+      "url": "https://spicevacations.com/vacation-types/romantic-getaways/",
+      "evidence": "GSC: \"romantic tropical getaways\" 7 impressions, 0 clicks. Hub page 500 words with no tropical-by-month guidance.",
+      "reason": "Query with impressions but no clicks maps to a thin hub page.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 1,
+      "url": "https://spicevacations.com/vacation-types/weekend-getaways/",
+      "evidence": "GSC: \"4 day getaway packages for couples\" 5 impressions, 0 clicks. Hub 420 words, no 3-4 day guidance.",
+      "reason": "Query with impressions but no clicks maps to a thin hub page.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 1,
+      "url": "https://spicevacations.com/vacation-types/honeymoon-vacations/",
+      "evidence": "GSC: \"anniversary vacation packages\" 9 impressions, 0 clicks; no page covers anniversary trips. Hub 301 words.",
+      "reason": "Query with impressions but no clicks maps to a thin hub page.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 2,
+      "url": "https://spicevacations.com/vacation-types/adults-only-resorts/",
+      "evidence": "Thin hub page (under 420 words) on the shared vacation-type template; no page-level GSC data captured (US filter unavailable).",
+      "reason": "Same thin template as the priority hubs; hubs are internal entry points for the main site sections.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 2,
+      "url": "https://spicevacations.com/vacation-types/all-inclusive-resorts/",
+      "evidence": "Thin hub page (under 420 words) on the shared vacation-type template; no page-level GSC data captured (US filter unavailable).",
+      "reason": "Same thin template as the priority hubs; hubs are internal entry points for the main site sections.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 2,
+      "url": "https://spicevacations.com/vacation-types/beach-vacations/",
+      "evidence": "Thin hub page (under 420 words) on the shared vacation-type template; no page-level GSC data captured (US filter unavailable).",
+      "reason": "Same thin template as the priority hubs; hubs are internal entry points for the main site sections.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 2,
+      "url": "https://spicevacations.com/vacation-types/luxury-vacations/",
+      "evidence": "Thin hub page (under 420 words) on the shared vacation-type template; no page-level GSC data captured (US filter unavailable).",
+      "reason": "Same thin template as the priority hubs; hubs are internal entry points for the main site sections.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    },
+    {
+      "week": "2026-W47",
+      "priority": 2,
+      "url": "https://spicevacations.com/vacation-types/cruise-vacations/",
+      "evidence": "Thin hub page (under 420 words) on the shared vacation-type template; no page-level GSC data captured (US filter unavailable).",
+      "reason": "Same thin template as the priority hubs; hubs are internal entry points for the main site sections.",
+      "lastReviewed": "2026-11-22",
+      "proposed": "Intent-matched meta title/description and a practical planning section (trip length, season, what to book ahead).",
+      "status": "drafted"
+    }
+  ]
+}

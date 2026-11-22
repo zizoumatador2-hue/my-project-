@@ -23,6 +23,8 @@ export interface Env {
   CONTACT_TO?: string;
   CONTACT_FROM?: string;
   TURNSTILE_SECRET_KEY?: string;
+  GITHUB_CLIENT_ID?: string;
+  GITHUB_CLIENT_SECRET?: string;
 }
 
 const SECURITY_HEADERS: Record<string, string> = {
@@ -215,6 +217,56 @@ async function errorPage(req: Request, env: Env) {
   }
 }
 
+/**
+ * GitHub OAuth for the Decap CMS editor at /admin/ (Decap's `base_url` + `auth_endpoint: api/auth`).
+ * The token never touches storage; GitHub itself enforces who may commit (repo collaborators only),
+ * so editing and publishing permissions stay server-side. Requires GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET.
+ */
+async function handleCmsAuth(req: Request, env: Env, url: URL): Promise<Response> {
+  const noStore = { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' };
+  if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
+    return withHeaders(new Response('CMS login is not configured (GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET).', { status: 503 }), noStore);
+  }
+  if (url.pathname === '/api/auth') {
+    const state = crypto.randomUUID();
+    const gh = new URL('https://github.com/login/oauth/authorize');
+    gh.searchParams.set('client_id', env.GITHUB_CLIENT_ID);
+    gh.searchParams.set('scope', 'repo');
+    gh.searchParams.set('state', state);
+    gh.searchParams.set('redirect_uri', `${url.origin}/api/callback`);
+    return withHeaders(new Response(null, { status: 302, headers: { Location: gh.toString() } }), {
+      ...noStore,
+      'Set-Cookie': `cms_oauth_state=${state}; Path=/api/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`,
+    });
+  }
+  const cookieState = /(?:^|;\s*)cms_oauth_state=([\w-]+)/.exec(req.headers.get('Cookie') || '')?.[1];
+  const code = url.searchParams.get('code');
+  let status = 'error';
+  let content: Record<string, string> = { error: 'Login failed. Please try again.' };
+  if (code && cookieState && cookieState === url.searchParams.get('state')) {
+    const r = await fetch('https://github.com/login/oauth/access_token', {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ client_id: env.GITHUB_CLIENT_ID, client_secret: env.GITHUB_CLIENT_SECRET, code }),
+    });
+    const data = (await r.json()) as { access_token?: string };
+    if (data.access_token) { status = 'success'; content = { token: data.access_token, provider: 'github' }; }
+  }
+  // Decap's popup handshake: announce, wait for the opener's reply, then post the result to that origin only.
+  const msg = JSON.stringify(`authorization:github:${status}:${JSON.stringify(content)}`);
+  const html = `<!doctype html><meta charset="utf-8"><title>Signing in…</title><script>
+(function(){var o=${JSON.stringify(url.origin)};function r(e){if(e.origin!==o)return;window.opener.postMessage(${msg},o);window.removeEventListener('message',r);}
+window.addEventListener('message',r);window.opener&&window.opener.postMessage('authorizing:github',o);})();
+</script><p>Signing in…</p>`;
+  return new Response(html, {
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8', ...noStore,
+      'Content-Security-Policy': "default-src 'none'; script-src 'unsafe-inline'; frame-ancestors 'none'",
+      'Set-Cookie': 'cms_oauth_state=; Path=/api/; Max-Age=0; Secure; HttpOnly; SameSite=Lax',
+    },
+  });
+}
+
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(req.url);
@@ -222,6 +274,7 @@ export default {
     try {
       if (path.startsWith('/go/')) return await handleGo(req, env, ctx, path);
       if (path === '/api/health') return json({ ok: true, service: 'spicevacations', time: new Date().toISOString() });
+      if (path === '/api/auth' || path === '/api/callback') return await handleCmsAuth(req, env, url);
       if (path.startsWith('/api/')) {
         if (req.method !== 'POST') return json({ ok: false, error: 'Method not allowed' }, 405);
         if (!sameOrigin(req, env)) return json({ ok: false, error: 'Cross-site request blocked.' }, 403);

@@ -1,10 +1,11 @@
 // Post-build checks that must pass before deploy: every page has exactly one <h1>, a title,
 // a meta description and a canonical; no inline executable scripts (CSP `script-src 'self'`);
 // no partner URLs leaked into HTML (they must go through /go/).
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const DIST = new URL('../dist/', import.meta.url).pathname;
+const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
 const registry = JSON.parse(readFileSync(new URL('../src/data/affiliates.json', import.meta.url), 'utf8'));
 const partnerHosts = registry.partners.filter((p) => p.urlTemplate).map((p) => new URL(p.urlTemplate).host);
 
@@ -14,7 +15,7 @@ walk(DIST);
 
 const errors = [];
 for (const f of files) {
-  const rel = f.replace(DIST, '/');
+  const rel = f.replace(DIST, '/').split('\\').join('/');
   if (rel.startsWith('/admin/')) continue;
   const html = readFileSync(f, 'utf8');
   const h1 = (html.match(/<h1[\s>]/g) || []).length;
@@ -27,6 +28,24 @@ for (const f of files) {
   for (const host of partnerHosts) if (html.includes(host)) errors.push(`${rel}: partner URL (${host}) hardcoded in HTML — use /go/`);
   if (/lorem ipsum|coming soon/i.test(html)) errors.push(`${rel}: placeholder text found`);
 }
+// /sitemap.xml: a flat copy of the generated sitemap (one file while under 5,000 URLs), validated so it
+// only lists built, indexable pages whose canonical points to themselves.
+const parts = readdirSync(DIST).filter((f) => /^sitemap-\d+\.xml$/.test(f));
+if (parts.length === 1) {
+  const xml = readFileSync(join(DIST, parts[0]), 'utf8');
+  for (const loc of [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])) {
+    const path = new URL(loc).pathname;
+    let html = '';
+    try { html = readFileSync(join(DIST, path, 'index.html'), 'utf8'); } catch { errors.push(`sitemap: ${path} has no built page`); continue; }
+    if (/<meta name="robots" content="noindex/.test(html)) errors.push(`sitemap: ${path} is noindex`);
+    const canon = /<link rel="canonical" href="([^"]+)"/.exec(html)?.[1];
+    if (canon && new URL(canon).pathname !== path) errors.push(`sitemap: ${path} canonicalizes to ${canon}`);
+  }
+  writeFileSync(join(DIST, 'sitemap.xml'), xml);
+} else {
+  errors.push(`sitemap: expected one sitemap-N.xml, found ${parts.length}`);
+}
+
 if (errors.length) {
   console.error(`postbuild: ${errors.length} problem(s)\n` + errors.map((e) => ' - ' + e).join('\n'));
   process.exit(1);

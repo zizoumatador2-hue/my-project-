@@ -1,7 +1,7 @@
 ---
 name: Beach Vacations
-metaTitle: "Beach Vacation Ideas for Couples: Resorts & Places"
-metaDescription: The best beach vacations in the USA, Mexico and the Caribbean, compared by water, weather, budget and vibe. Find a beach escape that fits your style and dates.
+metaTitle: "Beach Vacations: Best Beaches by Season & Water"
+metaDescription: "Pick the right beach vacation by water conditions, seaweed and storm season, and trip length, from Florida and Hawaii to Mexico and the Caribbean."
 scene: beach
 palette: gold
 imageAlt: Illustrated golden beach with palm trees and a glowing sunset
@@ -28,3 +28,15 @@ Explore [best beach vacations](/guides/best-beach-vacations/), [best beach vacat
 ## Timing your beach vacation
 
 Caribbean and Mexico beaches are busiest and most expensive from mid-December through April. Late spring and early summer often bring better rates, and the Atlantic hurricane season (June 1 to November 30) is the trade-off later in the year. In Caribbean Mexico and parts of the Caribbean, seaweed (sargassum) can arrive in warmer months, so check recent reports before you book a specific beach. Hawaii is a year-round destination, with bigger winter surf on north-facing shores.
+
+## Choosing the right beach
+
+Beaches vary more than photos suggest. Before you book, check:
+
+- **Water conditions.** Calm, swimmable water is typical on Caribbean coasts, Aruba and Florida's Gulf side. Hawaii's north shores and Mexico's Pacific coast can have strong surf, especially in winter.
+- **Seaweed season.** Sargassum can affect Mexico's Caribbean coast, the Dominican Republic and other Caribbean islands, usually most from spring through summer.
+- **Storm season.** The Atlantic hurricane season runs June 1 to November 30, with peak activity typically August through October. Consider travel insurance that covers weather for those months.
+
+## Beach trip length
+
+Plan three to four nights for Florida or a short flight to the Bahamas, and five to seven nights for Hawaii or the southern Caribbean so travel days do not take over the trip.

@@ -1,7 +1,7 @@
 ---
 name: Romantic Getaways
-metaTitle: "Romantic Getaway Ideas: Resorts, Places & Deals"
-metaDescription: Romantic getaways for every budget and style, from beach escapes and wine country weekends to adults-only resorts. Compare ideas and plan a trip for two.
+metaTitle: "Romantic Getaways: Tropical Escapes, Weekends & Resorts"
+metaDescription: "Romantic getaways for every budget, including the best tropical escapes by month, weekend trips and quiet resorts, with tips on timing and booking."
 scene: sunset
 palette: dusk
 imageAlt: Illustrated sunset over a calm ocean with a sailboat on the horizon
@@ -34,3 +34,20 @@ A romantic getaway is less about where you go and more about how the trip feels.
 Start with time and budget, then pick the vibe. If you only have a long weekend, favor destinations within a short flight or a few hours' drive. If you have a week, it becomes worth crossing time zones for Hawaii or the Caribbean. Our [affordable romantic getaways](/guides/affordable-romantic-getaways/) guide shows how to stretch a modest budget, and our full [romantic getaways](/) pillar guide walks through every decision step by step.
 
 Prefer a shortlist made for you? Use [Plan My Vacation](/plan-my-vacation/) and tell us your budget, dates and style.
+
+## Romantic tropical getaways: where to go by month
+
+Warm-weather trips are the most popular romantic getaways, but the best choice changes with the calendar.
+
+| Months | Strong choices | Why |
+| --- | --- | --- |
+| December–April | Mexico's Caribbean coast, Jamaica, St. Lucia, Aruba | Dry season with reliable sunshine; peak demand, so book early |
+| May–June | Hawaii, the Florida Keys, the Bahamas | Warm water and fewer crowds than winter |
+| July–October | Hawaii, Aruba, Southern California | Aruba sits south of the usual hurricane track; Hawaii is pleasant year-round |
+| November | Hawaii, Los Cabos | Shoulder-season value as the dry season begins |
+
+U.S. citizens can visit Hawaii, Puerto Rico and the U.S. Virgin Islands without a passport, which makes them easy last-minute choices.
+
+## What makes a getaway feel romantic
+
+Privacy and pace matter more than luxury. Look for a room with a view you will actually use, dinners within walking distance so nobody has to drive, and one shared highlight such as a sunset sail, a spa treatment or a scenic drive. Short airport transfers help too: an hour-long ride after a long flight takes the edge off the first evening.

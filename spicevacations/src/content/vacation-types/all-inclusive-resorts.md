@@ -1,7 +1,7 @@
 ---
 name: All-Inclusive Resorts
-metaTitle: "All-Inclusive Resort Picks for Couples by Destination"
-metaDescription: Compare all-inclusive resorts in Mexico, Jamaica, the Bahamas and the Dominican Republic. Learn what is included and how to choose the right resort for two.
+metaTitle: "All-Inclusive Resorts: Is It Worth It & What’s Included"
+metaDescription: "Decide whether an all-inclusive resort is worth it for your trip, what is usually included and excluded, and where couples find the best all-inclusive stays."
 scene: beach
 palette: teal
 imageAlt: Illustrated palm-lined beach with turquoise water and a setting sun
@@ -27,3 +27,18 @@ An all-inclusive resort takes the math out of your vacation. Once you have paid,
 4. **Transfer time.** An hour or less from the airport keeps travel days easy.
 
 Read our [all-inclusive resorts guide](/guides/all-inclusive-resorts-guide/), then shortlist the [best all-inclusive resorts for couples](/guides/best-all-inclusive-resorts-for-couples/) and check timing in [all-inclusive vacation deals](/guides/all-inclusive-vacation-deals/).
+
+## Is all-inclusive worth it?
+
+All-inclusive pricing makes the most sense when you would otherwise eat three restaurant meals a day and order drinks by the pool. It makes less sense in walkable destinations with great local food.
+
+| All-inclusive is a good fit if you… | Consider room-only if you… |
+| --- | --- |
+| Want a predictable trip cost | Plan to explore and eat off-site |
+| Enjoy cocktails and poolside service | Drink little or no alcohol |
+| Are staying somewhere isolated | Are staying in a walkable town |
+| Want zero meal planning | Have specific food preferences |
+
+## What is usually included, and what is not
+
+Most all-inclusive resorts cover meals, snacks, standard drinks, non-motorized water sports and nightly entertainment. Common extras are premium liquor, spa treatments, off-site excursions, some specialty dinners and airport transfers. Read the resort's inclusions page and check whether gratuities are covered.

@@ -1,7 +1,7 @@
 ---
 name: Cruise Vacations
-metaTitle: Cruise Vacations for Couples | SpiceVacations
-metaDescription: Are cruise vacations right for couples? Learn how Caribbean and Bahamas cruises work, what is included, and how to pick a ship and itinerary for two.
+metaTitle: "Cruise Vacations for Couples: Short Cruises & Tips"
+metaDescription: "Whether a cruise suits your trip, how to choose a short Bahamas or Caribbean cruise from Florida, and what fares usually include and leave out."
 scene: cruise
 palette: gold
 imageAlt: Illustrated cruise ship sailing on calm water under a golden sky
@@ -25,3 +25,11 @@ A cruise can be a surprisingly romantic way to see the Caribbean. You unpack onc
 - **Pair it with a beach stay.** Add a few nights in [Miami](/destinations/miami/) or the [Florida Keys](/destinations/florida/) before or after sailing.
 
 Many Caribbean itineraries call at the [Bahamas](/destinations/bahamas/), [Jamaica](/destinations/jamaica/) and Mexico's Cozumel. Explore [Caribbean vacations for couples](/guides/caribbean-vacations-for-couples/) to see which islands you might want to return to for a longer stay.
+
+## Is a cruise a good vacation for couples?
+
+Cruises suit couples who want to see several places without repacking and like having dining and entertainment close by. They suit less well if you want quiet, unscheduled days on one beach, since port days follow a fixed timetable.
+
+## Picking a short cruise
+
+Three- to five-night Bahamas and western Caribbean cruises leave year-round from Florida ports such as Miami, Fort Lauderdale and Port Canaveral, making them an easy first cruise. Compare cabin type (a balcony makes a big difference on a couples trip), what the fare includes (drinks, Wi-Fi and specialty dining are usually extra) and time in each port. On closed-loop cruises that start and end at the same U.S. port, U.S. citizens can often sail with a birth certificate and photo ID, but a passport is safer in case you need to fly home from a foreign port.

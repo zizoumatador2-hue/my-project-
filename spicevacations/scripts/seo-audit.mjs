@@ -1,16 +1,17 @@
 // Audits the built site (dist/) for technical SEO: title/description length and uniqueness,
 // one H1, canonical + hreflang, valid JSON-LD, internal links that resolve, images with alt text,
 // sitemap coverage and robots.txt. Run after `npm run build`:  npm run audit:seo
+import { fileURLToPath } from 'node:url';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const DIST = new URL('../dist/', import.meta.url).pathname;
+const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
 const files = [];
 const walk = (d) => readdirSync(d).forEach((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : f.endsWith('.html') && files.push(join(d, f))));
 walk(DIST);
 
 const route = (f) => {
-  const r = '/' + f.replace(DIST, '').replace(/index\.html$/, '').replace(/\.html$/, '');
+  const r = '/' + f.replace(DIST, '').split('\\').join('/').replace(/index\.html$/, '').replace(/\.html$/, '');
   return r;
 };
 const exists = (href) => {

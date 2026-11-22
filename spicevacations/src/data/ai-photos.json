@@ -80,23 +80,23 @@
     "megapixels": 2
   },
   "vacation-types/honeymoon-vacations": {
-    "id": "ai-vacation-types--luxury-vacations",
-    "base": "/ai/vacation-types--luxury-vacations",
+    "id": "ai-vacation-types--honeymoon-vacations",
+    "base": "/ai/vacation-types--honeymoon-vacations",
     "widths": [
       640,
       960,
       1536
     ],
-    "alt": "A clifftop villa terrace with a private pool overlooking the coast at sunset",
-    "avg": "#8a806a",
+    "alt": "Overwater bungalow deck with two sun loungers above a turquoise lagoon at sunrise",
+    "avg": "#080808",
     "photographer": "SpiceVacations",
     "photographerUrl": "/editorial-policy/",
     "url": "/editorial-policy/",
     "source": "AI",
     "ai": true,
     "model": "fal-ai/flux/schnell",
-    "seed": 109281767,
-    "prompt": "elegant clifftop villa terrace at sunset overlooking a dramatic coastline, private infinity pool, outdoor lounge furniture, champagne on a table, refined luxury atmosphere",
+    "seed": 1737869817,
+    "prompt": "overwater bungalow deck at sunrise above a calm turquoise lagoon, wooden ladder into the water, two teak sun loungers, lush green mountain in the distance, serene honeymoon destination, no people",
     "megapixels": 2
   },
   "vacation-types/adults-only-resorts": {
@@ -197,6 +197,26 @@
     "model": "fal-ai/flux/schnell",
     "seed": 1526351024,
     "prompt": "cozy wooden cabin porch overlooking a misty lake surrounded by autumn foliage, two coffee mugs and a blanket on a bench, early morning light, peaceful",
+    "megapixels": 2
+  },
+  "vacation-types/cruise-vacations": {
+    "id": "ai-vacation-types--cruise-vacations",
+    "base": "/ai/vacation-types--cruise-vacations",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A cruise ship at sea beyond a small tropical island with white sand and palm trees",
+    "avg": "#d8d8d8",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 82152321,
+    "prompt": "distant white cruise ship with a completely plain white hull and no lettering, far out on calm turquoise sea behind a small tropical island with white sand and palm trees, bright sunny morning, wide aerial view, the ship is small in the frame",
     "megapixels": 2
   }
 }

@@ -1,7 +1,7 @@
 ---
 name: Honeymoon Vacations
-metaTitle: "Honeymoon Vacation Ideas: Resorts, Places & Planning"
-metaDescription: Plan honeymoon vacations with confidence. Compare honeymoon destinations and resorts in Hawaii, Mexico and the Caribbean, with timing tips and budgets.
+metaTitle: "Honeymoon Vacations: Destinations, Timeline & Tips"
+metaDescription: "Honeymoon vacation ideas for U.S. couples, with a month-by-month planning timeline, honeymoon perks to ask about, and ideas for anniversary trips."
 scene: overwater
 palette: teal
 imageAlt: Illustrated overwater bungalows on a turquoise lagoon at sunrise
@@ -26,3 +26,18 @@ A honeymoon is often the first big trip you plan as a married couple, and it hap
 - **The Caribbean**, from St. Lucia's Pitons to Jamaica's couples-only resorts. Read [Caribbean vacations for couples](/guides/caribbean-vacations-for-couples/).
 
 Compare options in our guides to [honeymoon destinations](/guides/honeymoon-destinations/) and the [best honeymoon resorts](/guides/best-honeymoon-resorts/).
+
+## Honeymoon planning timeline
+
+| When | What to do |
+| --- | --- |
+| 6–9 months before | Set the budget, shortlist two or three destinations, check passport expiration dates |
+| 4–6 months before | Book flights and the resort, especially for December–April travel |
+| 2–3 months before | Reserve specialty dinners, excursions and spa treatments |
+| 2–4 weeks before | Confirm transfers, travel insurance and any entry requirements |
+
+Many resorts offer honeymoon extras such as a room upgrade or a private dinner. Mention your honeymoon when you book; some offers require proof of a recent wedding date.
+
+## Honeymoon vs. anniversary trips
+
+The resorts that suit honeymooners also work well for anniversaries, and many have anniversary offers too. Returning to your honeymoon destination for a milestone year is a popular choice, and a shorter trip, such as four nights in Mexico or Florida, often fits an anniversary schedule better than a full honeymoon-length stay.
