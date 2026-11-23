@@ -2,6 +2,7 @@
 title: "What Is the Fed Dot Plot and How to Read It"
 description: "Fed dot plot explained: what each dot means, how the median is built, what September 2026's projections signaled, and how markets react to new dots."
 publishDate: 2026-11-21
+modifiedDate: 2026-11-23
 category: market-events
 series: economic-event-explained
 primaryKeyword: "fed dot plot explained"
@@ -129,6 +130,7 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [What is quantitative tightening (QT)?](/articles/what-is-quantitative-tightening/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [What happens to stocks when the Fed cuts rates?](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 - [How interest rates affect stock valuations](/articles/how-interest-rates-affect-stock-valuations/)
