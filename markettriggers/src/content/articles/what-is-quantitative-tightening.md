@@ -2,6 +2,7 @@
 title: "What Is Quantitative Tightening (QT)?"
 description: "What is quantitative tightening? How the Fed shrank its balance sheet in 2017-2019 and 2022-2025, why QT ended, and how it can move yields and stocks."
 publishDate: 2026-11-23
+modifiedDate: 2026-11-25
 category: market-events
 series: economic-event-explained
 primaryKeyword: "what is quantitative tightening"
@@ -130,6 +131,7 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [The 2013 taper tantrum: what it teaches investors](/articles/taper-tantrum-2013-lessons/)
 - [What is the Fed dot plot and how to read it](/articles/what-is-the-fed-dot-plot/)
 - [FOMC meeting explained: what to watch, hour by hour](/articles/fomc-meeting-day-what-to-watch/)
 - [What is the 10-year Treasury yield and why does it matter?](/articles/what-is-the-10-year-treasury-yield/)
