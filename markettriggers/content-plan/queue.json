@@ -409,7 +409,8 @@
       "category": "investor-education",
       "series": "market-trigger-breakdown",
       "image": "washington-columns",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-25"
     },
     {
       "n": 26,

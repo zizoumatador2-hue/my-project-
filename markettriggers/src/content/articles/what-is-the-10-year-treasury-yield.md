@@ -2,7 +2,7 @@
 title: "What Is the 10-Year Treasury Yield and Why Does It Matter?"
 description: "The 10-year Treasury yield explained: what sets it, why it rose above 5% in November 2026, and how it feeds into mortgage rates and stock valuations."
 publishDate: 2026-11-17
-modifiedDate: 2026-11-23
+modifiedDate: 2026-11-25
 category: economic-indicators
 series: investor-guide
 primaryKeyword: "10 year treasury yield"
@@ -135,6 +135,7 @@ This article is educational and is not personalized investment advice.
 
 ## Related reading
 
+- [The 2013 taper tantrum: what it teaches investors](/articles/taper-tantrum-2013-lessons/)
 - [What is quantitative tightening (QT)?](/articles/what-is-quantitative-tightening/)
 - [Stocks vs. bonds: why they sometimes fall together](/articles/stocks-and-bonds-falling-together/)
 - [Yield curve inversion: what it means for stocks](/articles/yield-curve-inversion-explained/)
