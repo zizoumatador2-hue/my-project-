@@ -1,12 +1,12 @@
 ---
 title: "Best Couples Vacations Under $2,000: How to Plan a Great Trip for Two"
-metaTitle: "Best Couples Vacations Under $2,000 for Two"
-metaDescription: "How to plan the best couples vacations under $2,000 total: destinations that fit the budget, a simple budgeting method and proven ways to stretch every dollar."
+metaTitle: "Cheap Couples Vacations: Best Trips for Two Under $2,000"
+metaDescription: "Cheap couples vacations that still feel special: destinations that fit a $2,000 total budget, a simple budgeting method and proven ways to stretch every dollar."
 scene: tropical
 palette: gold
 imageAlt: Illustrated tropical cove with palms and a small island in golden light
 primaryKeyword: couples vacations under $2,000
-secondaryKeywords: [affordable couples vacations, budget vacations for two]
+secondaryKeywords: [cheap couples vacations, affordable couples vacations, budget vacations for two]
 category: couples-vacations
 destinations: [florida, las-vegas, mexico, dominican-republic, miami]
 resorts: [excellence-punta-cana, couples-negril, the-don-cesar, breathless-cabo-san-lucas]

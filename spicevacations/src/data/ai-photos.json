@@ -218,5 +218,65 @@
     "seed": 82152321,
     "prompt": "distant white cruise ship with a completely plain white hull and no lettering, far out on calm turquoise sea behind a small tropical island with white sand and palm trees, bright sunny morning, wide aerial view, the ship is small in the frame",
     "megapixels": 2
+  },
+  "guides/valentines-day-getaways": {
+    "id": "ai-guides--valentines-day-getaways",
+    "base": "/ai/guides--valentines-day-getaways",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A candlelit table for two on a beachfront terrace at dusk",
+    "avg": "#98d8e8",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1309718229,
+    "prompt": "a candlelit dinner table for two on a beachfront terrace at dusk in winter, white tablecloth, small vase of red roses, string lights, calm sea and palm trees in the background, no people",
+    "megapixels": 2
+  },
+  "guides/anniversary-trip-ideas": {
+    "id": "ai-guides--anniversary-trip-ideas",
+    "base": "/ai/guides--anniversary-trip-ideas",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "Two glasses of sparkling wine on a balcony above a vineyard valley at golden hour",
+    "avg": "#283828",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1637839419,
+    "prompt": "two glasses of sparkling wine on a wooden balcony railing overlooking a green vineyard valley and rolling hills at golden hour, a small gift box with a ribbon beside them, no people",
+    "megapixels": 2
+  },
+  "guides/best-time-to-visit-cancun": {
+    "id": "ai-guides--best-time-to-visit-cancun",
+    "base": "/ai/guides--best-time-to-visit-cancun",
+    "widths": [
+      640,
+      960,
+      1536
+    ],
+    "alt": "A white-sand beach in Cancun with turquoise water on a sunny day",
+    "avg": "#e8e8e8",
+    "photographer": "SpiceVacations",
+    "photographerUrl": "/editorial-policy/",
+    "url": "/editorial-policy/",
+    "source": "AI",
+    "ai": true,
+    "model": "fal-ai/flux/schnell",
+    "seed": 1962281399,
+    "prompt": "wide view of a white sand Caribbean beach in Cancun hotel zone on a bright sunny day, turquoise and deep blue water in clear bands, palm-thatched beach umbrella, gentle waves, a few distant low hotels, no people in focus",
+    "megapixels": 2
   }
 }

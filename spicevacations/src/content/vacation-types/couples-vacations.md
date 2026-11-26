@@ -1,7 +1,7 @@
 ---
 name: Couples Vacations
-metaTitle: "Vacations for Couples: How to Pick, Plan and Book"
-metaDescription: "Vacations for couples by travel style, trip length and season, from all-inclusive beach resorts to city breaks, with a planning checklist for two."
+metaTitle: "Couples Getaways & Trip Ideas: How to Pick and Plan"
+metaDescription: "Couples getaways and trip ideas by travel style, trip length and season, from all-inclusive beach resorts to city breaks, with a planning checklist for two."
 scene: tropical
 palette: coral
 imageAlt: Illustrated tropical cove with palm trees and a small island at sunset
