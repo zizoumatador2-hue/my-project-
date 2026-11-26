@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE } from '../../data/site';
+import { breadcrumbList, webPage } from '../../lib/schema';
+const path = '/contact/';
+const title = 'Contact SpiceVacations: Questions & Partnerships';
+const description = 'Contact the SpiceVacations.com team with travel questions, corrections or partnership ideas. We reply within two business days. We do not take bookings.';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Contact', href: path }];
+const turnstile = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<Base title={title} description={description} schema={[webPage({ path, title, description, type: 'ContactPage' }), breadcrumbList(crumbs)]}>
+  <PageHero title="Contact us" crumbs={crumbs} lead="Questions, corrections or partnership ideas? We read every message and reply within two business days." />
+  <div class="container section--tight">
+    <div class="article-layout">
+      <form class="info-card" action="/api/contact" method="post" data-ajax-form data-event="contact_submit" data-contact novalidate>
+        <h2>Send a message</h2>
+        <p class="field-error" data-error-flag hidden>Something went wrong with your last submission. Please check the form and try again.</p>
+        <div class="grid grid-2">
+          <div class="field"><label for="c-name">Your name</label><input class="input" id="c-name" name="name" required minlength="2" maxlength="100" autocomplete="name" /></div>
+          <div class="field"><label for="c-email">Email</label><input class="input" id="c-email" name="email" type="email" required maxlength="200" autocomplete="email" /></div>
+        </div>
+        <div class="field mt-2">
+          <label for="c-topic">Topic</label>
+          <select class="select" id="c-topic" name="topic">
+            <option value="general">General question</option>
+            <option value="trip-question">Trip planning question</option>
+            <option value="correction">Correction or update</option>
+            <option value="partnership">Partnership or advertising</option>
+            <option value="press">Press</option>
+          </select>
+        </div>
+        <div class="field mt-2"><label for="c-msg">Message</label><textarea class="textarea" id="c-msg" name="message" required minlength="10" maxlength="5000"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="c-web">Leave this field empty</label><input id="c-web" name="website" tabindex="-1" autocomplete="off" /></div>
+        <input type="hidden" name="ts" value="" data-ts />
+        {turnstile && <div class="cf-turnstile mt-2" data-sitekey={turnstile}></div>}
+        <label class="checkbox mt-2"><input type="checkbox" name="consent" value="yes" required /><span>I agree that SpiceVacations may use my details to reply, as described in the <a href="/privacy-policy/">privacy policy</a>.</span></label>
+        <button class="btn mt-3" type="submit"><Icon name="mail" /> Send message</button>
+        <p class="form-status mt-2" data-status aria-live="polite"></p>
+        <p class="small muted mb-0">Please don't send payment card details or passport numbers. We can't access or change bookings made with providers.</p>
+      </form>
+      <aside class="article-aside">
+        <div class="info-card">
+          <h2>Email</h2>
+          <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+          <h2 class="mt-3">About bookings</h2>
+          <p class="small muted mb-0">SpiceVacations.com does not sell travel. For changes, cancellations or refunds, contact the hotel, airline, cruise line or booking site you booked with directly.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+  {turnstile && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLInputElement>('[data-ts]').forEach((el) => (el.value = String(Date.now())));
+  if (new URLSearchParams(location.search).get('error')) document.querySelector<HTMLElement>('[data-error-flag]')?.removeAttribute('hidden');
+</script>

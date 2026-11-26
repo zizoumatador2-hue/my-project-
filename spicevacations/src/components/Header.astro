@@ -1,0 +1,97 @@
+---
+import { NAV } from '../data/site';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="site-header" data-header>
+  <div class="container">
+    <a class="brand" href="/" aria-label="SpiceVacations.com home">
+      <Logo id="hdr" animated size={40} />
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        {
+          NAV.map((item, i) =>
+            item.children ? (
+              <li class="has-dropdown">
+                <button class="nav-link" type="button" aria-expanded="false" aria-controls={`dd-${i}`} data-dropdown>
+                  {item.label}
+                  <Icon name="chevron-down" size={16} />
+                </button>
+                <ul class="dropdown" id={`dd-${i}`}>
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} aria-current={path === c.href ? 'page' : undefined}>
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a class="nav-link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn header-search" href="/search/" aria-label="Search vacations"><Icon name="search" /></a>
+      <a class="icon-btn" href="/saved/" aria-label="Saved trips">
+        <Icon name="heart" /><span class="saved-count" data-saved-count></span>
+      </a>
+      <a class="btn btn--sm header-cta" href="/plan-my-vacation/">Plan my trip</a>
+      <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-open>
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
+  <div class="mobile-menu__backdrop" data-menu-close></div>
+  <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu__top">
+      <a href="/" class="brand" aria-label="SpiceVacations.com home"><Logo id="mob" size={34} /></a>
+      <button class="icon-btn" type="button" aria-label="Close menu" data-menu-close><Icon name="x" /></button>
+    </div>
+    <nav aria-label="Mobile">
+      <ul>
+        {
+          NAV.map((item) =>
+            item.children ? (
+              <li>
+                <details>
+                  <summary>{item.label}</summary>
+                  <ul>
+                    {item.children.map((c) => (
+                      <li>
+                        <a href={c.href}>{c.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a class="m-link" href={item.href}>
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
+        }
+        <li><a class="m-link" href="/search/">Search vacations</a></li>
+        <li><a class="m-link" href="/saved/">Saved trips</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--block mt-3" href="/plan-my-vacation/">Plan my vacation</a>
+  </div>
+</div>

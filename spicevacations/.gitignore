@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.dev.vars
+public/art/
+public/og/
+*.log
+public/photos/
+src/data/photos.json

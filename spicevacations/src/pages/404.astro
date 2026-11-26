@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page Not Found | SpiceVacations" description="Sorry, we couldn't find that page. Explore romantic getaways, destinations, resorts and travel guides for couples on SpiceVacations.com instead." noindex>
+  <section class="page-hero page-hero--plain">
+    <div class="container center">
+      <p class="eyebrow" style="color:var(--gold)">Error 404</p>
+      <h1>This page sailed away</h1>
+      <p class="lead" style="margin-inline:auto">The page you're looking for doesn't exist or has moved. Let's get you back on course.</p>
+      <form class="cluster mt-3" style="justify-content:center" action="/search/" method="get" role="search">
+        <label class="sr-only" for="nf-q">Search</label>
+        <input class="input" style="max-width:320px" id="nf-q" name="q" type="search" placeholder="Search destinations or resorts" />
+        <button class="btn" type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+  <section class="section--tight container center">
+    <h2 style="font-size:var(--step-2)">Popular places to start</h2>
+    <ul class="pill-list mt-2" style="justify-content:center">
+      <li><a class="chip" href="/">Home</a></li>
+      <li><a class="chip" href="/destinations/">Destinations</a></li>
+      <li><a class="chip" href="/resorts/">Resorts</a></li>
+      <li><a class="chip" href="/guides/">Guides</a></li>
+      <li><a class="chip" href="/deals/">Deals</a></li>
+      <li><a class="chip" href="/plan-my-vacation/">Plan my vacation</a></li>
+    </ul>
+  </section>
+</Base>

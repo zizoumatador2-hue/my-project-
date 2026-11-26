@@ -1,0 +1,22 @@
+{
+  "services": [
+    {
+      "service": "Google Search Console",
+      "status": "processing error",
+      "property": "sc-domain:spicevacations.com",
+      "sitemap": "https://spicevacations.com/sitemap-index.xml",
+      "checked": "2026-11-15",
+      "evidence": "Sitemap submitted 2026-11-15; Search Console showed \"Couldn't fetch\" right after submission while the URL returned HTTP 200 to a Googlebot user agent. Not rechecked since.",
+      "link": "https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Aspicevacations.com"
+    },
+    {
+      "service": "Bing Webmaster Tools",
+      "status": "unconnected",
+      "property": "",
+      "sitemap": "",
+      "checked": "2026-11-22",
+      "evidence": "Not yet inspected; access not established in this session.",
+      "link": "https://www.bing.com/webmasters"
+    }
+  ]
+}

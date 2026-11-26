@@ -1,0 +1,62 @@
+---
+import { FOOTER_NAV, SITE } from '../data/site';
+import Logo from './Logo.astro';
+import NewsletterForm from './NewsletterForm.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="brand" aria-label="SpiceVacations.com home"><Logo id="ftr" size={40} class="on-dark" /></a>
+        <p class="mt-2">{SITE.tagline} Independent, couples-first travel guides to romantic getaways, adults-only and all-inclusive resorts, and beach escapes.</p>
+        <NewsletterForm variant="footer" id="footer" />
+      </div>
+      {
+        FOOTER_NAV.map((col) => (
+          <nav aria-label={col.title}>
+            <h2>{col.title}</h2>
+            <ul>
+              {col.links.map((l) => (
+                <li>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+    <div class="footer-legal">
+      <p>
+        <strong>Affiliate disclosure:</strong> Some links on SpiceVacations.com are affiliate links. If you book through them we may earn a commission at
+        no extra cost to you. This never changes what we recommend. <a href="/affiliate-disclosure/">Read our full disclosure</a>.
+      </p>
+      <p>
+        SpiceVacations.com is an independent travel publisher. We are not a hotel, airline, cruise line, tour operator or travel agency, and we do not
+        sell travel. Final prices, availability and booking terms are set by the provider you book with.
+      </p>
+      <p>
+        © {year}
+        {SITE.domain}. All rights reserved. · <a href={`mailto:${SITE.email}`}>{SITE.email}</a> ·
+        <button type="button" class="linklike" data-cookie-settings>Cookie settings</button>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .linklike {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: #e2e8f0;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .linklike:hover {
+    color: var(--gold);
+  }
+</style>
