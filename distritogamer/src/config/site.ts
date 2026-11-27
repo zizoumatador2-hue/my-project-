@@ -15,6 +15,8 @@ export const SITE = {
   contactEmail: env.PUBLIC_CONTACT_EMAIL || 'info@christopherkunz.com',
   contactEndpoint: env.PUBLIC_CONTACT_ENDPOINT || '',
   newsletterEndpoint: env.PUBLIC_NEWSLETTER_ENDPOINT || '',
+  // AdSense publisher ID. Public by design (it is visible in every page's source and in ads.txt).
+  adsensePublisher: 'ca-pub-8532224804732263',
   adsenseClient: env.PUBLIC_ADSENSE_CLIENT || '',
   ga4Id: env.PUBLIC_GA4_ID || '',
   gscVerification: env.PUBLIC_GSC_VERIFICATION || '',

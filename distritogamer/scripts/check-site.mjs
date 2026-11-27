@@ -185,7 +185,16 @@ else {
   if (!/Sitemap:\s*https?:\/\//.test(r)) err('robots', 'no Sitemap directive');
   if (/Disallow:\s*\/(_astro|fonts)/.test(r)) err('robots', 'blocks render-critical assets');
 }
-for (const need of ['_headers', 'favicon.svg', 'global.css']) if (!existsSync(join(DIST, need))) err('assets', `${need} missing in dist`);
+for (const need of ['_headers', 'ads.txt', 'favicon.svg', 'global.css']) if (!existsSync(join(DIST, need))) err('assets', `${need} missing in dist`);
+
+// AdSense: ads.txt must authorize the publisher, and every page must carry the account meta + loader
+const adsTxt = existsSync(join(DIST, 'ads.txt')) ? readFileSync(join(DIST, 'ads.txt'), 'utf8') : '';
+if (adsTxt && !/^google\.com, pub-\d+, (DIRECT|RESELLER)/m.test(adsTxt)) err('ads.txt', 'no valid google.com line');
+for (const [url, root] of docs) {
+  if (url === '/404/') continue;
+  if (!root.querySelector('meta[name="google-adsense-account"]')) err(url, 'missing google-adsense-account meta');
+  if (!root.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) err(url, 'missing AdSense loader script');
+}
 
 // JS/CSS budget
 const jsFiles = files.filter((f) => f.endsWith('.js'));
