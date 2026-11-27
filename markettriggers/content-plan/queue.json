@@ -426,7 +426,8 @@
       "category": "stock-market-triggers",
       "series": "investor-guide",
       "image": "boardroom-earnings",
-      "status": "queued"
+      "status": "published",
+      "publishedOn": "2026-11-27"
     },
     {
       "n": 27,
