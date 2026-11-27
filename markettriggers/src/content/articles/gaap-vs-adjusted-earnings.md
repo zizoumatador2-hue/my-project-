@@ -2,6 +2,7 @@
 title: "GAAP vs. Adjusted Earnings: What Investors Should Know"
 description: "GAAP vs adjusted earnings: why companies report two profit numbers, what non-GAAP EPS leaves out, and how to read the reconciliation before you trust a beat."
 publishDate: 2026-10-15
+modifiedDate: 2026-11-27
 category: stock-market-triggers
 series: investor-guide
 primaryKeyword: "gaap vs adjusted earnings"
@@ -157,6 +158,7 @@ This article is educational and is not personalized investment advice.
 - [How to read an earnings report in 10 minutes](/articles/how-to-read-an-earnings-report/)
 - [What is earnings guidance and why does it move stocks?](/articles/what-is-earnings-guidance/)
 - [Why stocks fall after beating earnings](/articles/why-do-stocks-fall-after-earnings/)
+- [Are stock buybacks good for investors?](/articles/are-stock-buybacks-good/)
 - [Stock market triggers: earnings and corporate news](/stock-market-triggers/)
 
 ## Sources

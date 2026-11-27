@@ -2,7 +2,7 @@
 title: "How to Read an Earnings Report in 10 Minutes"
 description: "How to read an earnings report fast: check revenue and EPS against estimates, guidance, margins, cash flow and the call, in a 10-minute order of operations."
 publishDate: 2026-10-11
-modifiedDate: 2026-10-15
+modifiedDate: 2026-11-27
 category: stock-market-triggers
 series: investor-guide
 primaryKeyword: "how to read an earnings report"
@@ -165,6 +165,7 @@ This article is educational and is not personalized investment advice.
 - [What is earnings guidance and why does it move stocks?](/articles/what-is-earnings-guidance/)
 - [GAAP vs. adjusted earnings: what investors should know](/articles/gaap-vs-adjusted-earnings/)
 - [Why stocks fall after beating earnings](/articles/why-do-stocks-fall-after-earnings/)
+- [Are stock buybacks good for investors?](/articles/are-stock-buybacks-good/)
 - [How inflation affects stocks](/articles/how-does-inflation-affect-stocks/)
 - [What happens to stocks when the Fed cuts rates](/articles/what-happens-to-stocks-when-the-fed-cuts-rates/)
 - [Stock market triggers: earnings and corporate news](/stock-market-triggers/)
