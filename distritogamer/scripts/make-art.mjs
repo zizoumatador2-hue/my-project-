@@ -29,6 +29,7 @@ const items = [
   ['beginners-guide-to-valorant', 'diamond', 350],
   ['beginners-guide-to-elden-ring', 'ring', 40],
   ['counter-strike-2-practice-guide', 'crosshair', 45],
+  ['aim-assist-explained', 'controller', 300],
 ];
 
 const hsl = (h, s, l, a = 1) => `hsla(${h % 360},${s}%,${l}%,${a})`;
