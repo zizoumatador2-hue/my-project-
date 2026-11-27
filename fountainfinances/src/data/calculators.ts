@@ -32,7 +32,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     seoTitle: 'Personal Loan Payment Calculator: Monthly Cost & Interest',
     hub: 'loans',
     icon: 'loan',
-    keywords: ['personal loan calculator', 'loan payment calculator', 'monthly loan payment calculator', 'loan interest calculator', 'personal loan repayment calculator'],
+    keywords: ['personal loan calculator', 'loan payment calculator', 'monthly loan payment calculator', 'loan interest calculator', 'personal loan repayment calculator', 'personal loan payment calculator', 'personal loan interest rate calculator', 'loan calculator monthly payment'],
     featured: true,
   },
   {

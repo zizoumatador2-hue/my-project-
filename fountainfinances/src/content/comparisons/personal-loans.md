@@ -2,7 +2,7 @@
 title: "Best Personal Loans: Compare Online Lenders"
 seoTitle: "Best Personal Loans of 2026: Compare Online Lenders"
 description: "Compare personal loan lenders by prequalification, credit fit, fees and direct creditor payment, plus how to compare offers by APR and total cost."
-keywords: ["best personal loans", "personal loan comparison", "personal loan rates", "personal loans for bad credit", "personal loans"]
+keywords: ["best personal loans", "personal loan comparison", "personal loan rates", "personal loans for bad credit", "personal loans", "compare personal loans", "personal loan lenders", "personal loans for debt consolidation"]
 hub: loans
 category: personal-loans
 published: 2026-09-20

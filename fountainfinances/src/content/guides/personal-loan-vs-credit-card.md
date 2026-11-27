@@ -2,7 +2,7 @@
 title: "Personal Loan vs. Credit Card: Which Is Better for Your Situation?"
 seoTitle: "Personal Loan vs Credit Card: Costs, Pros & Cons Compared"
 description: "Personal loan vs. credit card: compare interest rates, fees, repayment structure and credit impact, with examples showing when each option costs less."
-keywords: ["personal loan vs credit card", "personal loans", "personal loan rates", "credit cards", "personal loan comparison"]
+keywords: ["personal loan vs credit card", "personal loans", "personal loan rates", "credit cards", "personal loan comparison", "personal loans to pay off credit cards"]
 hub: loans
 topics: ["personal-loans", "credit-cards", "debt-consolidation"]
 published: 2026-09-09
@@ -33,7 +33,7 @@ sources:
   - title: "Consumer Credit - G.19"
     publisher: "Board of Governors of the Federal Reserve System"
     url: "https://www.federalreserve.gov/releases/g19/current/default.htm"
-related: ["debt-to-income-ratio", "what-is-debt-consolidation", "what-is-apr", "how-credit-card-interest-works"]
+related: ["debt-to-income-ratio", "what-is-debt-consolidation", "what-is-apr", "how-credit-card-interest-works", "personal-loan-requirements"]
 calculators: ["loan", "credit-card-payoff", "debt-consolidation"]
 comparisons: ["personal-loans", "balance-transfer-credit-cards"]
 ---

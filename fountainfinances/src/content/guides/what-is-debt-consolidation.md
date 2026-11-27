@@ -2,7 +2,7 @@
 title: "What Is Debt Consolidation? How It Works, Options and Risks"
 seoTitle: "What Is Debt Consolidation? Options, Pros, Cons & Risks"
 description: "How debt consolidation works, the main options (loans, balance transfers, debt management plans and home equity) and how to tell if it saves money."
-keywords: ["debt consolidation", "how debt consolidation works", "debt consolidation loans", "debt consolidation options", "debt consolidation calculator"]
+keywords: ["debt consolidation", "how debt consolidation works", "debt consolidation loans", "debt consolidation options", "debt consolidation calculator", "personal loans for debt consolidation", "using a personal loan to pay off credit card debt"]
 hub: loans
 topics: ["debt-consolidation", "debt-management", "personal-loans"]
 published: 2026-09-17
@@ -33,7 +33,7 @@ sources:
   - title: "Direct Consolidation Loans"
     publisher: "Federal Student Aid, U.S. Department of Education"
     url: "https://studentaid.gov/manage-loans/consolidation"
-related: ["how-to-pay-off-credit-card-debt", "debt-payoff-strategies", "personal-loan-vs-credit-card"]
+related: ["how-to-pay-off-credit-card-debt", "debt-payoff-strategies", "personal-loan-vs-credit-card", "personal-loan-requirements"]
 calculators: ["debt-consolidation", "loan", "credit-card-payoff"]
 comparisons: ["personal-loans", "balance-transfer-credit-cards"]
 ---
