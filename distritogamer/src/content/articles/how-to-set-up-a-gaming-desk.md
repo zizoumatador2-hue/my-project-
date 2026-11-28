@@ -1,10 +1,10 @@
 ---
 title: "How to Set Up a Gaming Desk for Comfort and Performance"
-seoTitle: "How to Set Up a Gaming Desk for Comfort and Performance"
+seoTitle: "Gaming Desk Setup: How to Build a Gaming Setup"
 description: "Set up a gaming desk for comfort and performance: monitor height and distance, chair and keyboard position, mouse space, lighting and break habits."
 category: gaming-gear
 tags: [desk, setup, ergonomics, posture, monitor]
-keywords: [gaming setup advice, how to set up a gaming desk, gaming desk ergonomics, monitor height gaming, gaming chair posture, mouse pad size]
+keywords: [build a gaming setup, gaming setup advice, how to set up a gaming desk, gaming desk ergonomics, monitor height gaming, gaming chair posture, mouse pad size]
 published: 2026-09-21
 quickAnswer: "Set your monitor so the top edge is near eye level at about an arm's length, keep your elbows near 90 degrees with relaxed shoulders, place your keyboard and mouse so your wrists stay neutral, leave plenty of mouse space, keep your feet supported, light the room to reduce glare, and take regular breaks."
 imageAlt: "Illustration of a monitor on a stand with a glowing graph on a dark orange background"

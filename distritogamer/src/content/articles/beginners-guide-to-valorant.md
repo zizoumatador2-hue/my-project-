@@ -1,10 +1,10 @@
 ---
 title: "Beginner's Guide to Valorant: Agents, Economy and First Steps"
-seoTitle: "Beginner's Guide to Valorant: Agents, Economy, Basics"
+seoTitle: "Valorant Guide for Beginners: Agents, Economy and Tips"
 description: "New to Valorant? Learn how rounds work, how agent roles differ, how the economy works, which mechanics to practice first and how to improve as a beginner."
 category: game-guides
 tags: [valorant, beginners, agents, economy, tactical shooter]
-keywords: [beginner's guide to Valorant, Valorant tips for beginners, Valorant agents roles, Valorant economy, how to get better at Valorant, tactical shooter basics]
+keywords: [competitive gaming, beginner's guide to Valorant, Valorant tips for beginners, Valorant agents roles, Valorant economy, how to get better at Valorant, tactical shooter basics]
 published: 2026-10-03
 quickAnswer: "In Valorant, attackers plant the Spike while defenders stop them, and the first team to win the required number of rounds takes the match. As a beginner, pick one agent, learn crosshair placement and counter-strafing, buy together with your team, use the Range to practice and review your deaths."
 imageAlt: "Illustration of a glowing diamond shape on a dark magenta and blue background"

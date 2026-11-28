@@ -1,10 +1,10 @@
 ---
 title: "How to Optimize Windows for Gaming: Safe Tweaks That Help"
-seoTitle: "How to Optimize Windows for Gaming: Safe Tweaks"
+seoTitle: "Optimize Windows for Gaming: Game Mode and Safe Tweaks"
 description: "Optimize Windows for gaming with safe, reversible tweaks: Game Mode, startup apps, power mode, GPU settings, updates, storage and what to avoid, step by step."
 category: gaming-performance
 tags: [windows, optimization, game mode, startup, drivers]
-keywords: [how to optimize Windows for gaming, PC gaming optimization, Windows 11 gaming settings, Game Mode, gaming performance tips, speed up PC for gaming]
+keywords: [game mode, how to optimize Windows for gaming, PC gaming optimization, Windows 11 gaming settings, Game Mode, gaming performance tips, speed up PC for gaming]
 published: 2026-09-12
 quickAnswer: "To optimize Windows for gaming, create a restore point, update Windows and graphics drivers, turn on Game Mode, set the power mode to best performance, remove unneeded startup apps and background recording, schedule updates outside play time, keep storage free and avoid registry cleaners and so-called FPS booster tools."
 imageAlt: "Illustration of a computer processor chip with glowing connection lines on a dark blue background"

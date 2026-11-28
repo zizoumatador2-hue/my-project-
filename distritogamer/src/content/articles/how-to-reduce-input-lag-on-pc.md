@@ -1,10 +1,10 @@
 ---
 title: "How to Reduce Input Lag on PC: A Complete Guide"
-seoTitle: "How to Reduce Input Lag on PC: Complete Guide"
+seoTitle: "Reduce Input Lag on PC: Low Latency Mode and More"
 description: "Reduce input lag on PC: raise and cap your frame rate, enable low-latency modes, set V-Sync and display options right and pick faster input devices."
 category: gaming-performance
 tags: [input lag, latency, fps, reflex, display]
-keywords: [how to reduce input lag, input lag PC, reduce latency gaming, low latency mode, V-Sync input lag, gaming performance tips]
+keywords: [low latency mode, latency for gaming, how to reduce input lag, input lag PC, reduce latency gaming, low latency mode, V-Sync input lag, gaming performance tips]
 published: 2026-09-09
 quickAnswer: "To reduce input lag, raise your frame rate, cap it slightly below what your GPU can sustain, turn on your game's low-latency mode such as NVIDIA Reflex or AMD Anti-Lag when available, avoid traditional V-Sync, use a high refresh rate display in game mode, and connect your mouse or controller with a wired or low-latency link."
 imageAlt: "Illustration of a speedometer-style gauge with a needle in the fast zone on a dark blue background"

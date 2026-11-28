@@ -1,10 +1,10 @@
 ---
 title: "Best Controller Settings for Competitive Gaming"
-seoTitle: "Best Controller Settings for Competitive Gaming Guide"
+seoTitle: "Best Controller Settings for Competitive Gaming (2026)"
 description: "Tune controller settings for competitive play: stick sensitivity, deadzones, response curves, aim assist and button layouts, with a safe testing method."
 category: game-settings
 tags: [controller, settings, deadzone, aim assist, sensitivity]
-keywords: [best controller settings, best controller settings for competitive gaming, controller deadzone, stick sensitivity, aim assist settings, gaming settings for beginners]
+keywords: [controller games, best controller settings, best controller settings for competitive gaming, controller deadzone, stick sensitivity, aim assist settings, gaming settings for beginners]
 published: 2026-08-31
 quickAnswer: "Start with default controller settings, then adjust one option at a time: set the smallest deadzone that removes stick drift, choose a stick sensitivity that allows fast turns and fine aim, try response curves, keep aim assist on if the game allows it, and use a button layout that keeps your thumbs on the sticks."
 imageAlt: "Illustration of a game controller outlined in glowing light on a dark purple background"

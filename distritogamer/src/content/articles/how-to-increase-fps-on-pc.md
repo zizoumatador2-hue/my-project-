@@ -1,10 +1,10 @@
 ---
 title: "How to Increase FPS on PC: 12 Safe Fixes That Work"
-seoTitle: "How to Increase FPS on PC: 12 Safe Fixes That Work"
+seoTitle: "FPS Boost on PC: 12 Safe Fixes for Low FPS"
 description: "Learn how to increase FPS on PC with 12 safe fixes: find your bottleneck, update drivers, tune graphics, fix thermals and check memory and storage."
 category: gaming-performance
 tags: [fps, performance, bottleneck, drivers, optimization]
-keywords: [how to increase FPS on PC, increase FPS, PC gaming optimization, gaming performance tips, boost FPS, fix low FPS]
+keywords: [fps boost, low fps, fps tweaks, how to increase FPS on PC, increase FPS, PC gaming optimization, gaming performance tips, boost FPS, fix low FPS]
 published: 2026-09-06
 quickAnswer: "To increase FPS on PC, first find whether your CPU or GPU is the bottleneck, then update graphics drivers, close background apps, lower the most expensive graphics settings, check temperatures for throttling, enable your RAM's rated speed, install games on an SSD and use an upscaler if your GPU is the limit."
 imageAlt: "Illustration of a speedometer-style gauge with a glowing needle on a dark orange-green gaming background"
