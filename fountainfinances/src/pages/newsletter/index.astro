@@ -1,0 +1,37 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+---
+<PageLayout
+  title="Fountain Finances Newsletter: Practical Money Tips"
+  heading="The Fountain Finances Newsletter"
+  description="Get practical personal finance tips, new guides and calculator walk-throughs every two weeks. Free, confirmed opt-in, and one-click unsubscribe any time."
+  lede="Practical money guidance in your inbox every two weeks. No hype, no spam."
+  showUpdated={false}
+>
+  <h2>What you’ll get</h2>
+  <ul>
+    <li><strong>One focused lesson</strong> each issue (budgeting, credit, saving, borrowing or insurance) explained with real numbers.</li>
+    <li><strong>New and updated guides</strong>, including changes to rules and limits that affect your money.</li>
+    <li><strong>Calculator walk-throughs</strong> that show how to model a real decision.</li>
+  </ul>
+  <h2>Who it’s for</h2>
+  <p>The newsletter is written for everyday Americans who want to get better with money without reading financial jargon: people building a first budget, paying down credit cards, saving for a home or trying to make sense of rates and fees. Every issue links to the full guide or calculator so you can go deeper when a topic matters to you.</p>
+
+  <h2>Example topics</h2>
+  <ul>
+    <li>How to set up a <a href="/guides/50-30-20-rule/">50/30/20 budget</a> in one afternoon.</li>
+    <li>When a <a href="/guides/cd-ladder/">CD ladder</a> beats a high-yield savings account.</li>
+    <li>The fastest way to pay off a credit card balance, with the math to prove it.</li>
+    <li>What changes in federal rules (such as deposit insurance or student loan repayment) mean for your wallet.</li>
+  </ul>
+
+  <h2>Our promises</h2>
+  <ul>
+    <li>We email you once to confirm your address. Nothing else arrives until you click the confirmation link.</li>
+    <li>The newsletter is free and contains no paid placements disguised as advice.</li>
+    <li>Every email has a one-click unsubscribe link. You can also <a href="/newsletter/unsubscribe/">unsubscribe here</a>.</li>
+    <li>We never sell or rent your email address. See our <a href="/privacy/">Privacy Policy</a>.</li>
+  </ul>
+  <div style="margin-top:28px"><NewsletterForm placement="newsletter-page" /></div>
+</PageLayout>

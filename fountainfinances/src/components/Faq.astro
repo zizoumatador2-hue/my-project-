@@ -1,0 +1,18 @@
+---
+import { marked } from 'marked';
+interface Props { faqs: { q: string; a: string }[]; heading?: string; id?: string }
+const { faqs, heading = 'Frequently asked questions', id = 'faq' } = Astro.props;
+---
+{faqs.length > 0 && (
+  <section aria-labelledby={`${id}-h`}>
+    <h2 id={`${id}-h`}>{heading}</h2>
+    <div class="faq">
+      {faqs.map((f, i) => (
+        <details open={i === 0}>
+          <summary><h3>{f.q}</h3></summary>
+          <div class="ans" set:html={marked.parseInline(f.a)} />
+        </details>
+      ))}
+    </div>
+  </section>
+)}

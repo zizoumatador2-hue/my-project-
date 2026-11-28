@@ -1,0 +1,85 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/data/site';
+import { abs, ORG_ID } from '@/lib/schema';
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+---
+<PageLayout
+  photo="contact"
+  title="Contact Fountain Finances"
+  heading="Contact Us"
+  description="Contact the Fountain Finances editorial team with questions, feedback, corrections or partnership inquiries. We reply to most messages within two business days."
+  lede="Questions, feedback, a correction or a partnership idea: we read every message."
+  showUpdated={false}
+  schema={[{ '@type': 'ContactPage', url: abs('/contact/'), name: 'Contact Fountain Finances', about: { '@id': ORG_ID } }]}
+>
+  <div class="two-col" style="align-items:start">
+    <div>
+      <h2 style="margin-top:0">Send us a message</h2>
+      <form class="calc-form" id="contact-form" action="/api/contact" method="post" novalidate>
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input class="input" id="c-name" name="name" autocomplete="name" required maxlength="120" />
+        </div>
+        <div class="field">
+          <label for="c-email">Email address</label>
+          <input class="input" id="c-email" name="email" type="email" autocomplete="email" required maxlength="254" />
+        </div>
+        <div class="field">
+          <label for="c-topic">Topic</label>
+          <select class="select" id="c-topic" name="topic">
+            <option>General question</option>
+            <option>Report an error or correction</option>
+            <option>Feedback on a calculator</option>
+            <option>Partnership or advertising</option>
+            <option>Privacy request</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-msg">Message</label>
+          <textarea class="textarea" id="c-msg" name="message" required minlength="10" maxlength="5000"></textarea>
+          <span class="hint">Please don’t include account numbers, Social Security numbers or passwords.</span>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
+        <label class="check"><input type="checkbox" name="consent" value="yes" required /><span>I agree that Fountain Finances may use my details to respond to this message, as described in the <a href="/privacy/">Privacy Policy</a>.</span></label>
+        {turnstileKey && <div data-turnstile={turnstileKey}></div>}
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div>
+      <h2 style="margin-top:0">Contact information</h2>
+      <dl class="contact-card">
+        <dt>Email</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+        <dt>Publisher</dt><dd>{SITE.founder}</dd>
+        <dt>Website</dt><dd><a href="/">{SITE.domain}</a></dd>
+        <dt>Response time</dt><dd>Within two business days (Monday–Friday)</dd>
+        <dt>Language</dt><dd>English</dd>
+        <dt>Advertising &amp; partnerships</dt><dd>Email us with “Partnership” in the subject line</dd>
+        <dt>Privacy requests</dt><dd>Use the form and choose “Privacy request”, or email us (see our <a href="/privacy/#rights">Privacy Policy</a>)</dd>
+      </dl>
+      <h2>Before you write</h2>
+      <ul>
+        <li><strong>Questions about your own account, application or loan</strong> must go to the bank, card issuer or lender directly. We are an information website and cannot see or change accounts.</li>
+        <li><strong>Found an error?</strong> Tell us the page and what looks wrong. See our <a href="/corrections/">corrections policy</a>.</li>
+        <li><strong>Common questions</strong> are answered on our <a href="/faq/">FAQ page</a>.</li>
+        <li><strong>Complaints about a financial company</strong> can be submitted to the <a href="https://www.consumerfinance.gov/complaint/" target="_blank" rel="noopener">Consumer Financial Protection Bureau</a>.</li>
+      </ul>
+    </div>
+  </div>
+</PageLayout>
+<script>
+  import { enhanceForm } from '@/lib/forms';
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  enhanceForm(form, {
+    validate(d) {
+      if (String(d.get('name') || '').trim().length < 2) return 'Please enter your name.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(d.get('email') || '').trim())) return 'Please enter a valid email address.';
+      if (String(d.get('message') || '').trim().length < 10) return 'Please write a message of at least 10 characters.';
+      if (!d.get('consent')) return 'Please tick the consent box so we can reply.';
+      return null;
+    },
+    success: 'Thank you. Your message has been sent. We’ll reply by email.',
+    event: 'contact_submit',
+  });
+</script>

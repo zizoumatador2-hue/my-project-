@@ -1,0 +1,37 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  value: number | string;
+  prefix?: string;
+  suffix?: string;
+  hint?: string;
+  min?: number;
+  max?: number;
+  step?: string;
+}
+const { id, label, value, prefix, suffix, hint, min = 0, max, step = 'any' } = Astro.props;
+const display = typeof value === 'number' && prefix === '$' ? value.toLocaleString('en-US') : String(value);
+---
+<div class="field">
+  <label for={id}>{label}</label>
+  <div class="affix">
+    {prefix && <span class="pre" aria-hidden="true">{prefix}</span>}
+    <input
+      class:list={['input', { suffix: !prefix && suffix }]}
+      id={id}
+      name={id}
+      type="text"
+      inputmode="decimal"
+      autocomplete="off"
+      value={display}
+      data-min={min}
+      data-max={max}
+      data-step={step}
+      data-money={prefix === '$' ? '' : undefined}
+      aria-describedby={hint ? `${id}-hint` : undefined}
+    />
+    {suffix && <span class="post" aria-hidden="true">{suffix}</span>}
+  </div>
+  {hint && <span class="hint" id={`${id}-hint`}>{hint}</span>}
+</div>

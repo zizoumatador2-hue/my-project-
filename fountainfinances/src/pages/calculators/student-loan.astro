@@ -1,0 +1,85 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import Field from '@/components/Field.astro';
+
+const faqs = [
+  {
+    q: 'How long does it take to pay off student loans?',
+    a: 'Under a standard fixed-payment plan, many federal loans are repaid over 10 years; larger balances and other plans can stretch repayment to 20 years or more. Private loan terms are set in your loan agreement, commonly 5 to 20 years.',
+  },
+  {
+    q: 'Do extra student loan payments go to principal?',
+    a: 'Federal loan servicers apply payments to fees and accrued interest first, then principal. If you pay extra, you can ask your servicer to apply it to the current balance rather than advancing your next due date, and to target the loan with the highest interest rate.',
+  },
+  {
+    q: 'Does this calculator cover income-driven repayment?',
+    a: 'No. Income-driven plans base payments on your income and family size, and federal repayment options changed under 2025 legislation. Use the official Loan Simulator at StudentAid.gov to see the plans available for your specific loans.',
+  },
+  {
+    q: 'Should I refinance federal student loans?',
+    a: 'Refinancing federal loans with a private lender can lower your rate, but you permanently give up federal benefits such as income-driven repayment, deferment options and forgiveness programs. Weigh those protections before refinancing.',
+  },
+];
+---
+<CalculatorLayout slug="student-loan" faqs={faqs}>
+  <form slot="form" class="calc-form" id="sl-form" novalidate>
+    <fieldset>
+      <legend>Your loans</legend>
+      <Field id="balance" label="Total loan balance" value={32000} prefix="$" min={1} />
+      <div class="row2">
+        <Field id="rate" label="Interest rate" value={6} suffix="%" max={20} hint="Use a weighted average if you have several loans." />
+        <Field id="years" label="Repayment term" value={10} suffix="years" min={1} max={30} />
+      </div>
+      <Field id="extra" label="Extra payment each month" value={100} prefix="$" hint="Optional: see how much faster you could finish." />
+    </fieldset>
+  </form>
+
+  <div slot="results">
+    <p class="big-num" data-out="payment">—</p>
+    <p class="big-sub">estimated monthly payment</p>
+    <ul class="stat-list">
+      <li><span>Total interest (standard)</span><span data-out="interest">—</span></li>
+      <li><span>Total repaid (standard)</span><span data-out="total">—</span></li>
+    </ul>
+    <h3 style="font-size:1rem;margin:0 0 10px">With your extra payment</h3>
+    <ul class="stat-list">
+      <li><span>Payoff time</span><span data-out="x-time">—</span></li>
+      <li><span>Time saved</span><span data-out="x-saved-time">—</span></li>
+      <li><span>Interest saved</span><span data-out="x-saved">—</span></li>
+    </ul>
+  </div>
+
+  <h2>How to use the student loan calculator</h2>
+  <p>Enter your total student loan balance, the interest rate and your repayment term. The calculator estimates the fixed monthly payment under a standard amortizing plan and the total interest you will pay. Add an extra monthly amount to see how much sooner you could be debt-free and how much interest you would save.</p>
+  <p>If you have several loans at different rates, enter a weighted average rate: multiply each balance by its rate, add the results and divide by your total balance.</p>
+
+  <h2>Federal vs. private student loans</h2>
+  <p>Federal student loans carry fixed rates set by law and offer protections private loans generally do not, including income-driven repayment, deferment and forbearance, and forgiveness programs such as Public Service Loan Forgiveness. Private loans are priced on your credit and may have fixed or variable rates.</p>
+  <p class="notice">Federal repayment plans changed under legislation passed in 2025, and which plans are open to you depends on when your loans were disbursed. Confirm your options with your servicer or the <a href="https://studentaid.gov/loan-simulator/" target="_blank" rel="noopener">Federal Student Aid Loan Simulator</a>.</p>
+
+  <h2>Ways to pay less interest</h2>
+  <ul>
+    <li><strong>Sign up for autopay.</strong> Federal servicers and many private lenders offer a small interest-rate reduction for automatic payments.</li>
+    <li><strong>Pay interest while in school or during grace periods</strong> to keep it from being added to your principal.</li>
+    <li><strong>Target the highest-rate loan</strong> with any extra payments.</li>
+  </ul>
+  <p>Read <a href="/guides/student-loan-repayment-options/">student loan repayment options</a> for a full overview, and visit our <a href="/student-loans/">student loans</a> hub.</p>
+</CalculatorLayout>
+
+<script>
+  import { amortizationByYear } from '@/lib/finance';
+  import { bindCalculator, usd, months } from '@/lib/calc-ui';
+  const form = document.getElementById('sl-form') as HTMLFormElement;
+  const out = (k: string) => document.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
+  bindCalculator(form, 'student-loan', (v) => {
+    const n = Math.round(v.years * 12);
+    const base = amortizationByYear(v.balance, v.rate, n);
+    const fast = amortizationByYear(v.balance, v.rate, n, v.extra);
+    out('payment').textContent = usd(base.payment, true);
+    out('interest').textContent = usd(base.totalInterest);
+    out('total').textContent = usd(v.balance + base.totalInterest);
+    out('x-time').textContent = months(fast.months);
+    out('x-saved-time').textContent = v.extra > 0 ? months(base.months - fast.months) : '—';
+    out('x-saved').textContent = v.extra > 0 ? usd(base.totalInterest - fast.totalInterest) : '—';
+  });
+</script>

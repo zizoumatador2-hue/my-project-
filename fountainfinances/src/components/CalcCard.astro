@@ -1,0 +1,12 @@
+---
+import Icon from './Icon.astro';
+import type { CalculatorMeta } from '@/data/calculators';
+interface Props { calc: CalculatorMeta; headingLevel?: 'h2' | 'h3' }
+const { calc, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<article class="card card-tool">
+  <div class="ico"><Icon name={calc.icon} /></div>
+  <H><a href={`/calculators/${calc.slug}/`}>{calc.name}</a></H>
+  <p>{calc.short}</p>
+</article>
