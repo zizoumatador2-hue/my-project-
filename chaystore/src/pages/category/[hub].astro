@@ -10,7 +10,7 @@ const h = HUBS[hub];
 const items = (await allArticles()).filter((a) => a.data.hub === hub);
 const path = `/category/${hub}/`;
 
-const HUB_TITLES: Record<string, string> = {"brewing": "How to Brew Tea: Ratios, Temperature & Timing", "chai-black-tea": "Chai & Black Tea Guides: Recipes, Types & Caffeine", "green-tea-matcha": "Green Tea & Matcha Guides: Types, Benefits & Recipes", "herbal-tea": "Herbal Tea Guides: Caffeine-Free Blends & Brewing", "tea-gear": "Tea Gear Guides: Kettles, Infusers & Teapots", "tea-wellness": "Tea & Wellness Guides: Caffeine & Daily Habits"};
+const HUB_TITLES: Record<string, string> = {"brewing": "How to Brew Tea: Ratios, Temperature & Timing", "chai-black-tea": "Chai & Black Tea Guides: Recipes, Types & Caffeine", "green-tea-matcha": "Green Tea & Matcha Guides: Types, Benefits & Recipes", "herbal-tea": "Herbal Tea Guides: Caffeine-Free Blends & Brewing", "tea-gear": "Tea Gear Guides: Kettles, Infusers & Teapots", "tea-wellness": "Tea Wellness Guides: Caffeine and Daily Habits"};
 ---
 <BaseLayout title={HUB_TITLES[hub] ?? `${h.name}: Guides & Tips`} description={`${h.blurb} Browse every ChayStore guide in ${h.name}.`.slice(0, 158)} path={path}>
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: h.name, path }]} />
