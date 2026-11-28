@@ -1,10 +1,10 @@
 ---
 title: "Best Gaming Mouse for FPS: What to Look For Before You Buy"
-seoTitle: "Best Gaming Mouse for FPS: What to Look For Before Buying"
+seoTitle: "Best Gaming Mouse for FPS Games: Specs That Matter"
 description: "How to choose the best gaming mouse for FPS: shape, weight, grip, sensor, polling rate, switches, wireless and what specifications you can safely ignore."
 category: gaming-gear
 tags: [mouse, gear, fps, buying guide, aim]
-keywords: [best gaming mouse for FPS, best gaming mouse, FPS mouse buying guide, lightweight gaming mouse, mouse grip types, gaming mouse specs]
+keywords: [best fps games, fps pc, best gaming mouse for FPS, best gaming mouse, FPS mouse buying guide, lightweight gaming mouse, mouse grip types, gaming mouse specs]
 published: 2026-09-15
 quickAnswer: "The best FPS gaming mouse is the one that fits your hand and grip. Prioritize shape and size, a weight you can control, a modern optical sensor, at least 1000 Hz polling, reliable switches and either a flexible cable or a trusted low-latency wireless receiver. Ignore maximum DPI figures and RGB."
 imageAlt: "Illustration of a computer mouse in glowing outline on a dark green and blue background"

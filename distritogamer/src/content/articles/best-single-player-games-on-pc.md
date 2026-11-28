@@ -133,6 +133,41 @@ Ask three simple questions before you buy:
 
 Many single player games play well with either. Action games such as Elden Ring, Hollow Knight and Celeste often feel better on a controller, while strategy games and shooters usually suit mouse and keyboard. Our [controller vs mouse and keyboard comparison](/game-comparisons/controller-vs-mouse-and-keyboard/) explains the trade-offs.
 
+## Single player games compared at a glance
+
+If you are choosing between several picks, this short comparison can help. "Time" is a rough guide to how long a normal first playthrough takes, and it varies a lot with play style.
+
+| Game | Style | Time | Challenge | Best for |
+| --- | --- | --- | --- | --- |
+| Elden Ring | Open-world action RPG | Very long | High | Players who enjoy learning hard fights |
+| The Witcher 3 | Open-world RPG | Very long | Low to medium | Story and side quests |
+| Baldur's Gate 3 | Turn-based RPG | Very long | Medium | Planning and choices |
+| Disco Elysium | Dialogue RPG | Long | Low | Readers |
+| Civilization VI | Turn-based strategy | Open-ended | Medium | Long-term planners |
+| XCOM 2 | Tactical strategy | Long | High | Tense decisions |
+| Doom Eternal | Shooter | Medium | Medium to high | Fast action |
+| Half-Life 2 | Shooter | Medium | Low to medium | Classic campaigns |
+| Hades | Roguelike action | Flexible | Medium | Short sessions |
+| Hollow Knight | Action platformer | Long | High | Explorers |
+| Portal 2 | Puzzle | Short | Low to medium | Almost everyone |
+| Celeste | Platformer | Short to medium | High, with assists | Precision lovers |
+
+## Getting the best performance in single player games
+
+Single player games do not need the very low input lag that competitive shooters chase, but a smooth and stable frame rate still makes them far more enjoyable. A few simple steps help on most PCs:
+
+- **Update your graphics driver** before you start a new game. New releases often get driver fixes in their first weeks.
+- **Choose a preset, then adjust.** Start with the "High" or "Medium" preset and lower the most expensive options first, usually shadows, volumetric effects and ray tracing.
+- **Use upscaling if it is offered.** Options such as DLSS, FSR or XeSS can raise frame rates a lot with a small loss in sharpness.
+- **Cap your frame rate** a little below your monitor's refresh rate if you see uneven frame pacing. Steady frames feel smoother than a number that jumps up and down.
+- **Turn on Windows Game Mode** and close heavy background apps. Our guide to [optimizing Windows for gaming](/gaming-performance/how-to-optimize-windows-for-gaming/) explains which tweaks are safe.
+
+If a game crashes or stutters even after these steps, follow our [crash and stutter troubleshooting guide](/troubleshooting/fix-game-crashes-and-stuttering/).
+
+## Where to buy single player games on PC
+
+Most of these games are sold on several PC stores, and prices change often. Big seasonal sales regularly discount older single player games, so it is worth adding the games you want to a wishlist and waiting if you are not in a hurry. Buy from official stores to avoid revoked keys and account problems.
+
 ## Tips to enjoy single player games more
 
 - **Lower the difficulty without guilt.** Difficulty settings exist so more people can finish the game. Play the way that makes it fun for you.

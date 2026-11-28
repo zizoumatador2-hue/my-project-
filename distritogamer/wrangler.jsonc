@@ -2,8 +2,12 @@
   // Static site served by Cloudflare Workers Static Assets. `public/_headers` controls cache + security headers.
   "name": "distritogamer",
   "compatibility_date": "2026-09-01",
+  // Tiny Worker that 301-redirects www to the apex domain (canonical host).
+  "main": "./worker/index.js",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
