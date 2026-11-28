@@ -1,10 +1,10 @@
 ---
 title: "Common Mistakes New Players Make (and How to Fix Them)"
-seoTitle: "Common Mistakes New Players Make in Games and How to Fix"
+seoTitle: "Common Gaming Mistakes New Players Make (and Fixes)"
 description: "Avoid the 12 most common mistakes new players make, from changing settings too often to skipping tutorials, with simple fixes you can apply in any game."
 category: beginner-guides
 tags: [beginners, mistakes, habits, improvement]
-keywords: [common mistakes new players make, beginner mistakes in games, gaming mistakes, new gamer mistakes, how to avoid beginner mistakes]
+keywords: [game mechanics, common mistakes new players make, beginner mistakes in games, gaming mistakes, new gamer mistakes, how to avoid beginner mistakes]
 published: 2026-08-13
 quickAnswer: "The most common new player mistakes are changing settings constantly, skipping tutorials, ignoring the game's economy, playing while tilted, copying pro settings blindly, buying gear too early, and never reviewing losses. Fix them by keeping settings stable, learning core systems, taking breaks and reviewing one mistake after each session."
 imageAlt: "Illustration of a game controller in neon outline on a dark red-orange gradient background"

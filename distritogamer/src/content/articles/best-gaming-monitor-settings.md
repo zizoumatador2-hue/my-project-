@@ -1,10 +1,10 @@
 ---
 title: "Best Gaming Monitor Settings: Refresh Rate, Overdrive and More"
-seoTitle: "Best Gaming Monitor Settings: Refresh Rate and Overdrive"
+seoTitle: "Best Refresh Rate for Gaming: Monitor Settings Guide"
 description: "Get the best gaming monitor settings: set the right refresh rate, enable adaptive sync, tune overdrive, brightness and gamma, and avoid options that add lag."
 category: game-settings
 tags: [monitor, refresh rate, overdrive, display, settings]
-keywords: [best gaming monitor settings, best gaming settings, monitor refresh rate setup, overdrive setting, gaming monitor calibration, input lag monitor]
+keywords: [best refresh rate for gaming, fps monitor, best gaming monitor settings, best gaming settings, monitor refresh rate setup, overdrive setting, gaming monitor calibration, input lag monitor]
 published: 2026-09-03
 quickAnswer: "Set your monitor to its highest refresh rate in Windows, use its native resolution, turn on adaptive sync, choose a middle overdrive setting that avoids trails and overshoot, enable the monitor's game or low-latency mode, keep gamma near 2.2 and color temperature near neutral, and turn off extra image processing."
 imageAlt: "Illustration of a monitor on a stand showing a glowing line graph on a dark blue background"

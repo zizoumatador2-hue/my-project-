@@ -1,10 +1,10 @@
 ---
 title: "How to Review Your Gameplay and Learn From Every Loss"
-seoTitle: "How to Review Your Gameplay: A Step-by-Step Method"
+seoTitle: "Game Review Method: How to Review Your Gameplay"
 description: "Learn how to review your gameplay: what to record, which moments to watch, how to take notes and how to turn each review into one habit to change."
 category: advanced-strategies
 tags: [review, vod, improvement, strategy]
-keywords: [how to review gameplay, VOD review, how to improve gaming skills, gameplay analysis, learn from losses]
+keywords: [game review, review all, how to review gameplay, VOD review, how to improve gaming skills, gameplay analysis, learn from losses]
 published: 2026-08-22
 quickAnswer: "To review gameplay, record your matches, then watch only the key moments: deaths, lost rounds and turning points. Pause before each decision, write what you knew and what you should have done, look for repeated patterns across matches, and choose one habit to change before your next session."
 imageAlt: "Illustration of a monitor displaying a rising line graph with glowing points on a teal gaming-style background"

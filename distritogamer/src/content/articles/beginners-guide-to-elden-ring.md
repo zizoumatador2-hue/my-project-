@@ -1,10 +1,10 @@
 ---
 title: "Beginner's Guide to Elden Ring: Systems, Stats and First Steps"
-seoTitle: "Beginner's Guide to Elden Ring: Systems and First Steps"
+seoTitle: "Elden Ring Guide for Beginners: Classes, Runes and Bosses"
 description: "New to Elden Ring? Learn classes, runes, Sites of Grace, stats, equip load, Torrent and Spirit Ashes, plus how to handle early bosses without frustration."
 category: game-guides
 tags: [elden ring, beginners, rpg, souls-like, builds]
-keywords: [beginner's guide to Elden Ring, Elden Ring tips for beginners, Elden Ring starting class, Elden Ring how to level up, Elden Ring stats explained, Elden Ring early game]
+keywords: [elden ring guide, elden ring game, beginner's guide to Elden Ring, Elden Ring tips for beginners, Elden Ring starting class, Elden Ring how to level up, Elden Ring early game]
 published: 2026-10-04
 quickAnswer: "In Elden Ring, rest at Sites of Grace to level up with runes, put points into Vigor early, keep your equip load low enough to roll quickly, use Torrent and Spirit Ashes, attack only when you have a safe opening and leave a hard boss to explore elsewhere. Rushing and over-committing cause most early deaths."
 imageAlt: "Illustration of a glowing ring with curved lines on a dark golden-brown background"

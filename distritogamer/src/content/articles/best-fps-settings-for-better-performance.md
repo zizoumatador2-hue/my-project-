@@ -1,10 +1,10 @@
 ---
 title: "Best FPS Settings for Better Performance and Clarity"
-seoTitle: "Best FPS Settings for Better Performance and Clarity"
+seoTitle: "Best FPS Settings: Graphics Options for Smooth Gameplay"
 description: "Find the best FPS settings for smooth, clear play: which graphics options cost the most, what to turn off and how to test each change on your PC."
 category: game-settings
 tags: [settings, fps, graphics, performance]
-keywords: [best FPS settings, best gaming settings, FPS gaming tips, graphics settings for performance, best settings for competitive games, V-Sync, frame cap]
+keywords: [fps pc, best FPS settings, best gaming settings, FPS gaming tips, graphics settings for performance, best settings for competitive games, V-Sync, frame cap]
 published: 2026-08-25
 quickAnswer: "The best FPS settings prioritize a stable high frame rate and clear visuals: lower shadows, effects and ray tracing first, keep resolution sharp, turn off motion blur and film grain, avoid V-Sync in competitive play, cap your frame rate slightly under your refresh rate if you use adaptive sync, and test one change at a time."
 imageAlt: "Illustration of three horizontal sliders with glowing knobs on a teal gaming-style background"

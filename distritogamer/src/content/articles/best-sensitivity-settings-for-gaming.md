@@ -1,10 +1,10 @@
 ---
 title: "Best Sensitivity Settings for Gaming: DPI, eDPI and How to Choose"
-seoTitle: "Best Sensitivity Settings for Gaming: DPI and eDPI Guide"
+seoTitle: "Best Sens for Gaming: DPI, eDPI and Sensitivity Settings"
 description: "Find the best sensitivity settings for gaming: learn DPI and eDPI, pick a starting point, run the 180-degree test and turn off mouse acceleration."
 category: game-settings
 tags: [sensitivity, dpi, edpi, aim, mouse]
-keywords: [best sensitivity settings for gaming, how to improve aim, mouse sensitivity, eDPI, DPI for gaming, best gaming mouse settings, mouse acceleration]
+keywords: [sens game, best sensitivity settings for gaming, how to improve aim, mouse sensitivity, eDPI, DPI for gaming, best gaming mouse settings, mouse acceleration]
 published: 2026-08-28
 quickAnswer: "There is no universal best sensitivity. Choose a mouse DPI between 400 and 1600, set an in-game sensitivity that lets you turn 180 degrees with a comfortable arm movement and still make small corrections, turn off mouse acceleration, and keep the setting unchanged for several weeks so muscle memory can form."
 imageAlt: "Illustration of a computer mouse in glowing outline on a dark blue background"

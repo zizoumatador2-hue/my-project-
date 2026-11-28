@@ -1,10 +1,10 @@
 ---
 title: "Counter-Strike 2 Practice Guide: Aim, Recoil and Utility"
-seoTitle: "Counter-Strike 2 Practice Guide: Aim, Recoil, Utility"
+seoTitle: "Counter-Strike 2 Guide: Aim, Recoil and Utility Practice"
 description: "Practice Counter-Strike 2 well: set up a practice server, train aim, recoil and movement, learn key grenades and the economy, and follow a weekly routine."
 category: game-guides
 tags: [counter-strike 2, cs2, practice, recoil, utility, economy]
-keywords: [Counter-Strike 2 practice guide, CS2 practice server, CS2 tips for beginners, CS2 recoil control, CS2 economy guide, CS2 console commands]
+keywords: [first person shooter games pc, Counter-Strike 2 practice guide, CS2 practice server, CS2 tips for beginners, CS2 recoil control, CS2 economy guide, CS2 console commands]
 published: 2026-10-05
 quickAnswer: "To practice Counter-Strike 2, start a local practice server with bots, work on first-shot accuracy and counter-strafing, learn each rifle's spray pattern, rehearse a few smoke, flash and molotov throws for your maps, understand the buy economy, and keep sessions short and focused with a clear goal."
 imageAlt: "Illustration of a glowing crosshair with concentric rings on a dark amber and brown background"
