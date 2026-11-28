@@ -1,5 +1,5 @@
 ---
-title: "Best Tea Infusers: Types, Materials & How to Choose"
+title: "Best Tea Infusers: Types, Sizes & What to Buy"
 description: "How to choose the best tea infuser: basket, ball, mug, French press and teapot options compared, plus materials, size and cleaning tips."
 hub: tea-gear
 keyword: "best tea infusers"

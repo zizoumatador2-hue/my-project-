@@ -1,5 +1,5 @@
 ---
-title: "What Is Kahwa Tea? Kashmiri Kahwa Recipe & Flavor"
+title: "Kahwa Tea: What It Is and How to Make It"
 description: "What is kahwa tea? Learn about Kashmiri kahwa, its saffron and spice flavor, a simple recipe, and how kahwa differs from chai."
 hub: green-tea-matcha
 keyword: "what is kahwa tea"

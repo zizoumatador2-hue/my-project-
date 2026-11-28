@@ -1,5 +1,5 @@
 ---
-title: "How to Make a Matcha Latte at Home (Hot or Iced)"
+title: "Matcha Latte Recipe: Hot or Iced at Home"
 description: "How to make a matcha latte at home, hot or iced, with or without a whisk. Includes ratios, milk options and tips for smooth, non-bitter matcha."
 hub: green-tea-matcha
 keyword: "how to make matcha latte"

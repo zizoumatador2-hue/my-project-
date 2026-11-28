@@ -1,5 +1,5 @@
 ---
-title: "How to Brew Loose Leaf Tea: A Step-by-Step Guide"
+title: "How to Brew Loose Leaf Tea: Step-by-Step Guide"
 description: "Learn how to brew loose leaf tea with the right ratio, water temperature and steeping time, with or without an infuser."
 hub: brewing
 keyword: "how to brew loose leaf tea"

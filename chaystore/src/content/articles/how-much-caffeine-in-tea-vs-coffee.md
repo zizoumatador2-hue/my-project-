@@ -1,5 +1,5 @@
 ---
-title: "Caffeine in Tea vs Coffee: How Much Is in Each Cup?"
+title: "Green Tea Caffeine vs Coffee: How Much Is in Each Cup?"
 description: "How much caffeine is in tea vs coffee? Compare typical amounts in black, green, white tea and matcha, plus what changes caffeine levels."
 hub: tea-wellness
 keyword: "how much caffeine in tea vs coffee"

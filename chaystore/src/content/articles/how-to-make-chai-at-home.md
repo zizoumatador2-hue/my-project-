@@ -1,5 +1,5 @@
 ---
-title: "How to Make Chai at Home: Easy Masala Chai Recipe"
+title: "Masala Chai Recipe: How to Make Chai at Home"
 description: "How to make chai at home from scratch: an easy masala chai recipe with whole spices, plus a tea-bag version and tips for the best flavor."
 hub: chai-black-tea
 keyword: "how to make chai at home"

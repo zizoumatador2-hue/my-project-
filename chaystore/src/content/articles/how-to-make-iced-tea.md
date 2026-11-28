@@ -1,5 +1,5 @@
 ---
-title: "How to Make Iced Tea: Hot Brew, Cold Brew & Sweet Tea"
+title: "Iced Tea Recipe: Hot Brew, Cold Brew & Sweet Tea"
 description: "Learn how to make iced tea three ways: hot-brew, cold brew and Southern sweet tea, with ratios, tips and fixes for cloudy tea."
 hub: brewing
 keyword: "how to make iced tea"

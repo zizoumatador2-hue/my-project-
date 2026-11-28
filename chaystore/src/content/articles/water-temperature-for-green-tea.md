@@ -1,5 +1,5 @@
 ---
-title: "Water Temperature for Green Tea (and Stop Bitterness)"
+title: "Water Temperature for Green Tea: Guide by Type"
 description: "What water temperature for green tea? Learn the ideal range, how long to steep, and how to fix bitter green tea without a thermometer."
 hub: brewing
 keyword: "water temperature for green tea"

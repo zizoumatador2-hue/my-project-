@@ -1,5 +1,5 @@
 ---
-title: "Best Electric Kettle for Tea: How to Choose One"
+title: "Best Electric Kettle for Tea: What to Look For"
 description: "How to choose the best electric kettle for tea: variable temperature, gooseneck spouts, materials, capacity, safety features and care."
 hub: tea-gear
 keyword: "best electric kettle for tea"
